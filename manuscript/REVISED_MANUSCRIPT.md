@@ -40,7 +40,7 @@ R-squared above 0.9 is no longer used for model selection, because a structurall
 broken model and its correct replacement both exceed it on the same data while
 their corrected AIC differs by up to 84.
 
-**Figure 3 withdrawn.** Version 1's Figure 3 was captioned "experimental data vs.
+**Version 1's experimental-data figure is withdrawn.** It was captioned "experimental data vs.
 model fitting". No dataset was named in version 1 and none exists. The
 replacement figure in this version uses synthetic data with known ground truth,
 is labelled as such, and supports conclusions about the estimator only.
@@ -240,7 +240,7 @@ for any parameter values, so the modelled population returns to the inoculum at 
 | *S. aureus*, t_c = 12 h | 2.48 × 10⁻³ | 1.000 | **×403 (2.61 log₁₀)** |
 | *S. aureus*, t_c = 80 h | 4.25 × 10⁻¹⁸ | 1.000 | **×2.35 × 10¹⁷ (17.4 log₁₀)** |
 
-*(`results/tables/eq4_discontinuity.csv`)*
+*(`results/tables/eq4_discontinuity.csv`; Figure 1A-C)*
 
 A second consequence follows from the same expression. As t grows, N(t) → N_d. The dormant subpopulation never declines, so the model asserts that no regimen of any duration can sterilise. Under the parameters of Section 2.6 this places a permanent floor at 3.6 × 10⁴ CFU/mL for *M. tuberculosis*, which is 358 times the assay limit of detection. Time to sterilisation is therefore infinite, not as an artefact of a truncated search but as a property of the equation; the search window was extended to 10⁶ h before infinity was returned (`results/tables/model_endpoints.csv`).
 
@@ -257,13 +257,13 @@ In a two-subpopulation system the crossover occurs where the two exponential ter
 | *M. tuberculosis* | 80 h | **33.3 h** | 2.41× |
 | *S. aureus* | 12 h | **15.5 h** | 0.77× |
 
-*(`results/tables/tc_identifiability.csv`)*
+*(`results/tables/tc_identifiability.csv`; Figure 1D)*
 
 Neither asserted value lies on its own curve. Treating f, k_fast, k_slow and t_c as four free parameters over-parameterises a three-parameter system, and Section 3.8 shows that the consequence is not theoretical: t_c cannot be estimated from time-kill data of realistic density.
 
 ### 3.3 The resistance and tolerance equations omit terms their own parameters require
 
-Equation 2a has no carrying-capacity term although Equation 1 declares one. Over a 240 h window this produces 10⁵⁷ CFU/mL for *S. aureus*, which exceeds the estimated total prokaryotic population of Earth [15] by twenty-six orders of magnitude. Applying the carrying capacity already declared in Equation 1 (Equation 2b) removes the excursion.
+Equation 2a has no carrying-capacity term although Equation 1 declares one. Over a 240 h window this produces 10⁵⁷ CFU/mL for *S. aureus*, which exceeds the estimated total prokaryotic population of Earth [15] by twenty-six orders of magnitude. Applying the carrying capacity already declared in Equation 1 (Equation 2b) removes the excursion (Figure 2).
 
 Equation 3a omits replication entirely, and for a fast grower this reverses the direction of the result rather than merely changing its magnitude. With r = 0.5/h and k_T = 0.2/h, the net rate is **+0.30 /h**: the population grows to carrying capacity. Equation 3a instead reports a decline of fifteen log₁₀ over the same window (`results/tables/eq3_omits_replication.csv`). For *M. tuberculosis* the sign is correct, because r = 0.03 < k_T = 0.05, but the magnitude is still wrong. A tolerance equation without a replication term cannot be applied to an organism whose replication rate appears in the same parameter table.
 
@@ -278,13 +278,13 @@ The strongest reason to abandon rather than patch Equation 4a is that the specie
 | *M. tuberculosis* | 0.857 | 2.86 × 10⁻⁴ |
 | *S. aureus* | 0.103 | 2.54 × 10⁻⁴ |
 
-The two species differ by a factor of **1.13, or 0.05 log₁₀** (`results/tables/central_comparison.csv`). On the parameters of Section 2.6 they are indistinguishable at ten days once the equation is made continuous. The apparent contrast in version 1's Figure 2 was produced by the fact that *M. tuberculosis*, with the later transition time, spent more of the window on the resurrected branch.
+The two species differ by a factor of **1.13, or 0.05 log₁₀** (`results/tables/central_comparison.csv`; Figure 1A-B). On the parameters of Section 2.6 they are indistinguishable at ten days once the equation is made continuous. The apparent contrast in the corresponding figure of version 1 was produced by the fact that *M. tuberculosis*, with the later transition time, spent more of the window on the resurrected branch.
 
 The biexponential form (Equation 4b) does preserve a difference, because it retains the dormant fraction as a weight on a surviving term rather than discarding it, and it is the form we recommend where a closed expression is required. But the general point stands: a conclusion that changes sign or magnitude when a discontinuity is removed was a property of the discontinuity. This is why the remainder of this paper proceeds mechanistically.
 
 ### 3.5 Biphasic killing emerges from compartment structure
 
-Equations 6a and 6b contain no breakpoint, yet they produce biphasic kill curves. At four times the MIC and an inoculum of 10⁶ CFU/mL, the curvature maximum of the total population occurs at 25 h for the slow grower and 15 h for the fast grower, and the population reaches the limit of detection at 380 h and 21 h respectively (`results/tables/fig05_mechanistic.csv`, Figure 4).
+Equations 6a and 6b contain no breakpoint, yet they produce biphasic kill curves. At four times the MIC and an inoculum of 10⁶ CFU/mL, the curvature maximum of the total population occurs at 25 h for the slow grower and 15 h for the fast grower, and the population reaches the limit of detection at 380 h and 21 h respectively (`results/tables/fig05_mechanistic.csv`, Figure 3).
 
 Three properties distinguish this from Equation 4a. The curve is continuous and differentiable throughout. Sterilisation occurs in finite time for any non-zero dormant kill rate, so treatment duration is a computed quantity rather than infinite by construction. And the transition is an observable derived from the rate constants rather than a parameter fitted independently of them, so it cannot contradict them in the way documented in Section 3.2.
 
@@ -301,7 +301,7 @@ Introducing each mechanism separately into one parameter set, and measuring each
 | Tolerant (metabolism ÷ 4) | 1.0 | **117 h** | 257 h |
 | Persistent (dormancy entry × 10) | 1.0 | 32 h | **352 h** |
 
-*(`results/tables/fig06_mic_mdk.csv`, Figure 5)*
+*(`results/tables/fig06_mic_mdk.csv`, Figure 4)*
 
 Resistance moves the MIC sixteen-fold and leaves both killing endpoints untouched: adequately exposed, a resistant strain dies at the wild-type rate. Tolerance leaves the MIC exactly unchanged and multiplies MDK₉₉ by 3.99, recovering the imposed four-fold slowing. Persistence leaves the MIC and MDK₉₉ essentially unchanged, moving MDK₉₉ by only 10%, while raising MDK₉₉.₉₉ 2.3-fold.
 
@@ -309,17 +309,17 @@ Two consequences are practical. An isolate can be placed in this space from two 
 
 ### 3.7 Resuscitation rate, not persister killing, governs sterilisation time
 
-Applied to Equation 4a, one-at-a-time sensitivity analysis returns a ranking that is an algebraic identity rather than a result. For any t > t_c the second branch of Equation 4a contains k_slow and f and nothing else, so k_fast and k_T have elasticities of exactly zero on any endpoint evaluated after the transition, and k_slow necessarily ranks first (`results/tables/analytic_elasticities.csv`, Figure 3A). This ranking would be unchanged for any parameter values and any organism, and therefore cannot support a biological conclusion.
+Applied to Equation 4a, one-at-a-time sensitivity analysis returns a ranking that is an algebraic identity rather than a result. For any t > t_c the second branch of Equation 4a contains k_slow and f and nothing else, so k_fast and k_T have elasticities of exactly zero on any endpoint evaluated after the transition, and k_slow necessarily ranks first (`results/tables/analytic_elasticities.csv`; Figure 5A). This ranking would be unchanged for any parameter values and any organism, and therefore cannot support a biological conclusion.
 
-Run on the state-structured model, where every parameter acts at every time, the answer is different. For the slow grower, the first-order Sobol index for k_PS, the rate at which dormant cells resume replication, is **0.873**, with a total-order index of **0.897** (`results/tables/sensitivity_sobol.csv`, Figure 3C). No other parameter reaches a total-order index of 0.07. Varying k_PS over the ±50% range shifts time to sterilisation from 380 h at baseline to 1,995 h at one tenth of baseline and 50 h at ten times baseline, a span of forty-fold.
+Run on the state-structured model, where every parameter acts at every time, the answer is different. For the slow grower, the first-order Sobol index for k_PS, the rate at which dormant cells resume replication, is **0.873**, with a total-order index of **0.897** (`results/tables/sensitivity_sobol.csv`, Figure 5C). No other parameter reaches a total-order index of 0.07. Varying k_PS over the ±50% range shifts time to sterilisation from 380 h at baseline to 1,995 h at one tenth of baseline and 50 h at ten times baseline, a span of forty-fold.
 
 The mechanism is the one identified in Section 3.5. A dormant cell is hard to kill; a dormant cell that resumes replication is not. Anything that increases the rate of resuscitation moves cells from a refractory compartment into a susceptible one, and the drug does the rest. This places resuscitation, rather than direct killing of persisters, at the centre of regimen shortening for slow-growing organisms, and it is a statement about a drug target that Equation 4a is structurally incapable of making.
 
-For the fast grower the picture differs in kind, not just in detail. The dominant parameters are E_max,S and r, and **61% of the variance in time to sterilisation arises from parameter interactions** rather than from parameters acting alone; for the log₁₀ reduction at 240 h the interaction share reaches 96% (`results/tables/sensitivity_interaction_fraction.csv`, Figure 3E). Where the interaction share is that high, no one-at-a-time analysis of that organism can be trusted regardless of how carefully it is conducted.
+For the fast grower the picture differs in kind, not just in detail. The dominant parameters are E_max,S and r, and **61% of the variance in time to sterilisation arises from parameter interactions** rather than from parameters acting alone; for the log₁₀ reduction at 240 h the interaction share reaches 96% (`results/tables/sensitivity_interaction_fraction.csv`, Figure 5E). Where the interaction share is that high, no one-at-a-time analysis of that organism can be trusted regardless of how carefully it is conducted.
 
 ### 3.8 The coefficient of determination cannot distinguish these models
 
-Fitting Equation 4a and Equation 4b to the same synthetic time-kill data at four sampling designs produces R² above 0.9 for both models in three of the four designs, with a maximum difference between the two models of 0.098. Over the same fits the corrected Akaike information criterion differs by up to **84 units**, always favouring the biexponential (`results/tables/r2_vs_aicc_discrimination.csv`, Figure 6C).
+Three further statistical claims from version 1 fail the same way, and are examined in Figure S1. Fitting Equation 4a and Equation 4b to the same synthetic time-kill data at four sampling designs produces R² above 0.9 for both models in three of the four designs, with a maximum difference between the two models of 0.098. Over the same fits the corrected Akaike information criterion differs by up to **84 units**, always favouring the biexponential (`results/tables/r2_vs_aicc_discrimination.csv`, Figure 6C).
 
 R² is close to one for almost any decreasing function fitted to a monotone decaying curve, because the total sum of squares is dominated by the spread of the data across orders of magnitude. It is therefore compatible with a model that raises the population by three log₁₀ at its transition. It should not be used to select between candidate killing models, and a reported R² above 0.9 provides no evidence that a persistence model is correct.
 
@@ -379,7 +379,7 @@ This is a framework rather than a measurement. Its quantitative claims about *M.
 
 ## Data and code availability
 
-All code, intermediate tables, receipts and figure-generating scripts are in the accompanying repository. `python run_all.py` regenerates every number and every figure reported here in approximately 110 seconds, with no network access. Each analysis stage writes a receipt recording library versions and run parameters. No experimental dataset is used or distributed; candidate datasets for the fitting stage are catalogued with digital object identifiers in `data/manifests/datasets.csv`.
+All code, intermediate tables, receipts and figure-generating scripts are openly available at **https://github.com/piranfar/comparative_model_presistance** (code under the MIT licence, documentation and figures under CC BY 4.0). `python run_all.py` regenerates every number and every figure reported here in approximately 110 seconds, with no network access. Each analysis stage writes a receipt recording library versions and run parameters. No experimental dataset is used or distributed; candidate datasets for the fitting stage are catalogued with digital object identifiers in `data/manifests/datasets.csv`.
 
 ## Author contributions
 
@@ -397,23 +397,29 @@ V.P. conceived the study, wrote the code, performed the analyses and wrote the m
 
 ## Figure legends
 
-**Figure 1. Growth and the three survival strategies, printed equations and corrected equations.**
-(A, B) Equations 1, 2a, 3a and 4a on the Class A parameters of Section 2.6, unchanged. The carrying capacity declared in Equation 1 appears in none of the survival laws, so the resistance curve for *S. aureus* passes 10⁵⁷ CFU/mL by 240 h, exceeding the estimated prokaryotic population of Earth by twenty-six orders of magnitude. The vertical rise in the persistence curve is the discontinuity of Section 3.1. (C, D) The same scenarios with the carrying capacity applied to every strategy and Equation 4a replaced by the biexponential. Note that under the corrected tolerance equation the *S. aureus* population grows, because its replication rate exceeds its tolerance kill rate.
-
-**Figure 2. The closed-form biphasic law and its two corrections, all on the same parameters.**
+**Figure 1. The closed-form biphasic law and its two corrections, all on the same parameters.**
 (A, B) Equation 4a against the continuous piecewise and biexponential replacements. The arrow marks the upward jump at t_c: 3.47 log₁₀ for *M. tuberculosis*, 2.61 log₁₀ for *S. aureus*. (C) Detail of the transition region. At t_c the second branch of Equation 4a evaluates to exactly N₀ for any amount of first-phase killing. (D) The transition time is fixed by the other three parameters through Equation 4c. Crosses mark the values asserted in version 1; neither lies on its own curve.
 
-**Figure 3. Sensitivity analysis: method and model varied independently.**
-(A) One-at-a-time analysis at ±10% applied to Equation 4a. The elasticities of k_fast and k_T are exactly zero because neither appears in the branch that governs the endpoint. (B) The same analysis on the state-structured model, where every parameter acts at every time. (C, D) First-order and total-order Sobol indices for time to sterilisation, 4,608 model evaluations per species. (E) Share of outcome variance arising from parameter interactions. Where these bars are tall, one-at-a-time analysis is the wrong instrument.
 
-**Figure 4. The state-structured model.**
+**Figure 2. Growth and the three survival strategies, printed equations and corrected equations.**
+(A, B) Equations 1, 2a, 3a and 4a on the Class A parameters of Section 2.6, unchanged. The carrying capacity declared in Equation 1 appears in none of the survival laws, so the resistance curve for *S. aureus* passes 10⁵⁷ CFU/mL by 240 h, exceeding the estimated prokaryotic population of Earth by twenty-six orders of magnitude. The vertical rise in the persistence curve is the discontinuity of Section 3.1. (C, D) The same scenarios with the carrying capacity applied to every strategy and Equation 4a replaced by the biexponential. Note that under the corrected tolerance equation the *S. aureus* population grows, because its replication rate exceeds its tolerance kill rate.
+
+
+**Figure 3. The state-structured model.**
 (A, B) Replicating, dormant and total populations at four times MIC. Biphasic killing emerges from the compartment structure; the model contains no transition time, and the curvature maximum is a derived observable. Sterilisation occurs in finite time. (C) Net growth rate against concentration, with the MIC of each species marked. Equations 2a to 4a contain no concentration term and cannot produce this panel. (D) Time to sterilisation against the resuscitation rate. Illustrative parameters.
 
-**Figure 5. Three strategies, three signatures.**
+
+**Figure 4. Three strategies, three signatures.**
 One parameter set with one mechanism changed at a time. (A) Concentration–response; markers give each variant's MIC. Resistance moves the MIC sixteen-fold; tolerance does not move it at all, because replication and killing scale together. (B) Time-kill at a single fixed dose of eight times the wild-type MIC, the clinically visible situation, in which the resistant variant grows. (C) The MIC–MDK₉₉ plane separates resistance from tolerance. (D) The MDK₉₉–MDK₉₉.₉₉ plane separates tolerance from persistence. In C and D each strain is exposed to eight times its own MIC. Illustrative parameters.
+
+
+**Figure 5. Sensitivity analysis: method and model varied independently.**
+(A) One-at-a-time analysis at ±10% applied to Equation 4a. The elasticities of k_fast and k_T are exactly zero because neither appears in the branch that governs the endpoint. (B) The same analysis on the state-structured model, where every parameter acts at every time. (C, D) First-order and total-order Sobol indices for time to sterilisation, 4,608 model evaluations per species. (E) Share of outcome variance arising from parameter interactions. Where these bars are tall, one-at-a-time analysis is the wrong instrument.
+
 
 **Figure 6. Fitting, model comparison and identifiability.**
 Synthetic data with known ground truth; no experimental dataset exists for this work. (A, B) Both models track the data closely. (C, D) Residuals and runs-test statistics. (E, F) Profile likelihood. The 95% interval for the transition time of Equation 4a reaches the edge of the searched range in every design; the slow rate of the biexponential is identifiable for the slow grower.
+
 
 **Figure S1. Three statistical claims checked.**
 (A) The two-sample Kolmogorov–Smirnov p-value computed between two deterministic curves falls by more than 170 orders of magnitude as the simulation grid is refined, while the test statistic moves by 0.04. The test has no inferential content when applied to deterministic curves. (B) Euler integration error against the exact solution, which is what a comparison between Euler and a closed-form expression measures. (C) R² for both models against the frequently reported 0.9 threshold, annotated with the corrected Akaike information criterion difference.

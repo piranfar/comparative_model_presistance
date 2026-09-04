@@ -75,7 +75,7 @@ Severity key:
 
 **Computed.** *S. aureus*: r = 0.5/h, k_T = 0.2/h, so the net rate is **+0.30/h and the population grows to carrying capacity**. Equation 3 instead reports a decline of 15 log₁₀ over 240 h. For *M. tuberculosis* the sign is correct (r = 0.03 < k_T = 0.05) but the magnitude remains wrong. `results/tables/eq3_omits_replication.csv`
 
-**Correction.** dN/dt = rN(1 − N/K) − k_T·N. Version 2 §2.1 Eq. 3b, §3.3, Figure 1D.
+**Correction.** dN/dt = rN(1 − N/K) − k_T·N. Version 2 §2.1 Eq. 3b, §3.3, Figure 2D.
 
 ---
 
@@ -94,7 +94,7 @@ Severity key:
 | Tolerant (metabolism ÷4) | 1.0 | **117 h** | 257 h |
 | Persistent (dormancy ×10) | 1.0 | 32 h | **352 h** |
 
-`results/tables/fig06_mic_mdk.csv`. Version 2 §2.4, §3.6, Figure 5.
+`results/tables/fig06_mic_mdk.csv`. Version 2 §2.4, §3.6, Figure 4.
 
 **Note on the encoding of tolerance.** Dividing E_max alone shifts the MIC by about fold^(1/H), which is partial resistance rather than tolerance. Tolerance is replication and killing scaled together, which leaves the MIC exactly invariant. Version 2 §2.4 states this explicitly.
 

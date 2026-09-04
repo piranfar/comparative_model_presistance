@@ -50,7 +50,7 @@ Full table with verdicts: [`results/tables/claim_recalculation.md`](results/tabl
 
 ## Status of the data
 
-**There is no experimental data in this project.** Version 1's Figure 3 was
+**There is no experimental data in this project.** Version 1's experimental-data figure was
 captioned "experimental data vs. model fitting" and named no dataset; it is
 withdrawn. Figures built on synthetic data carry a `SYNTHETIC DATA` stamp, and
 figures using unfitted parameters carry `ILLUSTRATIVE PARAMETERS`. Neither

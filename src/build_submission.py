@@ -4,7 +4,7 @@ Build the bioRxiv version-2 submission package from the Markdown manuscript.
 Run:  python -m src.build_submission
 
 Produces `submission/biorxiv_v2/` containing a Word manuscript with the figures
-embedded at their legends, the figure files separately in PDF and PNG, and a
+embedded beside the text that cites them, the figure files separately in PDF and PNG, and a
 checklist. bioRxiv accepts DOCX or PDF; DOCX is produced here because it is the
 format that survives their conversion pipeline with the fewest surprises.
 
@@ -28,16 +28,19 @@ SRC_MD = ROOT / "manuscript" / "REVISED_MANUSCRIPT.md"
 OUT_DIR = ROOT / "submission" / "biorxiv_v2"
 FIG_DIR = ROOT / "results" / "figures"
 
-# figure files, in the order the legends appear
+# Manuscript figure number -> the file that generates it. The figures are
+# numbered in order of first citation, which is not the order of the generating
+# modules, so this mapping is not the identity and must not be assumed to be.
 FIGURES = {
-    "Figure 1.": "fig01_growth_and_strategies.png",
-    "Figure 2.": "fig02_biphasic_killing.png",
-    "Figure 3.": "fig03_model_fitting.png",
-    "Figure 4.": "fig04_sensitivity.png",
-    "Figure 5.": "fig05_mechanistic_model.png",
-    "Figure 6.": "fig06_mic_mdk_plane.png",
-    "Figure S1.": "fig07_supplementary_diagnostics.png",
+    "1": "fig02_biphasic_killing",
+    "2": "fig01_growth_and_strategies",
+    "3": "fig05_mechanistic_model",
+    "4": "fig06_mic_mdk_plane",
+    "5": "fig04_sensitivity",
+    "6": "fig03_model_fitting",
+    "S1": "fig07_supplementary_diagnostics",
 }
+CITE = re.compile(r"Figure (S?\d+)")
 
 INLINE = re.compile(r"(\*\*.+?\*\*|\*[^*]+?\*|`[^`]+?`)", re.S)
 
@@ -86,20 +89,38 @@ def add_table(doc: Document, rows: list[str]) -> None:
 def build() -> Path:
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     (OUT_DIR / "figures").mkdir(exist_ok=True)
-    for name in FIGURES.values():
+    for old in (OUT_DIR / "figures").glob("fig0*"):
+        old.unlink()          # module-named copies from an earlier build
+    # Ship the figures under their manuscript numbers, not their module names.
+    for num, stem in FIGURES.items():
         for ext in (".png", ".pdf"):
-            f = FIG_DIR / (Path(name).stem + ext)
+            f = FIG_DIR / (stem + ext)
             if f.exists():
-                shutil.copy2(f, OUT_DIR / "figures" / f.name)
+                shutil.copy2(f, OUT_DIR / "figures" / f"Figure_{num}{ext}")
 
-    lines = SRC_MD.read_text(encoding="utf-8").split("\n")
+    text = SRC_MD.read_text(encoding="utf-8")
+
+    # Lift the legends out of the trailing section; each is placed inline with
+    # its own figure instead, under the paragraph that first cites it.
+    body, legend_block = text.split("## Figure legends\n", 1)
+    legend_block, tail = legend_block.split("\n---\n", 1)
+    legends = {}
+    for blk in re.split(r"\n(?=\*\*Figure )", legend_block.strip()):
+        blk = " ".join(l.strip() for l in blk.strip().split("\n") if l.strip())
+        legends[re.match(r"\*\*Figure (S?\d+)\.", blk).group(1)] = blk
+    missing = set(FIGURES) - set(legends)
+    if missing:
+        raise SystemExit(f"figures with no legend: {sorted(missing)}")
+
+    lines = (body + tail).split("\n")
+    unplaced = dict(FIGURES)
     doc = Document()
     style = doc.styles["Normal"]
     style.font.name = "Calibri"
     style.font.size = Pt(11)
     doc.styles["Normal"].paragraph_format.space_after = Pt(8)
 
-    i, pending_figure = 0, None
+    i = 0
     while i < len(lines):
         ln = lines[i]
 
@@ -143,22 +164,28 @@ def build() -> Path:
             i += 1
             continue
 
-        # a figure legend: emit the image first, then the legend text
-        key = next((k for k in FIGURES if ln.lstrip("*").startswith(k)), None)
-        if key:
-            img = OUT_DIR / "figures" / FIGURES[key]
-            if img.exists():
-                doc.add_picture(str(img), width=Inches(6.4))
-                doc.paragraphs[-1].alignment = WD_ALIGN_PARAGRAPH.CENTER
-            pending_figure = key
+        add_runs(doc.add_paragraph(), ln.strip())
 
-        par = doc.add_paragraph()
-        add_runs(par, ln.strip())
-        if pending_figure:
-            for r in par.runs:
+        # Any figure this paragraph is the first to cite goes in directly below
+        # it, with its legend, so the reader meets the figure where it is used.
+        for num in sorted(dict.fromkeys(CITE.findall(ln)),
+                          key=lambda n: (n.startswith("S"), int(n.lstrip("S")))):
+            if num not in unplaced:
+                continue
+            img = OUT_DIR / "figures" / f"Figure_{num}.png"
+            unplaced.pop(num)
+            if not img.exists():
+                continue
+            doc.add_picture(str(img), width=Inches(6.4))
+            doc.paragraphs[-1].alignment = WD_ALIGN_PARAGRAPH.CENTER
+            cap = doc.add_paragraph()
+            add_runs(cap, legends[num])
+            for r in cap.runs:
                 r.font.size = Pt(9)
-            pending_figure = None
         i += 1
+
+    if unplaced:
+        raise SystemExit(f"figures never cited in the text: {sorted(unplaced)}")
 
     out = OUT_DIR / "Piranfar_persistence_framework_bioRxiv_v2.docx"
     doc.save(out)
@@ -183,9 +210,9 @@ def checklist() -> Path:
 3. **Upload as a revision, not a new preprint.** Use the "post a revision" route
    on the existing entry, DOI 10.1101/2025.02.12.637810, so version 1 and version 2
    stay linked and readers of version 1 are shown that a correction exists.
-4. **Code link.** The data and code availability section refers to the accompanying
-   repository. Make that repository public first, and put its URL in that section.
-   Right now it names no URL.
+4. **Code link — done.** The repository is public at
+   https://github.com/piranfar/comparative_model_presistance and the data and
+   code availability section names it. Check the link resolves before uploading.
 5. **Read the change summary once more.** It is the first thing after the title and
    it says plainly that version 1's quantitative results are withdrawn. That is
    deliberate. Anyone who cites version 1 should see it immediately.
@@ -197,15 +224,22 @@ people's models are separate and are not part of this revision.
 
 ## Figures
 
-| File | Shows |
-|---|---|
-| fig01 | growth and the three survival strategies, printed against corrected |
-| fig02 | the biphasic law and its two corrections; the discontinuity |
-| fig03 | model fitting on synthetic data; profile likelihood |
-| fig04 | sensitivity analysis, three ways |
-| fig05 | the state-structured replacement |
-| fig06 | three strategies, three measurable signatures |
-| fig07 | supplementary: three statistical claims checked |
+Every figure appears in the Word file directly below the paragraph that first
+cites it, with its legend. There is no separate figure-legends section.
+
+Figures are numbered in order of first citation, so the numbers do not follow
+the generating modules. The files here carry the manuscript numbers; this table
+is the mapping back to the code that produces each one.
+
+| Submitted as | Generated by | Shows |
+|---|---|---|
+| Figure 1 | `src/figures/fig02_biphasic_killing.py` | the biphasic law and its two corrections; the discontinuity |
+| Figure 2 | `src/figures/fig01_growth_and_strategies.py` | growth and the three survival strategies, printed against corrected |
+| Figure 3 | `src/figures/fig05_mechanistic_model.py` | the state-structured replacement |
+| Figure 4 | `src/figures/fig06_mic_mdk_plane.py` | three strategies, three measurable signatures |
+| Figure 5 | `src/figures/fig04_sensitivity.py` | sensitivity analysis, three ways |
+| Figure 6 | `src/figures/fig03_model_fitting.py` | model fitting on synthetic data; profile likelihood |
+| Figure S1 | `src/figures/fig07_supplementary_diagnostics.py` | three statistical claims checked |
 """
     p = OUT_DIR / "SUBMISSION_CHECKLIST.md"
     p.write_text(text, encoding="utf-8")
