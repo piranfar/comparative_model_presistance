@@ -1,0 +1,7 @@
+species,endpoint,fraction_variance_from_interactions
+Mtb,MDK99_h,0.21179266519873874
+Mtb,log10_drop_240h,0.00805859572949219
+Mtb,time_to_LOD_h,0.022854666805679158
+S. aureus,MDK99_h,0.636272590692571
+S. aureus,log10_drop_240h,0.9561089106639057
+S. aureus,time_to_LOD_h,0.610104461953101

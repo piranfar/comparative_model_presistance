@@ -1,0 +1,7 @@
+species,strategy,log10_N_240h_as_printed,log10_N_240h_corrected,log10_K,exceeds_K_as_printed
+Mtb,resistance,8.918458918389852,8.642699139576047,9.0,False
+Mtb,tolerance,0.7884662171609781,3.914740886438628,9.0,False
+Mtb,persistence,5.933202241122278,4.449652351548441,9.0,False
+S. aureus,resistance,57.07303107182241,8.991226075692495,9.0,True
+S. aureus,tolerance,-14.846135131356087,8.778151250383644,9.0,False
+S. aureus,persistence,5.011710243670524,1.6566632477682146,9.0,False

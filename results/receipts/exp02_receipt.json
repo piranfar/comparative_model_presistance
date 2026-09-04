@@ -1,0 +1,16 @@
+{
+  "script": "src/experiments/exp02_fit_and_identifiability.py",
+  "utc": "2026-09-03T17:09:46+00:00",
+  "data": "SYNTHETIC (no experimental data in project)",
+  "concentration_xMIC": 4.0,
+  "inoculum_cfu_ml": 1000000.0,
+  "lod_cfu_ml": 100.0,
+  "min_r_squared_across_all_fits": 0.8991331545872497,
+  "n_fits": 8,
+  "n_nonidentifiable_parameters": 6,
+  "n_profiles": 8,
+  "printed_tc_nonidentifiable_in_all_designs": true,
+  "max_delta_aicc_printed_minus_biexp": 84.47287213386855,
+  "n_designs_where_both_r2_above_0.9": 3,
+  "n_designs": 4
+}

@@ -1,0 +1,57 @@
+# ---------------------------------------------------------------------------
+# This repository accompanies bioRxiv 10.1101/2025.02.12.637810 version 2.
+# It is scoped to what regenerates that manuscript. Two categories are excluded
+# on purpose.
+#
+# 1. Third-party data too large to redistribute. Provenance and fetch
+#    instructions are kept; the bytes are not. See data/raw/*/PROVENANCE.json.
+# 2. A separate, unfinished line of work analysing another group's published
+#    model. It is not part of this manuscript, the authors of that model have
+#    been written to and have not yet replied, and the working notes include
+#    their email addresses and adversarial internal reviews. None of that
+#    belongs in a public repository at this stage.
+# ---------------------------------------------------------------------------
+
+# (1) bulk third-party data
+data/raw/boccarella2026/
+data/processed/exp04_profile.npz
+data/processed/sobol_samples.npz
+
+# (2) the separate line of work, not part of this manuscript
+external/
+src/models/boccarella.py
+src/models/boccarella_runner.py
+src/experiments/exp04_*.py
+src/experiments/exp05_*.py
+src/experiments/exp06_*.py
+src/experiments/exp07_*.py
+src/experiments/exp08_*.py
+src/figures/fig08_*.py
+src/figures/fig09_*.py
+results/tables/exp04_*
+results/tables/exp05_*
+results/tables/exp06_*
+results/tables/exp07_*
+results/tables/exp08_*
+results/figures/fig08_*
+results/figures/fig09_*
+results/receipts/exp04_*
+results/receipts/exp05_*
+results/receipts/exp06_*
+results/receipts/exp08_*
+docs/05_NOVELTY_LANDSCAPE.md
+docs/06_DATA_FEASIBILITY.md
+docs/07_NEW_MATHEMATICS_OPTIONS.md
+docs/08_BOCCARELLA_REPRODUCTION.md
+docs/09_PAPER_PROPOSAL.md
+docs/10_CLAIM_NOVELTY_CHECK.md
+docs/11_RELAPSE_CLAIM_CHECK.md
+manuscript/EMAIL_TO_BOCCARELLA_DRAFT.md
+manuscript/_email_body.json
+
+# working files
+__pycache__/
+*.pyc
+.venv/
+paper.txt
+*.pdf.bak

@@ -1,0 +1,9 @@
+species,design,model,parameter,estimate,ci95_low,ci95_high,ci95_width,ci_open_at_low_end,ci_open_at_high_end,identifiable,tag
+Mtb,"sparse (8-point, 240 h)",Eq. 4 as printed (4 rate parameters + N0),t_c,1.0000000000000002,1.0000000000000002,1.9500000000000004,0.9500000000000002,True,True,False,SYNTHETIC (no experimental data in project)
+Mtb,"sparse (8-point, 240 h)",biexponential (3 rate parameters + N0),k_slow,0.014028522664536268,0.012695813011405321,0.015361232317667213,0.0026654193062618913,False,False,True,SYNTHETIC (no experimental data in project)
+Mtb,"dense (14-point, 240 h)",Eq. 4 as printed (4 rate parameters + N0),t_c,1.0000000000000002,1.0000000000000002,1.9500000000000004,0.9500000000000002,True,True,False,SYNTHETIC (no experimental data in project)
+Mtb,"dense (14-point, 240 h)",biexponential (3 rate parameters + N0),k_slow,0.010815305607583377,0.007732943509422115,0.013897667705744639,0.006164724196322524,False,False,True,SYNTHETIC (no experimental data in project)
+S. aureus,"sparse (8-point, 48 h)",Eq. 4 as printed (4 rate parameters + N0),t_c,12.000000061431745,1.170000005989595,15.420000078939795,14.2500000729502,True,False,False,SYNTHETIC (no experimental data in project)
+S. aureus,"sparse (8-point, 48 h)",biexponential (3 rate parameters + N0),k_slow,0.5488609040555382,0.02744304520277696,0.9920660840803853,0.9646230388776084,True,True,False,SYNTHETIC (no experimental data in project)
+S. aureus,"dense (16-point, 48 h)",Eq. 4 as printed (4 rate parameters + N0),t_c,1.0000000000000002,1.0000000000000002,1.5225000000000002,0.5225,True,False,False,SYNTHETIC (no experimental data in project)
+S. aureus,"dense (16-point, 48 h)",biexponential (3 rate parameters + N0),k_slow,0.011194232639957922,0.0005597116319978959,0.021828753647917948,0.021269042015920052,True,True,False,SYNTHETIC (no experimental data in project)
