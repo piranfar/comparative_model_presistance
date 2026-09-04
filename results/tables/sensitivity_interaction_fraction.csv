@@ -1,13 +1,13 @@
 exposure_mode,species,endpoint,fraction_variance_from_interactions
-absolute,Mtb,MDK99_h,0.04032514577346302
-absolute,Mtb,log10_drop_240h,0.021911320609043106
-absolute,Mtb,time_to_LOD_h,0.045922929546505786
-absolute,S. aureus,MDK99_h,0.636239674679681
-absolute,S. aureus,log10_drop_240h,0.6133417978991729
-absolute,S. aureus,time_to_LOD_h,0.604564910276207
-per_mic,Mtb,MDK99_h,0.05170077709258991
-per_mic,Mtb,log10_drop_240h,0.07977113701067429
-per_mic,Mtb,time_to_LOD_h,0.045705905733051555
-per_mic,S. aureus,MDK99_h,0.7302598252401121
+absolute,Mtb,MDK99_h,0.034530813169516006
+absolute,Mtb,log10_drop_240h,0.004270710708766612
+absolute,Mtb,time_to_LOD_h,0.030516337126119897
+absolute,S. aureus,MDK99_h,0.5970772511313169
+absolute,S. aureus,log10_drop_240h,0.6517413145149952
+absolute,S. aureus,time_to_LOD_h,0.5784787241830426
+per_mic,Mtb,MDK99_h,0.054368922844267864
+per_mic,Mtb,log10_drop_240h,0.05073694530243067
+per_mic,Mtb,time_to_LOD_h,0.022952036830886757
+per_mic,S. aureus,MDK99_h,0.727450500872935
 per_mic,S. aureus,log10_drop_240h,1.0
-per_mic,S. aureus,time_to_LOD_h,0.6766120179855128
+per_mic,S. aureus,time_to_LOD_h,0.6954143777469276

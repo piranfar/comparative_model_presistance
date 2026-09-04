@@ -1,6 +1,6 @@
 # Recalculation of every quantitative claim
 
-Generated 2026-09-03T17:09:45+00:00
+Generated 2026-09-04T23:19:38+00:00
 
 Each row recomputes one claim from the paper's own equations and Table 1 values. No experimental data is involved, so every verdict is reproducible from the manuscript alone.
 
