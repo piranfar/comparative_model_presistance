@@ -86,6 +86,27 @@ def add_table(doc: Document, rows: list[str]) -> None:
     doc.add_paragraph()
 
 
+STRUCTURAL = re.compile(r"^\s*(#|\||>|[-*]\s|\d+\.\s|---\s*$)")
+
+
+def unwrap(text: str) -> list[str]:
+    """Join hard-wrapped prose into one line per paragraph.
+
+    Parts of the source are wrapped at the margin and parts are not. Without
+    this the wrapped parts arrive in Word as a stack of one-line paragraphs,
+    each with paragraph spacing after it.
+    """
+    out: list[str] = []
+    for ln in text.split("\n"):
+        joinable = (out and out[-1].strip() and ln.strip()
+                    and not STRUCTURAL.match(ln) and not STRUCTURAL.match(out[-1]))
+        if joinable:
+            out[-1] = out[-1].rstrip() + " " + ln.strip()
+        else:
+            out.append(ln)
+    return out
+
+
 def build() -> Path:
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     (OUT_DIR / "figures").mkdir(exist_ok=True)
@@ -112,7 +133,7 @@ def build() -> Path:
     if missing:
         raise SystemExit(f"figures with no legend: {sorted(missing)}")
 
-    lines = (body + tail).split("\n")
+    lines = unwrap(body + tail)
     unplaced = dict(FIGURES)
     doc = Document()
     style = doc.styles["Normal"]

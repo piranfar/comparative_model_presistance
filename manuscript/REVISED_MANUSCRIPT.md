@@ -2,7 +2,10 @@
 
 **Vahhab Piranfar**
 
-*Affiliation to be completed before submission.*
+1. Independent Researcher, Jersey City, NJ, USA
+2. Farname Inc, Ontario, Canada
+
+Corresponding author: Vahhab Piranfar, Independent Researcher, Jersey City, NJ, USA.
 ORCID 0000-0003-3653-5739 · vahab.p@gmail.com
 
 **Revised manuscript, version 2.**
@@ -48,8 +51,9 @@ is labelled as such, and supports conclusions about the estimator only.
 **Methods corrected.** Version 1 stated that differential equations were solved
 with LSODA and cross-validated with Euler integration. Every model in version 1
 is a closed-form algebraic solution; nothing was integrated. That sentence is
-removed. The present version does contain a genuine initial value problem and
-states where.
+removed. The present version does contain a genuine initial value
+problem, the state-structured model of Section 2.3, and names the solver
+used for it.
 
 **References.** All thirty references of version 1 were checked against PubMed.
 Seventeen verified, eleven required correction, and two could not be located and
@@ -74,15 +78,27 @@ output file that contains them.
 
 ## Abstract
 
-Resistance, tolerance and persistence are distinct bacterial survival strategies, but they are frequently modelled with the same mathematical object: a first-order exponential decay with a different rate constant. We show that this practice makes the three strategies formally indistinguishable, and we develop a state-structured pharmacodynamic model in which each has its own signature.
-
-We first re-examined a widely used closed-form biphasic killing law of the form N(t) = N_d + (N₀ − N_d)e^(−k_slow(t−t_c)) for t ≥ t_c. This expression is not a decay law. At the transition time its second branch evaluates to exactly N₀ regardless of how much killing occurred beforehand, so the modelled population increases by 2.6 to 3.5 log₁₀ at the breakpoint, and it converges to a permanent floor at the dormant fraction, making sterilisation impossible at any duration. Its transition time is also not an independent parameter: in a two-subpopulation system t_c = ln((1−f)/f)/(k_fast − k_slow), and profile likelihood on simulated time-kill data of realistic design shows t_c to be unidentifiable in four of four sampling schemes.
-
-We then replaced this law with a two-compartment model in which replicating and dormant subpopulations each carry a sigmoid concentration–response. Biphasic killing emerges from the compartment structure rather than being imposed by a breakpoint, sterilisation time is finite and computable, and the three survival strategies separate onto orthogonal axes of measurable quantities: resistance shifts the minimum inhibitory concentration at unchanged minimum duration for killing, tolerance multiplies the minimum duration for killing at unchanged minimum inhibitory concentration, and persistence lifts the deep killing endpoint while leaving both the minimum inhibitory concentration and the bulk killing endpoint unchanged.
-
-Global variance-based sensitivity analysis of the replacement model identifies a determinant that the closed-form law cannot express. For the slow-growing organism, 87% of the first-order variance in time to sterilisation is carried by the rate at which dormant cells resume replication (total-order Sobol index 0.90), not by the rate at which dormant cells are killed. A dormant cell that resumes replication becomes susceptible, which places resuscitation, rather than direct killing of persisters, at the centre of regimen shortening.
-
-**This work is a modelling and methods contribution. It contains no experimental data.** Parameter values are illustrative and were chosen to reproduce documented qualitative behaviour; they are not measurements, and no quantitative claim about either species should be drawn from them until the model is fitted to time-kill data. All code, intermediate tables and figure-generating scripts are provided.
+Antibiotic resistance, tolerance, and persistence represent key bacterial
+survival strategies that impact treatment outcomes and global health. While
+*Staphylococcus aureus* is a rapidly growing pathogen associated with acute
+infections, *Mycobacterium tuberculosis* exhibits slow growth and chronic
+persistence, necessitating prolonged antibiotic regimens. In this study, we
+developed a state-structured pharmacodynamic model in which replicating and
+dormant subpopulations each carry their own concentration-response, so that the
+three strategies separate onto distinct measurable axes: resistance shifts the
+minimum inhibitory concentration, tolerance multiplies the minimum duration for
+killing, and persistence lifts the deep killing endpoint alone. Using global
+variance-based sensitivity analysis and profile likelihood, we identified which
+parameter governs the length of therapy and which parameters can be estimated at
+all from time-kill data. Our findings show that in the slow-growing organism 87%
+of the first-order variance in time to sterilisation is carried by the rate at
+which dormant cells resume replication, rather than by the rate at which dormant
+cells are killed, placing resuscitation at the centre of regimen shortening and
+identifying a class of intervention worth measuring. This version supersedes
+version 1, whose closed-form biphasic killing law is discontinuous and whose
+quantitative results are withdrawn and corrected here; the work is a modelling
+and methods contribution, contains no experimental data, and its parameter
+values are illustrative rather than measured.
 
 **Keywords:** antibiotic tolerance, bacterial persistence, pharmacodynamics, minimum duration for killing, structural identifiability, global sensitivity analysis, *Mycobacterium tuberculosis*, *Staphylococcus aureus*
 
