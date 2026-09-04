@@ -179,9 +179,18 @@ def build() -> Path:
             i += 1
             continue
 
-        if re.match(r"^\s*\d+\. ", ln):
-            add_runs(doc.add_paragraph(style="List Number"),
-                     re.sub(r"^\s*\d+\. ", "", ln))
+        num = re.match(r"^\s*(\d+)\. (.*)", ln)
+        if num:
+            # Literal numbering, deliberately not Word's List Number style.
+            # That style shares one counter across every numbered list in the
+            # document, so the reference list continued from the affiliations
+            # and the two lists before it and began at 6, breaking every
+            # citation in the text. Taking the number from the source makes
+            # the rendered list match the manuscript by construction.
+            p = doc.add_paragraph()
+            p.paragraph_format.left_indent = Inches(0.35)
+            p.paragraph_format.first_line_indent = Inches(-0.35)
+            add_runs(p, f"{num.group(1)}. {num.group(2)}")
             i += 1
             continue
 
@@ -208,6 +217,18 @@ def build() -> Path:
     if unplaced:
         raise SystemExit(f"figures never cited in the text: {sorted(unplaced)}")
 
+    # The reference list must run 1..N. It silently ran 6..26 once, because
+    # Word's shared list counter carried over from earlier numbered lists,
+    # which pointed every citation in the text at the wrong entry.
+    refs, in_refs = [], False
+    for par in doc.paragraphs:
+        if par.style.name.startswith("Heading"):
+            in_refs = par.text.strip().lower() == "references"
+        elif in_refs and (m := re.match(r"^(\d+)\. ", par.text)):
+            refs.append(int(m.group(1)))
+    if refs != list(range(1, len(refs) + 1)):
+        raise SystemExit(f"reference numbering is not 1..N: starts {refs[:4]}")
+
     out = OUT_DIR / "Piranfar_persistence_framework_bioRxiv_v2.docx"
     doc.save(out)
     return out
@@ -223,11 +244,13 @@ def checklist() -> Path:
 
 ## Before you upload
 
-1. **Affiliation.** The manuscript carries a placeholder. Your three other papers
-   use different affiliations, so this one has to be your call. Fill it in before
-   uploading.
-2. **Author contributions, competing interests, acknowledgements.** Placeholders
-   in the manuscript. bioRxiv does not require them, journals do.
+1. **Affiliation — done.** Taken from the most recent prior manuscript:
+   Independent Researcher, Jersey City, NJ, USA; and Farname Inc, Ontario,
+   Canada. Change it here if this paper should carry a different one.
+2. **Author contributions, competing interests, acknowledgements, funding.**
+   Still placeholders, and there is no funding section at all. bioRxiv does not
+   require them, journals do. Single-author papers still need a competing
+   interests statement, and "none" is a valid one.
 3. **Upload as a revision, not a new preprint.** Use the "post a revision" route
    on the existing entry, DOI 10.1101/2025.02.12.637810, so version 1 and version 2
    stay linked and readers of version 1 are shown that a correction exists.

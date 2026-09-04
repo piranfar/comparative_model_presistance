@@ -1,0 +1,17 @@
+# Versions this analysis was last run and verified on (Python 3.14.6).
+# `python run_all.py` needs only the first four; the rest build the submission
+# document and are not required to reproduce any number or figure.
+#
+# Pinned with == because the manuscript states that every reported number is
+# regenerated exactly. Each analysis stage also writes the versions it actually
+# ran under to results/receipts/, so a run under different versions is still
+# recorded rather than silently substituted.
+
+numpy==2.5.0
+scipy==1.18.0
+pandas==3.0.3
+matplotlib==3.11.1
+
+# submission document build (src/build_submission.py)
+python-docx==1.2.0
+PyMuPDF==1.28.2

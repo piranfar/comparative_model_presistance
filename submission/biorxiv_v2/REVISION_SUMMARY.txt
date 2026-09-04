@@ -1,0 +1,17 @@
+Errors in version 1 that alter its conclusions are corrected. Readers should treat its quantitative results as withdrawn.
+
+Mathematics. The biphasic killing law of version 1, its Equation 4, is discontinuous. At the transition time the second branch evaluates to exactly the inoculum, so the modelled population rises by 2.6 to 3.5 log10 at the breakpoint. It also converges to a permanent floor, making sterilisation impossible at any duration, and its transition time is neither independent nor estimable from realistic time-kill data. The resistance equation omitted the carrying capacity declared alongside it and reached 10 to the power 57 CFU per mL by day 10. The tolerance equation omitted replication, reversing the sign of the result for S. aureus: version 1 reported fifteen logs of killing where its own parameters imply net growth.
+
+Withdrawn conclusions. Once the biphasic equation is made continuous, the two species differ by 1.13-fold at 240 hours under the parameters of version 1. The comparative conclusion of version 1 was produced by the discontinuity. The persister fraction of 3.58 percent was an input, not a fit.
+
+Statistics. The Kolmogorov-Smirnov test is removed. Applied to deterministic curves its p value is set by the density of the simulation grid, falling by more than 170 orders of magnitude as the grid is refined. R-squared above 0.9 is no longer used for model selection, because a structurally broken model and its correct replacement both exceed it on the same data while their corrected AIC differs by up to 84.
+
+Figures. The figure captioned experimental data versus model fitting is withdrawn. No dataset was named in version 1 and none exists. The replacement uses synthetic data with known ground truth, is labelled as such, and supports conclusions about the estimator only. Figures are renumbered in citation order and placed with the text that cites them.
+
+Methods. The statement that equations were solved with LSODA and cross-validated with Euler integration is removed. Every model in version 1 was closed form and nothing was integrated.
+
+References. All thirty references were checked against PubMed. Seventeen verified, eleven required correction, two could not be located and are removed. Every entry now carries a PMID.
+
+Added. A state-structured replacement model in which biphasic killing emerges rather than being imposed and sterilisation time is finite; global sensitivity and identifiability analyses of both models; and a public repository that regenerates every number reported.
+
+Author affiliations added.

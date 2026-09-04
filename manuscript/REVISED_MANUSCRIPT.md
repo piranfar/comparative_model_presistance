@@ -59,7 +59,9 @@ used for it.
 Seventeen verified, eleven required correction, and two could not be located and
 are removed. Version 1's reference 3, the consensus definitions paper this work
 depends on, was cited with the wrong title, the wrong issue and an author who is
-not on it. The corrected list carries a PMID for every entry.
+not on it. Every entry in the corrected list that is indexed in PubMed carries
+its PMID; the one entry that is not indexed, a World Health Organization
+report, carries its ISBN.
 
 **What is added.** A state-structured replacement model in which biphasic killing
 emerges rather than being imposed, sterilisation time is finite, and the three
@@ -444,8 +446,10 @@ Synthetic data with known ground truth; no experimental dataset exists for this 
 
 ## References
 
-All entries below were verified against PubMed records in September 2026. Every
-entry carries a PMID. Thirteen entries from version 1 were removed or replaced;
+All entries below were verified in September 2026: those indexed in PubMed
+against their PubMed record and carrying their PMID, and the one entry that is
+not indexed, a World Health Organization report, against the publisher record
+and carrying its ISBN. Thirteen entries from version 1 were removed or replaced;
 see the note on version 2 above and `docs/04_REFERENCE_VERIFICATION.md` for the
 full audit.
 

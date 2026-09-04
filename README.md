@@ -11,11 +11,14 @@ and persistence, applied to Mycobacterium tuberculosis and Staphylococcus aureus
 > in [`manuscript/CORRECTIONS_LOG.md`](manuscript/CORRECTIONS_LOG.md).
 
 ```bash
+pip install -r requirements.txt
 python run_all.py
 ```
 
 Regenerates every number and every figure in the manuscript in about two minutes.
-No network access. Requires numpy, scipy, pandas and matplotlib.
+No network access. Needs numpy, scipy, pandas and matplotlib; the pinned versions
+this was last verified on are in [`requirements.txt`](requirements.txt), and every
+stage writes the versions it actually ran under to `results/receipts/`.
 
 ## What is here
 
@@ -65,7 +68,7 @@ state-structured model to them requires no change to any model code.
 All thirty references in version 1 were checked against PubMed. Seventeen
 verified, eleven required correction, two do not exist and are removed. The audit
 is in [`docs/04_REFERENCE_VERIFICATION.md`](docs/04_REFERENCE_VERIFICATION.md)
-and every entry in the version 2 list carries a PMID.
+and every PubMed-indexed entry in the version 2 list carries its PMID.
 
 ## Licence
 
