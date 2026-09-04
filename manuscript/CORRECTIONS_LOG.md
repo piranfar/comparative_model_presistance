@@ -160,9 +160,9 @@ Severity key:
 
 **The problem.** For any t > t_c the second branch of Equation 4 contains k_slow and f and nothing else. The elasticities of k_fast and k_T on a 240 h endpoint are **exactly zero**, and k_slow necessarily ranks first, for any parameter values and any organism. `results/tables/analytic_elasticities.csv`
 
-**Correction and replacement finding.** Version 2 §2.8 runs three analyses (OAT on the closed form, OAT on the structured model, and a variance-based global analysis with 4,608 evaluations per species). The replacement result: for the slow grower, **the first-order Sobol index for the resuscitation rate k_P→S is 0.873, total-order 0.897**, with no other parameter reaching 0.07. Varying it over ±50% spans time to sterilisation from 50 h to 1,995 h, a forty-fold range.
+**Correction and replacement finding.** Version 2 §2.8 runs three analyses (OAT on the closed form, OAT on the structured model, and a variance-based global analysis with 36,864 evaluations per species). The replacement result: for the slow grower, **the first-order Sobol index for the resuscitation rate k_P→S is 0.780 (95% bootstrap interval 0.640-0.916), total-order 0.799 (0.769-0.830)**, with no other parameter reaching a first-order index of 0.08 and interactions accounting for 2.3% of the variance.
 
-Additionally, **61% of the variance in time to sterilisation for the fast grower comes from parameter interactions** (96% for the 240 h log-reduction endpoint), so one-at-a-time analysis is the wrong instrument for that organism regardless of care. `results/tables/sensitivity_sobol.csv`, `results/tables/sensitivity_interaction_fraction.csv`. Version 2 §3.7, Figure 3.
+Additionally, **69.5% of the variance in time to LOD for the fast grower comes from parameter interactions**, where the resuscitation rate contributes exactly zero and the kill rate and replication rate reach total-order indices of 0.819 and 0.821 against first-order indices of 0.169 and 0.136. One-at-a-time analysis is the wrong instrument for that organism regardless of care. `results/tables/sensitivity_sobol.csv`, `results/tables/sensitivity_interaction_fraction.csv`. Version 2 §3.7, Figure 3.
 
 ---
 
@@ -313,4 +313,4 @@ Twenty-three quantitative claims were recomputed from version 1's own equations 
 
 Two failures were not identified in the original audit and are new to this pass: **C5**, the tolerance equation's omission of replication, which reverses the direction of the result for *S. aureus*; and the practical, as opposed to merely structural, non-identifiability of the transition time documented under **C3**.
 
-One finding replaces a withdrawn claim rather than merely removing it: **C12**, the dominance of the resuscitation rate in setting time to sterilisation for the slow-growing organism.
+One finding replaces a withdrawn claim rather than merely removing it: **C12**, the dominance of the resuscitation rate in setting time to LOD for the slow-growing organism.

@@ -21,8 +21,8 @@ version 1 should treat its quantitative results as withdrawn.
 **Mathematics.** The biphasic killing law of version 1 (its Equation 4) is
 discontinuous: at the transition time its second branch evaluates to exactly the
 inoculum, so the modelled population rises by 2.6 to 3.5 log10 at the breakpoint.
-It also converges to a permanent floor, making sterilisation impossible at any
-duration. Its transition time is not an independent parameter and, on time-kill
+It also converges to a permanent floor above the assay limit of detection, so
+under that equation the population never reaches the limit, at any duration. Its transition time is not an independent parameter and, on time-kill
 data of realistic density, is not estimable at all. The resistance equation
 omitted the carrying capacity declared alongside it and reached 10^57 CFU/mL by
 day 10. The tolerance equation omitted replication, which reverses the sign of
@@ -41,7 +41,7 @@ deterministic curves its p-value is set by the density of the simulation grid,
 falling by more than 170 orders of magnitude as the grid is refined. The reported
 R-squared above 0.9 is no longer used for model selection, because a structurally
 broken model and its correct replacement both exceed it on the same data while
-their corrected AIC differs by up to 84.
+their corrected AIC differs by up to 81.5.
 
 **Version 1's experimental-data figure is withdrawn.** It was captioned "experimental data vs.
 model fitting". No dataset was named in version 1 and none exists. The
@@ -64,8 +64,8 @@ its PMID; the one entry that is not indexed, a World Health Organization
 report, carries its ISBN.
 
 **What is added.** A state-structured replacement model in which biphasic killing
-emerges rather than being imposed, sterilisation time is finite, and the three
-survival strategies separate onto orthogonal measurable axes; a global
+emerges rather than being imposed, time to LOD is finite, and the three
+survival strategies separate onto distinct measurable axes; a global
 sensitivity analysis; and an identifiability analysis of both the old and the new
 model. All code is public and regenerates every number in this version.
 
@@ -92,11 +92,13 @@ minimum inhibitory concentration, tolerance multiplies the minimum duration for
 killing, and persistence lifts the deep killing endpoint alone. Using global
 variance-based sensitivity analysis and profile likelihood, we identified which
 parameter governs the length of therapy and which parameters can be estimated at
-all from time-kill data. Our findings show that in the slow-growing organism 87%
-of the first-order variance in time to sterilisation is carried by the rate at
-which dormant cells resume replication, rather than by the rate at which dormant
-cells are killed, placing resuscitation at the centre of regimen shortening and
-identifying a class of intervention worth measuring. This version supersedes
+all from time-kill data. Our findings show that the two
+organisms are governed by different parameters entirely: in the slow-growing
+organism 78% of the first-order variance in time to LOD is carried by the rate at
+which dormant cells resume replication, while in the fast-growing organism that
+same rate contributes nothing measurable and the outcome is set by the kill rate
+and the replication rate acting jointly. A regimen-shortening strategy has no
+reason to transfer between them. This version supersedes
 version 1, whose closed-form biphasic killing law is discontinuous and whose
 quantitative results are withdrawn and corrected here; the work is a modelling
 and methods contribution, contains no experimental data, and its parameter
@@ -114,7 +116,7 @@ Antibiotic resistance, tolerance and persistence lead to treatment failure and p
 
 Answering that question requires a model in which resistance, tolerance and persistence are different things. Much of the modelling literature, including our own earlier version of this work, does not meet that requirement. When all three are written as N(t) = N₀e^(−kt) with different values of k, they differ only in a number, and no measurement can distinguish them because the model contains no measurement that could. The problem is structural rather than numerical, and it cannot be fixed by re-estimating k.
 
-This paper does three things. First, it establishes what goes wrong with the closed-form biphasic killing law that is commonly used to represent persistence, including a discontinuity that has apparently gone unremarked and a structural non-identifiability that makes its transition time uninterpretable. Second, it develops a state-structured replacement in which the three strategies occupy orthogonal directions in a space of measurable quantities. Third, it uses global sensitivity analysis of the replacement to identify which parameter actually governs time to sterilisation, and finds an answer different from the one a one-at-a-time analysis of the closed-form law returns.
+This paper does three things. First, it establishes what goes wrong when a biphasic killing law is written as a closed form with an explicit transition time, a construction we adopted in version 1 of this work. Searching for the exact discontinuous form we used returns no other publication that prints it: the literature uses the continuous biexponential. The failure we document is therefore ours, and we document it because the underlying temptation is general -- an explicit transition time reads as an interpretable quantity, and it is not one. Second, it develops a state-structured replacement in which the three strategies occupy near-independent directions in a space of measurable quantities. Third, it uses global sensitivity analysis of the replacement to identify which parameter actually governs time to LOD, and finds an answer different from the one a one-at-a-time analysis of the closed-form law returns.
 
 We are explicit about the limits. This is a framework paper. It contains no experimental data, its parameter values are illustrative, and its species-level statements are therefore qualitative. What it does establish is which quantities must be measured, and what a model must contain before those measurements can be interpreted.
 
@@ -144,7 +146,7 @@ with N_d the dormant subpopulation and t_c the transition time. Section 3.1 to 3
 
 which has a closed solution: logistic with effective rate r − k and effective capacity K(r − k)/r.
 
-Equation 4a is replaced by a biexponential, which is smooth everywhere, reaches sterilisation, keeps the dormant fraction f dimensionless, and has three rate parameters rather than four:
+Equation 4a is replaced by a biexponential, which is smooth everywhere, reaches the limit of detection in finite time, keeps the dormant fraction f dimensionless, and has three rate parameters rather than four:
 
 > N(t) = N₀[(1 − f)e^(−k_fast t) + f e^(−k_slow t)]   (4b)
 
@@ -193,7 +195,7 @@ All endpoints are computed from the same simulated curve.
 
 - **MIC**: the lowest concentration at which the initial net growth rate of the bulk population is non-positive, located by Brent root-finding.
 - **MDK₉₉ and MDK₉₉.₉₉**: the times at which the surviving fraction first reaches 10⁻² and 10⁻⁴ [4].
-- **Time to sterilisation**: the time at which the population first falls below an assay limit of detection, taken as 10² CFU/mL, the value used in the hollow-fibre studies catalogued in the accompanying data manifest.
+- **Time to LOD**: the time at which the population first falls below an assay limit of detection, taken as 10² CFU/mL, the value used in the hollow-fibre studies catalogued in the accompanying data manifest.
 - **log₁₀ reduction at 240 h**.
 
 Endpoints are located by bracketing followed by Brent root-finding on an interpolated curve. Where an endpoint is not reached, the search window is doubled repeatedly to 10⁶ h before infinity is returned, so a reported infinity means the endpoint is genuinely unreachable and never that the search was truncated. This distinction matters in Section 3.1.
@@ -260,9 +262,9 @@ for any parameter values, so the modelled population returns to the inoculum at 
 
 *(`results/tables/eq4_discontinuity.csv`; Figure 1A-C)*
 
-A second consequence follows from the same expression. As t grows, N(t) → N_d. The dormant subpopulation never declines, so the model asserts that no regimen of any duration can sterilise. Under the parameters of Section 2.6 this places a permanent floor at 3.6 × 10⁴ CFU/mL for *M. tuberculosis*, which is 358 times the assay limit of detection. Time to sterilisation is therefore infinite, not as an artefact of a truncated search but as a property of the equation; the search window was extended to 10⁶ h before infinity was returned (`results/tables/model_endpoints.csv`).
+A second consequence follows from the same expression. As t grows, N(t) → N_d. The dormant subpopulation never declines, so the model asserts that no regimen of any duration can sterilise. Under the parameters of Section 2.6 this places a permanent floor at 3.6 × 10⁴ CFU/mL for *M. tuberculosis*, which is 358 times the assay limit of detection. Time to LOD is therefore infinite, not as an artefact of a truncated search but as a property of the equation; the search window was extended to 10⁶ h before infinity was returned (`results/tables/model_endpoints.csv`).
 
-Both corrected forms give finite sterilisation times under the same parameters: 1,290 h for *M. tuberculosis* and 333 h for *S. aureus* under the continuous piecewise form, and 5,881 h and 161 h under the biexponential.
+Both corrected forms give finite times to LOD under the same parameters: 1,290 h for *M. tuberculosis* and 333 h for *S. aureus* under the continuous piecewise form, and 5,881 h and 161 h under the biexponential.
 
 A published figure drawn from Equation 4a would show a vertical rise of two to three log₁₀ at the breakpoint. Figures that do not show this were not generated by the equation their methods section states. This discrepancy must be checked and disclosed wherever the equation appears.
 
@@ -308,7 +310,7 @@ Three properties distinguish this from Equation 4a. The curve is continuous and 
 
 The compartment trajectories also make the mechanism visible. The dormant compartment declines faster than its own kill rate alone would allow, because cells leaving dormancy enter a compartment that is being killed rapidly. The effective clearance rate of the dormant pool is approximately k_PS + E_max,P rather than E_max,P. This observation is developed in Section 3.7.
 
-### 3.6 The three strategies occupy orthogonal directions
+### 3.6 The three strategies separate onto distinct measurable axes
 
 Introducing each mechanism separately into one parameter set, and measuring each strain at eight times its own MIC so that a resistant strain is not merely under-dosed:
 
@@ -325,15 +327,15 @@ Resistance moves the MIC sixteen-fold and leaves both killing endpoints untouche
 
 Two consequences are practical. An isolate can be placed in this space from two standard laboratory measurements, so the distinction is operational rather than verbal. And a study that reports only MIC and a single killing endpoint at a fixed dose cannot separate tolerance from persistence, because both raise the deep endpoint; the two are separated only by whether the bulk endpoint moves with it.
 
-### 3.7 Resuscitation rate, not persister killing, governs sterilisation time
+### 3.7 Resuscitation rate governs time to LOD in the slow grower, and nothing else does
 
 Applied to Equation 4a, one-at-a-time sensitivity analysis returns a ranking that is an algebraic identity rather than a result. For any t > t_c the second branch of Equation 4a contains k_slow and f and nothing else, so k_fast and k_T have elasticities of exactly zero on any endpoint evaluated after the transition, and k_slow necessarily ranks first (`results/tables/analytic_elasticities.csv`; Figure 5A). This ranking would be unchanged for any parameter values and any organism, and therefore cannot support a biological conclusion.
 
-Run on the state-structured model, where every parameter acts at every time, the answer is different. For the slow grower, the first-order Sobol index for k_PS, the rate at which dormant cells resume replication, is **0.873**, with a total-order index of **0.897** (`results/tables/sensitivity_sobol.csv`, Figure 5C). No other parameter reaches a total-order index of 0.07. Varying k_PS over the ±50% range shifts time to sterilisation from 380 h at baseline to 1,995 h at one tenth of baseline and 50 h at ten times baseline, a span of forty-fold.
+Run on the state-structured model, where every parameter acts at every time and every parameter set is exposed at four times its own MIC, the answer is different and it is unambiguous. For the slow grower the first-order Sobol index of k_PS, the rate at which dormant cells resume replication, is **0.780** (95% bootstrap interval 0.640 to 0.916) with a total-order index of **0.799** (0.769 to 0.830) on time to LOD (`results/tables/sensitivity_sobol.csv`, Figure 5C). No other parameter reaches a first-order index of 0.08, and interactions account for only 2.3% of the variance: this is one parameter acting alone, not a ranking among comparable contributors. Indices are estimated from 4,096 base samples, 36,864 model evaluations per species, and the bootstrap intervals are reported because a smaller design returned negative first-order estimates for the parameters that carry no variance, which is a statement about Monte Carlo error and not about the model.
 
-The mechanism is the one identified in Section 3.5. A dormant cell is hard to kill; a dormant cell that resumes replication is not. Anything that increases the rate of resuscitation moves cells from a refractory compartment into a susceptible one, and the drug does the rest. This places resuscitation, rather than direct killing of persisters, at the centre of regimen shortening for slow-growing organisms, and it is a statement about a drug target that Equation 4a is structurally incapable of making.
+The mechanism is the one identified in Section 3.5. A dormant cell is hard to kill; a dormant cell that resumes replication is not. Anything that increases the rate of resuscitation moves cells from a refractory compartment into a susceptible one, and the drug does the rest. In this model, and for a slow grower, resuscitation therefore sets the duration and the persister kill rate does not. We state that as a property of the model and of these illustrative parameters; establishing it as a property of tuberculosis requires fitting to time-kill data, which Section 4.3 sets out. What the analysis does establish without qualification is that the two organisms are governed by different parameters, so a regimen-shortening strategy transferred between them has no reason to work. For slow-growing organisms, and it is a statement about a drug target that Equation 4a is structurally incapable of making.
 
-For the fast grower the picture differs in kind, not just in detail. The dominant parameters are E_max,S and r, and **61% of the variance in time to sterilisation arises from parameter interactions** rather than from parameters acting alone; for the log₁₀ reduction at 240 h the interaction share reaches 96% (`results/tables/sensitivity_interaction_fraction.csv`, Figure 5E). Where the interaction share is that high, no one-at-a-time analysis of that organism can be trusted regardless of how carefully it is conducted.
+For the fast grower the picture differs in kind, not in degree. The resuscitation rate contributes **exactly nothing**: its first-order and total-order indices are both 0.000 and its bootstrap interval has no width. What governs the fast grower is the maximum kill rate together with the replication rate, and together is the operative word — their total-order indices are 0.819 (0.706 to 0.935) and 0.821 (0.713 to 0.942) against first-order indices of only 0.169 and 0.136, so **69.5% of the variance in time to LOD comes from the two acting jointly** rather than from either alone (`results/tables/sensitivity_interaction_fraction.csv`, Figure 5E). A one-at-a-time analysis cannot see that quantity at all; it is the share of the answer that OAT structurally omits.
 
 ### 3.8 The coefficient of determination cannot distinguish these models
 
@@ -353,9 +355,9 @@ A reported value of t_c from a fit of Equation 4a therefore carries no informati
 
 Three results are independent of any parameter choice, because they are properties of the equations. The closed-form biphasic killing law increases the population at its transition and converges to an immortal floor. Its transition time is determined by its other three parameters and, in practice, is not estimable from time-kill data of realistic density. And a model in which resistance, tolerance and persistence are one exponential with three different rate constants cannot distinguish them, because it contains no quantity that differs between them.
 
-One result depends on the model structure but not on the specific parameter values: given a two-compartment model with a concentration–response, the three strategies separate onto orthogonal axes of measurable quantities, and an isolate can be placed in that space from measurements laboratories already make.
+One result depends on the model structure but not on the specific parameter values: given a two-compartment model with a concentration–response, each of the three strategies leaves its own signature across the minimum inhibitory concentration and the shallow and deep killing endpoints, and an isolate can be placed in that space from measurements laboratories already make. The separation is clean rather than exact: resistance and tolerance move one coordinate each and leave the others where they were, while persistence moves the deep endpoint 3.6-fold and the shallow one by 2.5%.
 
-One result depends on the illustrative parameters and is therefore provisional: the dominance of the resuscitation rate in setting time to sterilisation for the slow grower. Its mechanism is robust, in that any model with a refractory compartment and a susceptible compartment will show that moving cells between them changes clearance time. Its magnitude is not established and awaits fitting to data.
+One result depends on the illustrative parameters and is therefore provisional: the dominance of the resuscitation rate in setting time to LOD for the slow grower. Its mechanism is robust, in that any model with a refractory compartment and a susceptible compartment will show that moving cells between them changes clearance time. Its magnitude is not established and awaits fitting to data.
 
 ### 4.2 Implications, stated at the strength the evidence supports
 
@@ -387,9 +389,9 @@ The binding constraint is data extraction rather than model development. In orde
 
 ## 5. Conclusion
 
-Resistance, tolerance and persistence are three different phenomena, and a model that writes all three as one exponential with a different constant cannot tell them apart. The closed-form biphasic killing law widely used to represent persistence fails in three further ways that we quantify here: it raises the modelled population by two to three log₁₀ at its transition, it converges to a floor at which sterilisation is impossible at any duration, and its transition time is not identifiable from time-kill data of realistic density.
+Resistance, tolerance and persistence are three different phenomena, and a model that writes all three as one exponential with a different constant cannot tell them apart. A closed-form biphasic law written with an explicit transition time, as we wrote it in version 1, fails in three further ways that we quantify here: it raises the modelled population by two to three log₁₀ at its transition, it converges to a floor at which sterilisation is impossible at any duration, and its transition time is not identifiable from time-kill data of realistic density.
 
-A two-compartment model with a sigmoid concentration–response removes all three failures and separates the strategies onto orthogonal axes of quantities that laboratories already measure. Applied to that model, global sensitivity analysis identifies the rate at which dormant cells resume replication as the dominant determinant of sterilisation time for a slow-growing organism, a determinant the closed-form law cannot express.
+A two-compartment model with a sigmoid concentration–response removes all three failures and separates the strategies onto distinct axes of quantities that laboratories already measure. Applied to that model, global sensitivity analysis identifies the rate at which dormant cells resume replication as the dominant determinant of sterilisation time for a slow-growing organism, a determinant the closed-form law cannot express.
 
 This is a framework rather than a measurement. Its quantitative claims about *M. tuberculosis* and *S. aureus* await fitting to experimental time-kill data. What it establishes is which quantities must be measured, and what a model must contain before those measurements mean anything.
 
@@ -424,7 +426,7 @@ V.P. conceived the study, wrote the code, performed the analyses and wrote the m
 
 
 **Figure 3. The state-structured model.**
-(A, B) Replicating, dormant and total populations at four times MIC. Biphasic killing emerges from the compartment structure; the model contains no transition time, and the curvature maximum is a derived observable. Sterilisation occurs in finite time. (C) Net growth rate against concentration, with the MIC of each species marked. Equations 2a to 4a contain no concentration term and cannot produce this panel. (D) Time to sterilisation against the resuscitation rate. Illustrative parameters.
+(A, B) Replicating, dormant and total populations at four times MIC. Biphasic killing emerges from the compartment structure; the model contains no transition time, and the curvature maximum is a derived observable. Sterilisation occurs in finite time. (C) Net growth rate against concentration, with the MIC of each species marked. Equations 2a to 4a contain no concentration term and cannot produce this panel. (D) Time to LOD against the resuscitation rate. Illustrative parameters.
 
 
 **Figure 4. Three strategies, three signatures.**
@@ -432,7 +434,7 @@ One parameter set with one mechanism changed at a time. (A) Concentration–resp
 
 
 **Figure 5. Sensitivity analysis: method and model varied independently.**
-(A) One-at-a-time analysis at ±10% applied to Equation 4a. The elasticities of k_fast and k_T are exactly zero because neither appears in the branch that governs the endpoint. (B) The same analysis on the state-structured model, where every parameter acts at every time. (C, D) First-order and total-order Sobol indices for time to sterilisation, 4,608 model evaluations per species. (E) Share of outcome variance arising from parameter interactions. Where these bars are tall, one-at-a-time analysis is the wrong instrument.
+(A) One-at-a-time analysis at ±10% applied to Equation 4a. The elasticities of k_fast and k_T are exactly zero because neither appears in the branch that governs the endpoint. (B) The same analysis on the state-structured model, where every parameter acts at every time. (C, D) First-order and total-order Sobol indices for time to LOD, 4,608 model evaluations per species. (E) Share of outcome variance arising from parameter interactions. Where these bars are tall, one-at-a-time analysis is the wrong instrument.
 
 
 **Figure 6. Fitting, model comparison and identifiability.**

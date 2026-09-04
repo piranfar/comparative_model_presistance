@@ -46,7 +46,7 @@ equations and its own parameter table. Twenty fail, two are partial, one passes.
 | Resistant growth, Eq. 2 | 10⁵⁷ CFU/mL at 240 h, exceeding the prokaryotic biomass of Earth |
 | Tolerance kills *S. aureus*, Eq. 3 | net rate is +0.30/h; the population grows |
 | The two species differ markedly | 1.13-fold apart at 240 h once the discontinuity is removed |
-| R² > 0.9 confirms the model | both a correct and a broken model exceed 0.9 while AICc differs by 84 |
+| R² > 0.9 confirms the model | both a correct and a broken model exceed 0.9 while AICc differs by 81.5 |
 | Kolmogorov–Smirnov p < 0.05 | the p-value is set by the simulation grid density, not by the biology |
 
 Full table with verdicts: [`results/tables/claim_recalculation.md`](results/tables/claim_recalculation.md).
