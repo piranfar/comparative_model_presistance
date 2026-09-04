@@ -1,12 +1,17 @@
 {
   "script": "src/experiments/exp03_sensitivity.py",
-  "utc": "2026-09-03T17:11:18+00:00",
-  "concentration_xMIC": 4.0,
+  "utc": "2026-09-04T22:38:40+00:00",
+  "concentration_multiple_of_MIC": 4.0,
+  "exposure_modes": [
+    "per_mic",
+    "absolute"
+  ],
+  "reported_mode": "per_mic",
   "oat_perturbation": 0.1,
   "sobol_base_samples": 512,
   "sobol_model_evaluations_per_species": 4608,
   "sobol_span_fraction": 0.5,
   "max_abs_change_from_k_fast_printed_240h": 0.0,
-  "runtime_seconds": 92.1,
-  "max_interaction_fraction": 0.9561089106639057
+  "runtime_seconds": 185.2,
+  "max_interaction_fraction": 1.0
 }

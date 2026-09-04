@@ -106,7 +106,7 @@ def build():
             "MDK99_h": mdk(curve, N0, 99.0),
             "MDK99.99_h": mdk(curve, N0, 99.99),
             "log10_drop_24h": log10_drop(curve, N0, 24.0),
-            "persister_fraction_eq": p.persister_fraction_eq,
+            "dormant_fraction_at_inoculum": p.persister_fraction_growing(N0),
             "MIC_relative": mic(p),
         })
 

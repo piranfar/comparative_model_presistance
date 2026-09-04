@@ -121,6 +121,6 @@ def generate(p: PDParams, C: float, t_sample=HFIM_SAMPLING_H,
             "k_SP": p.k_SP,
             "k_PS": p.k_PS,
             "r": p.r,
-            "persister_fraction_eq": p.persister_fraction_eq,
+            "dormant_fraction_at_inoculum": p.persister_fraction_growing(N0),
         },
     )

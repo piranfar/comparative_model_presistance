@@ -95,7 +95,7 @@ def measure() -> pd.DataFrame:
             "MDK99_h_at_wild_type_dose": mdk(fixed, N0, 99.0),
             "MDK99.99_h_at_wild_type_dose": mdk(fixed, N0, 99.99),
             "r": q.r, "Emax_S": q.Emax_S, "EC50": q.EC50,
-            "dormant_fraction": q.persister_fraction_eq,
+            "dormant_fraction": q.persister_fraction_growing(N0),
         })
     return pd.DataFrame(rows)
 

@@ -31,6 +31,7 @@ Properties the printed Eq. 4 lacks:
 """
 from __future__ import annotations
 
+import math
 from dataclasses import dataclass, replace
 
 import numpy as np
@@ -57,8 +58,36 @@ class PDParams:
 
     @property
     def persister_fraction_eq(self) -> float:
-        """Dormant fraction at equilibrium without drug, k_SP/(k_SP+k_PS)."""
+        """Dormant fraction where switching balances and the population is not
+        growing, k_SP/(k_SP+k_PS). This is the stationary-phase inoculum: it
+        holds at carrying capacity, where replication has stopped. It is not
+        the right value for an inoculum taken from exponential growth, because
+        replication keeps refilling the replicating compartment; use
+        `persister_fraction_growing` for that.
+        """
         return self.k_SP / (self.k_SP + self.k_PS)
+
+    def persister_fraction_growing(self, N0: float) -> float:
+        """Dormant fraction in a population growing at density `N0`.
+
+        With S and P both growing exponentially at rate lambda, the ratio P/S
+        settles at k_SP/(lambda+k_PS), so the dormant fraction is
+        k_SP/(lambda+k_PS+k_SP), where lambda solves
+
+            lambda^2 + lambda(k_SP + k_PS - r_eff) - r_eff*k_PS = 0
+
+        for r_eff = r(1 - N0/K). At r_eff = 0 this returns lambda = 0 and the
+        expression collapses to `persister_fraction_eq`, as it must. While the
+        population grows it is smaller, roughly fourfold for the slow grower of
+        Section 2.6 and sixfold for the fast one, because replication dilutes
+        the dormant pool faster than switching refills it.
+        """
+        r_eff = self.r * (1.0 - N0 / self.K)
+        if r_eff <= 0.0:
+            return self.persister_fraction_eq
+        b = self.k_SP + self.k_PS - r_eff
+        lam = 0.5 * (-b + math.sqrt(b * b + 4.0 * r_eff * self.k_PS))
+        return self.k_SP / (lam + self.k_PS + self.k_SP)
 
     def with_resistance(self, fold: float) -> "PDParams":
         """Resistance: multiply EC50 by `fold`. MIC shifts, Emax unchanged."""
@@ -106,12 +135,16 @@ def simulate(p: PDParams, C: float, t_eval, N0: float = 1.0e6,
     """Integrate the two-compartment model.
 
     `C` is the drug concentration in multiples of the reference MIC, held
-    constant. `f0` is the initial dormant fraction; when None the pre-treatment
-    equilibrium fraction k_SP/(k_SP+k_PS) is used, which is the consistent
-    choice for an inoculum grown without drug.
+    constant. `f0` is the initial dormant fraction; when None it is taken from
+    the growing state at density `N0`, which is the state the simulation then
+    starts in. Using the no-growth equilibrium k_SP/(k_SP+k_PS) here instead,
+    as earlier versions did, asserts a stationary-phase inoculum and then
+    integrates it as an exponentially growing one; it overstates the dormant
+    pool by about fourfold for the slow grower and sixfold for the fast one.
+    Pass `f0` explicitly to model a genuinely stationary-phase inoculum.
     """
     t_eval = np.asarray(t_eval, dtype=float)
-    f = p.persister_fraction_eq if f0 is None else f0
+    f = p.persister_fraction_growing(N0) if f0 is None else f0
     y0 = [N0 * (1.0 - f), N0 * f]
     sol = solve_ivp(_rhs, (float(t_eval[0]), float(t_eval[-1])), y0,
                     t_eval=t_eval, args=(p, C), method="LSODA",
@@ -145,8 +178,10 @@ def net_growth_rate(p: PDParams, C: float, N0: float = 1.0e6) -> float:
     """Initial net growth rate of the bulk population, 1/h.
 
     Used to locate the MIC: the concentration at which net growth is zero.
+    The composition is the one the inoculum actually starts from, so that the
+    MIC and the simulations it scales are defined on the same population.
     """
-    f = p.persister_fraction_eq
+    f = p.persister_fraction_growing(N0)
     y = [N0 * (1.0 - f), N0 * f]
     dS, dP = _rhs(0.0, y, p, C)
     return (dS + dP) / N0

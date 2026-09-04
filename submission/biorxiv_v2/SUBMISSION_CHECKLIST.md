@@ -7,11 +7,13 @@
 
 ## Before you upload
 
-1. **Affiliation.** The manuscript carries a placeholder. Your three other papers
-   use different affiliations, so this one has to be your call. Fill it in before
-   uploading.
-2. **Author contributions, competing interests, acknowledgements.** Placeholders
-   in the manuscript. bioRxiv does not require them, journals do.
+1. **Affiliation — done.** Taken from the most recent prior manuscript:
+   Independent Researcher, Jersey City, NJ, USA; and Farname Inc, Ontario,
+   Canada. Change it here if this paper should carry a different one.
+2. **Author contributions, competing interests, acknowledgements, funding.**
+   Still placeholders, and there is no funding section at all. bioRxiv does not
+   require them, journals do. Single-author papers still need a competing
+   interests statement, and "none" is a valid one.
 3. **Upload as a revision, not a new preprint.** Use the "post a revision" route
    on the existing entry, DOI 10.1101/2025.02.12.637810, so version 1 and version 2
    stay linked and readers of version 1 are shown that a correction exists.
