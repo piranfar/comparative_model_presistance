@@ -1,4 +1,4 @@
-# Antibiotic tolerance endpoints measure the starting inoculum, not the kill rate
+# Duration endpoints misclassify antibiotic tolerance by measuring inoculum size rather than killing dynamics
 
 A reanalysis of four published deposits, asking what happens to the two ways
 antibiotic killing is summarised — as a rate, and as a duration — when the same
