@@ -1,0 +1,76 @@
+{
+  "script": "src/experiments/exp16_tb_mic_mdk_independence.py",
+  "utc": "2026-09-05T04:55:10+00:00",
+  "data_source": "eLife 93243 supplementary file 2",
+  "organism": "Mycobacterium tuberculosis, clinical isolates",
+  "antibiotic": "rifampicin",
+  "n_isolates": 217,
+  "assay_ceiling_days": 6.0,
+  "mic_range_ug_ml": [
+    0.03,
+    0.5
+  ],
+  "mic_distinct_values": 5,
+  "mic_fold_range": 16.666666666666668,
+  "censoring": {
+    "MDK90": 0.05069124423963134,
+    "MDK99": 0.2119815668202765,
+    "MDK99.99": 0.8986175115207373
+  },
+  "independence": [
+    {
+      "endpoint": "MDK90",
+      "sample": "all",
+      "n": 193,
+      "spearman_rho": 0.09048942382480309,
+      "p_value": 0.210744041262623,
+      "detectable_rho_at_95pct": 0.14124269945004728,
+      "independent": true
+    },
+    {
+      "endpoint": "MDK90",
+      "sample": "uncensored",
+      "n": 188,
+      "spearman_rho": 0.044893272608355024,
+      "p_value": 0.540703981021203,
+      "detectable_rho_at_95pct": 0.14311283588422272,
+      "independent": true
+    },
+    {
+      "endpoint": "MDK99",
+      "sample": "all",
+      "n": 193,
+      "spearman_rho": 0.05731632980338254,
+      "p_value": 0.4285108568089232,
+      "detectable_rho_at_95pct": 0.14124269945004728,
+      "independent": true
+    },
+    {
+      "endpoint": "MDK99",
+      "sample": "uncensored",
+      "n": 160,
+      "spearman_rho": -0.04668323193971318,
+      "p_value": 0.5577470785993166,
+      "detectable_rho_at_95pct": 0.15516155051421368,
+      "independent": true
+    },
+    {
+      "endpoint": "MDK99.99",
+      "sample": "all",
+      "n": 193,
+      "spearman_rho": -0.12006406644517321,
+      "p_value": 0.09627845218533394,
+      "detectable_rho_at_95pct": 0.14124269945004728,
+      "independent": true
+    },
+    {
+      "endpoint": "MDK99.99",
+      "sample": "uncensored",
+      "n": 21,
+      "spearman_rho": -0.15244550284086944,
+      "p_value": 0.5094535504456614,
+      "detectable_rho_at_95pct": 0.4316936864499687,
+      "independent": true
+    }
+  ]
+}
