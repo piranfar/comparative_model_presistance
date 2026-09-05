@@ -1,0 +1,130 @@
+{
+  "script": "src/experiments/exp17_era4tb_between_lab.py",
+  "utc": "2026-09-05T05:10:14+00:00",
+  "data_source": "ERA4TB standardised time-kill, figshare 19766083",
+  "organism": "Mycobacterium tuberculosis H37Rv",
+  "drugs": [
+    "moxifloxacin",
+    "isoniazid"
+  ],
+  "n_laboratories": 6,
+  "n_flasks": 90,
+  "fraction_below_limit_overall": 0.1930232558139535,
+  "censoring_treatments": [
+    "tobit (Beal M3)",
+    "multiple imputation, 50 draws, Rubin pooling",
+    "Kaplan-Meier and Cox proportional hazards"
+  ],
+  "baseline_spread_log10": 3.582248948781021,
+  "baseline_spread_fold": 3821.632738950572,
+  "clearance_auc_from_baseline_alone": 0.9738095238095238,
+  "clearance_mannwhitney_p": 1.168741137746919e-10,
+  "tobit_vs_mi_max_abs_difference": 0.002859992114399579,
+  "cox": [
+    {
+      "model": "log-rank across institutes",
+      "term": "institute",
+      "statistic": 53.785023556950826,
+      "p_value": 2.3202388316142943e-10
+    },
+    {
+      "model": "institute only",
+      "term": "institute_B",
+      "coef": 0.8232550037708269,
+      "hazard_ratio": 2.277902364155428,
+      "p_value": 0.09311156808338726,
+      "concordance": 0.8962264150943396
+    },
+    {
+      "model": "institute only",
+      "term": "institute_C",
+      "coef": 1.1036338075591088,
+      "hazard_ratio": 3.0151024435409512,
+      "p_value": 0.014200575377622192,
+      "concordance": 0.8962264150943396
+    },
+    {
+      "model": "institute only",
+      "term": "institute_D",
+      "coef": -1.6006378840233582,
+      "hazard_ratio": 0.20176777249816813,
+      "p_value": 0.014838206941952863,
+      "concordance": 0.8962264150943396
+    },
+    {
+      "model": "institute only",
+      "term": "institute_E",
+      "coef": -1.584701498602558,
+      "hazard_ratio": 0.20500897945109414,
+      "p_value": 0.016063574819403792,
+      "concordance": 0.8962264150943396
+    },
+    {
+      "model": "institute only",
+      "term": "institute_F",
+      "coef": -1.6006378840233577,
+      "hazard_ratio": 0.2017677724981682,
+      "p_value": 0.014838206941952817,
+      "concordance": 0.8962264150943396
+    },
+    {
+      "model": "institute + starting density",
+      "term": "institute_B",
+      "coef": 0.5234220578838675,
+      "hazard_ratio": 1.687793505597996,
+      "p_value": 0.2637228981069262,
+      "concordance": 0.9304245283018868
+    },
+    {
+      "model": "institute + starting density",
+      "term": "institute_C",
+      "coef": 1.661533473388032,
+      "hazard_ratio": 5.267382044569899,
+      "p_value": 0.00041474468651738215,
+      "concordance": 0.9304245283018868
+    },
+    {
+      "model": "institute + starting density",
+      "term": "institute_D",
+      "coef": -1.0803567596818042,
+      "hazard_ratio": 0.33947439326212786,
+      "p_value": 0.13807742192961664,
+      "concordance": 0.9304245283018868
+    },
+    {
+      "model": "institute + starting density",
+      "term": "institute_E",
+      "coef": -1.0097732642583963,
+      "hazard_ratio": 0.3643015703947546,
+      "p_value": 0.1724191556716273,
+      "concordance": 0.9304245283018868
+    },
+    {
+      "model": "institute + starting density",
+      "term": "institute_F",
+      "coef": -0.4789526028987853,
+      "hazard_ratio": 0.6194318432708091,
+      "p_value": 0.5756846609975435,
+      "concordance": 0.9304245283018868
+    },
+    {
+      "model": "institute + starting density",
+      "term": "start_log10",
+      "coef": -0.7411607096422668,
+      "hazard_ratio": 0.47656044606963227,
+      "p_value": 0.0001786007025698558,
+      "concordance": 0.9304245283018868
+    },
+    {
+      "model": "adjustment summary",
+      "absorbed_by_inoculum": "D,E,F",
+      "remaining_after_adjustment": "C"
+    },
+    {
+      "model": "proportional hazards test",
+      "term": "global",
+      "p_value": 0.6310676288915192
+    }
+  ],
+  "seed": 20240917
+}

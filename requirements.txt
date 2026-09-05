@@ -15,3 +15,9 @@ matplotlib==3.11.1
 # submission document build (src/build_submission.py)
 python-docx==1.2.0
 PyMuPDF==1.28.2
+
+# survival analysis for the between-laboratory experiment
+# (src/experiments/exp17_era4tb_between_lab.py). Its own metadata asks for
+# pandas<3, but it was verified to run under the pinned pandas 3.0.3 above;
+# install it with --no-deps if pip tries to downgrade pandas.
+lifelines==0.30.3
