@@ -37,79 +37,99 @@ tuberculosis*; censored data; time-kill kinetics; reproducibility
 
 ## 1. Introduction
 
-Antibiotic killing is summarised in two currencies, and the field spends both as
-though they were interchangeable. The first is a rate: how fast a population
-falls while the drug is present, captured by the maximum kill rate and the
-steepness of its concentration dependence (Regoes et al. 2004). The second is a
-duration: how long the drug must be present before some threshold is crossed,
-captured by the minimum duration for killing and by the time to a negative
-culture. Rates populate pharmacodynamic models. Durations populate treatment
-guidelines, trial endpoints, and the operational definition of tolerance itself
-(Brauner et al. 2016; Balaban et al. 2019).
+Tuberculosis is treated for months, and nothing measured at the bench tells us
+how many. A regimen that sterilises a flask within days still demands four to
+six months in a patient, and the compounds capable of closing that gap cannot
+at present be recognised in advance from the assays used to select them. That
+failure is not peripheral to tuberculosis drug development; it is the central
+obstacle. Which compounds advance, which combinations are assembled, how long a
+phase III trial must run, and whether an organism is called tolerant rather
+than merely slow to die are all decided from in vitro time-kill kinetics, and
+all of them are decided using two quantities read from the same experiment. The
+first is a rate: how fast the population falls while drug is present, captured
+by the maximum kill rate and by the steepness of its concentration dependence
+(Regoes et al. 2004). The second is a duration: how long drug must be present
+before a threshold is crossed, captured by the minimum duration for killing
+and, in patients, by the time to culture conversion. Rates populate
+pharmacodynamic models. Durations populate treatment guidelines, trial
+endpoints and the operational definition of tolerance itself (Brauner et al.
+2016; Balaban et al. 2019). The field spends both currencies as if they were
+interchangeable, and as if each were an intrinsic property of the organism
+meeting the drug.
 
-The two currencies are not equivalent, and the difference is not a matter of
-units. A rate is estimated from the whole trajectory. A duration is estimated
-from a single crossing of a fixed line. Everything that moves the line, or moves
-the population's starting distance from it, enters a duration and leaves a rate
-untouched. The starting density is the largest such quantity, and it is the one
-a protocol is written to fix.
+They are not the same kind of quantity, and the difference is not one of units.
+A rate is estimated from an entire trajectory: every count contributes, and a
+population that begins high simply falls from higher. A duration is estimated
+from a single crossing of a fixed line, and that line is not a biological
+boundary but the point at which the assay stops returning a number. Everything
+that moves the line, or moves the population's starting distance from it,
+enters the duration and leaves the rate untouched. Starting density is the
+largest such quantity, and it is precisely the quantity a written protocol
+exists to fix.
 
-Whether protocols succeed in fixing it is an empirical question that has become
-answerable. The ERA4TB consortium distributed one stock of *Mycobacterium
-tuberculosis* H37Rv with one written protocol to six laboratories, had each run
-the same time-kill exercise against moxifloxacin and isoniazid, and deposited
-every colony count (van Wijk et al. 2023). Their own analysis reports that
-baseline burden varied between laboratories while the net drug effect varied
-less. That observation is the starting point of this paper rather than its
-conclusion.
+The reason this has gone unexamined is a statistical convention that acts as a
+barrier to the biology. Time-kill data are left-censored: below some density
+the plate returns no colony, and that limit is set by how much culture was
+plated rather than by how many bacteria survived. The standard treatment is to
+exclude below-limit readings from numerical analysis. For a rate the exclusion
+costs little. For a duration it is fatal, because a duration endpoint *is* the
+moment a culture crosses the detection limit; discarding those readings
+discards the endpoint. Worse, the discarding is not neutral. It silently fuses
+two things that ought to be kept apart — the pharmacodynamic power of the drug
+and the sheer size of the inoculum it was given — and reports their sum as
+though it were a property of the bacterium. A culture that starts a log higher
+takes longer to disappear whatever the drug is doing to it. When that
+arithmetic is left inside the endpoint, cross-laboratory reproducibility fails
+for reasons that look biological and are not, and phenotypes assigned on
+duration evidence — tolerance, persistence, a lineage that is hard to kill —
+are assigned partly on the strength of how much culture the experimenter began
+with.
 
-What has not been asked of that dataset is what its variation does to a duration
-endpoint, and the reason is a methodological convention. Time-kill data are
-censored: below some density the assay returns no count, and the limit depends
-on how much culture was plated. The standard treatment is to exclude
-below-limit readings from numerical analysis, which van Wijk et al. do
-explicitly. For a rate this exclusion is a modest loss. For a duration it is
-fatal, because a duration endpoint *is* the moment a culture crosses the
-detection limit. Excluding the readings that define the endpoint removes the
-endpoint. The question therefore cannot be asked without changing how the
-censoring is handled.
+Whether protocols actually fix the inoculum has recently become an empirical
+question rather than an assumption. The ERA4TB consortium distributed a single
+stock of *Mycobacterium tuberculosis* H37Rv, with one written protocol, to six
+laboratories; each ran the same time-kill exercise against moxifloxacin and
+isoniazid, and every colony count was deposited (van Wijk et al. 2023). Their
+own analysis reports that baseline burden varied between laboratories while the
+net drug effect varied less, and that observation is the starting point of this
+paper rather than its conclusion. They also excluded every reading outside the
+quantification limits — a defensible reporting decision that nonetheless
+forecloses the question asked here, because it removes the observations from
+which a duration is built.
 
-Handling it properly turns out to be the whole analysis. Each ERA4TB sample was
-plated at four volumes, so each carries four readings against four different
-limits — 1.0, 2.0, 2.0 and 2.6 log10 CFU/mL for 100, 10, 10 and 2.5 µL. A blank
-2.5 µL drop and a blank 100 µL quadruplicate are not the same event and do not
-carry the same information. Judging every reading against the limit of its own
-plating volume, and retaining it as censored rather than discarding it, makes
-both currencies estimable on the same flasks: a rate by censored maximum
-likelihood, a duration by survival analysis. That is what allows them to be
-compared rather than assumed comparable.
+Recovering those observations is what makes the two currencies separable. Each
+ERA4TB sample was plated at four volumes, so each carries four readings judged
+against four different limits — 1.0, 2.0, 2.0 and 2.6 log10 CFU/mL for 100, 10,
+10 and 2.5 µL. A blank 2.5 µL drop and a blank 100 µL quadruplicate are not the
+same event and do not carry the same information, and pooling them destroys the
+distinction. Judging every reading against the limit of its own plating volume,
+and retaining it as censored rather than deleting it, makes both quantities
+estimable on the same flasks: a rate by censored maximum likelihood, a duration
+by survival analysis of the crossing itself. The two can then be compared
+instead of assumed comparable.
 
-We report that comparison here, and it is asymmetric. Under one protocol, one
-strain and one stock, every laboratory produces a kill rate and half of them
-produce no duration at all. The rates that survive span a few fold; the
-durations are undefined in three of six laboratories, in every treatment arm.
-Which laboratories can produce a duration is decided almost entirely by where
-their cultures started. A duration endpoint measured across laboratories is
-therefore, in substantial part, a measurement of their inocula.
-
-We then ask how far this reaches beyond one exercise. Three further published
-datasets are analysed with the same discipline: 217 clinical isolates carrying
-both a minimum inhibitory concentration and a minimum duration for killing; 126
-experimentally evolved clones carrying both a concentration endpoint and a
-persistence endpoint; and a concentration-by-time grid on a slow grower in which
-the same 32-fold dose range separates 48-fold at one week and 5-fold at two. The
-pattern is consistent. Quantities defined by a rate travel between conditions
-and laboratories. Quantities defined by a crossing do not, because they inherit
-whatever the population brought with it.
-
-Three things follow for practice, and they are the contribution.
-A pharmacodynamic parameter taken from one study and used in another must be
-checked for the axis it was fitted on: an E_max reported as a cumulative log10
-reduction over a fixed window has no time in its denominator and is not a rate.
-A comparison between regimens should be read at the window where the
-concentration axis is still informative, which is early. And a duration endpoint
-reported without its starting density is not interpretable, because the two are
-not separable after the fact.
+The aim of this study is to decouple the intrinsic pharmacodynamic kill rate
+from the assay-dependent duration endpoint, systematically and on the same
+bacteria, and to determine which of the two is a property of the drug and which
+is a property of the experiment. We test the hypothesis that time to clearance
+is mathematically tethered to the starting density rather than to drug
+efficacy, in four published deposits spanning the designs the field
+actually uses: the ERA4TB multi-laboratory consortium exercise, in which
+protocol, strain and stock are held constant and only the laboratory varies;
+217 clinical *M. tuberculosis* isolates carrying a minimum inhibitory
+concentration and a minimum duration for killing on the same isolate; 126
+experimentally evolved *Escherichia coli* clones carrying a concentration
+endpoint and a persistence endpoint on the same clone; and a
+concentration-by-time grid in a slow grower in which a 32-fold dose range is
+read at three successive windows. Each is analysed with censored readings
+retained as censored. If the hypothesis holds, three things follow immediately
+for practice: a pharmacodynamic parameter taken from one study and used in
+another must be checked for the axis it was fitted on, since a maximum effect
+reported as a cumulative log10 reduction over a fixed window has no time in its
+denominator and is not a rate; regimens should be compared in the window where
+the concentration axis still carries information, which is early; and a
+duration endpoint reported without its starting density cannot be interpreted
+at all, because the two are not separable after the fact.
 
 ---
 
@@ -531,8 +551,12 @@ asserted.
 
 The same question in 126 experimentally evolved clones, which share an ancestor
 and evolved in parallel under known conditions, returns the same answer within
-every stratum. Two designs, two organisms, one clinical and one experimental,
-and in each the axes carry separate information within the resolution available.
+every stratum. Two designs, two organisms, one clinical and one experimental, and in each the
+axes carry separate information within the resolution available. The practical
+consequence is clinical rather than statistical: a slow-clearing isolate is not
+thereby a tolerant one. Until the starting burden is accounted for, the two
+explanations are indistinguishable, and only one of them is about the
+bacterium.
 
 ### 4.4 The window in which concentration is informative
 
@@ -619,15 +643,56 @@ handled as censoring.
 
 ### 4.7 Conclusion
 
-A kill rate and a time to clearance are not two views of the same quantity. One
-is a property of the drug acting on a population in a state; the other is that
-property convolved with where the population began and with where the assay
-stops seeing it. Under a single protocol, a single strain and a single stock,
-the first is estimable everywhere and the second is undefined in half the
-laboratories that tried. Reporting the starting density, publishing the
-quantification limit, and reading dose comparisons in the window where the
-concentration axis still carries information would make duration endpoints mean
-between studies what they are already assumed to mean.
+A kill rate and a time to clearance are not two views of the same quantity. The
+first is a property of the drug acting on a population in a defined
+physiological state. The second is that property convolved with where the
+population began and with where the assay stops seeing it, and under a single
+protocol, a single strain and a single stock the difference is decisive: the
+rate is estimable in every laboratory, and the duration is undefined in half of
+them. Which half was settled by the inoculum. That is not a caveat attached to
+one consortium exercise; it is a general statement about what a threshold
+crossing can and cannot measure.
+
+Separating the two changes what the field is entitled to conclude from its own
+assays. A duration that is partly an inoculum measurement will, wherever the
+inoculum is not controlled and reported, manufacture phenotypes. A culture that
+began a log higher takes longer to disappear, and if the endpoint is the
+disappearance, the organism is recorded as harder to kill. Tolerance and
+persistence are defined on exactly this evidence. Our clinical and experimental
+comparisons show that the concentration axis and the duration axis carry
+separate information — no association survives correction of the twenty-four
+comparisons the clinical file supports, and the evolved-clone design returns
+the same answer within every stratum — so a duration cannot be read as a proxy
+for potency, and a slow disappearance cannot be read as a tolerant lineage
+until the starting density has been accounted for. Treating the two axes as
+independent measurements, each reported with the state it was measured in, is
+what keeps a phenotype attributable to the bacterium rather than to the flask.
+
+The same reasoning protects compounds. A drug's dose response is legible while
+the population is still falling and becomes illegible once it approaches the
+detection limit: across a 32-fold concentration range in a slow grower the
+separation between arms rose to 48.2-fold at day seven and collapsed to
+5.2-fold at day fourteen. An experiment read only at the later time would
+report that drug as indifferent to a 32-fold change in dose. The information
+had not left the system; it had left the endpoint. Screening cascades that rank
+candidates on a late reading will therefore discard potent compounds for the
+arithmetic of the assay rather than for anything about their pharmacology, and
+will do so invisibly, because a late null result looks like a negative result.
+
+Three changes would close this, and none requires a new technology. Report the
+starting density with every duration endpoint and adjust for it, so that a
+clearance time between laboratories becomes comparable for the first time.
+Publish the limit of quantification, so that a censored observation can be
+distinguished from a measured one and analysed as what it is. And add an
+early-window dose-switching arm to the standard time-kill design, so that the
+interval in which concentration is still informative is measured rather than
+inferred. Adopted together, these turn cross-laboratory pharmacodynamic
+parameters into biologically interpretable quantities: rates that describe the
+drug, durations that describe the drug and state the burden they were measured
+against, and a tolerance phenotype that means the same thing in one laboratory
+as it does in the next. That is the condition under which in vitro
+pharmacodynamics can begin to predict how long a patient must be treated, which
+is what the measurements were always meant to be for.
 
 ---
 
