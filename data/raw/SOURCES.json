@@ -59,7 +59,8 @@
       "licence": "ASM, free in PMC but not open access",
       "redistributable": false,
       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC148957/",
-      "note": "The only paired planktonic-versus-biofilm kill rate at matched drug, concentration and time. Fills the blank biofilm row in docs/14: ciprofloxacin 3.40 to 0.610 /h, a 5.6-fold fall; tobramycin 2.99 /h to net growth. Free to read, not free to redistribute."
+      "note": "Verified 2026-09-05 from the article text supplied by the author. P. aeruginosa colony biofilm, 100 h with fresh antibiotic every 24 h: log10 reduction 0.49 +/- 0.18 for tobramycin 10 ug/mL and 1.42 +/- 0.03 for ciprofloxacin 1.0 ug/mL. Both drugs PENETRATED the biofilm and the paper reports no acceleration of killing once they had, so tolerance is not a diffusion effect; oxygen reached only 50-90 um and that zone coincided with metabolic activity. An automated audit had attributed the values 3.40, 0.610 and 2.99 /h to this paper; none of them appear in it. Free to read, not redistributable; a copy is in the untracked data/raw/_fetched/.",
+      "values_verified": true
     },
     {
       "key": "ferro2014",

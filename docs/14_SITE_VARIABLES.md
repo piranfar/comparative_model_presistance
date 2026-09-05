@@ -48,9 +48,57 @@ Split by axis, because the distinction is the whole point: a model with a concen
 | Beta-lactam rescue of uptake | Cefotaxime + tobramycin/amikacin under low pH + low pO2 | 14x / 7x uptake restored | ↑ |
 | Acid pH, opposite sign | Oxacillin MIC 8–10x lower, EC50 ~15x lower at pH 5.0 | 8–15x more potent | ↑ |
 | **Nutrient availability (our measurement)** | Amikacin, E. coli, Windels grid, ordinary cells 0.56 → 10.43 /h | **19x**; dormant cells 5.3x | ↓ |
-| **Biofilm** | — | **no confirmed value in this set** | — |
+| **Biofilm (our measurement)** | 9 anti-TB drugs vs *M. tuberculosis* biofilm, 1x/4x/16x/64x MIC, triplicate | **>=16x MIC before any killing at all; ceiling ~1.05 log10 at 64x** | down, on both axes |
 
-Nothing in the confirmed set quantifies biofilm, inoculum as a fold shift, or PMF magnitude measured in situ.
+Biofilm now has a confirmed value, computed from raw counts held at
+`data/raw/apramycin_mtb/` (figshare 26462791, CC BY 4.0). Inoculum as a fold shift
+and PMF magnitude measured in situ remain unquantified in the confirmed set.
+
+The biofilm entry is unlike every other row in this table, and the difference
+matters. The others are potency shifts: more drug restores the effect. Here, at
+1x and 4x MIC **every one of the nine drugs lets the population grow**, killing
+begins only at 16x or 64x MIC, isoniazid never kills at all up to 64x, and the
+best drug in the set reaches only 1.05 log10 at 64x. That is a potency shift of at
+least sixteenfold *and* a ceiling that dose does not lift, so it is the one site
+variable here that is not dose-compensable. It is the same distinction exp15 draws
+between an EC50 shift and an Emax ceiling, and biofilm shows both at once.
+
+A second confirmed source, and it settles the mechanism. Walters MC 3rd, Roe F,
+Bugnicourt A, Franklin MJ, Stewart PS. *Antimicrob Agents Chemother*
+2003;47(1):317-323, doi:10.1128/AAC.47.1.317-323.2003, PMID 12499208. Verified
+against the article text supplied by the author, not quoted at second hand.
+
+*P. aeruginosa* colony biofilms starting at 10.4 log10 CFU per membrane, exposed
+for **100 hours** with fresh antibiotic every 24 h:
+
+| drug | concentration | log10 reduction in 100 h | mean rate |
+|---|---|---|---|
+| tobramycin | 10 ug/mL | **0.49 ± 0.18** | 0.005 log10/h |
+| ciprofloxacin | 1.0 ug/mL | **1.42 ± 0.03** | 0.014 log10/h |
+
+The mechanism matters more than the magnitudes. Both antibiotics **penetrated**
+the biofilm, and the paper states there was no acceleration of killing once they
+had, so limited diffusion is not the protective mechanism. What correlated with
+survival was oxygen: it reached only 50 to 90 um from the air interface, and
+that oxic zone coincided exactly with where an inducible fluorescent reporter
+was expressed, which is to say with where the cells were metabolically active.
+Cells showing antibiotic damage were found only near the air interface.
+
+So biofilm tolerance here is not a drug-access effect. It is a metabolic-state
+effect, arising in the same place and for the same reason as the nutrient effect
+this project measures in *E. coli* and the intracellular effect it measures in
+*M. tuberculosis*. That is an independent system, an independent laboratory and
+an independent readout arriving at the same explanation, and it is the strongest
+external support in this table for treating physiological state rather than drug
+delivery as the controlling variable.
+
+A caution about provenance, recorded because it nearly went wrong. An automated
+audit attributed to this paper the values "ciprofloxacin 3.40 to 0.610 /h, a
+5.6-fold fall; tobramycin 2.99 /h to net growth". **None of those numbers appear
+anywhere in the paper.** They were not quoted here while unverified, and the
+article text now confirms they are not Walters's values. The one figure that
+does check out is the tobramycin 4-hour result, a negligible increase of 0.09
+log10. Numbers reaching this table must come from the source itself.
 
 ## 2. How many act through PMF / metabolic state, and do they compound?
 
@@ -90,7 +138,8 @@ Nothing in the confirmed set quantifies biofilm, inoculum as a fold shift, or PM
 - König's median ratios (medians across drugs and species, quantised to 2-fold dilution steps).
 - Reynolds 1976 (abstract only, "up to 20x", 1976 methods).
 - Porcine bone cavity values (median only, n=8–10).
-- Biofilm: absent entirely.
+- Biofilm: present, and the largest effect in the set. See the note above: it acts
+  on the potency axis and the ceiling at the same time.
 
 **Must be fitted, not assumed:**
 
@@ -128,7 +177,7 @@ Level with it: pus binding at high solids (17–33x); gentamicin under anaerobio
 | Daptomycin, inflamed vs healthy tissue | 1.5x |
 | Generic interstitial penetration | 1.3x |
 | Linezolid | 1.0x |
-| Biofilm | no confirmed value |
+| Biofilm | >=16x on the concentration axis, plus a ceiling near 1 log |
 
 Nutrient limitation is **larger than every routine tissue-penetration term, which clusters at 1.3–3x**; larger than the entire protein-binding correction (1.9x); larger than the single-factor pH effect on the same drug and organism (8.3x); larger than the single-factor oxygen effect (6.25x); and larger than the whole simulated-abdominal-site MIC shift for its class (4–8x).
 
@@ -151,7 +200,11 @@ Runner-up, and it deserves naming: **abscess penetration**, whose confirmed spre
 
 ## Where the evidence runs out — stated plainly
 
-- **Biofilm has no confirmed value here at all.** It cannot be placed in the table, ranked, or parameterised from this evidence base.
+- **Biofilm is now quantified**, from triplicate counts on nine drugs at four
+  multiples of the MIC. It can be ranked, and it ranks first: >=16x MIC before any
+  killing, against 19x for nutrient limitation on a rate axis and 1.3-3x for every
+  routine tissue-penetration term. Unlike those, it also imposes a ceiling, so it
+  cannot be parameterised as a concentration shift alone.
 - **No study measures pH, oxygen and nutrient together on a kill rate.** The compounding hypothesis that motivated this search is, on the confirmed record, untested. Bryant's 2x2 is censored precisely where the answer lies; König's stack is quantised to 2-fold dilutions.
 - **Every effect-side value except our own is an MIC or an EC50 — an endpoint, not a rate.** A PD model needs rates. This is a real gap, and our measurement is the only thing filling it.
 - **There is no measurement of any aminoglycoside concentration in a human abscess.** The nearest is Thys 1988 in empyema, where two of three drugs were below detection.

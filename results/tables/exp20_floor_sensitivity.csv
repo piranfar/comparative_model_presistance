@@ -1,0 +1,5 @@
+assumed_loq_log10,corresponds_to,high_arm_censored,low_arm_censored,observed_rate_high,observed_rate_low,high_rate_is_lower_bound,inversion_established
+1.0,"100 uL plated, 10 CFU/mL",False,False,0.26957285693638,0.4080620504898839,False,True
+1.7,"50 uL plated, 20 CFU/mL",False,False,0.26957285693638,0.4080620504898839,False,True
+2.0,"10 uL plated, 100 CFU/mL",True,False,0.26957285693638,0.4080620504898839,True,False
+2.6,"2.5 uL plated, 400 CFU/mL",True,True,0.26957285693638,0.4080620504898839,True,False

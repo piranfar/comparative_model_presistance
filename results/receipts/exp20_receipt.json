@@ -1,0 +1,100 @@
+{
+  "script": "src/experiments/exp20_regimen_design.py",
+  "utc": "2026-09-05T14:59:13+00:00",
+  "data_doi": "10.6084/m9.figshare.26462791.v1",
+  "licence": "CC BY 4.0",
+  "organism": "Mycobacterium tuberculosis",
+  "drugs": [
+    "apramycin",
+    "amikacin"
+  ],
+  "inoculum_log10": 7.015476535167562,
+  "subthreshold_conc_ug_ml": 1.0,
+  "subthreshold_change_log10": 1.150395173541754,
+  "front_loading": [
+    {
+      "interval": "d0-3",
+      "rate_high": 0.4091278132712004,
+      "rate_low": 0.12942420255661494,
+      "ratio_high_over_low": 3.1611383743487447
+    },
+    {
+      "interval": "d3-7",
+      "rate_high": 0.5220232738384903,
+      "rate_low": 0.31096764854109615,
+      "ratio_high_over_low": 1.6787060528243407
+    },
+    {
+      "interval": "d7-14",
+      "rate_high": 0.26957285693638,
+      "rate_low": 0.4080620504898839,
+      "ratio_high_over_low": 0.6606173169319572
+    }
+  ],
+  "extra_log10_for_32x_dose_at_day14": 0.7139089784588055,
+  "exposure_cost_fold": 32.0,
+  "endpoint_separation": [
+    {
+      "day": 3.0,
+      "survivor_ratio_low_over_high": 6.904159758219219,
+      "log10_separation": 0.8391108321437564
+    },
+    {
+      "day": 7.0,
+      "survivor_ratio_low_over_high": 48.231784822393045,
+      "log10_separation": 1.6833333333333331
+    },
+    {
+      "day": 14.0,
+      "survivor_ratio_low_over_high": 5.174983607708489,
+      "log10_separation": 0.7139089784588057
+    }
+  ],
+  "best_endpoint_day": 7.0,
+  "worst_endpoint_day": 14.0,
+  "floor_sensitivity": [
+    {
+      "assumed_loq_log10": 1.0,
+      "corresponds_to": "100 uL plated, 10 CFU/mL",
+      "high_arm_censored": false,
+      "low_arm_censored": false,
+      "observed_rate_high": 0.26957285693638,
+      "observed_rate_low": 0.4080620504898839,
+      "high_rate_is_lower_bound": false,
+      "inversion_established": true
+    },
+    {
+      "assumed_loq_log10": 1.7,
+      "corresponds_to": "50 uL plated, 20 CFU/mL",
+      "high_arm_censored": false,
+      "low_arm_censored": false,
+      "observed_rate_high": 0.26957285693638,
+      "observed_rate_low": 0.4080620504898839,
+      "high_rate_is_lower_bound": false,
+      "inversion_established": true
+    },
+    {
+      "assumed_loq_log10": 2.0,
+      "corresponds_to": "10 uL plated, 100 CFU/mL",
+      "high_arm_censored": true,
+      "low_arm_censored": false,
+      "observed_rate_high": 0.26957285693638,
+      "observed_rate_low": 0.4080620504898839,
+      "high_rate_is_lower_bound": true,
+      "inversion_established": false
+    },
+    {
+      "assumed_loq_log10": 2.6,
+      "corresponds_to": "2.5 uL plated, 400 CFU/mL",
+      "high_arm_censored": true,
+      "low_arm_censored": true,
+      "observed_rate_high": 0.26957285693638,
+      "observed_rate_low": 0.4080620504898839,
+      "high_rate_is_lower_bound": true,
+      "inversion_established": false
+    }
+  ],
+  "inversion_established_at_any_plausible_loq": false,
+  "high_arm_day14_cfu_per_ml": 65.01147228896937,
+  "claim_made": "above a threshold the value of concentration is front-loaded, and a late endpoint cannot resolve a 32-fold dose range; the claim that a low dose overtakes a high one is NOT made"
+}

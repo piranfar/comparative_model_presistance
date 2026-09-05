@@ -68,7 +68,13 @@ be used.
 
 - Enterococcus: 0 dataset(s)
 - Staphylococcus aureus: 4 dataset(s)
-- Klebsiella: 0 dataset(s)
+- Klebsiella: 1 dataset(s) — Carvalho G, Guilhen C, Balestrino D, Forestier C,
+  Mathias JD. Microb Biotechnol 2017;10(6):1616-1627, doi:10.1111/1751-7915.12739,
+  PMC5658594, CC BY. *K. pneumoniae* CH1440 under ciprofloxacin, with killing
+  curves and a two-state model. Held at `data/raw/carvalho2017/`. This paper
+  relates switching rates to **substrate** concentration, which is the nutrient
+  axis exp14 measures in *E. coli*, so it is a second organism on that axis as
+  well as a filled ESKAPE cell.
 - Acinetobacter: 1 dataset(s)
 - Pseudomonas aeruginosa: 7 dataset(s)
 - Enterobacter: 0 dataset(s)
