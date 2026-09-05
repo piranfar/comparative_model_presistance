@@ -287,7 +287,7 @@ evolved under (ρ = +0.235, p = 0.0082, n = 126), spanning 0.5 to 64 µg/mL.
 
 A nominal concentration therefore does not fix an exposure. At 25 µg/mL the true
 exposure ranges from 0.55 to 9.47 times the evolved inhibitory concentration
-depending on nutrient level, a 17.2-fold spread that straddles the inhibitory
+depending on nutrient level (Table 6), a 17.2-fold spread that straddles the inhibitory
 concentration itself, so the same nominal dose is sub-inhibitory in one condition
 and strongly inhibitory in another. The confounding is directional: richer
 conditions evolved higher inhibitory concentrations, so equal absolute
