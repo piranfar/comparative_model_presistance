@@ -1,0 +1,15 @@
+{
+  "script": "src/experiments/exp15_ec50_or_emax.py",
+  "utc": "2026-09-05T04:45:05+00:00",
+  "data_doi": "10.5281/zenodo.7550302",
+  "antibiotic": "amikacin",
+  "rich_nutrient": 0.9,
+  "poor_nutrient": 0.0,
+  "ratio_at_lowest_concentration": 60.73116615431137,
+  "ratio_at_highest_concentration": 6.8199494922609265,
+  "convergence_slope_per_doubling": -0.16976109495453692,
+  "convergence_p": 0.47653670734490367,
+  "n_levels_still_rising_at_top": 4,
+  "n_levels_tested": 5,
+  "interpretation": "see printed output"
+}
