@@ -163,20 +163,25 @@ def build(src: Path | None = None, out_name: str | None = None,
 
     text = src.read_text(encoding="utf-8")
 
-    # Lift the legends out of the trailing section; each is placed inline with
-    # its own figure instead, under the paragraph that first cites it.
-    body, legend_block = text.split("## Figure legends\n", 1)
-    legend_block, tail = legend_block.split("\n---\n", 1)
-    legends = {}
-    for blk in re.split(r"\n(?=\*\*Figure )", legend_block.strip()):
-        blk = " ".join(l.strip() for l in blk.strip().split("\n") if l.strip())
-        legends[re.match(r"\*\*Figure (S?\d+)\.", blk).group(1)] = blk
-    missing = set(FIGURES) - set(legends)
-    if missing:
-        raise SystemExit(f"figures with no legend: {sorted(missing)}")
-
-    lines = unwrap(body + tail)
-    unplaced = dict(FIGURES)
+    # A journal manuscript carries its captions in a section of their own and
+    # uploads the figure files separately, which is what the publisher wants.
+    # Only the preprint embeds the images in the text, and only that form has a
+    # "Figure legends" section to lift them from.
+    if "## Figure legends\n" in text:
+        body, legend_block = text.split("## Figure legends\n", 1)
+        legend_block, tail = legend_block.split("\n---\n", 1)
+        legends = {}
+        for blk in re.split(r"\n(?=\*\*Figure )", legend_block.strip()):
+            blk = " ".join(l.strip() for l in blk.strip().split("\n") if l.strip())
+            legends[re.match(r"\*\*Figure (S?\d+)\.", blk).group(1)] = blk
+        missing = set(FIGURES) - set(legends)
+        if missing:
+            raise SystemExit(f"figures with no legend: {sorted(missing)}")
+        lines = unwrap(body + tail)
+        unplaced = dict(FIGURES)
+    else:
+        legends, unplaced = {}, {}
+        lines = unwrap(text)
     doc = Document()
     style = doc.styles["Normal"]
     style.font.name = "Calibri"
@@ -336,7 +341,7 @@ is the mapping back to the code that produces each one.
     return p
 
 
-JOURNAL_SRC = ROOT / "manuscript" / "REVISED_MANUSCRIPT_authordate.md"
+JOURNAL_SRC = ROOT / "manuscript" / "BMB_MANUSCRIPT.md"
 JOURNAL_DIR = ROOT / "submission" / "bmb"
 
 
