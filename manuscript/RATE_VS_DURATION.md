@@ -505,3 +505,60 @@ laboratories that tried. Reporting the starting density, publishing the
 quantification limit, and reading dose comparisons in the window where the
 concentration axis still carries information would make duration endpoints mean
 between studies what they are already assumed to mean.
+
+---
+
+## Figure captions
+
+**Figure 1. A kill rate transfers between laboratories; a time to clearance does
+not.** Six laboratories, one written protocol, one stock of *M. tuberculosis*
+H37Rv, moxifloxacin at ten times the minimum inhibitory concentration.
+(**A**) The kill rate estimated by censored maximum likelihood, with 95 per cent
+profile-likelihood intervals. Every laboratory yields one, spanning 5.2-fold.
+(**B**) Kaplan–Meier curves for time to the first undetectable culture, over all
+treated flasks. Three curves never descend: those laboratories recorded no flask
+below the limit of quantification in any arm, so no clearance time exists for
+them. (**C**) The two summaries against each other. The three lowest starting
+densities are exactly the three laboratories that cleared; the kill rate produces
+no such separation, and the laboratory with the highest starting density kills
+faster than four of the other five and never clears. (**D**) The p-value attached
+to each laboratory in a Cox model, before (grey) and after (arrow head) the
+starting density is added as a covariate. Blue: crosses from significant to not.
+Orange: institute C remains distinguishable, and it also returns the fastest rate.
+
+**Figure 2. A late endpoint cannot resolve a 32-fold concentration range.**
+Apramycin against *M. tuberculosis*, five concentrations, triplicate counts.
+(**A**) The trajectories, with the quantification limit implied by 10 µL plating
+drawn as a band. By day 14 the highest arm lies within it, so its apparent rate
+over the final interval is a lower bound. (**B**) The ratio of survivors between
+the lowest and highest concentration, read at each sampling day. The separation
+rises to 48.2-fold at day 7 and collapses to 5.2-fold at day 14. (**C**) The
+concentration slope fitted separately in each interval, from a bootstrap
+resampling all three replicates at both ends of every interval, 20 000 draws.
+Positive early, indistinguishable from zero in the middle, negative late; the
+late sign is not claimed, for the reason drawn in panel A.
+
+**Figure 3. Resistance and tolerance occupy separate axes, in two designs.**
+(**A**) All 24 comparisons between the concentration axis and the duration axis
+that the 217-isolate file supports, each plotted against the Benjamini–Hochberg
+critical value it would have to beat (red). Amber marks the four reaching nominal
+significance, where 1.2 are expected by chance; every one lies to the right of its
+own critical value, so none survives correction. (**B**) The fraction of isolates
+sitting at the assay ceiling for each duration endpoint. The four nominal results
+in panel A concentrate in the two endpoints that are almost entirely censored.
+(**C**) The same question in 126 clones sharing an ancestor. Grey bands show the
+correlation each stratum could have resolved at 95 per cent confidence, so the
+null is bounded rather than asserted.
+
+**Figure 4. Published pharmacodynamic constants transfer only when they are
+rates.** (**A**) The constants in routine use (red diamonds) against every
+mycobacterial rate admissible under the rule of Section 2.3, on a logarithmic
+axis. Values reported as a cumulative log reduction over a fixed window are
+excluded. (**B**) The ratio −ψ_min/ψ_max, which alone sets the shape of the
+concentration–response curve, for intracellular measurements from two independent
+laboratories. It is not a constant: within the second laboratory alone it runs
+from 0.65 to 4.10 and halves between the first observation window and the second.
+(**C**) The net change in population per 24-hour cycle of 5 hours' exposure and 19
+hours' regrowth, computed at infinite antibiotic concentration. Six of the seven
+published parameter sets leave the population growing; six of those come from a
+single publication and share two growth-rate denominators.
