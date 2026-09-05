@@ -1,0 +1,24 @@
+{
+  "script": "src/experiments/exp09_concentration_response.py",
+  "utc": "2026-09-05T01:30:00+00:00",
+  "data_source_doi": "10.6084/m9.figshare.31389142",
+  "data_origin_doi": "10.1093/ismejo/wrae070",
+  "model_source_doi": "10.1093/molbev/msag180",
+  "licence": "CC BY 4.0",
+  "tau_hours": 5.0,
+  "concentrations_ug_ml": [
+    12.5,
+    25.0
+  ],
+  "alphas_checked": [
+    0.8,
+    5e-05,
+    0.0009576
+  ],
+  "predicted_log_ratio": 0.44014319821763936,
+  "predicted_log_ratio_spread_across_alphas": 2.486794000666759e-06,
+  "predicted_fold_ratio": 1.5529295793379998,
+  "n_comparisons": 2,
+  "n_excluding_model": 2,
+  "max_understatement_fold": 130.572988092973
+}
