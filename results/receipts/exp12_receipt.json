@@ -1,6 +1,6 @@
 {
   "script": "src/experiments/exp12_lag_distribution.py",
-  "utc": "2026-09-05T02:38:00+00:00",
+  "utc": "2026-09-05T14:36:05+00:00",
   "data_source_doi": "10.1073/pnas.1903836116",
   "data_location": "supplementary appendix, Fig. 2b tables",
   "power_law_exponents": [
@@ -20,5 +20,19 @@
   "exponential_rate_used_per_min": 0.0032407338265236126,
   "hours_to_1e-4_exponential": 47.36756583027916,
   "hours_to_1e-4_power_law": 16666.666666666668,
-  "fold_difference_at_1e-4": 351.8582045441038
+  "fold_difference_at_1e-4": 351.8582045441038,
+  "unbinned_exponents": [
+    -1.7394318558418607,
+    -1.953149908039604
+  ],
+  "unbinned_r2": [
+    0.8190799384299039,
+    0.8792913494286292
+  ],
+  "unbinned_mean_converges": [
+    false,
+    false
+  ],
+  "binning_changes_whether_mean_exists": true,
+  "unbinned_fitted_range_max_min": 1190.0
 }

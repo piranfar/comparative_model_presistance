@@ -1,0 +1,3 @@
+series,n_tail_points,power_law_exponent,power_law_r2,fitted_from_min,fitted_to_min,mean_lag_converges
+"experiment 2 (raw, n=1,425)",15,-1.7394318558418607,0.8190799384299039,76.5,1067.5,False
+"experiment 3 (raw, n=10,264)",18,-1.953149908039604,0.8792913494286292,130.0,1190.0,False

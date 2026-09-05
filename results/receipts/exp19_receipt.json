@@ -1,0 +1,57 @@
+{
+  "script": "src/experiments/exp19_windels_mic_mapping.py",
+  "utc": "2026-09-05T14:35:45+00:00",
+  "data_doi": "10.5281/zenodo.7550302",
+  "licence": "CC BY 4.0",
+  "n_clones": 126,
+  "n_conditions": 9,
+  "mic_range_ug_ml": [
+    0.5,
+    64.0
+  ],
+  "worst_exposure_confound": {
+    "AB_conc_ug_ml": 25.0,
+    "exposure_min_x_mic": 0.5524271728019905,
+    "exposure_max_x_mic": 9.473228540689988,
+    "fold_spread": 17.148375400580683
+  },
+  "mic_vs_nutrient_spearman": {
+    "rho": 0.2346458567340356,
+    "p": 0.00817697664239825
+  },
+  "axis_independence": [
+    {
+      "stratum": "all clones",
+      "n_clones": 126,
+      "spearman_rho": 0.04329943661519372,
+      "p_value": 0.6302202065803402,
+      "detectable_rho_at_95pct": 0.1749100679473725,
+      "independent": true
+    },
+    {
+      "stratum": "nutrient 0.25",
+      "n_clones": 57,
+      "spearman_rho": 0.21279210857437209,
+      "p_value": 0.11201222160226679,
+      "detectable_rho_at_95pct": 0.26057222464282215,
+      "independent": true
+    },
+    {
+      "stratum": "nutrient 0.5",
+      "n_clones": 53,
+      "spearman_rho": 0.19455347257768005,
+      "p_value": 0.16272150169711797,
+      "detectable_rho_at_95pct": 0.2702985332093073,
+      "independent": true
+    },
+    {
+      "stratum": "nutrient 0.8",
+      "n_clones": 16,
+      "spearman_rho": 0.07381661411884827,
+      "p_value": 0.785864054182558,
+      "detectable_rho_at_95pct": 0.4957128641695042,
+      "independent": true
+    }
+  ],
+  "note": "This file had been in the repository unread since download. The exposure mapping here should be used wherever conditions from this dataset are compared."
+}
