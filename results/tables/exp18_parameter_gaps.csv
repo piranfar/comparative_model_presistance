@@ -1,0 +1,11 @@
+constant,model_value,published_value,state,pmid,fold_gap,note
+psi_max,0.9903225806451612,0.033,"intracellular, THP-1 macrophage",28356552,30.00977517106549,21.0 h doubling
+psi_max,0.9903225806451612,0.0769,"extracellular, planktonic 7H9",28356552,12.87805696547674,9.0 h doubling
+psi_max,0.9903225806451612,0.00098,"in vivo, sputum",34871099,1010.5332455562869,"prior, not estimated"
+psi_min,-6.0,-0.022,"rifampicin, intracellular",28356552,272.72727272727275,-psi_min/psi_max = 0.67
+psi_min,-6.0,-0.02,"ethambutol, intracellular",28356552,300.0,-psi_min/psi_max = 0.61
+psi_min,-6.0,-0.01,"pyrazinamide, intracellular",28356552,600.0,-psi_min/psi_max = 0.30
+psi_min,-6.0,-0.008,"isoniazid, intracellular",28356552,750.0,-psi_min/psi_max = 0.24
+psi_min,-6.0,-0.021,"bedaquiline, in vivo sputum",34871099,285.7142857142857,-psi_min/psi_max = 21.43
+psi_min,-6.0,-0.1011,"rifampicin, extracellular (provisional)",28356552,59.347181008902076,-psi_min/psi_max = 1.31
+psi_min,-6.0,-0.0651,"ethambutol, extracellular (provisional)",28356552,92.16589861751152,-psi_min/psi_max = 0.85

@@ -1,0 +1,31 @@
+{
+  "script": "src/experiments/exp18_slow_grower_transferability.py",
+  "utc": "2026-09-05T05:46:38+00:00",
+  "psi_axis": "natural log per hour, confirmed from survival() and net_rates()",
+  "psi_max_as_run": 0.9903225806451612,
+  "psi_max_naive_B_minus_D": 0.7,
+  "psi_min_assumed": -6.0,
+  "kappa_assumed": 2.0,
+  "ratio_assumed": 6.058631921824105,
+  "ratio_intracellular_mtb": [
+    0.6666666666666666,
+    0.6060606060606061,
+    0.30303030303030304,
+    0.24242424242424243
+  ],
+  "psi_max_fold_gap": 30.00977517106549,
+  "psi_min_fold_gap_range": [
+    59.347181008902076,
+    750.0
+  ],
+  "kappa_1_vs_2_survival_ratio": 271299.9493044751,
+  "n_parameter_sets_that_fail_to_clear": 6,
+  "n_parameter_sets_tested": 8,
+  "sources_verified": [
+    "28356552",
+    "34871099",
+    "24041886"
+  ],
+  "excluded_as_endpoint_reductions": "every Emax reported as a total log10 CFU reduction over a fixed window, and every Hill exponent fitted alongside one",
+  "unresolved": "whether PSI_MIN_S = -6.0 was adopted from Regoes 2004, which reports psi in log10 per hour; if so every gap here doubles"
+}
