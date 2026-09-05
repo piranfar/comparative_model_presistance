@@ -110,9 +110,9 @@ values are illustrative rather than measured.
 
 ## 1. Introduction
 
-Antibiotic resistance, tolerance and persistence lead to treatment failure and prolonged infection [1,2]. Resistance is a heritable change that raises the concentration required to inhibit growth. Tolerance and persistence are non-inherited: a tolerant population dies more slowly at an unchanged minimum inhibitory concentration, and a persistent population contains a subpopulation that survives exposure that clears the bulk [3,4]. These are three different statements about three different measurements, and Brauner and colleagues set them out as such [4]: resistance is a change in the minimum inhibitory concentration (MIC), tolerance a change in the minimum duration for killing (MDK) at fixed MIC, and persistence a change in the shape of the killing curve rather than in either summary statistic.
+Antibiotic resistance, tolerance and persistence lead to treatment failure and prolonged infection (Lewis 2007; Zhang and Yew 2009). Resistance is a heritable change that raises the concentration required to inhibit growth. Tolerance and persistence are non-inherited: a tolerant population dies more slowly at an unchanged minimum inhibitory concentration, and a persistent population contains a subpopulation that survives exposure that clears the bulk (Balaban et al. 2019; Brauner et al. 2016). These are three different statements about three different measurements, and Brauner and colleagues set them out as such (Brauner et al. 2016): resistance is a change in the minimum inhibitory concentration (MIC), tolerance a change in the minimum duration for killing (MDK) at fixed MIC, and persistence a change in the shape of the killing curve rather than in either summary statistic.
 
-*Staphylococcus aureus* and *Mycobacterium tuberculosis* sit at opposite ends of a growth-rate spectrum, with doubling times differing by roughly seventeen-fold, and they are treated on correspondingly different timescales [5,6]. *M. tuberculosis* persists in host tissue and requires months of therapy, a durability associated with dormancy and phenotypic heterogeneity [7,8,9,10]. *S. aureus* is a rapid grower whose biofilm and stationary-phase populations show marked tolerance and relapse after apparently successful treatment [11,12]. The contrast is a natural setting in which to ask what actually determines how long treatment must last.
+*Staphylococcus aureus* and *Mycobacterium tuberculosis* sit at opposite ends of a growth-rate spectrum, with doubling times differing by roughly seventeen-fold, and they are treated on correspondingly different timescales (Levin and Rozen 2006; World Health Organization 2021). *M. tuberculosis* persists in host tissue and requires months of therapy, a durability associated with dormancy and phenotypic heterogeneity (Aldridge et al. 2012; Dhar and McKinney 2010; Gengenbacher and Kaufmann 2012; Wakamoto et al. 2013). *S. aureus* is a rapid grower whose biofilm and stationary-phase populations show marked tolerance and relapse after apparently successful treatment (Conlon et al. 2016; Wilmaerts et al. 2019). The contrast is a natural setting in which to ask what actually determines how long treatment must last.
 
 Answering that question requires a model in which resistance, tolerance and persistence are different things. Much of the modelling literature, including our own earlier version of this work, does not meet that requirement. When all three are written as N(t) = N₀e^(−kt) with different values of k, they differ only in a number, and no measurement can distinguish them because the model contains no measurement that could. The problem is structural rather than numerical, and it cannot be fixed by re-estimating k.
 
@@ -162,7 +162,7 @@ None of Equations 2 to 4 contains a concentration term, so none can express an M
 
 > k(C) = E_max C^H / (EC50^H + C^H)   (5)
 
-with E_max the maximum kill rate, EC50 the half-maximal concentration and H the Hill coefficient. This function is standard in antibacterial pharmacokinetic–pharmacodynamic modelling [13,14]. It is what makes the three survival strategies formally distinct, as set out in Section 2.4.
+with E_max the maximum kill rate, EC50 the half-maximal concentration and H the Hill coefficient. This function is standard in antibacterial pharmacokinetic–pharmacodynamic modelling (Nielsen and Friberg 2013; Regoes et al. 2004). It is what makes the three survival strategies formally distinct, as set out in Section 2.4.
 
 ### 2.3 State-structured model
 
@@ -194,7 +194,7 @@ The encoding of tolerance requires comment. Dividing E_max alone is not toleranc
 All endpoints are computed from the same simulated curve.
 
 - **MIC**: the lowest concentration at which the initial net growth rate of the bulk population is non-positive, located by Brent root-finding.
-- **MDK₉₉ and MDK₉₉.₉₉**: the times at which the surviving fraction first reaches 10⁻² and 10⁻⁴ [4].
+- **MDK₉₉ and MDK₉₉.₉₉**: the times at which the surviving fraction first reaches 10⁻² and 10⁻⁴ (Brauner et al. 2016).
 - **Time to LOD**: the time at which the population first falls below an assay limit of detection, taken as 10² CFU/mL, the value used in the hollow-fibre studies catalogued in the accompanying data manifest.
 - **log₁₀ reduction at 240 h**.
 
@@ -283,11 +283,11 @@ Neither asserted value lies on its own curve. This matters because of what the e
 
 ### 3.3 The resistance and tolerance equations omit terms their own parameters require
 
-Equation 2a has no carrying-capacity term although Equation 1 declares one. Over a 240 h window this produces 10⁵⁷ CFU/mL for *S. aureus*, which exceeds the estimated total prokaryotic population of Earth [15] by twenty-six orders of magnitude. Applying the carrying capacity already declared in Equation 1 (Equation 2b) removes the excursion (Figure 2).
+Equation 2a has no carrying-capacity term although Equation 1 declares one. Over a 240 h window this produces 10⁵⁷ CFU/mL for *S. aureus*, which exceeds the estimated total prokaryotic population of Earth (Whitman et al. 1998) by twenty-six orders of magnitude. Applying the carrying capacity already declared in Equation 1 (Equation 2b) removes the excursion (Figure 2).
 
 Equation 3a omits replication entirely, and for a fast grower this reverses the direction of the result rather than merely changing its magnitude. With r = 0.5/h and k_T = 0.2/h, the net rate is **+0.30 /h**: the population grows to carrying capacity. Equation 3a instead reports a decline of fifteen log₁₀ over the same window (`results/tables/eq3_omits_replication.csv`). For *M. tuberculosis* the sign is correct, because r = 0.03 < k_T = 0.05, but the magnitude is still wrong. A tolerance equation without a replication term cannot be applied to an organism whose replication rate appears in the same parameter table.
 
-More fundamentally, Equations 2a and 3a are the same equation with different constants. As printed they do not distinguish resistance from tolerance, contradicting the framework they are meant to implement [4].
+More fundamentally, Equations 2a and 3a are the same equation with different constants. As printed they do not distinguish resistance from tolerance, contradicting the framework they are meant to implement (Brauner et al. 2016).
 
 ### 3.4 The comparative conclusion does not survive the correction
 
@@ -361,7 +361,7 @@ One result depends on the illustrative parameters and is therefore provisional: 
 
 ### 4.2 Implications, stated at the strength the evidence supports
 
-If the dominance of resuscitation survives fitting to real time-kill data, it has a direct therapeutic reading: for slow-growing organisms, agents that drive dormant cells back into replication would shorten therapy more effectively than agents that kill dormant cells directly. This is consistent with the interest in resuscitation-promoting approaches and with the observation that treatment duration for tuberculosis is set by a small, slowly cleared subpopulation rather than by the bulk [7,8,9]. We emphasise that our analysis motivates this hypothesis rather than confirming it.
+If the dominance of resuscitation survives fitting to real time-kill data, it has a direct therapeutic reading: for slow-growing organisms, agents that drive dormant cells back into replication would shorten therapy more effectively than agents that kill dormant cells directly. This is consistent with the interest in resuscitation-promoting approaches and with the observation that treatment duration for tuberculosis is set by a small, slowly cleared subpopulation rather than by the bulk (Dhar and McKinney 2010; Gengenbacher and Kaufmann 2012; Wakamoto et al. 2013). We emphasise that our analysis motivates this hypothesis rather than confirming it.
 
 The measurement implication is firmer and does not depend on the parameter values. A study reporting only MIC and a single killing endpoint cannot distinguish tolerance from persistence. Separating them requires two killing endpoints at different depths, MDK₉₉ and MDK₉₉.₉₉, measured at matched multiples of each strain's own MIC. Studies that dose all strains at a fixed absolute concentration measure under-dosing of resistant strains rather than any difference in their killing kinetics.
 
@@ -375,7 +375,7 @@ The methodological implication is firmest of all. A high R² is not evidence tha
 
 **Constant exposure.** All simulations use a constant concentration. Real regimens produce fluctuating concentrations, and the relevant exposure metric may be the area under the curve relative to MIC, the peak relative to MIC or the time above MIC depending on drug class. Extending Equations 6a and 6b to time-varying C is straightforward and is the natural next step.
 
-**Two compartments.** Dormancy is a continuum rather than a binary state, and depth of dormancy varies [16]. A two-compartment model is the simplest structure that separates the three strategies; it is not proposed as a complete description.
+**Two compartments.** Dormancy is a continuum rather than a binary state, and depth of dormancy varies (Pu et al. 2019). A two-compartment model is the simplest structure that separates the three strategies; it is not proposed as a complete description.
 
 **Deterministic.** At the low copy numbers that determine sterilisation, extinction is a stochastic event and a deterministic model cannot give an extinction probability. A stochastic implementation is required for that question.
 
@@ -401,17 +401,35 @@ This is a framework rather than a measurement. Its quantitative claims about *M.
 
 All code, intermediate tables, receipts and figure-generating scripts are openly available at **https://github.com/piranfar/comparative_model_presistance** (code under the MIT licence, documentation and figures under CC BY 4.0). `python run_all.py` regenerates every number and every figure reported here in approximately 110 seconds, with no network access. Each analysis stage writes a receipt recording library versions and run parameters. No experimental dataset is used or distributed; candidate datasets for the fitting stage are catalogued with digital object identifiers in `data/manifests/datasets.csv`.
 
-## Author contributions
+## Statements and Declarations
 
-V.P. conceived the study, wrote the code, performed the analyses and wrote the manuscript.
+**Competing interests.** *Draft, requiring the author's confirmation before
+submission:* The author declares no competing financial or non-financial
+interests related to this work.
 
-## Competing interests
+**Funding.** *Draft, requiring the author's confirmation:* This work received no
+specific grant from any funding agency in the public, commercial or
+not-for-profit sectors.
 
-*To be completed by the author before submission.*
+**Author contributions.** V.P. conceived the study, wrote the code, performed the
+analyses, and wrote and takes responsibility for the manuscript.
 
-## Acknowledgements
+**Acknowledgements.** *To be completed by the author.*
 
-*To be completed by the author before submission.*
+**Use of large language models.** A large language model (Claude, Anthropic) was
+used as a coding and analysis assistant: it wrote and revised the analysis code
+in this repository, ran the simulations and fitting, produced the figures, and
+drafted text that the author revised. It is not an author and does not meet
+authorship criteria. Every quantitative result reported here is regenerated by
+the deposited code and was checked by the author against that output, and the
+author is accountable for the entire contents of the manuscript. This statement
+covers use beyond AI-assisted copy editing, which the journal does not require to
+be declared.
+
+*Editorial note for the author: this declaration is drafted to match what was
+actually done. Its wording is a decision for you, but the journal requires that
+use of a large language model beyond copy editing be documented, so some version
+of it has to be present.*
 
 ---
 
@@ -448,6 +466,49 @@ Synthetic data with known ground truth; no experimental dataset exists for this 
 
 ## References
 
+All entries were verified in September 2026 against their PubMed record, except the World Health Organization report, which is not indexed in PubMed and was verified against the publisher record. Digital object identifiers are given where one exists; one entry (Zhang and Yew 2009) has none.
+
+Aldridge BB, Fernandez-Suarez M, Heller D, Ambravaneswaran V, Sundaresan V, Fortune SM (2012) Asymmetry and aging of mycobacterial cells lead to variable growth and antibiotic susceptibility. Science 335:100-104. https://doi.org/10.1126/science.1216166
+
+Balaban NQ, Helaine S, Lewis K, Ackermann M, Aldridge B, Andersson DI et al (2019) Definitions and guidelines for research on antibiotic persistence. Nat Rev Microbiol 17:441-448. https://doi.org/10.1038/s41579-019-0196-3
+
+Brauner A, Fridman O, Gefen O, Balaban NQ (2016) Distinguishing between resistance, tolerance and persistence to antibiotic treatment. Nat Rev Microbiol 14:320-330. https://doi.org/10.1038/nrmicro.2016.34
+
+Conlon BP, Nakayasu ES, Fischer LE, LoSasso G, Kim W, Lewis K et al (2013) Activated ClpP kills persisters and eradicates a chronic biofilm infection. Nature 503:365-370. https://doi.org/10.1038/nature12790
+
+Conlon BP, Rowe SE, Gandt AB, Nuxoll AS, Donegan NP, Zalis EA et al (2016) Persister formation in Staphylococcus aureus is associated with ATP depletion. Nat Microbiol 1:16051. https://doi.org/10.1038/nmicrobiol.2016.51
+
+Dhar N, McKinney JD (2010) Mycobacterium tuberculosis persistence mutants identified by screening in isoniazid-treated mice. Proc Natl Acad Sci USA 107:12275-12280. https://doi.org/10.1073/pnas.1003219107
+
+Drusano GL, Myrick J, Maynard M, Nole J, Duncanson B, Brown D et al (2018) Linezolid kills acid-phase and non-replicative-persister-phase Mycobacterium tuberculosis in a hollow-fiber infection model. Antimicrob Agents Chemother 62:e00221-18. https://doi.org/10.1128/AAC.00221-18
+
+Gengenbacher M, Kaufmann SHE (2012) Mycobacterium tuberculosis: success through dormancy. FEMS Microbiol Rev 36:514-532. https://doi.org/10.1111/j.1574-6976.2012.00331.x
+
+Gumbo T, Louie A, Deziel MR, Parsons LM, Salfinger M, Drusano GL (2004) Selection of a moxifloxacin dose that suppresses drug resistance in Mycobacterium tuberculosis, by use of an in vitro pharmacodynamic infection model and mathematical modeling. J Infect Dis 190:1642-1651. https://doi.org/10.1086/424849
+
+Levin BR, Rozen DE (2006) Non-inherited antibiotic resistance. Nat Rev Microbiol 4:556-562. https://doi.org/10.1038/nrmicro1445
+
+Lewis K (2007) Persister cells, dormancy and infectious disease. Nat Rev Microbiol 5:48-56. https://doi.org/10.1038/nrmicro1557
+
+Nielsen EI, Friberg LE (2013) Pharmacokinetic-pharmacodynamic modeling of antibacterial drugs. Pharmacol Rev 65:1053-1090. https://doi.org/10.1124/pr.111.005769
+
+Pasipanodya JG, Nuermberger E, Romero K, Hanna D, Gumbo T (2015) Systematic analysis of hollow fiber model of tuberculosis experiments. Clin Infect Dis 61(Suppl 1):S10-S17. https://doi.org/10.1093/cid/civ425
+
+Pu Y, Li Y, Jin X, Tian T, Ma Q, Zhao Z et al (2019) ATP-dependent dynamic protein aggregation regulates bacterial dormancy depth critical for antibiotic tolerance. Mol Cell 73:143-156. https://doi.org/10.1016/j.molcel.2018.10.022
+
+Regoes RR, Wiuff C, Zappala RM, Garner KN, Baquero F, Levin BR (2004) Pharmacodynamic functions: a multiparameter approach to the design of antibiotic treatment regimens. Antimicrob Agents Chemother 48:3670-3676. https://doi.org/10.1128/AAC.48.10.3670-3676.2004
+
+Tsuji BT, Brown T, Parasrampuria R, Brazeau DA, Forrest A, Kelchlin PA et al (2012) Front-loaded linezolid regimens result in increased killing and suppression of the accessory gene regulator system of Staphylococcus aureus. Antimicrob Agents Chemother 56:3712-3719. https://doi.org/10.1128/AAC.05453-11
+
+Wakamoto Y, Dhar N, Chait R, Schneider K, Signorino-Gelo F, Leibler S, McKinney JD (2013) Dynamic persistence of antibiotic-stressed mycobacteria. Science 339:91-95. https://doi.org/10.1126/science.1229858
+
+Whitman WB, Coleman DC, Wiebe WJ (1998) Prokaryotes: the unseen majority. Proc Natl Acad Sci USA 95:6578-6583. https://doi.org/10.1073/pnas.95.12.6578
+
+Wilmaerts D, Windels EM, Verstraeten N, Michiels J (2019) General mechanisms leading to persister formation and awakening. Trends Genet 35:401-411. https://doi.org/10.1016/j.tig.2019.03.007
+
+World Health Organization (2021) Global tuberculosis report 2021. World Health Organization, Geneva. ISBN 978-92-4-003702-1.
+
+Zhang Y, Yew WW (2009) Mechanisms of drug resistance in Mycobacterium tuberculosis. Int J Tuberc Lung Dis 13:1320-1330.
 All entries below were verified in September 2026: those indexed in PubMed
 against their PubMed record and carrying their PMID, and the one entry that is
 not indexed, a World Health Organization report, against the publisher record
@@ -455,28 +516,7 @@ and carrying its ISBN. Thirteen entries from version 1 were removed or replaced;
 see the note on version 2 above and `docs/04_REFERENCE_VERIFICATION.md` for the
 full audit.
 
-1. Lewis K. Persister cells, dormancy and infectious disease. Nat Rev Microbiol. 2007;5(1):48-56. PMID 17143318. doi:10.1038/nrmicro1557
-2. Zhang Y, Yew WW. Mechanisms of drug resistance in Mycobacterium tuberculosis. Int J Tuberc Lung Dis. 2009;13(11):1320-30. PMID 19861002.
-3. Balaban NQ, Helaine S, Lewis K, Ackermann M, Aldridge B, Andersson DI, et al. Definitions and guidelines for research on antibiotic persistence. Nat Rev Microbiol. 2019;17(7):441-448. PMID 30980069. doi:10.1038/s41579-019-0196-3
-4. Brauner A, Fridman O, Gefen O, Balaban NQ. Distinguishing between resistance, tolerance and persistence to antibiotic treatment. Nat Rev Microbiol. 2016;14(5):320-30. PMID 27080241. doi:10.1038/nrmicro.2016.34
-5. World Health Organization. Global tuberculosis report 2021. Geneva: World Health Organization; 2021. ISBN 978-92-4-003702-1.
-6. Levin BR, Rozen DE. Non-inherited antibiotic resistance. Nat Rev Microbiol. 2006;4(7):556-62. PMID 16778840. doi:10.1038/nrmicro1445
-7. Dhar N, McKinney JD. Mycobacterium tuberculosis persistence mutants identified by screening in isoniazid-treated mice. Proc Natl Acad Sci USA. 2010;107(27):12275-80. PMID 20566858. doi:10.1073/pnas.1003219107
-8. Gengenbacher M, Kaufmann SHE. Mycobacterium tuberculosis: success through dormancy. FEMS Microbiol Rev. 2012;36(3):514-32. PMID 22320122. doi:10.1111/j.1574-6976.2012.00331.x
-9. Wakamoto Y, Dhar N, Chait R, Schneider K, Signorino-Gelo F, Leibler S, McKinney JD. Dynamic persistence of antibiotic-stressed mycobacteria. Science. 2013;339(6115):91-5. PMID 23288538. doi:10.1126/science.1229858
-10. Aldridge BB, Fernandez-Suarez M, Heller D, Ambravaneswaran V, Sundaresan V, Fortune SM. Asymmetry and aging of mycobacterial cells lead to variable growth and antibiotic susceptibility. Science. 2012;335(6064):100-4. PMID 22174129. doi:10.1126/science.1216166
-11. Conlon BP, Rowe SE, Gandt AB, Nuxoll AS, Donegan NP, Zalis EA, et al. Persister formation in Staphylococcus aureus is associated with ATP depletion. Nat Microbiol. 2016;1:16051. PMID 27572649. doi:10.1038/nmicrobiol.2016.51
-12. Wilmaerts D, Windels EM, Verstraeten N, Michiels J. General mechanisms leading to persister formation and awakening. Trends Genet. 2019;35(6):401-411. PMID 31036343. doi:10.1016/j.tig.2019.03.007
-13. Regoes RR, Wiuff C, Zappala RM, Garner KN, Baquero F, Levin BR. Pharmacodynamic functions: a multiparameter approach to the design of antibiotic treatment regimens. Antimicrob Agents Chemother. 2004;48(10):3670-6. PMID 15388418. doi:10.1128/AAC.48.10.3670-3676.2004
-14. Nielsen EI, Friberg LE. Pharmacokinetic-pharmacodynamic modeling of antibacterial drugs. Pharmacol Rev. 2013;65(3):1053-90. PMID 23803529. doi:10.1124/pr.111.005769
-15. Whitman WB, Coleman DC, Wiebe WJ. Prokaryotes: the unseen majority. Proc Natl Acad Sci USA. 1998;95(12):6578-83. PMID 9618454. doi:10.1073/pnas.95.12.6578
-16. Pu Y, Li Y, Jin X, Tian T, Ma Q, Zhao Z, et al. ATP-dependent dynamic protein aggregation regulates bacterial dormancy depth critical for antibiotic tolerance. Mol Cell. 2019;73(1):143-156.e4. PMID 30472191. doi:10.1016/j.molcel.2018.10.022
 
 **Candidate datasets named in Section 4.3 for the fitting stage.** These are
 cited as sources of data, not as support for any claim made here.
 
-17. Tsuji BT, Brown T, Parasrampuria R, Brazeau DA, Forrest A, Kelchlin PA, et al. Front-loaded linezolid regimens result in increased killing and suppression of the accessory gene regulator system of Staphylococcus aureus. Antimicrob Agents Chemother. 2012;56(7):3712-9. PMID 22526313. doi:10.1128/AAC.05453-11
-18. Drusano GL, Myrick J, Maynard M, Nole J, Duncanson B, Brown D, et al. Linezolid kills acid-phase and non-replicative-persister-phase Mycobacterium tuberculosis in a hollow-fiber infection model. Antimicrob Agents Chemother. 2018;62(8):e00221-18. PMID 29866864. doi:10.1128/AAC.00221-18
-19. Pasipanodya JG, Nuermberger E, Romero K, Hanna D, Gumbo T. Systematic analysis of hollow fiber model of tuberculosis experiments. Clin Infect Dis. 2015;61 Suppl 1:S10-7. PMID 26224767. doi:10.1093/cid/civ425
-20. Gumbo T, Louie A, Deziel MR, Parsons LM, Salfinger M, Drusano GL. Selection of a moxifloxacin dose that suppresses drug resistance in Mycobacterium tuberculosis, by use of an in vitro pharmacodynamic infection model and mathematical modeling. J Infect Dis. 2004;190(9):1642-51. PMID 15478070. doi:10.1086/424849
-21. Conlon BP, Nakayasu ES, Fischer LE, LoSasso G, Kim W, Lewis K, et al. Activated ClpP kills persisters and eradicates a chronic biofilm infection. Nature. 2013;503(7476):365-70. PMID 24226776. doi:10.1038/nature12790
