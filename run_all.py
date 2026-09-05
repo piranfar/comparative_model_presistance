@@ -1,24 +1,23 @@
-#!/usr/bin/env python
 """
-Reproduce every number and every figure, from a clean checkout, in one command.
+Regenerate every number, table and figure in the current paper.
 
-    python run_all.py
+Run:  python run_all.py
 
-Order matters: the experiments write the tables and arrays that the figures
-read. Each stage prints its own summary and writes a receipt under
-results/receipts/ recording library versions and run parameters.
+The paper is a reanalysis of published deposits, so nothing here simulates
+anything: each stage reads a deposit from data/raw/, computes, and writes a
+table and a receipt recording the software versions it ran under. Running this
+from a clean checkout should reproduce every quantity the manuscript quotes,
+and `python -m src.audit_claims` afterwards checks that it did.
 
-Runtime is roughly two to three minutes, dominated by the 9,216 ODE solves of
-the global sensitivity analysis in exp03.
-
-Nothing here downloads data or contacts a network. There is no experimental
-dataset in this project, so every quantity is either recomputed from the
-preprint's own equations and Table 1, or generated from the mechanistic model
-and labelled synthetic.
+The earlier paper's pipeline is separate and lives at version_one/run_all.py.
+The two share data/ and nothing else: version one carries its own frozen copy of
+the modules they once had in common, so running one cannot alter the other's
+results.
 """
 from __future__ import annotations
 
 import runpy
+import subprocess
 import sys
 import time
 from pathlib import Path
@@ -26,60 +25,63 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent
 
 STAGES = [
-    ("exp01  recalculate every claim from the paper's own equations",
-     "src.experiments.exp01_recalculate_equations"),
-    ("exp02  fit the closed-form models and test identifiability",
-     "src.experiments.exp02_fit_and_identifiability"),
-    ("exp03  sensitivity analysis, one-at-a-time and global",
-     "src.experiments.exp03_sensitivity"),
-    ("fig 1  growth and the three survival strategies",
-     "src.figures.fig01_growth_and_strategies"),
-    ("fig 2  biphasic killing and its two corrections",
-     "src.figures.fig02_biphasic_killing"),
-    ("fig 3  model fitting, uncertainty and identifiability",
-     "src.figures.fig03_model_fitting"),
-    ("fig 4  sensitivity analysis",
-     "src.figures.fig04_sensitivity"),
-    ("fig 5  the mechanistic replacement",
-     "src.figures.fig05_mechanistic_model"),
-    ("fig 6  three strategies, three signatures",
-     "src.figures.fig06_mic_mdk_plane"),
-    ("fig S1 three statistical claims, checked",
-     "src.figures.fig07_supplementary_diagnostics"),
+    ("exp16  MIC against duration in 217 clinical isolates",
+     "src.experiments.exp16_tb_mic_mdk_independence"),
+    ("exp17  six laboratories, one protocol: a rate and a duration",
+     "src.experiments.exp17_era4tb_between_lab"),
+    ("exp18  do published constants transfer to a slow grower?",
+     "src.experiments.exp18_slow_grower_transferability"),
+    ("exp19  what a nominal concentration actually delivers",
+     "src.experiments.exp19_windels_mic_mapping"),
+    ("exp20  what the endpoint does to a 32-fold dose range",
+     "src.experiments.exp20_regimen_design"),
+    ("exp21  the concentration slope, interval by interval",
+     "src.experiments.exp21_sequential_and_combination"),
+
+    ("fig 1  a rate transfers; a clearance time does not",
+     "src.figures.fig10_rate_vs_duration"),
+    ("fig 2  the endpoint decides what is visible",
+     "src.figures.fig11_endpoint_collapse"),
+    ("fig 3  resistance and tolerance as separate axes",
+     "src.figures.fig12_independence"),
+    ("fig 4  which published constants transfer",
+     "src.figures.fig13_parameter_transfer"),
+
+    ("tables  build the manuscript tables from the results",
+     "src.build_tables"),
+    ("paper   assemble the complete document",
+     "src.assemble_paper"),
+    ("index   map results/ to the paper it serves",
+     "src.build_results_index"),
+    ("audit   recompute every quoted number from its table",
+     "src.audit_claims"),
 ]
 
 
 def main() -> int:
-    sys.path.insert(0, str(ROOT))
     failures = []
-    t_start = time.perf_counter()
+    t0 = time.time()
+    for label, module in STAGES:
+        print(f"\n{'=' * 78}\n{label}\n{'=' * 78}", flush=True)
+        started = time.time()
+        r = subprocess.run([sys.executable, "-m", module], cwd=ROOT)
+        took = time.time() - started
+        if r.returncode == 0:
+            print(f"-- ok, {took:.1f}s", flush=True)
+        else:
+            print(f"-- FAILED, exit {r.returncode}", flush=True)
+            failures.append(label)
 
-    for title, module in STAGES:
-        print("\n" + "=" * 78)
-        print(title)
-        print("=" * 78)
-        t0 = time.perf_counter()
-        try:
-            runpy.run_module(module, run_name="__main__")
-        except SystemExit as exc:
-            if exc.code not in (0, None):
-                failures.append((module, f"exit code {exc.code}"))
-        except Exception as exc:                      # noqa: BLE001
-            failures.append((module, f"{type(exc).__name__}: {exc}"))
-            print(f"  FAILED: {type(exc).__name__}: {exc}")
-        print(f"  [{time.perf_counter() - t0:.1f}s]")
-
-    print("\n" + "=" * 78)
-    print(f"total {time.perf_counter() - t_start:.1f}s")
+    print(f"\n{'=' * 78}")
+    print(f"{len(STAGES) - len(failures)} of {len(STAGES)} stages completed "
+          f"in {time.time() - t0:.0f}s")
     if failures:
-        print(f"{len(failures)} stage(s) failed:")
-        for module, why in failures:
-            print(f"  {module}: {why}")
+        print("failed:")
+        for f in failures:
+            print(f"   {f}")
         return 1
-    print("all stages completed")
-    print(f"  tables   {ROOT / 'results' / 'tables'}")
-    print(f"  figures  {ROOT / 'results' / 'figures'}")
-    print(f"  receipts {ROOT / 'results' / 'receipts'}")
+    print("Every number in manuscript/PAPER_COMPLETE.md was regenerated from "
+          "data/raw/.")
     return 0
 
 

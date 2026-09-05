@@ -236,10 +236,20 @@ def main() -> int:
         print("   made here. Kaur et al. 2024 (doi:10.3389/fitd.2024.1413211), who")
         print("   deposited these animals, report the combination as additive, which is")
         print("   what the larger control arm gives.")
+        # Power, stated so the flip above is read as the design's resolution
+        # rather than as a measured interaction. These were left referring to
+        # names the retraction removed, which raised after most of the output
+        # had already printed and so looked like a clean run.
+        best_mono = max(mono, key=lambda m: ctrl - v[m].mean())
+        n1, n2 = len(v[combo]), len(v[best_mono])
+        detectable = 2.8 * np.sqrt(1 / n1 + 1 / n2)
+        spread = abs(max(v[k].mean() for k in v if "Control" in k)
+                     - min(v[k].mean() for k in v if "Control" in k))
         print(f"\n   With n={n1} and n={n2} the design resolves about {detectable:.1f} log10 "
-              f"at conventional power,")
-        print(f"   and the sub-additivity in question is {abs(observed-expected):.2f}. It is a "
-              "direction, not an established interaction.")
+              "at conventional power,")
+        print(f"   while the two control arms differ by {spread:.2f} log10 between "
+              "themselves. Neither")
+        print("   verdict above is separable from that.")
 
     pre = next((k for k in v if "Pre" in k), None)
     if pre:

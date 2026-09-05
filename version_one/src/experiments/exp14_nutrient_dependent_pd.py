@@ -58,7 +58,8 @@ import pandas as pd
 from ..models import boccarella as bc
 
 ROOT = Path(__file__).resolve().parents[2]
-DATA = ROOT / "data" / "raw" / "windels2024" / "timekill.csv"
+REPO = ROOT.parent          # data/ is shared with the current paper
+DATA = REPO / "data" / "raw" / "windels2024" / "timekill.csv"
 SLOW = ROOT / "results" / "tables" / "exp13_slow_phase_fits.csv"
 TABLES = ROOT / "results" / "tables"
 RECEIPTS = ROOT / "results" / "receipts"

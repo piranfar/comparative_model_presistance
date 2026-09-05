@@ -1,0 +1,8 @@
+{
+  "script": "src/experiments/exp06_reproduce_check.py",
+  "utc": "2026-09-03T22:14:50+00:00",
+  "min_bR_used": 2.0,
+  "min_bR_in_their_main": 1.7,
+  "reproduces_published_distribution": false,
+  "runtime_minutes": 35.8
+}

@@ -337,9 +337,11 @@ writes a receipt recording library versions and run parameters.
 independent re-download against the copy obtained by literature search;
 simulation code and the redeposited survival slice of Boccarella et al. 2026
 (Mol Biol Evol 43:msag180) from figshare 10.6084/m9.figshare.31389142 under
-CC BY 4.0; recurrent-exposure CFU counts for *E. coli* MG1655 under ampicillin;
-survival scores for eight *Pseudomonas* species under ciprofloxacin and
-rifampicin from Vogwill et al.; and the binned lag-time counts of Şimşek and Kim
+CC BY 4.0; recurrent-exposure CFU counts for *E. coli* MG1655 under ampicillin
+from Kollerova et al. 2024 (mSystems 9(7):e00256-24,
+doi:10.1128/msystems.00256-24, PMID 38920373), obtained from their Dryad deposit
+doi:10.5061/dryad.rr4xgxdbj under CC0 1.0; survival scores for eight
+*Pseudomonas* species under ciprofloxacin and rifampicin from Vogwill et al.; and the binned lag-time counts of Şimşek and Kim
 2019 (PNAS 116, doi:10.1073/pnas.1903836116) from their supplementary appendix.
 
 **Concentration-response.** Survival ratios were compared within a nutrient

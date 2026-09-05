@@ -1,0 +1,23 @@
+{
+  "script": "src/experiments/exp08_persistence_threshold.py",
+  "utc": "2026-09-04T17:39:34+00:00",
+  "simulation_code": "external/boccarella2026/magnitude_of_evolution_simulations.py, unmodified",
+  "code_source_doi": "10.6084/m9.figshare.31389142",
+  "licence": "CC BY 4.0",
+  "concentration_ug_ml": 12.5,
+  "alphas": [
+    1e-05,
+    5e-05,
+    0.0001,
+    0.0009576,
+    0.003,
+    0.01,
+    0.03,
+    0.1,
+    0.3,
+    0.8
+  ],
+  "replicates_per_alpha": 22,
+  "persister_survival_per_pulse": 0.07786403681372438,
+  "runtime_minutes": 112.2
+}

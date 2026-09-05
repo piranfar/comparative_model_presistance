@@ -47,8 +47,9 @@ from ..models.mechanistic import PD_SPECIES, PDParams, mic, simulate
 from ..models.parameters import LOD_CFU_ML, SPECIES
 
 ROOT = Path(__file__).resolve().parents[2]
+REPO = ROOT.parent          # data/ is shared with the current paper
 TABLES = ROOT / "results" / "tables"
-PROCESSED = ROOT / "data" / "processed"
+PROCESSED = REPO / "data" / "processed"
 RECEIPTS = ROOT / "results" / "receipts"
 
 # Drug exposure. Two conventions, and the analysis is run under both because

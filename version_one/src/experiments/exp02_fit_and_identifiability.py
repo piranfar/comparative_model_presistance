@@ -46,8 +46,9 @@ from ..models.mechanistic import PD_SPECIES, apparent_transition_time, mic
 from ..models.parameters import LOD_CFU_ML, SPECIES
 
 ROOT = Path(__file__).resolve().parents[2]
+REPO = ROOT.parent          # data/ is shared with the current paper
 TABLES = ROOT / "results" / "tables"
-PROCESSED = ROOT / "data" / "processed"
+PROCESSED = REPO / "data" / "processed"
 RECEIPTS = ROOT / "results" / "receipts"
 
 # Multiples of each parameter set's own MIC. Passing 4.0 straight through as an

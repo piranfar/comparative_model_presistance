@@ -1,0 +1,7 @@
+arm,comparison,n_mine,n_theirs,median_mine,median_theirs,ks_statistic,ks_p,consistent_at_0.05
+high,all populations,16,500,10.5949855946258,9.210125578816594,0.3035,0.0918997472011663,True
+high,final_MIC > 2 (their Fig-3 filter),16,487,10.5949855946258,9.25456806729946,0.2999229979466119,0.09851960146187214,True
+high,rate of non-evolution (final_MIC = 2),16,500,0.0,0.026,,,
+low,all populations,48,500,16.98807695983143,18.63129105477755,0.275,0.002029403212133132,False
+low,final_MIC > 2 (their Fig-3 filter),40,497,17.835485241483624,18.6706656811963,0.15543259557344064,0.2985507505336158,True
+low,rate of non-evolution (final_MIC = 2),48,500,0.16666666666666666,0.006,,,

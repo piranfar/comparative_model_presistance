@@ -1,82 +1,71 @@
-# Comparative modelling of antibiotic resistance, tolerance and persistence
+# A kill rate transfers between laboratories; a time to clearance does not
 
-Code and results for bioRxiv preprint
-[10.1101/2025.02.12.637810](https://doi.org/10.1101/2025.02.12.637810),
-*A state-structured pharmacodynamic framework separating resistance, tolerance
-and persistence, applied to Mycobacterium tuberculosis and Staphylococcus aureus*.
+A reanalysis of five published deposits, asking what happens to the two ways
+antibiotic killing is summarised — as a rate, and as a duration — when the same
+protocol is run in six different laboratories.
 
-> **Version 2 corrects errors in version 1 that change its conclusions.**
-> Readers of version 1 should treat its quantitative results as withdrawn. The
-> full list of corrections, each tied to the computation that establishes it, is
-> in [`manuscript/CORRECTIONS_LOG.md`](manuscript/CORRECTIONS_LOG.md).
+The finding is an asymmetry. Every laboratory produces a kill rate. Half of them
+produce no clearance time at all, on the same flasks, and which half is decided
+by where their cultures started rather than by how fast the drug killed.
+
+## Layout
+
+```
+manuscript/     the paper: PAPER_COMPLETE.md is the assembled document
+docs/           working documents 12 to 18
+src/            the analysis
+results/        every table, figure and receipt it produces
+data/           the deposits, shared with version one
+version_one/    the first paper, complete and frozen
+```
+
+Two papers live here. This one is at the root; the earlier simulation study is
+in `version_one/`, self-contained, with its own copy of the modules the two once
+shared so that work here cannot retroactively alter what it reported. They share
+`data/` and nothing else.
+
+## Reproducing everything
 
 ```bash
 pip install -r requirements.txt
 python run_all.py
 ```
 
-Regenerates every number and every figure in the manuscript in about two minutes.
-No network access. Needs numpy, scipy, pandas and matplotlib; the pinned versions
-this was last verified on are in [`requirements.txt`](requirements.txt), and every
-stage writes the versions it actually ran under to `results/receipts/`.
+Fourteen stages, about forty seconds. Each writes a table and a receipt
+recording the software versions it actually ran under, then the last stage
+recomputes every quantity the manuscript quotes from the table it came from and
+reports any that disagree.
 
-## What is here
+```bash
+python -m src.audit_claims
+```
 
-| | |
+That check exists because numbers drift. Several in this project did, and were
+caught by it rather than by rereading.
+
+## What each stage does
+
+| stage | question |
 |---|---|
-| [`manuscript/`](manuscript/) | the version 2 manuscript and the corrections log |
-| [`submission/biorxiv_v2/`](submission/biorxiv_v2/) | the submitted document and figure files |
-| [`src/models/`](src/models/) | the version 1 equations implemented exactly as printed, the corrected closed forms, and the state-structured replacement |
-| [`src/inference/`](src/inference/) | log-scale fitting with censoring, information criteria, profile likelihood, and the synthetic data generator |
-| [`src/experiments/`](src/experiments/) | the three analysis stages |
-| [`src/figures/`](src/figures/) | one module per figure; each also writes the numbers behind its panels |
-| [`results/`](results/) | tables, figures and run receipts recording library versions |
-| [`docs/`](docs/) | the audit that motivated the revision, the study design, and the reference verification |
+| exp16 | Do MIC and the minimum duration for killing move together in 217 clinical isolates? |
+| exp17 | Six laboratories, one protocol: does a rate travel where a duration does not? |
+| exp18 | Do published pharmacodynamic constants transfer to a slow grower? |
+| exp19 | What does a nominal concentration actually deliver once the evolved MIC is known? |
+| exp20 | What does the choice of endpoint do to a 32-fold dose range? |
+| exp21 | Is the concentration slope the same early and late? |
 
-## The corrections, in one table
+`results/README.md` maps every output to the script that writes it and the
+script or manuscript section that uses it.
 
-Twenty-three quantitative claims from version 1 were recomputed from its own
-equations and its own parameter table. Twenty fail, two are partial, one passes.
+## Data
 
-| Claim in version 1 | Recomputed |
-|---|---|
-| Biphasic killing, Eq. 4 | rises by 2,981-fold (3.47 log₁₀) at the transition, for *M. tuberculosis* |
-| Prolonged therapy clears *M. tuberculosis* | time to sterilisation is infinite under the printed equation |
-| Transition time 80 h, fitted | 33.3 h implied by the other three parameters; not identifiable from realistic data |
-| Resistant growth, Eq. 2 | 10⁵⁷ CFU/mL at 240 h, exceeding the prokaryotic biomass of Earth |
-| Tolerance kills *S. aureus*, Eq. 3 | net rate is +0.30/h; the population grows |
-| The two species differ markedly | 1.13-fold apart at 240 h once the discontinuity is removed |
-| R² > 0.9 confirms the model | both a correct and a broken model exceed 0.9 while AICc differs by 81.5 |
-| Kolmogorov–Smirnov p < 0.05 | the p-value is set by the simulation grid density, not by the biology |
-
-Full table with verdicts: [`results/tables/claim_recalculation.md`](results/tables/claim_recalculation.md).
-
-## Status of the data
-
-**There is no experimental data in this project.** Version 1's experimental-data figure was
-captioned "experimental data vs. model fitting" and named no dataset; it is
-withdrawn. Figures built on synthetic data carry a `SYNTHETIC DATA` stamp, and
-figures using unfitted parameters carry `ILLUSTRATIVE PARAMETERS`. Neither
-supports any quantitative claim about either organism.
-
-Candidate real datasets, verified to exist, are catalogued in
-[`data/manifests/datasets.csv`](data/manifests/datasets.csv). Fitting the
-state-structured model to them requires no change to any model code.
-
-## References
-
-All thirty references in version 1 were checked against PubMed. Seventeen
-verified, eleven required correction, two do not exist and are removed. The audit
-is in [`docs/04_REFERENCE_VERIFICATION.md`](docs/04_REFERENCE_VERIFICATION.md)
-and every PubMed-indexed entry in the version 2 list carries its PMID.
+Four openly licensed deposits, none generated for this study and none chosen
+after its result was known. `data/raw/SOURCES.json` records every external
+source with its licence and whether its bytes may be redistributed; several are
+free to read but not to redistribute, and are registered by URL only.
+`src/fetch_external_data.py` retrieves what publishers serve openly.
 
 ## Licence
 
-Code under the MIT licence, see [`LICENSE`](LICENSE). Documentation and figures
-under CC BY 4.0.
-
-## Citation
-
-Piranfar V. *A state-structured pharmacodynamic framework separating resistance,
-tolerance and persistence, applied to Mycobacterium tuberculosis and
-Staphylococcus aureus.* bioRxiv 2025.02.12.637810, version 2.
+Code under the terms in `LICENSE`. Every reanalysed deposit is CC BY 4.0 or CC0
+and is cited in the manuscript and in `data/raw/SOURCES.json`.

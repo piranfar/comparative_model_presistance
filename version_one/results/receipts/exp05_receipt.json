@@ -1,0 +1,19 @@
+{
+  "script": "src/experiments/exp05_boccarella_recalibrated.py",
+  "utc": "2026-09-04T14:21:32+00:00",
+  "simulation_code": "external/boccarella2026/magnitude_of_evolution_simulations.py, unmodified",
+  "code_source_doi": "10.6084/m9.figshare.31389142",
+  "paper_doi": "10.1093/molbev/msag180",
+  "licence": "CC BY 4.0",
+  "concentration_ug_ml": 12.5,
+  "replicates_low_arm": 40,
+  "replicates_high_arm": 20,
+  "alphas": {
+    "authors/high": 0.8,
+    "authors/low": 5e-05,
+    "implied/high": 0.9999999999452872,
+    "implied/low": 0.0009576114603262
+  },
+  "high_arm_alpha_pinned_at_1": true,
+  "runtime_minutes": 70.8
+}

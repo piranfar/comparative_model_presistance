@@ -32,7 +32,7 @@ from ..models.parameters import LOD_CFU_ML
 from . import style as st
 
 ROOT = st.ROOT
-NPZ = ROOT / "data" / "processed" / "synthetic_fits.npz"
+NPZ = REPO / "data" / "processed" / "synthetic_fits.npz"
 DIAG = ROOT / "results" / "tables" / "fit_diagnostics.csv"
 
 PRINTED_NAME = "Eq. 4 as printed (4 rate parameters + N0)"

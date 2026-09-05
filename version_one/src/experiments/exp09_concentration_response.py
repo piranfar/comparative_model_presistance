@@ -58,7 +58,8 @@ from scipy import stats
 from ..models import boccarella as bc
 
 ROOT = Path(__file__).resolve().parents[2]
-DATA = ROOT / "data" / "raw" / "boccarella2026" / "survival_S1.csv"
+REPO = ROOT.parent          # data/ is shared with the current paper
+DATA = REPO / "data" / "raw" / "boccarella2026" / "survival_S1.csv"
 TABLES = ROOT / "results" / "tables"
 RECEIPTS = ROOT / "results" / "receipts"
 

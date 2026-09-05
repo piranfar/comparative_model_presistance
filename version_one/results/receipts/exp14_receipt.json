@@ -1,6 +1,6 @@
 {
   "script": "src/experiments/exp14_nutrient_dependent_pd.py",
-  "utc": "2026-09-05T03:55:02+00:00",
+  "utc": "2026-09-05T19:53:17+00:00",
   "data_doi": "10.5281/zenodo.7550302",
   "antibiotic": "amikacin",
   "reference_concentration_ug_ml": 12.5,

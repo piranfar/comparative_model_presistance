@@ -1,0 +1,9 @@
+AB_conc,nutrient_conc,time,n,geo_mean,min,max,arm
+12.5,0.25,1,2,0.9580083506942932,0.842,1.09,high persistence (25% MHB)
+12.5,0.25,2,22,0.2873147070719699,0.0721,0.958,high persistence (25% MHB)
+12.5,0.5,1,3,0.0003433238306562305,0.000305,0.000407,"intermediate (50% MHB, unused in the paper)"
+12.5,0.5,2,19,0.00029165785781225365,0.000185,0.00368,"intermediate (50% MHB, unused in the paper)"
+12.5,0.8,1,3,5.818275391117586e-05,2.89e-05,0.000211,low persistence (80% MHB)
+12.5,0.8,2,20,7.456350730066291e-05,9.72e-06,0.000821,low persistence (80% MHB)
+25.0,0.25,1,22,0.004724590688251659,0.000667,0.0213,high persistence (25% MHB)
+25.0,0.8,2,4,9.868244468788862e-07,4.84e-07,1.57e-06,low persistence (80% MHB)

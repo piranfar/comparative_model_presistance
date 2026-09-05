@@ -1,0 +1,26 @@
+{
+  "script": "src/experiments/exp04_boccarella_alpha.py",
+  "utc": "2026-09-03T20:11:44+00:00",
+  "data_source_doi": "10.6084/m9.figshare.31389142",
+  "paper_doi": "10.1093/molbev/msag180",
+  "licence": "CC BY 4.0",
+  "n_observations": 95,
+  "tau_hours": 5.0,
+  "kappa": 2.0,
+  "authors_alpha_high": 0.8,
+  "authors_alpha_low": 5e-05,
+  "manuscript_code_discrepancies": [
+    {
+      "item": "sigma, the standard deviation of the log-normal distribution of mutational effects on MIC",
+      "manuscript": "Table 1 gives sigma = 0.07",
+      "deposited_code": "main() sets sigma_values = [0.7]",
+      "consequence": "a ten-fold difference in the spread of mutational effect sizes, which is the quantity the large-effect versus small-effect argument rests on"
+    },
+    {
+      "item": "Hill coefficient kappa",
+      "manuscript": "Table 1 gives h = 2",
+      "deposited_code": "function default is kappaS = 3, but main() overrides it to 2, so the manuscript value is the one used",
+      "consequence": "none for the published runs; a trap for anyone who calls the function without setting kappaS"
+    }
+  ]
+}
