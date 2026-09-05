@@ -82,8 +82,9 @@ not separable after the fact.
 
 ### 2.1 Datasets
 
-Four published deposits are analysed. None was generated for this study, all are
-openly licensed, and no dataset was selected after its result was known.
+Four published deposits are analysed (Table 1). None was generated for this
+study, all are openly licensed, and no dataset was selected after its result was
+known.
 
 **The six-laboratory exercise.** *Mycobacterium tuberculosis* H37Rv from one
 stock, distributed with one written protocol to six laboratories blinded and
@@ -165,6 +166,18 @@ ever fell below the limit. A cell is fitted only when it retains at least six
 quantified readings at three distinct times; below that the slope is determined
 by the censoring pattern rather than by the counts.
 
+A published maximum effect is **admissible as a rate** only if it was fitted as
+an instantaneous rate inside a differential equation for the population. A
+maximum effect reported as a cumulative log10 reduction accumulated over a fixed
+window is not admissible and is not converted. It has no time in its
+denominator, and dividing it by the window does not produce a rate, because its
+plateau is reached when the inoculum is exhausted rather than when the drug
+effect saturates. The same exclusion applies to any Hill exponent fitted
+alongside such an endpoint: an exponent on a cumulative endpoint is a function
+of the inoculum, the window length and the detection limit, and it changes when
+any of those change with nothing about the drug changing. Section 3.6 reports
+only values that pass this rule, and Table 4 lists them.
+
 ### 2.4 Multiplicity
 
 Where a question admits more than one test, every test the deposit supports is
@@ -190,7 +203,7 @@ reports any that disagree. Analyses used Python 3.14 with numpy 2.5.0, scipy
 ### 3.1 Every laboratory yields a rate; half yield no duration
 
 At ten times the minimum inhibitory concentration of moxifloxacin, all six
-laboratories return a positive kill rate. The estimates span 5.2-fold, from 0.090
+laboratories return a positive kill rate (Fig. 1A, Table 2). The estimates span 5.2-fold, from 0.090
 to 0.464 log10 CFU/mL per day. Across all 30 laboratory-by-arm cells the Tobit
 and imputation estimates never differ by more than 0.003 log10 per day, so the
 result is a property of the data rather than of the censoring model.
@@ -198,13 +211,13 @@ result is a property of the data rather than of the censoring model.
 The duration endpoint behaves differently on the same flasks. Of 72 treated
 flasks, 29 ever fell below the limit, and they are not spread across the
 laboratories. Institutes A, B and C cleared flasks in every arm; institutes D, E
-and F cleared none in any arm. For half the laboratories the time to clearance is
+and F cleared none in any arm (Fig. 1B). For half the laboratories the time to clearance is
 not a number.
 
 The two orderings do not correspond, and the discrepancy is not marginal. Ranked
 by starting density, the three lowest laboratories are exactly the three that
 cleared and the three highest exactly the three that did not, without exception.
-Ranked by kill rate there is no such correspondence. Institute F, with the
+Ranked by kill rate there is no such correspondence (Fig. 1C). Institute F, with the
 highest starting density at 6.53 log10 CFU/mL, kills faster than four of the
 other five at 0.223 log10 per day and never clears. Institute E returns the
 slowest rate of all at 0.090 and also never clears. Institute A returns 0.119,
@@ -225,7 +238,7 @@ The log-rank test across laboratories gives χ² = 53.8 (p = 2.3 × 10⁻¹⁰).
 model on laboratory alone, institutes D, E and F carry hazard ratios of 0.20 with
 p-values of 0.015, 0.016 and 0.015. Adding the starting density as a covariate
 moves those p-values to 0.138, 0.172 and 0.576, and concordance rises from 0.896
-to 0.930. For those three laboratories the apparent laboratory effect on
+to 0.930 (Fig. 1D). For those three laboratories the apparent laboratory effect on
 clearance is an inoculum effect.
 
 One laboratory does not dissolve. Institute C remains distinguishable after
@@ -245,7 +258,7 @@ than the trajectory that produced it.
 The 217-isolate file supports 24 comparisons between the concentration axis and
 the duration axis: six duration endpoints, at 15 and 60 days of prior culture,
 crossed with four strata. Four reach nominal significance where 1.2 are expected
-by chance, the strongest being ρ = −0.206 (p = 0.0086, n = 162) in the
+by chance (Fig. 3A, Table 3), the strongest being ρ = −0.206 (p = 0.0086, n = 162) in the
 baseline-only stratum at the 99.99 per cent endpoint. None survives
 Benjamini–Hochberg correction at a false discovery rate of 5 per cent.
 
@@ -253,14 +266,15 @@ Three features of the four nominal results bear on how they should be read. They
 are negative, so a higher inhibitory concentration accompanies a *shorter*
 duration, which is not the direction a shared mechanism predicts. They
 concentrate in the deepest endpoint, where 89.9 per cent of isolates sit at the
-assay ceiling after 15 days of prior culture and 94.8 per cent after 60. And they
+assay ceiling after 15 days of prior culture and 94.8 per cent after 60
+(Fig. 3B). And they
 are not independent of one another, because the 15-day and 60-day columns are
 measured on overlapping isolates.
 
 The design resolves correlations of ρ = 0.14 to 0.25 depending on stratum, so the
 null is bounded rather than merely asserted.
 
-The same question in 126 evolved clones sharing an ancestor gives ρ = +0.043
+The same question in 126 evolved clones sharing an ancestor (Fig. 3C) gives ρ = +0.043
 (p = 0.63) against a resolvable ρ of 0.175, and independence holds within every
 nutrient stratum separately. Two designs, one clinical and one experimental,
 return the same answer within the resolution available.
@@ -283,7 +297,8 @@ killing is weakest.
 ### 3.5 A late endpoint cannot resolve a 32-fold concentration range
 
 In the concentration-by-time grid, survivors across a 32-fold range of apramycin
-separate 6.9-fold at day 3, 48.2-fold at day 7 and 5.2-fold at day 14. An
+separate 6.9-fold at day 3, 48.2-fold at day 7 and 5.2-fold at day 14
+(Fig. 2A and 2B, Table 5). An
 experiment read at 14 days would report this drug as insensitive to a 32-fold
 change in dose. The information is present in the system and absent from the
 endpoint.
@@ -293,7 +308,7 @@ of every interval, the concentration slope is +0.059 log10 per day per doubling
 over days 0 to 3 (p < 0.0001), +0.033 over days 3 to 7 (p = 0.15) and −0.025 over
 days 7 to 14 (p < 0.0001). The early-versus-late contrast is firm (+0.084, 95 per
 cent interval +0.037 to +0.128); the early-versus-middle contrast is not (+0.026,
-−0.039 to +0.086, p = 0.43).
+−0.039 to +0.086, p = 0.43). Fig. 2C.
 
 The sign of the late slope is not claimed. By day 14 the highest arm sits at
 65 CFU/mL and the source states no limit of quantification. At any limit of
@@ -312,7 +327,7 @@ Applying the admissibility rule of Section 2 to the mycobacterial literature
 leaves few usable values, and those that remain sit far from the constants in
 routine use in models built on fast-growing organisms. The maximum growth rate is
 30-fold too fast against intracellular *M. tuberculosis* and 12.9-fold against
-planktonic. The maximum kill rate is 273- to 750-fold too aggressive across four
+planktonic (Fig. 4A, Table 4). The maximum kill rate is 273- to 750-fold too aggressive across four
 drugs in the intracellular state, and 286-fold against bedaquiline measured in
 patients.
 
@@ -320,7 +335,8 @@ The ratio that alone sets the shape of the concentration-response curve is
 condition-dependent rather than constant. Across the two laboratories with
 admissible rates it spans 0.24 to 4.10; within a single laboratory, one readout
 and one set of cells, it runs from 0.65 for amikacin to 4.10 for rifampicin, and
-halves between the first observation window and the second for every drug in it.
+halves between the first observation window and the second for every drug in it
+(Fig. 4B).
 
 Two independent sources agree to within 4.5 per cent where they can be compared:
 intracellular rifampicin at −0.0220 and bedaquiline in patient sputum at −0.0210

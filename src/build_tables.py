@@ -147,6 +147,25 @@ def table5() -> str:
             + md(d))
 
 
+def table6() -> str:
+    """What one nominal concentration means once the evolved MIC is known."""
+    m = pd.read_csv(T / "exp19_exposure_mapping.csv")
+    rows = [[f"{r.AB_conc_ug_ml:g}", int(r.n_nutrient_levels),
+             f"{r.exposure_min_x_mic:.2f}", f"{r.exposure_max_x_mic:.2f}",
+             f"{r.fold_spread:.1f}x",
+             "yes" if r.crosses_the_mic else "no"]
+            for r in m.itertuples()]
+    d = pd.DataFrame(rows, columns=[
+        "Nominal concentration (ug/mL)", "Nutrient levels",
+        "Lowest exposure (x MIC)", "Highest exposure (x MIC)", "Spread",
+        "Straddles the MIC"])
+    return ("**Table 6.** The same nominal concentration expressed in multiples "
+            "of the minimum inhibitory concentration each population actually "
+            "evolved to. At 25 ug/mL the same number denotes a sub-inhibitory "
+            "exposure in one nutrient condition and a strongly inhibitory one in "
+            "another." + chr(10) + chr(10) + md(d))
+
+
 def main() -> int:
     OUT.parent.mkdir(parents=True, exist_ok=True)
     parts = ["# Tables",
@@ -155,12 +174,12 @@ def main() -> int:
              "`results/tables/`. Do not edit by hand: a value typed into this "
              "file can drift away from the analysis that produced it.",
              ""]
-    for fn in (table1, table2, table3, table4, table5):
+    for fn in (table1, table2, table3, table4, table5, table6):
         parts.append(fn())
         parts.append("")
     OUT.write_text("\n".join(parts), encoding="utf-8")
     print(f"wrote {OUT.relative_to(ROOT)}")
-    for fn in (table1, table2, table3, table4, table5):
+    for fn in (table1, table2, table3, table4, table5, table6):
         first = fn().split("\n")[0]
         print("   " + first[:96])
     return 0
