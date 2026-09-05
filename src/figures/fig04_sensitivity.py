@@ -12,7 +12,7 @@ which symbols appear in which branch.
 
 Panels B to E run the same question on the mechanistic model, where every
 parameter acts at every time. The answer changes, and it is not the answer the
-paper gives: the strongest single determinant of time to sterilisation in the
+paper gives: the strongest single determinant of time to LOD in the
 slow grower is the rate at which dormant cells wake up, not the rate at which
 dormant cells are killed. Panel E shows why one-at-a-time analysis is the wrong
 instrument for the fast grower, where most of the outcome variance comes from
@@ -94,7 +94,7 @@ def build():
     sub = oat_m[(oat_m["species"] == "Mtb") &
                 (oat_m["endpoint"] == "time_to_LOD_h")]
     _tornado(ax_b, sub, "B  the same OAT on the mechanistic model\n"
-                        "     M. tuberculosis, time to sterilisation",
+                        "     M. tuberculosis, time to LOD",
              "change in endpoint (%)")
     ax_b.legend(loc="lower right", fontsize=6.4)
 
@@ -116,12 +116,12 @@ def build():
         ax.axvline(0, color=st.AXIS, lw=1.0)
         ax.grid(axis="y", visible=False)
         ax.set_title(f"{letter}  {st.SPECIES_LABEL[short]}, "
-                     f"time to sterilisation", fontsize=8.8)
+                     f"time to LOD", fontsize=8.8)
         if short == "Mtb":
             ax.legend(loc="lower right", fontsize=6.3)
             top = s.iloc[-1]
             ax.annotate(f"{100*top['ST_total']:.0f}% of the variance in how "
-                        f"long\nsterilisation takes",
+                        f"long\ntime to LOD takes",
                         xy=(top["ST_total"], len(s) - 1),
                         xytext=(-6, -34), textcoords="offset points",
                         ha="right", fontsize=6.5, color=st.INK_SECONDARY,
@@ -132,7 +132,7 @@ def build():
     piv = inter.pivot_table(index="endpoint", columns="species",
                             values="fraction_variance_from_interactions")
     labels = {"log10_drop_240h": "log$_{10}$ drop at 240 h",
-              "MDK99_h": "MDK$_{99}$", "time_to_LOD_h": "time to sterilisation"}
+              "MDK99_h": "MDK$_{99}$", "time_to_LOD_h": "time to LOD"}
     xpos = np.arange(len(piv))
     for i, short in enumerate(("Mtb", "S. aureus")):
         ax_d.bar(xpos + (i - 0.5) * 0.34, piv[short], width=0.32,

@@ -14,7 +14,7 @@ being imposed by a breakpoint: there is no t_c anywhere in the model, no
 discontinuity, and the population reaches the limit of detection in finite time.
 Panel C shows what the printed model has no way to express, that killing depends
 on concentration. Panel D reports the result that the sensitivity analysis
-identified: for the slow grower, time to sterilisation is governed by how fast
+identified: for the slow grower, time to LOD is governed by how fast
 dormant cells wake up, because a dormant cell that resumes replication becomes
 killable. That is a statement about a drug target, and it is the kind of
 statement the printed equation is structurally incapable of making.
@@ -37,8 +37,17 @@ from ..models.parameters import LOD_CFU_ML
 from . import style as st
 
 ROOT = st.ROOT
+# Multiples of each parameter set's own MIC, not an absolute concentration.
+# The two sets have MICs of 0.26 and 0.80 in reference units, so a single
+# absolute value would compare them at 15.1x and 5.0x their own MIC while the
+# panel label claimed 4x for both.
 C_XMIC = 4.0
 N0 = 1.0e6
+
+
+def exposure(p) -> float:
+    """Absolute concentration giving C_XMIC multiples of this set's MIC."""
+    return C_XMIC * mic(p)
 
 
 def build():
@@ -63,7 +72,7 @@ def build():
         p = PD_SPECIES[short]
         t_end = 600.0 if short == "Mtb" else 60.0
         t = np.linspace(0.0, t_end, 3001)
-        out = simulate(p, C_XMIC, t, N0=N0)
+        out = simulate(p, exposure(p), t, N0=N0)
 
         ax.plot(t, np.log10(np.maximum(out["S"], 1e-300)),
                 color=st.COMPARTMENT_COLOR["S"], lw=1.7,
@@ -74,15 +83,15 @@ def build():
                 color=st.COMPARTMENT_COLOR["total"], lw=2.3,
                 label="total, what a CFU assay measures")
 
-        curve = total_curve(p, C_XMIC, N0=N0)
+        curve = total_curve(p, exposure(p), N0=N0)
         t_lod = time_to_lod(curve, LOD_CFU_ML)
-        knee = apparent_transition_time(p, C_XMIC)
+        knee = apparent_transition_time(p, exposure(p))
         ax.axvline(knee, color=st.INK_MUTED, lw=0.9, ls=(0, (1, 3)))
         ax.text(knee, 6.55, f" knee at {knee:.0f} h\n emerges, not imposed",
                 fontsize=6.5, color=st.INK_SECONDARY, ha="left", va="top")
         ax.plot([t_lod], [lod_log10], "o", color=st.CRITICAL, ms=6.5,
                 mec=st.SURFACE, mew=1.2, zorder=6, clip_on=False)
-        ax.annotate(f"sterilised at {t_lod:.0f} h", xy=(t_lod, lod_log10),
+        ax.annotate(f"below LOD at {t_lod:.0f} h", xy=(t_lod, lod_log10),
                     xytext=(-8, 26) if short == "Mtb" else (10, 30),
                     textcoords="offset points", fontsize=6.6,
                     color=st.CRITICAL, fontweight="semibold",
@@ -134,7 +143,7 @@ def build():
     ax_c.legend(loc="lower left", fontsize=7.0)
 
 
-    # ------------------------------ D: waking rate governs sterilisation ----
+    # ------------------------------ D: waking rate governs time to LOD ----
     mults = np.logspace(-1, 1, 25)
     for short in ("Mtb", "S. aureus"):
         p = PD_SPECIES[short]
@@ -142,13 +151,13 @@ def build():
         times = []
         for m in mults:
             q = replace(p, k_PS=p.k_PS * m)
-            times.append(time_to_lod(total_curve(q, C_XMIC, N0=N0),
+            times.append(time_to_lod(total_curve(q, exposure(p), N0=N0),
                                      LOD_CFU_ML, t_max=4000.0, n=8001,
                                      t_cap=2.0e5))
         times = np.array(times)
         ax_d.plot(mults, times, color=color, lw=2.0, marker="o", ms=3.6,
                   label=st.SPECIES_LABEL[short])
-        base = time_to_lod(total_curve(p, C_XMIC, N0=N0), LOD_CFU_ML)
+        base = time_to_lod(total_curve(p, exposure(p), N0=N0), LOD_CFU_ML)
         ax_d.plot([1.0], [base], "o", color=color, ms=7.0, mec=st.SURFACE,
                   mew=1.4, zorder=6)
         for m, tv in zip(mults, times):
@@ -164,13 +173,13 @@ def build():
     ax_d.text(1.0, ax_d.get_ylim()[1], " baseline", fontsize=6.6,
               color=st.INK_MUTED, va="top", ha="left")
     ax_d.set_xlabel("waking rate $k_{P\\rightarrow S}$ (multiple of baseline)")
-    ax_d.set_ylabel("time to sterilisation (h)")
+    ax_d.set_ylabel("time to LOD (h)")
     ax_d.set_title("D  waking dormant cells shortens therapy", fontsize=8.8)
     ax_d.legend(loc="upper right", fontsize=7.0)
 
 
     fig.suptitle("The mechanistic replacement: biphasic killing emerges and "
-                 "sterilisation is finite",
+                 "time to LOD is finite",
                  fontsize=10.2, fontweight="semibold", x=0.006, ha="left",
                  y=0.984)
     fig.text(0.006, 0.115,
