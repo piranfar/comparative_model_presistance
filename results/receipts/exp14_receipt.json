@@ -1,0 +1,14 @@
+{
+  "script": "src/experiments/exp14_nutrient_dependent_pd.py",
+  "utc": "2026-09-05T03:55:02+00:00",
+  "data_doi": "10.5281/zenodo.7550302",
+  "antibiotic": "amikacin",
+  "reference_concentration_ug_ml": 12.5,
+  "model_normal_kill_per_h": 7.061933534743202,
+  "model_persister_kill_per_h": 0.3766961186494162,
+  "measured_normal_kill_span_fold": 18.650875909112866,
+  "measured_persister_kill_span_fold": 5.272754697808636,
+  "advantage_of_dormancy_max_fold": 27.038864896962725,
+  "advantage_of_dormancy_min_fold": 3.6464348343535753,
+  "note": "rates read directly from the curves; no pharmacodynamic form fitted"
+}
