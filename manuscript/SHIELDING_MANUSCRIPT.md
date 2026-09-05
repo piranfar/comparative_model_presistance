@@ -26,8 +26,13 @@ two forms agree to within twenty percent for ten hours and then separate by
 eleven orders of magnitude within a week. Third, the persistence level itself is
 identifiable once survival is measured at several exposure durations, and the
 value implied by the data is 461-fold below the value simulated for the same
-condition. Each error is small where killing is fast and large where it is slow.
-Time to clearance is a deep-tail quantity, so all three land on it together.
+condition. Each error is small where killing is fast and large where it is slow,
+and time to clearance is a deep-tail quantity, so all three land on it together.
+Re-running the published simulation with a persister kill rate matched to the
+data leaves its reported contrast intact but eliminates 19 of 40 low-persistence
+populations, where the published parameters eliminate none in 80 runs: a model
+whose dormant compartment is too well protected cannot clear a population at
+all, which is the outcome a clinician is interested in.
 
 **Keywords:** antibiotic persistence, pharmacodynamics, heavy-tailed lag times,
 parameter identifiability, model misspecification, treatment duration
@@ -237,11 +242,50 @@ at complete nutrient starvation, not at the 25% nutrient level from which the
 high-persistence arm is drawn. The parameter is not invented; it is applied to
 the wrong condition.
 
-## 5. Discussion
+## 5. What the shielding costs a published conclusion
 
-### 5.1 The three failures are one failure
+The three preceding sections are about model structure. This one asks what the
+structure does to a result someone has drawn from it.
 
-Each result says that dormant cells are less isolated from the drug than the
+Boccarella et al. compare two persistence levels and report that the
+low-persistence arm reaches a higher final minimum inhibitory concentration than
+the high-persistence arm, by about 1.7-fold. We re-ran their simulation
+unmodified, changing only a parameter their own driver exposes: the floor on the
+persister kill rate, moved from the published $-0.5$/h to the $-3.58$/h that
+reproduces the observed concentration-response of Section 2. Forty populations
+per arm per scenario.
+
+Their contrast survives. Among populations that were not eliminated, the ratio
+is 2.01 under the published parameters and 2.05 under the recalibrated ones, and
+the two arms separate at $p = 2	imes10^{-6}$. The conclusion is robust to the
+correction, and we say so.
+
+What changes is what the model was not able to express.
+
+| | populations eliminated, low-persistence arm | high-persistence arm |
+|---|---|---|
+| published parameters | 0 / 40 | 0 / 40 |
+| recalibrated | **19 / 40** | 0 / 40 |
+
+Under the published persister kill rate, no population is ever cleared, in
+either arm, in any of the 80 runs. Under a persister kill rate that matches the
+survival data, nearly half the low-persistence populations are eliminated
+outright ($p = 2	imes10^{-7}$, Fisher's exact test), and none of the
+high-persistence ones are.
+
+This is the shielding of Sections 2 to 4 expressed as an outcome. A model whose
+dormant compartment is too well protected cannot clear a population, so every
+population must survive and the only question it can answer is how far each one
+evolves. Give the drug the access to dormant cells that the data show it has,
+and clearance becomes the dominant outcome in exactly the arm where persistence
+is scarce — which is the outcome a clinician is interested in and the one the
+published model cannot produce at all.
+
+## 6. Discussion
+
+### 6.1 The three failures are one failure
+
+Each of the first three results says that dormant cells are less isolated from the drug than the
 models represent. The concentration-response is too shallow because survival
 runs through a compartment whose kill rate is capped. The lag distribution is
 heavy-tailed because cells leave dormancy continuously rather than at a fixed
@@ -253,7 +297,7 @@ A model in which dormancy is a graded, concentration-permeable state with a
 heavy-tailed exit time would produce all three observations from one mechanism.
 We have not built it, and we do not claim that it would.
 
-### 5.2 What is safe and what is not
+### 6.2 What is safe and what is not
 
 None of this overturns a published conclusion by itself. A sensitivity ranking
 computed on a two-state model with exponential switching remains true of that
@@ -265,7 +309,7 @@ hours are safe: that is where the assumptions were tested and where they hold.
 Quantities decided four logs down are not, and treatment duration is one of
 them.
 
-### 5.3 Limitations
+### 6.3 Limitations
 
 The concentration-response test compares model predictions with published
 survival measurements made under protocols that differ from the simulated one in
@@ -287,7 +331,7 @@ the summary rather than reported as persistence levels.
 Every dataset used is published, was obtained from its public deposit, and is
 listed with its accession. No experiment was performed for this work.
 
-## 6. Methods
+## 7. Methods
 
 All analyses are reproducible from the accompanying repository. Each stage
 writes a receipt recording library versions and run parameters.

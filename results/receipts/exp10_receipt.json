@@ -1,0 +1,19 @@
+{
+  "script": "src/experiments/exp10_recalibrated_pd.py",
+  "utc": "2026-09-05T03:30:03+00:00",
+  "simulation_code": "external/boccarella2026/magnitude_of_evolution_simulations.py, unmodified",
+  "code_source_doi": "10.6084/m9.figshare.31389142",
+  "licence": "CC BY 4.0",
+  "concentration_ug_ml": 12.5,
+  "scenarios": {
+    "published": -0.5,
+    "calibrated": -3.5824
+  },
+  "psi_min_pr_calibrated": -2.9,
+  "replicates_per_cell": 40,
+  "arm_separation_p": {
+    "published": 1.662120204949333e-08,
+    "calibrated": 2.0998611289169187e-06
+  },
+  "runtime_minutes": 95.6
+}
