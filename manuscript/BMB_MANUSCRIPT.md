@@ -126,7 +126,43 @@ Values are chosen to reproduce documented qualitative behaviour — replication
 rates differing by more than an order of magnitude, dormant subpopulations of
 order $10^{-3}$ to $10^{-4}$, and a dormant compartment far harder to kill than a
 replicating one — and are not fitted to any dataset. They are inputs to a
-structural argument, not estimates.
+structural argument, not estimates. Table 1 gives every value, the quantities
+derived from them, and the settings under which the synthetic observations are
+generated, so that the analyses can be reproduced without reading the code.
+**Table 1** Parameter values of the two illustrative sets. Values are chosen to reproduce documented qualitative behaviour and are not fitted to any dataset. The two labels denote a slow-growth and a fast-growth parameterisation; they are not claims about the named organisms.
+
+| Symbol | Meaning | Unit | M. tuberculosis | S. aureus |
+|---|---|---|---|---|
+| $r$ | Replication rate of the replicating compartment | h⁻¹ | $0.03$ | $0.5$ |
+| $K$ | Carrying capacity | CFU/mL | $10^{9}$ | $10^{9}$ |
+| $E_{\max,S}$ | Maximum kill rate, replicating compartment | h⁻¹ | $0.25$ | $1.2$ |
+| $E_{\max,P}$ | Maximum kill rate, dormant compartment | h⁻¹ | $0.004$ | $0.05$ |
+| $EC_{50}$ | Half-maximal kill concentration, replicating | reference MIC | $1$ | $1$ |
+| $H$ | Hill coefficient | — | $1.5$ | $1.5$ |
+| $k_{S\to P}$ | Switching rate into dormancy | h⁻¹ | $1.01 \times 10^{-4}$ | $10^{-4}$ |
+| $k_{P\to S}$ | Resuscitation rate out of dormancy | h⁻¹ | $0.01$ | $0.1$ |
+| $\rho$ | EC50 of the dormant compartment, relative | — | $3$ | $3$ |
+
+Quantities derived from these values by the same functions the simulations call:
+
+| Derived quantity | M. tuberculosis | S. aureus |
+|---|---|---|
+| MIC (reference MIC units) | 0.2647 | 0.7981 |
+| Dormant fraction of the inoculum at $N_0=10^6$ | 0.00253 | 0.000167 |
+| Dormant fraction at carrying capacity | 0.01 | 0.000999 |
+
+Inoculum $N_0 = 10^6$ CFU/mL and limit of detection 100 CFU/mL throughout.
+
+**Phenotype constructions.** The signature comparison of Section 3.2 starts from the slow-growth set with the dormant fraction lowered to $k_{S\to P} = 5.0025 \times 10^{-6}$ h⁻¹ so that the baseline is not already persistent, and applies one change at a time: resistance multiplies $EC_{50}$ by 16, tolerance divides $r$, $E_{\max,S}$ and $E_{\max,P}$ by 4, and persistence multiplies $k_{S\to P}$ by 10. Duration endpoints are evaluated at 8 times each variant's own MIC.
+
+**Synthetic observations.** Time-kill data for the fitting analyses are generated from the state-structured model of Section 2.1 at four times each set's own MIC, with additive Gaussian noise on $\log_{10}$ CFU/mL of standard deviation 0.25 for a single plate, three replicates per time point, and observations below the limit of detection recorded as censored. The generator is seeded, so the datasets are reproducible. Sampling schedules:
+
+| Set | Design | Times (h) |
+|---|---|---|
+| Mtb | sparse (8-point, 240 h) | 0, 24, 48, 72, 96, 144, 192, 240 |
+| Mtb | dense (14-point, 240 h) | 0, 6, 12, 24, 36, 48, 72, 96, 120, 144, 168, 192, 216, 240 |
+| S. aureus | sparse (8-point, 48 h) | 0, 2, 4, 8, 12, 24, 36, 48 |
+| S. aureus | dense (16-point, 48 h) | 0, 1, 2, 3, 4, 6, 8, 10, 12, 16, 20, 24, 30, 36, 42, 48 |
 
 ### 2.6 Exposure
 
@@ -184,9 +220,9 @@ The reported time to LOD is 347 h for the slow-growth set and 19 h for the fast-
 ### 3.2 Resistance, tolerance and persistence produce distinct phenotypic signatures
 
 Imposing each strategy on the same parameter set, one mechanism at a time,
-produces distinct endpoint signatures in the synthetic comparison (Table 1, Figure 2).
+produces distinct endpoint signatures in the synthetic comparison (Table 2, Figure 2).
 
-**Table 1** Phenotypic signatures at eight times each variant's own MIC. MIC values are ratios to the baseline; baseline MDK values are in hours and variant MDK values are fold changes relative to that baseline. Ratios are rounded to the displayed precision.
+**Table 2** Phenotypic signatures at eight times each variant's own MIC. MIC values are ratios to the baseline; baseline MDK values are in hours and variant MDK values are fold changes relative to that baseline. Ratios are rounded to the displayed precision.
 
 | | MIC | MDK$_{99}$ | MDK$_{99.99}$ |
 |---|---|---|---|
@@ -305,7 +341,7 @@ The fitting results establish a separate conclusion. A close fit does not ensure
 
 **Fig. 1** State-structured population trajectories for the illustrative slow- and fast-growth parameter sets at four times their own MIC. Biphasic decline emerges from the compartment dynamics. The reported transition is a curvature-based observable, and time to LOD denotes crossing the detection threshold rather than population extinction
 
-**Fig. 2** Distinct phenotypic signatures in the prescribed synthetic comparisons. Concentration and shallow and deep killing endpoints distinguish the baseline, resistance, tolerance and persistence examples. Duration endpoints in Table 1 are evaluated at eight times each variant's own MIC; the persistence example also changes the shallow endpoint slightly
+**Fig. 2** Distinct phenotypic signatures in the prescribed synthetic comparisons. Concentration and shallow and deep killing endpoints distinguish the baseline, resistance, tolerance and persistence examples. Duration endpoints in Table 2 are evaluated at eight times each variant's own MIC; the persistence example also changes the shallow endpoint slightly
 
 **Fig. 3** First- and total-order Sobol indices for time to LOD in the two illustrative parameter sets under MIC-normalised exposure. The reported design uses 4,096 base samples, with bootstrap intervals. The interaction fraction is the aggregate share estimated from one minus the sum of first-order indices and is not a pair-specific contribution
 
