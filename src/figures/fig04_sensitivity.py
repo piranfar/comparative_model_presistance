@@ -153,11 +153,19 @@ def build():
                  "of the equation, not a property of the bacteria",
                  fontsize=10.2, fontweight="semibold", x=0.006, ha="left",
                  y=0.982)
+    # Read the design off the receipt rather than restating it, so the caption
+    # cannot fall out of step with the run as it did once already.
+    import json
+    rec = json.loads((ROOT / "results" / "receipts" / "exp03_receipt.json")
+                     .read_text(encoding="utf-8"))
+    n_base = rec["sobol_base_samples"]
+    n_eval = rec["sobol_model_evaluations_per_species"]
     fig.text(0.006, 0.052,
-             "A and B vary one parameter at a time by +/-10%, exactly as "
-             "Methods 2.3.2 describes. C and D use 4,608 model\n"
-             "evaluations per species (Saltelli estimator, 512 base samples, "
-             "parameters log-uniform over +/-50%).\n"
+             "A and B vary one parameter at a time by +/-10%. C and D use "
+             f"{n_eval:,} model evaluations per parameter set\n"
+             f"(Saltelli estimator, {n_base:,} base samples, parameters "
+             "log-uniform over +/-50%, exposure at four times each set's own "
+             "MIC).\n"
              "Where the bars in E are tall, no one-at-a-time analysis can be "
              "trusted, however carefully it is run.",
              fontsize=6.8, color=st.INK_MUTED, ha="left", va="top",
