@@ -55,3 +55,6 @@ __pycache__/
 .venv/
 paper.txt
 *.pdf.bak
+
+# stray saved web pages from literature searches
+/*.html
