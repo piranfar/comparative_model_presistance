@@ -1,6 +1,6 @@
 {
   "script": "src/experiments/exp11_external_concentration_response.py",
-  "utc": "2026-09-05T02:24:20+00:00",
+  "utc": "2026-09-05T05:41:45+00:00",
   "model_ceiling": {
     "max_persister_kill_rate_per_h": 0.55,
     "max_log_ratio_over_5h": 2.75,
@@ -13,6 +13,6 @@
   "n_strata": 5,
   "n_steeper_than_model": 5,
   "n_exceeding_ceiling": 3,
-  "median_steepness_ratio": 4.554808488679257,
+  "median_steepness_ratio": 3.6159475510365997,
   "ecoli_censored_observations": 8
 }

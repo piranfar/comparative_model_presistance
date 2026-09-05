@@ -58,3 +58,9 @@ paper.txt
 
 # stray saved web pages from literature searches
 /*.html
+
+# Uncurated retrieval output: unknown provenance and licence, some from
+# paywalled journals. Staged out of a temporary directory so the work is not
+# lost; must be identified and licence-checked before anything moves into a
+# tracked location. See data/raw/_staged/STAGING_MANIFEST.json
+data/raw/_staged/

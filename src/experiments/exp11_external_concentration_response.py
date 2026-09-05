@@ -39,12 +39,21 @@ for ECOR strains, and the Stepanyan et al. 2015 killing curve for a wild-type
 and a high-persistence strain. They bear on the other axis and are left to a
 separate analysis.
 
-A CAVEAT ON DATASET 2. Its dose column is labelled "relative dose" with levels
-1, 2 and 3. If those are multiples of the MIC then treating them as a
-concentration axis is right. If they are ordered categories, the slope per
-doubling is not defined and only the direction and rough magnitude survive.
-Both readings are reported; the conclusion does not depend on which is correct,
-because dataset 1 has real concentrations.
+DATASET 2's DOSE AXIS, RESOLVED. Its dose column is labelled "relative dose"
+with levels 1, 2 and 3, and an earlier version of this script could not tell
+whether those were concentrations or ordered categories. They are neither read
+literally: the Methods state the assay was run "at the MIC, 2x and 4x MIC for
+the strain with highest MIC for that antibiotic", so the three levels are 1x,
+2x and 4x, not 1, 2 and 3. The same paragraph gives the exposure as four hours
+("Four hours was found to representative to the level of persistence").
+
+Both corrections matter and both cut against the earlier result. Regressing on
+log2 of 1, 2, 3 instead of 1, 2, 4 compresses the top of the concentration range
+and inflates the fitted slope per doubling by 2/log2(3) = 1.26-fold. Filling the
+missing exposure with the model's own 5 h rather than the experiment's 4 h
+raised the model's ceiling by a quarter, which was generous to the model but
+still wrong. The ciprofloxacin slope reported here is therefore smaller than the
+one this script produced before the paper's Methods were read.
 
 Writes:
   results/tables/exp11_slopes.csv
@@ -70,6 +79,12 @@ RECEIPTS = ROOT / "results" / "receipts"
 PULSES = [(60, 150, "pulse 1"), (330, 420, "pulse 2"), (1080, 1170, "pulse 3")]
 EXPOSURE_MIN = 90.0          # each pulse in dataset 1, from the sampling times
 AMP_MIC_REGION = 8.0         # concentrations at or above this are used for the slope
+
+# Vogwill et al.: "relative dose" 1, 2 and 3 are 1x, 2x and 4x the MIC of the
+# least susceptible strain, and each exposure lasted four hours. Both read from
+# the paper's Methods (PMC5021160), not inferred.
+VOGWILL_DOSE_MULTIPLE = {1: 1.0, 2: 2.0, 3: 4.0}
+VOGWILL_EXPOSURE_H = 4.0
 
 
 def model_ceiling() -> dict:
@@ -151,6 +166,10 @@ def main() -> int:
     names = {"Cip": "ciprofloxacin", "Rif": "rifampicin"}
     for ab, g in vg.groupby("Antibiotic"):
         m = g.groupby("Relative dose")["Log survival"].mean() * np.log(10)
+        # The three levels are 1x, 2x and 4x MIC, not 1, 2 and 3. See the
+        # docstring: taking the labels literally shortens the log2 axis and
+        # inflates the slope.
+        conc = np.array([VOGWILL_DOSE_MULTIPLE[int(d)] for d in m.index], float)
         rows.append({
             "dataset": "Vogwill et al., 8 Pseudomonas species",
             "organism": "Pseudomonas spp.",
@@ -158,9 +177,9 @@ def main() -> int:
             "stratum": "pooled over species",
             "n_levels": int(len(m)),
             "n_obs": int(len(g)),
-            "slope_ln_per_doubling": slope_per_doubling(m.index, m.values),
-            "exposure_h": float("nan"),
-            "dose_axis": "relative dose levels 1-3, units unconfirmed",
+            "slope_ln_per_doubling": slope_per_doubling(conc, m.values),
+            "exposure_h": VOGWILL_EXPOSURE_H,
+            "dose_axis": "multiples of MIC: 1x, 2x, 4x, from the paper's Methods",
         })
 
     obs = pd.DataFrame(rows)
