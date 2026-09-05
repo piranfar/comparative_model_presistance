@@ -1,0 +1,18 @@
+{
+  "script": "src/experiments/exp11_external_concentration_response.py",
+  "utc": "2026-09-05T02:24:20+00:00",
+  "model_ceiling": {
+    "max_persister_kill_rate_per_h": 0.55,
+    "max_log_ratio_over_5h": 2.75,
+    "slope_at_published_values_per_doubling": 0.2783267229427053
+  },
+  "datasets": [
+    "E. coli MG1655, recurrent ampicillin",
+    "Vogwill et al., 8 Pseudomonas species"
+  ],
+  "n_strata": 5,
+  "n_steeper_than_model": 5,
+  "n_exceeding_ceiling": 3,
+  "median_steepness_ratio": 4.554808488679257,
+  "ecoli_censored_observations": 8
+}
