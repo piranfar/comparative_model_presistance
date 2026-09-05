@@ -28,7 +28,18 @@ response is already saturated.
 DATA, all published and obtained from their public deposits:
   1. Recurrent-exposure CFU counts, E. coli MG1655, ampicillin at eight
      concentrations from 0 to 128 ug/mL, eight replicates, three 90-minute
-     pulses.
+     pulses. Kollerova S, Jouvet L, Smelkova J, Zunk-Parras S, Rodriguez-Rojas
+     A, Steiner UK (2024) mSystems 9(7):e00256-24, doi:10.1128/msystems.00256-24,
+     PMID 38920373, PMC11264686. Deposit: Dryad doi:10.5061/dryad.rr4xgxdbj
+     (CC0 1.0), file `R long data Alex and Sara CFU counts.csv`.
+     THE AUTHORS' OWN FINDING, which this script must not restate as its own:
+     "for the cell culture experiments, we find the higher the antibiotic
+     concentration the stronger the reduction in CFUs". They also report the
+     opposite at the single-cell level in the same paper: "We also find no
+     graded survival response to different levels of antibiotics at the
+     single-cell level ... although at the cell-culture level we observed graded
+     responses in CFUs." What is new here is the size of the slope per doubling
+     and its comparison with the model ceiling, not the direction.
   2. Vogwill et al., J Evol Biol: survival of eight Pseudomonas species under
      ciprofloxacin and rifampicin at three relative doses, 48 observations per
      antibiotic and dose.
