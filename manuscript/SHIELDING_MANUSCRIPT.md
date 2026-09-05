@@ -14,12 +14,13 @@ Corresponding author: Vahhab Piranfar · vahab.p@gmail.com · ORCID 0000-0003-36
 Models of antibiotic persistence share two assumptions: that dormant cells are
 largely shielded from the drug, and that they wake at a constant rate. Both are
 convenient, and both can be checked against published measurements. We check
-them, and both fail in the same direction. First, the concentration-response of
-persister killing in a recent evolutionary model is five- to thirteen-fold
-shallower than survival data from three genera and four antibiotics, and its
-functional form carries a ceiling that no parameter value can pass: the
-persister kill rate is bounded at 0.55 per hour, so no two concentrations can
-differ by more than 2.75 in log survival, while the observations reach 5.3.
+them, and both fail in the same direction. First, survival under a recent evolutionary
+model changes twofold across a 32-fold range of antibiotic concentration where
+the measurements change 730-fold, and the cause is not the one it appears to be:
+the model's persister kill rate matches the measured one, 0.45 against 0.20 to
+0.68 per hour, but its ordinary cells are annihilated at every concentration in
+the range, so all survival is routed through a dormant compartment whose
+response is flat by construction and the concentration axis collapses.
 Second, single-cell lag times in *Escherichia coli* follow a power law with
 exponent near −2 rather than the exponential a constant waking rate implies. The
 two forms agree to within twenty percent for ten hours and then separate by
@@ -61,78 +62,71 @@ have survived. Where killing is slow the same errors are enormous. Time to
 clearance is a four-log quantity. It is decided entirely in the region where the
 models are wrong.
 
-## 2. The concentration-response of persister killing is too shallow, and it is capped
+## 2. The model loses the concentration axis, and not where you would expect
 
-### 2.1 A test that needs neither unknown
+### 2.1 The model's survival barely depends on concentration
 
-Persister survival under a pharmacodynamic model of the standard form is
+Under the model of Boccarella et al., survival after a five-hour exposure at the
+nutrient level used for their high-persistence arm changes by a factor of two
+across a 32-fold range of antibiotic concentration. The measured survival over
+the same range changes by a factor of 730.
 
-$$S(c,\tau) = \alpha \exp\!\big[-(d_P + a_P(c))\,\tau\big] + (1-\alpha)\,S_{\text{normal}}(c,\tau)$$
-
-with $\alpha$ the persistence level, $d_P$ a drug-independent death rate and
-$a_P(c)$ the drug-dependent kill rate. Neither $\alpha$ nor $d_P$ is easy to
-measure. But the ratio of survival at two concentrations removes them both:
-
-$$\ln\frac{S(c_1,\tau)}{S(c_2,\tau)} = \big[a_P(c_2) - a_P(c_1)\big]\,\tau$$
-
-$d_P$ cancels exactly and $\alpha$ cancels to within $3\times10^{-6}$ in log
-units across the range of interest, the residual coming only from the normal
-compartment's small contribution. What remains is the concentration-response of
-persister killing alone, which the model specifies analytically. It is a
-prediction with effectively no free parameters, and it can be checked against
-any dataset that reports survival at two concentrations.
-
-### 2.2 The prediction fails by two orders of magnitude
-
-Applied to the model of Boccarella et al. and to the survival data its own
-persistence contrast is drawn from, the prediction is that doubling the
-concentration from 12.5 to 25 µg/mL reduces survival 1.55-fold. The data show
-203-fold at one nutrient level and 75-fold at another. Both confidence intervals
-exclude the prediction, at $p=0.025$ and $p=0.002$.
-
-| | ln ratio | fold |
-|---|---|---|
-| model prediction | 0.440 | 1.55 |
-| observed, 25% nutrient | 5.31 ± 0.47 | 203 |
-| observed, 80% nutrient | 4.32 ± 0.73 | 75 |
-
-### 2.3 The gap cannot be closed by tuning
-
-The functional form has a ceiling. With a maximum persister growth rate of
-0.05/h and a floor on the minimum net growth rate of −0.5/h, the persister kill
-rate cannot exceed 0.55/h. Over a five-hour exposure no two concentrations can
-differ by more than 2.75 in log survival, at any parameter values. Both
-observations exceed that.
-
-Raising the Hill coefficient makes matters worse rather than better. Above the
-minimum inhibitory concentration the response is already saturated, so a steeper
-curve saturates sooner: the achievable log ratio falls from 0.33 at $\kappa=2$
-to 0.05 at $\kappa=4$ and to zero by $\kappa=12$. Varying the assumed MIC does
-not rescue it either; the best achievable value over all MIC and all $\kappa$
-tested is 0.33, an order of magnitude short.
-
-The same is not true of the normal compartment. Its floor is −6/h rather than
-−0.5/h, and at an assumed MIC between 4 and 16 µg/mL the identical functional
-form produces log ratios of 7 to 12.5 — more than the observations require. The
-problem is therefore specific and locatable. It is not the Regoes form, which is
-adequate. It is that survival is routed almost entirely through a compartment
-whose kill rate is capped by a constant, and that constant is too small.
-
-### 2.4 Independent data agree
-
-Four published datasets, obtained from their public deposits and spanning two
-genera and three antibiotics, give the same answer. Every stratum is steeper
-than the model, and three exceed the ceiling once it is matched to each
-experiment's own exposure duration.
-
-| organism | antibiotic | ln per doubling | vs model |
+| concentration (µg/mL) | model | measured | model / measured |
 |---|---|---|---|
-| *E. coli*, ampicillin, pulse 1 | ampicillin | −1.43 | 5.1× |
-| *E. coli*, ampicillin, pulse 2 | ampicillin | −0.79 | 2.8× |
-| *E. coli*, ampicillin, pulse 3 | ampicillin | −0.83 | 3.0× |
-| *Pseudomonas*, 8 species | ciprofloxacin | −3.72 | 13.4× |
-| *Pseudomonas*, 8 species | rifampicin | −1.27 | 4.6× |
-| model | | −0.28 | — |
+| 12.5 | 1.3 × 10⁻⁴ | 0.113 | 0.0012 |
+| 25 | 8.5 × 10⁻⁵ | 9.2 × 10⁻⁴ | 0.093 |
+| 50 | 7.2 × 10⁻⁵ | 4.7 × 10⁻⁴ | 0.15 |
+| 100 | 6.8 × 10⁻⁵ | 1.6 × 10⁻⁴ | 0.43 |
+| 200 | 6.7 × 10⁻⁵ | 1.8 × 10⁻⁴ | 0.37 |
+| 400 | 6.6 × 10⁻⁵ | 1.6 × 10⁻⁴ | 0.43 |
+
+Halving the dose from 25 to 12.5 µg/mL raises survival 1.55-fold in the model
+and 123-fold in the data. The model is close at the top of the range and wrong
+by nearly three orders of magnitude at the bottom.
+
+### 2.2 The cause is not the persister kill rate
+
+The obvious explanation would be that persisters are killed too slowly in the
+model. They are not. The persister kill rate can be read directly off the slow
+phase of each measured curve, and it agrees with the model:
+
+| | persister kill rate |
+|---|---|
+| measured, slow-phase slopes at ≥50 µg/mL | 0.20 – 0.68 /h |
+| model | 0.45 /h |
+
+Both are close to flat in concentration: 0.018/h per doubling measured against
+0.002/h per doubling in the model. On this quantity, which is what the model
+says about dormant cells, the model is right.
+
+### 2.3 The cause is that the model puts everything in the dormant compartment
+
+The model's normal-cell survival at 12.5 µg/mL is 10⁻¹¹. Ordinary cells are
+annihilated at every concentration in this range, so all modelled survival is
+persister survival — the persister term supplies 99.99% of it at both 12.5 and
+25 µg/mL — and the persister term is flat in concentration. The concentration
+axis collapses because there is nothing left on it that responds.
+
+The data do not behave that way. At 12.5 µg/mL the population declines at
+roughly 0.4/h throughout the eight hours, with no fast phase and no break: the
+survivors are ordinary cells that the drug has not killed, not a dormant
+subpopulation. At 25 µg/mL a fast phase appears, reaching 3.2/h in the second
+hour, and only then does the curve break into a slow tail.
+
+| | instantaneous kill rate per hour, hours 1 to 8 |
+|---|---|
+| 12.5 µg/mL | 0.61, 0.73, 0.04, 0.40, 0.37 |
+| 25 µg/mL | 0.49, **3.16**, 1.79, 0.78, 0.03 |
+
+So the model's failure is located in the normal compartment, not the dormant
+one. Its concentration-response for ordinary cells saturates so early that a
+concentration the data show to be barely bactericidal is treated as completely
+lethal. Everything then flows through the dormant compartment, whose response
+is flat by construction, and the model loses the concentration axis entirely.
+
+The consequence for the dormant compartment is indirect but real: a model that
+routes all survival through it must make it large enough to carry the observed
+survivors, which is the subject of Section 4.
 
 ## 3. Waking is not a rate
 
@@ -251,9 +245,11 @@ Boccarella et al. compare two persistence levels and report that the
 low-persistence arm reaches a higher final minimum inhibitory concentration than
 the high-persistence arm, by about 1.7-fold. We re-ran their simulation
 unmodified, changing only a parameter their own driver exposes: the floor on the
-persister kill rate, moved from the published $-0.5$/h to the $-3.58$/h that
-reproduces the observed concentration-response of Section 2. Forty populations
-per arm per scenario.
+persister kill rate, from $-0.5$/h to $-3.58$/h. Forty populations per arm per
+scenario. This is a sensitivity analysis and not a recalibration: Section 2.2
+shows the published persister kill rate already matches the measured one, so the
+change asks what the model does when dormant cells are made killable, not what
+the data say they are.
 
 Their contrast survives. Among populations that were not eliminated, the ratio
 is 2.01 under the published parameters and 2.05 under the recalibrated ones, and
