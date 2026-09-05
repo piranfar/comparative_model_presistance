@@ -1,4 +1,4 @@
-# A kill rate transfers between laboratories; a time to clearance does not
+# Antibiotic tolerance endpoints measure the starting inoculum, not the kill rate
 
 ## 1. Introduction
 

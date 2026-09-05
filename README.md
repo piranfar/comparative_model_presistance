@@ -1,6 +1,6 @@
-# A kill rate transfers between laboratories; a time to clearance does not
+# Antibiotic tolerance endpoints measure the starting inoculum, not the kill rate
 
-A reanalysis of five published deposits, asking what happens to the two ways
+A reanalysis of four published deposits, asking what happens to the two ways
 antibiotic killing is summarised — as a rate, and as a duration — when the same
 protocol is run in six different laboratories.
 
