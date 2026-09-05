@@ -21,6 +21,8 @@ from pathlib import Path
 
 from docx import Document
 from docx.enum.text import WD_ALIGN_PARAGRAPH
+from docx.oxml import OxmlElement
+from docx.oxml.ns import qn
 from docx.shared import Inches, Pt, RGBColor
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -107,7 +109,47 @@ def unwrap(text: str) -> list[str]:
     return out
 
 
-def build() -> Path:
+def _add_line_numbers(doc: Document, restart: str = "continuous") -> None:
+    """Number every line continuously through the document.
+
+    Bulletin of Mathematical Biology requires it: "Authors must include
+    continuous line numbering on all the manuscript pages." python-docx has no
+    API for it, so the element goes into the section properties directly.
+    """
+    for section in doc.sections:
+        sect_pr = section._sectPr
+        for existing in sect_pr.findall(qn("w:lnNumType")):
+            sect_pr.remove(existing)
+        ln = OxmlElement("w:lnNumType")
+        ln.set(qn("w:countBy"), "1")
+        ln.set(qn("w:restart"), restart)
+        ln.set(qn("w:distance"), "360")     # quarter inch from the text
+        sect_pr.append(ln)
+
+
+def _add_page_numbers(doc: Document) -> None:
+    """Put a centred page number in the footer of every section."""
+    for section in doc.sections:
+        par = section.footer.paragraphs[0]
+        par.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        for run in list(par.runs):
+            run._element.getparent().remove(run._element)
+        run = par.add_run()
+        begin = OxmlElement("w:fldChar")
+        begin.set(qn("w:fldCharType"), "begin")
+        instr = OxmlElement("w:instrText")
+        instr.set(qn("xml:space"), "preserve")
+        instr.text = " PAGE "
+        end = OxmlElement("w:fldChar")
+        end.set(qn("w:fldCharType"), "end")
+        for el in (begin, instr, end):
+            run._element.append(el)
+
+
+def build(src: Path | None = None, out_name: str | None = None,
+          out_dir: Path | None = None, numbered_lines: bool = False) -> Path:
+    src = src or SRC_MD
+    OUT_DIR = out_dir or globals()["OUT_DIR"]
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     (OUT_DIR / "figures").mkdir(exist_ok=True)
     for old in (OUT_DIR / "figures").glob("fig0*"):
@@ -119,7 +161,7 @@ def build() -> Path:
             if f.exists():
                 shutil.copy2(f, OUT_DIR / "figures" / f"Figure_{num}{ext}")
 
-    text = SRC_MD.read_text(encoding="utf-8")
+    text = src.read_text(encoding="utf-8")
 
     # Lift the legends out of the trailing section; each is placed inline with
     # its own figure instead, under the paragraph that first cites it.
@@ -229,7 +271,11 @@ def build() -> Path:
     if refs != list(range(1, len(refs) + 1)):
         raise SystemExit(f"reference numbering is not 1..N: starts {refs[:4]}")
 
-    out = OUT_DIR / "Piranfar_persistence_framework_bioRxiv_v2.docx"
+    if numbered_lines:
+        _add_line_numbers(doc)
+    _add_page_numbers(doc)
+
+    out = OUT_DIR / (out_name or "Piranfar_persistence_framework_bioRxiv_v2.docx")
     doc.save(out)
     return out
 
@@ -290,9 +336,21 @@ is the mapping back to the code that produces each one.
     return p
 
 
+JOURNAL_SRC = ROOT / "manuscript" / "REVISED_MANUSCRIPT_authordate.md"
+JOURNAL_DIR = ROOT / "submission" / "bmb"
+
+
 if __name__ == "__main__":
     docx = build()
     chk = checklist()
+
+    # The journal version: author-date references, continuous line numbering and
+    # page numbers, both of which Bulletin of Mathematical Biology requires and
+    # neither of which belongs on a posted preprint.
+    if JOURNAL_SRC.exists():
+        j = build(src=JOURNAL_SRC, out_dir=JOURNAL_DIR,
+                  out_name="Piranfar_persistence_BMB.docx", numbered_lines=True)
+        print(f"wrote {j}  ({j.stat().st_size/1024:.0f} KB)")
     print(f"wrote {docx}  ({docx.stat().st_size/1024:.0f} KB)")
     print(f"wrote {chk}")
     print(f"figures: {len(list((OUT_DIR / 'figures').glob('*')))} files")
