@@ -42,7 +42,7 @@ import pandas as pd
 from ..inference.fitting import fit_log10, profile_likelihood
 from ..inference.synthetic import SCHEDULES, SYNTHETIC_TAG, generate
 from ..models.corrected import (biexponential_log10, persistence_as_printed_log10)
-from ..models.mechanistic import PD_SPECIES, apparent_transition_time
+from ..models.mechanistic import PD_SPECIES, apparent_transition_time, mic
 from ..models.parameters import LOD_CFU_ML, SPECIES
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -50,7 +50,14 @@ TABLES = ROOT / "results" / "tables"
 PROCESSED = ROOT / "data" / "processed"
 RECEIPTS = ROOT / "results" / "receipts"
 
+# Multiples of each parameter set's own MIC. Passing 4.0 straight through as an
+# absolute concentration, as earlier versions did, generated the synthetic data
+# at 15.1x and 5.0x the two MICs while labelling both 4x.
 C_XMIC = 4.0
+
+
+def exposure(p) -> float:
+    return C_XMIC * mic(p)
 N0 = 1.0e6
 
 # ----------------------------------------------------------------- models ----
@@ -94,9 +101,9 @@ def main() -> int:
     store: dict[str, np.ndarray] = {}
 
     for short, pd_par in PD_SPECIES.items():
-        knee = apparent_transition_time(pd_par, C_XMIC)
+        knee = apparent_transition_time(pd_par, exposure(pd_par))
         for design_name, sched in SCHEDULES[short].items():
-            ds = generate(pd_par, C_XMIC, t_sample=sched, N0=N0,
+            ds = generate(pd_par, exposure(pd_par), t_sample=sched, N0=N0,
                           sigma=0.25, lod=LOD_CFU_ML, n_replicates=3,
                           seed=20250212 + len(design_name),
                           label=f"{short} {C_XMIC:g}xMIC {design_name}")

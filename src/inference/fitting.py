@@ -224,7 +224,18 @@ def fit_log10(model: Callable, t: np.ndarray, log10_obs: np.ndarray,
     except (np.linalg.LinAlgError, ValueError):
         cov = stderr = corr = None
 
-    J = sol.jac
+    # Sensitivity of the fitted curve to each parameter, evaluated at the
+    # reported estimate. `sol.jac` would be the Jacobian at the least-squares
+    # solution, which is only the starting point for the maximum likelihood fit
+    # above and is a different point in parameter space.
+    J = np.empty((t.size, p))
+    for j in range(p):
+        h = max(abs(theta[j]) * 1e-6, 1e-9)
+        up, dn = theta.copy(), theta.copy()
+        up[j] += h
+        dn[j] -= h
+        J[:, j] = (np.asarray(model(t, *up), dtype=float)
+                   - np.asarray(model(t, *dn), dtype=float)) / (2.0 * h)
     sv = np.linalg.svd(J, compute_uv=False)
     jac_cond = float(sv[0] / sv[-1]) if sv[-1] > 0 else float("inf")
 
@@ -304,7 +315,13 @@ def profile_likelihood(model: Callable, t: np.ndarray, log10_obs: np.ndarray,
     centre = theta_hat[index]
     scale = max(abs(centre), 1e-3)
     grid = np.linspace(centre - span * scale, centre + span * scale, n_points)
-    grid = grid[(grid > lo_b[index]) & (grid < hi_b[index])]
+    # Inclusive bounds, and the estimate itself always on the grid. With strict
+    # inequalities an estimate sitting on a bound was excluded from its own
+    # profile, so the reported interval began at the next grid point above it
+    # and did not contain the point estimate.
+    grid = grid[(grid >= lo_b[index]) & (grid <= hi_b[index])]
+    if not np.any(np.isclose(grid, centre)):
+        grid = np.sort(np.append(grid, centre))
 
     free = [i for i in range(p) if i != index]
 
