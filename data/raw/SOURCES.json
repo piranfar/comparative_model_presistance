@@ -102,6 +102,42 @@
       "licence": "CC BY-NC-ND",
       "redistributable": false,
       "note": "docs/06 recorded this as CC BY, which is wrong. The ND clause blocks including digitised values in any released corpus without written permission from the corresponding author."
+    },
+    {
+      "key": "apramycin_mtb",
+      "doi": "10.6084/m9.figshare.26462791.v1",
+      "pmid": null,
+      "licence": "CC BY 4.0",
+      "redistributable": true,
+      "in_repo": "data/raw/apramycin_mtb/",
+      "note": "Raw triplicate log10 CFU, apramycin and amikacin against M. tuberculosis, planktonic and intracellular, with a concurrent drug-free control at every visit. Used by exp18. It corrected exp18's shape finding: its intracellular control doubles in 51.7 h against the 21 h exp18 had imported, which with a 2.5-fold faster rifampicin kill moves -psi_min/psi_max from 0.67 to 4.10 for the same drug in the same state."
+    },
+    {
+      "key": "chakraborty2024",
+      "doi": "10.3389/fams.2024.1355373",
+      "pmid": "39906541",
+      "licence": "CC BY 4.0",
+      "redistributable": true,
+      "in_repo": "data/raw/chakraborty2024/",
+      "note": "Open substitute for Antia 1996, which is paywalled until about 2066."
+    },
+    {
+      "key": "singh2023",
+      "doi": "10.1371/journal.pcbi.1010243",
+      "pmid": "36649322",
+      "licence": "CC BY 4.0",
+      "redistributable": true,
+      "in_repo": "data/raw/singh2023/",
+      "note": "A second independent persistence model, on pulse dosing to eradicate persisters. Bears directly on exp18 finding 3, that the 5 h / 19 h cycle fails against a slow grower."
+    },
+    {
+      "key": "cryptic2022",
+      "doi": "10.1371/journal.pbio.3001721",
+      "pmid": "35944069",
+      "licence": "CC BY 4.0",
+      "redistributable": true,
+      "in_repo": "data/raw/cryptic2022/",
+      "note": "MIC compendium for 12,289 M. tuberculosis isolates across 13 drugs. exp16 tested MIC against MDK independence on 217 isolates from one study; this shows whether that MIC distribution is representative."
     }
   ]
 }

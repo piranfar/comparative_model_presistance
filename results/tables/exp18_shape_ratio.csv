@@ -1,0 +1,14 @@
+drug,state,source,psi_min,psi_max,ratio
+isoniazid,intracellular,PMID 28356552,-0.008,0.033,0.24242424242424243
+pyrazinamide,intracellular,PMID 28356552,-0.01,0.033,0.30303030303030304
+ethambutol,intracellular,PMID 28356552,-0.02,0.033,0.6060606060606061
+amikacin 128,"intracellular, days 3-7",figshare 26462791,-0.005,0.0077,0.6493506493506493
+rifampicin,intracellular,PMID 28356552,-0.022,0.033,0.6666666666666666
+ethambutol,extracellular (provisional),PMID 28356552,-0.0651,0.0769,0.8465539661898571
+amikacin 128,"intracellular, days 0-3",figshare 26462791,-0.0142,0.0134,1.0597014925373134
+rifampicin,extracellular (provisional),PMID 28356552,-0.1011,0.0769,1.3146944083224967
+apramycin 32,"intracellular, days 3-7",figshare 26462791,-0.0119,0.0077,1.5454545454545454
+rifampicin 16,"intracellular, days 3-7",figshare 26462791,-0.0195,0.0077,2.5324675324675323
+apramycin 32,"intracellular, days 0-3",figshare 26462791,-0.0527,0.0134,3.932835820895522
+rifampicin 16,"intracellular, days 0-3",figshare 26462791,-0.055,0.0134,4.104477611940299
+bedaquiline,in vivo sputum,PMID 34871099,-0.021,0.00098,21.42857142857143

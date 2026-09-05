@@ -1,0 +1,26 @@
+{
+  "citation": "Singh G, Orman MA, Conrad JC, Nikolaou M. Systematic design of pulse dosing to eradicate persister bacteria. PLoS Comput Biol. 2023;19(1):e1010243.",
+  "doi": "10.1371/journal.pcbi.1010243",
+  "pmid": "36649322",
+  "pmcid": "PMC9882918",
+  "licence": "CC BY 4.0",
+  "licence_verified": "PMC JATS <permissions> for PMC9882918 carries ali:license_ref https://creativecommons.org/licenses/by/4.0/ and custom-meta pmc-license-ref = 'CC BY'; PubMed copyright statement '(c) 2023 Singh et al ... Creative Commons Attribution License'.",
+  "url": "https://journals.plos.org/ploscompbiol/article/file?id=10.1371/journal.pcbi.1010243&type=printable",
+  "contents": "Article PDF (18 pp) and S1 Text (Appendices A-D: derivation of the t_off/t_on criterion, optimal decline rate, estimation of K_n,off and K_n,on from Fig 5, analytical solution of the two-state ODEs). The article's own numeric data are NOT here: the authors put them on GitHub, fetched separately to ../_fetched/singh2023/ because that repository carries no licence.",
+  "why": "A second, independent two-state persister model (normal/persister with switching rates a, b and net rates K_n, K_p) fitted to E. coli / ampicillin time-kill data, for comparison against the model under audit. Fitted parameters are in Table 1; underlying data are E. coli WT (pQE-80L GFP) under ampicillin 100 ug/mL.",
+  "staged_utc": "2026-09-05T14:33:16+00:00",
+  "files": [
+    {
+      "file": "singh2023_PLoSComputBiol_pcbi.1010243.pdf",
+      "bytes": 2203319,
+      "md5": "9c8ab503e8f4ae45611b8f35d97b2e04"
+    },
+    {
+      "file": "pcbi.1010243.s001_S1_Text.docx",
+      "bytes": 330909,
+      "md5": "98c66a7b6c82a0ab735cbfa0afac3b6a"
+    }
+  ],
+  "redistributable": true,
+  "note": "Openly licensed (CC BY 4.0); retained in this repository with attribution. The associated GitHub data/code is NOT redistributable and is kept out of tracked storage - see data/raw/_fetched/singh2023/PROVENANCE.json."
+}

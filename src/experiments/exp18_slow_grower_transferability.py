@@ -46,11 +46,38 @@ WHAT IT FINDS. Three separate failures, of increasing severity.
   1. The rates are one to three orders of magnitude too fast. psi_max is 30-fold
      too fast, psi_min between 273 and 286-fold too aggressive.
 
-  2. The shape is wrong independently of the scale. The Regoes curve depends on
-     psi_min and psi_max only through their ratio and the overall scale. This
-     project uses -psi_min/psi_max = 6.06, meaning the drug comfortably outruns
-     growth. Intracellular mycobacteria give 0.24 to 0.67, meaning it does not.
-     Rescaling psi_max alone leaves psi_min ninefold too aggressive.
+  2. The shape is wrong too, but not in the way the first version of this script
+     claimed. The Regoes curve depends on psi_min and psi_max only through their
+     ratio and the overall scale. This project uses -psi_min/psi_max = 6.06.
+
+     An earlier version asserted that intracellular mycobacteria give 0.24 to
+     0.67, so that the drug does not outrun growth, and that the model was
+     therefore ninefold out on shape alone. That was wrong, and the error came
+     from resting a ratio on a single laboratory. The apramycin deposit below
+     supplies rifampicin against intracellular Mtb from an independent
+     laboratory, and both halves of the ratio move: its drug-free intracellular
+     control doubles in 51.7 h against the 21 h taken from PMID 28356552, and
+     its rifampicin kills 2.5-fold faster over the first window. The two shifts
+     compound, giving 4.10 and 2.54 for the same drug in the same state.
+
+     Counting both sources the intracellular ratio spans 0.24 to 4.10, a
+     seventeenfold range, so the model's 6.06 sits about 1.5-fold above the top
+     of it rather than ninefold above the whole of it. The specific numeric
+     claim does not survive.
+
+     What survives is better for the argument than what it replaces. Within the
+     second laboratory alone, one readout and one set of cells, the ratio runs
+     from 0.65 for amikacin, which barely outruns growth, to 4.10 for
+     rifampicin, which comfortably does; and for every drug in it the ratio
+     halves between the first window and the second. The ratio is not a
+     mycobacterial constant to be looked up. It is condition-, drug- and
+     window-dependent, which is this project's thesis rather than an exception
+     to it. The model's error is assuming any single value transfers, not
+     picking the wrong one.
+
+     The bedaquiline row reaches 21.4 and is excluded from that range, because
+     its denominator is a fixed prior rather than a measured growth rate. It is
+     kept in the table so the exclusion is visible rather than silent.
 
   3. The daily cycle stops working altogether. With TAU_TREAT = 5 h and
      TAU_GROW = 19 h, substituting mycobacterial rates gives a net population
@@ -68,11 +95,18 @@ Sources, all verified against the primary record:
   PMID 24041886  Antimicrob Agents Chemother 57(12). Drug-free growth slopes by
                  physiological state; its Table 4 Emax values are endpoint
                  reductions and are excluded.
+  figshare 26462791  CC BY 4.0. Raw triplicate log10 CFU for apramycin and
+                 amikacin against M. tuberculosis, planktonic and intracellular,
+                 with a concurrent drug-free control at every visit. Rates here
+                 are computed from those counts rather than taken from a fitted
+                 table, and the control supplies psi_max measured in the same
+                 wells instead of imported from another study.
 
 Writes:
   results/tables/exp18_parameter_gaps.csv
   results/tables/exp18_kappa_sweep.csv
   results/tables/exp18_cycle_balance.csv
+  results/tables/exp18_shape_ratio.csv
   results/receipts/exp18_receipt.json
 """
 from __future__ import annotations
@@ -107,6 +141,25 @@ MTB_KILL = [
     ("bedaquiline", "in vivo sputum", -0.0210, 0.00098, "34871099"),
     ("rifampicin", "extracellular (provisional)", -0.1011, 0.0769, "28356552"),
     ("ethambutol", "extracellular (provisional)", -0.0651, 0.0769, "28356552"),
+]
+
+# An independent laboratory, computed from raw CFU counts rather than taken from
+# a fitted table: figshare 26462791, CC BY 4.0, five sheets of triplicate log10
+# CFU. Kill here is GROSS, the observed decline plus the growth of the
+# concurrent drug-free control, which is the quantity psi_min denotes; and
+# psi_max is that control, measured in the same wells on the same days rather
+# than imported. Rates are converted to natural log per hour.
+#
+# Two windows are kept separately and deliberately. Collapsing them would hide
+# the fact that the ratio halves between them for every drug, which is a
+# principal finding rather than noise to be averaged away.
+APRAMYCIN_DEPOSIT = [
+    ("rifampicin 16", "intracellular, days 0-3", -0.0550, 0.0134),
+    ("rifampicin 16", "intracellular, days 3-7", -0.0195, 0.0077),
+    ("apramycin 32", "intracellular, days 0-3", -0.0527, 0.0134),
+    ("apramycin 32", "intracellular, days 3-7", -0.0119, 0.0077),
+    ("amikacin 128", "intracellular, days 0-3", -0.0142, 0.0134),
+    ("amikacin 128", "intracellular, days 3-7", -0.0050, 0.0077),
 ]
 
 
@@ -155,6 +208,42 @@ def main() -> int:
     print(gaps[["constant", "model_value", "published_value", "fold_gap",
                 "state", "pmid"]].to_string(
         index=False, float_format=lambda v: f"{v:,.4f}"))
+
+    # -- 1b. the ratio, which is where the first version of this went wrong ---
+    ratio_rows = []
+    for drug, state, pmin, gmax, pmid in MTB_KILL:
+        ratio_rows.append({"drug": drug, "state": state,
+                           "source": f"PMID {pmid}",
+                           "psi_min": pmin, "psi_max": gmax,
+                           "ratio": abs(pmin) / gmax})
+    for drug, state, pmin, gmax in APRAMYCIN_DEPOSIT:
+        ratio_rows.append({"drug": drug, "state": state,
+                           "source": "figshare 26462791",
+                           "psi_min": pmin, "psi_max": gmax,
+                           "ratio": abs(pmin) / gmax})
+    ratios = pd.DataFrame(ratio_rows).sort_values("ratio")
+    ratios.to_csv(TABLES / "exp18_shape_ratio.csv", index=False)
+
+    intra = ratios[ratios["state"].str.startswith("intracellular")]
+    print("\n-- the ratio -psi_min/psi_max, which alone sets the curve's shape --")
+    print(ratios.to_string(index=False, float_format=lambda v: f"{v:,.4f}"))
+    print(f"\n   model assumes                     {abs(bc.PSI_MIN_S)/psi_max:6.2f}")
+    print(f"   observed across both laboratories {intra['ratio'].min():6.2f} to "
+          f"{intra['ratio'].max():6.2f}  (intracellular only)")
+    print(f"   so the model sits {abs(bc.PSI_MIN_S)/psi_max/intra['ratio'].max():.1f}x above "
+          "the top of the observed range.")
+    print("\n   An earlier version of this script put that factor at 9, because it rested")
+    print("   the ratio on one laboratory. The second laboratory moves both halves: its")
+    print("   intracellular control doubles in 51.7 h rather than 21 h, and its")
+    print("   rifampicin kills 2.5-fold faster. The specific claim does not survive.")
+    print("\n   What survives is the spread. Within the second laboratory alone, one")
+    print("   readout and one set of cells, the ratio runs from")
+    dep = ratios[ratios["source"] == "figshare 26462791"]
+    print(f"   {dep['ratio'].min():.2f} ({dep.loc[dep['ratio'].idxmin(), 'drug']}) to "
+          f"{dep['ratio'].max():.2f} ({dep.loc[dep['ratio'].idxmax(), 'drug']}), and it halves")
+    print("   between the first window and the second for every drug in it. The ratio is")
+    print("   not a mycobacterial constant. The model's error is assuming one value")
+    print("   transfers, not choosing the wrong one.")
 
     # -- 2. the Hill exponent, which no verified source measures on psi's axis --
     sweep = []
@@ -209,7 +298,18 @@ def main() -> int:
         "psi_min_assumed": bc.PSI_MIN_S,
         "kappa_assumed": bc.KAPPA,
         "ratio_assumed": abs(bc.PSI_MIN_S) / psi_max,
-        "ratio_intracellular_mtb": [abs(p) / g for _, _, p, g, _ in MTB_KILL[:4]],
+        "ratio_assumed_vs_observed": {
+            "model": abs(bc.PSI_MIN_S) / psi_max,
+            "observed_intracellular_min": float(intra["ratio"].min()),
+            "observed_intracellular_max": float(intra["ratio"].max()),
+            "model_over_observed_max": float(
+                abs(bc.PSI_MIN_S) / psi_max / intra["ratio"].max()),
+            "superseded_claim": (
+                "an earlier version reported the intracellular range as 0.24 to 0.67 "
+                "and the model as ninefold out on shape; that rested on one "
+                "laboratory and does not survive the second"),
+        },
+        "shape_ratio_rows": ratios.to_dict(orient="records"),
         "psi_max_fold_gap": psi_max / 0.0330,
         "psi_min_fold_gap_range": [abs(bc.PSI_MIN_S / -0.1011),
                                    abs(bc.PSI_MIN_S / -0.0080)],

@@ -1,0 +1,41 @@
+{
+  "citation": "The CRyPTIC Consortium. A data compendium associating the genomes of 12,289 Mycobacterium tuberculosis isolates with quantitative resistance phenotypes to 13 antibiotics. PLoS Biol. 2022;20(8):e3001721.",
+  "doi": "10.1371/journal.pbio.3001721",
+  "pmid": "35944069",
+  "pmcid": "PMC9363010",
+  "licence": "CC BY 4.0",
+  "licence_verified": "PMC licence metadata for PMC9363010 records license type 'CC BY 4.0' (https://creativecommons.org/licenses/by/4.0/) with copyright '(c) 2022 The CRyPTIC Consortium'. The PLOS Biology article footnote reads 'This is an open access article distributed under the terms of the Creative Commons Attribution License, which permits unrestricted use, distribution, and reproduction in any medium, provided the original author and source are credited.' The article's Data Availability statement names this exact directory as the location of the data: 'Data are available from ftp.ebi.ac.uk/pub/databases/cryptic/release_june2022/'. CAVEAT: the FTP tree itself carries no LICENSE/LICENCE/COPYING file (all probed, HTTP 404) and neither README states a licence; the CC BY 4.0 determination rests on the data owner's own publication of record, plus EMBL-EBI's stated position that it 'does not impose any additional restrictions on the use of data over those provided by the data owner' (https://www.ebi.ac.uk/licencing).",
+  "url": "https://ftp.ebi.ac.uk/pub/databases/cryptic/release_june2022/reuse/",
+  "contents": "CRyPTIC_reuse_table_20240917.csv: the reuse MIC table, 12,287 data rows (one isolate per row, UNIQUEID and ENA_SAMPLE both unique) x 44 columns. Per isolate: MIC, binary S/I/R phenotype and phenotype quality (HIGH/MEDIUM/LOW) for 13 antituberculars (AMI, BDQ, CFZ, DLM, EMB, ETH, INH, KAN, LEV, LZD, MXF, RIF, RFB), plus ENA run and sample accessions and relative paths to per-sample and joint-genotyped VCFs (the VCFs themselves are NOT included here). 157,375 non-missing MIC values in total; per drug 11,925-12,192 MICs, of which 6,784-10,041 are HIGH quality. MICs are interval-censored to the CRyPTIC UKMYC 96-well broth microdilution plate, so values are doubling-dilution steps with left- ('<=x') and right-censored ('>x') tails. CRyPTIC_reuse_README.txt: column definitions and the ECOFF table (Table 2 of the Brankin/Malone phenotyping paper) used to derive the binary calls. CRyPTIC_reuse_CHANGELOG.txt: file history. The published compendium describes 12,289 isolates; the 20221019 table has 12,288 rows and the current 20240917 table 12,287, one sample having been withdrawn in October 2023 (see CHANGELOG).",
+  "why": "A population-scale MIC distribution for M. tuberculosis against which to judge whether the 217-isolate sample used in exp16 (Vijay et al., eLife 2024, doi 10.7554/eLife.93243) is representative. exp16 tests MIC-MDK independence on rifampicin; those isolates span RIF MIC 0.03-0.5 mg/L only, entirely at or below the 0.5 mg/L ECOFF, whereas CRyPTIC records 4,683 rifampicin-resistant isolates out of 12,097 with a RIF MIC, reaching >8 mg/L. The exp16 sample therefore covers roughly a 16-fold MIC range inside the susceptible mode of a distribution that spans more than 256-fold.",
+  "staged_utc": "2026-09-05T17:33:00+00:00",
+  "files": [
+    {
+      "file": "CRyPTIC_reuse_table_20240917.csv",
+      "bytes": 5393811,
+      "md5": "69aed34242883dfc3c4a8ca78f295581",
+      "source_url": "https://ftp.ebi.ac.uk/pub/databases/cryptic/release_june2022/reuse/CRyPTIC_reuse_table_20240917.csv"
+    },
+    {
+      "file": "CRyPTIC_reuse_README.txt",
+      "bytes": 5441,
+      "md5": "d9c116ad814fa528d063bd5144f3f1e5",
+      "source_url": "https://ftp.ebi.ac.uk/pub/databases/cryptic/release_june2022/reuse/README"
+    },
+    {
+      "file": "CRyPTIC_reuse_CHANGELOG.txt",
+      "bytes": 864,
+      "md5": "513379df0c7063750e1291bec731c14d",
+      "source_url": "https://ftp.ebi.ac.uk/pub/databases/cryptic/release_june2022/reuse/CHANGELOG"
+    }
+  ],
+  "not_downloaded": [
+    "clockwork_container.v0.8.3.img (1.3G, analysis container)",
+    "reproducibility/cryptic-index_20231027.json (23M) and cryptic-index_February2022.json (25M)",
+    "reproducibility/fastq/ and reproducibility/00/ (per-sample VCFs and plate images, bulk)",
+    "pubs/gwas2022/ (GWAS paper working files)",
+    "reuse/CRyPTIC_excluded_samples_20220607.tsv (676K) and the superseded reuse tables 20221019/20231027/20231107/20231208 (4.5-4.7M each)"
+  ],
+  "redistributable": true,
+  "note": "Openly licensed; retained in this repository with attribution. Cite the PLOS Biology compendium paper in any publication using these data, as the FTP README requests."
+}

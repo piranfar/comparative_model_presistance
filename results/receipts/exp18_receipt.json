@@ -1,17 +1,124 @@
 {
   "script": "src/experiments/exp18_slow_grower_transferability.py",
-  "utc": "2026-09-05T05:46:38+00:00",
+  "utc": "2026-09-05T14:49:36+00:00",
   "psi_axis": "natural log per hour, confirmed from survival() and net_rates()",
   "psi_max_as_run": 0.9903225806451612,
   "psi_max_naive_B_minus_D": 0.7,
   "psi_min_assumed": -6.0,
   "kappa_assumed": 2.0,
   "ratio_assumed": 6.058631921824105,
-  "ratio_intracellular_mtb": [
-    0.6666666666666666,
-    0.6060606060606061,
-    0.30303030303030304,
-    0.24242424242424243
+  "ratio_assumed_vs_observed": {
+    "model": 6.058631921824105,
+    "observed_intracellular_min": 0.24242424242424243,
+    "observed_intracellular_max": 4.104477611940299,
+    "model_over_observed_max": 1.4761030500444183,
+    "superseded_claim": "an earlier version reported the intracellular range as 0.24 to 0.67 and the model as ninefold out on shape; that rested on one laboratory and does not survive the second"
+  },
+  "shape_ratio_rows": [
+    {
+      "drug": "isoniazid",
+      "state": "intracellular",
+      "source": "PMID 28356552",
+      "psi_min": -0.008,
+      "psi_max": 0.033,
+      "ratio": 0.24242424242424243
+    },
+    {
+      "drug": "pyrazinamide",
+      "state": "intracellular",
+      "source": "PMID 28356552",
+      "psi_min": -0.01,
+      "psi_max": 0.033,
+      "ratio": 0.30303030303030304
+    },
+    {
+      "drug": "ethambutol",
+      "state": "intracellular",
+      "source": "PMID 28356552",
+      "psi_min": -0.02,
+      "psi_max": 0.033,
+      "ratio": 0.6060606060606061
+    },
+    {
+      "drug": "amikacin 128",
+      "state": "intracellular, days 3-7",
+      "source": "figshare 26462791",
+      "psi_min": -0.005,
+      "psi_max": 0.0077,
+      "ratio": 0.6493506493506493
+    },
+    {
+      "drug": "rifampicin",
+      "state": "intracellular",
+      "source": "PMID 28356552",
+      "psi_min": -0.022,
+      "psi_max": 0.033,
+      "ratio": 0.6666666666666666
+    },
+    {
+      "drug": "ethambutol",
+      "state": "extracellular (provisional)",
+      "source": "PMID 28356552",
+      "psi_min": -0.0651,
+      "psi_max": 0.0769,
+      "ratio": 0.8465539661898571
+    },
+    {
+      "drug": "amikacin 128",
+      "state": "intracellular, days 0-3",
+      "source": "figshare 26462791",
+      "psi_min": -0.0142,
+      "psi_max": 0.0134,
+      "ratio": 1.0597014925373134
+    },
+    {
+      "drug": "rifampicin",
+      "state": "extracellular (provisional)",
+      "source": "PMID 28356552",
+      "psi_min": -0.1011,
+      "psi_max": 0.0769,
+      "ratio": 1.3146944083224967
+    },
+    {
+      "drug": "apramycin 32",
+      "state": "intracellular, days 3-7",
+      "source": "figshare 26462791",
+      "psi_min": -0.0119,
+      "psi_max": 0.0077,
+      "ratio": 1.5454545454545454
+    },
+    {
+      "drug": "rifampicin 16",
+      "state": "intracellular, days 3-7",
+      "source": "figshare 26462791",
+      "psi_min": -0.0195,
+      "psi_max": 0.0077,
+      "ratio": 2.5324675324675323
+    },
+    {
+      "drug": "apramycin 32",
+      "state": "intracellular, days 0-3",
+      "source": "figshare 26462791",
+      "psi_min": -0.0527,
+      "psi_max": 0.0134,
+      "ratio": 3.932835820895522
+    },
+    {
+      "drug": "rifampicin 16",
+      "state": "intracellular, days 0-3",
+      "source": "figshare 26462791",
+      "psi_min": -0.055,
+      "psi_max": 0.0134,
+      "ratio": 4.104477611940299
+    },
+    {
+      "drug": "bedaquiline",
+      "state": "in vivo sputum",
+      "source": "PMID 34871099",
+      "psi_min": -0.021,
+      "psi_max": 0.00098,
+      "ratio": 21.42857142857143
+    }
   ],
   "psi_max_fold_gap": 30.00977517106549,
   "psi_min_fold_gap_range": [

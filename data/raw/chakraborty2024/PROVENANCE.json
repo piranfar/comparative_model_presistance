@@ -1,0 +1,21 @@
+{
+  "citation": "Chakraborty D, Batabyal S, Ganusov VV. A brief overview of mathematical modeling of the within-host dynamics of Mycobacterium tuberculosis. Front Appl Math Stat. 2024;10:1355373.",
+  "doi": "10.3389/fams.2024.1355373",
+  "pmid": "39906541",
+  "pmcid": "PMC11793202",
+  "licence": "CC BY 4.0",
+  "licence_verified": "Two independent checks on the version of record. (1) Crossref licence metadata for 10.3389/fams.2024.1355373 gives URL https://creativecommons.org/licenses/by/4.0/ with content-version 'vor'. (2) The saved PDF states on p.1: 'This is an open-access article distributed under the terms of the Creative Commons Attribution License (CC BY).' NOTE: the PMC deposit PMC11793202 is a DIFFERENT object - an NIH author manuscript (nihms-2019078.pdf) whose PMC permissions block reads 'This file is available for text mining. It may also be used consistent with the principles of fair use under the copyright law.' That version is NOT CC BY and is deliberately not stored here.",
+  "url": "https://www.frontiersin.org/journals/applied-mathematics-and-statistics/articles/10.3389/fams.2024.1355373/pdf",
+  "contents": "Publisher version of record, 17 pp. Review article. Section 'Deterministic models of within-host Mtb dynamics' restates the Antia, Koella & Perrot (1996) within-host mycobacterial model as Equations 1-3 (short-term dynamics: replicating pathogen P, dormant pathogen Q, immune response X) and the Hayflick-limit T-cell extension as Equations 4-6. Equations 7-9 are the Gill/McDaniel plasmid-segregation model. MODEL_EQUATIONS.md holds the transcribed equations and the parameter-provenance sentence.",
+  "why": "Independent, citable confirmation that the canonical within-host mycobacterial persistence model (Antia 1996) was parameterised ad hoc and never fitted to data - stated in print by Ganusov, who works in this exact modelling area. Supports the argument that dormancy/reactivation rate constants in this lineage carry no empirical calibration.",
+  "staged_utc": "2026-09-05T14:33:00+00:00",
+  "files": [
+    {
+      "file": "chakraborty2024_fams_vor.pdf",
+      "bytes": 3739667,
+      "md5": "dd950c53244aa33174cbe6b5f2127913"
+    }
+  ],
+  "redistributable": true,
+  "note": "Openly licensed (CC BY 4.0); retained in this repository with attribution. Attribution required on reuse."
+}

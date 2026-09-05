@@ -1,0 +1,26 @@
+{
+  "citation": "Kaur P, Ramya VK, Naveenkumar CN, Bharathkumar K, Singh M, Hobbie SN, Shandil RK, Narayanan S. Apramycin kills replicating and non-replicating Mycobacterium tuberculosis. Front Trop Dis. 2024;5:1413211. Raw data: Kaur, Parvinder (2024). Apramycin kills replicating and non-replicating Mycobacterium tuberculosis - Raw Data. figshare. Dataset. https://doi.org/10.6084/m9.figshare.26462791.v1",
+  "doi": "10.6084/m9.figshare.26462791.v1",
+  "article_doi": "10.3389/fitd.2024.1413211",
+  "pmid": null,
+  "pmcid": null,
+  "pmid_note": "No PMID and no PMC record. Frontiers in Tropical Diseases is not MEDLINE-indexed; a Europe PMC search on DOI 10.3389/fitd.2024.1413211 returned hitCount 0, and PubMed queries for the title and for Kaur P + apramycin returned nothing matching. Do not cite a PMID for this paper.",
+  "licence": "CC BY 4.0",
+  "licence_verified": "figshare API record for article 26462791 returns license = {\"value\": 1, \"name\": \"CC BY 4.0\", \"url\": \"https://creativecommons.org/licenses/by/4.0/\"}. Independently, the Crossref record for the companion article 10.3389/fitd.2024.1413211 carries license URL https://creativecommons.org/licenses/by/4.0/ (content-version vor, delay 0 days).",
+  "url": "https://ndownloader.figshare.com/files/48113812",
+  "landing_page": "https://figshare.com/articles/dataset/Apramycin_kills_replicating_and_non-replicating_Mycobacterium_tuberculosis_-_Raw_Data/26462791",
+  "contents": "Single workbook 'Raw Data.xlsx', 5 sheets, all values as log10 CFU in triplicate (Replicate-1/2/3) plus a computed Avg and a log10 CFU drop column, except the in-vivo sheet which is raw CFU/lung per animal. (1) 'Kill kinetics' (B1:I38): planktonic Mtb, day 0 baseline cell control (avg 7.015 log10) then days 3, 7 and 14; apramycin and amikacin each at 128/32/8/4/1 ug/mL plus an untreated cell control per day. 33 treated/control rows. Control grows 7.02 -> 9.35 log10 over 14 d; 128 ug/mL apramycin falls 7.02 -> 5.79 -> 3.70 -> 1.81. (2) 'Intracellular efficacy' (B1:I33): macrophage intracellular killing, day 0 control (avg 5.950 log10) then days 3 and 7; apramycin at 32/16/8/4/2/1 ug/mL, amikacin at 128/64/32/16/8/4 ug/mL, rifampicin 16 ug/mL comparator, cell control. Note the concentration ladders differ between the two drugs and from the kill-kinetics sheet. (3) 'Biofilm 1' (B1:I29): single-endpoint biofilm, 6 agents (apramycin, amikacin, moxifloxacin, isoniazid, rifampicin, ethambutol) at 64X/16X/4X/1X MIC, plus Early and Late untreated controls. (4) 'Biofilm 2' (B2:K33): same design against apramycin plus the BPaLM agents (bedaquiline, pretomanid, linezolid, moxifloxacin) and amikacin, 64X/16X/4X/1X MIC, Early and Late controls. (5) 'In-vivo' (A1:C23): mouse chronic TB lung model, raw CFU/lung per animal, 5 groups - Pre Drug Control (n=5), Post Drug Control (n=2), Apramycin (n=4), HREZ (n=5), Apramycin+HREZ (n=4).",
+  "why": "A second Mtb monotherapy time-kill source with per-replicate numbers, independent of the ERA4TB set and using a different drug class (aminoglycoside rather than fluoroquinolone/isoniazid). The 'Kill kinetics' sheet is the fittable one: a genuine concentration x time monotherapy design with a growing untreated control, so kill and net growth are separable. The killing decelerates over the series - at 128 ug/mL apramycin the rate is 0.41, 0.52 then 0.27 log10/day across the 0-3, 3-7 and 7-14 d intervals - which is the shape a two-population model is meant to capture. The biofilm and intracellular sheets give a drug-tolerant-state contrast in the same units and from the same laboratory, which is the more unusual asset: tolerance measured against the same drug, same readout, same hands.",
+  "caveats": "Only 4 time points (0, 3, 7, 14 d) on the planktonic series, and the last interval is 7 days wide - the deceleration is real in the numbers but rests on one interval, so a two-population fit will be weakly identified and should be reported with that stated. No limit of detection is given anywhere in the workbook, and the day-14 values (1.7-1.9 log10) are low enough that censoring cannot be ruled out. The Avg and log10-drop columns are the depositors' own arithmetic and were not recomputed on ingest. Sheet headers span several merged rows and columns A and (in Biofilm 2) J-K are padding; any parser must skip them rather than assume a rectangular table. The intracellular sheet is not a dose-matched comparison - apramycin and amikacin were tested over different concentration ranges. The in-vivo sheet is raw CFU/lung, not log10, and its group sizes are unequal.",
+  "staged_utc": "2026-09-05T14:32:02+00:00",
+  "files": [
+    {
+      "file": "Raw Data.xlsx",
+      "bytes": 27241,
+      "md5": "b00994f4a147804e2c4ab30f9011253b",
+      "md5_matches_figshare_computed_md5": true
+    }
+  ],
+  "redistributable": true,
+  "note": "Openly licensed CC BY 4.0; retained in this repository with attribution. Attribution is owed to Kaur et al. 2024 (Front Trop Dis 5:1413211) and to the figshare deposit."
+}

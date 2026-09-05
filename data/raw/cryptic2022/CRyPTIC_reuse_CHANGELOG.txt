@@ -1,0 +1,27 @@
+October 27 2023
+
+* Removed sample site.10.iso.1.subject.BC01299674.lab_id.BC01299674.seq_reps.1
+
+* Added file CRyPTIC_reuse_table_20231027.csv, is an updated version of
+  CRyPTIC_reuse_table_20221019.csv. The above sample is removed, and ENA run
+  accessions added in a new column ENA_RUN
+
+November 7 2023
+
+Adding 18 missing run accessions, all from smaples with more than one run.
+The run accession was "None".
+
+December 8 2023
+
+* Added file CRyPTIC_reuse_table_20231208.csv, is an updated version of
+  CRyPTIC_reuse_table_20231027.csv. Added "DLM_PHENOTYPE_QUALITY"
+  column.
+
+
+September 17 2024
+
+Updated CRyPTIC_reuse_table_20231208.csv with new file
+CRyPTIC_reuse_table_20240917.csv.
+The difference is that "../reproducibility/" is added to the start of the paths
+in the "VCF" and "REGENOTYPED_VCF" columns, so that they are relative to this
+reuse/ directory.
