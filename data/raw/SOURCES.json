@@ -1,0 +1,107 @@
+{
+  "generated_utc": "2026-09-05T14:27:07+00:00",
+  "purpose": "Every external source this project has identified, with its licence and whether its bytes may be kept in this repository. Sources marked redistributable false are recorded by URL only: run src/fetch_external_data.py to retrieve them locally. Redistributing them here would breach the publisher's terms even though the project is entitled to read and analyse them.",
+  "sources": [
+    {
+      "key": "peyrusson2020",
+      "doi": "10.1038/s41467-020-15966-7",
+      "pmid": "32366839",
+      "licence": "CC BY 4.0",
+      "redistributable": true,
+      "in_repo": "data/raw/peyrusson2020/"
+    },
+    {
+      "key": "nguyen2021",
+      "doi": "10.3389/fmicb.2021.785573",
+      "pmid": "34975808",
+      "licence": "CC BY 4.0",
+      "redistributable": true,
+      "in_repo": "data/raw/nguyen2021/"
+    },
+    {
+      "key": "carvalho2017",
+      "doi": "10.1111/1751-7915.12739",
+      "pmid": "28730700",
+      "licence": "CC BY",
+      "redistributable": true,
+      "in_repo": "data/raw/carvalho2017/"
+    },
+    {
+      "key": "windels2024",
+      "doi": "10.5281/zenodo.7550302",
+      "pmid": "38691440",
+      "licence": "CC BY 4.0",
+      "redistributable": true,
+      "in_repo": "data/raw/windels2024/"
+    },
+    {
+      "key": "era4tb",
+      "doi": "10.6084/m9.figshare.19766083",
+      "pmid": null,
+      "licence": "CC BY 4.0",
+      "redistributable": true,
+      "in_repo": "data/raw/tb/era4tb_timekill.csv"
+    },
+    {
+      "key": "vogwill2016",
+      "doi": "10.1111/jeb.12864",
+      "pmid": "26999656",
+      "licence": "CC BY-NC-ND",
+      "redistributable": false,
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5021160/",
+      "data_url": "https://doi.org/10.5061/dryad.s7j42",
+      "note": "The ND clause blocks redistributing a modified form, and mixing NC content into this repository would conflict with its own licence. The survival workbook already in data/raw/external_survival/ came from the Dryad deposit; its licence should be checked separately before release. The full-text XML was used only to read the Methods, which resolved the dose axis in exp11."
+    },
+    {
+      "key": "walters2003",
+      "doi": "10.1128/AAC.47.1.317-323.2003",
+      "pmid": "12499208",
+      "licence": "ASM, free in PMC but not open access",
+      "redistributable": false,
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC148957/",
+      "note": "The only paired planktonic-versus-biofilm kill rate at matched drug, concentration and time. Fills the blank biofilm row in docs/14: ciprofloxacin 3.40 to 0.610 /h, a 5.6-fold fall; tobramycin 2.99 /h to net growth. Free to read, not free to redistribute."
+    },
+    {
+      "key": "ferro2014",
+      "doi": "10.1093/jac/dku431",
+      "pmid": "25344808",
+      "licence": "Taverne Article 25fa, institutional deposit",
+      "redistributable": false,
+      "url": "https://repository.ubn.ru.nl/handle/2066/154302",
+      "note": "Free to read at the author's institutional repository under a Dutch copyright exception that permits the AUTHOR to make it public. That permission does not extend to a third party redistributing it."
+    },
+    {
+      "key": "drusano2018",
+      "doi": "10.1128/AAC.00221-18",
+      "pmid": "29866864",
+      "licence": "Free in PMC, no open-access licence",
+      "redistributable": false,
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6105790/",
+      "note": "Limit of detection absent from the text; see docs/16 request 4."
+    },
+    {
+      "key": "gumbo2004",
+      "doi": "10.1086/424849",
+      "pmid": "15478070",
+      "licence": "paywalled",
+      "redistributable": false,
+      "note": "Do not buy. ERA4TB and Drusano 2021 cover the same cell more richly and are free."
+    },
+    {
+      "key": "desteenwinkel2010",
+      "doi": "10.1093/jac/dkq374",
+      "pmid": "20947621",
+      "licence": "paywalled",
+      "redistributable": false,
+      "note": "The falsification test for this project's central transfer: it reports amikacin as equally effective irrespective of metabolic state, against the nutrient dependence exp14 measures. Highest-value interlibrary loan."
+    },
+    {
+      "key": "mahieu2025",
+      "doi": "10.1016/j.isci.2025.112076",
+      "pmid": "40124509",
+      "licence": "CC BY-NC-ND",
+      "redistributable": false,
+      "note": "docs/06 recorded this as CC BY, which is wrong. The ND clause blocks including digitised values in any released corpus without written permission from the corresponding author."
+    }
+  ]
+}

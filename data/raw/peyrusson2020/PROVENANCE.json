@@ -1,0 +1,21 @@
+{
+  "citation": "Peyrusson F, Varet H, Nguyen TK, Legendre R, Sismeiro O, Coppee JY, Wolz C, Tenson T, Van Bambeke F. Intracellular Staphylococcus aureus persisters upon antibiotic exposure. Nat Commun. 2020;11:2200.",
+  "doi": "10.1038/s41467-020-15966-7",
+  "pmid": "32366839",
+  "pmcid": "PMC7198484",
+  "licence": "CC BY 4.0",
+  "licence_verified": "creativecommons.org/licenses/by in the PMC full text",
+  "url": "https://static-content.springer.com/esm/art%3A10.1038%2Fs41467-020-15966-7/MediaObjects/41467_2020_15966_MOESM3_ESM.xlsx",
+  "contents": "Source Data workbook, 13 sheets. Fig 1a/1h: 11-point concentration-response, 3 replicates. Fig 1b/1i: time-kill at 0, 1, 3, 6, 24 h, intracellular and extracellular, 3 replicates.",
+  "why": "The only numeric S. aureus source in the corpus. Thin in time (5 points) but real.",
+  "staged_utc": "2026-09-05T14:26:32+00:00",
+  "files": [
+    {
+      "file": "41467_2020_15966_MOESM3_ESM.xlsx",
+      "bytes": 23750,
+      "md5": "71b2e6eb7b8c802e9a675306a9c9658c"
+    }
+  ],
+  "redistributable": true,
+  "note": "Openly licensed; retained in this repository with attribution."
+}

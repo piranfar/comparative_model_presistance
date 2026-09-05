@@ -1,0 +1,26 @@
+{
+  "citation": "Carvalho G, Guilhen C, Balestrino D, Forestier C, Mathias JD. Relating switching rates between normal and persister cells to substrate and antibiotic concentrations. Microb Biotechnol. 2017;10(6):1616-1627.",
+  "doi": "10.1111/1751-7915.12739",
+  "pmid": "28730700",
+  "pmcid": "PMC5658594",
+  "licence": "CC BY",
+  "licence_verified": "Europe PMC core record, license field, checked live",
+  "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5658594/",
+  "contents": "Supplementary information and figure files for a two-state persistence model of Klebsiella pneumoniae CH1440 under ciprofloxacin.",
+  "why": "A second, independent two-state model with calibration data, from a laboratory unconnected to the one under audit. It also relates switching rates to SUBSTRATE concentration, which is the nutrient axis exp14 measures, and it fills the Klebsiella cell that docs/12 records as empty.",
+  "staged_utc": "2026-09-05T14:26:32+00:00",
+  "files": [
+    {
+      "file": "MBT2-10-1616-s001.docx",
+      "bytes": 116056,
+      "md5": "d0ef7beb96df6db81ab174c41876e03c"
+    },
+    {
+      "file": "supp5658594.zip",
+      "bytes": 453198,
+      "md5": "42c215ff45bdb7e21138eef522a41c63"
+    }
+  ],
+  "redistributable": true,
+  "note": "Openly licensed; retained in this repository with attribution."
+}

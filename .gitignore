@@ -64,3 +64,6 @@ paper.txt
 # lost; must be identified and licence-checked before anything moves into a
 # tracked location. See data/raw/_staged/STAGING_MANIFEST.json
 data/raw/_staged/
+
+# Fetched copies of sources this repository may not redistribute.
+data/raw/_fetched/

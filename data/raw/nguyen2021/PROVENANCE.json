@@ -1,0 +1,26 @@
+{
+  "citation": "Nguyen TK, Peyrusson F, Siala W, Pham NH, Nguyen HA, Tulkens PM, Van Bambeke F. Activity of moxifloxacin against biofilms formed by clinical isolates of Staphylococcus aureus. Front Microbiol. 2021;12:785573.",
+  "doi": "10.3389/fmicb.2021.785573",
+  "pmid": "34975808",
+  "pmcid": "PMC8715871",
+  "licence": "CC BY 4.0",
+  "licence_verified": "CC BY stated twice in the PMC full text",
+  "url": "https://www.frontiersin.org/articles/10.3389/fmicb.2021.785573/full#supplementary-material",
+  "contents": "Supplementary Data Sheet 1. Table S2 holds FITTED Hill parameters, not raw CFU; raw CFU appears only in Supplementary Figure S4, at two time points (0 and 24 h).",
+  "why": "Prior information only. Two time points cannot support a slow-phase fit; the audit recommends requesting the non-normalised replicate CFU from the authors.",
+  "staged_utc": "2026-09-05T14:26:32+00:00",
+  "files": [
+    {
+      "file": "PMC8715871-supp.zip",
+      "bytes": 1179196,
+      "md5": "35ba3601f3b89124eb2dac1dece8d1bf"
+    },
+    {
+      "file": "Data_Sheet_1.PDF",
+      "bytes": 763700,
+      "md5": "6da7d733361e6ca566bf5499198f5036"
+    }
+  ],
+  "redistributable": true,
+  "note": "Openly licensed; retained in this repository with attribution."
+}
