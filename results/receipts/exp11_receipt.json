@@ -1,6 +1,6 @@
 {
   "script": "src/experiments/exp11_external_concentration_response.py",
-  "utc": "2026-09-05T05:41:45+00:00",
+  "utc": "2026-09-05T15:35:55+00:00",
   "model_ceiling": {
     "max_persister_kill_rate_per_h": 0.55,
     "max_log_ratio_over_5h": 2.75,

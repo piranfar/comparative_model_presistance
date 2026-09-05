@@ -79,6 +79,7 @@ from pathlib import Path
 
 import numpy as np
 import pandas as pd
+from scipy import stats
 
 from ..models import boccarella as bc
 
@@ -137,6 +138,54 @@ def ecoli_dose_response() -> pd.DataFrame:
     return pd.DataFrame(rows)
 
 
+def series_quality(conc, ln_surv) -> dict:
+    """Whether a dose-response series is fit to be quoted at all.
+
+    A slope per doubling is only meaningful if survival actually falls with
+    concentration. Three checks are applied and reported rather than assumed:
+    Spearman rank correlation, which should approach -1 for a clean series; the
+    coefficient of determination of the log-linear fit; and leave-one-out, which
+    catches a slope carried by a single concentration.
+
+    This gate exists because the third exposure pulse of dataset 1 fails all
+    three. Its slope has an R-squared of 0.15 and a p-value of 0.61, so it is not
+    distinguishable from no dose response, and dropping one of its four
+    concentrations moves the slope from -0.83 to -0.30. A number of that
+    stability should not appear beside the two pulses that behave.
+    """
+    conc = np.asarray(conc, dtype=float)
+    ln_surv = np.asarray(ln_surv, dtype=float)
+    ok = np.isfinite(ln_surv) & (conc > 0)
+    c, y = conc[ok], ln_surv[ok]
+    if c.size < 3:
+        return {"usable": False, "reason": "fewer than three concentrations"}
+
+    lr = stats.linregress(np.log2(c), y)
+    rho = stats.spearmanr(c, y).statistic
+    slopes = []
+    for j in range(c.size):
+        m = np.ones(c.size, dtype=bool)
+        m[j] = False
+        if m.sum() >= 3:
+            slopes.append(stats.linregress(np.log2(c[m]), y[m]).slope)
+    swing = float(np.max(np.abs(np.asarray(slopes) - lr.slope))) if slopes else np.nan
+
+    usable = bool(lr.pvalue < 0.05 and rho < 0 and swing < 0.5 * abs(lr.slope))
+    reasons = []
+    if lr.pvalue >= 0.05:
+        reasons.append(f"slope not distinguishable from zero (p={lr.pvalue:.2f})")
+    if rho >= 0:
+        reasons.append(f"survival does not fall with concentration (rho={rho:+.2f})")
+    if not (swing < 0.5 * abs(lr.slope)):
+        reasons.append(f"one concentration moves the slope by {swing:.2f}")
+    return {"usable": usable, "r_squared": float(lr.rvalue ** 2),
+            "p_value": float(lr.pvalue), "spearman_rho": float(rho),
+            "monotone": bool(pd.Series(y, index=c).sort_index().is_monotonic_decreasing),
+            "max_leave_one_out_swing": swing,
+            "reason": "; ".join(reasons)}
+
+
+
 def slope_per_doubling(conc, ln_surv) -> float:
     """Regression of ln survival on log2 concentration."""
     conc = np.asarray(conc, dtype=float)
@@ -168,6 +217,8 @@ def main() -> int:
             "n_levels": int(len(above)),
             "n_obs": int((g["conc"] >= AMP_MIC_REGION).sum()),
             "slope_ln_per_doubling": slope_per_doubling(above.index, above.values),
+            **{f"quality_{k}": v for k, v in
+               series_quality(above.index, above.values).items()},
             "exposure_h": EXPOSURE_MIN / 60.0,
             "dose_axis": "ug/mL, measured",
         })
@@ -225,6 +276,25 @@ def main() -> int:
         print(f"   {k:<46} {v:8.4f}")
 
     print("\n-- what independent data show --")
+    if "quality_usable" in obs.columns:
+        q = obs.dropna(subset=["quality_usable"])
+        print()
+        print("-- is each dose-response series fit to be quoted at all? --")
+        print(q[["stratum", "quality_r_squared", "quality_p_value",
+                 "quality_spearman_rho", "quality_max_leave_one_out_swing",
+                 "quality_usable", "quality_reason"]].to_string(
+            index=False, float_format=lambda v: f"{v:,.3f}"))
+        bad = q[~q["quality_usable"].astype(bool)]
+        for _, b in bad.iterrows():
+            print()
+            print(f"{b['stratum']} FAILS the gate: {b['quality_reason']}.")
+        if len(bad):
+            print("   Its slope is reported below for completeness and must not be quoted")
+            print("   alongside the series that pass. The headline comparison rests on the")
+            print("   series that do.")
+
+    print()
+    print("-- what independent data show --")
     print(obs[["organism", "antibiotic", "stratum", "n_obs", "exposure_h",
                "slope_ln_per_doubling", "model_slope_per_doubling",
                "steeper_than_model_by", "model_ceiling_at_this_exposure",
