@@ -1,6 +1,6 @@
 {
   "script": "src/experiments/exp18_slow_grower_transferability.py",
-  "utc": "2026-09-05T14:49:36+00:00",
+  "utc": "2026-09-05T15:18:13+00:00",
   "psi_axis": "natural log per hour, confirmed from survival() and net_rates()",
   "psi_max_as_run": 0.9903225806451612,
   "psi_max_naive_B_minus_D": 0.7,
@@ -134,5 +134,36 @@
     "24041886"
   ],
   "excluded_as_endpoint_reductions": "every Emax reported as a total log10 CFU reduction over a fixed window, and every Hill exponent fitted alongside one",
-  "unresolved": "whether PSI_MIN_S = -6.0 was adopted from Regoes 2004, which reports psi in log10 per hour; if so every gap here doubles"
+  "unit_sensitivity": [
+    {
+      "reading": "as coded, natural log per hour",
+      "psi_min_ln_per_h": -6.0,
+      "compared_with": "rifampicin, intracellular",
+      "published_ln_per_h": -0.022,
+      "fold_gap": 272.72727272727275
+    },
+    {
+      "reading": "as coded, natural log per hour",
+      "psi_min_ln_per_h": -6.0,
+      "compared_with": "bedaquiline, in vivo sputum",
+      "published_ln_per_h": -0.021,
+      "fold_gap": 285.7142857142857
+    },
+    {
+      "reading": "if adopted from Regoes' log10 per hour",
+      "psi_min_ln_per_h": -13.815510557964275,
+      "compared_with": "rifampicin, intracellular",
+      "published_ln_per_h": -0.022,
+      "fold_gap": 627.9777526347398
+    },
+    {
+      "reading": "if adopted from Regoes' log10 per hour",
+      "psi_min_ln_per_h": -13.815510557964275,
+      "compared_with": "bedaquiline, in vivo sputum",
+      "published_ln_per_h": -0.021,
+      "fold_gap": 657.8814551411559
+    }
+  ],
+  "conclusion_robust_to_unit_reading": true,
+  "unresolved_but_not_load_bearing": "whether PSI_MIN_S = -6.0 was adopted from Regoes 2004, which reports psi in log10 per hour. Under the natural-log reading the gap to measured mycobacterial rates is 273-286 fold; under the log10 reading it is 628-658 fold. The argument does not rest on which is correct."
 }

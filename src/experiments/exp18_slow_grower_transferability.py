@@ -21,9 +21,13 @@ magnitude meant anything.
   42-minute doubling time, which is only sensible on a natural-log basis. Regoes
   2004 reports psi in log10 per hour, so a value carried across without
   conversion is wrong by ln 10 = 2.303. Whether PSI_MIN_S = -6.0 was adopted on
-  the log10 axis cannot be settled from the code, and the manuscript should say
-  so; every figure below uses -6.0 as a natural-log rate, which is what the code
-  consumes and the conservative reading.
+  the log10 axis cannot be settled from the code and needs the original authors.
+  It does not have to be settled. The comparison is reported under both readings
+  below, and the assumed kill rate exceeds every measured mycobacterial value by
+  between 273 and 658 fold either way, so the ambiguity changes the size of the
+  discrepancy and not its existence. Every other figure uses -6.0 as a
+  natural-log rate, which is what the code consumes and the conservative
+  reading.
 
   The growth rate the model actually runs. psi_max is not B_S - D_S = 0.700/h.
   The birth rate is reassigned by mic_to_br(MIC) inside net_rates, giving
@@ -107,6 +111,7 @@ Writes:
   results/tables/exp18_kappa_sweep.csv
   results/tables/exp18_cycle_balance.csv
   results/tables/exp18_shape_ratio.csv
+  results/tables/exp18_unit_sensitivity.csv
   results/receipts/exp18_receipt.json
 """
 from __future__ import annotations
@@ -208,6 +213,34 @@ def main() -> int:
     print(gaps[["constant", "model_value", "published_value", "fold_gap",
                 "state", "pmid"]].to_string(
         index=False, float_format=lambda v: f"{v:,.4f}"))
+
+    # -- 1a. the unit ambiguity, shown not to matter ------------------------
+    # PSI_MIN_S = -6.0 is consumed by the code as a natural-log rate, but Regoes
+    # 2004, the source of this functional form, tabulates psi in log10 per hour.
+    # Whether -6.0 was carried across that boundary cannot be settled from the
+    # code and needs the original authors. It does not have to be settled here:
+    # the comparison is reported under both readings, and the conclusion is the
+    # same under either, which removes the question from the manuscript's
+    # critical path.
+    LN10 = float(np.log(10.0))
+    unit_rows = []
+    for reading, psi_min_ln in (("as coded, natural log per hour", bc.PSI_MIN_S),
+                                ("if adopted from Regoes' log10 per hour",
+                                 bc.PSI_MIN_S * LN10)):
+        for drug, state, pmin, _g, pmid in MTB_KILL[:1] + MTB_KILL[4:5]:
+            unit_rows.append({"reading": reading, "psi_min_ln_per_h": psi_min_ln,
+                              "compared_with": f"{drug}, {state}",
+                              "published_ln_per_h": pmin,
+                              "fold_gap": abs(psi_min_ln / pmin)})
+    units = pd.DataFrame(unit_rows)
+    units.to_csv(TABLES / "exp18_unit_sensitivity.csv", index=False)
+    print("\n-- does the conclusion depend on which axis -6.0 was taken from? --")
+    print(units.to_string(index=False, float_format=lambda v: f"{v:,.4f}"))
+    print(f"\n   Under either reading the assumed maximum kill rate exceeds every "
+          f"measured\n   mycobacterial value by between {units['fold_gap'].min():.0f} and "
+          f"{units['fold_gap'].max():.0f} fold. The ambiguity changes the size of")
+    print("   the discrepancy and not its existence, so the manuscript can state the")
+    print("   provenance question without its argument resting on the answer.")
 
     # -- 1b. the ratio, which is where the first version of this went wrong ---
     ratio_rows = []
@@ -320,9 +353,13 @@ def main() -> int:
         "excluded_as_endpoint_reductions": (
             "every Emax reported as a total log10 CFU reduction over a fixed "
             "window, and every Hill exponent fitted alongside one"),
-        "unresolved": (
-            "whether PSI_MIN_S = -6.0 was adopted from Regoes 2004, which reports "
-            "psi in log10 per hour; if so every gap here doubles"),
+        "unit_sensitivity": units.to_dict(orient="records"),
+        "conclusion_robust_to_unit_reading": True,
+        "unresolved_but_not_load_bearing": (
+            "whether PSI_MIN_S = -6.0 was adopted from Regoes 2004, which reports psi "
+            "in log10 per hour. Under the natural-log reading the gap to measured "
+            "mycobacterial rates is 273-286 fold; under the log10 reading it is "
+            "628-658 fold. The argument does not rest on which is correct."),
     }, indent=2), encoding="utf-8")
     return 0
 

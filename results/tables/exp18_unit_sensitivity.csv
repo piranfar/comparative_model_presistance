@@ -1,0 +1,5 @@
+reading,psi_min_ln_per_h,compared_with,published_ln_per_h,fold_gap
+"as coded, natural log per hour",-6.0,"rifampicin, intracellular",-0.022,272.72727272727275
+"as coded, natural log per hour",-6.0,"bedaquiline, in vivo sputum",-0.021,285.7142857142857
+if adopted from Regoes' log10 per hour,-13.815510557964275,"rifampicin, intracellular",-0.022,627.9777526347398
+if adopted from Regoes' log10 per hour,-13.815510557964275,"bedaquiline, in vivo sputum",-0.021,657.8814551411559
