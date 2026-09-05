@@ -1,0 +1,91 @@
+{
+  "script": "src/experiments/exp21_sequential_and_combination.py",
+  "utc": "2026-09-05T15:10:11+00:00",
+  "data_doi": "10.6084/m9.figshare.26462791.v1",
+  "licence": "CC BY 4.0",
+  "interval_concentration_dependence": [
+    {
+      "interval": "days 0-3",
+      "n_concentrations": 4,
+      "slope_per_doubling": 0.05902987414780902,
+      "ci_low": 0.030218070029821017,
+      "ci_high": 0.08784167826579702,
+      "p_value": 0.01262521796703409,
+      "rate_at_lowest": 0.12942420255661494,
+      "rate_at_highest": 0.4091278132712004,
+      "fold_across_range": 3.1611383743487447,
+      "concentration_matters": true
+    },
+    {
+      "interval": "days 3-7",
+      "n_concentrations": 4,
+      "slope_per_doubling": 0.032957406407253385,
+      "ci_low": -0.05172276815057753,
+      "ci_high": 0.11763758096508431,
+      "p_value": 0.2359966944766585,
+      "rate_at_lowest": 0.31096764854109615,
+      "rate_at_highest": 0.5220232738384903,
+      "fold_across_range": 1.6787060528243407,
+      "concentration_matters": false
+    },
+    {
+      "interval": "days 7-14",
+      "n_concentrations": 4,
+      "slope_per_doubling": -0.02514503287249545,
+      "ci_low": -0.060210603252726584,
+      "ci_high": 0.009920537507735687,
+      "p_value": 0.09094461053848613,
+      "rate_at_lowest": 0.4080620504898839,
+      "rate_at_highest": 0.26957285693638,
+      "fold_across_range": 0.6606173169319572,
+      "concentration_matters": false
+    }
+  ],
+  "concentration_matters_in": [
+    "days 0-3"
+  ],
+  "cost_of_de_escalating_early_fraction": 0.6836582643409215,
+  "cost_of_de_escalating_late_fraction": -0.5137356747537374,
+  "combination": [
+    {
+      "arm": "Apramycin",
+      "n": 4,
+      "mean_log10": 4.619151686350858,
+      "sd_log10": 0.25715875119945275,
+      "log10_reduction_vs_control": 1.30339733365627
+    },
+    {
+      "arm": "Apramycin+HREZ",
+      "n": 4,
+      "mean_log10": 2.768229297653221,
+      "sd_log10": 0.48395001612575134,
+      "log10_reduction_vs_control": 3.1543197223539075
+    },
+    {
+      "arm": "HREZ",
+      "n": 5,
+      "mean_log10": 3.6627202667811405,
+      "sd_log10": 0.44078145912364025,
+      "log10_reduction_vs_control": 2.259828753225988
+    },
+    {
+      "arm": "Post Drug Control",
+      "n": 2,
+      "mean_log10": 5.9225490200071285,
+      "sd_log10": 0.3161884762241101,
+      "log10_reduction_vs_control": 0.0
+    },
+    {
+      "arm": "Pre Drug Control",
+      "n": 5,
+      "mean_log10": 5.54862555878842,
+      "sd_log10": 0.3209401337034385,
+      "log10_reduction_vs_control": 0.3739234612187081
+    }
+  ],
+  "bliss_expected_log10": 3.563226086882258,
+  "bliss_observed_log10": 3.1543197223539075,
+  "control_n": 2,
+  "claim_made": "the concentration dependence of the kill rate is significant in the first interval and absent in the last, which is the case for de-escalation; that de-escalation itself WORKS is not demonstrated, because no arm changed dose",
+  "experiment_that_would_settle_it": "the same grid plus three arms switching concentration at day 3 and day 7, against constant high and constant low at matched cumulative exposure"
+}
