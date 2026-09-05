@@ -21,11 +21,28 @@ The intuition is that intensity is worth most early. The grid tests it directly,
 because the concentration dependence of the kill rate can be measured separately
 in each interval instead of averaged across the experiment.
 
-  days 0 to 3    slope +0.059 log10/day per doubling, 95% CI [+0.030, +0.088],
-                 p = 0.013. Concentration matters, and the interval is the only
-                 one where the confidence interval excludes zero.
-  days 3 to 7    slope +0.033, CI [-0.052, +0.118], p = 0.24.
-  days 7 to 14   slope -0.025, CI [-0.060, +0.010], p = 0.09.
+  days 0 to 3    slope +0.059 log10/day per doubling, p < 0.0001
+  days 3 to 7    slope +0.033, p = 0.15
+  days 7 to 14   slope -0.025, p < 0.0001
+
+These come from a bootstrap that resamples all three replicates at both ends of
+every interval, 20,000 draws. An earlier version regressed on the four
+concentration MEANS, which left two residual degrees of freedom and overstated
+the precision; a calibration against the literature caught it. The corrected
+figures change the finding in one important way. The late slope is not merely
+absent, it is significantly NEGATIVE, and the early-versus-late contrast is
+firm (+0.084, 95% CI [+0.037, +0.128], p < 0.0001) while the early-versus-middle
+contrast is not (+0.026, CI [-0.039, +0.086], p = 0.43).
+
+So the concentration dependence does not decay smoothly. It is positive early,
+indistinguishable from zero in the middle, and reversed late. "Present early and
+gone late" was the wrong description and is not used.
+
+The reversal must be read with exp20's censoring bound: by day 14 the highest
+arm is at 65 CFU/mL against an unstated quantification limit, and if it is
+censored its apparent rate is a lower bound, which is exactly the direction that
+would manufacture a negative slope. The defensible statement is that the
+early-versus-late contrast is real and its late sign is not established.
 
 Put in the terms a prescriber would use: dropping from 128 to 4 ug/mL over the
 first three days costs 68 per cent of the kill rate, and doing it after day
