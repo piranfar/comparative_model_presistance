@@ -38,6 +38,9 @@ STAGES = [
     ("exp21  the concentration slope, interval by interval",
      "src.experiments.exp21_sequential_and_combination"),
 
+    ("exp22  what a published tolerance classification tracks",
+     "src.experiments.exp22_tolerance_dynamic_range"),
+
     ("fig 1  a rate transfers; a clearance time does not",
      "src.figures.fig10_rate_vs_duration"),
     ("fig 2  the endpoint decides what is visible",

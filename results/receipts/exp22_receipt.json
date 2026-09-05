@@ -1,0 +1,208 @@
+{
+  "script": "src/experiments/exp22_tolerance_dynamic_range.py",
+  "utc": "2026-09-05T23:59:26+00:00",
+  "data_source": "eLife 93243 supplementary file 2",
+  "organism": "Mycobacterium tuberculosis, clinical isolates",
+  "n_isolates": 217,
+  "mpn_floor_per_ml": 23.0,
+  "floor_pile_up": {
+    "15d_smallest_values": {
+      "23": 18,
+      "230": 55,
+      "610": 1,
+      "1300": 1
+    },
+    "60d_smallest_values": {
+      "23": 6,
+      "230": 7,
+      "2300": 2,
+      "6100": 7
+    }
+  },
+  "headroom": [
+    {
+      "culture_age_days": 15,
+      "group": "cannot reach 4 logs",
+      "n_isolates": 33,
+      "n_at_mdk_ceiling": 33,
+      "fraction_at_ceiling": 1.0,
+      "fisher_p": 0.029956795544915107
+    },
+    {
+      "culture_age_days": 15,
+      "group": "has 4 logs of headroom",
+      "n_isolates": 184,
+      "n_at_mdk_ceiling": 162,
+      "fraction_at_ceiling": 0.8804347826086957,
+      "fisher_p": 0.029956795544915107
+    },
+    {
+      "culture_age_days": 60,
+      "group": "cannot reach 4 logs",
+      "n_isolates": 7,
+      "n_at_mdk_ceiling": 7,
+      "fraction_at_ceiling": 1.0,
+      "fisher_p": 1.0
+    },
+    {
+      "culture_age_days": 60,
+      "group": "has 4 logs of headroom",
+      "n_isolates": 203,
+      "n_at_mdk_ceiling": 192,
+      "fraction_at_ceiling": 0.9458128078817734,
+      "fisher_p": 1.0
+    }
+  ],
+  "isolates_at_floor": [
+    {
+      "culture_age_days": 15,
+      "n_isolates_at_floor": 18,
+      "start_density_fold_range": 265.2173913043478,
+      "apparent_survival_fold_range": 265.2173913043478,
+      "distinct_tolerance_labels_assigned": 2,
+      "label_counts": "{\"Low\": 12, \"Medium\": 6}"
+    },
+    {
+      "culture_age_days": 60,
+      "n_isolates_at_floor": 6,
+      "start_density_fold_range": 100.0,
+      "apparent_survival_fold_range": 100.00000000000001,
+      "distinct_tolerance_labels_assigned": 1,
+      "label_counts": "{\"Low\": 6}"
+    }
+  ],
+  "starting_density_by_resistance": {
+    "15d": {
+      "resistant_median_log10": 5.361727836017593,
+      "susceptible_median_log10": 6.361727836017593,
+      "fold_lower_in_resistant": 10.0,
+      "mannwhitney_p": 9.070609029008442e-14,
+      "pct_resistant_below_4log_headroom": 0.2619047619047619,
+      "pct_susceptible_below_4log_headroom": 0.07563025210084033
+    },
+    "60d": {
+      "resistant_median_log10": 7.361727836017593,
+      "susceptible_median_log10": 7.361727836017593,
+      "fold_lower_in_resistant": 1.0,
+      "mannwhitney_p": 0.004763730368981704,
+      "pct_resistant_below_4log_headroom": 0.047619047619047616,
+      "pct_susceptible_below_4log_headroom": 0.025210084033613446
+    }
+  },
+  "label_associations": [
+    {
+      "predictor": "growth",
+      "adjusted_for_start_density": true,
+      "culture_age_days": 15,
+      "endpoint_depth": "D5",
+      "n": 202,
+      "beta": 0.02655464308946514,
+      "p_value": 0.0024620797245331616,
+      "beta_after_adjusting_for_start_density": NaN,
+      "p_after_adjusting_for_start_density": NaN,
+      "survives_bh": true
+    },
+    {
+      "predictor": "resistance",
+      "adjusted_for_start_density": false,
+      "culture_age_days": 15,
+      "endpoint_depth": "D5",
+      "n": 202,
+      "beta": 0.25888427660220725,
+      "p_value": 0.0034652840068976065,
+      "beta_after_adjusting_for_start_density": 0.08870977372439988,
+      "p_after_adjusting_for_start_density": 0.3739741086569761,
+      "survives_bh": true
+    },
+    {
+      "predictor": "growth",
+      "adjusted_for_start_density": true,
+      "culture_age_days": 60,
+      "endpoint_depth": "D2",
+      "n": 196,
+      "beta": -0.019492831756624987,
+      "p_value": 0.059039665805103114,
+      "beta_after_adjusting_for_start_density": NaN,
+      "p_after_adjusting_for_start_density": NaN,
+      "survives_bh": false
+    },
+    {
+      "predictor": "growth",
+      "adjusted_for_start_density": true,
+      "culture_age_days": 15,
+      "endpoint_depth": "D2",
+      "n": 202,
+      "beta": 0.01159473928921269,
+      "p_value": 0.08119635742448339,
+      "beta_after_adjusting_for_start_density": NaN,
+      "p_after_adjusting_for_start_density": NaN,
+      "survives_bh": false
+    },
+    {
+      "predictor": "resistance",
+      "adjusted_for_start_density": false,
+      "culture_age_days": 15,
+      "endpoint_depth": "D2",
+      "n": 202,
+      "beta": 0.05153386655867172,
+      "p_value": 0.4446260231829673,
+      "beta_after_adjusting_for_start_density": -0.13181752522183218,
+      "p_after_adjusting_for_start_density": 0.07824477709049682,
+      "survives_bh": false
+    },
+    {
+      "predictor": "resistance",
+      "adjusted_for_start_density": false,
+      "culture_age_days": 60,
+      "endpoint_depth": "D2",
+      "n": 196,
+      "beta": -0.05506870063832086,
+      "p_value": 0.5486497034687539,
+      "beta_after_adjusting_for_start_density": -0.10720559227471887,
+      "p_after_adjusting_for_start_density": 0.2432301667264265,
+      "survives_bh": false
+    },
+    {
+      "predictor": "resistance",
+      "adjusted_for_start_density": false,
+      "culture_age_days": 60,
+      "endpoint_depth": "D5",
+      "n": 196,
+      "beta": 0.038948393378773156,
+      "p_value": 0.6797443931773826,
+      "beta_after_adjusting_for_start_density": -0.003967814543773688,
+      "p_after_adjusting_for_start_density": 0.9666933912275462,
+      "survives_bh": false
+    },
+    {
+      "predictor": "growth",
+      "adjusted_for_start_density": true,
+      "culture_age_days": 60,
+      "endpoint_depth": "D5",
+      "n": 196,
+      "beta": -0.00412792506996667,
+      "p_value": 0.6998776714646602,
+      "beta_after_adjusting_for_start_density": NaN,
+      "p_after_adjusting_for_start_density": NaN,
+      "survives_bh": false
+    }
+  ],
+  "culture_age_comparison": [
+    {
+      "culture_age_days": 15,
+      "n": 217,
+      "median_start_log10": 5.785329835010767,
+      "iqr_start_log10": 1.0,
+      "n_below_4log_headroom": 33,
+      "fraction_below_4log_headroom": 0.15207373271889402
+    },
+    {
+      "culture_age_days": 60,
+      "n": 210,
+      "median_start_log10": 7.361727836017593,
+      "iqr_start_log10": 0.4236019989931741,
+      "n_below_4log_headroom": 7,
+      "fraction_below_4log_headroom": 0.03333333333333333
+    }
+  ]
+}

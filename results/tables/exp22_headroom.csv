@@ -1,0 +1,5 @@
+culture_age_days,group,n_isolates,n_at_mdk_ceiling,fraction_at_ceiling,fisher_p
+15,cannot reach 4 logs,33,33,1.0,0.029956795544915107
+15,has 4 logs of headroom,184,162,0.8804347826086957,0.029956795544915107
+60,cannot reach 4 logs,7,7,1.0,1.0
+60,has 4 logs of headroom,203,192,0.9458128078817734,1.0
