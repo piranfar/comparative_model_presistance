@@ -27,10 +27,10 @@ emerges from the compartment structure rather than being imposed by a breakpoint
 Variance-based global sensitivity analysis then shows that which parameter
 governs killing is not a property of the drug but of the growth regime: for a
 slow grower the resuscitation rate of dormant cells carries 78% of the
-first-order variance in time to detection limit, while for a fast grower it
-carries none at all and 70% of the variance is interaction between replication
-and kill rate. We give the sampling designs under which each parameter can and
-cannot be estimated.
+first-order variance in time to detection limit, while for a fast grower its
+total-order index falls to $2 \times 10^{-5}$ and interactions account for
+roughly 70% of the variance. We give the sampling designs under which each
+parameter can and cannot be estimated.
 
 **Keywords:** antibiotic tolerance, bacterial persistence, pharmacodynamics,
 minimum duration for killing, practical identifiability, global sensitivity
@@ -90,8 +90,9 @@ and time to the detection limit is finite and computable rather than asserted.
 Third, and least expected, the identity of the parameter that governs killing is
 not fixed. It depends on the growth regime of the organism. For a slow grower the
 rate at which dormant cells resume replication dominates the variance in time to
-the detection limit; for a fast grower that same rate contributes nothing and the
-outcome is set by replication and kill rate acting jointly. A regimen-shortening
+the detection limit; for a fast grower the same rate falls four orders of
+magnitude in importance and most of the variance is carried by interactions
+rather than by any parameter alone. A regimen-shortening
 strategy built for one organism therefore has no structural reason to transfer to
 the other, and this is a prediction of the model rather than an observation about
 either species.
@@ -167,7 +168,7 @@ $$f = \frac{k_{S\to P}}{\lambda + k_{P\to S} + k_{S\to P}}, \qquad
 
 with $r_{\text{eff}} = r(1 - N_0/K)$. At $r_{\text{eff}} = 0$ this returns
 $\lambda = 0$ and collapses to the stationary-phase expression, as it must. While
-the population grows it is smaller: fourfold for the slow grower of Section 2.6
+the population grows it is smaller: fourfold for the slow grower of Section 2.5
 and sixfold for the fast one. Initialising at the stationary-phase value and then
 integrating an exponentially growing population overstates the dormant pool of
 the inoculum by that factor. The trajectory inherits the error, but does not
@@ -314,8 +315,8 @@ other parameter reaches a first-order index of 0.08, and interactions account fo
 factor of ten rather than a rank ordering among comparable contributors.
 
 For the fast grower, the same parameter carries essentially none of the
-variance. Its total-order index is $2.3	imes10^{-5}$ (bootstrap interval
-$1.9$–$2.7	imes10^{-5}$), four orders of magnitude below the dominant
+variance. Its total-order index is $2.3 \times 10^{-5}$ (bootstrap interval
+$1.9$–$2.7 \times 10^{-5}$), four orders of magnitude below the dominant
 parameters, and its first-order estimate is indistinguishable from zero, its
 bootstrap interval spanning zero. What governs the fast grower is the maximum kill rate together with the
 replication rate — and together is the operative word, since their total-order
@@ -332,8 +333,8 @@ occupies that compartment, the same rate has nothing to act on.
 
 Two things follow. The first is a prediction about transferability: an
 intervention that shortens treatment by accelerating resuscitation should work for
-a slow grower and do nothing for a fast one, and an intervention that raises the
-kill rate should behave in the opposite way. The second is methodological. A
+a slow grower and have little effect on a fast one, and an intervention that
+raises the kill rate should behave in the opposite way. The second is methodological. A
 one-at-a-time analysis run on the fast grower would report the two dominant
 parameters and miss two-thirds of the variance, and it would do so without any
 diagnostic indicating that it had.
@@ -371,10 +372,10 @@ so $t_c$ is determined by the other three. Treating it as a fourth free paramete
 is redundant under the two-subpopulation reading that motivates the equation in
 the first place; read instead as a purely phenomenological piecewise form, $t_c$
 is genuinely free and there is no redundancy, but then it is not the biological
-transition time it is reported as. Either way, a fitted $t_c$ does not measure
-what it is presented as measuring: under the first reading it duplicates
-information already in the other parameters, and under the second it is a
-descriptive feature of the curve with no claim on the underlying biology.
+transition time it is reported as. The redundancy is worth stating because it
+explains the profile likelihoods above, but it is the identifiability result that
+carries the practical weight: at the designs tested, whichever reading is
+intended, the data do not determine $t_c$.
 
 The claim here is about practical identifiability at the sampling designs tested,
 which span the range time-kill experiments use. It is not a structural result: no
@@ -391,9 +392,10 @@ Across the same four designs, $R^2$ exceeds 0.9 for both the closed-form
 biphasic law and the biexponential in three of the four, with a maximum
 difference between the two models of 0.098 (Figure 5). The first of these is the
 law whose second branch returns to the inoculum at the transition, raising the
-modelled population by up to three log$_{10}$ at that point; $R^2$ does not
-register this. Over the same fits the
-corrected Akaike information criterion differs by up to 81.5.
+modelled population by up to three log$_{10}$ at that point. A high $R^2$ neither
+reveals that defect nor rules it out: the value is compatible with both models,
+so it cannot be used to decide between them. Over the same fits the corrected
+Akaike information criterion differs by up to 81.5.
 
 The reason $R^2$ behaves this way on time-kill data is not subtle. The total sum
 of squares is dominated by the spread of the data across orders of magnitude, so
@@ -402,3 +404,200 @@ of it. It is not evidence that
 a persistence model is correct, and it cannot choose between candidate killing
 models. Information criteria, residual runs tests and profile
 likelihood each separate the two models cleanly on the same data.
+
+## 4. Discussion
+
+### 4.1 Positioning the model within existing frameworks
+
+The result of Section 3.3 sits in a literature that has approached the same
+question from three directions, and it agrees with none of them completely.
+
+**The algebra is not new.** Patra and Klumpp (2013) analysed a two-state
+persistence model and showed that under stress the terminal decay rate approaches
+the sum of the persister kill rate and the switching rate out of dormancy. When
+the persister kill rate is small, that sum collapses to the switching rate alone,
+which is the mechanism of Section 3.3 written down thirteen years ago. They did
+not apply it to treatment duration, did not include a concentration-dependent
+kill function, and performed no sensitivity analysis, so the quantitative
+ranking, the organism dependence and the identifiability consequences are not in
+their paper. But the mechanism is, and it should be read as their result rather
+than ours. What we add is the demonstration that this term dominates the outcome
+variance for one growth regime and is negligible for the other, which is a
+statement about relative magnitude that their analysis does not make.
+
+**The strongest clinical evidence points the other way, and cannot settle the
+question.** Magombedze et al. (2021) fitted a two-subpopulation model to serial
+sputum from 1,924 patients in the REMoxTB trial and ranked the kill rate of the
+slow-replicating subpopulation first, at 100% variable importance, as the
+determinant of time to extinction and therefore of required therapy duration.
+That is a far stronger evidential base than anything in this paper, and it is
+data rather than simulation.
+
+It also cannot test the claim made here. Their two subpopulations are uncoupled:
+the model contains no switching term, no resuscitation rate, and the word does
+not appear. A parameter absent from a model cannot be ranked by an analysis of
+that model, so the absence of resuscitation from their ranking is a property of
+the model structure and not evidence about the biology. The two results are
+compatible in the following sense: if the true system contains a resuscitation
+term, fitting a model without one will load its effect onto whichever parameter
+is structurally closest, and in their model that is the slow-phase kill rate.
+Section 3.1 gives the reason to expect exactly that, since the effective
+clearance rate of the dormant pool is approximately $k_{P\to S} + E_{\max,P}$ and
+a model containing only the second will absorb the first into it.
+
+We do not claim this is what happened. We claim that their design cannot
+distinguish the two, and that distinguishing them requires fitting a model with a
+switching term to data with enough resolution in the slow phase to identify it —
+which Section 3.4 shows is a demanding requirement rather than a routine one.
+
+**A competing explanation of the slow phase is better supported than persistence
+in at least one dataset.** Martinecz et al. (2023) set up the same dichotomy
+directly, parameterised both persistence and heteroresistance against rifampicin
+early bactericidal activity data, and rejected persistence: the slow phase
+accelerated with peak drug concentration, which switching-based persistence does
+not predict because exit from the non-susceptible state is concentration
+independent. Their persistence arm used in vitro replication rates that they
+concede are unlikely to match the in vivo values, and their window is fourteen
+days rather than the six-month duration horizon, but the argument is sound and
+the prediction it tests is one our model also makes. A model of the kind
+developed here should be confronted with that observation before its slow-phase
+behaviour is believed.
+
+**The qualitative claim is old.** That the subpopulation governing sterilising
+activity consists of bacilli dormant much of the time but occasionally
+metabolising for short periods is the stated conclusion of Dickinson and
+Mitchison (1981), from experiments on why rifampicin sterilises better than
+isoniazid. The idea that waking is what exposes these cells to the drug is
+theirs. What Section 3.3 adds is the rate parameter and its rank against the
+alternatives, not the mechanism.
+
+**A parsimonious alternative dispenses with switching altogether.** Abel Zur
+Wiesch et al. (2015) showed that chemical binding kinetics alone reproduce
+persister-like biphasic killing, post-antibiotic growth suppression and
+density-dependent effects, without any phenotypic switching term. If that account
+is sufficient, the resuscitation rate of Section 3.3 is not a real quantity but a
+lumped stand-in for binding and unbinding at the target. Our model cannot
+adjudicate this, because it assumes the two-state structure rather than deriving
+it. The distinguishing prediction is available, however: a binding-kinetics
+account ties the slow phase to drug concentration, whereas concentration-
+independent switching does not, and that is precisely the comparison Martinecz et
+al. made.
+
+Taken together: the mechanism is established, its dominance is not, the one large
+clinical dataset that bears on it cannot test it, and at least one careful study
+disfavours the persistence explanation of the slow phase in tuberculosis. The
+contribution of Section 3.3 is therefore the organism dependence and the
+quantification, offered as a hypothesis that specifies its own test, and not as a
+settled account of what governs treatment duration.
+
+### 4.2 What to measure
+
+The analysis implies a short experimental programme, and the requirements are
+stringent enough to be worth stating plainly.
+
+*To classify an isolate*, three quantities are needed: the MIC, MDK$_{99}$, and
+MDK$_{99.99}$. The first two are routine. The third is not, and Section 3.2
+explains why it is indispensable — persistence moves only the deep endpoint, so
+an assay reporting MIC and a bulk kill rate returns wild-type values for a
+persistent isolate. The requirement is four log$_{10}$ of dynamic range below the
+inoculum, with sampling that continues into the tail rather than stopping when
+the count approaches the detection limit.
+
+*To estimate a resuscitation rate*, the design must resolve the slow phase.
+Section 3.4 shows that the slow rate is identifiable for a slow grower in both
+designs tested and not identifiable for a fast grower, where killing completes
+before the slow phase is expressed. For a fast-growing organism the parameter is
+not estimable from a standard time-kill curve at all, and a reported value should
+be treated accordingly.
+
+*To compare organisms*, exposure must be matched to each organism's own MIC.
+Section 2.6 gives the size of the error otherwise: the same absolute
+concentration was 15.1 times the MIC of one parameter set and 5.0 times that of
+the other, and a contrast computed that way carries the exposure difference
+inside it.
+
+*To choose between models*, report an information criterion and a residual
+diagnostic. Section 3.5 shows $R^2$ above 0.9 for two models whose AICc differs by
+81.5, so a reported $R^2$ conveys almost nothing about which model is right.
+
+### 4.3 Scope and limitations
+
+**The model applies to a constant concentration.** Every result here is computed
+at fixed exposure. Extending to a pharmacokinetic profile requires replacing $C$
+with $C(t)$, which the structure accommodates without modification, but the
+sensitivity ranking is not guaranteed to survive that change: a fluctuating
+concentration gives dormant cells windows in which to resume replication at low
+drug levels, which should raise rather than lower the importance of the
+resuscitation rate, but this is an expectation and not a result.
+
+**There is no experimental data.** Parameter values are illustrative, chosen to
+reproduce documented qualitative behaviour, and the species labels are a
+convenience for discussing a slow and a fast growth regime rather than claims
+about *M. tuberculosis* and *S. aureus*. No quantitative statement about either
+organism should be drawn from them.
+
+**The model is deterministic.** At the copy numbers that matter for genuine
+sterilisation, extinction is a stochastic event, and a deterministic model cannot
+give an extinction probability or a relapse risk. This is why the endpoint here is
+time to the limit of detection and not time to sterilisation, and it is a limit on
+the question the model can be asked rather than on the accuracy of its answer.
+
+**Two compartments is a modelling choice.** Real populations are distributed in
+dormancy depth rather than divided into two states, and a graded model would
+replace the switching rates with a distribution. Two compartments is the smallest
+structure that separates the three strategies, which is what this paper needs; it
+is not a claim that bacteria have two states.
+
+**The Sobol ranges are wide and uniform in the logarithm.** A $\pm50\%$
+log-uniform range on every parameter treats them as equally uncertain, which they
+are not. Narrowing the range on well-characterised parameters would raise the
+apparent importance of the poorly-characterised ones, so the ranking should be
+read as conditional on that choice.
+
+## 5. Conclusion
+
+Written as single exponentials with different rate constants, resistance,
+tolerance and persistence are one mathematical object under three names, and no
+measurement can separate them. Given two compartments and a concentration
+response, they become three different measurements: a shift in concentration, a
+shift in duration, and a shift in the deep killing endpoint. Each is obtainable
+from a time-kill assay and a dilution series that laboratories already run,
+provided the assay reaches four log$_{10}$ below the inoculum.
+
+That is the practical content of this work. It converts a classification argued
+from mechanism into three numbers that can be reported and compared between
+laboratories. And once they are reported, the question of which parameter limits a
+regimen becomes answerable per organism and per drug rather than assumed. The
+analysis here shows the answer is not the same for a fast grower and a slow one:
+the parameter worth measuring, and the intervention worth developing, differ by
+growth regime. Whether that difference holds for real pathogens is now an
+experimental question with a specified design, which is the most useful thing a
+model without data can produce.
+
+## References
+
+All entries were verified against their PubMed record in September 2026. Digital object identifiers are given where one exists.
+
+Abel Zur Wiesch P, Abel S, Gkotzis S, Ocampo P, Engelstädter J, Hinkley T et al (2015) Classic reaction kinetics can explain complex patterns of antibiotic action. Sci Transl Med 7:287ra73. https://doi.org/10.1126/scitranslmed.aaa8760
+
+Balaban NQ, Helaine S, Lewis K, Ackermann M, Aldridge B, Andersson DI et al (2019) Definitions and guidelines for research on antibiotic persistence. Nat Rev Microbiol 17:441-448. https://doi.org/10.1038/s41579-019-0196-3
+
+Beal SL (2001) Ways to fit a PK model with some data below the quantification limit. J Pharmacokinet Pharmacodyn 28:481-504. https://doi.org/10.1023/a:1012299115260
+
+Brauner A, Fridman O, Gefen O, Balaban NQ (2016) Distinguishing between resistance, tolerance and persistence to antibiotic treatment. Nat Rev Microbiol 14:320-330. https://doi.org/10.1038/nrmicro.2016.34
+
+Dickinson JM, Mitchison DA (1981) Experimental models to explain the high sterilizing activity of rifampin in the chemotherapy of tuberculosis. Am Rev Respir Dis 123:367-371. https://doi.org/10.1164/arrd.1981.123.4.367
+
+Levin BR, Rozen DE (2006) Non-inherited antibiotic resistance. Nat Rev Microbiol 4:556-562. https://doi.org/10.1038/nrmicro1445
+
+Lewis K (2007) Persister cells, dormancy and infectious disease. Nat Rev Microbiol 5:48-56. https://doi.org/10.1038/nrmicro1557
+
+Magombedze G, Pasipanodya JG, Gumbo T (2021) Bacterial load slopes represent biomarkers of tuberculosis therapy success, failure, and relapse. Commun Biol 4:664. https://doi.org/10.1038/s42003-021-02184-0
+
+Martinecz A, Boeree MJ, Diacon AH, Dawson R, Hemez C, Aarnoutse RE, Abel Zur Wiesch P (2023) High rifampicin peak plasma concentrations accelerate the slow phase of bacterial decline in tuberculosis patients: evidence for heteroresistance. PLoS Comput Biol 19:e1011000. https://doi.org/10.1371/journal.pcbi.1011000
+
+Nielsen EI, Friberg LE (2013) Pharmacokinetic-pharmacodynamic modeling of antibacterial drugs. Pharmacol Rev 65:1053-1090. https://doi.org/10.1124/pr.111.005769
+
+Patra P, Klumpp S (2013) Population dynamics of bacterial persistence. PLoS One 8:e62814. https://doi.org/10.1371/journal.pone.0062814
+
+Regoes RR, Wiuff C, Zappala RM, Garner KN, Baquero F, Levin BR (2004) Pharmacodynamic functions: a multiparameter approach to the design of antibiotic treatment regimens. Antimicrob Agents Chemother 48:3670-3676. https://doi.org/10.1128/AAC.48.10.3670-3676.2004

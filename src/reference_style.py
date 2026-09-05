@@ -116,6 +116,37 @@ REFS = {
              year=2004,
              rest="Selection of a moxifloxacin dose that suppresses drug resistance in Mycobacterium tuberculosis, by use of an in vitro pharmacodynamic infection model and mathematical modeling. J Infect Dis 190:1642-1651",
              doi="10.1086/424849"),
+    # Added for the journal version's Discussion and Methods. Every entry below
+    # was verified against its PubMed record rather than recalled: the PMID
+    # first used for Abel Zur Wiesch et al. turned out to belong to a paper on
+    # prokaryotic flotillins, and the claim originally attributed to that paper
+    # was not the one it makes.
+    22: dict(cite="Beal 2001", sort=("Beal", 2001),
+             authors="Beal SL", year=2001,
+             rest="Ways to fit a PK model with some data below the quantification limit. J Pharmacokinet Pharmacodyn 28:481-504",
+             doi="10.1023/a:1012299115260"),
+    23: dict(cite="Patra and Klumpp 2013", sort=("Patra", 2013),
+             authors="Patra P, Klumpp S", year=2013,
+             rest="Population dynamics of bacterial persistence. PLoS One 8:e62814",
+             doi="10.1371/journal.pone.0062814"),
+    24: dict(cite="Magombedze et al. 2021", sort=("Magombedze", 2021),
+             authors="Magombedze G, Pasipanodya JG, Gumbo T", year=2021,
+             rest="Bacterial load slopes represent biomarkers of tuberculosis therapy success, failure, and relapse. Commun Biol 4:664",
+             doi="10.1038/s42003-021-02184-0"),
+    25: dict(cite="Martinecz et al. 2023", sort=("Martinecz", 2023),
+             authors="Martinecz A, Boeree MJ, Diacon AH, Dawson R, Hemez C, Aarnoutse RE, Abel Zur Wiesch P",
+             year=2023,
+             rest="High rifampicin peak plasma concentrations accelerate the slow phase of bacterial decline in tuberculosis patients: evidence for heteroresistance. PLoS Comput Biol 19:e1011000",
+             doi="10.1371/journal.pcbi.1011000"),
+    26: dict(cite="Abel Zur Wiesch et al. 2015", sort=("Abel Zur Wiesch", 2015),
+             authors="Abel Zur Wiesch P, Abel S, Gkotzis S, Ocampo P, Engelstädter J, Hinkley T et al",
+             year=2015,
+             rest="Classic reaction kinetics can explain complex patterns of antibiotic action. Sci Transl Med 7:287ra73",
+             doi="10.1126/scitranslmed.aaa8760"),
+    27: dict(cite="Dickinson and Mitchison 1981", sort=("Dickinson", 1981),
+             authors="Dickinson JM, Mitchison DA", year=1981,
+             rest="Experimental models to explain the high sterilizing activity of rifampin in the chemotherapy of tuberculosis. Am Rev Respir Dis 123:367-371",
+             doi="10.1164/arrd.1981.123.4.367"),
     21: dict(cite="Conlon et al. 2013", sort=("Conlon", 2013),
              authors="Conlon BP, Nakayasu ES, Fischer LE, LoSasso G, Kim W, Lewis K et al",
              year=2013,
@@ -135,6 +166,20 @@ def citation(numbers: list[int]) -> str:
     """Render one bracketed group as a name-and-year citation."""
     keys = sorted((REFS[n] for n in numbers), key=lambda r: r["sort"])
     return "(" + "; ".join(k["cite"] for k in keys) + ")"
+
+
+def cited_in(text: str) -> list[dict]:
+    """The entries actually cited in `text`, alphabetised.
+
+    Springer is explicit that the list "should only include works that are cited
+    in the text", and the two manuscripts drawn from this project cite different
+    subsets. Citations are matched with whitespace collapsed, because a citation
+    broken across a line break is still a citation, and in both the parenthetical
+    and the narrative form.
+    """
+    flat = re.sub(r"\s+", " ", re.sub(r"\((\d{4})\)", r"\1", text))
+    return sorted((r for r in REFS.values() if r["cite"] in flat),
+                  key=lambda r: r["sort"])
 
 
 def convert(text: str) -> str:
