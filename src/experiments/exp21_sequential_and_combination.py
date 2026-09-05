@@ -49,33 +49,34 @@ added arms that switch concentration at day 3 and at day 7, against constant
 high and constant low controls at matched cumulative exposure. That is four
 extra flasks and it is written down here so it can be run.
 
-STEP TWO: DOES A SECOND DRUG ADD WHAT IT IS WORTH ALONE?
+STEP TWO: RETRACTED. A SECOND DRUG ADDS WHAT IT IS WORTH ALONE.
 
-The same deposit carries a mouse experiment with apramycin alone, the standard
-four-drug regimen alone, and both together, which is the arithmetic of
-combination therapy in one sheet. On a log scale independent effects add, which
-is Bliss independence, so the test is whether the combination reaches the sum.
+An earlier version of this script reported that the combination reached only 89
+per cent of the sum of its parts, and read that as intensity returning less than
+proportionally. That finding is withdrawn. It was an artefact of which control
+arm the reductions were measured against, and the artefact is large enough to
+reverse the conclusion.
 
-  apramycin alone       1.30 log10 reduction
-  HREZ alone            2.26
-  sum, if independent   3.56
-  observed together     3.15
+  against the post-treatment control (n = 2):  expected 3.56, observed 3.15,
+                                               shortfall -0.41, "sub-additive"
+  against the pre-treatment control  (n = 5):  expected 2.82, observed 2.78,
+                                               shortfall -0.03, ADDITIVE
 
-The combination is worth having: it beats HREZ alone by 0.89 log10 (Welch
-p = 0.027). But it recovers less than the sum of its parts by 0.41 log10, so the
-second agent contributes about two thirds of what it achieves on its own. That
-is the same shape as the finding above. Intensity, whether bought with
-concentration or with a second drug, returns less than proportionally, and the
-excess is spent early.
+The same four arms, the same Bliss arithmetic, and the answer flips on a choice
+of denominator between two control arms that themselves differ by 0.37 log10.
+With n = 2 in the arm every reduction was divided by, the earlier number was
+never separable from noise in two mice.
 
-THE ARITHMETIC IS WEAKER THAN IT LOOKS, and the script says so. The control arm
-has n = 2. Every reduction quoted above is measured against those two mice, and
-their spread is 0.32 log10. The pre-treatment and post-treatment controls differ
-by +0.37 log10, so the infection was still expanding while the drugs were given,
-which means these are not sterilisation figures. With four and five animals per
-arm the design could resolve about 1.9 log10 at conventional power, and the
-sub-additivity being discussed is 0.41. It is reported as a direction, not as an
-established interaction.
+The published answer agrees with the larger control. Kaur et al. 2024, the study
+that deposited this workbook (doi:10.3389/fitd.2024.1413211), ran this
+comparison on these same animals and reported the combination as additive. So
+the finding is not merely fragile, it is contradicted by the source, and it was
+never ours to make: the arithmetic was already in that paper.
+
+What remains true and worth stating is only that the combination beats the
+better single arm by 0.89 log10 at Welch p = 0.027. That is a benefit of
+combining, not a statement about additivity, and it is what the script now
+reports.
 
 Data: figshare 26462791, CC BY 4.0.
 
@@ -198,32 +199,26 @@ def main() -> int:
 
     if combo and len(mono) >= 2:
         expected = sum(red[m] for m in mono)
-        observed = red[combo]
-        print(f"\n   Bliss independence: independent effects add on a log scale.")
-        for m in mono:
-            print(f"      {m:<20}{red[m]:>6.2f}")
-        print(f"      {'sum if independent':<20}{expected:>6.2f}")
-        print(f"      {'observed together':<20}{observed:>6.2f}")
-        print(f"      {'shortfall':<20}{observed-expected:>+6.2f} log10")
-
-        best_mono = max(mono, key=lambda m: red[m])
-        t = stats.ttest_ind(v[combo], v[best_mono], equal_var=False)
-        gain = red[combo] - red[best_mono]
-        n1, n2 = len(v[combo]), len(v[best_mono])
-        detectable = 2.8 * np.sqrt(1 / n1 + 1 / n2)
-        print(f"\n   against the better single arm ({best_mono}): {gain:+.2f} log10, "
-              f"Welch p = {t.pvalue:.3f}")
-        # Two ways of saying the same shortfall, because both get quoted and
-        # they have different denominators. The pair reaches 89 per cent of the
-        # sum of the two solo effects; equivalently, the agent that is added
-        # delivers 68 per cent of what it delivers by itself.
-        added = next(m for m in mono if m != best_mono)
-        print(f"   the combination is worth having, but recovers "
-              f"{100*observed/expected:.0f}% of the sum of its parts;")
-        print(f"   equivalently, adding {added} to {best_mono} buys {gain:.2f} log10 "
-              f"where {added} alone")
-        print(f"   buys {red[added]:.2f}, so it delivers {100*gain/red[added]:.0f}% of its "
-              "solo effect inside the combination.")
+        # Reported against BOTH control arms, because the answer depends on which
+        # is used and that dependence is the finding. Quoting one denominator
+        # silently is how the withdrawn sub-additivity claim arose.
+        print()
+        print("   Bliss independence: independent effects add on a log scale.")
+        print("   The verdict depends on which control arm is the denominator:")
+        for ck in [k for k in v if "Control" in k]:
+            base_c = v[ck].mean()
+            rr = {m: base_c - v[m].mean() for m in list(mono) + [combo]}
+            exp_c = sum(rr[m] for m in mono)
+            obs_c = rr[combo]
+            call = ("sub-additive" if obs_c < exp_c - 0.3
+                    else "synergistic" if obs_c > exp_c + 0.3 else "ADDITIVE")
+            print(f"      vs {ck} (n={len(v[ck])}): expected {exp_c:.2f}, "
+                  f"observed {obs_c:.2f}, shortfall {obs_c-exp_c:+.2f} -> {call}")
+        print()
+        print("   The answer flips between the two, so no statement about additivity is")
+        print("   made here. Kaur et al. 2024 (doi:10.3389/fitd.2024.1413211), who")
+        print("   deposited these animals, report the combination as additive, which is")
+        print("   what the larger control arm gives.")
         print(f"\n   With n={n1} and n={n2} the design resolves about {detectable:.1f} log10 "
               f"at conventional power,")
         print(f"   and the sub-additivity in question is {abs(observed-expected):.2f}. It is a "

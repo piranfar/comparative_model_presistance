@@ -23,9 +23,29 @@ sampled to day 21 or 28, in six laboratories blinded and labelled A to F. Each
 sample was plated at four volumes, so each carries four readings with four
 different limits of quantification.
 
-WHAT THIS SCRIPT FINDS, stated before the methods so the methods can be judged
-against it. The starting density, which the protocol fixes, spans more than
-three log10 between laboratories. That single unreported difference decides
+WHAT IS ALREADY PUBLISHED, AND MUST NOT BE RESTATED AS NEW. van Wijk et al.
+report the inoculum spread themselves, in their own abstract: "Baseline
+bacterial burden per laboratory ranged from 3.29 to 5.97 log10 CFU/mL", a 2.68
+log10 spread, which is reproduced exactly from the raw data by taking day-zero
+uncensored readings across all four plating volumes. Their conclusion is also
+close to one of this script's: "Baseline bacterial burden varied between
+laboratories but variability was limited in net drug effect." That the burden
+varies and the effect varies less is theirs, not ours.
+
+The figure this script computes, 3.58 log10, is a different quantity: it
+restricts to the most sensitive plating and includes day one. It is not a
+correction of their number and is not reported as one.
+
+WHAT THIS SCRIPT ADDS is downstream of that. They never construct a duration
+endpoint: there is no time-to-event analysis, no Kaplan-Meier, no Cox, and no
+count of how often a laboratory produces no duration value at all. They also
+excluded every reading above or below the quantification limit from numerical
+analysis, where this script keeps them and treats them as censored. What follows
+is therefore about what the inoculum does to a duration endpoint, which is open,
+rather than about the inoculum spread, which is not.
+
+The starting density, which the protocol fixes, spans more than three log10
+between laboratories on the measure used here. That single unreported difference decides
 whether a flask is ever recorded as cleared: it classifies clearance with an
 area under the curve of 0.97, and once it is in the model the laboratory itself
 stops explaining anything. The kill rate, fitted as a slope, is far more
