@@ -1,0 +1,62 @@
+{
+  "script": "src/experiments/exp28_standard_vs_realised.py",
+  "utc": "2026-09-06T13:44:55+00:00",
+  "half_mcfarland_nominal_cfu_per_ml": 150000000.0,
+  "clsi_m26_target_cfu_per_ml": 500000.0,
+  "era4tb": {
+    "n_laboratories_with_clean_day0": 4,
+    "spread_log10": 2.33492058252653,
+    "spread_fold": 216.23230733015092,
+    "n_below_clsi_target": 3,
+    "largest_shortfall_fold": 107.5874179851069,
+    "treated_vs_untreated_max_gap_log10": 0.12655251816620083,
+    "n_laboratories_with_both_arms": 2
+  },
+  "era4tb_per_laboratory": [
+    {
+      "laboratory": "B",
+      "n_flasks": 3,
+      "untreated_day0_log10": 3.6672085194289132,
+      "treated_day0_log10": NaN,
+      "realised_cfu_per_ml": 4647.38358224392,
+      "fold_from_clsi_target": 0.009294767164487839,
+      "fold_from_half_mcfarland": 3.0982557214959465e-05
+    },
+    {
+      "laboratory": "C",
+      "n_flasks": 3,
+      "untreated_day0_log10": 4.6055242320087,
+      "treated_day0_log10": 4.661215807813558,
+      "realised_cfu_per_ml": 40320.34430607967,
+      "fold_from_clsi_target": 0.08064068861215934,
+      "fold_from_half_mcfarland": 0.0002688022953738645
+    },
+    {
+      "laboratory": "D",
+      "n_flasks": 3,
+      "untreated_day0_log10": 4.6524559361438405,
+      "treated_day0_log10": 4.779008454310041,
+      "realised_cfu_per_ml": 44921.674447749676,
+      "fold_from_clsi_target": 0.08984334889549936,
+      "fold_from_half_mcfarland": 0.0002994778296516645
+    },
+    {
+      "laboratory": "F",
+      "n_flasks": 3,
+      "untreated_day0_log10": 6.002129101955443,
+      "treated_day0_log10": NaN,
+      "realised_cfu_per_ml": 1004914.475036865,
+      "fold_from_clsi_target": 2.00982895007373,
+      "fold_from_half_mcfarland": 0.0066994298335791
+    }
+  ],
+  "dubey": {
+    "n_cultures": 20,
+    "nominal_stated_in_methods": 100000.0,
+    "measured_min": 700000.0,
+    "measured_median": 1215000.0,
+    "measured_max": 2800000.0,
+    "median_fold_above_nominal": 12.15,
+    "log10_discrepancy": 1.084576277934331
+  }
+}
