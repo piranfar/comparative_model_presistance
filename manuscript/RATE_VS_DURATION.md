@@ -594,7 +594,8 @@ outright, since three laboratories produce none at all.
 ### 6. A turbidity standard fixes what goes in, not what the plate can resolve
 
 A time-kill inoculum is not chosen freely: a suspension is matched to 0.5
-McFarland and diluted, and CLSI M26 puts the target near 5 × 10⁵ CFU/mL. If the
+McFarland and diluted, and CLSI M26-A (approved guideline, 1999, since archived)
+puts the target near 5 × 10⁵ CFU/mL. If the
 protocol fixes the starting density, the preceding sections describe a variable
 that does not vary.
 

@@ -317,11 +317,13 @@ sit on the same most-probable-number rung — and since no section analyses the
 
 **m11 — MDK99 notation is never expanded.** Done, in the legend of Table 14 [8].
 
-**m12 — CLSI M26 lacks an edition and date. OUTSTANDING.** This will be supplied
-with the reference list (C3). The reviewer's substantive point, that M26 is a
-general bacterial standard applied to a mycobacterial protocol, is already
-conceded in Section 6 and will be cited alongside the mycobacteria-specific
-guidance.
+**m12 — CLSI M26 lacks an edition and date.** Done in the text: Section 6 now
+names M26-A, the approved guideline of 1999, and notes that CLSI has since
+archived it, so a reader can see that the 5 × 10⁵ CFU/mL target we quote comes
+from a document no longer maintained. The full entry follows with the reference
+list (C3). The reviewer's substantive point, that M26 is a general bacterial
+standard applied to a mycobacterial protocol, is already conceded in that section
+and will be cited alongside the mycobacteria-specific guidance.
 
 **m13 — Table 8 [5]'s final column header says "all arms".** Done. The header
 reads "treated arms", which the denominator of 12 per laboratory reflects.
