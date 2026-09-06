@@ -49,7 +49,7 @@ resistance, which does not: resistant isolates enter ten-fold lower and lose
 two-thirds of their apparent tolerance once that is accounted for.
 
 In a six-laboratory exercise distributing one strain under one protocol, the
-population that fell faster crossed the detection limit later in 37 per cent of
+population that fell faster crossed the detection limit later in 36.6 per cent
 comparisons, though the kill rate still carries more of the spread. A tolerance
 call reported without its starting density and quantification limit cannot be
 interpreted.
@@ -847,7 +847,9 @@ on the curve *L*/*N₀*, which is what a reading at the floor computes, so the
 265-fold span in their apparent survival is exactly the 265-fold span in their
 starting densities. The dotted lines are the deposited classification
 thresholds: the isolates fall either side of the low/medium cut according to
-where they began, not according to what rifampicin did.
+where they began, not according to what rifampicin did. Because a floor reading
+bounds the class from above, the twelve below the cut keep their label and the
+six above it are the undecidable ones.
 
 ![Figure 2](../results/figures/fig10_rate_vs_duration.png)
 

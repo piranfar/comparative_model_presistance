@@ -26,7 +26,7 @@ resistance, which does not: resistant isolates enter ten-fold lower and lose
 two-thirds of their apparent tolerance once that is accounted for.
 
 In a six-laboratory exercise distributing one strain under one protocol, the
-population that fell faster crossed the detection limit later in 37 per cent of
+population that fell faster crossed the detection limit later in 36.6 per cent
 comparisons, though the kill rate still carries more of the spread. A tolerance
 call reported without its starting density and quantification limit cannot be
 interpreted.

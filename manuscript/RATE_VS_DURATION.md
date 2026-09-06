@@ -690,7 +690,9 @@ on the curve *L*/*N₀*, which is what a reading at the floor computes, so the
 265-fold span in their apparent survival is exactly the 265-fold span in their
 starting densities. The dotted lines are the deposited classification
 thresholds: the isolates fall either side of the low/medium cut according to
-where they began, not according to what rifampicin did.
+where they began, not according to what rifampicin did. Because a floor reading
+bounds the class from above, the twelve below the cut keep their label and the
+six above it are the undecidable ones.
 
 **Figure 2. Where the inoculum is set by protocol, the two summaries still
 diverge.** Six laboratories, one written protocol, one stock of *M. tuberculosis*
