@@ -1,3 +1,3 @@
-group,n,pct_determinable,pct_deep_endpoint_unreachable,median_headroom_log10,fisher_p_unreachable
+group,n,pct_measured,pct_deep_endpoint_unreachable,median_headroom_log10,fisher_p_unreachable
 IR,84,91.66666666666666,26.190476190476193,4.0,0.0005630647809615917
 IS,119,90.75630252100841,7.563025210084033,5.0,0.0005630647809615917

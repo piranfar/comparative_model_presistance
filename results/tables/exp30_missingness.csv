@@ -1,0 +1,29 @@
+culture_age_days,endpoint_depth,stage,n_dropped,n_kept,kept_median_start_log10,dropped_median_start_log10,start_density_mannwhitney_p,kept_pct_resistant,dropped_pct_resistant,resistance_fisher_p,note
+15,D2,"susceptibility not IS or IR (MDR, MDR-G)",14.0,,,,,,,,
+15,D2,"tolerance label is 'MDR', a fourth category not a level",0.0,,,,,,,,
+15,D2,tolerance label missing,0.0,,,,,,,,
+15,D2,starting density missing,0.0,,,,,,,,
+15,D2,growth (Time_to_0.4) missing,1.0,,,,,,,,
+15,D2,KEPT (all IS/IR analysis set),,202.0,5.785329835010767,5.361727836017593,0.3805034858217764,41.089108910891085,6.666666666666667,,"susceptibility differs by construction, not by chance: the first stage drops the MDR and MDR-G isolates on purpose"
+15,D2,"dropped for missingness only, within IS/IR",1.0,,5.785329835010767,6.785329835010767,,41.089108910891085,100.0,0.41379310344827586,"the informative comparison: these rows were lost to missing values, not excluded by design"
+15,D5,"susceptibility not IS or IR (MDR, MDR-G)",14.0,,,,,,,,
+15,D5,"tolerance label is 'MDR', a fourth category not a level",0.0,,,,,,,,
+15,D5,tolerance label missing,0.0,,,,,,,,
+15,D5,starting density missing,0.0,,,,,,,,
+15,D5,growth (Time_to_0.4) missing,1.0,,,,,,,,
+15,D5,KEPT (all IS/IR analysis set),,202.0,5.785329835010767,5.361727836017593,0.3805034858217764,41.089108910891085,6.666666666666667,,"susceptibility differs by construction, not by chance: the first stage drops the MDR and MDR-G isolates on purpose"
+15,D5,"dropped for missingness only, within IS/IR",1.0,,5.785329835010767,6.785329835010767,,41.089108910891085,100.0,0.41379310344827586,"the informative comparison: these rows were lost to missing values, not excluded by design"
+60,D2,"susceptibility not IS or IR (MDR, MDR-G)",14.0,,,,,,,,
+60,D2,"tolerance label is 'MDR', a fourth category not a level",0.0,,,,,,,,
+60,D2,tolerance label missing,6.0,,,,,,,,
+60,D2,starting density missing,0.0,,,,,,,,
+60,D2,growth (Time_to_0.4) missing,1.0,,,,,,,,
+60,D2,KEPT (all IS/IR analysis set),,196.0,5.785329835010767,5.361727836017593,0.5487171969450579,40.30612244897959,23.809523809523807,,"susceptibility differs by construction, not by chance: the first stage drops the MDR and MDR-G isolates on purpose"
+60,D2,"dropped for missingness only, within IS/IR",7.0,,5.785329835010767,6.361727836017593,0.4558738538090459,40.30612244897959,71.42857142857143,0.12827767412378047,"the informative comparison: these rows were lost to missing values, not excluded by design"
+60,D5,"susceptibility not IS or IR (MDR, MDR-G)",14.0,,,,,,,,
+60,D5,"tolerance label is 'MDR', a fourth category not a level",0.0,,,,,,,,
+60,D5,tolerance label missing,6.0,,,,,,,,
+60,D5,starting density missing,0.0,,,,,,,,
+60,D5,growth (Time_to_0.4) missing,1.0,,,,,,,,
+60,D5,KEPT (all IS/IR analysis set),,196.0,5.785329835010767,5.361727836017593,0.5487171969450579,40.30612244897959,23.809523809523807,,"susceptibility differs by construction, not by chance: the first stage drops the MDR and MDR-G isolates on purpose"
+60,D5,"dropped for missingness only, within IS/IR",7.0,,5.785329835010767,6.361727836017593,0.4558738538090459,40.30612244897959,71.42857142857143,0.12827767412378047,"the informative comparison: these rows were lost to missing values, not excluded by design"

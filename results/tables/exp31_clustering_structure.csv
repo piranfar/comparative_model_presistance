@@ -1,0 +1,8 @@
+deposit,level,unit,n_units,n_parents,mean_per_parent,note
+Vijay clinical,1,isolate (row),217,174.0,1.2471264367816093,"Archive and Sample-ID are both unique per row, so neither is the parent key"
+Vijay clinical,2,patient (NOT RECOVERABLE),174,,,"at least 174 patients; 43 follow-up isolates come from patients already represented, but the deposit does not say which, so up to 86 rows sit in clusters of two"
+ERA4TB six-laboratory,1,reading (one plating),2775,699.0,3.9699570815450644,unique on institute+sample+replicate+plating format+time (0 collisions); using volume instead collides 696 times
+ERA4TB six-laboratory,2,flask-visit,699,93.0,7.516129032258065,up to four platings of one culture at one time point
+ERA4TB six-laboratory,3,flask (replicate),93,31.0,3.0,72 of them in treated arms
+ERA4TB six-laboratory,4,treatment arm in a laboratory,31,6.0,5.166666666666667,five arms per laboratory; institute E also deposits an inoculum check
+ERA4TB six-laboratory,5,laboratory,6,1.0,6.0,"THE ONLY LEVEL AT WHICH BETWEEN-LABORATORY CLAIMS REPLICATE. Six clusters, one written protocol, one stock."

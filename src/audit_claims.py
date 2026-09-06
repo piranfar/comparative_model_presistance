@@ -84,12 +84,12 @@ def main() -> int:
         o = r["observability"]["15d"]
         rows.append(check("tolerance calls classified, 15d (2: 203)",
                           203, float(o["n_calls"]), 0.001))
-        rows.append(check("determinable calls (2: 185)",
-                          185, float(o["determinable"]), 0.001))
-        rows.append(check("labels forced by the inoculum alone (2: 12)",
-                          12, float(o["forced_by_inoculum"]), 0.001))
-        rows.append(check("labels undecidable from the assay (2: 6)",
-                          6, float(o["undecidable"]), 0.001))
+        rows.append(check("calls resting on a measured fraction (2: 185)",
+                          185, float(o["measured"]), 0.001))
+        rows.append(check("censored calls with one compatible class (2: 12)",
+                          12, float(o["single_compatible_class"]), 0.001))
+        rows.append(check("censored calls with several compatible (2: 6)",
+                          6, float(o["multiple_compatible_classes"]), 0.001))
         g = {x["group"]: x for x in r["by_susceptibility_group"]["15d"]}
         if "IR" in g and "IS" in g:
             rows.append(check("deep endpoint unreachable, resistant (2: 26.2%)",
@@ -104,6 +104,146 @@ def main() -> int:
                           28, float(f["n_short_of_4_logs"].min()), 0.001))
         rows.append(check("short of 4 logs at the inferred floor (methods: 33)",
                           33, float(f["n_short_of_4_logs"].max()), 0.001))
+
+    # --- exp29, what L is and what a different L would cost ---------------
+    r = receipt("exp29_receipt.json")
+    if r is not None:
+        rows.append(check("deposits stating an LOQ with a value (Methods: 0)",
+                          0, float(r["n_datasets_stating_a_loq_with_a_value"]), 1.0))
+
+    # --- exp30, the label refitted as an ordered outcome -------------------
+    f = load("exp30_model_comparison.csv")
+    if f is not None:
+        fam = f[f.in_bh_family]
+        rows.append(check("ordinal family members (4: 8)",
+                          8, float(len(fam)), 0.001))
+        rows.append(check("ordinal members surviving BH (4: 2)",
+                          2, float(fam.survives_bh_ordinal.sum()), 0.001))
+        rows.append(check("linear members surviving BH, same family (S3: 2)",
+                          2, float(fam.survives_bh_linear.sum()), 0.001))
+        rows.append(check("every member agrees in direction (S3: 8 of 8)",
+                          8, float(fam.same_direction.sum()), 0.001))
+        g = fam.set_index(["predictor", "culture_age_days", "endpoint_depth"])
+        rows.append(check("resistance odds ratio, 15 d D5 (4: 2.32)",
+                          2.317, float(g.loc[("resistance", 15, "D5"), "odds_ratio"]), 0.01))
+        rows.append(check("growth odds ratio, 15 d D5 adjusted (4: 1.096)",
+                          1.096, float(g.loc[("growth", 15, "D5"), "odds_ratio"]), 0.01))
+        rows.append(check("baseline-only resistance loses BH (4: 0 = no)",
+                          0, float(g.loc[("resistance", 15, "D5"),
+                                         "survives_bh_ordinal_baseline_only"]), 1.0))
+        rows.append(check("baseline-only growth keeps BH (4: 1 = yes)",
+                          1, float(g.loc[("growth", 15, "D5"),
+                                         "survives_bh_ordinal_baseline_only"]), 0.001))
+
+    # --- exp31, what survives once the clustering is respected -------------
+    r = receipt("exp31_receipt.json")
+    if r is not None:
+        c = r["clinical_clustering"]
+        rows.append(check("baseline isolates, one per patient (4: 174)",
+                          174, float(c["n_baseline_isolates"]), 0.001))
+        rows.append(check("follow-up isolates from repeat patients (4: 43)",
+                          43, float(c["n_follow_up_isolates"]), 0.001))
+        rows.append(check("rows in clusters of two (4: 86)",
+                          86, float(c["n_rows_potentially_non_independent"]), 0.001))
+
+        p = r["paired_panels"]
+        rows.append(check("isolates in both panels (4: 210)",
+                          210, float(p["n_isolates_in_both_panels"]), 0.001))
+        rows.append(check("lose the headroom shortfall between panels (4: 26)",
+                          26, float(p["paired_short"]["n_only_first"]), 0.001))
+        rows.append(check("gain one (4: 0)",
+                          0, float(p["paired_short"]["n_only_second"]), 1.0))
+        rows.append(check("paired McNemar on the shortfall (4: 3.0e-8)",
+                          2.98e-8, float(p["paired_short"]["p_value"]), 0.02))
+        rows.append(check("leave the floor between panels (4: 11)",
+                          11, float(p["paired_at_floor"]["n_only_first"]), 0.001))
+
+        e = r["era4tb_clearance_vs_density"]
+        rows.append(check("laboratory-level exact p (5: 0.10)",
+                          0.10, float(e["laboratory_level_exact_p_two_sided"]), 0.01))
+        rows.append(check("smallest p this design can return (5: 0.10)",
+                          0.10, float(e["smallest_two_sided_p_this_design_can_return"]), 0.01))
+        rows.append(check("laboratory and arm both fixed, floor p (5: 0.167)",
+                          0.1667, float(e["restricted_permutation"]["laboratory and arm"]
+                                        ["smallest_attainable_p"]), 0.01))
+
+        rows.append(check("between-laboratory share of starting density (5: 87.0%)",
+                          0.870, float(r["era4tb_starting_density_variance"]
+                                       ["observed_share"]), 0.01))
+        rows.append(check("between-laboratory share of within-arm kill rate (5: 33.0%)",
+                          0.330, float(r["era4tb_kill_rate_variance"]["observed_share"]), 0.01))
+
+        h = r["era4tb_headroom_spread_100ul"]
+        rows.append(check("laboratories behind delta h at 100 uL (6: 4)",
+                          4, float(h["n_laboratories"]), 0.001))
+        rows.append(check("delta h at 100 uL (6: 2.33)",
+                          2.335, float(h["observed_range"]), 0.01))
+
+        v = r["verdicts"]
+        rows.append(check("conclusions that survive clustering (12: 20)",
+                          20, float(v["SUPPORTED"]), 0.001))
+        rows.append(check("conclusions weakened by clustering (12: 7)",
+                          7, float(v["WEAKENED"]), 0.001))
+        rows.append(check("conclusions that do not survive (12: 5)",
+                          5, float(v["NOT SUPPORTED"]), 0.001))
+
+        b = r["clinical_baseline_only_15d"]
+        rows.append(check("baseline-only short of 4-log headroom (4: 21)",
+                          21, float(b["n_short_of_4_logs"]), 0.001))
+        rows.append(check("baseline-only ceiling Fisher p (1: 0.137)",
+                          0.137, float(b["ceiling_fisher_p"]), 0.02))
+
+    # --- exp32, the crossing event and what follows it ---------------------
+    r = receipt("exp32_receipt.json")
+    if r is not None:
+        k = r["recrossing_plating_key"]
+        rows.append(check("series under the plating key (5: 360)",
+                          360, float(k["n_series"]), 0.001))
+        rows.append(check("flasks behind them (5: 90)", 90, float(k["n_flasks"]), 0.001))
+        rows.append(check("series that ever cross (5: 140)",
+                          140, float(k["n_ever_crossed_below"]), 0.001))
+        rows.append(check("of those, series that return above (5: 84)",
+                          84, float(k["n_returned_above"]), 0.001))
+        rows.append(check("fraction of crossers returning (5: 60.0%)",
+                          0.600, float(k["fraction_of_crossers_returning"]), 0.01))
+        rows.append(check("median days below before returning (5: 4)",
+                          4.0, float(k["days_below_before_return"]["median"]), 0.01))
+        rows.append(check("returning within three days (5: 38)",
+                          38, float(k["n_returning_within_three_days"]), 0.001))
+        rows.append(check("volume key collides, plating key does not (5: 0)",
+                          0, float(r["duplicate_key_resolution"]
+                                   ["condition_keys_with_more_than_one_row"]), 1.0))
+
+    f = load("exp32_transitions.csv")
+    if f is not None:
+        o = f[f.stratum_kind == "overall"].iloc[0]
+        rows.append(check("visit-to-visit transitions (13: 2232)",
+                          2232, float(o.n_visit_pairs), 0.001))
+        rows.append(check("above to below (13: 144)", 144, float(o.above_to_below), 0.001))
+        rows.append(check("below to above (13: 95)", 95, float(o.below_to_above), 0.001))
+        rows.append(check("P(leaving the below state) (13: 0.222)",
+                          0.222, float(o.p_below_to_above), 0.01))
+        rows.append(check("series with one crossing that holds (13: 56)",
+                          56, float(o.n_one_crossing_no_return), 0.001))
+
+    f = load("exp32_interval_censored.csv")
+    if f is not None:
+        g = f.set_index("stratum")
+        a = "all arms, 100 uL quadruplicate"
+        rows.append(check("interval-censored t10, 100 uL (5: 1.82 d)",
+                          1.819, float(g.loc[a, "weibull_interval_t10_days"]), 0.01))
+        rows.append(check("naive t10, same stratum (5: 2.95 d)",
+                          2.953, float(g.loc[a, "weibull_naive_t10_days"]), 0.01))
+        rows.append(check("interval-censored t25, 100 uL (5: 9.64 d)",
+                          9.637, float(g.loc[a, "weibull_interval_t25_days"]), 0.01))
+        # the correction has a sign: the interval curve sits BELOW the naive one
+        rows.append(check("Turnbull minus naive KM at day 3 (5: -0.081)",
+                          -0.0814, float(g.loc[a, "turnbull_minus_km_day3"]), 0.02))
+        t = "treated arms, all four platings"
+        rows.append(check("treated arms, interval t25 (5: 3.67 d)",
+                          3.670, float(g.loc[t, "weibull_interval_t25_days"]), 0.01))
+        rows.append(check("treated arms, naive t25 (5: 5.77 d)",
+                          5.765, float(g.loc[t, "weibull_naive_t25_days"]), 0.01))
 
     # --- exp27, the out-of-sample test ------------------------------------
     f = load("exp27_out_of_sample.csv")

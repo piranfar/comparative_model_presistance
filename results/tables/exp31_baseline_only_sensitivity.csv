@@ -1,0 +1,28 @@
+quantity,all_isolates,baseline_only,note
+isolates analysed,217,174,Time_point == '0M'; the 43 follow-ups are the only rows that can repeat a patient
+"short of 4-log headroom, n",33,21,Section 1
+"short of 4-log headroom, %",15.21,12.07,Section 1
+"of those, at the MDK ceiling",1.0,1.0,Section 1
+"with ample headroom, at the ceiling",0.8804,0.8693,Section 1
+ceiling Fisher p,0.02996,0.1367,the only clinical p-value in Section 1
+isolates at the assay floor,18,12,Section 2
+their starting-density fold range,265.2,265.2,Section 2
+their recorded-survival fold range,265.2,265.2,identical to the line above by construction
+tolerance calls classified,203,168,Section 2
+determinable,185,156,Section 2
+forced by inoculum,12,10,Section 2
+undecidable,6,2,Section 2
+"deep endpoint unreachable, resistant %",26.19,22.45,Section 2
+"deep endpoint unreachable, susceptible %",7.56,7.56,Section 2
+unreachable Fisher p,0.0005631,0.01568,Section 2
+"resistant start lower, fold",10.0,10.0,Section 4
+"that gap, Mann-Whitney p",9.07e-14,1.48e-09,Section 4
+"resistance coefficient, unadjusted",0.2589,0.2295,Section 4
+"resistance p, unadjusted",0.003465,0.0275,Section 4
+"resistance coefficient, adjusted",0.0887,0.0633,Section 4
+"resistance p, adjusted",0.374,0.5784,Section 4
+attenuation of the resistance coefficient,0.6573,0.7243,Section 4
+"growth coefficient, adjusted",0.0266,0.0306,Section 4
+"growth p, adjusted",0.002462,0.001732,Section 4
+"resistant grow more slowly, p",0.235,0.47,"Section 4, a null"
+MIC-MDK tests surviving BH,0,0,Section 10; 6 vs 6 tests

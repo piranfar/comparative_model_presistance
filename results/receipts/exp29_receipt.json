@@ -1,0 +1,434 @@
+{
+  "script": "src/experiments/exp29_floor_provenance.py",
+  "utc": "2026-09-06T19:21:19+00:00",
+  "data_sources": [
+    "eLife 93243 supplementary file 2 (Vijay et al. 2024)",
+    "figshare 19766083 (ERA4TB / van Wijk et al. 2023)",
+    "Zenodo 7550302 (Windels et al. 2024)",
+    "figshare 26462791 (Kaur et al. 2024)",
+    "Nat Commun source data (Dubey et al. 2026)"
+  ],
+  "limit_term_scans": {
+    "vijay": {
+      "deposit_strings_scanned": 295,
+      "deposit_matches": 0,
+      "deposit_matches_stating_a_value": 0,
+      "deposit_hits": [],
+      "project_record_strings_scanned": 1,
+      "project_record_matches": 0,
+      "project_record_hits": []
+    },
+    "era4tb": {
+      "deposit_strings_scanned": 62,
+      "deposit_matches": 5,
+      "deposit_matches_stating_a_value": 0,
+      "deposit_hits": [
+        {
+          "where": "deposit: data\\raw\\tb\\era4tb_timekill.csv",
+          "term": "AQL",
+          "text": "AQL",
+          "states_a_value": false
+        },
+        {
+          "where": "deposit: data\\raw\\tb\\era4tb_timekill.csv",
+          "term": "BQL",
+          "text": "BQL",
+          "states_a_value": false
+        },
+        {
+          "where": "deposit: data\\raw\\tb\\era4tb_timekill.csv",
+          "term": "AQL",
+          "text": "Group,Replicate,Time,CFU,CFUlog10,Condition,Volume,AQL,BQL,Institute,Sample,Comments",
+          "states_a_value": false
+        },
+        {
+          "where": "deposit: data\\raw\\tb\\era4tb_readme.txt",
+          "term": "AQL",
+          "text": "AQL       = Above quantification limit [0: countable culture, 1: uncountable culture/full plate]",
+          "states_a_value": false
+        },
+        {
+          "where": "deposit: data\\raw\\tb\\era4tb_readme.txt",
+          "term": "BQL",
+          "text": "BQL       = Below quantification limit [0: countable culture, 1: uncountable culture/too few or no colonies]",
+          "states_a_value": false
+        }
+      ],
+      "project_record_strings_scanned": 6,
+      "project_record_matches": 0,
+      "project_record_hits": []
+    },
+    "windels": {
+      "deposit_strings_scanned": 26,
+      "deposit_matches": 0,
+      "deposit_matches_stating_a_value": 0,
+      "deposit_hits": [],
+      "project_record_strings_scanned": 6,
+      "project_record_matches": 0,
+      "project_record_hits": []
+    },
+    "kaur": {
+      "deposit_strings_scanned": 43,
+      "deposit_matches": 0,
+      "deposit_matches_stating_a_value": 0,
+      "deposit_hits": [],
+      "project_record_strings_scanned": 33,
+      "project_record_matches": 1,
+      "project_record_hits": [
+        {
+          "where": "project record: data\\raw\\apramycin_mtb\\PROVENANCE.json",
+          "term": "limit of detection",
+          "text": "\"caveats\": \"Only 4 time points (0, 3, 7, 14 d) on the planktonic series, and the last interval is 7 days wide - the deceleration is real in the numbers but rests on one interval, so a two-population fit will be weakly identified and should be reported with that stated. No limit of detection is given",
+          "states_a_value": false
+        }
+      ]
+    },
+    "dubey": {
+      "deposit_strings_scanned": 4417,
+      "deposit_matches": 0,
+      "deposit_matches_stating_a_value": 0,
+      "deposit_hits": [],
+      "project_record_strings_scanned": 19,
+      "project_record_matches": 1,
+      "project_record_hits": [
+        {
+          "where": "project record: data\\raw\\dubey2026\\PROVENANCE.json",
+          "term": "below the limit",
+          "text": "\"The drug-treated arm reads at or below the limit already at t=0 while its paired control reads about 1e6, so that sample was taken after exposure rather than before.\"",
+          "states_a_value": false
+        }
+      ]
+    }
+  },
+  "vijay_floor_evidence": {
+    "n_readings": 1932,
+    "minimum_per_ml": 23.0,
+    "n_exactly_at_minimum": 33,
+    "n_below_minimum": 0,
+    "minimum_by_column": {
+      "mpn_T0_15days": 2300.0,
+      "mpn_T2_15days": 230.0,
+      "mpn_T5_15days": 23.0,
+      "mpn_T0_30days": 2300.0,
+      "mpn_T2_30days": 230.0,
+      "mpn_T5_30days": 23.0,
+      "mpn_T0_60days": 2300.0,
+      "mpn_T2_60days": 230.0,
+      "mpn_T5_60days": 23.0
+    },
+    "minimum_is_an_mpn_table_value": true,
+    "mpn_rungs_below_the_minimum_that_never_appear": [
+      3.0,
+      3.6,
+      7.2,
+      7.4,
+      9.2,
+      11.0,
+      14.0,
+      15.0,
+      20.0,
+      21.0
+    ],
+    "plated_volume_recorded": false
+  },
+  "era4tb_floor_evidence": {
+    "n_rows": 2775,
+    "n_quantified_counts": 2120,
+    "n_counts_below_their_own_volume_floor": 0,
+    "n_counts_exactly_on_their_own_volume_floor": 56,
+    "by_volume_and_format": [
+      {
+        "plated_volume_ul": 2.5,
+        "plating_format": "2.5ul single drop",
+        "n_counts": 517,
+        "implied_floor_per_ml": 400.0,
+        "smallest_count_per_ml": 400.0,
+        "smallest_equals_implied_floor": true,
+        "fraction_on_the_1000_over_V_lattice": 1.0,
+        "n_off_lattice": 0,
+        "off_lattice_institutes": []
+      },
+      {
+        "plated_volume_ul": 10.0,
+        "plating_format": "10ul 4 drops",
+        "n_counts": 548,
+        "implied_floor_per_ml": 100.0,
+        "smallest_count_per_ml": 100.0,
+        "smallest_equals_implied_floor": true,
+        "fraction_on_the_1000_over_V_lattice": 0.9762773722627737,
+        "n_off_lattice": 13,
+        "off_lattice_institutes": [
+          "F"
+        ]
+      },
+      {
+        "plated_volume_ul": 10.0,
+        "plating_format": "10ul single drop",
+        "n_counts": 520,
+        "implied_floor_per_ml": 100.0,
+        "smallest_count_per_ml": 100.0,
+        "smallest_equals_implied_floor": true,
+        "fraction_on_the_1000_over_V_lattice": 1.0,
+        "n_off_lattice": 0,
+        "off_lattice_institutes": []
+      },
+      {
+        "plated_volume_ul": 50.0,
+        "plating_format": "100ul quad",
+        "n_counts": 2,
+        "implied_floor_per_ml": 20.0,
+        "smallest_count_per_ml": 52000.0,
+        "smallest_equals_implied_floor": false,
+        "fraction_on_the_1000_over_V_lattice": 1.0,
+        "n_off_lattice": 0,
+        "off_lattice_institutes": []
+      },
+      {
+        "plated_volume_ul": 100.0,
+        "plating_format": "100ul quad",
+        "n_counts": 533,
+        "implied_floor_per_ml": 10.0,
+        "smallest_count_per_ml": 10.0,
+        "smallest_equals_implied_floor": true,
+        "fraction_on_the_1000_over_V_lattice": 1.0,
+        "n_off_lattice": 0,
+        "off_lattice_institutes": []
+      }
+    ],
+    "pooling_test_100ul": {
+      "n_readings": 533,
+      "n_on_the_pooled_2_5_lattice": 533,
+      "n_on_the_single_plate_10_lattice": 533,
+      "n_on_2_5_but_off_10": 0,
+      "n_readings_below_1000": 91,
+      "n_readings_below_100": 24,
+      "distinct_values_below_100": [
+        10.0,
+        20.0,
+        30.0,
+        40.0,
+        50.0,
+        70.0,
+        80.0,
+        90.0
+      ],
+      "smallest_reading": 10.0,
+      "n_at_a_pooled_only_rung_below_10": 0,
+      "note": "Every multiple of 10 is a multiple of 2.5, so the count on the 10 lattice cannot by itself exclude pooling. The discriminating count is n_on_2_5_but_off_10, which under pooling should be about three readings in four and is 0. The test has force only where the reported precision could have expressed a x2.5, x5.0 or x7.5 rung, so the argument rests on the readings below 1 000 and above all on those below 100, not on all 533."
+    },
+    "n_flask_visits": 699,
+    "platings_per_flask_visit_median": 4.0,
+    "distinct_floors_per_flask_visit": {
+      "0": 1,
+      "1": 2,
+      "2": 12,
+      "3": 684
+    },
+    "max_floor_spread_within_a_flask_visit_log10": 1.6020599913279623,
+    "n_keys_without_condition": 2078,
+    "n_keys_with_more_than_one_row_without_condition": 696,
+    "n_keys_with_condition": 2774,
+    "n_keys_with_more_than_one_row_with_condition": 0,
+    "rows_whose_volume_field_is_unusable": {
+      "n": 3,
+      "detail": [
+        {
+          "institute": "C",
+          "sample": "untreated",
+          "time": -3.0,
+          "volume_ul": 50.0,
+          "comments": "100ul quad"
+        },
+        {
+          "institute": "C",
+          "sample": "untreated",
+          "time": -3.0,
+          "volume_ul": 50.0,
+          "comments": "100ul quad"
+        },
+        {
+          "institute": "C",
+          "sample": "untreated",
+          "time": -3.0,
+          "volume_ul": null,
+          "comments": "100ul quad"
+        }
+      ],
+      "note": "Comments say 100 uL quad while Volume says 50 (or is blank); all are Time = -3 pre-timepoint readings from one laboratory and none enters a killing series."
+    },
+    "flag_rate_denominators": {
+      "all_rows_in_file": 2775,
+      "pct_flagged_below_over_all_rows": 17.945945945945947,
+      "rows_in_the_exp17_analysis_set": 2580,
+      "pct_flagged_below_over_analysis_set": 19.302325581395348,
+      "n_flags": 498
+    },
+    "n_bql_flags": 498,
+    "n_aql_flags": 24,
+    "n_bql_flags_that_retain_a_count": 0,
+    "n_rows_with_no_count_and_no_flag": 133
+  },
+  "kaur_floor_evidence": {
+    "n_readings": 102,
+    "minimum_per_ml": 39.99999999999999,
+    "minimum_log10": 1.6020599913279623,
+    "n_exactly_at_minimum": 1,
+    "plated_volume_recorded": false,
+    "n_day_zero_replicates": 3,
+    "median_log10_n0_planktonic": 7.033423755486949
+  },
+  "windels_floor_evidence": {
+    "n_readings": 595,
+    "n_below_limit_written_as_exact_zero": 6,
+    "pct_below_limit": 1.0084033613445378,
+    "lowest_non_zero_surviving_fraction": 7.04e-09,
+    "lowest_non_zero_log10": -8.152427340857887,
+    "n_grid_cells": 102,
+    "n_grid_cells_with_a_zero": 2,
+    "absolute_counts_present": false
+  },
+  "dubey_floor_evidence": {
+    "n_genuine_counts": 229,
+    "n_multiples_of_10": 229,
+    "smallest_genuine_count": 10.0,
+    "n_genuine_counts_below_100": 20,
+    "distinct_genuine_counts_below_100": [
+      10.0,
+      20.0,
+      30.0,
+      40.0,
+      50.0,
+      60.0,
+      80.0
+    ],
+    "plated_volume_ul": 100.0,
+    "plated_volume_source": "data/raw/dubey2026/PROVENANCE.json, this project's own staging record; the published Methods are not in this repository and were not scanned by this experiment",
+    "derived_floor_per_ml": 10.0,
+    "n_cultures_with_a_measured_t0": 20,
+    "median_log10_n0": 6.084484323277383
+  },
+  "clinical_sweep": {
+    "upward_counterfactual_not_in_the_ladder": {
+      "assumed_floor_per_ml": 230.0,
+      "why_this_value": "the day-2 column's own minimum, a factor of ten above the day-5 minimum the analysis uses",
+      "excluded_because": "33 readings sit exactly on 23; a floor above them would put readings below the floor",
+      "n_short_of_4_logs_15d": 133,
+      "n_undecidable_15d": 52
+    },
+    "n_short_of_4_logs_15d_range": [
+      28,
+      33
+    ],
+    "n_short_of_4_logs_15d_at_23": 33,
+    "n_short_of_4_logs_15d_at_3": 28,
+    "n_undecidable_15d_at_23": 6,
+    "n_forced_by_inoculum_15d_at_23": 12,
+    "n_calls_15d": 203,
+    "mpn_rungs_from_3_up_to_but_excluding_23": 10,
+    "readings_on_those_rungs": 0,
+    "readings_exactly_on_23": 33,
+    "n_readings_total": 1932
+  },
+  "era4tb_pooling_sweep": {
+    "n_quantified_counts": 2120,
+    "per_volume_flags_contradicted": 83,
+    "per_volume_pct_flags_contradicted": 16.666666666666668,
+    "per_volume_flags_with_a_comparator": 189,
+    "per_volume_pct_of_comparable_flags_contradicted": 43.91534391534392,
+    "flags_with_a_comparator_by_scheme": {
+      "per-volume (as analysed)": 189,
+      "pooled at the most sensitive volume, 100 uL": 218,
+      "pooled at the modal volume, 10 uL": 218,
+      "pooled at the least sensitive volume, 2.5 uL": 218,
+      "pooled at the geometric mean of the per-volume floors": 218
+    },
+    "max_genuine_counts_a_pooled_floor_would_discard": 126,
+    "pct_at_the_least_sensitive_pooled_floor": 5.943396226415095,
+    "flags_contradicted_by_scheme": {
+      "per-volume (as analysed)": 83,
+      "pooled at the most sensitive volume, 100 uL": 215,
+      "pooled at the modal volume, 10 uL": 143,
+      "pooled at the least sensitive volume, 2.5 uL": 76,
+      "pooled at the geometric mean of the per-volume floors": 194
+    }
+  },
+  "n_datasets_stating_a_loq_with_a_value": 0,
+  "reconciles_with": "docs/21_FLOOR_INFERENCE.md",
+  "reconciliation": [
+    {
+      "deposit": "Vijay clinical",
+      "docs21_verdict": "INFERRED",
+      "exp29_verdict": "INFERRED",
+      "n_readings_docs21": 1932,
+      "n_readings_exp29": 1932,
+      "minimum_docs21": 23.0,
+      "minimum_exp29": 23.0,
+      "ties_docs21": 33,
+      "ties_exp29": 33,
+      "below_docs21": 0,
+      "below_exp29": 0,
+      "agrees": true,
+      "note": ""
+    },
+    {
+      "deposit": "ERA4TB 100 uL",
+      "docs21_verdict": "DERIVED",
+      "exp29_verdict": "DERIVED",
+      "n_readings_docs21": 533,
+      "n_readings_exp29": 533,
+      "minimum_docs21": 10.0,
+      "minimum_exp29": 10.0,
+      "ties_docs21": 4,
+      "ties_exp29": 4,
+      "below_docs21": 0,
+      "below_exp29": 0,
+      "agrees": true,
+      "note": "derivation exact at the minimum and across the lattice"
+    },
+    {
+      "deposit": "ERA4TB 10 uL",
+      "docs21_verdict": "DERIVED",
+      "exp29_verdict": "DERIVED",
+      "n_readings_docs21": 1068,
+      "n_readings_exp29": 1068,
+      "minimum_docs21": 100.0,
+      "minimum_exp29": 100.0,
+      "ties_docs21": 31,
+      "ties_exp29": 31,
+      "below_docs21": 0,
+      "below_exp29": 0,
+      "agrees": true,
+      "note": "exact at the minimum, but 13 readings are off the 1000/V lattice; DERIVED holds for the rest"
+    },
+    {
+      "deposit": "ERA4TB 2.5 uL",
+      "docs21_verdict": "DERIVED",
+      "exp29_verdict": "DERIVED",
+      "n_readings_docs21": 517,
+      "n_readings_exp29": 517,
+      "minimum_docs21": 400.0,
+      "minimum_exp29": 400.0,
+      "ties_docs21": 21,
+      "ties_exp29": 21,
+      "below_docs21": 0,
+      "below_exp29": 0,
+      "agrees": true,
+      "note": "derivation exact at the minimum and across the lattice"
+    },
+    {
+      "deposit": "Kaur apramycin",
+      "docs21_verdict": "NONE",
+      "exp29_verdict": "NONE",
+      "n_readings_docs21": 102,
+      "n_readings_exp29": 102,
+      "minimum_docs21": 40.0,
+      "minimum_exp29": 39.99999999999999,
+      "ties_docs21": 1,
+      "ties_exp29": 1,
+      "below_docs21": 0,
+      "below_exp29": 0,
+      "agrees": true,
+      "note": ""
+    }
+  ]
+}

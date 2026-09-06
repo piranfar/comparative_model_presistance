@@ -1,5 +1,5 @@
 """
-How many of the published tolerance calls are actually determinable?
+How much of a published tolerance classification rests on a measured fraction?
 
 Run:  python -m src.experiments.exp25_observability_classes
 
@@ -23,22 +23,35 @@ own disfavour. Whether the recorded label survives the bound is not the question
 The question is whether the measurement could ever have returned a different one.
 
 Sweeping the true count across the entire range the floor admits, zero to L,
-gives the classes that were reachable at all. Where only one class is reachable,
-the label was fixed by the starting density before the drug was added: the assay
-could not have said anything else, and its reading contributed nothing.
+gives the set of classes compatible with the observation. Where that set has one
+member, the published rule has no other label available and the reading adds
+nothing to what the starting density and the floor already imply.
+
+Say exactly what that does and does not mean, because an earlier version of this
+file overstated it. It does NOT mean the phenotype was settled before the drug
+was added. Whether a culture reaches the floor at all depends on the drug: the
+population has to fall by the isolate's entire headroom for the reading to be
+censored, and the starting density does not by itself decide that. What the
+starting density settles is narrower and still consequential: GIVEN a censored
+reading, it fixes which classes remain compatible with it.
 
 So a tolerance call falls into one of three classes:
 
-  DETERMINABLE          the day-5 reading is above the floor; the fraction is
-                        measured and the label is a measurement
-  FORCED BY INOCULUM    the reading is at the floor and only one class was ever
-                        reachable; the label is arithmetic, not observation
-  UNDECIDABLE           the reading is at the floor and more than one class is
-                        reachable; the assay cannot say which
+  MEASURED                     the day-5 reading is above the floor; the
+                               surviving fraction is observed and the label is a
+                               measurement of it
+  SINGLE COMPATIBLE CLASS      the reading is censored at the floor and only one
+                               class is compatible with it; the label follows
+                               from N0 and the floor, not from the reading
+  MULTIPLE COMPATIBLE CLASSES  the reading is censored and more than one class
+                               is compatible; the rule cannot choose
 
-Counting them says how much of a published classification survives its own
-measurement, which is a different and more useful number than counting how many
-isolates hit the floor.
+Counting them says how much of a published classification rests on an observed
+fraction and how much on the censoring rule, which is a different and more useful
+number than counting how many isolates hit the floor. It says nothing about how
+much drug effect each isolate experienced; the true count below the floor is
+unknown, and two isolates with the same censored reading may have fallen by
+quite different amounts.
 
 The same logic is applied to the deepest duration endpoint, where the constraint
 is headroom rather than a floor-level reading: an isolate without the dynamic
@@ -94,17 +107,19 @@ def classify(d: pd.DataFrame, age: int) -> pd.DataFrame:
     # lowest class "bounded, tight" and let its label stand, on the argument
     # that the class cannot be bounded below its own floor. That conceded too
     # much. The right question is not whether the recorded label survives the
-    # bound, but whether the measurement could ever have produced a different
-    # one. Sweep the true count across the whole range the floor admits, 0 to
-    # L, and see which classes are reachable. Where only one is, the label was
-    # FORCED by the starting density before the drug was added, and the assay
-    # contributed nothing to it.
+    # bound, but which labels the rule could have returned given a censored
+    # reading. Sweep the true count across the whole range the floor admits, 0
+    # to L, and see which classes stay compatible. Where only one does, the
+    # label follows from N0 and the floor rather than from the reading. This is
+    # conditional on the reading being censored; it is not a claim that the
+    # starting density decided whether the culture reached the floor.
     reachable_low = np.array([_class_of(0.0)] * len(n0))          # count 0
     reachable_high = np.array([_class_of(MPN_FLOOR / v) if v > 0 else None
                                for v in n0])                       # count at L
-    forced = at_floor & (reachable_low == reachable_high)
-    klass = np.where(~at_floor, "determinable",
-                     np.where(forced, "forced by inoculum", "undecidable"))
+    single = at_floor & (reachable_low == reachable_high)
+    klass = np.where(~at_floor, "measured",
+                     np.where(single, "single compatible class",
+                              "multiple compatible classes"))
 
     return pd.DataFrame({
         "culture_age_days": age,
@@ -122,12 +137,14 @@ def classify(d: pd.DataFrame, age: int) -> pd.DataFrame:
 def summarise(c: pd.DataFrame) -> dict:
     n = len(c)
     out = {"n_calls": n}
-    for k in ("determinable", "forced by inoculum", "undecidable"):
+    for k in ("measured", "single compatible class",
+              "multiple compatible classes"):
         m = int((c["observability"] == k).sum())
         out[k.replace(", ", "_").replace(" ", "_")] = m
         out[k.replace(", ", "_").replace(" ", "_") + "_pct"] = 100 * m / n if n else np.nan
-    loose = c[c["observability"] == "undecidable"]
-    out["undecidable_recorded_classes"] = loose["recorded_class"].value_counts().to_dict()
+    loose = c[c["observability"] == "multiple compatible classes"]
+    out["multiple_compatible_classes_recorded"] = (
+        loose["recorded_class"].value_counts().to_dict())
     out["n_deep_endpoint_unreachable"] = int((~c["deep_endpoint_reachable"]).sum())
     out["pct_deep_endpoint_unreachable"] = 100 * (~c["deep_endpoint_reachable"]).mean()
     return out
@@ -143,7 +160,7 @@ def by_group(c: pd.DataFrame) -> pd.DataFrame:
     for g, sub in c[c["inh"].isin(["IS", "IR"])].groupby("inh"):
         rows.append({
             "group": g, "n": len(sub),
-            "pct_determinable": 100 * (sub["observability"] == "determinable").mean(),
+            "pct_measured": 100 * (sub["observability"] == "measured").mean(),
             "pct_deep_endpoint_unreachable": 100 * (~sub["deep_endpoint_reachable"]).mean(),
             "median_headroom_log10": float(sub["headroom_log10"].median()),
         })
@@ -186,16 +203,18 @@ def main() -> int:
 
     for age in (15, 60):
         s = summ[f"{age}d"]
-        print(f"\n-- {age}-day panel: how much of the classification survives its "
-              f"own measurement? (n={s['n_calls']}) --")
-        print(f"   determinable, reading above the floor : "
-              f"{s['determinable']:3d}  ({s['determinable_pct']:.1f}%)")
-        print(f"   forced by the inoculum alone          : "
-              f"{s['forced_by_inoculum']:3d}  ({s['forced_by_inoculum_pct']:.1f}%)  "
-              f"only one class was ever reachable")
-        print(f"   undecidable from the assay            : "
-              f"{s['undecidable']:3d}  ({s['undecidable_pct']:.1f}%)  "
-              f"{s['undecidable_recorded_classes']}")
+        print(f"\n-- {age}-day panel: what each tolerance call rests on "
+              f"(n={s['n_calls']}) --")
+        print(f"   measured, reading above the floor     : "
+              f"{s['measured']:3d}  ({s['measured_pct']:.1f}%)")
+        print(f"   censored, one compatible class        : "
+              f"{s['single_compatible_class']:3d}  "
+              f"({s['single_compatible_class_pct']:.1f}%)  "
+              f"the rule has no other label available")
+        print(f"   censored, several compatible classes  : "
+              f"{s['multiple_compatible_classes']:3d}  "
+              f"({s['multiple_compatible_classes_pct']:.1f}%)  "
+              f"{s['multiple_compatible_classes_recorded']}")
         print(f"   deepest endpoint unreachable          : "
               f"{s['n_deep_endpoint_unreachable']:3d}  "
               f"({s['pct_deep_endpoint_unreachable']:.1f}%)")

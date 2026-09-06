@@ -1,0 +1,562 @@
+{
+  "script": "src/experiments/exp31_clustering_audit.py",
+  "utc": "2026-09-06T19:23:32+00:00",
+  "data_sources": [
+    "eLife 93243 supplementary file 2",
+    "ERA4TB standardised time-kill, figshare 19766083"
+  ],
+  "tables_audited": [
+    "results/tables/exp23_flask_parameters.csv",
+    "results/tables/exp24_trajectory_shape.csv",
+    "results/tables/exp24_flag_consistency.csv",
+    "results/tables/exp17_kill_rates.csv"
+  ],
+  "seed": 20260906,
+  "n_bootstrap": 4000,
+  "n_bootstrap_pairwise_statistics": 600,
+  "n_permutations": 20000,
+  "clinical_clustering": {
+    "n_isolates": 217,
+    "n_baseline_isolates": 174,
+    "n_follow_up_isolates": 43,
+    "n_continuation_phase_IR_CP": 21,
+    "n_intensive_phase_IR_IP": 14,
+    "n_follow_up_without_sequential_label": 8,
+    "time_point_counts": {
+      "0M": 174,
+      "1M": 12,
+      "12M": 7,
+      "8M": 6,
+      "18M": 6,
+      "2M": 5,
+      "5M": 4,
+      "24M": 3
+    },
+    "sequential_label_counts": {
+      "IS": 119,
+      "IR-BL": 49,
+      "IR-CP": 21,
+      "IR-IP": 14,
+      "nan": 14
+    },
+    "n_rows_potentially_non_independent": 86,
+    "pct_rows_potentially_non_independent": 39.63133640552996,
+    "min_distinct_patients": 174,
+    "max_mean_cluster_size": 1.2471264367816093,
+    "worst_case_design_effect": 1.2471264367816093,
+    "worst_case_se_inflation": 1.11674815279973,
+    "linkage_recoverable": false,
+    "columns_matching_a_patient_key_signature": []
+  },
+  "clinical_full_panel_15d": {
+    "n_rows": 217,
+    "n_with_headroom_and_endpoint": 217,
+    "n_short_of_4_logs": 33,
+    "pct_short_of_4_logs": 15.2073732718894,
+    "fraction_at_ceiling_short": 1.0,
+    "fraction_at_ceiling_ample": 0.8804347826086957,
+    "ceiling_fisher_p": 0.029956795544915107,
+    "n_at_floor": 18,
+    "at_floor_start_fold_range": 265.2173913043478,
+    "at_floor_survival_fold_range": 265.2173913043478,
+    "at_floor_label_counts": {
+      "Low": 12,
+      "Medium": 6
+    },
+    "n_calls": 203,
+    "determinable": 185,
+    "forced_by_inoculum": 12,
+    "undecidable": 6,
+    "n_IR": 84,
+    "n_IS": 119,
+    "pct_unreachable_IR": 26.190476190476193,
+    "pct_unreachable_IS": 7.563025210084033,
+    "unreachable_fisher_p": 0.0005630647809615917,
+    "start_median_IR": 5.361727836017593,
+    "start_median_IS": 6.361727836017593,
+    "start_fold_lower_in_IR": 10.0,
+    "start_mannwhitney_p": 9.070609029008442e-14,
+    "growth_median_IR": 19.0,
+    "growth_median_IS": 17.0,
+    "growth_mannwhitney_p": 0.23533176159824598,
+    "n_association": 202,
+    "resistance_beta": 0.25888427660220725,
+    "resistance_ci": [
+      0.08736796749970224,
+      0.4304005857047123
+    ],
+    "resistance_p": 0.0034652840068976065,
+    "resistance_beta_adjusted": 0.08870977372439988,
+    "resistance_ci_adjusted": [
+      -0.10641910949412585,
+      0.2838386569429256
+    ],
+    "resistance_p_adjusted": 0.3739741086569761,
+    "resistance_attenuation": 0.6573381169042248,
+    "growth_beta_adjusted": 0.02655464308946514,
+    "growth_p_adjusted": 0.0024620797245331616
+  },
+  "clinical_baseline_only_15d": {
+    "n_rows": 174,
+    "n_with_headroom_and_endpoint": 174,
+    "n_short_of_4_logs": 21,
+    "pct_short_of_4_logs": 12.068965517241379,
+    "fraction_at_ceiling_short": 1.0,
+    "fraction_at_ceiling_ample": 0.869281045751634,
+    "ceiling_fisher_p": 0.1367147479311115,
+    "n_at_floor": 12,
+    "at_floor_start_fold_range": 265.2173913043478,
+    "at_floor_survival_fold_range": 265.2173913043478,
+    "at_floor_label_counts": {
+      "Low": 10,
+      "Medium": 2
+    },
+    "n_calls": 168,
+    "determinable": 156,
+    "forced_by_inoculum": 10,
+    "undecidable": 2,
+    "n_IR": 49,
+    "n_IS": 119,
+    "pct_unreachable_IR": 22.448979591836736,
+    "pct_unreachable_IS": 7.563025210084033,
+    "unreachable_fisher_p": 0.015675761160433607,
+    "start_median_IR": 5.361727836017593,
+    "start_median_IS": 6.361727836017593,
+    "start_fold_lower_in_IR": 10.0,
+    "start_mannwhitney_p": 1.4784300779943802e-09,
+    "growth_median_IR": 15.0,
+    "growth_median_IS": 17.0,
+    "growth_mannwhitney_p": 0.47048166715119333,
+    "n_association": 167,
+    "resistance_beta": 0.22951680672268918,
+    "resistance_ci": [
+      0.027250194549236745,
+      0.4317834188961416
+    ],
+    "resistance_p": 0.0275017033525764,
+    "resistance_beta_adjusted": 0.06327443361010107,
+    "resistance_ci_adjusted": [
+      -0.1594716848457615,
+      0.28602055206596366
+    ],
+    "resistance_p_adjusted": 0.5784449947133163,
+    "resistance_attenuation": 0.724314595895578,
+    "growth_beta_adjusted": 0.030592159756193095,
+    "growth_p_adjusted": 0.0017318151242646795
+  },
+  "clinical_mic_mdk_family": {
+    "all_rows": {
+      "n_tests": 6,
+      "n_nominal": 1,
+      "n_surviving_bh": 0,
+      "smallest_p": 0.036138173902890806,
+      "all_negative": true
+    },
+    "baseline_only": {
+      "n_tests": 6,
+      "n_nominal": 1,
+      "n_surviving_bh": 0,
+      "smallest_p": 0.008621407974391862,
+      "all_negative": true
+    }
+  },
+  "paired_panels": {
+    "n_isolates_in_both_panels": 210,
+    "n_only_15d": 7,
+    "n_only_60d": 0,
+    "pairing_key": "same spreadsheet row; Archive and Sample-ID identical for the 15-day and 60-day columns by construction",
+    "unpaired_short": {
+      "n_15d": 33,
+      "N_15d": 217,
+      "n_60d": 7,
+      "N_60d": 210,
+      "fisher_p": 1.997668302267564e-05
+    },
+    "paired_short": {
+      "n_pairs": 210,
+      "n_both": 7,
+      "n_only_first": 26,
+      "n_only_second": 0,
+      "n_neither": 177,
+      "n_discordant": 26,
+      "p_value": 2.9802322387695312e-08
+    },
+    "unpaired_at_floor": {
+      "n_15d": 18,
+      "N_15d": 217,
+      "n_60d": 6,
+      "N_60d": 210,
+      "fisher_p": 0.019449187352463763
+    },
+    "paired_at_floor": {
+      "n_pairs": 210,
+      "n_both": 6,
+      "n_only_first": 11,
+      "n_only_second": 0,
+      "n_neither": 193,
+      "n_discordant": 11,
+      "p_value": 0.0009765625
+    },
+    "paired_not_determinable": {
+      "n_pairs": 197,
+      "n_both": 6,
+      "n_only_first": 11,
+      "n_only_second": 0,
+      "n_neither": 180,
+      "n_discordant": 11,
+      "p_value": 0.0009765625,
+      "n_not_determinable_15d": 17,
+      "n_not_determinable_60d": 6
+    },
+    "unpaired_headroom": {
+      "median_15d": 4.423601998993174,
+      "median_60d": 6.0,
+      "mannwhitney_p": 3.0876708966256103e-49
+    },
+    "paired_headroom": {
+      "median_within_isolate_change": 1.576398001006826,
+      "n_pairs": 210,
+      "n_increased": 193,
+      "n_decreased": 0,
+      "wilcoxon_p": 1.2708807649372611e-33,
+      "wilcoxon_statistic": 0.0
+    },
+    "unpaired_start": {
+      "median_15d": 5.785329835010767,
+      "median_60d": 7.361727836017593,
+      "mannwhitney_p": 3.0876708966256103e-49
+    },
+    "paired_start": {
+      "median_within_isolate_change": 1.576398001006826,
+      "n_pairs": 210,
+      "n_increased": 193,
+      "n_decreased": 0,
+      "wilcoxon_p": 1.2708807649372611e-33,
+      "wilcoxon_statistic": 0.0
+    },
+    "iqr_start": {
+      "iqr_15d": 1.0,
+      "iqr_60d": 0.4236019989931741,
+      "difference": -0.5763980010068259,
+      "paired_bootstrap_ci": [
+        -0.5763980010068259,
+        -0.5368894597231524
+      ],
+      "note": "isolates resampled as whole units so both panels move together"
+    }
+  },
+  "era4tb_clearance_vs_density": {
+    "n_treated_flasks": 67,
+    "n_cleared": 25,
+    "n_never_cleared": 42,
+    "n_laboratories": 6,
+    "naive_auc": 0.9738095238095238,
+    "naive_mannwhitney_p": 1.168741137746919e-10,
+    "cluster_bootstrap_labs_auc_ci": [
+      0.917087967644085,
+      1.0
+    ],
+    "cluster_bootstrap_labs_n_usable": 3924,
+    "cluster_bootstrap_flasks_within_lab_auc_ci": [
+      0.94078752340337,
+      0.9954627949183303
+    ],
+    "cluster_bootstrap_flasks_note": "holds the six laboratories fixed, so it measures flask noise and carries no between-laboratory information",
+    "restricted_permutation": {
+      "laboratory": {
+        "p_value": 5e-05,
+        "null_mean_auc": 0.9155484761904762,
+        "null_95th_percentile": 0.9419047619047619,
+        "n_strata": 6,
+        "n_strata_with_both_outcomes": 3,
+        "n_distinct_arrangements": 87120,
+        "smallest_attainable_p": 1.147842056932966e-05
+      },
+      "laboratory and arm": {
+        "p_value": 0.49585,
+        "null_mean_auc": 0.9740118333333332,
+        "null_95th_percentile": 0.9780952380952381,
+        "n_strata": 24,
+        "n_strata_with_both_outcomes": 2,
+        "n_distinct_arrangements": 6,
+        "smallest_attainable_p": 0.16666666666666666
+      }
+    },
+    "within_laboratory_permutation_p": 5e-05,
+    "within_laboratory_and_arm_permutation_p": 0.49585,
+    "laboratory_level_exact_p_two_sided": 0.1,
+    "laboratory_level_exact_p_one_sided": 0.05,
+    "smallest_two_sided_p_this_design_can_return": 0.1,
+    "laboratory_level_spearman_rho": -0.7589709258986453,
+    "laboratory_level_spearman_exact_p": 0.11666666666666667,
+    "laboratory_table": [
+      {
+        "institute": "A",
+        "mean_start": 2.7647710051994903,
+        "n_flasks": 11,
+        "n_cleared": 8,
+        "any_cleared": true,
+        "fraction_cleared": 0.7272727272727273
+      },
+      {
+        "institute": "B",
+        "mean_start": 2.9304280585038014,
+        "n_flasks": 8,
+        "n_cleared": 7,
+        "any_cleared": true,
+        "fraction_cleared": 0.875
+      },
+      {
+        "institute": "C",
+        "mean_start": 3.848018553006643,
+        "n_flasks": 12,
+        "n_cleared": 10,
+        "any_cleared": true,
+        "fraction_cleared": 0.8333333333333334
+      },
+      {
+        "institute": "D",
+        "mean_start": 4.678754351763792,
+        "n_flasks": 12,
+        "n_cleared": 0,
+        "any_cleared": false,
+        "fraction_cleared": 0.0
+      },
+      {
+        "institute": "E",
+        "mean_start": 4.869359822476107,
+        "n_flasks": 12,
+        "n_cleared": 0,
+        "any_cleared": false,
+        "fraction_cleared": 0.0
+      },
+      {
+        "institute": "F",
+        "mean_start": 6.614918435578553,
+        "n_flasks": 12,
+        "n_cleared": 0,
+        "any_cleared": false,
+        "fraction_cleared": 0.0
+      }
+    ]
+  },
+  "era4tb_cox_cluster_diagnosis": {
+    "n_clusters": 6,
+    "n_parameters": 6,
+    "max_rank_of_cluster_robust_meat": 5,
+    "cluster_robust_wald_available": false,
+    "institute_constant_within_cluster": true,
+    "n_flasks": 67,
+    "naive_institute_p": {
+      "institute_B": 0.263722898106926,
+      "institute_C": 0.00041474468651737977,
+      "institute_D": 0.13807742192961697,
+      "institute_E": 0.17241915567162724,
+      "institute_F": 0.5756846609975432
+    },
+    "cluster_robust_institute_p": {
+      "institute_B": 0.0006598047543885698,
+      "institute_C": 1.1338345276508116e-25,
+      "institute_D": 0.02711252331514055,
+      "institute_E": 0.012549581097073558,
+      "institute_F": 0.14250306685557515
+    },
+    "cluster_robust_fit": "converged, but see max_rank: the reported standard errors are not trustworthy with six clusters"
+  },
+  "era4tb_starting_density_variance": {
+    "n_units": 85,
+    "n_groups": 6,
+    "stratified_by": null,
+    "n_permutation_draws": 5000,
+    "smallest_p_these_draws_can_return": 0.0002,
+    "observed_share": 0.8701050551300202,
+    "expected_share_under_null": 0.05952380952380952,
+    "permutation_p": 0.0,
+    "null_share_mean": 0.05933297428203196,
+    "null_share_95th_percentile": 0.12712338811703983
+  },
+  "era4tb_starting_density_variance_within_arm": {
+    "n_units": 85,
+    "n_groups": 6,
+    "stratified_by": "treatment arm",
+    "n_permutation_draws": 5000,
+    "smallest_p_these_draws_can_return": 0.0002,
+    "observed_share": 0.926585325380279,
+    "expected_share_under_null": 0.05952380952380952,
+    "permutation_p": 0.0,
+    "null_share_mean": 0.06262732899460148,
+    "null_share_95th_percentile": 0.13603175032631404
+  },
+  "era4tb_kill_rate_variance": {
+    "n_units": 42,
+    "n_groups": 6,
+    "stratified_by": "treatment arm",
+    "n_permutation_draws": 5000,
+    "smallest_p_these_draws_can_return": 0.0002,
+    "observed_share": 0.32976258471358927,
+    "expected_share_under_null": 0.12195121951219512,
+    "permutation_p": 0.0048,
+    "null_share_mean": 0.11034387696716344,
+    "null_share_95th_percentile": 0.22628330645246608
+  },
+  "era4tb_headroom_100ul_by_laboratory": {
+    "B": 2.6672085194289132,
+    "C": 3.6055242320087,
+    "D": 3.6524559361438405,
+    "F": 5.002129101955443
+  },
+  "era4tb_inversions": {
+    "all_pairs": {
+      "min_rate_gap": 0.0,
+      "naive_n_pairs": 191,
+      "naive_n_inversions": 70,
+      "naive_rate": 0.36649214659685864,
+      "naive_jeffreys_ci": [
+        0.3005762258341505,
+        0.436419914891423
+      ],
+      "naive_correct_call_rate": 0.837696335078534,
+      "cluster_bootstrap_labs_ci": [
+        0.030119047619047625,
+        0.7237569060773481
+      ],
+      "cluster_bootstrap_labs_median_pairs_per_draw": 159.0,
+      "cluster_bootstrap_flasks_within_lab_ci": [
+        0.2468383017163505,
+        0.5053925378935095
+      ],
+      "leave_one_laboratory_out_ci": [
+        -0.2548108760104088,
+        0.987795169204126
+      ],
+      "leave_one_laboratory_out_se": 0.24169742973908154,
+      "leave_one_laboratory_out_note": "a delete-one-cluster jackknife on a pairwise statistic with six clusters; where the interval runs outside [0, 1] that is the result, not a bug -- the normal approximation has nothing to stand on",
+      "cluster_bootstrap_correct_call_ci": [
+        0.6702127659574468,
+        0.9809523809523809
+      ],
+      "n_bootstrap_draws": 600,
+      "n_clusters": 6
+    },
+    "strictest_gap": {
+      "min_rate_gap": 0.1,
+      "naive_n_pairs": 94,
+      "naive_n_inversions": 20,
+      "naive_rate": 0.2127659574468085,
+      "naive_jeffreys_ci": [
+        0.13948967489739442,
+        0.30341245841908815
+      ],
+      "naive_correct_call_rate": 0.851063829787234,
+      "cluster_bootstrap_labs_ci": [
+        0.0,
+        0.8235294117647058
+      ],
+      "cluster_bootstrap_labs_median_pairs_per_draw": 82.0,
+      "cluster_bootstrap_flasks_within_lab_ci": [
+        0.07586881472957423,
+        0.42657377049180295
+      ],
+      "leave_one_laboratory_out_ci": [
+        -0.5784489556416096,
+        1.0039808705352267
+      ],
+      "leave_one_laboratory_out_se": 0.3077960413940928,
+      "leave_one_laboratory_out_note": "a delete-one-cluster jackknife on a pairwise statistic with six clusters; where the interval runs outside [0, 1] that is the result, not a bug -- the normal approximation has nothing to stand on",
+      "cluster_bootstrap_correct_call_ci": [
+        0.546869639794168,
+        1.0
+      ],
+      "n_bootstrap_draws": 600,
+      "n_clusters": 6
+    }
+  },
+  "era4tb_kill_rate_spread": {
+    "n_laboratories": 6,
+    "observed_range": 0.712494912989707,
+    "cluster_bootstrap_range_ci": [
+      0.12390563103445373,
+      0.712494912989707
+    ],
+    "observed_between_lab_sd": 0.265228867606181,
+    "cluster_bootstrap_sd_ci": [
+      0.06076941264920825,
+      0.3469123522684918
+    ],
+    "observed_fold_range": 5.15816123141301,
+    "cluster_bootstrap_fold_range_ci": [
+      1.330165351521074,
+      5.15816123141301
+    ]
+  },
+  "era4tb_headroom_spread_100ul": {
+    "n_laboratories": 4,
+    "observed_range": 2.33492058252653,
+    "cluster_bootstrap_range_ci": [
+      0.04693170413514025,
+      2.33492058252653
+    ],
+    "observed_between_lab_sd": 0.9607864997597664,
+    "cluster_bootstrap_sd_ci": [
+      0.023465852067570125,
+      1.167460291263265
+    ],
+    "laboratories_used": [
+      "B",
+      "C",
+      "D",
+      "F"
+    ],
+    "laboratories_with_no_untreated_day_zero_row": [
+      "E"
+    ],
+    "laboratories_whose_day_zero_100ul_row_is_above_the_limit": [
+      "A"
+    ],
+    "n_day_zero_100ul_rows_above_the_limit": 3
+  },
+  "era4tb_trajectory_terminal_step": {
+    "n": 64,
+    "n_laboratories": 6,
+    "proportion": 0.75,
+    "naive_jeffreys_ci": [
+      0.6345157499844356,
+      0.8434560327912654
+    ],
+    "cluster_bootstrap_labs_ci": [
+      0.6363636363636364,
+      0.8676470588235294
+    ]
+  },
+  "era4tb_trajectory_rebound": {
+    "n": 64,
+    "n_laboratories": 6,
+    "proportion": 0.6875,
+    "naive_jeffreys_ci": [
+      0.5675994321963472,
+      0.790871190593621
+    ],
+    "cluster_bootstrap_labs_ci": [
+      0.5263157894736842,
+      0.7794117647058824
+    ]
+  },
+  "era4tb_flag_contradiction": {
+    "n": 498,
+    "n_laboratories": 6,
+    "proportion": 0.16666666666666666,
+    "naive_jeffreys_ci": [
+      0.13591079140975623,
+      0.2012834000882894
+    ],
+    "cluster_bootstrap_labs_ci": [
+      0.08647654093836246,
+      0.41847826086956524
+    ]
+  },
+  "verdicts": {
+    "SUPPORTED": 20,
+    "WEAKENED": 7,
+    "NOT SUPPORTED": 5
+  }
+}

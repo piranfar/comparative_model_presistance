@@ -53,6 +53,24 @@ STAGES = [
     ("exp26  four attempts to refute this paper's own claims",
      "src.experiments.exp26_counter_tests"),
 
+    ("exp27  the boundaries applied cold to a held-out deposit",
+     "src.experiments.exp27_out_of_sample_boundaries"),
+
+    ("exp28  measurable depth against the turbidity standard",
+     "src.experiments.exp28_standard_vs_realised"),
+
+    ("exp29  what L actually is, deposit by deposit",
+     "src.experiments.exp29_floor_provenance"),
+
+    ("exp30  the tolerance label refitted as the ordered outcome it is",
+     "src.experiments.exp30_ordinal_tolerance"),
+
+    ("exp31  what survives once the clustering is respected",
+     "src.experiments.exp31_clustering_audit"),
+
+    ("exp32  first crossing below the boundary, and how often it holds",
+     "src.experiments.exp32_crossing_events"),
+
     ("fig 1  the assay floor bounds the endpoint and decides the phenotype",
      "src.figures.fig14_dynamic_range"),
     ("fig 2  one protocol, six laboratories: the inoculum still decides",

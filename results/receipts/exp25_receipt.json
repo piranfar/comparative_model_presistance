@@ -1,19 +1,19 @@
 {
   "script": "src/experiments/exp25_observability_classes.py",
-  "utc": "2026-09-06T14:46:58+00:00",
+  "utc": "2026-09-06T19:21:10+00:00",
   "data_source": "eLife 93243 supplementary file 2",
   "mpn_floor_per_ml": 23.0,
   "deep_endpoint_logs": 4.0,
   "observability": {
     "15d": {
       "n_calls": 203,
-      "determinable": 185,
-      "determinable_pct": 91.13300492610837,
-      "forced_by_inoculum": 12,
-      "forced_by_inoculum_pct": 5.911330049261084,
-      "undecidable": 6,
-      "undecidable_pct": 2.955665024630542,
-      "undecidable_recorded_classes": {
+      "measured": 185,
+      "measured_pct": 91.13300492610837,
+      "single_compatible_class": 12,
+      "single_compatible_class_pct": 5.911330049261084,
+      "multiple_compatible_classes": 6,
+      "multiple_compatible_classes_pct": 2.955665024630542,
+      "multiple_compatible_classes_recorded": {
         "Medium": 6
       },
       "n_deep_endpoint_unreachable": 31,
@@ -21,13 +21,13 @@
     },
     "60d": {
       "n_calls": 197,
-      "determinable": 191,
-      "determinable_pct": 96.95431472081218,
-      "forced_by_inoculum": 6,
-      "forced_by_inoculum_pct": 3.045685279187817,
-      "undecidable": 0,
-      "undecidable_pct": 0.0,
-      "undecidable_recorded_classes": {},
+      "measured": 191,
+      "measured_pct": 96.95431472081218,
+      "single_compatible_class": 6,
+      "single_compatible_class_pct": 3.045685279187817,
+      "multiple_compatible_classes": 0,
+      "multiple_compatible_classes_pct": 0.0,
+      "multiple_compatible_classes_recorded": {},
       "n_deep_endpoint_unreachable": 7,
       "pct_deep_endpoint_unreachable": 3.5532994923857872
     }
@@ -37,7 +37,7 @@
       {
         "group": "IR",
         "n": 84,
-        "pct_determinable": 91.66666666666666,
+        "pct_measured": 91.66666666666666,
         "pct_deep_endpoint_unreachable": 26.190476190476193,
         "median_headroom_log10": 4.0,
         "fisher_p_unreachable": 0.0005630647809615917
@@ -45,7 +45,7 @@
       {
         "group": "IS",
         "n": 119,
-        "pct_determinable": 90.75630252100841,
+        "pct_measured": 90.75630252100841,
         "pct_deep_endpoint_unreachable": 7.563025210084033,
         "median_headroom_log10": 5.0,
         "fisher_p_unreachable": 0.0005630647809615917
@@ -55,7 +55,7 @@
       {
         "group": "IR",
         "n": 80,
-        "pct_determinable": 93.75,
+        "pct_measured": 93.75,
         "pct_deep_endpoint_unreachable": 5.0,
         "median_headroom_log10": 6.0,
         "fisher_p_unreachable": 0.444941643384403
@@ -63,7 +63,7 @@
       {
         "group": "IS",
         "n": 117,
-        "pct_determinable": 99.14529914529915,
+        "pct_measured": 99.14529914529915,
         "pct_deep_endpoint_unreachable": 2.564102564102564,
         "median_headroom_log10": 6.0,
         "fisher_p_unreachable": 0.444941643384403

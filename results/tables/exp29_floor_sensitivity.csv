@@ -1,0 +1,283 @@
+dataset,scenario,floor_per_ml,metric,value
+"Vijay 2024, clinical isolates",floor = 3 MPN/mL,3.0,n_short_of_4_logs_15d,28.0
+"Vijay 2024, clinical isolates",floor = 3 MPN/mL,3.0,pct_short_of_4_logs_15d,12.903225806451612
+"Vijay 2024, clinical isolates",floor = 3 MPN/mL,3.0,n_calls_15d,203.0
+"Vijay 2024, clinical isolates",floor = 3 MPN/mL,3.0,n_at_floor_15d,0.0
+"Vijay 2024, clinical isolates",floor = 3 MPN/mL,3.0,n_determinable_15d,203.0
+"Vijay 2024, clinical isolates",floor = 3 MPN/mL,3.0,n_forced_by_inoculum_15d,0.0
+"Vijay 2024, clinical isolates",floor = 3 MPN/mL,3.0,n_undecidable_15d,0.0
+"Vijay 2024, clinical isolates",floor = 3 MPN/mL,3.0,n_at_floor_whose_bound_sits_exactly_on_a_class_cut_15d,0.0
+"Vijay 2024, clinical isolates",floor = 3 MPN/mL,3.0,n_short_of_4_logs_60d,3.0
+"Vijay 2024, clinical isolates",floor = 3 MPN/mL,3.0,pct_short_of_4_logs_60d,1.4285714285714286
+"Vijay 2024, clinical isolates",floor = 3 MPN/mL,3.0,n_calls_60d,197.0
+"Vijay 2024, clinical isolates",floor = 3 MPN/mL,3.0,n_at_floor_60d,0.0
+"Vijay 2024, clinical isolates",floor = 3 MPN/mL,3.0,n_determinable_60d,197.0
+"Vijay 2024, clinical isolates",floor = 3 MPN/mL,3.0,n_forced_by_inoculum_60d,0.0
+"Vijay 2024, clinical isolates",floor = 3 MPN/mL,3.0,n_undecidable_60d,0.0
+"Vijay 2024, clinical isolates",floor = 3 MPN/mL,3.0,n_at_floor_whose_bound_sits_exactly_on_a_class_cut_60d,0.0
+"Vijay 2024, clinical isolates",floor = 3 MPN/mL,3.0,n_short_of_4_logs_15d_baseline_only,17.0
+"Vijay 2024, clinical isolates",floor = 3 MPN/mL,3.0,n_baseline_only,174.0
+"Vijay 2024, clinical isolates",floor = 3 MPN/mL,3.0,n_mpn_rungs_between_this_floor_and_23,10.0
+"Vijay 2024, clinical isolates",floor = 3 MPN/mL,3.0,n_readings_on_those_rungs,0.0
+"Vijay 2024, clinical isolates",floor = 3.6 MPN/mL,3.6,n_short_of_4_logs_15d,28.0
+"Vijay 2024, clinical isolates",floor = 3.6 MPN/mL,3.6,pct_short_of_4_logs_15d,12.903225806451612
+"Vijay 2024, clinical isolates",floor = 3.6 MPN/mL,3.6,n_calls_15d,203.0
+"Vijay 2024, clinical isolates",floor = 3.6 MPN/mL,3.6,n_at_floor_15d,0.0
+"Vijay 2024, clinical isolates",floor = 3.6 MPN/mL,3.6,n_determinable_15d,203.0
+"Vijay 2024, clinical isolates",floor = 3.6 MPN/mL,3.6,n_forced_by_inoculum_15d,0.0
+"Vijay 2024, clinical isolates",floor = 3.6 MPN/mL,3.6,n_undecidable_15d,0.0
+"Vijay 2024, clinical isolates",floor = 3.6 MPN/mL,3.6,n_at_floor_whose_bound_sits_exactly_on_a_class_cut_15d,0.0
+"Vijay 2024, clinical isolates",floor = 3.6 MPN/mL,3.6,n_short_of_4_logs_60d,3.0
+"Vijay 2024, clinical isolates",floor = 3.6 MPN/mL,3.6,pct_short_of_4_logs_60d,1.4285714285714286
+"Vijay 2024, clinical isolates",floor = 3.6 MPN/mL,3.6,n_calls_60d,197.0
+"Vijay 2024, clinical isolates",floor = 3.6 MPN/mL,3.6,n_at_floor_60d,0.0
+"Vijay 2024, clinical isolates",floor = 3.6 MPN/mL,3.6,n_determinable_60d,197.0
+"Vijay 2024, clinical isolates",floor = 3.6 MPN/mL,3.6,n_forced_by_inoculum_60d,0.0
+"Vijay 2024, clinical isolates",floor = 3.6 MPN/mL,3.6,n_undecidable_60d,0.0
+"Vijay 2024, clinical isolates",floor = 3.6 MPN/mL,3.6,n_at_floor_whose_bound_sits_exactly_on_a_class_cut_60d,0.0
+"Vijay 2024, clinical isolates",floor = 3.6 MPN/mL,3.6,n_short_of_4_logs_15d_baseline_only,17.0
+"Vijay 2024, clinical isolates",floor = 3.6 MPN/mL,3.6,n_baseline_only,174.0
+"Vijay 2024, clinical isolates",floor = 3.6 MPN/mL,3.6,n_mpn_rungs_between_this_floor_and_23,9.0
+"Vijay 2024, clinical isolates",floor = 3.6 MPN/mL,3.6,n_readings_on_those_rungs,0.0
+"Vijay 2024, clinical isolates",floor = 7.2 MPN/mL,7.2,n_short_of_4_logs_15d,33.0
+"Vijay 2024, clinical isolates",floor = 7.2 MPN/mL,7.2,pct_short_of_4_logs_15d,15.2073732718894
+"Vijay 2024, clinical isolates",floor = 7.2 MPN/mL,7.2,n_calls_15d,203.0
+"Vijay 2024, clinical isolates",floor = 7.2 MPN/mL,7.2,n_at_floor_15d,0.0
+"Vijay 2024, clinical isolates",floor = 7.2 MPN/mL,7.2,n_determinable_15d,203.0
+"Vijay 2024, clinical isolates",floor = 7.2 MPN/mL,7.2,n_forced_by_inoculum_15d,0.0
+"Vijay 2024, clinical isolates",floor = 7.2 MPN/mL,7.2,n_undecidable_15d,0.0
+"Vijay 2024, clinical isolates",floor = 7.2 MPN/mL,7.2,n_at_floor_whose_bound_sits_exactly_on_a_class_cut_15d,0.0
+"Vijay 2024, clinical isolates",floor = 7.2 MPN/mL,7.2,n_short_of_4_logs_60d,7.0
+"Vijay 2024, clinical isolates",floor = 7.2 MPN/mL,7.2,pct_short_of_4_logs_60d,3.3333333333333335
+"Vijay 2024, clinical isolates",floor = 7.2 MPN/mL,7.2,n_calls_60d,197.0
+"Vijay 2024, clinical isolates",floor = 7.2 MPN/mL,7.2,n_at_floor_60d,0.0
+"Vijay 2024, clinical isolates",floor = 7.2 MPN/mL,7.2,n_determinable_60d,197.0
+"Vijay 2024, clinical isolates",floor = 7.2 MPN/mL,7.2,n_forced_by_inoculum_60d,0.0
+"Vijay 2024, clinical isolates",floor = 7.2 MPN/mL,7.2,n_undecidable_60d,0.0
+"Vijay 2024, clinical isolates",floor = 7.2 MPN/mL,7.2,n_at_floor_whose_bound_sits_exactly_on_a_class_cut_60d,0.0
+"Vijay 2024, clinical isolates",floor = 7.2 MPN/mL,7.2,n_short_of_4_logs_15d_baseline_only,21.0
+"Vijay 2024, clinical isolates",floor = 7.2 MPN/mL,7.2,n_baseline_only,174.0
+"Vijay 2024, clinical isolates",floor = 7.2 MPN/mL,7.2,n_mpn_rungs_between_this_floor_and_23,8.0
+"Vijay 2024, clinical isolates",floor = 7.2 MPN/mL,7.2,n_readings_on_those_rungs,0.0
+"Vijay 2024, clinical isolates",floor = 7.4 MPN/mL,7.4,n_short_of_4_logs_15d,33.0
+"Vijay 2024, clinical isolates",floor = 7.4 MPN/mL,7.4,pct_short_of_4_logs_15d,15.2073732718894
+"Vijay 2024, clinical isolates",floor = 7.4 MPN/mL,7.4,n_calls_15d,203.0
+"Vijay 2024, clinical isolates",floor = 7.4 MPN/mL,7.4,n_at_floor_15d,0.0
+"Vijay 2024, clinical isolates",floor = 7.4 MPN/mL,7.4,n_determinable_15d,203.0
+"Vijay 2024, clinical isolates",floor = 7.4 MPN/mL,7.4,n_forced_by_inoculum_15d,0.0
+"Vijay 2024, clinical isolates",floor = 7.4 MPN/mL,7.4,n_undecidable_15d,0.0
+"Vijay 2024, clinical isolates",floor = 7.4 MPN/mL,7.4,n_at_floor_whose_bound_sits_exactly_on_a_class_cut_15d,0.0
+"Vijay 2024, clinical isolates",floor = 7.4 MPN/mL,7.4,n_short_of_4_logs_60d,7.0
+"Vijay 2024, clinical isolates",floor = 7.4 MPN/mL,7.4,pct_short_of_4_logs_60d,3.3333333333333335
+"Vijay 2024, clinical isolates",floor = 7.4 MPN/mL,7.4,n_calls_60d,197.0
+"Vijay 2024, clinical isolates",floor = 7.4 MPN/mL,7.4,n_at_floor_60d,0.0
+"Vijay 2024, clinical isolates",floor = 7.4 MPN/mL,7.4,n_determinable_60d,197.0
+"Vijay 2024, clinical isolates",floor = 7.4 MPN/mL,7.4,n_forced_by_inoculum_60d,0.0
+"Vijay 2024, clinical isolates",floor = 7.4 MPN/mL,7.4,n_undecidable_60d,0.0
+"Vijay 2024, clinical isolates",floor = 7.4 MPN/mL,7.4,n_at_floor_whose_bound_sits_exactly_on_a_class_cut_60d,0.0
+"Vijay 2024, clinical isolates",floor = 7.4 MPN/mL,7.4,n_short_of_4_logs_15d_baseline_only,21.0
+"Vijay 2024, clinical isolates",floor = 7.4 MPN/mL,7.4,n_baseline_only,174.0
+"Vijay 2024, clinical isolates",floor = 7.4 MPN/mL,7.4,n_mpn_rungs_between_this_floor_and_23,7.0
+"Vijay 2024, clinical isolates",floor = 7.4 MPN/mL,7.4,n_readings_on_those_rungs,0.0
+"Vijay 2024, clinical isolates",floor = 9.2 MPN/mL,9.2,n_short_of_4_logs_15d,33.0
+"Vijay 2024, clinical isolates",floor = 9.2 MPN/mL,9.2,pct_short_of_4_logs_15d,15.2073732718894
+"Vijay 2024, clinical isolates",floor = 9.2 MPN/mL,9.2,n_calls_15d,203.0
+"Vijay 2024, clinical isolates",floor = 9.2 MPN/mL,9.2,n_at_floor_15d,0.0
+"Vijay 2024, clinical isolates",floor = 9.2 MPN/mL,9.2,n_determinable_15d,203.0
+"Vijay 2024, clinical isolates",floor = 9.2 MPN/mL,9.2,n_forced_by_inoculum_15d,0.0
+"Vijay 2024, clinical isolates",floor = 9.2 MPN/mL,9.2,n_undecidable_15d,0.0
+"Vijay 2024, clinical isolates",floor = 9.2 MPN/mL,9.2,n_at_floor_whose_bound_sits_exactly_on_a_class_cut_15d,0.0
+"Vijay 2024, clinical isolates",floor = 9.2 MPN/mL,9.2,n_short_of_4_logs_60d,7.0
+"Vijay 2024, clinical isolates",floor = 9.2 MPN/mL,9.2,pct_short_of_4_logs_60d,3.3333333333333335
+"Vijay 2024, clinical isolates",floor = 9.2 MPN/mL,9.2,n_calls_60d,197.0
+"Vijay 2024, clinical isolates",floor = 9.2 MPN/mL,9.2,n_at_floor_60d,0.0
+"Vijay 2024, clinical isolates",floor = 9.2 MPN/mL,9.2,n_determinable_60d,197.0
+"Vijay 2024, clinical isolates",floor = 9.2 MPN/mL,9.2,n_forced_by_inoculum_60d,0.0
+"Vijay 2024, clinical isolates",floor = 9.2 MPN/mL,9.2,n_undecidable_60d,0.0
+"Vijay 2024, clinical isolates",floor = 9.2 MPN/mL,9.2,n_at_floor_whose_bound_sits_exactly_on_a_class_cut_60d,0.0
+"Vijay 2024, clinical isolates",floor = 9.2 MPN/mL,9.2,n_short_of_4_logs_15d_baseline_only,21.0
+"Vijay 2024, clinical isolates",floor = 9.2 MPN/mL,9.2,n_baseline_only,174.0
+"Vijay 2024, clinical isolates",floor = 9.2 MPN/mL,9.2,n_mpn_rungs_between_this_floor_and_23,6.0
+"Vijay 2024, clinical isolates",floor = 9.2 MPN/mL,9.2,n_readings_on_those_rungs,0.0
+"Vijay 2024, clinical isolates",floor = 11 MPN/mL,11.0,n_short_of_4_logs_15d,33.0
+"Vijay 2024, clinical isolates",floor = 11 MPN/mL,11.0,pct_short_of_4_logs_15d,15.2073732718894
+"Vijay 2024, clinical isolates",floor = 11 MPN/mL,11.0,n_calls_15d,203.0
+"Vijay 2024, clinical isolates",floor = 11 MPN/mL,11.0,n_at_floor_15d,0.0
+"Vijay 2024, clinical isolates",floor = 11 MPN/mL,11.0,n_determinable_15d,203.0
+"Vijay 2024, clinical isolates",floor = 11 MPN/mL,11.0,n_forced_by_inoculum_15d,0.0
+"Vijay 2024, clinical isolates",floor = 11 MPN/mL,11.0,n_undecidable_15d,0.0
+"Vijay 2024, clinical isolates",floor = 11 MPN/mL,11.0,n_at_floor_whose_bound_sits_exactly_on_a_class_cut_15d,0.0
+"Vijay 2024, clinical isolates",floor = 11 MPN/mL,11.0,n_short_of_4_logs_60d,7.0
+"Vijay 2024, clinical isolates",floor = 11 MPN/mL,11.0,pct_short_of_4_logs_60d,3.3333333333333335
+"Vijay 2024, clinical isolates",floor = 11 MPN/mL,11.0,n_calls_60d,197.0
+"Vijay 2024, clinical isolates",floor = 11 MPN/mL,11.0,n_at_floor_60d,0.0
+"Vijay 2024, clinical isolates",floor = 11 MPN/mL,11.0,n_determinable_60d,197.0
+"Vijay 2024, clinical isolates",floor = 11 MPN/mL,11.0,n_forced_by_inoculum_60d,0.0
+"Vijay 2024, clinical isolates",floor = 11 MPN/mL,11.0,n_undecidable_60d,0.0
+"Vijay 2024, clinical isolates",floor = 11 MPN/mL,11.0,n_at_floor_whose_bound_sits_exactly_on_a_class_cut_60d,0.0
+"Vijay 2024, clinical isolates",floor = 11 MPN/mL,11.0,n_short_of_4_logs_15d_baseline_only,21.0
+"Vijay 2024, clinical isolates",floor = 11 MPN/mL,11.0,n_baseline_only,174.0
+"Vijay 2024, clinical isolates",floor = 11 MPN/mL,11.0,n_mpn_rungs_between_this_floor_and_23,5.0
+"Vijay 2024, clinical isolates",floor = 11 MPN/mL,11.0,n_readings_on_those_rungs,0.0
+"Vijay 2024, clinical isolates",floor = 14 MPN/mL,14.0,n_short_of_4_logs_15d,33.0
+"Vijay 2024, clinical isolates",floor = 14 MPN/mL,14.0,pct_short_of_4_logs_15d,15.2073732718894
+"Vijay 2024, clinical isolates",floor = 14 MPN/mL,14.0,n_calls_15d,203.0
+"Vijay 2024, clinical isolates",floor = 14 MPN/mL,14.0,n_at_floor_15d,0.0
+"Vijay 2024, clinical isolates",floor = 14 MPN/mL,14.0,n_determinable_15d,203.0
+"Vijay 2024, clinical isolates",floor = 14 MPN/mL,14.0,n_forced_by_inoculum_15d,0.0
+"Vijay 2024, clinical isolates",floor = 14 MPN/mL,14.0,n_undecidable_15d,0.0
+"Vijay 2024, clinical isolates",floor = 14 MPN/mL,14.0,n_at_floor_whose_bound_sits_exactly_on_a_class_cut_15d,0.0
+"Vijay 2024, clinical isolates",floor = 14 MPN/mL,14.0,n_short_of_4_logs_60d,7.0
+"Vijay 2024, clinical isolates",floor = 14 MPN/mL,14.0,pct_short_of_4_logs_60d,3.3333333333333335
+"Vijay 2024, clinical isolates",floor = 14 MPN/mL,14.0,n_calls_60d,197.0
+"Vijay 2024, clinical isolates",floor = 14 MPN/mL,14.0,n_at_floor_60d,0.0
+"Vijay 2024, clinical isolates",floor = 14 MPN/mL,14.0,n_determinable_60d,197.0
+"Vijay 2024, clinical isolates",floor = 14 MPN/mL,14.0,n_forced_by_inoculum_60d,0.0
+"Vijay 2024, clinical isolates",floor = 14 MPN/mL,14.0,n_undecidable_60d,0.0
+"Vijay 2024, clinical isolates",floor = 14 MPN/mL,14.0,n_at_floor_whose_bound_sits_exactly_on_a_class_cut_60d,0.0
+"Vijay 2024, clinical isolates",floor = 14 MPN/mL,14.0,n_short_of_4_logs_15d_baseline_only,21.0
+"Vijay 2024, clinical isolates",floor = 14 MPN/mL,14.0,n_baseline_only,174.0
+"Vijay 2024, clinical isolates",floor = 14 MPN/mL,14.0,n_mpn_rungs_between_this_floor_and_23,4.0
+"Vijay 2024, clinical isolates",floor = 14 MPN/mL,14.0,n_readings_on_those_rungs,0.0
+"Vijay 2024, clinical isolates",floor = 15 MPN/mL,15.0,n_short_of_4_logs_15d,33.0
+"Vijay 2024, clinical isolates",floor = 15 MPN/mL,15.0,pct_short_of_4_logs_15d,15.2073732718894
+"Vijay 2024, clinical isolates",floor = 15 MPN/mL,15.0,n_calls_15d,203.0
+"Vijay 2024, clinical isolates",floor = 15 MPN/mL,15.0,n_at_floor_15d,0.0
+"Vijay 2024, clinical isolates",floor = 15 MPN/mL,15.0,n_determinable_15d,203.0
+"Vijay 2024, clinical isolates",floor = 15 MPN/mL,15.0,n_forced_by_inoculum_15d,0.0
+"Vijay 2024, clinical isolates",floor = 15 MPN/mL,15.0,n_undecidable_15d,0.0
+"Vijay 2024, clinical isolates",floor = 15 MPN/mL,15.0,n_at_floor_whose_bound_sits_exactly_on_a_class_cut_15d,0.0
+"Vijay 2024, clinical isolates",floor = 15 MPN/mL,15.0,n_short_of_4_logs_60d,7.0
+"Vijay 2024, clinical isolates",floor = 15 MPN/mL,15.0,pct_short_of_4_logs_60d,3.3333333333333335
+"Vijay 2024, clinical isolates",floor = 15 MPN/mL,15.0,n_calls_60d,197.0
+"Vijay 2024, clinical isolates",floor = 15 MPN/mL,15.0,n_at_floor_60d,0.0
+"Vijay 2024, clinical isolates",floor = 15 MPN/mL,15.0,n_determinable_60d,197.0
+"Vijay 2024, clinical isolates",floor = 15 MPN/mL,15.0,n_forced_by_inoculum_60d,0.0
+"Vijay 2024, clinical isolates",floor = 15 MPN/mL,15.0,n_undecidable_60d,0.0
+"Vijay 2024, clinical isolates",floor = 15 MPN/mL,15.0,n_at_floor_whose_bound_sits_exactly_on_a_class_cut_60d,0.0
+"Vijay 2024, clinical isolates",floor = 15 MPN/mL,15.0,n_short_of_4_logs_15d_baseline_only,21.0
+"Vijay 2024, clinical isolates",floor = 15 MPN/mL,15.0,n_baseline_only,174.0
+"Vijay 2024, clinical isolates",floor = 15 MPN/mL,15.0,n_mpn_rungs_between_this_floor_and_23,3.0
+"Vijay 2024, clinical isolates",floor = 15 MPN/mL,15.0,n_readings_on_those_rungs,0.0
+"Vijay 2024, clinical isolates",floor = 20 MPN/mL,20.0,n_short_of_4_logs_15d,33.0
+"Vijay 2024, clinical isolates",floor = 20 MPN/mL,20.0,pct_short_of_4_logs_15d,15.2073732718894
+"Vijay 2024, clinical isolates",floor = 20 MPN/mL,20.0,n_calls_15d,203.0
+"Vijay 2024, clinical isolates",floor = 20 MPN/mL,20.0,n_at_floor_15d,0.0
+"Vijay 2024, clinical isolates",floor = 20 MPN/mL,20.0,n_determinable_15d,203.0
+"Vijay 2024, clinical isolates",floor = 20 MPN/mL,20.0,n_forced_by_inoculum_15d,0.0
+"Vijay 2024, clinical isolates",floor = 20 MPN/mL,20.0,n_undecidable_15d,0.0
+"Vijay 2024, clinical isolates",floor = 20 MPN/mL,20.0,n_at_floor_whose_bound_sits_exactly_on_a_class_cut_15d,0.0
+"Vijay 2024, clinical isolates",floor = 20 MPN/mL,20.0,n_short_of_4_logs_60d,7.0
+"Vijay 2024, clinical isolates",floor = 20 MPN/mL,20.0,pct_short_of_4_logs_60d,3.3333333333333335
+"Vijay 2024, clinical isolates",floor = 20 MPN/mL,20.0,n_calls_60d,197.0
+"Vijay 2024, clinical isolates",floor = 20 MPN/mL,20.0,n_at_floor_60d,0.0
+"Vijay 2024, clinical isolates",floor = 20 MPN/mL,20.0,n_determinable_60d,197.0
+"Vijay 2024, clinical isolates",floor = 20 MPN/mL,20.0,n_forced_by_inoculum_60d,0.0
+"Vijay 2024, clinical isolates",floor = 20 MPN/mL,20.0,n_undecidable_60d,0.0
+"Vijay 2024, clinical isolates",floor = 20 MPN/mL,20.0,n_at_floor_whose_bound_sits_exactly_on_a_class_cut_60d,0.0
+"Vijay 2024, clinical isolates",floor = 20 MPN/mL,20.0,n_short_of_4_logs_15d_baseline_only,21.0
+"Vijay 2024, clinical isolates",floor = 20 MPN/mL,20.0,n_baseline_only,174.0
+"Vijay 2024, clinical isolates",floor = 20 MPN/mL,20.0,n_mpn_rungs_between_this_floor_and_23,2.0
+"Vijay 2024, clinical isolates",floor = 20 MPN/mL,20.0,n_readings_on_those_rungs,0.0
+"Vijay 2024, clinical isolates",floor = 21 MPN/mL,21.0,n_short_of_4_logs_15d,33.0
+"Vijay 2024, clinical isolates",floor = 21 MPN/mL,21.0,pct_short_of_4_logs_15d,15.2073732718894
+"Vijay 2024, clinical isolates",floor = 21 MPN/mL,21.0,n_calls_15d,203.0
+"Vijay 2024, clinical isolates",floor = 21 MPN/mL,21.0,n_at_floor_15d,0.0
+"Vijay 2024, clinical isolates",floor = 21 MPN/mL,21.0,n_determinable_15d,203.0
+"Vijay 2024, clinical isolates",floor = 21 MPN/mL,21.0,n_forced_by_inoculum_15d,0.0
+"Vijay 2024, clinical isolates",floor = 21 MPN/mL,21.0,n_undecidable_15d,0.0
+"Vijay 2024, clinical isolates",floor = 21 MPN/mL,21.0,n_at_floor_whose_bound_sits_exactly_on_a_class_cut_15d,0.0
+"Vijay 2024, clinical isolates",floor = 21 MPN/mL,21.0,n_short_of_4_logs_60d,7.0
+"Vijay 2024, clinical isolates",floor = 21 MPN/mL,21.0,pct_short_of_4_logs_60d,3.3333333333333335
+"Vijay 2024, clinical isolates",floor = 21 MPN/mL,21.0,n_calls_60d,197.0
+"Vijay 2024, clinical isolates",floor = 21 MPN/mL,21.0,n_at_floor_60d,0.0
+"Vijay 2024, clinical isolates",floor = 21 MPN/mL,21.0,n_determinable_60d,197.0
+"Vijay 2024, clinical isolates",floor = 21 MPN/mL,21.0,n_forced_by_inoculum_60d,0.0
+"Vijay 2024, clinical isolates",floor = 21 MPN/mL,21.0,n_undecidable_60d,0.0
+"Vijay 2024, clinical isolates",floor = 21 MPN/mL,21.0,n_at_floor_whose_bound_sits_exactly_on_a_class_cut_60d,0.0
+"Vijay 2024, clinical isolates",floor = 21 MPN/mL,21.0,n_short_of_4_logs_15d_baseline_only,21.0
+"Vijay 2024, clinical isolates",floor = 21 MPN/mL,21.0,n_baseline_only,174.0
+"Vijay 2024, clinical isolates",floor = 21 MPN/mL,21.0,n_mpn_rungs_between_this_floor_and_23,1.0
+"Vijay 2024, clinical isolates",floor = 21 MPN/mL,21.0,n_readings_on_those_rungs,0.0
+"Vijay 2024, clinical isolates",floor = 23 MPN/mL,23.0,n_short_of_4_logs_15d,33.0
+"Vijay 2024, clinical isolates",floor = 23 MPN/mL,23.0,pct_short_of_4_logs_15d,15.2073732718894
+"Vijay 2024, clinical isolates",floor = 23 MPN/mL,23.0,n_calls_15d,203.0
+"Vijay 2024, clinical isolates",floor = 23 MPN/mL,23.0,n_at_floor_15d,18.0
+"Vijay 2024, clinical isolates",floor = 23 MPN/mL,23.0,n_determinable_15d,185.0
+"Vijay 2024, clinical isolates",floor = 23 MPN/mL,23.0,n_forced_by_inoculum_15d,12.0
+"Vijay 2024, clinical isolates",floor = 23 MPN/mL,23.0,n_undecidable_15d,6.0
+"Vijay 2024, clinical isolates",floor = 23 MPN/mL,23.0,n_at_floor_whose_bound_sits_exactly_on_a_class_cut_15d,6.0
+"Vijay 2024, clinical isolates",floor = 23 MPN/mL,23.0,n_short_of_4_logs_60d,7.0
+"Vijay 2024, clinical isolates",floor = 23 MPN/mL,23.0,pct_short_of_4_logs_60d,3.3333333333333335
+"Vijay 2024, clinical isolates",floor = 23 MPN/mL,23.0,n_calls_60d,197.0
+"Vijay 2024, clinical isolates",floor = 23 MPN/mL,23.0,n_at_floor_60d,6.0
+"Vijay 2024, clinical isolates",floor = 23 MPN/mL,23.0,n_determinable_60d,191.0
+"Vijay 2024, clinical isolates",floor = 23 MPN/mL,23.0,n_forced_by_inoculum_60d,6.0
+"Vijay 2024, clinical isolates",floor = 23 MPN/mL,23.0,n_undecidable_60d,0.0
+"Vijay 2024, clinical isolates",floor = 23 MPN/mL,23.0,n_at_floor_whose_bound_sits_exactly_on_a_class_cut_60d,0.0
+"Vijay 2024, clinical isolates",floor = 23 MPN/mL,23.0,n_short_of_4_logs_15d_baseline_only,21.0
+"Vijay 2024, clinical isolates",floor = 23 MPN/mL,23.0,n_baseline_only,174.0
+"Vijay 2024, clinical isolates",floor = 23 MPN/mL,23.0,n_mpn_rungs_between_this_floor_and_23,0.0
+"Vijay 2024, clinical isolates",floor = 23 MPN/mL,23.0,n_readings_on_those_rungs,0.0
+"ERA4TB, six laboratories",per-volume (as analysed),"10, 100 or 400 by volume",n_genuine_counts_this_floor_would_discard,0
+"ERA4TB, six laboratories",per-volume (as analysed),"10, 100 or 400 by volume",pct_genuine_counts_discarded,0.0
+"ERA4TB, six laboratories",per-volume (as analysed),"10, 100 or 400 by volume",n_counts_sitting_exactly_on_the_floor,56
+"ERA4TB, six laboratories",per-volume (as analysed),"10, 100 or 400 by volume",n_flags_checkable,498
+"ERA4TB, six laboratories",per-volume (as analysed),"10, 100 or 400 by volume",n_flags_with_a_comparator,189
+"ERA4TB, six laboratories",per-volume (as analysed),"10, 100 or 400 by volume",n_flags_contradicted,83
+"ERA4TB, six laboratories",per-volume (as analysed),"10, 100 or 400 by volume",pct_flags_contradicted,16.666666666666668
+"ERA4TB, six laboratories",per-volume (as analysed),"10, 100 or 400 by volume",pct_of_flags_with_a_comparator_contradicted,43.91534391534392
+"ERA4TB, six laboratories","pooled at the most sensitive volume, 100 uL",10,n_genuine_counts_this_floor_would_discard,0
+"ERA4TB, six laboratories","pooled at the most sensitive volume, 100 uL",10,pct_genuine_counts_discarded,0.0
+"ERA4TB, six laboratories","pooled at the most sensitive volume, 100 uL",10,n_counts_sitting_exactly_on_the_floor,4
+"ERA4TB, six laboratories","pooled at the most sensitive volume, 100 uL",10,n_flags_checkable,498
+"ERA4TB, six laboratories","pooled at the most sensitive volume, 100 uL",10,n_flags_with_a_comparator,218
+"ERA4TB, six laboratories","pooled at the most sensitive volume, 100 uL",10,n_flags_contradicted,215
+"ERA4TB, six laboratories","pooled at the most sensitive volume, 100 uL",10,pct_flags_contradicted,43.17269076305221
+"ERA4TB, six laboratories","pooled at the most sensitive volume, 100 uL",10,pct_of_flags_with_a_comparator_contradicted,98.62385321100918
+"ERA4TB, six laboratories","pooled at the modal volume, 10 uL",100,n_genuine_counts_this_floor_would_discard,24
+"ERA4TB, six laboratories","pooled at the modal volume, 10 uL",100,pct_genuine_counts_discarded,1.1320754716981132
+"ERA4TB, six laboratories","pooled at the modal volume, 10 uL",100,n_counts_sitting_exactly_on_the_floor,46
+"ERA4TB, six laboratories","pooled at the modal volume, 10 uL",100,n_flags_checkable,498
+"ERA4TB, six laboratories","pooled at the modal volume, 10 uL",100,n_flags_with_a_comparator,218
+"ERA4TB, six laboratories","pooled at the modal volume, 10 uL",100,n_flags_contradicted,143
+"ERA4TB, six laboratories","pooled at the modal volume, 10 uL",100,pct_flags_contradicted,28.714859437751002
+"ERA4TB, six laboratories","pooled at the modal volume, 10 uL",100,pct_of_flags_with_a_comparator_contradicted,65.59633027522936
+"ERA4TB, six laboratories","pooled at the least sensitive volume, 2.5 uL",400,n_genuine_counts_this_floor_would_discard,126
+"ERA4TB, six laboratories","pooled at the least sensitive volume, 2.5 uL",400,pct_genuine_counts_discarded,5.943396226415095
+"ERA4TB, six laboratories","pooled at the least sensitive volume, 2.5 uL",400,n_counts_sitting_exactly_on_the_floor,29
+"ERA4TB, six laboratories","pooled at the least sensitive volume, 2.5 uL",400,n_flags_checkable,498
+"ERA4TB, six laboratories","pooled at the least sensitive volume, 2.5 uL",400,n_flags_with_a_comparator,218
+"ERA4TB, six laboratories","pooled at the least sensitive volume, 2.5 uL",400,n_flags_contradicted,76
+"ERA4TB, six laboratories","pooled at the least sensitive volume, 2.5 uL",400,pct_flags_contradicted,15.261044176706827
+"ERA4TB, six laboratories","pooled at the least sensitive volume, 2.5 uL",400,pct_of_flags_with_a_comparator_contradicted,34.862385321100916
+"ERA4TB, six laboratories",pooled at the geometric mean of the per-volume floors,80.1638,n_genuine_counts_this_floor_would_discard,22
+"ERA4TB, six laboratories",pooled at the geometric mean of the per-volume floors,80.1638,pct_genuine_counts_discarded,1.0377358490566038
+"ERA4TB, six laboratories",pooled at the geometric mean of the per-volume floors,80.1638,n_counts_sitting_exactly_on_the_floor,0
+"ERA4TB, six laboratories",pooled at the geometric mean of the per-volume floors,80.1638,n_flags_checkable,498
+"ERA4TB, six laboratories",pooled at the geometric mean of the per-volume floors,80.1638,n_flags_with_a_comparator,218
+"ERA4TB, six laboratories",pooled at the geometric mean of the per-volume floors,80.1638,n_flags_contradicted,194
+"ERA4TB, six laboratories",pooled at the geometric mean of the per-volume floors,80.1638,pct_flags_contradicted,38.95582329317269
+"ERA4TB, six laboratories",pooled at the geometric mean of the per-volume floors,80.1638,pct_of_flags_with_a_comparator_contradicted,88.9908256880734
+"Dubey 2026, hollow fibre",the below-limit placeholder taken literally,1.0,median_headroom_log10,6.084484323277383
+"Dubey 2026, hollow fibre",the below-limit placeholder taken literally,1.0,n_short_of_4_logs,0
+"Dubey 2026, hollow fibre",the below-limit placeholder taken literally,1.0,n_cultures,20
+"Dubey 2026, hollow fibre","100 uL plated, as the deposit's staging record gives",10.0,median_headroom_log10,5.084484323277383
+"Dubey 2026, hollow fibre","100 uL plated, as the deposit's staging record gives",10.0,n_short_of_4_logs,0
+"Dubey 2026, hollow fibre","100 uL plated, as the deposit's staging record gives",10.0,n_cultures,20
+"Dubey 2026, hollow fibre",50 uL plated,20.0,median_headroom_log10,4.783454327613402
+"Dubey 2026, hollow fibre",50 uL plated,20.0,n_short_of_4_logs,0
+"Dubey 2026, hollow fibre",50 uL plated,20.0,n_cultures,20
+"Dubey 2026, hollow fibre",10 uL plated,100.0,median_headroom_log10,4.084484323277383
+"Dubey 2026, hollow fibre",10 uL plated,100.0,n_short_of_4_logs,5
+"Dubey 2026, hollow fibre",10 uL plated,100.0,n_cultures,20
+"Kaur 2024, apramycin grid","100 uL plated, if it had been stated",10.0,headroom_log10,6.033423755486949
+"Kaur 2024, apramycin grid","100 uL plated, if it had been stated",10.0,four_log_endpoint_reachable,True
+"Kaur 2024, apramycin grid","the observed minimum, which occurs once",40.0,headroom_log10,5.431363764158987
+"Kaur 2024, apramycin grid","the observed minimum, which occurs once",40.0,four_log_endpoint_reachable,True
+"Kaur 2024, apramycin grid","10 uL plated, if it had been stated",100.0,headroom_log10,5.033423755486949
+"Kaur 2024, apramycin grid","10 uL plated, if it had been stated",100.0,four_log_endpoint_reachable,True
+"Kaur 2024, apramycin grid","2.5 uL plated, if it had been stated",400.0,headroom_log10,4.431363764158987
+"Kaur 2024, apramycin grid","2.5 uL plated, if it had been stated",400.0,four_log_endpoint_reachable,True
+"Windels 2024, evolved clones",no floor is recoverable,,n_below_limit_written_as_exact_zero,6
+"Windels 2024, evolved clones",upper bound only,,lowest_non_zero_surviving_fraction,7.04e-09

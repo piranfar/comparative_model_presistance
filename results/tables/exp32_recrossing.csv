@@ -1,0 +1,361 @@
+institute,arm,replicate,plating,plated_volume_ul,boundary_log10,n_rows,n_visits_observed,n_visits_not_observed,last_visit_day,start_log10,start_uses_day_zero,start_n_early_readings,day_zero_log10,day_one_log10,ever_crossed_below,first_observed_visit_below,n_crossings_below,n_returns_above,oscillates_more_than_once,terminal_state,returned_under_loose_rule,first_crossing_day,last_day_above_before_crossing,returned_above,day_of_first_return,days_below_before_return,longest_run_below_days,trajectory_class
+A,INH 10X MIC,1,100 uL quadruplicate,100.0,1.0,7,7,0,21.0,2.11394335230684,False,1,,2.11394335230684,True,False,1,0,False,below,False,7.0,3.0,False,,,14.0,"one crossing, no return"
+A,INH 10X MIC,1,10 uL four drops,10.0,2.0,7,7,0,21.0,2.0,False,1,,2.0,True,False,1,0,False,below,False,2.0,1.0,False,,,19.0,"one crossing, no return"
+A,INH 10X MIC,1,10 uL single drop,10.0,2.0,7,7,0,21.0,2.30102999566398,False,1,,2.30102999566398,True,False,2,1,False,below,True,3.0,2.0,True,7.0,4.0,11.0,crosses repeatedly
+A,INH 10X MIC,1,2.5 uL single drop,2.5,2.6020599913279625,7,7,0,21.0,2.90308998699194,False,1,,2.90308998699194,True,False,2,1,False,below,True,2.0,1.0,True,3.0,1.0,14.0,crosses repeatedly
+A,INH 10X MIC,2,100 uL quadruplicate,100.0,1.0,7,7,0,21.0,2.38021124171161,False,1,,2.38021124171161,True,False,1,0,False,below,False,10.0,7.0,False,,,11.0,"one crossing, no return"
+A,INH 10X MIC,2,10 uL four drops,10.0,2.0,7,7,0,21.0,2.0,False,1,,2.0,True,False,1,0,False,below,False,2.0,1.0,False,,,19.0,"one crossing, no return"
+A,INH 10X MIC,2,10 uL single drop,10.0,2.0,7,7,0,21.0,,False,0,,,True,True,0,0,False,below,False,1.0,,False,,,20.0,"one crossing, no return"
+A,INH 10X MIC,2,2.5 uL single drop,2.5,2.6020599913279625,7,7,0,21.0,3.30102999566398,False,1,,3.30102999566398,True,False,2,1,False,below,True,2.0,1.0,True,3.0,1.0,14.0,crosses repeatedly
+A,INH 10X MIC,3,100 uL quadruplicate,100.0,1.0,7,7,0,21.0,2.46239799789896,False,1,,2.46239799789896,True,False,1,0,False,below,False,3.0,2.0,False,,,18.0,"one crossing, no return"
+A,INH 10X MIC,3,10 uL four drops,10.0,2.0,7,7,0,21.0,2.0,False,1,,2.0,True,False,1,0,False,below,False,2.0,1.0,False,,,19.0,"one crossing, no return"
+A,INH 10X MIC,3,10 uL single drop,10.0,2.0,7,7,0,21.0,,False,0,,,True,True,1,1,False,below,True,1.0,,True,2.0,1.0,18.0,"one crossing, returns above"
+A,INH 10X MIC,3,2.5 uL single drop,2.5,2.6020599913279625,7,7,0,21.0,3.30102999566398,False,1,,3.30102999566398,True,False,1,0,False,below,False,7.0,3.0,False,,,14.0,"one crossing, no return"
+A,INH 1X MIC,1,100 uL quadruplicate,100.0,1.0,7,6,1,21.0,2.54406804435028,False,1,,2.54406804435028,True,False,1,1,False,above,True,7.0,3.0,True,14.0,7.0,0.0,"one crossing, returns above"
+A,INH 1X MIC,1,10 uL four drops,10.0,2.0,7,6,1,21.0,2.0,False,1,,2.0,True,False,1,1,False,above,True,2.0,1.0,True,14.0,12.0,5.0,"one crossing, returns above"
+A,INH 1X MIC,1,10 uL single drop,10.0,2.0,7,6,1,21.0,2.95424250943932,False,1,,2.95424250943932,True,False,1,1,False,above,True,2.0,1.0,True,21.0,19.0,12.0,"one crossing, returns above"
+A,INH 1X MIC,1,2.5 uL single drop,2.5,2.6020599913279625,7,6,1,21.0,2.60205999132796,False,1,,2.60205999132796,True,False,1,1,False,above,True,3.0,2.0,True,21.0,18.0,11.0,"one crossing, returns above"
+A,INH 1X MIC,2,100 uL quadruplicate,100.0,1.0,7,7,0,21.0,2.5910646070265,False,1,,2.5910646070265,True,False,1,1,False,above,True,7.0,3.0,True,10.0,3.0,0.0,"one crossing, returns above"
+A,INH 1X MIC,2,10 uL four drops,10.0,2.0,7,7,0,21.0,2.69897000433602,False,1,,2.69897000433602,True,False,1,1,False,above,True,2.0,1.0,True,14.0,12.0,8.0,"one crossing, returns above"
+A,INH 1X MIC,2,10 uL single drop,10.0,2.0,7,7,0,21.0,2.47712125471966,False,1,,2.47712125471966,True,False,2,2,True,above,True,3.0,2.0,True,10.0,7.0,4.0,crosses repeatedly
+A,INH 1X MIC,2,2.5 uL single drop,2.5,2.6020599913279625,7,7,0,21.0,3.44715803134222,False,1,,3.44715803134222,True,False,2,2,True,above,True,2.0,1.0,True,3.0,1.0,7.0,crosses repeatedly
+A,INH 1X MIC,3,100 uL quadruplicate,100.0,1.0,7,6,1,21.0,2.44715803134222,False,1,,2.44715803134222,True,False,1,1,False,above,True,7.0,3.0,True,10.0,3.0,0.0,"one crossing, returns above"
+A,INH 1X MIC,3,10 uL four drops,10.0,2.0,7,7,0,21.0,2.60205999132796,False,1,,2.60205999132796,True,False,1,1,False,above,True,2.0,1.0,True,14.0,12.0,8.0,"one crossing, returns above"
+A,INH 1X MIC,3,10 uL single drop,10.0,2.0,7,7,0,21.0,2.95424250943932,False,1,,2.95424250943932,True,False,1,1,False,above,True,3.0,2.0,True,14.0,11.0,7.0,"one crossing, returns above"
+A,INH 1X MIC,3,2.5 uL single drop,2.5,2.6020599913279625,7,7,0,21.0,3.38021124171161,False,1,,3.38021124171161,True,False,1,1,False,above,True,2.0,1.0,True,14.0,12.0,8.0,"one crossing, returns above"
+A,MXF 10X MIC,1,100 uL quadruplicate,100.0,1.0,7,7,0,21.0,,False,0,,,True,False,2,2,True,above,True,7.0,3.0,True,10.0,3.0,0.0,crosses repeatedly
+A,MXF 10X MIC,1,10 uL four drops,10.0,2.0,7,7,0,21.0,2.60205999132796,False,1,,2.60205999132796,True,False,1,1,False,above,True,10.0,7.0,True,21.0,11.0,4.0,"one crossing, returns above"
+A,MXF 10X MIC,1,10 uL single drop,10.0,2.0,7,7,0,21.0,2.60205999132796,False,1,,2.60205999132796,True,False,1,1,False,above,True,10.0,7.0,True,21.0,11.0,4.0,"one crossing, returns above"
+A,MXF 10X MIC,1,2.5 uL single drop,2.5,2.6020599913279625,7,7,0,21.0,,False,0,,,True,True,1,2,True,above,True,1.0,,True,2.0,1.0,4.0,crosses repeatedly
+A,MXF 10X MIC,2,100 uL quadruplicate,100.0,1.0,7,7,0,21.0,2.41497334797082,False,1,,2.41497334797082,True,False,1,1,False,above,True,14.0,10.0,True,21.0,7.0,0.0,"one crossing, returns above"
+A,MXF 10X MIC,2,10 uL four drops,10.0,2.0,7,7,0,21.0,2.77815125038364,False,1,,2.77815125038364,True,False,1,1,False,above,True,3.0,2.0,True,21.0,18.0,11.0,"one crossing, returns above"
+A,MXF 10X MIC,2,10 uL single drop,10.0,2.0,7,7,0,21.0,2.77815125038364,False,1,,2.77815125038364,True,False,1,1,False,above,True,3.0,2.0,True,21.0,18.0,11.0,"one crossing, returns above"
+A,MXF 10X MIC,2,2.5 uL single drop,2.5,2.6020599913279625,7,7,0,21.0,,False,0,,,True,True,1,2,True,above,True,1.0,,True,2.0,1.0,7.0,crosses repeatedly
+A,MXF 10X MIC,3,100 uL quadruplicate,100.0,1.0,7,6,1,14.0,2.46239799789896,False,1,,2.46239799789896,True,False,1,0,False,below,True,14.0,10.0,False,,,0.0,"one crossing, no return"
+A,MXF 10X MIC,3,10 uL four drops,10.0,2.0,7,6,1,14.0,3.23044892137827,False,1,,3.23044892137827,True,False,1,1,False,above,True,2.0,1.0,True,14.0,12.0,8.0,"one crossing, returns above"
+A,MXF 10X MIC,3,10 uL single drop,10.0,2.0,7,6,1,14.0,3.17609125905568,False,1,,3.17609125905568,True,False,1,0,False,below,True,2.0,1.0,False,,,12.0,"one crossing, no return"
+A,MXF 10X MIC,3,2.5 uL single drop,2.5,2.6020599913279625,7,6,1,14.0,2.60205999132796,False,1,,2.60205999132796,True,False,2,1,False,below,True,2.0,1.0,True,3.0,1.0,7.0,crosses repeatedly
+A,MXF 1X MIC,1,100 uL quadruplicate,100.0,1.0,7,7,0,21.0,3.73239375982297,False,1,,3.73239375982297,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+A,MXF 1X MIC,1,10 uL four drops,10.0,2.0,7,7,0,21.0,3.60205999132796,False,1,,3.60205999132796,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+A,MXF 1X MIC,1,10 uL single drop,10.0,2.0,7,7,0,21.0,3.07918124604762,False,1,,3.07918124604762,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+A,MXF 1X MIC,1,2.5 uL single drop,2.5,2.6020599913279625,7,7,0,21.0,3.30102999566398,False,1,,3.30102999566398,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+A,MXF 1X MIC,2,100 uL quadruplicate,100.0,1.0,7,7,0,21.0,3.70757017609794,False,1,,3.70757017609794,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+A,MXF 1X MIC,2,10 uL four drops,10.0,2.0,7,7,0,21.0,3.47712125471966,False,1,,3.47712125471966,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+A,MXF 1X MIC,2,10 uL single drop,10.0,2.0,7,7,0,21.0,3.07918124604762,False,1,,3.07918124604762,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+A,MXF 1X MIC,2,2.5 uL single drop,2.5,2.6020599913279625,7,7,0,21.0,3.30102999566398,False,1,,3.30102999566398,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+A,MXF 1X MIC,3,100 uL quadruplicate,100.0,1.0,7,7,0,21.0,3.55630250076729,False,1,,3.55630250076729,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+A,MXF 1X MIC,3,10 uL four drops,10.0,2.0,7,7,0,21.0,3.67209785793572,False,1,,3.67209785793572,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+A,MXF 1X MIC,3,10 uL single drop,10.0,2.0,7,7,0,21.0,3.04139268515822,False,1,,3.04139268515822,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+A,MXF 1X MIC,3,2.5 uL single drop,2.5,2.6020599913279625,7,7,0,21.0,3.20411998265592,False,1,,3.20411998265592,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+A,untreated,1,100 uL quadruplicate,100.0,1.0,8,8,0,21.0,3.98677173426624,False,1,,3.98677173426624,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+A,untreated,1,10 uL four drops,10.0,2.0,8,8,0,21.0,3.569466970128465,True,2,3.43136376415899,3.70757017609794,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+A,untreated,1,10 uL single drop,10.0,2.0,8,8,0,21.0,3.23044892137827,True,2,3.23044892137827,3.23044892137827,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+A,untreated,1,2.5 uL single drop,2.5,2.6020599913279625,8,8,0,21.0,3.25257498915995,True,2,3.20411998265592,3.30102999566398,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+A,untreated,2,100 uL quadruplicate,100.0,1.0,8,8,0,21.0,3.92941892571429,False,1,,3.92941892571429,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+A,untreated,2,10 uL four drops,10.0,2.0,8,8,0,21.0,3.6164980551960753,True,2,3.47712125471966,3.75587485567249,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+A,untreated,2,10 uL single drop,10.0,2.0,8,8,0,21.0,3.09376036041823,True,2,3.14612803567824,3.04139268515822,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+A,untreated,2,2.5 uL single drop,2.5,2.6020599913279625,8,8,0,21.0,3.25257498915995,True,2,3.20411998265592,3.30102999566398,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+A,untreated,3,100 uL quadruplicate,100.0,1.0,8,7,1,21.0,,False,0,,,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+A,untreated,3,10 uL four drops,10.0,2.0,8,8,0,21.0,3.6300356939925402,True,2,3.54406804435028,3.7160033436348,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+A,untreated,3,10 uL single drop,10.0,2.0,8,8,0,21.0,3.2124408183155353,True,2,3.14612803567824,3.27875360095283,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+A,untreated,3,2.5 uL single drop,2.5,2.6020599913279625,8,8,0,21.0,3.25257498915995,True,2,3.20411998265592,3.30102999566398,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+B,INH 10X MIC,1,100 uL quadruplicate,100.0,1.0,7,6,1,14.0,,False,0,,,True,False,1,0,False,below,True,3.0,2.0,False,,,11.0,"one crossing, no return"
+B,INH 10X MIC,1,10 uL four drops,10.0,2.0,7,6,1,14.0,2.60205999132796,False,1,,2.60205999132796,True,False,2,1,False,below,True,7.0,3.0,True,10.0,3.0,0.0,crosses repeatedly
+B,INH 10X MIC,1,10 uL single drop,10.0,2.0,7,6,1,14.0,,False,0,,,True,True,1,1,False,below,True,1.0,,True,2.0,1.0,11.0,"one crossing, returns above"
+B,INH 10X MIC,1,2.5 uL single drop,2.5,2.6020599913279625,7,6,1,14.0,,False,0,,,True,True,0,0,False,below,True,1.0,,False,,,13.0,"one crossing, no return"
+B,INH 10X MIC,2,100 uL quadruplicate,100.0,1.0,7,6,1,14.0,2.30102999566398,False,1,,2.30102999566398,True,False,2,1,False,below,True,7.0,3.0,True,10.0,3.0,0.0,crosses repeatedly
+B,INH 10X MIC,2,10 uL four drops,10.0,2.0,7,6,1,14.0,2.0,False,1,,2.0,True,False,1,0,False,below,True,7.0,3.0,False,,,7.0,"one crossing, no return"
+B,INH 10X MIC,2,10 uL single drop,10.0,2.0,7,6,1,14.0,,False,0,,,True,True,0,0,False,below,True,1.0,,False,,,13.0,"one crossing, no return"
+B,INH 10X MIC,2,2.5 uL single drop,2.5,2.6020599913279625,7,6,1,14.0,,False,0,,,True,True,0,0,False,below,True,1.0,,False,,,13.0,"one crossing, no return"
+B,INH 10X MIC,3,100 uL quadruplicate,100.0,1.0,7,6,1,14.0,2.84509804001426,False,1,,2.84509804001426,True,False,1,1,False,above,True,7.0,3.0,True,14.0,7.0,3.0,"one crossing, returns above"
+B,INH 10X MIC,3,10 uL four drops,10.0,2.0,7,6,1,14.0,,False,0,,,True,True,1,1,False,below,True,1.0,,True,2.0,1.0,11.0,"one crossing, returns above"
+B,INH 10X MIC,3,10 uL single drop,10.0,2.0,7,6,1,14.0,,False,0,,,True,True,0,0,False,below,True,1.0,,False,,,13.0,"one crossing, no return"
+B,INH 10X MIC,3,2.5 uL single drop,2.5,2.6020599913279625,7,6,1,14.0,,False,0,,,True,True,0,0,False,below,True,1.0,,False,,,13.0,"one crossing, no return"
+B,INH 1X MIC,1,100 uL quadruplicate,100.0,1.0,7,6,1,14.0,2.69897000433602,False,1,,2.69897000433602,True,False,1,0,False,below,True,3.0,2.0,False,,,11.0,"one crossing, no return"
+B,INH 1X MIC,1,10 uL four drops,10.0,2.0,7,6,1,14.0,2.77815125038364,False,1,,2.77815125038364,True,False,1,1,False,above,True,10.0,7.0,True,14.0,4.0,0.0,"one crossing, returns above"
+B,INH 1X MIC,1,10 uL single drop,10.0,2.0,7,6,1,14.0,,False,0,,,True,True,0,1,False,above,True,1.0,,True,10.0,9.0,6.0,"one crossing, returns above"
+B,INH 1X MIC,1,2.5 uL single drop,2.5,2.6020599913279625,7,6,1,14.0,2.60205999132796,False,1,,2.60205999132796,True,False,1,0,False,below,True,2.0,1.0,False,,,12.0,"one crossing, no return"
+B,INH 1X MIC,2,100 uL quadruplicate,100.0,1.0,7,6,1,14.0,,False,0,,,True,False,2,1,False,below,True,3.0,2.0,True,10.0,7.0,4.0,crosses repeatedly
+B,INH 1X MIC,2,10 uL four drops,10.0,2.0,7,6,1,14.0,2.77815125038364,False,1,,2.77815125038364,True,False,1,1,False,above,True,7.0,3.0,True,14.0,7.0,3.0,"one crossing, returns above"
+B,INH 1X MIC,2,10 uL single drop,10.0,2.0,7,6,1,14.0,,False,0,,,True,True,0,1,False,above,True,1.0,,True,14.0,13.0,9.0,"one crossing, returns above"
+B,INH 1X MIC,2,2.5 uL single drop,2.5,2.6020599913279625,7,6,1,14.0,,False,0,,,True,True,1,2,True,above,True,1.0,,True,3.0,2.0,3.0,crosses repeatedly
+B,INH 1X MIC,3,100 uL quadruplicate,100.0,1.0,7,6,1,14.0,,False,0,,,True,False,3,2,True,below,True,2.0,1.0,True,3.0,1.0,0.0,crosses repeatedly
+B,INH 1X MIC,3,10 uL four drops,10.0,2.0,7,6,1,14.0,2.84509804001426,False,1,,2.84509804001426,True,False,1,1,False,above,True,3.0,2.0,True,14.0,11.0,7.0,"one crossing, returns above"
+B,INH 1X MIC,3,10 uL single drop,10.0,2.0,7,6,1,14.0,,False,0,,,True,True,0,1,False,above,True,1.0,,True,14.0,13.0,9.0,"one crossing, returns above"
+B,INH 1X MIC,3,2.5 uL single drop,2.5,2.6020599913279625,7,6,1,14.0,2.90308998699194,False,1,,2.90308998699194,True,False,2,2,True,above,True,2.0,1.0,True,3.0,1.0,3.0,crosses repeatedly
+B,MXF 10X MIC,1,100 uL quadruplicate,100.0,1.0,7,6,1,14.0,2.90308998699194,False,1,,2.90308998699194,True,False,1,0,False,below,True,10.0,7.0,False,,,4.0,"one crossing, no return"
+B,MXF 10X MIC,1,10 uL four drops,10.0,2.0,7,6,1,14.0,2.69897000433602,False,1,,2.69897000433602,True,False,1,0,False,below,True,3.0,2.0,False,,,11.0,"one crossing, no return"
+B,MXF 10X MIC,1,10 uL single drop,10.0,2.0,7,6,1,14.0,,False,0,,,True,True,0,0,False,below,True,1.0,,False,,,13.0,"one crossing, no return"
+B,MXF 10X MIC,1,2.5 uL single drop,2.5,2.6020599913279625,7,6,1,14.0,2.60205999132796,False,1,,2.60205999132796,True,False,2,1,False,below,True,2.0,1.0,True,3.0,1.0,7.0,crosses repeatedly
+B,MXF 10X MIC,2,100 uL quadruplicate,100.0,1.0,7,6,1,14.0,2.95424250943932,False,1,,2.95424250943932,True,False,1,0,False,below,True,10.0,7.0,False,,,4.0,"one crossing, no return"
+B,MXF 10X MIC,2,10 uL four drops,10.0,2.0,7,6,1,14.0,3.0,False,1,,3.0,True,False,1,1,False,above,True,10.0,7.0,True,14.0,4.0,0.0,"one crossing, returns above"
+B,MXF 10X MIC,2,10 uL single drop,10.0,2.0,7,6,1,14.0,3.30102999566398,False,1,,3.30102999566398,True,False,2,1,False,below,True,2.0,1.0,True,3.0,1.0,7.0,crosses repeatedly
+B,MXF 10X MIC,2,2.5 uL single drop,2.5,2.6020599913279625,7,6,1,14.0,2.90308998699194,False,1,,2.90308998699194,True,False,3,2,True,below,True,2.0,1.0,True,3.0,1.0,0.0,crosses repeatedly
+B,MXF 10X MIC,3,100 uL quadruplicate,100.0,1.0,7,6,1,14.0,2.77815125038364,False,1,,2.77815125038364,True,False,1,0,False,below,True,10.0,7.0,False,,,4.0,"one crossing, no return"
+B,MXF 10X MIC,3,10 uL four drops,10.0,2.0,7,6,1,14.0,2.47712125471966,False,1,,2.47712125471966,True,False,1,0,False,below,True,7.0,3.0,False,,,7.0,"one crossing, no return"
+B,MXF 10X MIC,3,10 uL single drop,10.0,2.0,7,6,1,14.0,,False,0,,,True,True,0,0,False,below,True,1.0,,False,,,13.0,"one crossing, no return"
+B,MXF 10X MIC,3,2.5 uL single drop,2.5,2.6020599913279625,7,6,1,14.0,2.60205999132796,False,1,,2.60205999132796,True,False,1,0,False,below,True,3.0,2.0,False,,,11.0,"one crossing, no return"
+B,MXF 1X MIC,1,100 uL quadruplicate,100.0,1.0,7,6,1,14.0,3.70757017609794,False,1,,3.70757017609794,True,False,1,1,False,above,True,2.0,1.0,True,3.0,1.0,0.0,"one crossing, returns above"
+B,MXF 1X MIC,1,10 uL four drops,10.0,2.0,7,6,1,14.0,3.7481880270062,False,1,,3.7481880270062,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+B,MXF 1X MIC,1,10 uL single drop,10.0,2.0,7,6,1,14.0,3.60205999132796,False,1,,3.60205999132796,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+B,MXF 1X MIC,1,2.5 uL single drop,2.5,2.6020599913279625,7,6,1,14.0,3.44715803134222,False,1,,3.44715803134222,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+B,MXF 1X MIC,2,100 uL quadruplicate,100.0,1.0,7,6,1,14.0,,False,0,,,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+B,MXF 1X MIC,2,10 uL four drops,10.0,2.0,7,6,1,14.0,3.50514997831991,False,1,,3.50514997831991,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+B,MXF 1X MIC,2,10 uL single drop,10.0,2.0,7,6,1,14.0,3.90308998699194,False,1,,3.90308998699194,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+B,MXF 1X MIC,2,2.5 uL single drop,2.5,2.6020599913279625,7,6,1,14.0,3.55630250076729,False,1,,3.55630250076729,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+B,MXF 1X MIC,3,100 uL quadruplicate,100.0,1.0,7,6,1,14.0,3.25527250510331,False,1,,3.25527250510331,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+B,MXF 1X MIC,3,10 uL four drops,10.0,2.0,7,6,1,14.0,3.57978359661681,False,1,,3.57978359661681,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+B,MXF 1X MIC,3,10 uL single drop,10.0,2.0,7,6,1,14.0,3.60205999132796,False,1,,3.60205999132796,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+B,MXF 1X MIC,3,2.5 uL single drop,2.5,2.6020599913279625,7,6,1,14.0,3.20411998265592,False,1,,3.20411998265592,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+B,untreated,1,100 uL quadruplicate,100.0,1.0,8,7,1,14.0,3.60874197210695,True,2,3.74036268949424,3.47712125471966,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+B,untreated,1,10 uL four drops,10.0,2.0,8,7,1,14.0,3.31162464519895,True,2,3.47712125471966,3.14612803567824,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+B,untreated,1,10 uL single drop,10.0,2.0,8,7,1,14.0,3.6505149978319897,True,2,3.69897000433602,3.60205999132796,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+B,untreated,1,2.5 uL single drop,2.5,2.6020599913279625,8,7,1,14.0,3.579181246047625,True,2,3.55630250076729,3.60205999132796,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+B,untreated,2,100 uL quadruplicate,100.0,1.0,8,7,1,14.0,3.39794000867204,True,1,3.39794000867204,,True,False,1,1,False,above,True,2.0,1.0,True,3.0,1.0,0.0,"one crossing, returns above"
+B,untreated,2,10 uL four drops,10.0,2.0,8,7,1,14.0,3.84509804001426,True,2,3.84509804001426,3.84509804001426,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+B,untreated,2,10 uL single drop,10.0,2.0,8,7,1,14.0,3.840620618687795,True,2,3.60205999132796,4.07918124604763,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+B,untreated,2,2.5 uL single drop,2.5,2.6020599913279625,8,7,1,14.0,3.75039258645873,True,2,3.64345267648619,3.85733249643127,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+B,untreated,3,100 uL quadruplicate,100.0,1.0,8,7,1,14.0,3.86332286012046,True,1,3.86332286012046,,True,False,1,1,False,above,True,1.0,0.0,True,2.0,1.0,0.0,"one crossing, returns above"
+B,untreated,3,10 uL four drops,10.0,2.0,8,7,1,14.0,3.6505149978319897,True,2,3.69897000433602,3.60205999132796,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+B,untreated,3,10 uL single drop,10.0,2.0,8,7,1,14.0,3.759256969938945,True,2,3.47712125471966,4.04139268515823,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+B,untreated,3,2.5 uL single drop,2.5,2.6020599913279625,8,7,1,14.0,3.59987758862674,True,2,3.55630250076729,3.64345267648619,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+C,INH 10X MIC,1,100 uL quadruplicate,100.0,1.0,9,9,0,28.0,2.8266062568876698,True,2,4.17609125905568,1.47712125471966,True,False,1,0,False,below,False,2.0,1.0,False,,,26.0,"one crossing, no return"
+C,INH 10X MIC,1,10 uL four drops,10.0,2.0,9,9,0,28.0,3.020696342579115,True,2,4.04139268515823,2.0,True,False,1,0,False,below,False,2.0,1.0,False,,,26.0,"one crossing, no return"
+C,INH 10X MIC,1,10 uL single drop,10.0,2.0,9,9,0,28.0,4.25527250510331,True,1,4.25527250510331,,True,False,1,0,False,below,False,1.0,0.0,False,,,27.0,"one crossing, no return"
+C,INH 10X MIC,1,2.5 uL single drop,2.5,2.6020599913279625,9,9,0,28.0,3.94448267215017,True,1,3.94448267215017,,True,False,1,0,False,below,False,1.0,0.0,False,,,27.0,"one crossing, no return"
+C,INH 10X MIC,2,100 uL quadruplicate,100.0,1.0,9,9,0,28.0,2.88907562519182,True,2,4.77815125038364,1.0,True,False,1,0,False,below,False,2.0,1.0,False,,,26.0,"one crossing, no return"
+C,INH 10X MIC,2,10 uL four drops,10.0,2.0,9,9,0,28.0,3.190105620855805,True,2,4.07918124604763,2.30102999566398,True,False,1,0,False,below,False,2.0,1.0,False,,,26.0,"one crossing, no return"
+C,INH 10X MIC,2,10 uL single drop,10.0,2.0,9,9,0,28.0,3.127636252551655,True,2,4.25527250510331,2.0,True,False,1,0,False,below,False,2.0,1.0,False,,,26.0,"one crossing, no return"
+C,INH 10X MIC,2,2.5 uL single drop,2.5,2.6020599913279625,9,9,0,28.0,3.92427928606188,True,1,3.92427928606188,,True,False,1,0,False,below,False,1.0,0.0,False,,,27.0,"one crossing, no return"
+C,INH 10X MIC,3,100 uL quadruplicate,100.0,1.0,9,9,0,28.0,2.98656392679985,True,2,4.9731278535997,1.0,True,False,1,0,False,below,False,2.0,1.0,False,,,26.0,"one crossing, no return"
+C,INH 10X MIC,3,10 uL four drops,10.0,2.0,9,9,0,28.0,3.1505149978319897,True,2,4.0,2.30102999566398,True,False,1,0,False,below,False,2.0,1.0,False,,,26.0,"one crossing, no return"
+C,INH 10X MIC,3,10 uL single drop,10.0,2.0,9,9,0,28.0,4.04139268515823,True,1,4.04139268515823,,True,False,1,0,False,below,False,1.0,0.0,False,,,27.0,"one crossing, no return"
+C,INH 10X MIC,3,2.5 uL single drop,2.5,2.6020599913279625,9,9,0,28.0,4.0,True,1,4.0,,True,False,1,0,False,below,False,1.0,0.0,False,,,27.0,"one crossing, no return"
+C,INH 1X MIC,1,100 uL quadruplicate,100.0,1.0,9,9,0,28.0,4.397592294841215,True,2,5.07918124604763,3.7160033436348,True,False,1,1,False,above,True,7.0,3.0,True,14.0,7.0,3.0,"one crossing, returns above"
+C,INH 1X MIC,1,10 uL four drops,10.0,2.0,9,9,0,28.0,3.671211340411105,True,2,4.04139268515823,3.30102999566398,True,False,1,1,False,above,True,3.0,2.0,True,14.0,11.0,7.0,"one crossing, returns above"
+C,INH 1X MIC,1,10 uL single drop,10.0,2.0,9,9,0,28.0,3.84509804001426,True,2,3.84509804001426,3.84509804001426,True,False,3,3,True,above,True,2.0,1.0,True,3.0,1.0,0.0,crosses repeatedly
+C,INH 1X MIC,1,2.5 uL single drop,2.5,2.6020599913279625,9,9,0,28.0,3.141650614351775,True,2,3.68124123737559,2.60205999132796,True,False,1,1,False,above,True,2.0,1.0,True,14.0,12.0,8.0,"one crossing, returns above"
+C,INH 1X MIC,2,100 uL quadruplicate,100.0,1.0,9,9,0,28.0,4.186915572536915,True,2,4.74036268949424,3.63346845557959,True,False,1,1,False,above,True,3.0,2.0,True,14.0,11.0,7.0,"one crossing, returns above"
+C,INH 1X MIC,2,10 uL four drops,10.0,2.0,9,9,0,28.0,3.8494850021680103,True,2,4.0,3.69897000433602,True,False,1,1,False,above,True,3.0,2.0,True,14.0,11.0,7.0,"one crossing, returns above"
+C,INH 1X MIC,2,10 uL single drop,10.0,2.0,9,9,0,28.0,3.759256969938945,True,2,4.04139268515823,3.47712125471966,True,False,1,1,False,above,True,2.0,1.0,True,21.0,19.0,12.0,"one crossing, returns above"
+C,INH 1X MIC,2,2.5 uL single drop,2.5,2.6020599913279625,9,9,0,28.0,3.77815125038364,True,1,3.77815125038364,,True,False,1,1,False,above,True,1.0,0.0,True,21.0,20.0,13.0,"one crossing, returns above"
+C,INH 1X MIC,3,100 uL quadruplicate,100.0,1.0,9,9,0,28.0,4.120274624141301,True,2,4.76342799356294,3.47712125471966,True,False,1,1,False,above,True,3.0,2.0,True,21.0,18.0,11.0,"one crossing, returns above"
+C,INH 1X MIC,3,10 uL four drops,10.0,2.0,9,9,0,28.0,4.1227563339070805,True,2,4.20411998265593,4.04139268515823,True,False,1,1,False,above,True,3.0,2.0,True,14.0,11.0,7.0,"one crossing, returns above"
+C,INH 1X MIC,3,10 uL single drop,10.0,2.0,9,9,0,28.0,4.016711877743475,True,2,4.07918124604763,3.95424250943932,True,False,1,1,False,above,True,2.0,1.0,True,21.0,19.0,12.0,"one crossing, returns above"
+C,INH 1X MIC,3,2.5 uL single drop,2.5,2.6020599913279625,9,9,0,28.0,3.77815125038364,True,1,3.77815125038364,,True,False,1,1,False,above,True,1.0,0.0,True,21.0,20.0,13.0,"one crossing, returns above"
+C,MXF 10X MIC,1,100 uL quadruplicate,100.0,1.0,9,9,0,28.0,3.967249225621785,True,2,4.63346845557959,3.30102999566398,True,False,1,0,False,below,False,7.0,3.0,False,,,21.0,"one crossing, no return"
+C,MXF 10X MIC,1,10 uL four drops,10.0,2.0,9,9,0,28.0,3.75257498915995,True,2,3.90308998699194,3.60205999132796,True,False,1,0,False,below,False,7.0,3.0,False,,,21.0,"one crossing, no return"
+C,MXF 10X MIC,1,10 uL single drop,10.0,2.0,9,9,0,28.0,3.9515449934959754,True,2,4.20411998265593,3.69897000433602,True,False,1,0,False,below,False,7.0,3.0,False,,,21.0,"one crossing, no return"
+C,MXF 10X MIC,1,2.5 uL single drop,2.5,2.6020599913279625,9,9,0,28.0,3.86779944984909,True,2,3.83250891270624,3.90308998699194,True,False,1,0,False,below,False,7.0,3.0,False,,,21.0,"one crossing, no return"
+C,MXF 10X MIC,2,100 uL quadruplicate,100.0,1.0,9,8,1,28.0,3.47712125471966,False,1,,3.47712125471966,True,False,1,0,False,below,False,7.0,3.0,False,,,21.0,"one crossing, no return"
+C,MXF 10X MIC,2,10 uL four drops,10.0,2.0,9,9,0,28.0,4.01059464953497,True,2,4.17609125905568,3.84509804001426,True,False,1,0,False,below,False,7.0,3.0,False,,,21.0,"one crossing, no return"
+C,MXF 10X MIC,2,10 uL single drop,10.0,2.0,9,9,0,28.0,3.9621396430309455,True,2,4.07918124604763,3.84509804001426,True,False,1,0,False,below,False,7.0,3.0,False,,,21.0,"one crossing, no return"
+C,MXF 10X MIC,2,2.5 uL single drop,2.5,2.6020599913279625,9,9,0,28.0,4.0931956078477505,True,2,3.80617997398389,4.38021124171161,True,False,1,0,False,below,False,7.0,3.0,False,,,21.0,"one crossing, no return"
+C,MXF 10X MIC,3,100 uL quadruplicate,100.0,1.0,9,8,1,28.0,3.69897000433602,False,1,,3.69897000433602,True,False,1,0,False,below,False,7.0,3.0,False,,,21.0,"one crossing, no return"
+C,MXF 10X MIC,3,10 uL four drops,10.0,2.0,9,9,0,28.0,3.93753063169585,True,2,4.17609125905568,3.69897000433602,True,False,1,0,False,below,False,7.0,3.0,False,,,21.0,"one crossing, no return"
+C,MXF 10X MIC,3,10 uL single drop,10.0,2.0,9,9,0,28.0,3.9621396430309455,True,2,4.07918124604763,3.84509804001426,True,False,1,0,False,below,False,7.0,3.0,False,,,21.0,"one crossing, no return"
+C,MXF 10X MIC,3,2.5 uL single drop,2.5,2.6020599913279625,9,9,0,28.0,3.880211241711605,True,2,3.85733249643127,3.90308998699194,True,False,1,0,False,below,False,7.0,3.0,False,,,21.0,"one crossing, no return"
+C,MXF 1X MIC,1,100 uL quadruplicate,100.0,1.0,9,9,0,28.0,4.53777348069627,True,2,4.54406804435028,4.53147891704226,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+C,MXF 1X MIC,1,10 uL four drops,10.0,2.0,9,9,0,28.0,4.23637822465861,True,2,4.04139268515823,4.43136376415899,True,False,1,1,False,above,True,7.0,3.0,True,10.0,3.0,0.0,"one crossing, returns above"
+C,MXF 1X MIC,1,10 uL single drop,10.0,2.0,9,9,0,28.0,4.278151250383646,True,2,4.30102999566398,4.25527250510331,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+C,MXF 1X MIC,1,2.5 uL single drop,2.5,2.6020599913279625,9,9,0,28.0,4.11265464086293,True,2,3.92427928606188,4.30102999566398,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+C,MXF 1X MIC,2,100 uL quadruplicate,100.0,1.0,9,9,0,28.0,4.57460955632769,True,2,4.47712125471966,4.67209785793572,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+C,MXF 1X MIC,2,10 uL four drops,10.0,2.0,9,9,0,28.0,4.329482421332219,True,2,4.38021124171161,4.27875360095283,True,False,1,1,False,above,True,7.0,3.0,True,10.0,3.0,0.0,"one crossing, returns above"
+C,MXF 1X MIC,2,10 uL single drop,10.0,2.0,9,9,0,28.0,4.196348476629835,True,2,4.11394335230684,4.27875360095283,True,False,1,1,False,above,True,7.0,3.0,True,10.0,3.0,0.0,"one crossing, returns above"
+C,MXF 1X MIC,2,2.5 uL single drop,2.5,2.6020599913279625,9,9,0,28.0,4.05630250076729,True,2,4.03342375548695,4.07918124604763,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+C,MXF 1X MIC,3,100 uL quadruplicate,100.0,1.0,9,8,1,28.0,4.513470813979515,True,2,4.44715803134222,4.57978359661681,True,False,1,1,False,above,True,7.0,3.0,True,14.0,7.0,0.0,"one crossing, returns above"
+C,MXF 1X MIC,3,10 uL four drops,10.0,2.0,9,9,0,28.0,4.340620618687796,True,2,4.30102999566398,4.38021124171161,True,False,1,1,False,above,True,7.0,3.0,True,10.0,3.0,0.0,"one crossing, returns above"
+C,MXF 1X MIC,3,10 uL single drop,10.0,2.0,9,9,0,28.0,4.3520752584199,True,2,4.36172783601759,4.34242268082221,True,False,1,1,False,above,True,7.0,3.0,True,10.0,3.0,0.0,"one crossing, returns above"
+C,MXF 1X MIC,3,2.5 uL single drop,2.5,2.6020599913279625,9,9,0,28.0,4.1623469569308895,True,2,3.94448267215017,4.38021124171161,True,False,1,1,False,above,True,10.0,7.0,True,14.0,4.0,0.0,"one crossing, returns above"
+C,untreated,1,100 uL quadruplicate,100.0,1.0,9,9,0,28.0,4.60953016622443,True,2,4.66275783168157,4.55630250076729,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+C,untreated,1,10 uL four drops,10.0,2.0,9,9,0,28.0,4.238560627359835,True,2,4.07918124604763,4.39794000867204,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+C,untreated,1,10 uL single drop,10.0,2.0,9,9,0,28.0,4.053604984823935,True,2,3.90308998699194,4.20411998265593,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+C,untreated,1,2.5 uL single drop,2.5,2.6020599913279625,9,9,0,28.0,4.1305124169962,True,2,3.88081359228079,4.38021124171161,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+C,untreated,2,100 uL quadruplicate,100.0,1.0,9,9,0,28.0,4.678490700496566,True,2,4.39794000867204,4.95904139232109,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+C,untreated,2,10 uL four drops,10.0,2.0,9,9,0,28.0,4.244275358250225,True,2,4.14612803567824,4.34242268082221,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+C,untreated,2,10 uL single drop,10.0,2.0,9,9,0,28.0,4.192803136799155,True,2,3.95424250943932,4.43136376415899,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+C,untreated,2,2.5 uL single drop,2.5,2.6020599913279625,9,9,0,28.0,4.141650614351775,True,2,3.90308998699194,4.38021124171161,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+C,untreated,3,100 uL quadruplicate,100.0,1.0,9,9,0,28.0,4.75587485567249,True,1,4.75587485567249,,True,False,1,1,False,above,True,1.0,0.0,True,2.0,1.0,0.0,"one crossing, returns above"
+C,untreated,3,10 uL four drops,10.0,2.0,9,9,0,28.0,4.16722687557547,True,2,4.25527250510331,4.07918124604763,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+C,untreated,3,10 uL single drop,10.0,2.0,9,9,0,28.0,4.08804562952784,True,2,4.0,4.17609125905568,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+C,untreated,3,2.5 uL single drop,2.5,2.6020599913279625,9,8,1,21.0,4.1623469569308895,True,2,3.94448267215017,4.38021124171161,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+D,INH 10X MIC,1,100 uL quadruplicate,100.0,1.0,7,7,0,21.0,4.55018527255878,True,2,4.92427928606188,4.17609125905568,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+D,INH 10X MIC,1,10 uL four drops,10.0,2.0,8,8,0,21.0,4.04845500650403,True,2,4.39794000867204,3.69897000433602,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+D,INH 10X MIC,1,10 uL single drop,10.0,2.0,8,8,0,21.0,3.878698014396515,True,2,4.11394335230684,3.64345267648619,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+D,INH 10X MIC,1,2.5 uL single drop,2.5,2.6020599913279625,8,7,1,21.0,4.4030899869919455,True,2,5.30102999566398,3.50514997831991,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+D,INH 10X MIC,2,100 uL quadruplicate,100.0,1.0,7,6,1,21.0,4.76342799356294,True,1,4.76342799356294,,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+D,INH 10X MIC,2,10 uL four drops,10.0,2.0,8,7,1,21.0,4.11471292396035,True,2,4.50514997831991,3.72427586960079,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+D,INH 10X MIC,2,10 uL single drop,10.0,2.0,8,8,0,21.0,3.9146518864155153,True,2,4.39794000867204,3.43136376415899,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+D,INH 10X MIC,2,2.5 uL single drop,2.5,2.6020599913279625,8,7,1,21.0,4.273271331739065,True,2,4.90308998699194,3.64345267648619,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+D,INH 10X MIC,3,100 uL quadruplicate,100.0,1.0,7,7,0,21.0,4.46684485447895,True,2,4.76342799356294,4.17026171539496,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+D,INH 10X MIC,3,10 uL four drops,10.0,2.0,8,7,1,21.0,4.043890708904775,True,2,4.38021124171161,3.70757017609794,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+D,INH 10X MIC,3,10 uL single drop,10.0,2.0,8,7,1,21.0,4.055294855149625,True,2,4.47712125471966,3.63346845557959,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+D,INH 10X MIC,3,2.5 uL single drop,2.5,2.6020599913279625,8,7,1,21.0,4.34062061868779,True,2,4.90308998699194,3.77815125038364,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+D,INH 1X MIC,1,100 uL quadruplicate,100.0,1.0,7,7,0,21.0,4.653105254083885,True,2,4.96378782734556,4.34242268082221,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+D,INH 1X MIC,1,10 uL four drops,10.0,2.0,8,8,0,21.0,4.57918124604763,True,2,4.95424250943933,4.20411998265593,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+D,INH 1X MIC,1,10 uL single drop,10.0,2.0,8,8,0,21.0,4.38468866303807,True,2,4.44715803134222,4.32221929473392,True,False,1,1,False,above,True,10.0,7.0,True,14.0,4.0,0.0,"one crossing, returns above"
+D,INH 1X MIC,1,2.5 uL single drop,2.5,2.6020599913279625,8,7,1,21.0,4.7160033436348,True,1,4.7160033436348,,True,False,1,1,False,above,True,1.0,0.0,True,2.0,1.0,0.0,"one crossing, returns above"
+D,INH 1X MIC,2,100 uL quadruplicate,100.0,1.0,7,6,1,14.0,4.8170874358813,True,2,4.77085201164214,4.86332286012046,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+D,INH 1X MIC,2,10 uL four drops,10.0,2.0,8,6,2,14.0,4.488861802644425,True,2,4.69897000433602,4.27875360095283,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+D,INH 1X MIC,2,10 uL single drop,10.0,2.0,8,8,0,21.0,4.332320987778065,True,2,4.34242268082221,4.32221929473392,True,False,1,1,False,above,True,10.0,7.0,True,14.0,4.0,0.0,"one crossing, returns above"
+D,INH 1X MIC,2,2.5 uL single drop,2.5,2.6020599913279625,8,6,2,14.0,4.773271331739065,True,2,4.64345267648619,4.90308998699194,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+D,INH 1X MIC,3,100 uL quadruplicate,100.0,1.0,7,7,0,21.0,4.704119982655925,True,2,4.60205999132796,4.80617997398389,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+D,INH 1X MIC,3,10 uL four drops,10.0,2.0,8,8,0,21.0,4.522661489393325,True,2,4.47712125471966,4.56820172406699,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+D,INH 1X MIC,3,10 uL single drop,10.0,2.0,8,8,0,21.0,4.39654580008829,True,2,4.36172783601759,4.43136376415899,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+D,INH 1X MIC,3,2.5 uL single drop,2.5,2.6020599913279625,8,7,1,21.0,4.773271331739065,True,2,4.64345267648619,4.90308998699194,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+D,MXF 10X MIC,1,100 uL quadruplicate,100.0,1.0,7,6,1,21.0,4.65321251377534,True,1,4.65321251377534,,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+D,MXF 10X MIC,1,10 uL four drops,10.0,2.0,8,7,1,21.0,4.800486447843375,True,2,4.32221929473392,5.27875360095283,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+D,MXF 10X MIC,1,10 uL single drop,10.0,2.0,8,6,2,21.0,4.70748667398541,True,2,4.41497334797082,5.0,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+D,MXF 10X MIC,1,2.5 uL single drop,2.5,2.6020599913279625,8,7,1,21.0,4.491135616519784,True,2,4.60205999132796,4.38021124171161,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+D,MXF 10X MIC,2,100 uL quadruplicate,100.0,1.0,7,7,0,21.0,4.42684910588809,True,2,4.70757017609794,4.14612803567824,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+D,MXF 10X MIC,2,10 uL four drops,10.0,2.0,8,7,1,21.0,4.4030899869919455,True,2,4.50514997831991,4.30102999566398,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+D,MXF 10X MIC,2,10 uL single drop,10.0,2.0,8,6,2,10.0,4.34948500216801,True,2,4.39794000867204,4.30102999566398,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+D,MXF 10X MIC,2,2.5 uL single drop,2.5,2.6020599913279625,8,7,1,21.0,4.72969624387962,True,2,5.07918124604763,4.38021124171161,True,False,1,0,False,below,False,14.0,7.0,False,,,7.0,"one crossing, no return"
+D,MXF 10X MIC,3,100 uL quadruplicate,100.0,1.0,7,7,0,21.0,4.58187876199098,True,2,4.73239375982297,4.43136376415899,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+D,MXF 10X MIC,3,10 uL four drops,10.0,2.0,8,7,1,21.0,4.338803476360245,True,2,4.44715803134222,4.23044892137827,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+D,MXF 10X MIC,3,10 uL single drop,10.0,2.0,8,7,1,21.0,4.353785088048965,True,2,4.47712125471966,4.23044892137827,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+D,MXF 10X MIC,3,2.5 uL single drop,2.5,2.6020599913279625,8,7,1,21.0,4.60205999132796,False,1,,4.60205999132796,True,True,0,1,False,above,True,0.0,,True,1.0,1.0,0.0,"one crossing, returns above"
+D,MXF 1X MIC,1,100 uL quadruplicate,100.0,1.0,7,7,0,21.0,4.79553230351325,True,2,4.81291335664286,4.77815125038364,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+D,MXF 1X MIC,1,10 uL four drops,10.0,2.0,8,8,0,21.0,4.8010299956639795,True,2,4.60205999132796,5.0,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+D,MXF 1X MIC,1,10 uL single drop,10.0,2.0,8,7,1,21.0,5.0,False,1,,5.0,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+D,MXF 1X MIC,1,2.5 uL single drop,2.5,2.6020599913279625,8,8,0,21.0,4.991135616519785,True,2,4.90308998699194,5.07918124604763,True,False,1,1,False,above,True,14.0,10.0,True,21.0,7.0,0.0,"one crossing, returns above"
+D,MXF 1X MIC,2,100 uL quadruplicate,100.0,1.0,7,6,1,21.0,4.818994890392339,True,2,4.74036268949424,4.89762709129044,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+D,MXF 1X MIC,2,10 uL four drops,10.0,2.0,8,8,0,21.0,4.59987758862674,True,2,4.55630250076729,4.64345267648619,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+D,MXF 1X MIC,2,10 uL single drop,10.0,2.0,8,8,0,21.0,4.2385606273598295,True,2,4.47712125471966,4.0,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+D,MXF 1X MIC,2,2.5 uL single drop,2.5,2.6020599913279625,8,8,0,21.0,5.25257498915995,True,2,4.60205999132796,5.90308998699194,True,False,1,0,False,below,False,14.0,10.0,False,,,7.0,"one crossing, no return"
+D,MXF 1X MIC,3,100 uL quadruplicate,100.0,1.0,7,5,2,21.0,4.91381385238372,True,1,4.91381385238372,,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+D,MXF 1X MIC,3,10 uL four drops,10.0,2.0,8,6,2,21.0,4.53409293087308,True,2,4.47712125471966,4.5910646070265,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+D,MXF 1X MIC,3,10 uL single drop,10.0,2.0,8,8,0,21.0,4.15051499783199,True,2,4.69897000433602,3.60205999132796,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+D,MXF 1X MIC,3,2.5 uL single drop,2.5,2.6020599913279625,8,8,0,21.0,5.10205999132796,True,2,4.60205999132796,5.60205999132796,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+D,untreated,1,100 uL quadruplicate,100.0,1.0,8,6,2,21.0,4.56820172406699,True,1,4.56820172406699,,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+D,untreated,1,10 uL four drops,10.0,2.0,8,7,1,14.0,4.97712125471966,True,2,4.47712125471966,5.47712125471966,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+D,untreated,1,10 uL single drop,10.0,2.0,8,8,0,21.0,4.603412938015925,True,2,4.36172783601759,4.84509804001426,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+D,untreated,1,2.5 uL single drop,2.5,2.6020599913279625,8,8,0,21.0,5.17512400916708,True,2,4.90308998699194,5.44715803134222,True,False,1,1,False,above,True,2.0,1.0,True,3.0,1.0,0.0,"one crossing, returns above"
+D,untreated,2,100 uL quadruplicate,100.0,1.0,8,7,1,21.0,5.052584713999665,True,2,4.69019608002851,5.41497334797082,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+D,untreated,2,10 uL four drops,10.0,2.0,8,8,0,21.0,4.896195844749125,True,2,4.49136169383427,5.30102999566398,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+D,untreated,2,10 uL single drop,10.0,2.0,8,8,0,21.0,4.477121254719664,True,2,4.25527250510331,4.69897000433602,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+D,untreated,2,2.5 uL single drop,2.5,2.6020599913279625,8,8,0,21.0,5.102059991327961,True,2,4.90308998699194,5.30102999566398,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+D,untreated,3,100 uL quadruplicate,100.0,1.0,8,6,2,21.0,4.69897000433602,True,1,4.69897000433602,,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+D,untreated,3,10 uL four drops,10.0,2.0,8,7,1,21.0,5.5910646070265,False,1,,5.5910646070265,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+D,untreated,3,10 uL single drop,10.0,2.0,8,8,0,21.0,4.8010299956639795,True,2,5.0,4.60205999132796,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+D,untreated,3,2.5 uL single drop,2.5,2.6020599913279625,8,8,0,21.0,5.252574989159955,True,2,5.30102999566398,5.20411998265593,True,False,1,1,False,above,True,14.0,10.0,True,21.0,7.0,0.0,"one crossing, returns above"
+E,INH 10X MIC,1,100 uL quadruplicate,100.0,1.0,7,7,0,21.0,4.54406804435028,False,1,,4.54406804435028,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+E,INH 10X MIC,1,10 uL four drops,10.0,2.0,7,7,0,21.0,4.69897000433602,False,1,,4.69897000433602,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+E,INH 10X MIC,1,10 uL single drop,10.0,2.0,7,6,1,21.0,4.77815125038364,False,1,,4.77815125038364,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+E,INH 10X MIC,1,2.5 uL single drop,2.5,2.6020599913279625,7,6,1,21.0,4.60205999132796,False,1,,4.60205999132796,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+E,INH 10X MIC,2,100 uL quadruplicate,100.0,1.0,7,7,0,21.0,4.67209785793572,False,1,,4.67209785793572,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+E,INH 10X MIC,2,10 uL four drops,10.0,2.0,7,7,0,21.0,4.80617997398389,False,1,,4.80617997398389,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+E,INH 10X MIC,2,10 uL single drop,10.0,2.0,7,7,0,21.0,4.47712125471966,False,1,,4.47712125471966,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+E,INH 10X MIC,2,2.5 uL single drop,2.5,2.6020599913279625,7,6,1,21.0,4.7481880270062,False,1,,4.7481880270062,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+E,INH 10X MIC,3,100 uL quadruplicate,100.0,1.0,7,7,0,21.0,4.67209785793572,False,1,,4.67209785793572,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+E,INH 10X MIC,3,10 uL four drops,10.0,2.0,7,7,0,21.0,4.73239375982297,False,1,,4.73239375982297,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+E,INH 10X MIC,3,10 uL single drop,10.0,2.0,7,7,0,21.0,4.47712125471966,False,1,,4.47712125471966,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+E,INH 10X MIC,3,2.5 uL single drop,2.5,2.6020599913279625,7,6,1,21.0,4.64345267648619,False,1,,4.64345267648619,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+E,INH 1X MIC,1,100 uL quadruplicate,100.0,1.0,7,7,0,21.0,4.81954393554187,False,1,,4.81954393554187,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+E,INH 1X MIC,1,10 uL four drops,10.0,2.0,7,7,0,21.0,5.04139268515823,False,1,,5.04139268515823,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+E,INH 1X MIC,1,10 uL single drop,10.0,2.0,7,7,0,21.0,5.0,False,1,,5.0,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+E,INH 1X MIC,1,2.5 uL single drop,2.5,2.6020599913279625,7,7,0,21.0,4.68124123737559,False,1,,4.68124123737559,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+E,INH 1X MIC,2,100 uL quadruplicate,100.0,1.0,7,7,0,21.0,4.57978359661681,False,1,,4.57978359661681,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+E,INH 1X MIC,2,10 uL four drops,10.0,2.0,7,7,0,21.0,5.04139268515823,False,1,,5.04139268515823,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+E,INH 1X MIC,2,10 uL single drop,10.0,2.0,7,7,0,21.0,4.77815125038364,False,1,,4.77815125038364,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+E,INH 1X MIC,2,2.5 uL single drop,2.5,2.6020599913279625,7,7,0,21.0,4.80617997398389,False,1,,4.80617997398389,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+E,INH 1X MIC,3,100 uL quadruplicate,100.0,1.0,7,7,0,21.0,4.73239375982297,False,1,,4.73239375982297,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+E,INH 1X MIC,3,10 uL four drops,10.0,2.0,7,7,0,21.0,5.04139268515823,False,1,,5.04139268515823,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+E,INH 1X MIC,3,10 uL single drop,10.0,2.0,7,7,0,21.0,5.20411998265593,False,1,,5.20411998265593,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+E,INH 1X MIC,3,2.5 uL single drop,2.5,2.6020599913279625,7,7,0,21.0,4.7160033436348,False,1,,4.7160033436348,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+E,MXF 10X MIC,1,100 uL quadruplicate,100.0,1.0,7,7,0,21.0,4.56820172406699,False,1,,4.56820172406699,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+E,MXF 10X MIC,1,10 uL four drops,10.0,2.0,7,7,0,21.0,4.78532983501077,False,1,,4.78532983501077,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+E,MXF 10X MIC,1,10 uL single drop,10.0,2.0,7,7,0,21.0,5.07918124604763,False,1,,5.07918124604763,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+E,MXF 10X MIC,1,2.5 uL single drop,2.5,2.6020599913279625,7,7,0,21.0,5.38021124171161,False,1,,5.38021124171161,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+E,MXF 10X MIC,2,100 uL quadruplicate,100.0,1.0,7,7,0,21.0,4.77815125038364,False,1,,4.77815125038364,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+E,MXF 10X MIC,2,10 uL four drops,10.0,2.0,7,7,0,21.0,4.8750612633917,False,1,,4.8750612633917,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+E,MXF 10X MIC,2,10 uL single drop,10.0,2.0,7,7,0,21.0,4.69897000433602,False,1,,4.69897000433602,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+E,MXF 10X MIC,2,2.5 uL single drop,2.5,2.6020599913279625,7,7,0,21.0,5.50514997831991,False,1,,5.50514997831991,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+E,MXF 10X MIC,3,100 uL quadruplicate,100.0,1.0,7,7,0,21.0,4.7160033436348,False,1,,4.7160033436348,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+E,MXF 10X MIC,3,10 uL four drops,10.0,2.0,7,7,0,21.0,4.85733249643127,False,1,,4.85733249643127,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+E,MXF 10X MIC,3,10 uL single drop,10.0,2.0,7,7,0,21.0,4.95424250943933,False,1,,4.95424250943933,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+E,MXF 10X MIC,3,2.5 uL single drop,2.5,2.6020599913279625,7,7,0,21.0,5.07918124604763,False,1,,5.07918124604763,True,False,1,1,False,above,True,3.0,2.0,True,7.0,4.0,0.0,"one crossing, returns above"
+E,MXF 1X MIC,1,100 uL quadruplicate,100.0,1.0,7,7,0,21.0,5.61278385671974,False,1,,5.61278385671974,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+E,MXF 1X MIC,1,10 uL four drops,10.0,2.0,7,7,0,21.0,5.39794000867204,False,1,,5.39794000867204,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+E,MXF 1X MIC,1,10 uL single drop,10.0,2.0,7,7,0,21.0,5.32221929473392,False,1,,5.32221929473392,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+E,MXF 1X MIC,1,2.5 uL single drop,2.5,2.6020599913279625,7,7,0,21.0,5.55630250076729,False,1,,5.55630250076729,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+E,MXF 1X MIC,2,100 uL quadruplicate,100.0,1.0,7,7,0,21.0,5.32221929473392,False,1,,5.32221929473392,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+E,MXF 1X MIC,2,10 uL four drops,10.0,2.0,7,7,0,21.0,5.34242268082221,False,1,,5.34242268082221,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+E,MXF 1X MIC,2,10 uL single drop,10.0,2.0,7,7,0,21.0,5.38021124171161,False,1,,5.38021124171161,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+E,MXF 1X MIC,2,2.5 uL single drop,2.5,2.6020599913279625,7,7,0,21.0,5.50514997831991,False,1,,5.50514997831991,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+E,MXF 1X MIC,3,100 uL quadruplicate,100.0,1.0,7,6,1,21.0,5.41497334797082,False,1,,5.41497334797082,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+E,MXF 1X MIC,3,10 uL four drops,10.0,2.0,7,6,1,21.0,5.60205999132796,False,1,,5.60205999132796,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+E,MXF 1X MIC,3,10 uL single drop,10.0,2.0,7,7,0,21.0,5.57978359661681,False,1,,5.57978359661681,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+E,MXF 1X MIC,3,2.5 uL single drop,2.5,2.6020599913279625,7,7,0,21.0,5.07918124604763,False,1,,5.07918124604763,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+E,untreated,1,100 uL quadruplicate,100.0,1.0,7,7,0,21.0,5.56820172406699,False,1,,5.56820172406699,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+E,untreated,1,10 uL four drops,10.0,2.0,7,7,0,21.0,5.53147891704226,False,1,,5.53147891704226,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+E,untreated,1,10 uL single drop,10.0,2.0,7,7,0,21.0,5.17609125905568,False,1,,5.17609125905568,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+E,untreated,1,2.5 uL single drop,2.5,2.6020599913279625,7,7,0,21.0,5.20411998265593,False,1,,5.20411998265593,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+E,untreated,2,100 uL quadruplicate,100.0,1.0,7,6,1,21.0,,False,0,,,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+E,untreated,2,10 uL four drops,10.0,2.0,7,7,0,21.0,5.63346845557959,False,1,,5.63346845557959,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+E,untreated,2,10 uL single drop,10.0,2.0,7,7,0,21.0,5.32221929473392,False,1,,5.32221929473392,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+E,untreated,2,2.5 uL single drop,2.5,2.6020599913279625,7,7,0,21.0,5.38021124171161,False,1,,5.38021124171161,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+E,untreated,3,100 uL quadruplicate,100.0,1.0,7,6,1,21.0,,False,0,,,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+E,untreated,3,10 uL four drops,10.0,2.0,7,7,0,21.0,5.38021124171161,False,1,,5.38021124171161,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+E,untreated,3,10 uL single drop,10.0,2.0,7,6,1,21.0,5.14612803567824,False,1,,5.14612803567824,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+E,untreated,3,2.5 uL single drop,2.5,2.6020599913279625,7,7,0,21.0,5.44715803134222,False,1,,5.44715803134222,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+F,INH 10X MIC,1,100 uL quadruplicate,100.0,1.0,7,7,0,21.0,6.86923171973098,False,1,,6.86923171973098,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+F,INH 10X MIC,1,10 uL four drops,10.0,2.0,7,6,1,21.0,5.90308998699194,False,1,,5.90308998699194,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+F,INH 10X MIC,1,10 uL single drop,10.0,2.0,7,7,0,21.0,6.23044892137827,False,1,,6.23044892137827,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+F,INH 10X MIC,1,2.5 uL single drop,2.5,2.6020599913279625,7,7,0,21.0,6.30102999566398,False,1,,6.30102999566398,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+F,INH 10X MIC,2,100 uL quadruplicate,100.0,1.0,7,7,0,21.0,6.83884909073726,False,1,,6.83884909073726,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+F,INH 10X MIC,2,10 uL four drops,10.0,2.0,7,7,0,21.0,6.14612803567824,False,1,,6.14612803567824,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+F,INH 10X MIC,2,10 uL single drop,10.0,2.0,7,7,0,21.0,5.77815125038364,False,1,,5.77815125038364,True,False,1,1,False,above,True,7.0,3.0,True,10.0,3.0,0.0,"one crossing, returns above"
+F,INH 10X MIC,2,2.5 uL single drop,2.5,2.6020599913279625,7,7,0,21.0,6.68124123737559,False,1,,6.68124123737559,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+F,INH 10X MIC,3,100 uL quadruplicate,100.0,1.0,7,7,0,21.0,6.46239799789896,False,1,,6.46239799789896,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+F,INH 10X MIC,3,10 uL four drops,10.0,2.0,7,7,0,21.0,5.95424250943933,False,1,,5.95424250943933,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+F,INH 10X MIC,3,10 uL single drop,10.0,2.0,7,7,0,21.0,5.95424250943933,False,1,,5.95424250943933,True,False,1,1,False,above,True,7.0,3.0,True,10.0,3.0,0.0,"one crossing, returns above"
+F,INH 10X MIC,3,2.5 uL single drop,2.5,2.6020599913279625,7,7,0,21.0,6.44715803134222,False,1,,6.44715803134222,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+F,INH 1X MIC,1,100 uL quadruplicate,100.0,1.0,7,7,0,21.0,6.69897000433602,False,1,,6.69897000433602,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+F,INH 1X MIC,1,10 uL four drops,10.0,2.0,7,6,1,21.0,5.90308998699194,False,1,,5.90308998699194,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+F,INH 1X MIC,1,10 uL single drop,10.0,2.0,7,7,0,21.0,6.14612803567824,False,1,,6.14612803567824,True,False,1,1,False,above,True,10.0,7.0,True,15.0,5.0,0.0,"one crossing, returns above"
+F,INH 1X MIC,1,2.5 uL single drop,2.5,2.6020599913279625,7,7,0,21.0,4.64345267648619,False,1,,4.64345267648619,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+F,INH 1X MIC,2,100 uL quadruplicate,100.0,1.0,7,7,0,21.0,7.01703333929878,False,1,,7.01703333929878,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+F,INH 1X MIC,2,10 uL four drops,10.0,2.0,7,7,0,21.0,6.17609125905568,False,1,,6.17609125905568,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+F,INH 1X MIC,2,10 uL single drop,10.0,2.0,7,7,0,21.0,6.20411998265593,False,1,,6.20411998265593,True,False,1,1,False,above,True,10.0,7.0,True,15.0,5.0,0.0,"one crossing, returns above"
+F,INH 1X MIC,2,2.5 uL single drop,2.5,2.6020599913279625,7,7,0,21.0,4.44715803134222,False,1,,4.44715803134222,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+F,INH 1X MIC,3,100 uL quadruplicate,100.0,1.0,7,7,0,21.0,6.90848501887865,False,1,,6.90848501887865,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+F,INH 1X MIC,3,10 uL four drops,10.0,2.0,7,7,0,21.0,5.95424250943933,False,1,,5.95424250943933,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+F,INH 1X MIC,3,10 uL single drop,10.0,2.0,7,7,0,21.0,6.04139268515823,False,1,,6.04139268515823,True,False,1,1,False,above,True,10.0,7.0,True,15.0,5.0,0.0,"one crossing, returns above"
+F,INH 1X MIC,3,2.5 uL single drop,2.5,2.6020599913279625,7,7,0,21.0,4.55630250076729,False,1,,4.55630250076729,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+F,MXF 10X MIC,1,100 uL quadruplicate,100.0,1.0,7,7,0,21.0,6.23044892137827,False,1,,6.23044892137827,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+F,MXF 10X MIC,1,10 uL four drops,10.0,2.0,7,6,1,21.0,5.30102999566398,False,1,,5.30102999566398,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+F,MXF 10X MIC,1,10 uL single drop,10.0,2.0,7,7,0,21.0,5.47712125471966,False,1,,5.47712125471966,True,False,1,0,False,below,False,21.0,15.0,False,,,0.0,"one crossing, no return"
+F,MXF 10X MIC,1,2.5 uL single drop,2.5,2.6020599913279625,7,7,0,21.0,5.60205999132796,False,1,,5.60205999132796,True,False,1,0,False,below,False,21.0,15.0,False,,,0.0,"one crossing, no return"
+F,MXF 10X MIC,2,100 uL quadruplicate,100.0,1.0,7,7,0,21.0,6.14612803567824,False,1,,6.14612803567824,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+F,MXF 10X MIC,2,10 uL four drops,10.0,2.0,7,6,1,21.0,5.47712125471966,False,1,,5.47712125471966,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+F,MXF 10X MIC,2,10 uL single drop,10.0,2.0,7,7,0,21.0,5.69897000433602,False,1,,5.69897000433602,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+F,MXF 10X MIC,2,2.5 uL single drop,2.5,2.6020599913279625,7,7,0,21.0,5.90308998699194,False,1,,5.90308998699194,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+F,MXF 10X MIC,3,100 uL quadruplicate,100.0,1.0,7,7,0,21.0,6.11394335230684,False,1,,6.11394335230684,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+F,MXF 10X MIC,3,10 uL four drops,10.0,2.0,7,7,0,21.0,5.47712125471966,False,1,,5.47712125471966,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+F,MXF 10X MIC,3,10 uL single drop,10.0,2.0,7,7,0,21.0,5.30102999566398,False,1,,5.30102999566398,True,False,1,0,False,below,False,21.0,15.0,False,,,0.0,"one crossing, no return"
+F,MXF 10X MIC,3,2.5 uL single drop,2.5,2.6020599913279625,7,7,0,21.0,5.90308998699194,False,1,,5.90308998699194,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+F,MXF 1X MIC,1,100 uL quadruplicate,100.0,1.0,7,7,0,21.0,6.88081359228079,False,1,,6.88081359228079,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+F,MXF 1X MIC,1,10 uL four drops,10.0,2.0,7,7,0,21.0,6.17609125905568,False,1,,6.17609125905568,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+F,MXF 1X MIC,1,10 uL single drop,10.0,2.0,7,7,0,21.0,6.17609125905568,False,1,,6.17609125905568,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+F,MXF 1X MIC,1,2.5 uL single drop,2.5,2.6020599913279625,7,7,0,21.0,,False,0,,,True,True,0,1,False,above,True,1.0,,True,2.0,1.0,0.0,"one crossing, returns above"
+F,MXF 1X MIC,2,100 uL quadruplicate,100.0,1.0,7,7,0,21.0,6.70757017609794,False,1,,6.70757017609794,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+F,MXF 1X MIC,2,10 uL four drops,10.0,2.0,7,7,0,21.0,5.95424250943933,False,1,,5.95424250943933,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+F,MXF 1X MIC,2,10 uL single drop,10.0,2.0,7,7,0,21.0,6.04139268515823,False,1,,6.04139268515823,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+F,MXF 1X MIC,2,2.5 uL single drop,2.5,2.6020599913279625,7,7,0,21.0,,False,0,,,True,True,0,1,False,above,True,1.0,,True,2.0,1.0,0.0,"one crossing, returns above"
+F,MXF 1X MIC,3,100 uL quadruplicate,100.0,1.0,7,7,0,21.0,6.50514997831991,False,1,,6.50514997831991,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+F,MXF 1X MIC,3,10 uL four drops,10.0,2.0,7,5,2,21.0,,False,0,,,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+F,MXF 1X MIC,3,10 uL single drop,10.0,2.0,7,7,0,21.0,6.07918124604763,False,1,,6.07918124604763,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+F,MXF 1X MIC,3,2.5 uL single drop,2.5,2.6020599913279625,7,6,1,21.0,,False,0,,,True,True,0,1,False,above,True,1.0,,True,2.0,1.0,0.0,"one crossing, returns above"
+F,untreated,1,100 uL quadruplicate,100.0,1.0,8,7,1,21.0,6.387331461268911,True,2,6.09342168516223,6.68124123737559,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+F,untreated,1,10 uL four drops,10.0,2.0,8,7,1,21.0,6.096562299177235,True,2,6.07918124604763,6.11394335230684,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+F,untreated,1,10 uL single drop,10.0,2.0,8,8,0,21.0,6.259256969938945,True,2,6.04139268515823,6.47712125471966,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+F,untreated,1,2.5 uL single drop,2.5,2.6020599913279625,8,8,0,21.0,5.840620618687796,True,2,6.30102999566398,5.38021124171161,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+F,untreated,2,100 uL quadruplicate,100.0,1.0,8,8,0,21.0,6.3337264764449746,True,2,5.96848294855393,6.69897000433602,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+F,untreated,2,10 uL four drops,10.0,2.0,8,7,1,21.0,6.07306401783912,True,2,6.0,6.14612803567824,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+F,untreated,2,10 uL single drop,10.0,2.0,8,8,0,21.0,6.34509804001426,True,2,5.84509804001426,6.84509804001426,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+F,untreated,2,2.5 uL single drop,2.5,2.6020599913279625,8,8,0,21.0,5.67512400916708,True,2,5.90308998699194,5.44715803134222,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+F,untreated,3,100 uL quadruplicate,100.0,1.0,8,8,0,21.0,6.36490625358047,True,2,5.94448267215017,6.78532983501077,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+F,untreated,3,10 uL four drops,10.0,2.0,8,8,0,21.0,5.962139643030945,True,2,5.84509804001426,6.07918124604763,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+F,untreated,3,10 uL single drop,10.0,2.0,8,8,0,21.0,6.370181344747125,True,2,6.04139268515823,6.69897000433602,False,False,0,0,False,above,False,,,False,,,,never below the boundary
+F,untreated,3,2.5 uL single drop,2.5,2.6020599913279625,8,8,0,21.0,5.579181246047625,True,2,5.60205999132796,5.55630250076729,False,False,0,0,False,above,False,,,False,,,,never below the boundary
