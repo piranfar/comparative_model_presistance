@@ -19,7 +19,7 @@ keywords:
 
 **Correspondence:** [to be inserted]
 
-**Figures:** 4 | **Tables:** 10 | **Supplementary tables:** 3 | **Supplementary figures:** 1
+**Figures:** 4 | **Tables:** 10 | **Supplementary tables:** 2
 
 ---
 
@@ -312,7 +312,7 @@ against its own stated figure rather than against a standard: its Methods specif
 nominal.
 
 Distance from the McFarland reference is descriptive and is reported as such
-(Table S3). Sitting far below it is the intended state, since the inoculum is
+(Table S2). Sitting far below it is the intended state, since the inoculum is
 prepared by diluting from it, and the figure is not a measure of protocol
 compliance. What determines the maximum observable log-kill depth is the measured
 starting density and the real quantification limit, not the turbidity the
@@ -416,7 +416,7 @@ The same question in 126 evolved clones sharing an ancestor gives ρ = +0.043
 nutrient stratum separately. Stratifying is not optional there: the nominal
 concentration is not a fixed exposure across those strata, since at 25 µg/mL the
 same figure spans 0.55 to 9.47 times the inhibitory concentration each population
-evolved to and straddles it (Table S2).
+evolved to and straddles it (Table S1).
 
 ---
 

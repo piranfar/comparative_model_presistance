@@ -264,9 +264,9 @@ def main() -> int:
     # --- exp18, the conclusion must hold on both unit readings ------------
     f = load("exp18_unit_sensitivity.csv")
     if f is not None:
-        rows.append(check("smallest psi_min gap, either unit reading (273x)",
+        rows.append(check("smallest psi_min gap, either unit reading (docs/18: 273x)",
                           273, float(f.fold_gap.min()), 0.02, "x"))
-        rows.append(check("largest psi_min gap, either unit reading (658x)",
+        rows.append(check("largest psi_min gap, either unit reading (docs/18: 658x)",
                           658, float(f.fold_gap.max()), 0.02, "x"))
 
     # --- exp20, the endpoint that decides what is visible -----------------

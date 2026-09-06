@@ -26,7 +26,7 @@ Outputs of the earlier paper are not here; they live in `version_one/results/`.
 | `exp17_survival.csv` | `exp17_era4tb_between_lab.py` | `build_tables`, `fig10_rate_vs_duration` |
 | `exp18_cycle_balance.csv` | `exp18_slow_grower_transferability.py` | `fig13_parameter_transfer` |
 | `exp18_kappa_sweep.csv` | `exp18_slow_grower_transferability.py` | quoted in the text only |
-| `exp18_parameter_gaps.csv` | `exp18_slow_grower_transferability.py` | `build_tables`, `fig13_parameter_transfer` |
+| `exp18_parameter_gaps.csv` | `exp18_slow_grower_transferability.py` | `fig13_parameter_transfer` |
 | `exp18_shape_ratio.csv` | `exp18_slow_grower_transferability.py` | `fig13_parameter_transfer` |
 | `exp18_unit_sensitivity.csv` | `exp18_slow_grower_transferability.py` | `audit_claims` |
 | `exp19_axis_independence.csv` | `exp19_windels_mic_mapping.py` | `fig12_independence` |

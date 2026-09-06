@@ -19,7 +19,7 @@ keywords:
 
 **Correspondence:** [to be inserted]
 
-**Figures:** 4 | **Tables:** 10 | **Supplementary tables:** 3 | **Supplementary figures:** 1
+**Figures:** 4 | **Tables:** 10 | **Supplementary tables:** 2
 
 ## Abstract
 
@@ -407,7 +407,7 @@ against its own stated figure rather than against a standard: its Methods specif
 nominal.
 
 Distance from the McFarland reference is descriptive and is reported as such
-(Table S3). Sitting far below it is the intended state, since the inoculum is
+(Table S2). Sitting far below it is the intended state, since the inoculum is
 prepared by diluting from it, and the figure is not a measure of protocol
 compliance. What determines the maximum observable log-kill depth is the measured
 starting density and the real quantification limit, not the turbidity the
@@ -492,24 +492,9 @@ demonstrable.
 
 ## Supplementary tables
 
-Held here so the Results stay on one line of reasoning. Table S1 records what the field assumes about mycobacterial rate constants and is background rather than evidence for any claim made above; Tables S2 and S3 support Sections 10 and 6 respectively.
+Held here so the Results stay on one line of reasoning. Table S1 supports Section 10 and Table S2 supports Section 6.
 
-**Table S1.** Every mycobacterial kill or growth rate we could find reported as an instantaneous constant, against the value in routine modelling use. Rates published only as a cumulative log reduction over a fixed window are not convertible without assuming the shape this paper is testing, and are excluded.
-
-| Constant | State measured in | Published (ln/h) | Assumed (ln/h) | Gap | Source PMID |
-| --- | ---: | ---: | ---: | ---: | ---: |
-| psi max | intracellular, THP-1 macrophage | +0.0330 | +0.9903 | 30x | 28356552 |
-| psi max | extracellular, planktonic 7H9 | +0.0769 | +0.9903 | 13x | 28356552 |
-| psi max | in vivo, sputum | +0.0010 | +0.9903 | 1,011x | 34871099 |
-| psi min | rifampicin, intracellular | -0.0220 | -6.0000 | 273x | 28356552 |
-| psi min | ethambutol, intracellular | -0.0200 | -6.0000 | 300x | 28356552 |
-| psi min | pyrazinamide, intracellular | -0.0100 | -6.0000 | 600x | 28356552 |
-| psi min | isoniazid, intracellular | -0.0080 | -6.0000 | 750x | 28356552 |
-| psi min | bedaquiline, in vivo sputum | -0.0210 | -6.0000 | 286x | 34871099 |
-| psi min | rifampicin, extracellular (provisional) | -0.1011 | -6.0000 | 59x | 28356552 |
-| psi min | ethambutol, extracellular (provisional) | -0.0651 | -6.0000 | 92x | 28356552 |
-
-**Table S2.** The same nominal concentration expressed in multiples of the minimum inhibitory concentration each population actually evolved to. At 25 ug/mL the same number denotes a sub-inhibitory exposure in one nutrient condition and a strongly inhibitory one in another.
+**Table S1.** The same nominal concentration expressed in multiples of the minimum inhibitory concentration each population actually evolved to. At 25 ug/mL the same number denotes a sub-inhibitory exposure in one nutrient condition and a strongly inhibitory one in another.
 
 | Nominal concentration (ug/mL) | Nutrient levels | Lowest exposure (x MIC) | Highest exposure (x MIC) | Spread | Straddles the MIC |
 | --- | ---: | ---: | ---: | ---: | ---: |
@@ -518,7 +503,7 @@ Held here so the Results stay on one line of reasoning. Table S1 records what th
 | 50 | 2 | 5.08 | 10.95 | 2.2x | no |
 | 100 | 1 | 9.72 | 9.72 | 1.0x | no |
 
-**Table S3.** Fold below the nominal 0.5 McFarland reference, 1.5e8 CFU/mL. Descriptive only, and not a protocol-compliance metric. A time-kill inoculum is prepared by diluting from a suspension matched to that turbidity, so every entry is expected to sit far below it; the conversion of a turbidity to CFU/mL depends on species, cell aggregation and preparation and is least reliable for mycobacteria.
+**Table S2.** Fold below the nominal 0.5 McFarland reference, 1.5e8 CFU/mL. Descriptive only, and not a protocol-compliance metric. A time-kill inoculum is prepared by diluting from a suspension matched to that turbidity, so every entry is expected to sit far below it; the conversion of a turbidity to CFU/mL depends on species, cell aggregation and preparation and is least reliable for mycobacteria.
 
 | Dataset | Median log10 N0 | Fold below nominal 0.5 McFarland |
 | --- | ---: | ---: |
@@ -600,7 +585,7 @@ The same question in 126 evolved clones sharing an ancestor gives ρ = +0.043
 nutrient stratum separately. Stratifying is not optional there: the nominal
 concentration is not a fixed exposure across those strata, since at 25 µg/mL the
 same figure spans 0.55 to 9.47 times the inhibitory concentration each population
-evolved to and straddles it (Table S2).
+evolved to and straddles it (Table S1).
 
 ---
 

@@ -227,23 +227,6 @@ def table8() -> str:
             + md(d))
 
 
-def tableS1() -> str:
-    """Admissible mycobacterial rates against the constants in routine use."""
-    g = pd.read_csv(T / "exp18_parameter_gaps.csv")
-    rows = [[r.constant.replace("psi_", "psi "), r.state,
-             f"{r.published_value:+.4f}", f"{r.model_value:+.4f}",
-             f"{r.fold_gap:,.0f}x", str(r.pmid)]
-            for r in g.itertuples()]
-    d = pd.DataFrame(rows, columns=[
-        "Constant", "State measured in", "Published (ln/h)", "Assumed (ln/h)",
-        "Gap", "Source PMID"])
-    return ("**Table S1.** Every mycobacterial kill or growth rate we could "
-            "find reported as an instantaneous constant, against the value in "
-            "routine modelling use. Rates published only as a cumulative log "
-            "reduction over a fixed window are not convertible without assuming "
-            "the shape this paper is testing, and are excluded.\n\n" + md(d))
-
-
 def table7() -> str:
     """What the endpoint does to a 32-fold concentration range."""
     s = pd.read_csv(T / "exp20_endpoint_separation.csv")
@@ -266,7 +249,7 @@ def table7() -> str:
             + md(d))
 
 
-def tableS2() -> str:
+def tableS1() -> str:
     """What one nominal concentration means once the evolved MIC is known."""
     m = pd.read_csv(T / "exp19_exposure_mapping.csv")
     rows = [[f"{r.AB_conc_ug_ml:g}", int(r.n_nutrient_levels),
@@ -278,7 +261,7 @@ def tableS2() -> str:
         "Nominal concentration (ug/mL)", "Nutrient levels",
         "Lowest exposure (x MIC)", "Highest exposure (x MIC)", "Spread",
         "Straddles the MIC"])
-    return ("**Table S2.** The same nominal concentration expressed in multiples "
+    return ("**Table S1.** The same nominal concentration expressed in multiples "
             "of the minimum inhibitory concentration each population actually "
             "evolved to. At 25 ug/mL the same number denotes a sub-inhibitory "
             "exposure in one nutrient condition and a strongly inhibitory one in "
@@ -328,7 +311,7 @@ def table10() -> str:
             + chr(10) + chr(10) + md(f))
 
 
-def tableS3() -> str:
+def tableS2() -> str:
     """The turbidity reference, kept out of the main tables on purpose."""
     d = pd.read_csv(T / "exp28_supplementary_mcfarland.csv")
     col = "fold_below_nominal_0.5_McFarland"
@@ -336,7 +319,7 @@ def tableS3() -> str:
             zip(d["dataset"], d["median_log10_N0"], d[col])]
     f = pd.DataFrame(rows, columns=[
         "Dataset", "Median log10 N0", "Fold below nominal 0.5 McFarland"])
-    return ("**Table S3.** Fold below the nominal 0.5 McFarland reference, "
+    return ("**Table S2.** Fold below the nominal 0.5 McFarland reference, "
             "1.5e8 CFU/mL. Descriptive only, and not a protocol-compliance "
             "metric. A time-kill inoculum is prepared by diluting from a "
             "suspension matched to that turbidity, so every entry is expected to "
@@ -360,16 +343,14 @@ def main() -> int:
         parts.append("")
     parts += ["---", "", "## Supplementary tables", "",
               "Held here so the Results stay on one line of reasoning. "
-              "Table S1 records what the field assumes about mycobacterial rate "
-              "constants and is background rather than evidence for any claim "
-              "made above; Tables S2 and S3 support Sections 10 and 6 "
-              "respectively.", ""]
-    for fn in (tableS1, tableS2, tableS3):
+              "Table S1 supports Section 10 and Table S2 supports Section 6.",
+              ""]
+    for fn in (tableS1, tableS2):
         parts.append(fn())
         parts.append("")
     OUT.write_text("\n".join(parts), encoding="utf-8")
     print(f"wrote {OUT.relative_to(ROOT)}")
-    for fn in order + (tableS1, tableS2, tableS3):
+    for fn in order + (tableS1, tableS2):
         first = fn().split("\n")[0]
         print("   " + first[:96])
     return 0

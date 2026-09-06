@@ -38,8 +38,9 @@ FIGURES = {
     2: "fig10_rate_vs_duration",
     3: "fig11_endpoint_collapse",
     4: "fig12_independence",
-    # fig13_parameter_transfer supports Section 4.5 and Table S1. It is not part
-    # of the main line of argument and is not embedded in the body.
+    # fig13_parameter_transfer belongs to the published-rate-constant comparison,
+    # which is no longer part of this paper. The figure stays in results/ as a
+    # record of the work; it is neither embedded nor listed as supplementary.
 }
 
 

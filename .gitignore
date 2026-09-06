@@ -67,3 +67,8 @@ data/raw/_staged/
 
 # Fetched copies of sources this repository may not redistribute.
 data/raw/_fetched/
+
+# Reading copies rebuilt from the manuscript by src/build_pdf.py. Derived, and
+# a 1.6 MB binary that changes on every build, so the recipe is tracked and the
+# output is not.
+build/
