@@ -1,6 +1,6 @@
 {
   "script": "src/experiments/exp22_tolerance_dynamic_range.py",
-  "utc": "2026-09-06T04:31:26+00:00",
+  "utc": "2026-09-06T04:38:51+00:00",
   "data_source": "eLife 93243 supplementary file 2",
   "organism": "Mycobacterium tuberculosis, clinical isolates",
   "n_isolates": 217,
@@ -51,6 +51,50 @@
       "n_at_mdk_ceiling": 192,
       "fraction_at_ceiling": 0.9458128078817734,
       "fisher_p": 1.0
+    }
+  ],
+  "floor_sensitivity": [
+    {
+      "assumed_floor_per_ml": 3.0,
+      "n_short_of_4_logs": 28,
+      "pct_short_of_4_logs": 12.903225806451612,
+      "n_readings_at_this_floor": 0
+    },
+    {
+      "assumed_floor_per_ml": 3.6,
+      "n_short_of_4_logs": 28,
+      "pct_short_of_4_logs": 12.903225806451612,
+      "n_readings_at_this_floor": 0
+    },
+    {
+      "assumed_floor_per_ml": 7.2,
+      "n_short_of_4_logs": 33,
+      "pct_short_of_4_logs": 15.2073732718894,
+      "n_readings_at_this_floor": 0
+    },
+    {
+      "assumed_floor_per_ml": 9.2,
+      "n_short_of_4_logs": 33,
+      "pct_short_of_4_logs": 15.2073732718894,
+      "n_readings_at_this_floor": 0
+    },
+    {
+      "assumed_floor_per_ml": 15.0,
+      "n_short_of_4_logs": 33,
+      "pct_short_of_4_logs": 15.2073732718894,
+      "n_readings_at_this_floor": 0
+    },
+    {
+      "assumed_floor_per_ml": 21.0,
+      "n_short_of_4_logs": 33,
+      "pct_short_of_4_logs": 15.2073732718894,
+      "n_readings_at_this_floor": 0
+    },
+    {
+      "assumed_floor_per_ml": 23.0,
+      "n_short_of_4_logs": 33,
+      "pct_short_of_4_logs": 15.2073732718894,
+      "n_readings_at_this_floor": 18
     }
   ],
   "isolates_at_floor": [

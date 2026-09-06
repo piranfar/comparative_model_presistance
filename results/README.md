@@ -6,13 +6,13 @@ Outputs of the earlier paper are not here; they live in `version_one/results/`.
 
 | | tables | figures | receipts |
 | --- | ---: | ---: | ---: |
-| total | 39 | 5 | 11 |
+| total | 40 | 5 | 11 |
 
 ## Tolerance and the assay floor (manuscript/PAPER_COMPLETE.md)
 
 **Figures.** `fig10_rate_vs_duration`, `fig11_endpoint_collapse`, `fig12_independence`, `fig13_parameter_transfer`, `fig14_dynamic_range`
 
-**Tables (31).**
+**Tables (32).**
 
 | file | written by | used by |
 | --- | --- | --- |
@@ -38,6 +38,7 @@ Outputs of the earlier paper are not here; they live in `version_one/results/`.
 | `exp20_kill_grid.csv` | `exp20_regimen_design.py` | `fig11_endpoint_collapse` |
 | `exp21_combination.csv` | `exp21_sequential_and_combination.py` | quoted in the text only |
 | `exp21_interval_concentration_dependence.csv` | `exp21_sequential_and_combination.py` | `audit_claims`, `build_tables` |
+| `exp22_floor_sensitivity.csv` | `exp22_tolerance_dynamic_range.py` | `audit_claims` |
 | `exp22_headroom.csv` | `exp22_tolerance_dynamic_range.py` | `audit_claims`, `build_tables` |
 | `exp22_label_associations.csv` | `exp22_tolerance_dynamic_range.py` | `audit_claims`, `build_tables` |
 | `exp23_flask_parameters.csv` | `exp23_inversion_decomposition.py` | quoted in the text only |

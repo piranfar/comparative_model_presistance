@@ -722,6 +722,18 @@ probable numbers taking the discrete values of an MPN table, and the day-5 colum
 bottoms out at 23 per mL with a visible pile-up there; that value is treated as
 the floor, and the first Results section reports the evidence for it.
 
+That deposit states no limit of quantification, so the floor is inferred rather
+than read off, and the inference is bounded rather than asserted. Three things
+support it: 23 per mL is the smallest value anywhere in the file, nothing lies
+below it in 1 932 readings, and the minimum shifts by exactly a factor of ten per
+visit — 2 300, 230, 23 — in all three culture ages, which is the signature of one
+dilution series applied to a differently diluted sample at each timepoint. Since
+none of that is proof, the load-bearing count is recomputed at every value a
+three-tube MPN table returns below 23. The number of isolates lacking four logs
+of headroom is 33 at a floor of 23 and does not fall below 28 at a floor of 3.0,
+the lowest such table returns. The conclusion holds across the whole range, so it
+is not an artefact of where we place the floor.
+
 The six-laboratory deposit also carries the evidence for judging each reading
 against its own volume rather than pooling. Each sample is plated at four
 volumes at the same visit, so a below-limit flag can be checked against the other

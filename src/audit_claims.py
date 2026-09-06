@@ -97,6 +97,14 @@ def main() -> int:
             rows.append(check("deep endpoint unreachable, susceptible (2: 7.6%)",
                               7.56, float(g["IS"]["pct_deep_endpoint_unreachable"]), 0.02))
 
+    # --- exp22, the floor is inferred, so bound what rests on it ----------
+    f = load("exp22_floor_sensitivity.csv")
+    if f is not None:
+        rows.append(check("short of 4 logs at the lowest plausible floor (methods: 28)",
+                          28, float(f["n_short_of_4_logs"].min()), 0.001))
+        rows.append(check("short of 4 logs at the inferred floor (methods: 33)",
+                          33, float(f["n_short_of_4_logs"].max()), 0.001))
+
     # --- exp26, the counter-tests -----------------------------------------
     # The strictest inversion rate is pinned because it is the number that
     # replaced our headline. 36.6 per cent was the most generous reading.
