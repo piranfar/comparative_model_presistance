@@ -51,9 +51,9 @@ hollow-fibre experiment the framework never saw, five of twenty cultures cannot
 show five logs. A tolerance call reported without *N₀* and *L* cannot be
 interpreted; Box 1 is the calculation, and it needs no new apparatus.
 
-**Keywords:** antibiotic tolerance; minimum duration for killing; *Mycobacterium
-tuberculosis*; assay floor; headroom; censored data; ordinal regression;
-time-kill kinetics; inoculum effect
+**Keywords:** antibiotic tolerance; minimum duration for killing;
+*Mycobacterium tuberculosis*; assay floor; censored data; time-kill kinetics;
+inoculum effect
 
 ## Introduction
 
@@ -262,7 +262,7 @@ endpoint is recorded as not having reached it, and 88 per cent of those that
 could are recorded the same way. The deepest endpoint is therefore the only one at risk, and it is the
 one the tolerance classification is built on.
 
-### 2. Identical floor observations received different tolerance phenotypes
+### 2. Identical floor observations received different tolerance labels
 
 The deposited tolerance level is a threshold on the recorded surviving fraction,
 with no overlap between classes. The thresholds themselves are not deposited;
@@ -399,8 +399,8 @@ section quantifies.
 
 ### 3. The affected isolates are named before the drug is added
 
-Sections 1 and 2 counted isolates. The two boundaries of Section 2 of the Methods
-do more than that: given only the floor, the class thresholds and each isolate's
+Sections 1 and 2 counted isolates. The two boundaries derived in the Methods,
+under *Dynamic range, and the two boundaries it sets*, do more than that: given only the floor, the class thresholds and each isolate's
 starting density, they say in advance which isolates are affected, before any
 day-5 reading is used.
 
@@ -596,7 +596,9 @@ have reported that as a null.
 
 If the effect is a property of assay geometry rather than of clinical sampling,
 it should appear where one protocol, one strain and one stock are distributed
-deliberately. It does.
+deliberately. Van Wijk and colleagues (2023) ran exactly that exercise, sending a
+single stock of H37Rv to six blinded laboratories under one written protocol. It
+does.
 
 The starting densities in Table 8 need their basis stated before they are used.
 Each is the mean of quantified readings at day 0 or day 1 at the 100 µL plating,
@@ -655,16 +657,13 @@ and records no crossing. Institute E returns the slowest rate of all at 0.090 an
 also records none.
 
 Starting density separates flasks that ever crossed from those that never did
-with an area under the curve of 0.974. That figure is a description and it is
-quoted without a p-value, deliberately. The comparison looks like 67 flasks but
-it is three laboratories against three: every flask in a laboratory shares its
-starting culture, and the three lowest starting densities are exactly the three
-laboratories that recorded crossings. Tested at the level at which the
-observations are actually independent, the exact two-sided p is 0.10 — and 0.10
-is the smallest value a three-against-three split of six clusters can return, so
-no arrangement of this deposit could have reached significance. Nor is there a
-within-laboratory fallback: holding laboratory and treatment arm both fixed,
-only 2 of 24 cells contain both outcomes, and the smallest attainable p is 0.17.
+with an area under the curve of 0.974. That figure is a description and it is quoted
+without a p-value, deliberately. The comparison looks like 67 flasks but it is
+three laboratories against three, and the between-laboratory evidence in this
+deposit is six clusters throughout; the Limitations set out what that permits and
+what it forbids. In short: the exact laboratory-level test returns 0.10, which is
+the smallest value the design can return, and there is no within-laboratory
+fallback once the treatment arm is held fixed.
 
 The Cox fits are reported for the same reason and with the same restraint. On
 laboratory alone, institutes D, E and F carry hazard ratios of 0.20, 0.21 and
@@ -831,7 +830,7 @@ compliance. What determines the maximum observable log-kill depth is the measure
 starting density and the real assay floor, not the turbidity the
 preparation began from.
 
-### 7. Faster killing often crosses the floor later
+### 7. The population that fell faster often crossed the floor later
 
 Across 191 pairs of flasks in the same treatment arm from different laboratories,
 with 45 further pairs that the censoring could not settle and which are excluded
@@ -930,8 +929,10 @@ exposure rather than before it.
 
 ### 9. A late endpoint can erase a 32-fold dose difference
 
-In the concentration-by-time grid, survivors across a 32-fold range of apramycin
-separate 6.9-fold at day 3, 48.2-fold at day 7 and 5.2-fold at day 14 (Fig. 3,
+The deposit carries apramycin at 1, 4, 8, 32 and 128 µg/mL. The 1 µg/mL arm
+shows net growth rather than killing and is excluded from the dose comparison, so
+the range compared is 4 to 128 µg/mL: 32-fold, five doublings. Across it,
+survivors separate 6.9-fold at day 3, 48.2-fold at day 7 and 5.2-fold at day 14 (Fig. 3,
 Table 13). An experiment read at 14 days would report this drug as insensitive to
 a 32-fold change in dose. Fitted per interval on a bootstrap resampling all three
 replicates at both ends of every interval, the concentration slope is +0.059
@@ -941,7 +942,7 @@ log10 per day per doubling over days 0 to 3 (95 per cent interval +0.030 to
 contrast is firm (+0.084, +0.037 to +0.128) and the early-versus-middle contrast
 is not (p = 0.43).
 
-**Table 13.** The same 32-fold concentration range summarised at each sampling day (upper rows), and the concentration slope fitted separately in each interval (lower rows). Slopes and intervals are from the replicate-level bootstrap described in Section 2.
+**Table 13.** The same 32-fold concentration range summarised at each sampling day (upper rows), and the concentration slope fitted separately in each interval (lower rows). Slopes and intervals are from the replicate-level bootstrap described in the Methods.
 
 | Read at | Survivor ratio (low/high dose) | log10 separation | Slope per doubling | 95% interval | p |
 | --- | ---: | ---: | ---: | ---: | ---: |
@@ -1361,7 +1362,10 @@ pre-treatment visits, is 2 580 readings, of which 19.3 per cent are flagged.
 experiment under amikacin, each carrying an endpoint minimum inhibitory
 concentration and a persister fraction measured on the same clone, labelled by
 the antibiotic concentration and nutrient level its population evolved under
-(Windels et al. 2024; Zenodo 10.5281/zenodo.7550302, CC BY 4.0).
+(Windels et al. 2024; Zenodo 10.5281/zenodo.7550302, CC BY 4.0). Six of its
+595 surviving fractions are written as exact zeros, marking a below-limit reading
+without naming a limit; they fix no floor, so this deposit is one of the two for
+which observability labels are refused.
 
 **A deposit held out for validation.** Amoxicillin-clavulanate against
 *Escherichia coli* in a hollow-fibre infection model, with 100 µL plated and
@@ -1602,6 +1606,10 @@ by Rubin's rules. It makes a different assumption from the Tobit model about wha
 happened below the limit, so agreement between them shows the answer is not
 driven by either.
 
+The growth proxy is the deposit's time to an optical density of 0.4, in days;
+the deposit records no wavelength, so none is given here. Because it is a time,
+it runs inversely to growth rate: a larger value is a slower-growing isolate.
+
 **The tolerance label** is modelled as an ordered categorical outcome by
 proportional-odds ordinal logistic regression, with starting density as a
 prespecified covariate and every association reported unadjusted and adjusted for
@@ -1639,6 +1647,23 @@ clusters cannot support one. Proportionality is tested on Schoenfeld residuals.
 A cell is fitted only when it retains at least six quantified readings at three
 distinct times; below that the slope is determined by the censoring pattern
 rather than by the counts.
+
+**The replicate-level bootstrap** behind the interval slopes resamples the three
+replicate counts with replacement at both ends of each interval, refits the
+concentration slope on each draw, and takes percentile intervals from 20 000
+draws. The resampling unit is the replicate count, not the interval, so a draw
+can repeat a replicate at one end and not the other.
+
+**What is standard and what is not.** The Tobit fit, Kaplan–Meier, Cox and the
+interval-censored fits come from the packages named below. Four procedures do
+not: the Brant test of proportional odds, the partial-proportional-odds fit with
+a per-cut coefficient mask, the product-of-coefficients mediation with bootstrap
+percentile intervals, and the residual-correlation sensitivity for sequential
+ignorability. Those are implemented in the released analysis code rather than
+taken from a package — in `exp30_ordinal_tolerance.py` and `exp34_mediation.py` —
+and the partial-proportional-odds likelihood is validated against the
+proportional-odds fit it nests, agreeing to 1.0 × 10⁻¹⁰ in log-likelihood when
+nothing is released. The multinomial check uses statsmodels.
 
 ### The decomposition of a crossing time
 
@@ -1779,7 +1804,8 @@ Apramycin against *M. tuberculosis*, five concentrations, triplicate counts.
 plating would give — drawn as a band; this deposit records no plated volume, so
 the band is an assumption and is drawn to show what the assumption costs; by day 14 the highest arm lies within it, so its apparent rate
 over the final interval is a lower bound. (**B**) The ratio of survivors between
-the lowest and highest concentration at each sampling day, rising to 48.2-fold at
+the lowest and highest of the four compared concentrations, 4 and 128 µg/mL, at
+each sampling day, rising to 48.2-fold at
 day 7 and collapsing to 5.2-fold at day 14. (**C**) The concentration slope fitted
 separately in each interval from a replicate-level bootstrap, 20 000 draws.
 
@@ -1866,32 +1892,100 @@ Held here so the Results stay on one line of reasoning. Table S6 supports Sectio
 | 50 | 2 | 5.08 | 10.95 | 2.2x | no |
 | 100 | 1 | 9.72 | 9.72 | 1.0x | no |
 
-**Table S7.** Sensitivity of the load-bearing counts to the choice of floor, per deposit, showing only the counts a conclusion rests on. The clinical sweep steps through every three-tube most-probable-number rung at or below 23 per mL: the number of isolates short of four logs of headroom moves only between 28 and 33 across the whole range, which is why the inferred floor is safe to use. The six-laboratory rows compare judging each reading against the floor its own plated volume implies with pooling all four volumes to one floor, and price what pooling would cost. The Kaur deposit records no plated volume, so its row shows what assuming one would do: the four-log endpoint stays reachable throughout while h itself moves by 1.6 log10.
+**Table S7.** Sensitivity of the load-bearing counts to the choice of floor. Each deposit is sensitive to a different thing, so the table is long rather than wide: one row per deposit, floor scenario and quantity. The clinical sweep steps through every three-tube most-probable-number rung at or below 23 per mL, and the number of isolates short of four logs of headroom moves only between 28 and 33 across the whole range, which is why the inferred floor is safe to use. The six-laboratory rows price what pooling the four plating volumes to one floor would cost. The Kaur deposit records no plated volume, so its rows show what assuming one would do: the four-log endpoint stays reachable throughout while the headroom itself moves by 1.6 log10.
 
-| Deposit | Floor assumed | % counts a pooled floor discards | % flags contradicted | 4-log reachable | at the floor | h | measured | median h | one class | several classes | short of 4 logs | short, baseline only | written as exact zero |
-| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| Dubey 2026, hollow fibre | 10 uL plated | - | - | - | - | - | - | 4.08 | - | - | 5 | - | - |
-| Dubey 2026, hollow fibre | 100 uL plated, as the deposit's staging record gives | - | - | - | - | - | - | 5.08 | - | - | 0 | - | - |
-| Dubey 2026, hollow fibre | 50 uL plated | - | - | - | - | - | - | 4.78 | - | - | 0 | - | - |
-| Dubey 2026, hollow fibre | the below-limit placeholder taken literally | - | - | - | - | - | - | 6.08 | - | - | 0 | - | - |
-| ERA4TB, six laboratories | per-volume (as analysed) | 0 | 16.67 | - | - | - | - | - | - | - | - | - | - |
-| ERA4TB, six laboratories | pooled at the geometric mean of the per-volume floors | 1.04 | 38.96 | - | - | - | - | - | - | - | - | - | - |
-| ERA4TB, six laboratories | pooled at the least sensitive volume, 2.5 uL | 5.94 | 15.26 | - | - | - | - | - | - | - | - | - | - |
-| ERA4TB, six laboratories | pooled at the modal volume, 10 uL | 1.13 | 28.71 | - | - | - | - | - | - | - | - | - | - |
-| ERA4TB, six laboratories | pooled at the most sensitive volume, 100 uL | 0 | 43.17 | - | - | - | - | - | - | - | - | - | - |
-| Kaur 2024, apramycin grid | 10 uL plated, if it had been stated | - | - | True | - | 5.03 | - | - | - | - | - | - | - |
-| Kaur 2024, apramycin grid | 100 uL plated, if it had been stated | - | - | True | - | 6.03 | - | - | - | - | - | - | - |
-| Kaur 2024, apramycin grid | 2.5 uL plated, if it had been stated | - | - | True | - | 4.43 | - | - | - | - | - | - | - |
-| Kaur 2024, apramycin grid | the observed minimum, which occurs once | - | - | True | - | 5.43 | - | - | - | - | - | - | - |
-| Vijay 2024, clinical isolates | floor = 11 MPN/mL | - | - | - | 0 | - | 203 | - | 0 | 0 | 33 | 21 | - |
-| Vijay 2024, clinical isolates | floor = 14 MPN/mL | - | - | - | 0 | - | 203 | - | 0 | 0 | 33 | 21 | - |
-| Vijay 2024, clinical isolates | floor = 15 MPN/mL | - | - | - | 0 | - | 203 | - | 0 | 0 | 33 | 21 | - |
-| Vijay 2024, clinical isolates | floor = 20 MPN/mL | - | - | - | 0 | - | 203 | - | 0 | 0 | 33 | 21 | - |
-| Vijay 2024, clinical isolates | floor = 21 MPN/mL | - | - | - | 0 | - | 203 | - | 0 | 0 | 33 | 21 | - |
-| Vijay 2024, clinical isolates | floor = 23 MPN/mL | - | - | - | 18 | - | 185 | - | 12 | 6 | 33 | 21 | - |
-| Vijay 2024, clinical isolates | floor = 3 MPN/mL | - | - | - | 0 | - | 203 | - | 0 | 0 | 28 | 17 | - |
-| Vijay 2024, clinical isolates | floor = 3.6 MPN/mL | - | - | - | 0 | - | 203 | - | 0 | 0 | 28 | 17 | - |
-| Vijay 2024, clinical isolates | floor = 7.2 MPN/mL | - | - | - | 0 | - | 203 | - | 0 | 0 | 33 | 21 | - |
-| Vijay 2024, clinical isolates | floor = 7.4 MPN/mL | - | - | - | 0 | - | 203 | - | 0 | 0 | 33 | 21 | - |
-| Vijay 2024, clinical isolates | floor = 9.2 MPN/mL | - | - | - | 0 | - | 203 | - | 0 | 0 | 33 | 21 | - |
-| Windels 2024, evolved clones | no floor is recoverable | - | - | - | - | - | - | - | - | - | - | - | 6 |
+| Deposit | Floor assumed | Quantity | Value |
+| --- | --- | --- | ---: |
+| Vijay 2024 | floor = 3 MPN/mL | isolates short of 4 logs | 28 |
+| Vijay 2024 | floor = 3 MPN/mL | isolates at the floor | 0 |
+| Vijay 2024 | floor = 3 MPN/mL | calls resting on a measured fraction | 203 |
+| Vijay 2024 | floor = 3 MPN/mL | calls with one compatible class | 0 |
+| Vijay 2024 | floor = 3 MPN/mL | calls with several compatible classes | 0 |
+| Vijay 2024 | floor = 3 MPN/mL | short of 4 logs, baseline only | 17 |
+| Vijay 2024 | floor = 3.6 MPN/mL | isolates short of 4 logs | 28 |
+| Vijay 2024 | floor = 3.6 MPN/mL | isolates at the floor | 0 |
+| Vijay 2024 | floor = 3.6 MPN/mL | calls resting on a measured fraction | 203 |
+| Vijay 2024 | floor = 3.6 MPN/mL | calls with one compatible class | 0 |
+| Vijay 2024 | floor = 3.6 MPN/mL | calls with several compatible classes | 0 |
+| Vijay 2024 | floor = 3.6 MPN/mL | short of 4 logs, baseline only | 17 |
+| Vijay 2024 | floor = 7.2 MPN/mL | isolates short of 4 logs | 33 |
+| Vijay 2024 | floor = 7.2 MPN/mL | isolates at the floor | 0 |
+| Vijay 2024 | floor = 7.2 MPN/mL | calls resting on a measured fraction | 203 |
+| Vijay 2024 | floor = 7.2 MPN/mL | calls with one compatible class | 0 |
+| Vijay 2024 | floor = 7.2 MPN/mL | calls with several compatible classes | 0 |
+| Vijay 2024 | floor = 7.2 MPN/mL | short of 4 logs, baseline only | 21 |
+| Vijay 2024 | floor = 7.4 MPN/mL | isolates short of 4 logs | 33 |
+| Vijay 2024 | floor = 7.4 MPN/mL | isolates at the floor | 0 |
+| Vijay 2024 | floor = 7.4 MPN/mL | calls resting on a measured fraction | 203 |
+| Vijay 2024 | floor = 7.4 MPN/mL | calls with one compatible class | 0 |
+| Vijay 2024 | floor = 7.4 MPN/mL | calls with several compatible classes | 0 |
+| Vijay 2024 | floor = 7.4 MPN/mL | short of 4 logs, baseline only | 21 |
+| Vijay 2024 | floor = 9.2 MPN/mL | isolates short of 4 logs | 33 |
+| Vijay 2024 | floor = 9.2 MPN/mL | isolates at the floor | 0 |
+| Vijay 2024 | floor = 9.2 MPN/mL | calls resting on a measured fraction | 203 |
+| Vijay 2024 | floor = 9.2 MPN/mL | calls with one compatible class | 0 |
+| Vijay 2024 | floor = 9.2 MPN/mL | calls with several compatible classes | 0 |
+| Vijay 2024 | floor = 9.2 MPN/mL | short of 4 logs, baseline only | 21 |
+| Vijay 2024 | floor = 11 MPN/mL | isolates short of 4 logs | 33 |
+| Vijay 2024 | floor = 11 MPN/mL | isolates at the floor | 0 |
+| Vijay 2024 | floor = 11 MPN/mL | calls resting on a measured fraction | 203 |
+| Vijay 2024 | floor = 11 MPN/mL | calls with one compatible class | 0 |
+| Vijay 2024 | floor = 11 MPN/mL | calls with several compatible classes | 0 |
+| Vijay 2024 | floor = 11 MPN/mL | short of 4 logs, baseline only | 21 |
+| Vijay 2024 | floor = 14 MPN/mL | isolates short of 4 logs | 33 |
+| Vijay 2024 | floor = 14 MPN/mL | isolates at the floor | 0 |
+| Vijay 2024 | floor = 14 MPN/mL | calls resting on a measured fraction | 203 |
+| Vijay 2024 | floor = 14 MPN/mL | calls with one compatible class | 0 |
+| Vijay 2024 | floor = 14 MPN/mL | calls with several compatible classes | 0 |
+| Vijay 2024 | floor = 14 MPN/mL | short of 4 logs, baseline only | 21 |
+| Vijay 2024 | floor = 15 MPN/mL | isolates short of 4 logs | 33 |
+| Vijay 2024 | floor = 15 MPN/mL | isolates at the floor | 0 |
+| Vijay 2024 | floor = 15 MPN/mL | calls resting on a measured fraction | 203 |
+| Vijay 2024 | floor = 15 MPN/mL | calls with one compatible class | 0 |
+| Vijay 2024 | floor = 15 MPN/mL | calls with several compatible classes | 0 |
+| Vijay 2024 | floor = 15 MPN/mL | short of 4 logs, baseline only | 21 |
+| Vijay 2024 | floor = 20 MPN/mL | isolates short of 4 logs | 33 |
+| Vijay 2024 | floor = 20 MPN/mL | isolates at the floor | 0 |
+| Vijay 2024 | floor = 20 MPN/mL | calls resting on a measured fraction | 203 |
+| Vijay 2024 | floor = 20 MPN/mL | calls with one compatible class | 0 |
+| Vijay 2024 | floor = 20 MPN/mL | calls with several compatible classes | 0 |
+| Vijay 2024 | floor = 20 MPN/mL | short of 4 logs, baseline only | 21 |
+| Vijay 2024 | floor = 21 MPN/mL | isolates short of 4 logs | 33 |
+| Vijay 2024 | floor = 21 MPN/mL | isolates at the floor | 0 |
+| Vijay 2024 | floor = 21 MPN/mL | calls resting on a measured fraction | 203 |
+| Vijay 2024 | floor = 21 MPN/mL | calls with one compatible class | 0 |
+| Vijay 2024 | floor = 21 MPN/mL | calls with several compatible classes | 0 |
+| Vijay 2024 | floor = 21 MPN/mL | short of 4 logs, baseline only | 21 |
+| Vijay 2024 | floor = 23 MPN/mL | isolates short of 4 logs | 33 |
+| Vijay 2024 | floor = 23 MPN/mL | isolates at the floor | 18 |
+| Vijay 2024 | floor = 23 MPN/mL | calls resting on a measured fraction | 185 |
+| Vijay 2024 | floor = 23 MPN/mL | calls with one compatible class | 12 |
+| Vijay 2024 | floor = 23 MPN/mL | calls with several compatible classes | 6 |
+| Vijay 2024 | floor = 23 MPN/mL | short of 4 logs, baseline only | 21 |
+| ERA4TB | per-volume (as analysed) | genuine counts a pooled floor discards (%) | 0 |
+| ERA4TB | per-volume (as analysed) | below-limit flags contradicted (%) | 16.67 |
+| ERA4TB | pooled at the most sensitive volume, 100 uL | genuine counts a pooled floor discards (%) | 0 |
+| ERA4TB | pooled at the most sensitive volume, 100 uL | below-limit flags contradicted (%) | 43.17 |
+| ERA4TB | pooled at the modal volume, 10 uL | genuine counts a pooled floor discards (%) | 1.13 |
+| ERA4TB | pooled at the modal volume, 10 uL | below-limit flags contradicted (%) | 28.71 |
+| ERA4TB | pooled at the least sensitive volume, 2.5 uL | genuine counts a pooled floor discards (%) | 5.94 |
+| ERA4TB | pooled at the least sensitive volume, 2.5 uL | below-limit flags contradicted (%) | 15.26 |
+| ERA4TB | pooled at the geometric mean of the per-volume floors | genuine counts a pooled floor discards (%) | 1.04 |
+| ERA4TB | pooled at the geometric mean of the per-volume floors | below-limit flags contradicted (%) | 38.96 |
+| Dubey 2026 | the below-limit placeholder taken literally | median headroom (log10) | 6.08 |
+| Dubey 2026 | the below-limit placeholder taken literally | cultures short of 4 logs | 0 |
+| Dubey 2026 | 100 uL plated, as the deposit's staging record gives | median headroom (log10) | 5.08 |
+| Dubey 2026 | 100 uL plated, as the deposit's staging record gives | cultures short of 4 logs | 0 |
+| Dubey 2026 | 50 uL plated | median headroom (log10) | 4.78 |
+| Dubey 2026 | 50 uL plated | cultures short of 4 logs | 0 |
+| Dubey 2026 | 10 uL plated | median headroom (log10) | 4.08 |
+| Dubey 2026 | 10 uL plated | cultures short of 4 logs | 5 |
+| Kaur 2024 | 100 uL plated, if it had been stated | headroom (log10) | 6.03 |
+| Kaur 2024 | 100 uL plated, if it had been stated | 4-log endpoint reachable | True |
+| Kaur 2024 | the observed minimum, which occurs once | headroom (log10) | 5.43 |
+| Kaur 2024 | the observed minimum, which occurs once | 4-log endpoint reachable | True |
+| Kaur 2024 | 10 uL plated, if it had been stated | headroom (log10) | 5.03 |
+| Kaur 2024 | 10 uL plated, if it had been stated | 4-log endpoint reachable | True |
+| Kaur 2024 | 2.5 uL plated, if it had been stated | headroom (log10) | 4.43 |
+| Kaur 2024 | 2.5 uL plated, if it had been stated | 4-log endpoint reachable | True |
+| Windels 2024 | no floor is recoverable | readings written as exact zero | 6 |

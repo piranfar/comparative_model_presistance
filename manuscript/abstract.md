@@ -28,6 +28,6 @@ hollow-fibre experiment the framework never saw, five of twenty cultures cannot
 show five logs. A tolerance call reported without *N₀* and *L* cannot be
 interpreted; Box 1 is the calculation, and it needs no new apparatus.
 
-**Keywords:** antibiotic tolerance; minimum duration for killing; *Mycobacterium
-tuberculosis*; assay floor; headroom; censored data; ordinal regression;
-time-kill kinetics; inoculum effect
+**Keywords:** antibiotic tolerance; minimum duration for killing;
+*Mycobacterium tuberculosis*; assay floor; censored data; time-kill kinetics;
+inoculum effect

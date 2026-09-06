@@ -288,7 +288,7 @@ def table13() -> str:
     return ("**Table 13.** The same 32-fold concentration range summarised at each "
             "sampling day (upper rows), and the concentration slope fitted "
             "separately in each interval (lower rows). Slopes and intervals are "
-            "from the replicate-level bootstrap described in Section 2.\n\n"
+            "from the replicate-level bootstrap described in the Methods.\n\n"
             + md(d))
 
 
@@ -432,57 +432,49 @@ def table16() -> str:
 def tableS7() -> str:
     """What the load-bearing counts do under a different floor."""
     d = pd.read_csv(T / "exp29_floor_sensitivity.csv")
-    # One row per (deposit, floor scenario); only the counts a conclusion rests on.
-    keep = ["n_short_of_4_logs_15d", "n_at_floor_15d", "n_determinable_15d",
-            "n_forced_by_inoculum_15d", "n_undecidable_15d",
-            "n_short_of_4_logs_15d_baseline_only",
-            "pct_genuine_counts_discarded", "pct_flags_contradicted",
-            "n_short_of_4_logs", "median_headroom_log10", "headroom_log10",
-            "four_log_endpoint_reachable", "n_below_limit_written_as_exact_zero"]
-    short = {"n_short_of_4_logs_15d": "short of 4 logs",
-             "n_at_floor_15d": "at the floor",
-             "n_determinable_15d": "measured",
-             "n_forced_by_inoculum_15d": "one class",
-             "n_undecidable_15d": "several classes",
-             "n_short_of_4_logs_15d_baseline_only": "short, baseline only",
-             "pct_genuine_counts_discarded": "% counts a pooled floor discards",
-             "pct_flags_contradicted": "% flags contradicted",
-             "n_short_of_4_logs": "short of 4 logs",
-             "median_headroom_log10": "median h",
-             "headroom_log10": "h",
-             "four_log_endpoint_reachable": "4-log reachable",
-             "n_below_limit_written_as_exact_zero": "written as exact zero"}
+    # Long form, not a wide grid. The five deposits are sensitive to different
+    # things, so a column set that suits one is empty for the others; pivoting
+    # them into one grid produced a table that was mostly dashes.
+    keep = {"n_short_of_4_logs_15d": "isolates short of 4 logs",
+            "n_at_floor_15d": "isolates at the floor",
+            "n_determinable_15d": "calls resting on a measured fraction",
+            "n_forced_by_inoculum_15d": "calls with one compatible class",
+            "n_undecidable_15d": "calls with several compatible classes",
+            "n_short_of_4_logs_15d_baseline_only": "short of 4 logs, baseline only",
+            "pct_genuine_counts_discarded": "genuine counts a pooled floor discards (%)",
+            "pct_flags_contradicted": "below-limit flags contradicted (%)",
+            "n_short_of_4_logs": "cultures short of 4 logs",
+            "median_headroom_log10": "median headroom (log10)",
+            "headroom_log10": "headroom (log10)",
+            "four_log_endpoint_reachable": "4-log endpoint reachable",
+            "n_below_limit_written_as_exact_zero": "readings written as exact zero"}
     f = d[d.metric.isin(keep)].copy()
-    f["metric"] = f["metric"].map(short)
-    w = (f.pivot_table(index=["dataset", "scenario"], columns="metric",
-                       values="value", aggfunc="first")
-           .reset_index())
-    w.columns.name = None
+    f["metric"] = f["metric"].map(keep)
+
     def fmt(v):
-        if pd.isna(v):
-            return "-"
         try:
             x = float(v)
         except (TypeError, ValueError):
             return str(v)
         return f"{x:,.0f}" if x.is_integer() else f"{x:,.2f}"
 
-    for c in w.columns[2:]:
-        w[c] = w[c].map(fmt)
-    w = w.rename(columns={"dataset": "Deposit", "scenario": "Floor assumed"})
+    rows = [[r.dataset.split(",")[0], r.scenario, r.metric, fmt(r.value)]
+            for r in f.itertuples()]
+    w = pd.DataFrame(rows, columns=["Deposit", "Floor assumed", "Quantity", "Value"])
     return ("**Table S7.** Sensitivity of the load-bearing counts to the choice "
-            "of floor, per deposit, showing only the counts a conclusion rests "
-            "on. The clinical sweep steps through every three-tube "
-            "most-probable-number rung at or below 23 per mL: the number of "
+            "of floor. Each deposit is sensitive to a different thing, so the "
+            "table is long rather than wide: one row per deposit, floor scenario "
+            "and quantity. The clinical sweep steps through every three-tube "
+            "most-probable-number rung at or below 23 per mL, and the number of "
             "isolates short of four logs of headroom moves only between 28 and "
             "33 across the whole range, which is why the inferred floor is safe "
-            "to use. The six-laboratory rows compare judging each reading "
-            "against the floor its own plated volume implies with pooling all "
-            "four volumes to one floor, and price what pooling would cost. The "
-            "Kaur deposit records no plated volume, so its row shows what "
-            "assuming one would do: the four-log endpoint stays reachable "
-            "throughout while h itself moves by 1.6 log10."
-            + chr(10) + chr(10) + md(w, align_right_from=2))
+            "to use. The six-laboratory rows price what pooling the four plating "
+            "volumes to one floor would cost. The Kaur deposit records no plated "
+            "volume, so its rows show what assuming one would do: the four-log "
+            "endpoint stays reachable throughout while the headroom itself moves "
+            "by 1.6 log10."
+            + chr(10) + chr(10) + md(w, align_right_from=3))
+
 
 
 def table15() -> str:
