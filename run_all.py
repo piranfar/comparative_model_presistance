@@ -80,6 +80,9 @@ STAGES = [
     ("exp35  the strengtheners an external review asked for",
      "src.experiments.exp35_review_strengthen"),
 
+    ("exp36  the floor is visit-specific, and which covariates may adjust",
+     "src.experiments.exp36_visit_floors_and_covariates"),
+
     ("fig 1  the assay floor bounds the endpoint and decides the phenotype",
      "src.figures.fig14_dynamic_range"),
     ("fig 2  one protocol, six laboratories: the inoculum still decides",

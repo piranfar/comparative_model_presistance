@@ -1,0 +1,3 @@
+culture_age_days,endpoint,assay_floor,c1,n_usable,N_reach_1log,N_reach_2log,N_reach_4log,N_id,n_short_1log,n_short_2log,n_short_4log,n_at_floor,n_single_compatible_class,n_multiple_compatible_classes
+15,day 2,230.0,0.01,203,2300.0,23000.0,2300000.0,23000.0,0,2,121,18,11,7
+15,day 5,23.0,0.001,203,230.0,2300.0,230000.0,23000.0,0,0,31,18,12,6

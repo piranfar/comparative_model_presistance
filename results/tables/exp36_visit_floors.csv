@@ -1,0 +1,10 @@
+culture_age_days,visit,n_readings,minimum,n_on_the_minimum,verdict,floor_used,ci_low,ci_high,log10_span,refuse_labels,reason
+15,T0,217,2300.0,1,NONE,2300.0,,,,True,"the minimum appears once, which is what a continuous tail looks like; no floor is evidenced; refuse observability labels"
+15,T2,217,230.0,18,INFERRED,230.0,230.0,230.0,0.0,False,"18 readings sit exactly on the minimum and nothing lies below it; 95% support [230, 230] (span 0 log10)"
+15,T5,217,23.0,18,INFERRED,23.0,7.4,23.0,0.4924961162866166,False,"18 readings sit exactly on the minimum, nothing lies below it, and the minimum is a value an MPN table returns; 95% support [7.4, 23] (span 0.492 log10)"
+30,T0,217,2300.0,1,NONE,2300.0,,,,True,"the minimum appears once, which is what a continuous tail looks like; no floor is evidenced; refuse observability labels"
+30,T2,217,230.0,4,WEAK,230.0,,,,True,only 4 readings sit on the minimum; a floor is possible but a thin tail would look similar; refuse observability labels
+30,T5,217,23.0,9,INFERRED,23.0,7.2,23.0,0.5043953395863243,False,"9 readings sit exactly on the minimum, nothing lies below it, and the minimum is a value an MPN table returns; 95% support [7.2, 23] (span 0.504 log10)"
+60,T0,210,2300.0,1,NONE,2300.0,,,,True,"the minimum appears once, which is what a continuous tail looks like; no floor is evidenced; refuse observability labels"
+60,T2,210,230.0,3,WEAK,230.0,,,,True,only 3 readings sit on the minimum; a floor is possible but a thin tail would look similar; refuse observability labels
+60,T5,210,23.0,6,INFERRED,23.0,7.2,23.0,0.5043953395863243,False,"6 readings sit exactly on the minimum, nothing lies below it, and the minimum is a value an MPN table returns; 95% support [7.2, 23] (span 0.504 log10)"

@@ -1,0 +1,10 @@
+covariate,n_non_null,n_non_null_resistant,n_resistant,n_non_null_susceptible,n_susceptible,fisher_p_missingness_vs_exposure,verdict,usable_for_adjustment
+INH_MGIT_DST,96,82,84,0,119,2.063483921559027e-55,PROXY: recorded for only one exposure group,False
+RIF_MGIT_DST,96,82,84,0,119,2.063483921559027e-55,PROXY: recorded for only one exposure group,False
+INH_mutation,94,79,84,1,119,4.915636556647719e-49,PARTIAL: missingness strongly associated with exposure,False
+INH_Mykrobe,90,76,84,0,119,3.8096183314019813e-47,PROXY: recorded for only one exposure group,False
+RIF_Mykrobe,90,76,84,0,119,3.8096183314019813e-47,PROXY: recorded for only one exposure group,False
+MIC_INH,193,67,84,119,119,1.0719581935410852e-07,PARTIAL: missingness strongly associated with exposure,False
+MIC_RIF,193,67,84,119,119,1.0719581935410852e-07,PARTIAL: missingness strongly associated with exposure,False
+Time_to_0.4,216,83,84,119,119,0.41379310344827586,INDEPENDENT: usable for adjustment,True
+Time_point,217,84,84,119,119,1.0,INDEPENDENT: usable for adjustment,True

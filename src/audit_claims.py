@@ -304,6 +304,34 @@ def main() -> int:
         rows.append(check("treated flasks in the deposit (5: 72)",
                           72, float(len(flask)), 0.001))
 
+    # --- exp36, the visit-specific floor and the covariate screen ----------
+    r = receipt("exp36_receipt.json")
+    if r is not None:
+        c = r["starting_density_censoring"]
+        rows.append(check("day-0 readings on the minimum, 15 d (Methods: 1)",
+                          1, float(c["n_on_the_day0_minimum"]["15d"]), 0.001))
+        rows.append(check("N0 is left-censored (Methods: 0 = no)",
+                          0, 1.0 if c["n0_is_left_censored"] else 0.0, 1.0))
+        rows.append(check("covariates that may adjust the seeding gap (S6: 2)",
+                          2, float(r["n_covariates_usable_for_adjustment"]), 0.001))
+        d2 = r["day2_cut_recovery"]["15d_day2_cuts"]
+        rows.append(check("day-2 cuts reproduce every class, 15 d (1: 203)",
+                          203, float(d2["n_agree"]), 0.001))
+
+    f = load("exp36_day2_boundaries.csv")
+    if f is not None:
+        g = f[f.culture_age_days == 15].set_index("endpoint")
+        rows.append(check("day-2 assay floor (1: 230)",
+                          230, float(g.loc["day 2", "assay_floor"]), 0.001))
+        rows.append(check("N_id at day 2 equals N_id at day 5 (1: 23000)",
+                          23000, float(g.loc["day 2", "N_id"]), 0.001))
+        rows.append(check("short of 4 logs against the day-2 floor (1: 121)",
+                          121, float(g.loc["day 2", "n_short_4log"]), 0.001))
+        rows.append(check("day-2 readings at their floor (1: 18)",
+                          18, float(g.loc["day 2", "n_at_floor"]), 0.001))
+        rows.append(check("of those, one compatible class (1: 11)",
+                          11, float(g.loc["day 2", "n_single_compatible_class"]), 0.001))
+
     # --- exp27, the out-of-sample test ------------------------------------
     f = load("exp27_out_of_sample.csv")
     if f is not None:

@@ -60,8 +60,11 @@ def table1() -> str:
                                     "Design", "Deposit", "Licence"])
     return ("**Table 1.** The five published deposits reanalysed. Four carry "
             "the analysis and the fifth is held out to test it. None was "
-            "generated for this study, and none was selected after its result "
-            "was known.\n\n" + md(d, align_right_from=99))
+            "generated for this study. The held-out deposit was opened after "
+            "every boundary and threshold was fixed, which the commit history "
+            "of the analysis repository timestamps; the other four were "
+            "selected for the fields they carry, and that selection is not "
+            "separately registered.\n\n" + md(d, align_right_from=99))
 
 
 def table2() -> str:
@@ -620,23 +623,38 @@ def tableS5() -> str:
 
 
 def tableS6() -> str:
-    """What the deposit can and cannot rule out for the seeding gap."""
-    d = pd.read_csv(T / "exp35_ir_seeding_confounders.csv")
-    rows = [[r.covariate, r.kind, int(r.n), f"{r.beta_IR:+.3f}",
-             f"{r.p:.3g}", f"{100 * r.attenuation_of_IR_beta:.0f}%"]
-            for r in d.itertuples()]
+    """What the deposit can, and cannot, rule out for the seeding gap."""
+    a = pd.read_csv(T / "exp35_ir_seeding_confounders.csv").set_index("covariate")
+    ind = pd.read_csv(T / "exp36_covariate_independence.csv")
+    rows = []
+    for r in ind.itertuples():
+        s = a.loc[r.covariate] if r.covariate in a.index else None
+        rows.append([
+            r.covariate,
+            f"{r.n_non_null_resistant}/{r.n_resistant}",
+            f"{r.n_non_null_susceptible}/{r.n_susceptible}",
+            r.verdict.split(":")[0],
+            "-" if s is None else f"{s.beta_IR:+.3f}",
+            "-" if s is None else f"{100 * s.attenuation_of_IR_beta:.0f}%",
+        ])
     f = pd.DataFrame(rows, columns=[
-        "Adjusted for", "Kind", "n", "Resistance coefficient", "p",
-        "Attenuation"])
+        "Covariate", "Recorded, resistant", "Recorded, susceptible",
+        "Can it adjust?", "Resistance coefficient", "Attenuation"])
+    n_ok = int(ind.usable_for_adjustment.sum())
     return ("**Table S6.** Isoniazid-resistant isolates enter this assay ten-fold "
-            "lower than susceptible ones, and we do not know why. This is what "
-            "the deposit can rule out: the association between resistance and "
-            "starting density, adjusted in turn for every usable pretreatment "
-            "covariate the file carries. None removes it. The file records no "
-            "referring site and no processing batch, so those cannot be tested "
-            "at all, and the gap is reported as real, large and unexplained "
-            "rather than attributed to a mechanism the data cannot support."
-            + chr(10) + chr(10) + md(f, align_right_from=2))
+            "lower than susceptible ones, and we do not know why. This is what the "
+            "deposit can and cannot rule out. Six of the nine pretreatment "
+            "covariates are recorded almost exclusively for resistant isolates, so "
+            "their missingness is the exposure and adjusting for them conditions on "
+            "it; the two susceptibility calls are missing on identical rows, which "
+            "is why they return identical coefficients. Those rows are shown with "
+            "their coefficients so the circularity is visible, but they do not "
+            f"bound anything. Only {n_ok} covariates are recorded at rates unrelated "
+            "to susceptibility, and adjusting for either leaves the coefficient "
+            "within five per cent of its unadjusted value. The file records no "
+            "referring site and no processing batch, so those cannot be tested at "
+            "all." + chr(10) + chr(10) + md(f, align_right_from=1))
+
 
 def main() -> int:
     OUT.parent.mkdir(parents=True, exist_ok=True)

@@ -1,6 +1,6 @@
 {
   "script": "src/experiments/exp34_mediation.py",
-  "utc": "2026-09-06T20:24:30.393690+00:00",
+  "utc": "2026-09-06T20:54:23.713010+00:00",
   "exposure": "INH-Suceptibility IR vs IS",
   "mediator": "log10(mpn_T0_15days)",
   "outcome": "Tolerant_level_D5_15 (Low=0, Medium=1, High=2)",

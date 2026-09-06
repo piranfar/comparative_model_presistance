@@ -6,7 +6,7 @@ Outputs of the earlier paper are not here; they live in `version_one/results/`.
 
 | | tables | figures | receipts |
 | --- | ---: | ---: | ---: |
-| total | 62 | 5 | 20 |
+| total | 65 | 5 | 21 |
 
 ## Tolerance and the assay floor (manuscript/PAPER_COMPLETE.md)
 
@@ -42,7 +42,7 @@ Outputs of the earlier paper are not here; they live in `version_one/results/`.
 | `exp22_headroom.csv` | `exp22_tolerance_dynamic_range.py` | `audit_claims`, `build_tables` |
 | `exp22_label_associations.csv` | `exp22_tolerance_dynamic_range.py` | `audit_claims` |
 | `exp23_flask_parameters.csv` | `exp23_inversion_decomposition.py` | quoted in the text only |
-| `exp23_inversions.csv` | `exp23_inversion_decomposition.py` | quoted in the text only |
+| `exp23_inversions.csv` | `exp23_inversion_decomposition.py` | `audit_claims` |
 | `exp24_flag_consistency.csv` | `exp24_trajectory_and_flag_audit.py` | quoted in the text only |
 | `exp24_trajectory_shape.csv` | `exp24_trajectory_and_flag_audit.py` | quoted in the text only |
 | `exp25_observability_by_group.csv` | `exp25_observability_classes.py` | quoted in the text only |
@@ -51,7 +51,7 @@ Outputs of the earlier paper are not here; they live in `version_one/results/`.
 
 ## Unassigned
 
-**Tables (30).**
+**Tables (33).**
 
 | file | written by | used by |
 | --- | --- | --- |
@@ -70,7 +70,7 @@ Outputs of the earlier paper are not here; they live in `version_one/results/`.
 | `exp31_recomputed_inference.csv` | `exp31_clustering_audit.py` | `build_tables` |
 | `exp32_cox_descriptive.csv` | `exp32_crossing_events.py` | quoted in the text only |
 | `exp32_interval_censored.csv` | `exp32_crossing_events.py` | `audit_claims` |
-| `exp32_recrossing.csv` | `exp32_crossing_events.py` | quoted in the text only |
+| `exp32_recrossing.csv` | `exp32_crossing_events.py` | `audit_claims` |
 | `exp32_transitions.csv` | `exp32_crossing_events.py` | `audit_claims`, `build_tables` |
 | `exp33_floor_posterior.csv` | `exp33_floor_posterior.py` | `audit_claims`, `build_tables` |
 | `exp34_mediation.csv` | `exp34_mediation.py` | `audit_claims`, `build_tables` |
@@ -81,6 +81,9 @@ Outputs of the earlier paper are not here; they live in `version_one/results/`.
 | `exp35_delta_h_ci.csv` | `exp35_review_strengthen.py` | quoted in the text only |
 | `exp35_ir_seeding_confounders.csv` | `exp35_review_strengthen.py` | `build_tables` |
 | `exp35_mediation_sensitivity_dense.csv` | `exp35_review_strengthen.py` | quoted in the text only |
+| `exp36_covariate_independence.csv` | `exp36_visit_floors_and_covariates.py` | `build_tables` |
+| `exp36_day2_boundaries.csv` | `exp36_visit_floors_and_covariates.py` | `audit_claims` |
+| `exp36_visit_floors.csv` | `exp36_visit_floors_and_covariates.py` | quoted in the text only |
 | `learn_boundaries.csv` | `-` | `learn_boundaries` |
 | `neural_structure.csv` | `-` | `neural_structure` |
 | `symbolic_boundaries.csv` | `-` | `symbolic_boundaries` |
@@ -94,7 +97,7 @@ Outputs of the earlier paper are not here; they live in `version_one/results/`.
 
 ## Receipts
 
-20 JSON receipts, one per analysis stage. Each records the inputs, the headline outputs and the software versions the stage actually ran under, so a run under different versions is recorded rather than silently substituted.
+21 JSON receipts, one per analysis stage. Each records the inputs, the headline outputs and the software versions the stage actually ran under, so a run under different versions is recorded rather than silently substituted.
 
 ## Checking the numbers
 

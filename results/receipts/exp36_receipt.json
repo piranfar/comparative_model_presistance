@@ -1,0 +1,187 @@
+{
+  "script": "src/experiments/exp36_visit_floors_and_covariates.py",
+  "utc": "2026-09-06T20:54:48+00:00",
+  "data_source": "eLife 93243 supplementary file 2",
+  "starting_density_censoring": {
+    "n_on_the_day0_minimum": {
+      "15d": 1,
+      "60d": 1
+    },
+    "day0_verdicts": {
+      "15": "NONE",
+      "30": "NONE",
+      "60": "NONE"
+    },
+    "n0_is_left_censored": false,
+    "conclusion": "the day-0 minimum occurs once per panel, so no day-0 floor is evidenced and N0 is observed throughout"
+  },
+  "day2_cut_recovery": {
+    "15d_day2_cuts": {
+      "cuts": [
+        0.01,
+        0.1
+      ],
+      "n_agree": 203,
+      "n_usable": 203,
+      "reproduces_every_class": true
+    },
+    "60d_day2_cuts": {
+      "cuts": null,
+      "n_agree": 109,
+      "n_usable": 197,
+      "reproduces_every_class": false,
+      "observed_class_ranges": {
+        "Low": [
+          3.7704918032786884e-06,
+          0.037096774193548385
+        ],
+        "Medium": [
+          0.03770491803278689,
+          0.3770491803278688
+        ],
+        "High": [
+          0.46923076923076923,
+          10.0
+        ]
+      }
+    }
+  },
+  "day2_boundaries": [
+    {
+      "culture_age_days": 15,
+      "endpoint": "day 2",
+      "assay_floor": 230.0,
+      "c1": 0.01,
+      "n_usable": 203,
+      "N_reach_1log": 2300.0,
+      "N_reach_2log": 23000.0,
+      "N_reach_4log": 2300000.0,
+      "N_id": 23000.0,
+      "n_short_1log": 0,
+      "n_short_2log": 2,
+      "n_short_4log": 121,
+      "n_at_floor": 18,
+      "n_single_compatible_class": 11,
+      "n_multiple_compatible_classes": 7
+    },
+    {
+      "culture_age_days": 15,
+      "endpoint": "day 5",
+      "assay_floor": 23.0,
+      "c1": 0.001,
+      "n_usable": 203,
+      "N_reach_1log": 230.0,
+      "N_reach_2log": 2300.0,
+      "N_reach_4log": 230000.0,
+      "N_id": 23000.0,
+      "n_short_1log": 0,
+      "n_short_2log": 0,
+      "n_short_4log": 31,
+      "n_at_floor": 18,
+      "n_single_compatible_class": 12,
+      "n_multiple_compatible_classes": 6
+    }
+  ],
+  "covariate_independence": [
+    {
+      "covariate": "INH_MGIT_DST",
+      "n_non_null": 96,
+      "n_non_null_resistant": 82,
+      "n_resistant": 84,
+      "n_non_null_susceptible": 0,
+      "n_susceptible": 119,
+      "fisher_p_missingness_vs_exposure": 2.063483921559027e-55,
+      "verdict": "PROXY: recorded for only one exposure group",
+      "usable_for_adjustment": false
+    },
+    {
+      "covariate": "RIF_MGIT_DST",
+      "n_non_null": 96,
+      "n_non_null_resistant": 82,
+      "n_resistant": 84,
+      "n_non_null_susceptible": 0,
+      "n_susceptible": 119,
+      "fisher_p_missingness_vs_exposure": 2.063483921559027e-55,
+      "verdict": "PROXY: recorded for only one exposure group",
+      "usable_for_adjustment": false
+    },
+    {
+      "covariate": "INH_mutation",
+      "n_non_null": 94,
+      "n_non_null_resistant": 79,
+      "n_resistant": 84,
+      "n_non_null_susceptible": 1,
+      "n_susceptible": 119,
+      "fisher_p_missingness_vs_exposure": 4.915636556647719e-49,
+      "verdict": "PARTIAL: missingness strongly associated with exposure",
+      "usable_for_adjustment": false
+    },
+    {
+      "covariate": "INH_Mykrobe",
+      "n_non_null": 90,
+      "n_non_null_resistant": 76,
+      "n_resistant": 84,
+      "n_non_null_susceptible": 0,
+      "n_susceptible": 119,
+      "fisher_p_missingness_vs_exposure": 3.8096183314019813e-47,
+      "verdict": "PROXY: recorded for only one exposure group",
+      "usable_for_adjustment": false
+    },
+    {
+      "covariate": "RIF_Mykrobe",
+      "n_non_null": 90,
+      "n_non_null_resistant": 76,
+      "n_resistant": 84,
+      "n_non_null_susceptible": 0,
+      "n_susceptible": 119,
+      "fisher_p_missingness_vs_exposure": 3.8096183314019813e-47,
+      "verdict": "PROXY: recorded for only one exposure group",
+      "usable_for_adjustment": false
+    },
+    {
+      "covariate": "MIC_INH",
+      "n_non_null": 193,
+      "n_non_null_resistant": 67,
+      "n_resistant": 84,
+      "n_non_null_susceptible": 119,
+      "n_susceptible": 119,
+      "fisher_p_missingness_vs_exposure": 1.0719581935410852e-07,
+      "verdict": "PARTIAL: missingness strongly associated with exposure",
+      "usable_for_adjustment": false
+    },
+    {
+      "covariate": "MIC_RIF",
+      "n_non_null": 193,
+      "n_non_null_resistant": 67,
+      "n_resistant": 84,
+      "n_non_null_susceptible": 119,
+      "n_susceptible": 119,
+      "fisher_p_missingness_vs_exposure": 1.0719581935410852e-07,
+      "verdict": "PARTIAL: missingness strongly associated with exposure",
+      "usable_for_adjustment": false
+    },
+    {
+      "covariate": "Time_to_0.4",
+      "n_non_null": 216,
+      "n_non_null_resistant": 83,
+      "n_resistant": 84,
+      "n_non_null_susceptible": 119,
+      "n_susceptible": 119,
+      "fisher_p_missingness_vs_exposure": 0.41379310344827586,
+      "verdict": "INDEPENDENT: usable for adjustment",
+      "usable_for_adjustment": true
+    },
+    {
+      "covariate": "Time_point",
+      "n_non_null": 217,
+      "n_non_null_resistant": 84,
+      "n_resistant": 84,
+      "n_non_null_susceptible": 119,
+      "n_susceptible": 119,
+      "fisher_p_missingness_vs_exposure": 1.0,
+      "verdict": "INDEPENDENT: usable for adjustment",
+      "usable_for_adjustment": true
+    }
+  ],
+  "n_covariates_usable_for_adjustment": 2
+}

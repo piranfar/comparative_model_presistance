@@ -265,19 +265,35 @@ Held here so the Results stay on one line of reasoning. Table S1 supports Sectio
 | High versus rest | 203 | +0.121 | +0.013 | +0.108 (+0.037, +0.189) | 89% |
 | Not-low versus low | 203 | +0.135 | +0.077 | +0.058 (+0.003, +0.121) | 43% |
 
-**Table S6.** Isoniazid-resistant isolates enter this assay ten-fold lower than susceptible ones, and we do not know why. This is what the deposit can rule out: the association between resistance and starting density, adjusted in turn for every usable pretreatment covariate the file carries. None removes it. The file records no referring site and no processing batch, so those cannot be tested at all, and the gap is reported as real, large and unexplained rather than attributed to a mechanism the data cannot support.
+**Table S6.** Isoniazid-resistant isolates enter this assay ten-fold lower than susceptible ones, and we do not know why. This is what the deposit can and cannot rule out. Six of the nine pretreatment covariates are recorded almost exclusively for resistant isolates, so their missingness is the exposure and adjusting for them conditions on it; the two susceptibility calls are missing on identical rows, which is why they return identical coefficients. Those rows are shown with their coefficients so the circularity is visible, but they do not bound anything. Only 2 covariates are recorded at rates unrelated to susceptibility, and adjusting for either leaves the coefficient within five per cent of its unadjusted value. The file records no referring site and no processing batch, so those cannot be tested at all.
 
-| Adjusted for | Kind | n | Resistance coefficient | p | Attenuation |
-| --- | --- | ---: | ---: | ---: | ---: |
-| INH_mutation | categorical(k=4) | 203 | -0.662 | 0.0462 | 22% |
-| MIC_INH | numeric | 186 | -0.963 | 3.07e-07 | -13% |
-| Time_to_0.4 | numeric | 202 | -0.807 | 1.23e-14 | 5% |
-| Time_point | categorical(k=8) | 203 | -0.818 | 2.89e-10 | 4% |
-| MIC_RIF | numeric | 186 | -0.853 | 2.41e-13 | -0% |
-| RIF_MGIT_DST | categorical(k=2) | 203 | -0.851 | 2.58e-14 | -0% |
-| INH_MGIT_DST | categorical(k=2) | 203 | -0.851 | 2.58e-14 | -0% |
-| (none) | unadjusted | 203 | -0.850 | 2.01e-14 | 0% |
+| Covariate | Recorded, resistant | Recorded, susceptible | Can it adjust? | Resistance coefficient | Attenuation |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| INH_MGIT_DST | 82/84 | 0/119 | PROXY | -0.851 | -0% |
+| RIF_MGIT_DST | 82/84 | 0/119 | PROXY | -0.851 | -0% |
+| INH_mutation | 79/84 | 1/119 | PARTIAL | -0.662 | 22% |
+| INH_Mykrobe | 76/84 | 0/119 | PROXY | - | - |
+| RIF_Mykrobe | 76/84 | 0/119 | PROXY | - | - |
+| MIC_INH | 67/84 | 119/119 | PARTIAL | -0.963 | -13% |
+| MIC_RIF | 67/84 | 119/119 | PARTIAL | -0.853 | -0% |
+| Time_to_0.4 | 83/84 | 119/119 | INDEPENDENT | -0.807 | 5% |
+| Time_point | 84/84 | 119/119 | INDEPENDENT | -0.818 | 4% |
 
+
+The deposit carries a second classification, scored at day 2, and it sits on a
+different floor. The day-2 column bottoms out at 230 per mL with eighteen
+readings on it, so *L* = 230 there, and the day-2 class thresholds — which the
+source does not state — are recovered the same way as the day-5 ones: the cuts
+10⁻² and 10⁻¹ reproduce all 203 usable day-2 classes with no disagreement, one
+decade shallower than at day 5. Both the floor and the lowest threshold shift by
+a factor of ten, so the identifiability boundary is unmoved: *N*_id = 230/10⁻² =
+23 000 per mL, the same value as at day 5. The reachability boundary does move,
+by a decade, and the consequence is large: 121 of 203 isolates lack the headroom
+for a four-log reduction against the day-2 floor, where 31 do against the day-5
+floor. Eighteen day-2 readings rest on their floor, eleven with a single
+compatible class and seven with more than one. At 60 days no pair of decade cuts
+reproduces the day-2 classes (109 of 197), so that rule is not a decade threshold
+on the recorded fraction and no day-2 accounting is offered for it.
 
 The consequence is that each isolate carries a fixed budget of observable
 killing. At 15 days of prior culture the starting densities span 3.36 to 7.79
@@ -539,7 +555,9 @@ resistant isolates do not grow significantly more slowly in this deposit (median
 time to OD 0.4 of 19 against 17, p = 0.24), and 85 of them carry *katG* S315X,
 the mutation that predominates clinically precisely because it is close to
 fitness-neutral. The association between resistance and a low starting inoculum
-is real, large and unexplained, and we record it as such.
+is real, large and unexplained, and we record it as such. The only two covariates
+whose recording is independent of susceptibility move it by at most five per
+cent.
 
 Both surviving associations sit in the 15-day panel, which is where the
 mechanism places them. By 60 days the cultures are 38-fold denser, the spread of
@@ -1040,12 +1058,23 @@ The natural explanation — that resistance carries a fitness cost — is not
 supported here, since these isolates do not grow measurably more slowly and most
 carry the near-neutral *katG* S315X allele. That gap is a finding in its own
 right and belongs in the next study rather than in a speculative sentence in this
-one. What the deposit can rule out, it does: adjusting the
-resistance–inoculum association in turn for every usable pretreatment covariate
-the file carries — sampling time, growth, both inhibitory concentrations, the
-resistance mutation and both susceptibility calls — leaves the coefficient
-between −0.66 and −0.96, the largest attenuation being 22 per cent for the
-mutation identity (Table S6). The file records no referring site and no
+one. What the deposit can rule out is less than we first
+reported, and the correction runs in our favour. Six of the nine pretreatment
+covariates the file carries cannot adjust this association at all, because their
+missingness *is* the exposure: the two susceptibility calls and the two Mykrobe
+calls are recorded for 82 of 84 resistant isolates and for none of the 119
+susceptible ones, and the mutation identity for 79 and one. Conditioning on such
+a column conditions on resistance, which is why the two susceptibility rows agree
+to three significant figures — they are missing on exactly the same rows and
+contribute the same design matrix. That also disposes of the largest attenuation
+we previously quoted, 22 per cent for the mutation identity, which was an
+artefact of the same circularity.
+
+Two covariates are missing at rates unrelated to susceptibility and can be used:
+the growth proxy and months on treatment. Adjusting for either leaves the
+coefficient at −0.81 or −0.82 against an unadjusted −0.85, an attenuation of at
+most five per cent (Table S6). The seeding gap is therefore more robust than the
+earlier sweep suggested, not less. The file records no referring site and no
 processing batch, so those cannot be tested at all.
 
 
@@ -1266,10 +1295,12 @@ much culture went into the tube.
 ### Datasets
 
 Five published deposits are analysed (Table 1). Four carry the analysis and the fifth is held out to test it. None was generated for this
-study, all are openly licensed, and no dataset was selected after its result was
-known.
+study and all are openly licensed. The held-out deposit was opened only after
+every boundary and threshold was fixed, which the commit history of the analysis
+repository timestamps; the other four were chosen for the fields they carry, and
+that choice is not separately registered.
 
-**Table 1.** The five published deposits reanalysed. Four carry the analysis and the fifth is held out to test it. None was generated for this study, and none was selected after its result was known.
+**Table 1.** The five published deposits reanalysed. Four carry the analysis and the fifth is held out to test it. None was generated for this study. The held-out deposit was opened after every boundary and threshold was fixed, which the commit history of the analysis repository timestamps; the other four were selected for the fields they carry, and that selection is not separately registered.
 
 | Dataset | Organism | Drug and range | Design | Deposit | Licence |
 | --- | --- | --- | --- | --- | --- |
@@ -1326,7 +1357,14 @@ tuberculosis consortia, the persistence literature, food microbiology and the
 hollow-fibre field, and was the only deposit found carrying all three fields the
 boundaries require. No boundary, threshold or modelling choice in this
 paper was informed by it: it was opened after all of them were fixed, and
-Section 8 is the only place it tests anything. It does appear as a descriptive
+Section 8 is the only place it tests anything. What cannot be documented is the
+search itself. The repositories were searched interactively and no query log,
+access date or screening count was kept, so this paper reports the outcome of
+that search — one deposit carrying a measured per-culture starting density, a
+recorded plated volume and per-culture time-course counts together — without
+being able to evidence its extent. The claim that no deposit was selected after
+its result was known rests on the commit history of this repository rather than
+on a registration, and readers should weigh it accordingly. It does appear as a descriptive
 row in Tables 9, 14 and S2, which is reporting rather than fitting.
 
 **Concentration-by-time grid.** Apramycin and amikacin against *M. tuberculosis*
@@ -1373,7 +1411,18 @@ than read off, and the inference is bounded rather than asserted. Three things
 support it: 23 per mL is the smallest value anywhere in the file, nothing lies
 below it in 1 932 readings, and the minimum shifts by exactly a factor of ten per
 visit — 2 300, 230, 23 — in all three culture ages, which is the signature of one
-dilution series applied to a differently diluted sample at each timepoint. Since
+dilution series applied to a differently diluted sample at each timepoint.
+
+The floor is therefore visit-specific, and it does not follow that every visit
+has one. A floor is a value readings stop at, so it shows as a pile-up on the
+lowest rung with nothing below; the ten-fold shift alone only shows the dilution
+changing. Applying the rule of the next subsection visit by visit, the day-5
+column has that signature in every panel and the day-2 column has it at 15 days,
+but the day-0 column does not: its minimum of 2 300 per mL occurs exactly once in
+each panel, with the next value at 6 100, which is the tail of a distribution
+rather than a floor. The verdict for day 0 is that no floor is evidenced. The
+starting density is therefore an observed value throughout, and no quantity in
+this paper that conditions on *N₀* needs a censored specification. Since
 none of that is proof, the load-bearing count is recomputed at every value a
 three-tube MPN table returns below 23. The number of isolates lacking four logs
 of headroom is 33 at a floor of 23 and does not fall below 28 at a floor of 3.0,
