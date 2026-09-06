@@ -274,7 +274,7 @@ one of the three ordered classes, the other 14 carrying a fourth, unordered MDR
 category that no ordered analysis can place (Table 5) — so what follows is an argument about the fraction the
 assay recorded and not about an independent clinical judgement.
 
-**Table 5.** Every analysis set in this paper, and the exclusion that produced it. The manuscript quotes a dozen different denominators, each correct for its own analysis; this is where a reader checks which is which. The MDR tolerance label is a fourth, unordered category and is dropped wherever an ordered outcome is fitted; the growth proxy is missing for one isolate; and five treated flasks in the six-laboratory deposit carry no usable starting density, which is why a comparison over 72 flasks is reported on 67. Whether these exclusions are plausibly ignorable is tested in Table S1.
+**Table 5.** Every analysis set in this paper, and the exclusion that produced it. The manuscript quotes a dozen different denominators, each correct for its own analysis; this is where a reader checks which is which. The MDR tolerance label is a fourth, unordered category and is dropped wherever an ordered outcome is fitted; the growth proxy is missing for one isolate; and five treated flasks in the six-laboratory deposit carry no usable starting density, which is why a comparison over 72 flasks is reported on 67. Whether these exclusions are plausibly ignorable is tested in Table S1. The last rows of each block cover sets counted in units other than isolates or flasks -- pairs, flags, cells, readings -- because a reader meeting one of those figures in the text needs somewhere to look it up too.
 
 | Deposit | Panel | Stratum | Stage | n | Excluded here |
 | --- | --- | --- | --- | ---: | ---: |
@@ -302,6 +302,14 @@ assay recorded and not about an independent clinical judgement.
 | Vijay clinical | 60-day | baseline only (0M) | starting and day-5 readings present | 162 | - |
 | Vijay clinical | 60-day | baseline only (0M) | susceptibility is IS or IR | 162 | - |
 | Vijay clinical | 60-day | baseline only (0M) | growth proxy present (association family) | 161 | -1 |
+| Vijay clinical | 15-day | other sets quoted | isolates with a starting density | 217 | - |
+| Vijay clinical | 60-day | other sets quoted | isolates with a starting density | 210 | -7 |
+| Vijay clinical | 15-day | concentration-duration family | all isolates with an inhibitory concentration | 193 | - |
+| Vijay clinical | 60-day | concentration-duration family | all isolates with an inhibitory concentration | 187 | - |
+| Vijay clinical | 15-day | concentration-duration family | INH-susceptible with one | 119 | - |
+| Vijay clinical | 60-day | concentration-duration family | INH-susceptible with one | 117 | - |
+| Vijay clinical | 15-day | concentration-duration family | baseline only with one | 162 | - |
+| Vijay clinical | 60-day | concentration-duration family | baseline only with one | 156 | - |
 | ERA4TB six-laboratory | - | - | readings in the file | 2775 | - |
 | ERA4TB six-laboratory | - | - | excluding inoculum controls | 2751 | -24 |
 | ERA4TB six-laboratory | - | - | flasks (institute x arm x replicate) | 90 | - |
@@ -312,6 +320,15 @@ assay recorded and not about an independent clinical judgement.
 | ERA4TB six-laboratory | - | - | series under the plating key (flasks x 4 platings) | 360 | - |
 | ERA4TB six-laboratory | - | - | treated series | 288 | -72 |
 | ERA4TB six-laboratory | - | - | cross-laboratory pairs in the same arm | 191 | - |
+| ERA4TB six-laboratory | - | derived units | cross-laboratory pairs, strict rate separation | 94 | - |
+| ERA4TB six-laboratory | - | derived units | flasks contributing those pairs | 42 | - |
+| ERA4TB six-laboratory | - | derived units | laboratory-by-arm-by-volume cells with a measured start | 56 | - |
+| ERA4TB six-laboratory | - | derived units | treated series with three or more quantified readings at 100 uL | 64 | - |
+| ERA4TB six-laboratory | - | derived units | flask units in the variance decomposition (all arms plus inoculum) | 85 | - |
+| ERA4TB six-laboratory | - | derived units | untreated day-zero readings at 100 uL (4 laboratories x 3 flasks) | 12 | - |
+| ERA4TB six-laboratory | - | derived units | below-limit flags in the analysis set | 498 | - |
+| ERA4TB six-laboratory | - | derived units | readings in the kill-rate analysis set | 2580 | -171 |
+| Dubey hollow fibre (held out) | - | - | cultures with a measured day-zero density | 20 | - |
 
 
 **Table 4.** The deposited tolerance class at day 5 after 15 days of prior culture is a threshold on the recorded surviving fraction, with no overlap between classes: low below 10⁻³, medium from 10⁻³ to 10⁻² inclusive, high above 10⁻². Applying those cuts reproduces every usable class in the file. This matters because the argument that follows is about the fraction the assay recorded, not about an independent clinical judgement.
@@ -774,8 +791,9 @@ In the six-laboratory exercise, the untreated arm at day zero on the 100 µL
 plating gives realised densities of 3.67, 4.61, 4.65 and 6.00 log10 CFU/mL for
 institutes B, C, D and F. Institute E deposits no untreated day-zero reading at
 any volume, its series beginning at day one, and institute A's three readings at
-that plating are flagged above the quantification limit rather than counted. Two
-of the four sit between twenty and a hundred-fold below the CLSI target. Every
+that plating are flagged above the quantification limit rather than counted. Three
+of the four sit below the CLSI target, by 11-, 12- and 107-fold; the fourth sits
+two-fold above it. Every
 figure in this section is on that one basis — untreated, day zero, 100 µL — which
 is not the basis of Table 8 and is not expected to match it.
 
@@ -1154,7 +1172,7 @@ removed from the text.
 
 | Section | Conclusion as stated | Units treated as independent | Independent clusters | Method used instead | Verdict |
 | --- | --- | --- | ---: | ---: | ---: |
-| 4 | the difference between panels in the growth association is itself supported (interaction p = 0.0072) | unknown isolate-panel | 210 isolates | not recomputable | NOT SUPPORTED |
+| 4 | the difference between panels in the growth association is itself supported (interaction p = 0.0072) | unknown isolate-panel (each of 210 isolates counted once per panel) | 210 isolates | not recomputable | NOT SUPPORTED |
 | 5 | starting density separates flasks that ever crossed below the assay floor from those that never did (AUC 0.974, p = 1.2e-10) | 67 flask | 6 | exact laboratory-level test (3 crossed vs 3 did not); cluster bootstrap over laboratories; permutation of crossing within laboratory, and within laboratory AND treatment arm | NOT SUPPORTED |
 | 5 | in a Cox model, institutes D, E and F carry p = 0.015, 0.016, 0.015, which adjustment for starting density moves to 0.138, 0.172, 0.576 | 67 flask | 6 | cluster-robust sandwich on six clusters | NOT SUPPORTED |
 | 5 | the log-rank test separates the six laboratories on time to first crossing | 67 flask | 6 | none available: the grouping variable is the cluster | NOT SUPPORTED |
@@ -1167,19 +1185,19 @@ removed from the text.
 | 7 | 36.6% of 191 cross-laboratory pairs are inversions (95% CI 30.1-43.6) | 191 pair of flasks | 6 | cluster bootstrap over whole laboratories; also over flasks within laboratory; also delete-one-laboratory jackknife | WEAKENED |
 | 7 | under the strictest rate separation the inversion rate is 21.3% of 94 pairs (95% CI 13.9-30.3) | 94 pair of flasks | 6 | cluster bootstrap over whole laboratories | WEAKENED |
 | 1 | 33 of 217 isolates (15.2%) lack the headroom for a 4-log endpoint | 217 isolate | 174 patients min | baseline-only recount | SUPPORTED |
-| 1 / 2 | 18 isolates rest on the floor at 15 days and 6 at 60 | 217 + 210 isolate-panel | 210 isolates | exact McNemar on the paired binary | SUPPORTED |
+| 1 / 2 | 18 isolates rest on the floor at 15 days and 6 at 60 | 217 + 210 isolate-panel (each of 210 isolates counted once per panel) | 210 isolates | exact McNemar on the paired binary | SUPPORTED |
 | 10 | no MIC-MDK association survives Benjamini-Hochberg | 6 tests isolate | 174 patients min | baseline-only family of six | SUPPORTED |
 | 2 | 18 isolates at the floor; their survival span IS their inoculum span | 217 isolate | 174 patients min | baseline-only recount | SUPPORTED |
 | 2 | 185 determinable, 12 forced by the inoculum, 6 undecidable | 203 isolate | 174 patients min | baseline-only reclassification | SUPPORTED |
-| 2 | at 60 days the observability counts are 191, 6 and none, 'because the cultures are denser and few readings reach the floor' | 203 + 197 isolate-panel | 197 isolates | exact McNemar on the paired binary | SUPPORTED |
+| 2 | at 60 days the observability counts are 191, 6 and none, 'because the cultures are denser and few readings reach the floor' | 203 + 197 isolate-panel (each of 210 isolates counted once per panel) | 197 isolates | exact McNemar on the paired binary | SUPPORTED |
 | 2 / 4 | the deep endpoint is unreachable for 26.2% of resistant against 7.6% of susceptible isolates | 217 isolate | 174 patients min | baseline-only Fisher exact | SUPPORTED |
 | 4 | resistant isolates enter the assay ten-fold lower | 217 isolate | 174 patients min | baseline-only Mann-Whitney | SUPPORTED |
 | 4 | the resistance-tolerance association attenuates once starting density enters the model, and its interval then spans zero | 202 isolate | 174 patients min | baseline-only refit | SUPPORTED |
 | 4 | growth state predicts the tolerance class and survives adjustment (beta = +0.027, p = 0.0025) | 202 isolate | 174 patients min | baseline-only refit | SUPPORTED |
 | 4 | resistant isolates do not grow measurably more slowly (p = 0.24) | 217 isolate | 174 patients min | baseline-only Mann-Whitney | SUPPORTED |
-| 4 | the confound thins between panels: 15.2% short of headroom at 15 days against 3.3% at 60 | 217 + 210 isolate-panel | 210 isolates | exact McNemar on the paired binary | SUPPORTED |
-| 4 | the 60-day cultures are denser, so headroom is larger there | 420 treated as independent isolate-panel | 210 isolates | Wilcoxon signed-rank on the within-isolate change | SUPPORTED |
-| 4 | the spread of starting densities more than halves between panels (IQR 1.00 to 0.42 log10) | 420 isolate-panel | 210 isolates | paired bootstrap resampling whole isolates | SUPPORTED |
+| 4 | the confound thins between panels: 15.2% short of headroom at 15 days against 3.3% at 60 | 217 + 210 isolate-panel (each of 210 isolates counted once per panel) | 210 isolates | exact McNemar on the paired binary | SUPPORTED |
+| 4 | the 60-day cultures are denser, so headroom is larger there | 420 treated as independent isolate-panel (each of 210 isolates counted once per panel) | 210 isolates | Wilcoxon signed-rank on the within-isolate change | SUPPORTED |
+| 4 | the spread of starting densities more than halves between panels (IQR 1.00 to 0.42 log10) | 420 isolate-panel (each of 210 isolates counted once per panel) | 210 isolates | paired bootstrap resampling whole isolates | SUPPORTED |
 | 5 | of 64 treated series the final step is not a decline in 48 (75%) | 64 series (one per treated flask) | 6 | cluster bootstrap over whole laboratories | SUPPORTED |
 | 5 | 44 of 64 series end more than one log10 above their own nadir | 64 series (one per treated flask) | 6 | cluster bootstrap over whole laboratories | SUPPORTED |
 | 5 / Limitations | 87.0% of the variance in flask starting density lies between laboratories | 85 flask | 6 | permutation of the laboratory label across flasks | SUPPORTED |
@@ -1871,7 +1889,7 @@ Held here so the Results stay on one line of reasoning. Table S6 supports Sectio
 | Time_to_0.4 | 83/84 | 119/119 | INDEPENDENT | -0.807 | 5% |
 | Time_point | 84/84 | 119/119 | INDEPENDENT | -0.818 | 4% |
 
-**Table S5.** Fold below the nominal 0.5 McFarland reference, 1.5e8 CFU/mL. Descriptive only, and not a protocol-compliance metric. A time-kill inoculum is prepared by diluting from a suspension matched to that turbidity, so every entry is expected to sit far below it; the conversion of a turbidity to CFU/mL depends on species, cell aggregation and preparation and is least reliable for mycobacteria.
+**Table S5.** Fold below the nominal 0.5 McFarland reference, 1.5e8 CFU/mL. Descriptive only, and not a protocol-compliance metric. A time-kill inoculum is prepared by diluting from a suspension matched to that turbidity, so every entry is expected to sit far below it; the conversion of a turbidity to CFU/mL depends on species, cell aggregation and preparation and is least reliable for mycobacteria. The clinical rows are most probable numbers divided by a reference stated in CFU/mL, so those two ratios cross units and are the least meaningful in the table.
 
 | Dataset | Median log10 N0 | Fold below nominal 0.5 McFarland |
 | --- | ---: | ---: |

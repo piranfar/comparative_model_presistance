@@ -610,8 +610,9 @@ In the six-laboratory exercise, the untreated arm at day zero on the 100 µL
 plating gives realised densities of 3.67, 4.61, 4.65 and 6.00 log10 CFU/mL for
 institutes B, C, D and F. Institute E deposits no untreated day-zero reading at
 any volume, its series beginning at day one, and institute A's three readings at
-that plating are flagged above the quantification limit rather than counted. Two
-of the four sit between twenty and a hundred-fold below the CLSI target. Every
+that plating are flagged above the quantification limit rather than counted. Three
+of the four sit below the CLSI target, by 11-, 12- and 107-fold; the fourth sits
+two-fold above it. Every
 figure in this section is on that one basis — untreated, day zero, 100 µL — which
 is not the basis of Table 8 and is not expected to match it.
 

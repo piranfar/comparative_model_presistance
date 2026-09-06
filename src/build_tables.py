@@ -395,7 +395,9 @@ def tableS5() -> str:
             "suspension matched to that turbidity, so every entry is expected to "
             "sit far below it; the conversion of a turbidity to CFU/mL depends "
             "on species, cell aggregation and preparation and is least reliable "
-            "for mycobacteria." + chr(10) + chr(10) + md(f))
+            "for mycobacteria. The clinical rows are most probable numbers divided by "
+            "a reference stated in CFU/mL, so those two ratios cross units and "
+            "are the least meaningful in the table." + chr(10) + chr(10) + md(f))
 
 
 
@@ -696,7 +698,11 @@ def table5() -> str:
             "treated flasks in the six-laboratory deposit carry no usable "
             "starting density, which is why a comparison over 72 flasks is "
             "reported on 67. Whether these exclusions are plausibly ignorable is "
-            "tested in Table S1." + chr(10) + chr(10) + md(f, align_right_from=4))
+            "tested in Table S1. The last rows of each block cover sets counted in "
+            "units other than isolates or flasks -- pairs, flags, cells, "
+            "readings -- because a reader meeting one of those figures in the "
+            "text needs somewhere to look it up too."
+            + chr(10) + chr(10) + md(f, align_right_from=4))
 
 
 def tableS1() -> str:

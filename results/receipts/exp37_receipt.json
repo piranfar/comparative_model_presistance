@@ -1,26 +1,41 @@
 {
   "script": "src/experiments/exp37_analysis_flow.py",
-  "utc": "2026-09-06T21:50:09+00:00",
+  "utc": "2026-09-06T22:12:48+00:00",
   "distinct_denominators": [
+    12,
+    20,
     29,
     30,
+    42,
+    56,
+    64,
     67,
     72,
+    85,
     90,
+    94,
+    117,
+    119,
+    156,
     161,
     162,
     167,
     168,
     174,
+    187,
     191,
+    193,
     196,
     197,
     202,
     203,
+    210,
     211,
     217,
     288,
     360,
+    498,
+    2580,
     2751,
     2775
   ],
@@ -240,6 +255,78 @@
       "n": 161,
       "excluded_here": 1,
       "appears_in_manuscript_as": ""
+    },
+    {
+      "deposit": "Vijay clinical",
+      "panel": "15-day",
+      "stratum": "other sets quoted",
+      "stage": "isolates with a starting density",
+      "n": 217,
+      "excluded_here": 0,
+      "appears_in_manuscript_as": ""
+    },
+    {
+      "deposit": "Vijay clinical",
+      "panel": "60-day",
+      "stratum": "other sets quoted",
+      "stage": "isolates with a starting density",
+      "n": 210,
+      "excluded_here": 7,
+      "appears_in_manuscript_as": ""
+    },
+    {
+      "deposit": "Vijay clinical",
+      "panel": "15-day",
+      "stratum": "concentration-duration family",
+      "stage": "all isolates with an inhibitory concentration",
+      "n": 193,
+      "excluded_here": 0,
+      "appears_in_manuscript_as": ""
+    },
+    {
+      "deposit": "Vijay clinical",
+      "panel": "60-day",
+      "stratum": "concentration-duration family",
+      "stage": "all isolates with an inhibitory concentration",
+      "n": 187,
+      "excluded_here": 0,
+      "appears_in_manuscript_as": ""
+    },
+    {
+      "deposit": "Vijay clinical",
+      "panel": "15-day",
+      "stratum": "concentration-duration family",
+      "stage": "INH-susceptible with one",
+      "n": 119,
+      "excluded_here": 0,
+      "appears_in_manuscript_as": ""
+    },
+    {
+      "deposit": "Vijay clinical",
+      "panel": "60-day",
+      "stratum": "concentration-duration family",
+      "stage": "INH-susceptible with one",
+      "n": 117,
+      "excluded_here": 0,
+      "appears_in_manuscript_as": ""
+    },
+    {
+      "deposit": "Vijay clinical",
+      "panel": "15-day",
+      "stratum": "concentration-duration family",
+      "stage": "baseline only with one",
+      "n": 162,
+      "excluded_here": 0,
+      "appears_in_manuscript_as": ""
+    },
+    {
+      "deposit": "Vijay clinical",
+      "panel": "60-day",
+      "stratum": "concentration-duration family",
+      "stage": "baseline only with one",
+      "n": 156,
+      "excluded_here": 0,
+      "appears_in_manuscript_as": ""
     }
   ],
   "era4tb": [
@@ -330,6 +417,87 @@
       "stratum": "-",
       "stage": "cross-laboratory pairs in the same arm",
       "n": 191,
+      "excluded_here": 0,
+      "appears_in_manuscript_as": ""
+    },
+    {
+      "deposit": "ERA4TB six-laboratory",
+      "panel": "-",
+      "stratum": "derived units",
+      "stage": "cross-laboratory pairs, strict rate separation",
+      "n": 94,
+      "excluded_here": 0,
+      "appears_in_manuscript_as": ""
+    },
+    {
+      "deposit": "ERA4TB six-laboratory",
+      "panel": "-",
+      "stratum": "derived units",
+      "stage": "flasks contributing those pairs",
+      "n": 42,
+      "excluded_here": 0,
+      "appears_in_manuscript_as": ""
+    },
+    {
+      "deposit": "ERA4TB six-laboratory",
+      "panel": "-",
+      "stratum": "derived units",
+      "stage": "laboratory-by-arm-by-volume cells with a measured start",
+      "n": 56,
+      "excluded_here": 0,
+      "appears_in_manuscript_as": ""
+    },
+    {
+      "deposit": "ERA4TB six-laboratory",
+      "panel": "-",
+      "stratum": "derived units",
+      "stage": "treated series with three or more quantified readings at 100 uL",
+      "n": 64,
+      "excluded_here": 0,
+      "appears_in_manuscript_as": ""
+    },
+    {
+      "deposit": "ERA4TB six-laboratory",
+      "panel": "-",
+      "stratum": "derived units",
+      "stage": "flask units in the variance decomposition (all arms plus inoculum)",
+      "n": 85,
+      "excluded_here": 0,
+      "appears_in_manuscript_as": ""
+    },
+    {
+      "deposit": "ERA4TB six-laboratory",
+      "panel": "-",
+      "stratum": "derived units",
+      "stage": "untreated day-zero readings at 100 uL (4 laboratories x 3 flasks)",
+      "n": 12,
+      "excluded_here": 0,
+      "appears_in_manuscript_as": ""
+    },
+    {
+      "deposit": "ERA4TB six-laboratory",
+      "panel": "-",
+      "stratum": "derived units",
+      "stage": "below-limit flags in the analysis set",
+      "n": 498,
+      "excluded_here": 0,
+      "appears_in_manuscript_as": ""
+    },
+    {
+      "deposit": "ERA4TB six-laboratory",
+      "panel": "-",
+      "stratum": "derived units",
+      "stage": "readings in the kill-rate analysis set",
+      "n": 2580,
+      "excluded_here": 171,
+      "appears_in_manuscript_as": ""
+    },
+    {
+      "deposit": "Dubey hollow fibre (held out)",
+      "panel": "-",
+      "stratum": "-",
+      "stage": "cultures with a measured day-zero density",
+      "n": 20,
       "excluded_here": 0,
       "appears_in_manuscript_as": ""
     }

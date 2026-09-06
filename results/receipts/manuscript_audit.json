@@ -1,0 +1,36 @@
+{
+  "script": "src/audit_manuscript.py",
+  "utc": "2026-09-06T22:13:12+00:00",
+  "checkers": [
+    "check_arithmetic",
+    "check_consistency",
+    "check_coverage",
+    "check_identity"
+  ],
+  "n_words_audited": 25624,
+  "counts": {
+    "high": 0,
+    "medium": 1,
+    "low": 1
+  },
+  "findings": [
+    {
+      "severity": "medium",
+      "kind": "denominator-not-in-flow-table",
+      "where": "line 1546",
+      "detail": "A count of 20 (row) is quoted, but no stage of the analysis-flow table (Table 5) has that n or that exclusion count, so the flow account cannot say which set it is.",
+      "expected": "an n of 20 among the stages of Table 5",
+      "found": "ws from the 15-day panel and 20 from the 60-day; the growth proxy is missing for one isolate; six 60-day labels are absent; and fi",
+      "checker": "check_consistency"
+    },
+    {
+      "severity": "low",
+      "kind": "coverage-summary",
+      "where": "whole manuscript",
+      "detail": "abstract (1): 11 numeric claims, 11 traceable, 11 of those to a results table or receipt, 9 tokens skipped as conventions; box (1): 6 numeric claims, 6 traceable, 6 of those to a results table or receipt, 5 tokens skipped as conventions; figure legend (4): 41 numeric claims, 41 traceable, 41 of those to a results table or receipt, 9 tokens skipped as conventions; table legend (23): 84 numeric claims, 84 traceable, 84 of those to a results table or receipt, 24 tokens skipped as conventions",
+      "expected": "every region scanned",
+      "found": "142 numeric claims outside table bodies",
+      "checker": "check_coverage"
+    }
+  ]
+}

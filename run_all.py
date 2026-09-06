@@ -105,6 +105,8 @@ STAGES = [
      "src.build_results_index"),
     ("audit   recompute every quoted number from its table",
      "src.audit_claims"),
+    ("check   read the legends, the box and the abstract the audit cannot",
+     "src.audit_manuscript"),
 ]
 
 

@@ -1301,7 +1301,7 @@ def main() -> int:
     add("Vijay clinical", "4",
         "the confound thins between panels: 15.2% short of headroom at 15 days "
         "against 3.3% at 60",
-        "isolate-panel", "the two panels are the SAME isolates",
+        "isolate-panel (each of 210 isolates counted once per panel)", "the two panels are the SAME isolates",
         f"{ps['N_15d']} + {ps['N_60d']}",
         f"{paired['n_isolates_in_both_panels']} isolates",
         f"{ps['n_15d']}/{ps['N_15d']} vs {ps['n_60d']}/{ps['N_60d']}",
@@ -1320,7 +1320,7 @@ def main() -> int:
     pa, pb = paired["unpaired_at_floor"], paired["paired_at_floor"]
     add("Vijay clinical", "1 / 2",
         "18 isolates rest on the floor at 15 days and 6 at 60",
-        "isolate-panel", "the two panels are the SAME isolates",
+        "isolate-panel (each of 210 isolates counted once per panel)", "the two panels are the SAME isolates",
         f"{pa['N_15d']} + {pa['N_60d']}",
         f"{paired['n_isolates_in_both_panels']} isolates",
         f"{pa['n_15d']} vs {pa['n_60d']}",
@@ -1334,7 +1334,7 @@ def main() -> int:
     add("Vijay clinical", "2",
         "at 60 days the observability counts are 191, 6 and none, 'because the "
         "cultures are denser and few readings reach the floor'",
-        "isolate-panel", "the two panels are the SAME isolates",
+        "isolate-panel (each of 210 isolates counted once per panel)", "the two panels are the SAME isolates",
         f"{full['n_calls']} + {nd['n_pairs']}", f"{nd['n_pairs']} isolates",
         f"{nd['n_not_determinable_15d']} not determinable at 15 d vs "
         f"{nd['n_not_determinable_60d']} at 60 d",
@@ -1350,7 +1350,7 @@ def main() -> int:
     ph, pw = paired["unpaired_headroom"], paired["paired_headroom"]
     add("Vijay clinical", "4",
         "the 60-day cultures are denser, so headroom is larger there",
-        "isolate-panel", "the two panels are the SAME isolates",
+        "isolate-panel (each of 210 isolates counted once per panel)", "the two panels are the SAME isolates",
         f"{2 * paired['n_isolates_in_both_panels']} treated as independent",
         f"{paired['n_isolates_in_both_panels']} isolates",
         f"median {ph['median_15d']:.2f} vs {ph['median_60d']:.2f} log10",
@@ -1369,7 +1369,7 @@ def main() -> int:
     add("Vijay clinical", "4",
         "the spread of starting densities more than halves between panels "
         "(IQR 1.00 to 0.42 log10)",
-        "isolate-panel", "the two panels are the SAME isolates",
+        "isolate-panel (each of 210 isolates counted once per panel)", "the two panels are the SAME isolates",
         f"{2 * paired['n_isolates_in_both_panels']}",
         f"{paired['n_isolates_in_both_panels']} isolates",
         f"IQR {iq['iqr_15d']:.2f} -> {iq['iqr_60d']:.2f}",
@@ -1383,7 +1383,7 @@ def main() -> int:
     add("Vijay clinical", "4",
         "the difference between panels in the growth association is itself "
         "supported (interaction p = 0.0072)",
-        "isolate-panel", "the two panels are the SAME isolates",
+        "isolate-panel (each of 210 isolates counted once per panel)", "the two panels are the SAME isolates",
         "unknown", f"{paired['n_isolates_in_both_panels']} isolates",
         "interaction p = 0.0072", "as quoted",
         "not recomputable", "no generating code found in this repository",

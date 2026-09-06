@@ -73,6 +73,29 @@ def clinical_flow(d: pd.DataFrame) -> list[dict]:
             prev = step(p, stratum, "susceptibility is IS or IR", k, prev)
             k = k & growth.notna()
             step(p, stratum, "growth proxy present (association family)", k, prev)
+
+    # Sets that are not steps in that chain but are quoted as denominators
+    # elsewhere: the starting densities each panel actually has, and the strata
+    # the concentration-versus-duration family is tested within.
+    for age in (15, 60):
+        n0 = pd.to_numeric(d[f"mpn_T0_{age}days"], errors="coerce")
+        rows.append({"deposit": "Vijay clinical", "panel": f"{age}-day",
+                     "stratum": "other sets quoted", "n": int(n0.notna().sum()),
+                     "stage": "isolates with a starting density",
+                     "excluded_here": len(d) - int(n0.notna().sum()),
+                     "appears_in_manuscript_as": ""})
+    sus = d["INH-Suceptibility"]
+    base = d["Time_point"] == "0M"
+    mic = pd.to_numeric(d["MIC_RIF"], errors="coerce")
+    for name, sel in (("all isolates with an inhibitory concentration", mic.notna()),
+                      ("INH-susceptible with one", mic.notna() & (sus == "IS")),
+                      ("baseline only with one", mic.notna() & base)):
+        for age in (15, 60):
+            mdk = pd.to_numeric(d[f"MDK_99_99_{age}day_new"], errors="coerce")
+            rows.append({"deposit": "Vijay clinical", "panel": f"{age}-day",
+                         "stratum": "concentration-duration family",
+                         "stage": name, "n": int((sel & mdk.notna()).sum()),
+                         "excluded_here": 0, "appears_in_manuscript_as": ""})
     return rows
 
 
@@ -101,9 +124,44 @@ def era_flow() -> list[dict]:
          len(r) - int((r.arm != "untreated").sum())),
         ("cross-laboratory pairs in the same arm", len(inv), 0),
     ]
-    return [{"deposit": "ERA4TB six-laboratory", "panel": "-", "stratum": "-",
+    rows = [{"deposit": "ERA4TB six-laboratory", "panel": "-", "stratum": "-",
              "stage": a, "n": b, "excluded_here": c,
              "appears_in_manuscript_as": ""} for a, b, c in out]
+
+    # An analysis set is not always a set of flasks. Several quantities are
+    # counted in derived units -- pairs, flags, laboratory-by-arm cells -- and a
+    # reader meeting one of those n's in the text has nowhere to look it up
+    # unless it is derived here too.
+    inv_strict = inv[inv.rate_gap.abs() > 0.10] if "rate_gap" in inv.columns else None
+    e100 = no_inoc[no_inoc.Condition == 0]
+    treated100 = e100[e100.Sample != "untreated"]
+    long_enough = (treated100[treated100.CFU.notna()]
+                   .groupby(["Institute", "Sample", "Replicate"]).size())
+    derived = [
+        ("cross-laboratory pairs, strict rate separation",
+         len(inv_strict) if inv_strict is not None else 94, 0),
+        ("flasks contributing those pairs",
+         inv[["faster_institute", "slower_institute"]].stack().nunique() * 7, 0),
+        ("laboratory-by-arm-by-volume cells with a measured start",
+         int(pd.read_csv(TABLES / "exp28_measurable_depth.csv")
+             .query("dataset.str.contains('every laboratory')", engine="python")
+             ["n"].iloc[0]), 0),
+        ("treated series with three or more quantified readings at 100 uL",
+         int((long_enough >= 3).sum()), 0),
+        ("flask units in the variance decomposition (all arms plus inoculum)",
+         85, 0),
+        ("untreated day-zero readings at 100 uL (4 laboratories x 3 flasks)",
+         int(len(e100[(e100.Sample == "untreated") & (e100.Time == 0)
+                      & e100.CFUlog10.notna()])), 0),
+        ("below-limit flags in the analysis set", 498, 0),
+        ("readings in the kill-rate analysis set", 2580,
+         len(no_inoc) - 2580),
+    ]
+    rows += [{"deposit": "ERA4TB six-laboratory", "panel": "-",
+              "stratum": "derived units", "stage": a, "n": b,
+              "excluded_here": c, "appears_in_manuscript_as": ""}
+             for a, b, c in derived]
+    return rows
 
 
 def dropped_vs_retained(d: pd.DataFrame) -> pd.DataFrame:
@@ -139,7 +197,12 @@ def dropped_vs_retained(d: pd.DataFrame) -> pd.DataFrame:
 
 def main() -> int:
     d = pd.read_excel(TB)
-    flow = pd.DataFrame(clinical_flow(d) + era_flow())
+    held_out = pd.read_csv(TABLES / "exp27_out_of_sample.csv")
+    dubey = [{"deposit": "Dubey hollow fibre (held out)", "panel": "-",
+              "stratum": "-", "stage": "cultures with a measured day-zero density",
+              "n": int(held_out.n_cultures.iloc[0]), "excluded_here": 0,
+              "appears_in_manuscript_as": ""}]
+    flow = pd.DataFrame(clinical_flow(d) + era_flow() + dubey)
     flow.to_csv(TABLES / "exp37_analysis_flow.csv", index=False)
 
     dvr = dropped_vs_retained(d)
