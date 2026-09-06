@@ -1,193 +1,332 @@
 {
   "script": "src/experiments/exp28_standard_vs_realised.py",
-  "utc": "2026-09-06T14:00:21+00:00",
-  "half_mcfarland_nominal_cfu_per_ml": 150000000.0,
-  "clsi_m26_target_cfu_per_ml": 500000.0,
-  "era4tb": {
-    "n_laboratories_with_clean_day0": 5,
-    "spread_log10": 2.6845477198056313,
-    "spread_fold": 483.6684063411788,
-    "n_below_clsi_target": 4,
-    "largest_shortfall_fold": 257.90329620080314,
-    "treated_vs_untreated_max_gap_log10": 0.06118278385753673,
-    "n_laboratories_with_both_arms": 2
+  "utc": "2026-09-06T14:05:16+00:00",
+  "definitions": {
+    "H_i": "N0_i / L_i",
+    "h_i": "log10(N0_i / L_i), deepest measurable reduction",
+    "delta_h": "max(h_i) - min(h_i)",
+    "fold_spread": "10 ** delta_h"
   },
-  "era4tb_per_laboratory": [
+  "nominal_reference_only": {
+    "half_mcfarland_cfu_per_ml": 150000000.0,
+    "status": "descriptive, not a compliance metric"
+  },
+  "era4tb_channels": [
     {
-      "laboratory": "A",
-      "n_flasks": 9,
-      "untreated_day0_log10": 3.2875131115479377,
-      "treated_day0_log10": NaN,
-      "realised_cfu_per_ml": 1938.7111656405536,
-      "fold_from_clsi_target": 0.0038774223312811073,
-      "fold_from_half_mcfarland": 1.2924741104270358e-05
+      "institute": "A",
+      "plated_volume_ul": 2.5,
+      "n_readings": 3,
+      "N0_cfu_per_ml": 1599.999999999983,
+      "L_cfu_per_ml": 400.0,
+      "H_ratio": 3.9999999999999574,
+      "h_log10": 0.6020599913279577
     },
     {
-      "laboratory": "B",
-      "n_flasks": 12,
-      "untreated_day0_log10": 3.6297519821467574,
-      "treated_day0_log10": NaN,
-      "realised_cfu_per_ml": 4263.35976374534,
-      "fold_from_clsi_target": 0.00852671952749068,
-      "fold_from_half_mcfarland": 2.8422398424968937e-05
+      "institute": "A",
+      "plated_volume_ul": 10.0,
+      "n_readings": 6,
+      "N0_cfu_per_ml": 2134.0749890820193,
+      "L_cfu_per_ml": 100.0,
+      "H_ratio": 21.34074989082019,
+      "h_log10": 1.3292096759939462
     },
     {
-      "laboratory": "C",
-      "n_flasks": 12,
-      "untreated_day0_log10": 4.1569061025591205,
-      "treated_day0_log10": 4.176466461375926,
-      "realised_cfu_per_ml": 14351.791042572977,
-      "fold_from_clsi_target": 0.028703582085145955,
-      "fold_from_half_mcfarland": 9.567860695048651e-05
+      "institute": "B",
+      "plated_volume_ul": 2.5,
+      "n_readings": 3,
+      "N0_cfu_per_ml": 3849.041195995015,
+      "L_cfu_per_ml": 400.0,
+      "H_ratio": 9.622602989987538,
+      "h_log10": 0.9832925680122943
     },
     {
-      "laboratory": "D",
-      "n_flasks": 11,
-      "untreated_day0_log10": 4.6954600970685645,
-      "treated_day0_log10": 4.634277313211028,
-      "realised_cfu_per_ml": 49597.53551388221,
-      "fold_from_clsi_target": 0.09919507102776443,
-      "fold_from_half_mcfarland": 0.00033065023675921476
+      "institute": "B",
+      "plated_volume_ul": 10.0,
+      "n_readings": 6,
+      "N0_cfu_per_ml": 4297.574607203265,
+      "L_cfu_per_ml": 100.0,
+      "H_ratio": 42.97574607203265,
+      "h_log10": 1.63322342490893
     },
     {
-      "laboratory": "F",
-      "n_flasks": 12,
-      "untreated_day0_log10": 5.972060831353569,
-      "treated_day0_log10": NaN,
-      "realised_cfu_per_ml": 937693.3398412156,
-      "fold_from_clsi_target": 1.8753866796824312,
-      "fold_from_half_mcfarland": 0.006251288932274771
+      "institute": "B",
+      "plated_volume_ul": 100.0,
+      "n_readings": 3,
+      "N0_cfu_per_ml": 4647.38358224392,
+      "L_cfu_per_ml": 10.0,
+      "H_ratio": 464.73835822439196,
+      "h_log10": 2.6672085194289132
+    },
+    {
+      "institute": "C",
+      "plated_volume_ul": 2.5,
+      "n_readings": 3,
+      "N0_cfu_per_ml": 8118.243693045485,
+      "L_cfu_per_ml": 400.0,
+      "H_ratio": 20.295609232613714,
+      "h_log10": 1.3074020924796714
+    },
+    {
+      "institute": "C",
+      "plated_volume_ul": 10.0,
+      "n_readings": 6,
+      "N0_cfu_per_ml": 11384.633318233628,
+      "L_cfu_per_ml": 100.0,
+      "H_ratio": 113.84633318233628,
+      "h_log10": 2.0563190472100734
+    },
+    {
+      "institute": "C",
+      "plated_volume_ul": 100.0,
+      "n_readings": 3,
+      "N0_cfu_per_ml": 40320.34430607967,
+      "L_cfu_per_ml": 10.0,
+      "H_ratio": 4032.034430607967,
+      "h_log10": 3.6055242320087
+    },
+    {
+      "institute": "D",
+      "plated_volume_ul": 2.5,
+      "n_readings": 3,
+      "N0_cfu_per_ml": 108576.70466379564,
+      "L_cfu_per_ml": 400.0,
+      "H_ratio": 271.4417616594891,
+      "h_log10": 2.4336766652213244
+    },
+    {
+      "institute": "D",
+      "plated_volume_ul": 10.0,
+      "n_readings": 5,
+      "N0_cfu_per_ml": 32892.48292663532,
+      "L_cfu_per_ml": 100.0,
+      "H_ratio": 328.9248292663532,
+      "h_log10": 2.5170966579349656
+    },
+    {
+      "institute": "D",
+      "plated_volume_ul": 100.0,
+      "n_readings": 3,
+      "N0_cfu_per_ml": 44921.674447749676,
+      "L_cfu_per_ml": 10.0,
+      "H_ratio": 4492.167444774967,
+      "h_log10": 3.6524559361438405
+    },
+    {
+      "institute": "F",
+      "plated_volume_ul": 2.5,
+      "n_readings": 3,
+      "N0_cfu_per_ml": 861773.8760127496,
+      "L_cfu_per_ml": 400.0,
+      "H_ratio": 2154.434690031874,
+      "h_log10": 3.3333333333333313
+    },
+    {
+      "institute": "F",
+      "plated_volume_ul": 10.0,
+      "n_readings": 6,
+      "N0_cfu_per_ml": 944844.739405066,
+      "L_cfu_per_ml": 100.0,
+      "H_ratio": 9448.44739405066,
+      "h_log10": 3.975360449398768
+    },
+    {
+      "institute": "F",
+      "plated_volume_ul": 100.0,
+      "n_readings": 3,
+      "N0_cfu_per_ml": 1004914.475036865,
+      "L_cfu_per_ml": 10.0,
+      "H_ratio": 100491.4475036865,
+      "h_log10": 5.002129101955443
     }
   ],
-  "dubey": {
-    "n_cultures": 20,
-    "nominal_stated_in_methods": 100000.0,
-    "measured_min": 700000.0,
-    "measured_median": 1215000.0,
-    "measured_max": 2800000.0,
-    "median_fold_above_nominal": 12.15,
-    "log10_discrepancy": 1.084576277934331
+  "era4tb_floor_audit": {
+    "A @ 2.5uL": {
+      "n": 70,
+      "expected_floor": 400.0,
+      "smallest_observed": 400.0,
+      "fraction_on_the_L_grid": 1.0
+    },
+    "A @ 10uL": {
+      "n": 135,
+      "expected_floor": 100.0,
+      "smallest_observed": 100.0,
+      "fraction_on_the_L_grid": 1.0
+    },
+    "A @ 100uL": {
+      "n": 81,
+      "expected_floor": 10.0,
+      "smallest_observed": 10.0,
+      "fraction_on_the_L_grid": 1.0
+    },
+    "B @ 2.5uL": {
+      "n": 55,
+      "expected_floor": 400.0,
+      "smallest_observed": 400.0,
+      "fraction_on_the_L_grid": 1.0
+    },
+    "B @ 10uL": {
+      "n": 118,
+      "expected_floor": 100.0,
+      "smallest_observed": 100.0,
+      "fraction_on_the_L_grid": 1.0
+    },
+    "B @ 100uL": {
+      "n": 63,
+      "expected_floor": 10.0,
+      "smallest_observed": 100.0,
+      "fraction_on_the_L_grid": 1.0
+    },
+    "C @ 2.5uL": {
+      "n": 78,
+      "expected_floor": 400.0,
+      "smallest_observed": 400.0,
+      "fraction_on_the_L_grid": 1.0
+    },
+    "C @ 10uL": {
+      "n": 169,
+      "expected_floor": 100.0,
+      "smallest_observed": 100.0,
+      "fraction_on_the_L_grid": 1.0
+    },
+    "C @ 50uL": {
+      "n": 2,
+      "expected_floor": 20.0,
+      "smallest_observed": 52000.0,
+      "fraction_on_the_L_grid": 1.0
+    },
+    "C @ 100uL": {
+      "n": 85,
+      "expected_floor": 10.0,
+      "smallest_observed": 10.0,
+      "fraction_on_the_L_grid": 1.0
+    },
+    "D @ 2.5uL": {
+      "n": 101,
+      "expected_floor": 400.0,
+      "smallest_observed": 400.0,
+      "fraction_on_the_L_grid": 1.0
+    },
+    "D @ 10uL": {
+      "n": 220,
+      "expected_floor": 100.0,
+      "smallest_observed": 300.0,
+      "fraction_on_the_L_grid": 1.0
+    },
+    "D @ 100uL": {
+      "n": 97,
+      "expected_floor": 10.0,
+      "smallest_observed": 170.0,
+      "fraction_on_the_L_grid": 1.0
+    },
+    "E @ 2.5uL": {
+      "n": 107,
+      "expected_floor": 400.0,
+      "smallest_observed": 400.0,
+      "fraction_on_the_L_grid": 1.0
+    },
+    "E @ 10uL": {
+      "n": 219,
+      "expected_floor": 100.0,
+      "smallest_observed": 100.0,
+      "fraction_on_the_L_grid": 1.0
+    },
+    "E @ 100uL": {
+      "n": 97,
+      "expected_floor": 10.0,
+      "smallest_observed": 230.0,
+      "fraction_on_the_L_grid": 1.0
+    },
+    "F @ 2.5uL": {
+      "n": 106,
+      "expected_floor": 400.0,
+      "smallest_observed": 400.0,
+      "fraction_on_the_L_grid": 1.0
+    },
+    "F @ 10uL": {
+      "n": 207,
+      "expected_floor": 100.0,
+      "smallest_observed": 200.0,
+      "fraction_on_the_L_grid": 0.9371980676328503
+    },
+    "F @ 100uL": {
+      "n": 110,
+      "expected_floor": 10.0,
+      "smallest_observed": 100.0,
+      "fraction_on_the_L_grid": 1.0
+    }
   },
-  "against_turbidity": [
+  "main_table": [
     {
-      "group": "ERA4TB, all institutes pooled",
-      "what_varies": "LABORATORIES, one written protocol",
+      "dataset": "ERA4TB, between laboratories at 100 uL",
+      "level_of_variation": "between laboratories, one written protocol",
+      "n": 12,
+      "median_log10_N0": 4.62899008407627,
+      "L_note": "10 CFU/mL, derived from 100 uL plated",
+      "delta_h": 2.33492058252653,
+      "fold_spread": 216.23230733015092
+    },
+    {
+      "dataset": "ERA4TB, every laboratory and plating volume",
+      "level_of_variation": "laboratories and plated volumes together",
       "n": 56,
-      "median_log10": 4.1569061025591205,
-      "min_log10": 3.2875131115479377,
-      "max_log10": 5.972060831353569,
-      "range_log10": 2.6845477198056313,
-      "kill_depth_range_log10": 2.6845477198056313
+      "median_log10_N0": 4.286707852572519,
+      "L_note": "10, 100 or 400 CFU/mL by volume",
+      "delta_h": 4.400069110627485,
+      "fold_spread": 25122.861875921873
     },
     {
-      "group": "ERA4TB, institute A",
-      "what_varies": "flasks within one laboratory",
-      "n": 9,
-      "median_log10": 3.2875131115479377,
-      "min_log10": 3.2875131115479377,
-      "max_log10": 3.2875131115479377,
-      "range_log10": 0.0,
-      "kill_depth_range_log10": 0.0
-    },
-    {
-      "group": "ERA4TB, institute B",
-      "what_varies": "flasks within one laboratory",
-      "n": 12,
-      "median_log10": 3.6297519821467574,
-      "min_log10": 3.6297519821467574,
-      "max_log10": 3.6297519821467574,
-      "range_log10": 0.0,
-      "kill_depth_range_log10": 0.0
-    },
-    {
-      "group": "ERA4TB, institute C",
-      "what_varies": "flasks within one laboratory",
-      "n": 12,
-      "median_log10": 4.1569061025591205,
-      "min_log10": 4.1569061025591205,
-      "max_log10": 4.1569061025591205,
-      "range_log10": 0.0,
-      "kill_depth_range_log10": 0.0
-    },
-    {
-      "group": "ERA4TB, institute D",
-      "what_varies": "flasks within one laboratory",
-      "n": 11,
-      "median_log10": 4.6954600970685645,
-      "min_log10": 4.6954600970685645,
-      "max_log10": 4.6954600970685645,
-      "range_log10": 0.0,
-      "kill_depth_range_log10": 0.0
-    },
-    {
-      "group": "ERA4TB, institute F",
-      "what_varies": "flasks within one laboratory",
-      "n": 12,
-      "median_log10": 5.972060831353569,
-      "min_log10": 5.972060831353569,
-      "max_log10": 5.972060831353569,
-      "range_log10": 0.0,
-      "kill_depth_range_log10": 0.0
-    },
-    {
-      "group": "Vijay, 15-day culture",
-      "what_varies": "clinical isolates",
+      "dataset": "Vijay, 15-day culture",
+      "level_of_variation": "between clinical isolates",
       "n": 217,
-      "median_log10": 5.785329835010767,
-      "min_log10": 3.361727836017593,
-      "max_log10": 7.785329835010767,
-      "range_log10": 4.423601998993174,
-      "kill_depth_range_log10": 4.423601998993174
+      "median_log10_N0": 5.785329835010767,
+      "L_note": "23 CFU/mL, inferred",
+      "delta_h": 4.423601998993174,
+      "fold_spread": 26521.739130434777
     },
     {
-      "group": "Vijay, 30-day culture",
-      "what_varies": "clinical isolates",
+      "dataset": "Vijay, 30-day culture",
+      "level_of_variation": "between clinical isolates",
       "n": 217,
-      "median_log10": 7.361727836017593,
-      "min_log10": 3.361727836017593,
-      "max_log10": 8.792391689498254,
-      "range_log10": 5.430663853480661,
-      "kill_depth_range_log10": 5.430663853480661
+      "median_log10_N0": 7.361727836017593,
+      "L_note": "23 CFU/mL, inferred",
+      "delta_h": 5.430663853480661,
+      "fold_spread": 269565.2173913045
     },
     {
-      "group": "Vijay, 60-day culture",
-      "what_varies": "clinical isolates",
+      "dataset": "Vijay, 60-day culture",
+      "level_of_variation": "between clinical isolates",
       "n": 210,
-      "median_log10": 7.361727836017593,
-      "min_log10": 3.361727836017593,
-      "max_log10": 8.792391689498254,
-      "range_log10": 5.430663853480661,
-      "kill_depth_range_log10": 5.430663853480661
+      "median_log10_N0": 7.361727836017593,
+      "L_note": "23 CFU/mL, inferred",
+      "delta_h": 5.430663853480661,
+      "fold_spread": 269565.2173913045
     },
     {
-      "group": "Kaur, planktonic",
-      "what_varies": "replicates of ONE preparation",
+      "dataset": "Kaur, planktonic",
+      "level_of_variation": "technical replicates of one preparation",
       "n": 3,
-      "median_log10": 7.033423755486949,
-      "min_log10": 6.963787827345556,
-      "max_log10": 7.049218022670182,
-      "range_log10": 0.08543019532462637,
-      "kill_depth_range_log10": 0.08543019532462637
+      "median_log10_N0": 7.033423755486949,
+      "L_note": "not stated in the deposit",
+      "delta_h": NaN,
+      "fold_spread": NaN
     },
     {
-      "group": "Kaur, intracellular",
-      "what_varies": "replicates of ONE preparation",
+      "dataset": "Kaur, intracellular",
+      "level_of_variation": "technical replicates of one preparation",
       "n": 3,
-      "median_log10": 5.944482672150168,
-      "min_log10": 5.924279286061882,
-      "max_log10": 5.982271233039568,
-      "range_log10": 0.05799194697768595,
-      "kill_depth_range_log10": 0.05799194697768595
+      "median_log10_N0": 5.944482672150168,
+      "L_note": "not stated in the deposit",
+      "delta_h": NaN,
+      "fold_spread": NaN
     },
     {
-      "group": "Dubey, hollow fibre",
-      "what_varies": "cultures within one laboratory",
+      "dataset": "Dubey, hollow fibre",
+      "level_of_variation": "between cultures, one laboratory",
       "n": 20,
-      "median_log10": 6.084576277934331,
-      "min_log10": 5.845098040014257,
-      "max_log10": 6.447158031342219,
-      "range_log10": 0.6020599913279625,
-      "kill_depth_range_log10": 0.6020599913279625
+      "median_log10_N0": 6.084484323277383,
+      "L_note": "10 CFU/mL, derived from 100 uL plated",
+      "delta_h": 0.6020599913279625,
+      "fold_spread": 4.000000000000001
     }
   ]
 }
