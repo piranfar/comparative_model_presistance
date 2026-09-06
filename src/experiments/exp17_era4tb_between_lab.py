@@ -283,10 +283,17 @@ def main() -> int:
     print(cens.to_string(index=False, float_format=lambda v: f"{v:,.3f}"))
 
     # -- the starting density the protocol was supposed to fix --------------
-    base = (d[(d["Time"] <= 1) & (~d["censored"]) & (d["Condition"] == SENSITIVE_CONDITION)]
-            .groupby("Institute")["y"].agg(["mean", "std", "size"])
+    early = d[(d["Time"] <= 1) & (~d["censored"])
+              & (d["Condition"] == SENSITIVE_CONDITION)]
+    base = (early.groupby("Institute")["y"].agg(["mean", "std", "size"])
             .rename(columns={"mean": "start_log10_cfu_ml", "std": "sd", "size": "n"})
             .reset_index())
+    # Which visit each laboratory's figure actually comes from. Only two deposit a
+    # day-zero reading for treated flasks; for the rest this is a day-one reading,
+    # taken after 24 hours of drug, and a reader has to be told which.
+    days = (early.groupby("Institute")["Time"]
+            .agg(lambda s: ", ".join(f"day {int(v)}" for v in sorted(s.unique()))))
+    base["reading_days"] = base["Institute"].map(days)
     base.to_csv(TABLES / "exp17_baseline.csv", index=False)
     spread = float(base["start_log10_cfu_ml"].max() - base["start_log10_cfu_ml"].min())
     print("\n-- starting density, which one protocol was written to fix --")

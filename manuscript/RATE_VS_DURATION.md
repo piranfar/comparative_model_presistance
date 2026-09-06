@@ -158,7 +158,9 @@ on the recorded fraction and no day-2 accounting is offered for it.
 
 The consequence is that each isolate carries a fixed budget of observable
 killing. At 15 days of prior culture the starting densities span 3.36 to 7.79
-log10, so headroom spans 2.00 to 6.42 log10 (Fig. 1B, Table 2). Against that budget the
+log10, so headroom spans 2.00 to 6.42 log10 (Fig. 1B, Table 2); both spans are
+the same 4.42 log10, and the fold figures quoted throughout are ten raised to the
+unrounded difference rather than to the displayed one. Against that budget the
 three deposited endpoints behave very differently. No isolate lacks the headroom
 for a 90 or a 99 per cent reduction: 0 of 217 in both cases. **Thirty-three of
 217 isolates — 15.2 per cent — lack the headroom for the 99.99 per cent
@@ -187,7 +189,9 @@ with no overlap between classes. The thresholds themselves are not deposited;
 they are recovered here, and the data pin them only to the gaps between classes:
 at day 5 and 15 days of prior culture, low tolerance covers fractions below
 10⁻³, medium covers 10⁻³ to 10⁻², and high exceeds 10⁻². Applying those cuts reproduces every usable class in the file,
-203 of 203 (Table 3a), so what follows is an argument about the fraction the
+203 of 203 (Table 3a) — usable meaning the 203 of 217 isolates whose label is
+one of the three ordered classes, the other 14 carrying a fourth, unordered MDR
+category that no ordered analysis can place (Table 15) — so what follows is an argument about the fraction the
 assay recorded and not about an independent clinical judgement.
 
 Eighteen isolates ended at the floor. They share one reported floor-level
@@ -246,9 +250,11 @@ is censored and more than one class is compatible. At 60 days the counts are 191
 6 and none, because the cultures are denser and few readings reach the floor.
 
 The larger effect is at the deeper endpoint and it falls unevenly on the groups a
-study would compare. The 99.99 per cent endpoint is unreachable for 26.2 per cent
-of isoniazid-resistant isolates against 7.6 per cent of susceptible ones (Fisher
-exact p = 0.00056), and their median headroom differs by a full log, 4 against 5.
+study would compare. The 99.99 per cent endpoint is unreachable for 22 of 84
+isoniazid-resistant isolates, 26.2 per cent, against 9 of 119 susceptible ones,
+7.6 per cent (Fisher exact p = 0.00056); the remaining two of the 33 fall outside
+that contrast, being MDR. Their median headroom differs by a full log, 4 against
+5.
 A comparison of tolerance between those groups is therefore in part a comparison
 of how well each group could be measured, which is the disposition the previous
 section quantifies.
@@ -409,6 +415,17 @@ If the effect is a property of assay geometry rather than of clinical sampling,
 it should appear where one protocol, one strain and one stock are distributed
 deliberately. It does.
 
+The starting densities in Table 5 need their basis stated before they are used.
+Each is the mean of quantified readings at day 0 or day 1 at the 100 µL plating,
+pooled over that laboratory's arms. Institute A deposits no day-zero reading at
+all, and among treated flasks only C and D do, so for four of the six the figure
+rests partly on readings taken after twenty-four hours of drug — by which point
+the ten-times-MIC arms have already lost between 0.7 and 2.4 log10. A day-zero
+comparison across all six is therefore not available, and the check that is
+available runs the other way: re-running the whole analysis on a day-one exposure
+for every laboratory leaves the ordering, the area under the curve and the
+laboratory-level exact test unchanged.
+
 At ten times the minimum inhibitory concentration of moxifloxacin all six
 laboratories return a positive kill rate spanning 5.2-fold, from 0.090 to 0.464
 log10 CFU/mL per day, and across all 30 laboratory-by-arm cells the Tobit and
@@ -455,11 +472,13 @@ within-laboratory fallback: holding laboratory and treatment arm both fixed,
 only 2 of 24 cells contain both outcomes, and the smallest attainable p is 0.17.
 
 The Cox fits are reported for the same reason and with the same restraint. On
-laboratory alone, institutes D, E and F carry hazard ratios of 0.20; adding
-starting density moves those to 0.138, 0.172 and 0.576, and concordance rises
-from 0.896 to 0.930 (Fig. 2D). Institute C does not dissolve, and it is also the
-fastest killer, which is the behaviour expected of a laboratory that genuinely
-kills faster. No p-value is attached to any of these terms. The tested covariate
+laboratory alone, institutes D, E and F carry hazard ratios of 0.20, 0.21 and
+0.20; adding starting density moves those to 0.34, 0.36 and 0.62, and concordance
+rises from 0.896 to 0.930 (Fig. 2D). Institute C moves the other way, from 3.0 to
+5.3, and it is also the fastest killer, which is the behaviour expected of a
+laboratory that genuinely kills faster. No p-value is attached to any of these
+terms, and the panel that displays them is a display of that movement rather than
+a test of it. The tested covariate
 is constant within cluster, and with six laboratories and six parameters the
 cluster-robust covariance is singular by construction; fitting it anyway does not
 fail loudly but returns a smaller p than the one it was meant to correct. A
@@ -545,20 +564,22 @@ protocols work from a range of dilutions and target inocula. And the standard
 fixes what goes in, while what is needed here is what the plate counts, separated
 from it by a dilution, a transfer and whatever aggregation occurs on the way.
 
-In the six-laboratory exercise, the untreated arm at day zero gives realised
-densities of 3.29, 3.63, 4.16, 4.70 and 5.97 log10 CFU/mL for institutes A, B, C,
-D and F; institute E deposits no untreated day-zero reading at any volume, its
-series beginning at day one. Three of the five sit between eleven and a
-hundred-fold below the CLSI target.
+In the six-laboratory exercise, the untreated arm at day zero on the 100 µL
+plating gives realised densities of 3.67, 4.61, 4.65 and 6.00 log10 CFU/mL for
+institutes B, C, D and F. Institute E deposits no untreated day-zero reading at
+any volume, its series beginning at day one, and institute A's three readings at
+that plating are flagged above the quantification limit rather than counted. Two
+of the four sit between twenty and a hundred-fold below the CLSI target. Every
+figure in this section is on that one basis — untreated, day zero, 100 µL — which
+is not the basis of Table 5 and is not expected to match it.
 
 Reported as headroom at a fixed plating volume the spread is Δ*h* = 2.33 log10, a
 216-fold difference in measurable capacity under one written protocol (Table 9),
 and that figure needs its roster stated because it is small. It is a
-maximum-minus-minimum over the **four** laboratories that deposit a countable
-untreated day-zero reading at 100 µL — B at *h* = 2.67, C at 3.61, D at 3.65 and
-F at 5.00. Institute A's three readings there are flagged above the quantification
-limit rather than absent, and its other platings put it near *h* = 2.4, so
-including it would widen the spread rather than narrow it. A range over four
+maximum-minus-minimum over those same four laboratories — B at *h* = 2.67, C at
+3.61, D at 3.65 and F at 5.00, each exactly one log10 below the density above it,
+since *L* = 10 CFU/mL at this plating. Institute A's other platings put it near
+*h* = 2.4, so including it would widen the spread rather than narrow it. A range over four
 draws is a fragile statistic: its cluster-bootstrap 95 per cent interval runs from
 0.05 to 2.33 log10, the upper limit being the observed range by construction.
 
@@ -570,11 +591,18 @@ laboratories differ.
 
 The obvious counter-explanation is early killing: if the drug had already acted
 by the day-zero reading, a spread in those readings would be kill rather than
-inoculum. Where both arms have a day-zero reading, treated and untreated agree to
-0.13 log10, so the spread is the inoculum. A second deposit gives the same result
+inoculum. Only institutes C and D deposit a day-zero reading in both arms, and there
+treated and untreated agree to 0.06 and 0.13 log10 respectively, so for those two
+the spread is the inoculum and not early kill. The other four cannot be checked
+this way. Institute F shows why the check matters and why it is not decisive: its
+treated day-one readings average 6.62 log10, above its untreated day-zero reading
+of 6.00, because the untreated culture itself grows to 6.72 over the same
+twenty-four hours. A day-one reading is not a day-zero reading in either
+direction. A second deposit gives the same result
 against its own stated figure rather than against a standard: its Methods specify
-10⁵ CFU/mL and its file measures 7 × 10⁵ to 2.8 × 10⁶, a median 12.2-fold above
-nominal.
+10⁵ CFU/mL and its file measures 7 × 10⁵ to 2.8 × 10⁶, a median of 1.22 × 10⁶ and
+so 12.2-fold above nominal — computed from the unrounded median, which Table 9
+displays rounded to 6.08 log10.
 
 Distance from the McFarland reference is descriptive and is reported as such
 (Table S2). Sitting far below it is the intended state, since the inoculum is
@@ -683,17 +711,24 @@ any assumption about the floor is that the separation collapses.
 That the two axes are separate is the premise of the framework that defines them
 (Brauner et al. 2016), and the deposits bound rather than assert it. The
 217-isolate file supports 24 comparisons between the concentration axis and the
-duration axis. Four reach nominal significance where 1.2 are expected by chance
-and none survives Benjamini–Hochberg correction (Fig. 4, Table 8). The four are
+duration axis, and those 24 are the correction family throughout: the
+Benjamini–Hochberg critical values in Table 8 are ranked against 24, not against
+the size of any one stratum. Four reach nominal significance where 1.2 are
+expected by chance and none survives correction (Fig. 4, Table 8). The four are
 negative, so a higher inhibitory concentration accompanies a *shorter* duration,
 which is not the direction a shared mechanism predicts, and they concentrate in
-the deepest endpoint — the one Section 1 shows is compromised. The design
-resolves correlations of 0.14 to 0.25 depending on stratum.
+the deepest endpoint — the one Section 1 shows is compromised. Across all 24 tests the design
+resolves correlations of 0.14 to 0.25 depending on stratum; the six strongest,
+which Table 8 lists, span 0.14 to 0.18.
 
 This null is narrower than it looks and we report it as such. Restricted to the
 baseline isolates, where every isolate is from a different patient, the deepest
-15-day endpoint gives ρ = −0.21 with p = 0.0086 against a corrected threshold of
-0.0083 — it misses by three and a half per cent, in the same negative direction.
+15-day endpoint gives ρ = −0.21 with p = 0.0086. Against the family of 24 its
+critical value is 0.0021 and it is nowhere near; treated as a pre-specified
+family of six baseline tests in its own right the threshold would be 0.0083 and
+it would miss by three and a half per cent. The family of 24 is the one this
+paper corrects against, so the honest reading is the first; the second is
+recorded only because the direction is the same negative one.
 The axes are not shown to be independent here; they are shown not to be
 positively coupled, which is what the deposits can support.
 
@@ -1168,6 +1203,30 @@ Fold-change figures such as 216-fold and 265-fold are ten raised to the unrounde
 log10 difference before display rounding, so that Δ*h* = 2.3349… is reported as
 216-fold rather than as 10^2.33.
 
+### What each analysis was fitted to
+
+A dozen different denominators appear in this paper and each is correct for its
+own analysis, so every one of them is derived in a single place (Table 15). The
+reductions are few and they are named: the MDR tolerance label is a fourth,
+unordered category and is dropped wherever an ordered outcome is fitted, taking
+14 rows from the 15-day panel and 20 from the 60-day; the growth proxy is missing
+for one isolate; six 60-day labels are absent; and five of the 72 treated flasks
+in the six-laboratory deposit carry no usable starting density, which is why a
+comparison over 72 flasks is reported on 67. Of the 30 laboratory-by-arm cells,
+29 retain enough quantified readings to fit a rate.
+
+The series counts in the six-laboratory deposit differ for the same reason. Each
+of the 90 flasks is plated four ways, giving 360 series of which 288 are treated;
+the descriptive Cox drops a further 27, 26 for carrying no quantified reading at
+day 0 or day 1 in their own plating and one for reading below its boundary at day
+zero, leaving 261.
+
+Whether these exclusions are plausibly ignorable is tested rather than asserted:
+dropped rows are compared with retained rows on starting density and
+susceptibility (Table S7). The MDR exclusion differs in susceptibility by
+construction. The only difference not by construction is in the 60-day panel,
+where the 20 dropped rows sit higher in starting density.
+
 ### Dynamic range, and the two boundaries it sets
 
 For a culture starting at *N₀* against an assay floor *L*, two quantities
@@ -1256,8 +1315,8 @@ coarse. Interval-censored fits are therefore reported alongside the naive
 treatment that pins the event to the visit at which the blank plate was noticed.
 Kaplan–Meier and Cox proportional hazards are retained as **descriptive**
 summaries of first crossing only; their intervals are replaced by cluster
-bootstraps over laboratories and over flasks, because 261 series come from 72
-flasks in 6 laboratories and the partial likelihood treats them as independent.
+bootstraps over laboratories and over flasks, because those 261 series come from
+72 flasks in 6 laboratories and the partial likelihood treats them as independent.
 No p-value is quoted for a term that is constant within laboratory, since six
 clusters cannot support one. Proportionality is tested on Schoenfeld residuals.
 
@@ -1382,10 +1441,15 @@ arm, so their first-crossing times are right-censored throughout. (**C**) The tw
 summaries against each other. The three lowest starting densities are exactly the
 three laboratories that recorded crossings; the kill rate produces no such
 separation.
-(**D**) The p-value attached to each laboratory in a Cox model before (grey) and
-after (arrow head) starting density is added. Blue: crosses from significant to
-not. Orange: institute C remains distinguishable, and it also returns the fastest
-rate.
+(**D**) The model-based p-value attached to each laboratory in a descriptive Cox
+model before (grey) and after (arrow head) starting density is added. The panel
+shows how far the two predictors overlap: five of the six terms move toward
+p = 1 on adjustment and institute C moves away from it. Those p-values are
+plotted because they are what moves, not because they are valid: the laboratory
+label is constant within its own cluster and there are six clusters, so no
+between-laboratory test is available and none is claimed. Blue marks a term
+crossing the conventional threshold, which is a description of the movement and
+not a finding.
 
 **Figure 3. A late endpoint cannot resolve a 32-fold concentration range.**
 Apramycin against *M. tuberculosis*, five concentrations, triplicate counts.

@@ -48,7 +48,7 @@ def table1() -> str:
          "MIC and persister fraction per clone",
          "Zenodo 7550302", "CC BY 4.0"],
         ["Concentration-by-time grid", "*M. tuberculosis*",
-         "apramycin, amikacin, 1-128 ug/mL",
+         "apramycin 1-128 ug/mL (amikacin arm not analysed)",
          "5 concentrations x 4 days x 3 replicates",
          "figshare 26462791", "CC BY 4.0"],
         ["Held out for validation", "*E. coli*, hollow fibre",
@@ -163,7 +163,7 @@ def table4() -> str:
             "ratio above one means higher odds of a higher tolerance class. The "
             "proportional-odds column is a Brant test per predictor; the "
             "assumption holds throughout this family. The final column repeats "
-            "each test on the 174 baseline isolates, one per patient by "
+            "each test on the baseline isolates, one per patient by "
             "construction, which is where the resistance association stops "
             "clearing its corrected threshold. Standard errors are model-based; "
             "the deposit carries no patient identifier, so none can be clustered "
@@ -214,6 +214,7 @@ def table5() -> str:
         rows.append([
             inst,
             f"{b.loc[inst, 'start_log10_cfu_ml']:.2f}",
+            str(b.loc[inst, 'reading_days']),
             f"{m.loc[inst, 'kill_rate_tobit']:.3f}",
             f"{m.loc[inst, 'kill_rate_ci_low']:.3f} to {m.loc[inst, 'kill_rate_ci_high']:.3f}",
             f"{m.loc[inst, 'kill_rate_mi']:.3f}",
@@ -221,15 +222,24 @@ def table5() -> str:
             f"{int(crossed.get(inst, 0))} / {int(n_flask.get(inst, 0))}",
         ])
     d = pd.DataFrame(rows, columns=[
-        "Lab", "Starting density (log10 CFU/mL)", "Kill rate (log10/day)",
+        "Lab", "Starting density (log10 CFU/mL)", "Reading day",
+        "Kill rate (log10/day)",
         "95% profile interval", "By imputation", "Readings censored",
-        "Flasks ever crossing the boundary (all arms)"])
+        "Flasks ever crossing the boundary (treated arms)"])
     return ("**Table 5.** Moxifloxacin at ten times MIC. Every laboratory yields "
             "a rate; three record no crossing below the assay boundary in any arm. "
             "The final column counts first observed crossings, which are not "
             "clearances: across the deposit 60% of the series that cross read "
             "above the boundary again at a later visit. The two censoring "
-            "estimators agree to 0.003 log10 per day.\n\n" + md(d))
+            "estimators agree to 0.003 log10 per day. The starting density is the "
+            "mean of quantified readings at day 0 or day 1 at the 100 uL plating, "
+            "pooled over all of that laboratory's arms; the reading-day column "
+            "says which visits contributed. Institute A deposits no day-zero "
+            "reading at all, and among treated flasks only institutes C and D do, "
+            "so for the rest this figure rests partly on readings taken after 24 "
+            "hours of drug. Section 6 and Table 9 instead use untreated day-zero "
+            "readings only, so the two tables are not expected to "
+            "match.\n\n" + md(d))
 
 
 def table8() -> str:
@@ -401,7 +411,9 @@ def table11() -> str:
             "DERIVED means the value follows arithmetically from a recorded "
             "plated volume; INFERRED means it was read off the deposit's own "
             "behaviour and is labelled as inferred wherever it is used; NONE "
-            "means no floor is evidenced and none is assumed. Where a plated "
+            "means no floor is evidenced and none is assumed; FLAGGED means the deposit "
+            "marks below-limit readings without naming a value, which fixes no floor "
+            "either. Where a plated "
             "volume is recorded the honest term is the minimum reportable "
             "positive count, one colony in that volume; elsewhere it is an "
             "operational assay floor."
@@ -482,8 +494,14 @@ def table12() -> str:
             f"observations are actually independent. "
             f"{int(n.get('SUPPORTED', 0))} survive unchanged, "
             f"{int(n.get('WEAKENED', 0))} survive with materially wider "
-            f"uncertainty, and {int(n.get('NOT SUPPORTED', 0))} do not survive "
-            "and have been removed from the text. The five that fail are all "
+            f"uncertainty, and {int(n.get('NOT SUPPORTED', 0))} do not survive. "
+            "Each verdict applies to the claim as it was originally stated. "
+            "Three of the five failures are gone from the text entirely; for the "
+            "other two a weaker statement is retained and is marked as such where "
+            "it appears -- the Cox coefficient trade is now reported as hazard "
+            "ratios with no p-value, and institute C as the laboratory whose "
+            "crossings its starting density does not account for rather than as a "
+            "tested contrast. The five that fail are all "
             "between-laboratory p-values computed on flasks: every flask in a "
             "laboratory shares a starting culture, so a comparison that looks "
             "like 67 flasks is six laboratories, and for a three-against-three "
@@ -559,8 +577,11 @@ def table14() -> str:
         support = ("point mass" if r.verdict == "DERIVED"
                    else ("-" if pd.isna(r.ci_low)
                          else f"[{r.ci_low:.1f}, {r.ci_high:.1f}]"))
+        # Where the verdict is NONE the minimum is not a floor, and printing it
+        # in a column headed "floor used" would say it was.
         rows.append([r.deposit, r.verdict,
-                     "-" if pd.isna(r.candidate_floor) else f"{r.candidate_floor:,.0f}",
+                     "-" if (pd.isna(r.candidate_floor) or r.verdict == "NONE")
+                     else f"{r.candidate_floor:,.0f}",
                      support,
                      "-" if pd.isna(r.log10_span) else f"{r.log10_span:.3f}",
                      "yes" if r.refuse_labels else "no"])
@@ -656,6 +677,51 @@ def tableS6() -> str:
             "all." + chr(10) + chr(10) + md(f, align_right_from=1))
 
 
+
+def table15() -> str:
+    """Every denominator, traced to the exclusion that produced it."""
+    d = pd.read_csv(T / "exp37_analysis_flow.csv")
+    rows = [[r.deposit, r.panel, r.stratum, r.stage, int(r.n),
+             "-" if r.excluded_here == 0 else f"-{int(r.excluded_here)}"]
+            for r in d.itertuples()]
+    f = pd.DataFrame(rows, columns=[
+        "Deposit", "Panel", "Stratum", "Stage", "n", "Excluded here"])
+    return ("**Table 15.** Every analysis set in this paper, and the exclusion "
+            "that produced it. The manuscript quotes a dozen different "
+            "denominators, each correct for its own analysis; this is where a "
+            "reader checks which is which. The MDR tolerance label is a fourth, "
+            "unordered category and is dropped wherever an ordered outcome is "
+            "fitted; the growth proxy is missing for one isolate; and five "
+            "treated flasks in the six-laboratory deposit carry no usable "
+            "starting density, which is why a comparison over 72 flasks is "
+            "reported on 67. Whether these exclusions are plausibly ignorable is "
+            "tested in Table S7." + chr(10) + chr(10) + md(f, align_right_from=4))
+
+
+def tableS7() -> str:
+    """Do the dropped rows differ from the retained ones?"""
+    d = pd.read_csv(T / "exp37_dropped_vs_retained.csv")
+    rows = [[r.panel, r.exclusion, int(r.n_dropped), int(r.n_retained),
+             f"{r.median_start_log10_retained:.2f}",
+             f"{r.median_start_log10_dropped:.2f}",
+             f"{r.start_density_mannwhitney_p:.3f}",
+             f"{r.pct_resistant_retained:.0f}%",
+             f"{r.pct_resistant_dropped:.0f}%",
+             f"{r.resistance_fisher_p:.3f}"] for r in d.itertuples()]
+    f = pd.DataFrame(rows, columns=[
+        "Panel", "Exclusion", "Dropped", "Retained", "Median log10 N0 retained",
+        "Median log10 N0 dropped", "p", "Resistant, retained",
+        "Resistant, dropped", "p "])
+    return ("**Table S7.** The comparison the Methods promise: rows dropped from "
+            "the association family against rows retained, on starting density "
+            "and susceptibility. The MDR exclusion differs in susceptibility by "
+            "construction, since those isolates are outside the "
+            "resistant-versus-susceptible contrast the family tests. The one "
+            "difference not by construction is in the 60-day panel, where the "
+            "dropped rows sit higher in starting density (p = 0.027); it affects "
+            "20 rows and no conclusion drawn from that panel."
+            + chr(10) + chr(10) + md(f, align_right_from=2))
+
 def main() -> int:
     OUT.parent.mkdir(parents=True, exist_ok=True)
     parts = ["# Tables",
@@ -666,7 +732,7 @@ def main() -> int:
              ""]
     order = (table1, table2, table3, table3a, table4, table5, table6,
              table7, table8, table9, table10, table11, table12, table13,
-             table14)
+             table14, table15)
     for fn in order:
         parts.append(fn())
         parts.append("")
@@ -674,12 +740,14 @@ def main() -> int:
               "Held here so the Results stay on one line of reasoning. "
               "Table S1 supports Section 10 and Table S2 supports Section 6.",
               ""]
-    for fn in (tableS1, tableS2, tableS3, tableS4, tableS5, tableS6):
+    for fn in (tableS1, tableS2, tableS3, tableS4, tableS5, tableS6,
+               tableS7):
         parts.append(fn())
         parts.append("")
     OUT.write_text("\n".join(parts), encoding="utf-8")
     print(f"wrote {OUT.relative_to(ROOT)}")
-    for fn in order + (tableS1, tableS2, tableS3, tableS4, tableS5, tableS6):
+    for fn in order + (tableS1, tableS2, tableS3, tableS4, tableS5,
+                       tableS6, tableS7):
         first = fn().split("\n")[0]
         print("   " + first[:96])
     return 0

@@ -332,6 +332,23 @@ def main() -> int:
         rows.append(check("of those, one compatible class (1: 11)",
                           11, float(g.loc["day 2", "n_single_compatible_class"]), 0.001))
 
+    # --- the Cox terms, pinned as hazard ratios so they cannot become p-values
+    f = load("exp17_cox.csv")
+    if f is not None:
+        adj = f[f.model == "institute + starting density"].set_index("term")
+        alone = f[f.model == "institute only"].set_index("term")
+        for inst, before, after in (("D", 0.202, 0.339), ("E", 0.205, 0.364),
+                                    ("F", 0.202, 0.619), ("C", 3.015, 5.267)):
+            rows.append(check(f"institute {inst} hazard ratio, laboratory alone (5)",
+                              before, float(alone.loc[f"institute_{inst}", "hazard_ratio"]), 0.02))
+            rows.append(check(f"institute {inst} hazard ratio, adjusted (5)",
+                              after, float(adj.loc[f"institute_{inst}", "hazard_ratio"]), 0.02))
+        # the numbers Section 5 once printed as hazard ratios are these p-values
+        rows.append(check("institute D adjusted p, NOT a hazard ratio (12: 0.138)",
+                          0.138, float(adj.loc["institute_D", "p_value"]), 0.02))
+        rows.append(check("institute F adjusted p, NOT a hazard ratio (12: 0.576)",
+                          0.576, float(adj.loc["institute_F", "p_value"]), 0.02))
+
     # --- exp27, the out-of-sample test ------------------------------------
     f = load("exp27_out_of_sample.csv")
     if f is not None:

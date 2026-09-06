@@ -1247,7 +1247,8 @@ def main() -> int:
         "the largest effect in the clinical deposit and the least fragile")
 
     add("Vijay clinical", "4",
-        "the resistance-tolerance association attenuates by 66% and its interval "
+        "the resistance-tolerance association attenuates once starting density "
+        "enters the model, and its interval "
         "then spans zero",
         "isolate", "up to 43 follow-ups repeat a patient",
         full.get("n_association"), "174 patients min",
@@ -1394,15 +1395,15 @@ def main() -> int:
 
     # --- ERA4TB -------------------------------------------------------------
     add("ERA4TB six-laboratory", "5",
-        "starting density separates flasks that ever cleared from those that "
-        "never did (AUC 0.974, p = 1.2e-10)",
+        "starting density separates flasks that ever crossed below the assay "
+        "floor from those that never did (AUC 0.974, p = 1.2e-10)",
         "flask", "flasks nested in six laboratories; the exposure is "
                  "87% a laboratory-level variable",
         clearance["n_treated_flasks"], clearance["n_laboratories"],
         f"AUC {clearance['naive_auc']:.3f}",
         f"Mann-Whitney p = {clearance['naive_mannwhitney_p']:.2g}",
-        "exact laboratory-level test (3 cleared vs 3 did not); cluster bootstrap "
-        "over laboratories; permutation of clearance within laboratory, and "
+        "exact laboratory-level test (3 crossed vs 3 did not); cluster bootstrap "
+        "over laboratories; permutation of crossing within laboratory, and "
         "within laboratory AND treatment arm",
         f"AUC {clearance['naive_auc']:.3f}, cluster-bootstrap 95% CI "
         f"{ci(clearance['cluster_bootstrap_labs_auc_ci'])}",
@@ -1460,7 +1461,7 @@ def main() -> int:
     lr = logrank[logrank["model"] == "log-rank across institutes"]
     lr_p = float(lr["p_value"].iloc[0]) if len(lr) else np.nan
     add("ERA4TB six-laboratory", "5",
-        "the log-rank test separates the six laboratories on time to clearance",
+        "the log-rank test separates the six laboratories on time to first crossing",
         "flask", "flasks nested in six laboratories; the tested label IS the "
                  "cluster",
         cox["n_flasks"], cox["n_clusters"],

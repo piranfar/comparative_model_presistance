@@ -22,7 +22,6 @@ log10 in measurable depth before any biology enters.
 | ERA4TB, between laboratories at 100 uL | between laboratories, one written protocol | 12 | 4.63 | 10 CFU/mL, derived from 100 uL plated | 2.33 | 216x |
 | ERA4TB, every laboratory and plating volume | laboratories and plated volumes together | 56 | 4.29 | 10, 100 or 400 CFU/mL by volume | 4.40 | 25,123x |
 | Vijay, 15-day culture | between clinical isolates | 217 | 5.79 | 23 CFU/mL, inferred | 4.42 | 26,522x |
-| Vijay, 30-day culture | between clinical isolates | 217 | 7.36 | 23 CFU/mL, inferred | 5.43 | 269,565x |
 | Vijay, 60-day culture | between clinical isolates | 210 | 7.36 | 23 CFU/mL, inferred | 5.43 | 269,565x |
 | Kaur, planktonic | technical replicates of one preparation | 3 | 7.03 | not stated in the deposit | NA | NA |
 | Kaur, intracellular | technical replicates of one preparation | 3 | 5.94 | not stated in the deposit | NA | NA |
@@ -79,7 +78,6 @@ separate `Inoculum TKA` row, at 4.35 log10, against an untreated day-1 reading o
 | ERA4TB, between laboratories at 100 uL | 4.63 | 3,525x |
 | ERA4TB, every laboratory and plating volume | 4.29 | 7,751x |
 | Vijay, 15-day culture | 5.79 | 246x |
-| Vijay, 30-day culture | 7.36 | 7x |
 | Vijay, 60-day culture | 7.36 | 7x |
 | Kaur, planktonic | 7.03 | 14x |
 | Kaur, intracellular | 5.94 | 170x |

@@ -136,7 +136,9 @@ def era4tb_audit() -> dict:
 def vijay_groups() -> pd.DataFrame:
     d = pd.read_excel(VIJAY)
     rows = []
-    for age in (15, 30, 60):
+    # The 30-day panel is deposited but no section of the paper analyses it, and a
+    # table row a reader cannot follow back to a claim is noise.
+    for age in (15, 60):
         col = f"mpn_T0_{age}days"
         if col not in d:
             continue

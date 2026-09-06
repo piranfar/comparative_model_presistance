@@ -1,0 +1,387 @@
+{
+  "script": "src/experiments/exp37_analysis_flow.py",
+  "utc": "2026-09-06T21:23:00+00:00",
+  "distinct_denominators": [
+    29,
+    30,
+    67,
+    72,
+    90,
+    161,
+    162,
+    167,
+    168,
+    174,
+    191,
+    196,
+    197,
+    202,
+    203,
+    211,
+    217,
+    288,
+    360,
+    2751,
+    2775
+  ],
+  "clinical": [
+    {
+      "deposit": "Vijay clinical",
+      "panel": "15-day",
+      "stratum": "all isolates",
+      "stage": "rows in the deposit",
+      "n": 217,
+      "excluded_here": 0,
+      "appears_in_manuscript_as": ""
+    },
+    {
+      "deposit": "Vijay clinical",
+      "panel": "15-day",
+      "stratum": "all isolates",
+      "stage": "tolerance label present",
+      "n": 217,
+      "excluded_here": 0,
+      "appears_in_manuscript_as": ""
+    },
+    {
+      "deposit": "Vijay clinical",
+      "panel": "15-day",
+      "stratum": "all isolates",
+      "stage": "label is Low, Medium or High (drops 'MDR')",
+      "n": 203,
+      "excluded_here": 14,
+      "appears_in_manuscript_as": ""
+    },
+    {
+      "deposit": "Vijay clinical",
+      "panel": "15-day",
+      "stratum": "all isolates",
+      "stage": "starting and day-5 readings present",
+      "n": 203,
+      "excluded_here": 0,
+      "appears_in_manuscript_as": ""
+    },
+    {
+      "deposit": "Vijay clinical",
+      "panel": "15-day",
+      "stratum": "all isolates",
+      "stage": "susceptibility is IS or IR",
+      "n": 203,
+      "excluded_here": 0,
+      "appears_in_manuscript_as": ""
+    },
+    {
+      "deposit": "Vijay clinical",
+      "panel": "15-day",
+      "stratum": "all isolates",
+      "stage": "growth proxy present (association family)",
+      "n": 202,
+      "excluded_here": 1,
+      "appears_in_manuscript_as": ""
+    },
+    {
+      "deposit": "Vijay clinical",
+      "panel": "15-day",
+      "stratum": "baseline only (0M)",
+      "stage": "rows in the deposit",
+      "n": 174,
+      "excluded_here": 0,
+      "appears_in_manuscript_as": ""
+    },
+    {
+      "deposit": "Vijay clinical",
+      "panel": "15-day",
+      "stratum": "baseline only (0M)",
+      "stage": "tolerance label present",
+      "n": 174,
+      "excluded_here": 0,
+      "appears_in_manuscript_as": ""
+    },
+    {
+      "deposit": "Vijay clinical",
+      "panel": "15-day",
+      "stratum": "baseline only (0M)",
+      "stage": "label is Low, Medium or High (drops 'MDR')",
+      "n": 168,
+      "excluded_here": 6,
+      "appears_in_manuscript_as": ""
+    },
+    {
+      "deposit": "Vijay clinical",
+      "panel": "15-day",
+      "stratum": "baseline only (0M)",
+      "stage": "starting and day-5 readings present",
+      "n": 168,
+      "excluded_here": 0,
+      "appears_in_manuscript_as": ""
+    },
+    {
+      "deposit": "Vijay clinical",
+      "panel": "15-day",
+      "stratum": "baseline only (0M)",
+      "stage": "susceptibility is IS or IR",
+      "n": 168,
+      "excluded_here": 0,
+      "appears_in_manuscript_as": ""
+    },
+    {
+      "deposit": "Vijay clinical",
+      "panel": "15-day",
+      "stratum": "baseline only (0M)",
+      "stage": "growth proxy present (association family)",
+      "n": 167,
+      "excluded_here": 1,
+      "appears_in_manuscript_as": ""
+    },
+    {
+      "deposit": "Vijay clinical",
+      "panel": "60-day",
+      "stratum": "all isolates",
+      "stage": "rows in the deposit",
+      "n": 217,
+      "excluded_here": 0,
+      "appears_in_manuscript_as": ""
+    },
+    {
+      "deposit": "Vijay clinical",
+      "panel": "60-day",
+      "stratum": "all isolates",
+      "stage": "tolerance label present",
+      "n": 211,
+      "excluded_here": 6,
+      "appears_in_manuscript_as": ""
+    },
+    {
+      "deposit": "Vijay clinical",
+      "panel": "60-day",
+      "stratum": "all isolates",
+      "stage": "label is Low, Medium or High (drops 'MDR')",
+      "n": 197,
+      "excluded_here": 14,
+      "appears_in_manuscript_as": ""
+    },
+    {
+      "deposit": "Vijay clinical",
+      "panel": "60-day",
+      "stratum": "all isolates",
+      "stage": "starting and day-5 readings present",
+      "n": 197,
+      "excluded_here": 0,
+      "appears_in_manuscript_as": ""
+    },
+    {
+      "deposit": "Vijay clinical",
+      "panel": "60-day",
+      "stratum": "all isolates",
+      "stage": "susceptibility is IS or IR",
+      "n": 197,
+      "excluded_here": 0,
+      "appears_in_manuscript_as": ""
+    },
+    {
+      "deposit": "Vijay clinical",
+      "panel": "60-day",
+      "stratum": "all isolates",
+      "stage": "growth proxy present (association family)",
+      "n": 196,
+      "excluded_here": 1,
+      "appears_in_manuscript_as": ""
+    },
+    {
+      "deposit": "Vijay clinical",
+      "panel": "60-day",
+      "stratum": "baseline only (0M)",
+      "stage": "rows in the deposit",
+      "n": 174,
+      "excluded_here": 0,
+      "appears_in_manuscript_as": ""
+    },
+    {
+      "deposit": "Vijay clinical",
+      "panel": "60-day",
+      "stratum": "baseline only (0M)",
+      "stage": "tolerance label present",
+      "n": 168,
+      "excluded_here": 6,
+      "appears_in_manuscript_as": ""
+    },
+    {
+      "deposit": "Vijay clinical",
+      "panel": "60-day",
+      "stratum": "baseline only (0M)",
+      "stage": "label is Low, Medium or High (drops 'MDR')",
+      "n": 162,
+      "excluded_here": 6,
+      "appears_in_manuscript_as": ""
+    },
+    {
+      "deposit": "Vijay clinical",
+      "panel": "60-day",
+      "stratum": "baseline only (0M)",
+      "stage": "starting and day-5 readings present",
+      "n": 162,
+      "excluded_here": 0,
+      "appears_in_manuscript_as": ""
+    },
+    {
+      "deposit": "Vijay clinical",
+      "panel": "60-day",
+      "stratum": "baseline only (0M)",
+      "stage": "susceptibility is IS or IR",
+      "n": 162,
+      "excluded_here": 0,
+      "appears_in_manuscript_as": ""
+    },
+    {
+      "deposit": "Vijay clinical",
+      "panel": "60-day",
+      "stratum": "baseline only (0M)",
+      "stage": "growth proxy present (association family)",
+      "n": 161,
+      "excluded_here": 1,
+      "appears_in_manuscript_as": ""
+    }
+  ],
+  "era4tb": [
+    {
+      "deposit": "ERA4TB six-laboratory",
+      "panel": "-",
+      "stratum": "-",
+      "stage": "readings in the file",
+      "n": 2775,
+      "excluded_here": 0,
+      "appears_in_manuscript_as": ""
+    },
+    {
+      "deposit": "ERA4TB six-laboratory",
+      "panel": "-",
+      "stratum": "-",
+      "stage": "excluding inoculum controls",
+      "n": 2751,
+      "excluded_here": 24,
+      "appears_in_manuscript_as": ""
+    },
+    {
+      "deposit": "ERA4TB six-laboratory",
+      "panel": "-",
+      "stratum": "-",
+      "stage": "flasks (institute x arm x replicate)",
+      "n": 90,
+      "excluded_here": 0,
+      "appears_in_manuscript_as": ""
+    },
+    {
+      "deposit": "ERA4TB six-laboratory",
+      "panel": "-",
+      "stratum": "-",
+      "stage": "treated flasks",
+      "n": 72,
+      "excluded_here": 18,
+      "appears_in_manuscript_as": ""
+    },
+    {
+      "deposit": "ERA4TB six-laboratory",
+      "panel": "-",
+      "stratum": "-",
+      "stage": "treated flasks with a usable starting density",
+      "n": 67,
+      "excluded_here": 5,
+      "appears_in_manuscript_as": ""
+    },
+    {
+      "deposit": "ERA4TB six-laboratory",
+      "panel": "-",
+      "stratum": "-",
+      "stage": "laboratory-by-arm cells",
+      "n": 30,
+      "excluded_here": 0,
+      "appears_in_manuscript_as": ""
+    },
+    {
+      "deposit": "ERA4TB six-laboratory",
+      "panel": "-",
+      "stratum": "-",
+      "stage": "cells with a fitted kill rate",
+      "n": 29,
+      "excluded_here": 1,
+      "appears_in_manuscript_as": ""
+    },
+    {
+      "deposit": "ERA4TB six-laboratory",
+      "panel": "-",
+      "stratum": "-",
+      "stage": "series under the plating key (flasks x 4 platings)",
+      "n": 360,
+      "excluded_here": 0,
+      "appears_in_manuscript_as": ""
+    },
+    {
+      "deposit": "ERA4TB six-laboratory",
+      "panel": "-",
+      "stratum": "-",
+      "stage": "treated series",
+      "n": 288,
+      "excluded_here": 72,
+      "appears_in_manuscript_as": ""
+    },
+    {
+      "deposit": "ERA4TB six-laboratory",
+      "panel": "-",
+      "stratum": "-",
+      "stage": "cross-laboratory pairs in the same arm",
+      "n": 191,
+      "excluded_here": 0,
+      "appears_in_manuscript_as": ""
+    }
+  ],
+  "dropped_vs_retained": [
+    {
+      "panel": "15-day",
+      "exclusion": "label missing or 'MDR'",
+      "n_dropped": 14,
+      "n_retained": 202,
+      "median_start_log10_retained": 5.785329835010767,
+      "median_start_log10_dropped": 5.361727836017593,
+      "start_density_mannwhitney_p": 0.19823030773897587,
+      "pct_resistant_retained": 41.08910891089109,
+      "pct_resistant_dropped": 0.0,
+      "resistance_fisher_p": 0.0011097410360847357
+    },
+    {
+      "panel": "15-day",
+      "exclusion": "growth proxy missing",
+      "n_dropped": 1,
+      "n_retained": 202,
+      "median_start_log10_retained": 5.785329835010767,
+      "median_start_log10_dropped": 6.785329835010767,
+      "start_density_mannwhitney_p": 0.1492765756012265,
+      "pct_resistant_retained": 41.08910891089109,
+      "pct_resistant_dropped": 100.0,
+      "resistance_fisher_p": 0.41379310344827586
+    },
+    {
+      "panel": "60-day",
+      "exclusion": "label missing or 'MDR'",
+      "n_dropped": 20,
+      "n_retained": 196,
+      "median_start_log10_retained": 7.361727836017593,
+      "median_start_log10_dropped": 7.785329835010767,
+      "start_density_mannwhitney_p": 0.02689925104054916,
+      "pct_resistant_retained": 40.30612244897959,
+      "pct_resistant_dropped": 20.0,
+      "resistance_fisher_p": 0.09273897533559254
+    },
+    {
+      "panel": "60-day",
+      "exclusion": "growth proxy missing",
+      "n_dropped": 1,
+      "n_retained": 196,
+      "median_start_log10_retained": 7.361727836017593,
+      "median_start_log10_dropped": 7.361727836017593,
+      "start_density_mannwhitney_p": 0.7490345180138778,
+      "pct_resistant_retained": 40.30612244897959,
+      "pct_resistant_dropped": 100.0,
+      "resistance_fisher_p": 0.40609137055837563
+    }
+  ]
+}
