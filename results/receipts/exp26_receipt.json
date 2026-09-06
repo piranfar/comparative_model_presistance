@@ -1,0 +1,44 @@
+{
+  "script": "src/experiments/exp26_counter_tests.py",
+  "utc": "2026-09-06T04:31:38+00:00",
+  "counter_test_1_headroom_or_biology": {
+    "n_with_ample_headroom": 184,
+    "n_reached": 22,
+    "corr_start_density_with_reaching": 0.054182854778492724,
+    "p_value": 0.4650845232237205,
+    "rival_supported": false,
+    "verdict": "claim survives: where there is room, the starting density does not predict failure"
+  },
+  "counter_test_2_external_corroboration": {
+    "n": 18,
+    "spearman_rho": 0.41917178954936,
+    "p_value": 0.08336113499777566,
+    "rival_supported": false,
+    "verdict": "no significant corroboration, but the point estimate is positive and n is 18, so this is underpowered rather than negative",
+    "caveat": "MDK99 is computed from the same T0 reading as the label, so it is not fully independent of it; a shared N0 inflates agreement in the direction of the rival."
+  },
+  "counter_test_3_sampling_time_confound": {
+    "n": 203,
+    "beta_unadjusted": -0.8498503338923304,
+    "p_unadjusted": 1.9984014443252818e-14,
+    "beta_adjusted_for_months": -0.8084114805608604,
+    "p_adjusted": 1.1771250640890685e-11,
+    "attenuation_fraction": 0.048760177738213374,
+    "rival_supported": false,
+    "verdict": "claim survives: resistance still predicts a lower inoculum with months on treatment in the model"
+  },
+  "counter_test_4_inversions_or_noise": {
+    "rate_at_no_threshold": 0.36649214659685864,
+    "rate_at_strictest": 0.2127659574468085,
+    "strictest_gap": 0.1,
+    "pairs_at_strictest": 94,
+    "ci_at_strictest": [
+      0.13948967489739442,
+      0.30341245841908815
+    ],
+    "monotone_decline": true,
+    "rival_supported": false,
+    "verdict": "does not collapse, but it does erode: the headline 36.6 per cent is the most generous reading, and requiring the rate difference to be real leaves roughly one comparison in five. The manuscript must quote the range, not the maximum."
+  },
+  "n_rivals_supported": 0
+}

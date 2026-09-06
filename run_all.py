@@ -50,6 +50,9 @@ STAGES = [
     ("exp25  how much of a published classification survives its measurement",
      "src.experiments.exp25_observability_classes"),
 
+    ("exp26  four attempts to refute this paper's own claims",
+     "src.experiments.exp26_counter_tests"),
+
     ("fig 1  the assay floor bounds the endpoint and decides the phenotype",
      "src.figures.fig14_dynamic_range"),
     ("fig 2  one protocol, six laboratories: the inoculum still decides",

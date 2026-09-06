@@ -97,6 +97,19 @@ def main() -> int:
             rows.append(check("deep endpoint unreachable, susceptible (2: 7.6%)",
                               7.56, float(g["IS"]["pct_deep_endpoint_unreachable"]), 0.02))
 
+    # --- exp26, the counter-tests -----------------------------------------
+    # The strictest inversion rate is pinned because it is the number that
+    # replaced our headline. 36.6 per cent was the most generous reading.
+    r = receipt("exp26_receipt.json")
+    if r is not None:
+        t4 = r["counter_test_4_inversions_or_noise"]
+        rows.append(check("inversion rate, no rate-gap requirement (5: 36.6%)",
+                          0.366, float(t4["rate_at_no_threshold"]), 0.01))
+        rows.append(check("inversion rate, gap > 0.10 log10/day (5: 21.3%)",
+                          0.213, float(t4["rate_at_strictest"]), 0.02))
+        rows.append(check("rivals supported across the four counter-tests (0)",
+                          0, float(r["n_rivals_supported"]), 1.0))
+
     # --- exp21, the per-interval p-values --------------------------------
     # Added after a manuscript revision caught three of these wrong in the body
     # text. They had been carried over from an earlier draft and never

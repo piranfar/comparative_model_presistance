@@ -25,32 +25,32 @@ keywords:
 
 A culture taken after antibiotics have started is not evidence of sterility. The
 field's answer was to ask not whether a culture went negative but how far it
-fell: the minimum duration for killing, the time
-to a 90, 99 or 99.99 per cent reduction, is the accepted quantitative indicator
-of antibiotic tolerance. Expressing killing as a fraction of the starting
+fell: the minimum duration for killing, the time to a 90, 99 or 99.99 per cent
+reduction, is the accepted indicator of antibiotic tolerance. Expressing killing as a fraction of the starting
 population is what should make it inoculum-independent. That independence holds
 in the definition and fails in the measurement.
 
 A fractional reduction is observable only where the assay resolves it. An
-isolate's headroom, the distance from its starting density to the assay floor,
-caps the deepest reduction demonstrable whatever the drug does, and a reading
-resting on the floor yields a fraction of floor over starting density: the most
-inoculum-dependent quantity available.
+isolate's headroom, the distance from its starting density to the floor, caps the
+deepest reduction demonstrable whatever the drug does, and a reading resting on
+the floor yields floor over starting density: the most inoculum-dependent
+quantity there is.
 
 In 217 clinical *Mycobacterium tuberculosis* isolates carrying their authors'
 own tolerance classification, none lacks the headroom for a 90 or 99 per cent
 endpoint, while 33 lack it for the 99.99 per cent endpoint the classification
-uses, and all 33 are recorded as failing to reach it. Eighteen
-isolates ended at the same unmeasurable floor and a single threshold on their
-starting density reproduces every label they were given; for twelve, no count the
-assay could have returned would have changed the class. The label tracks
-growth state, which survives adjustment for starting density, and isoniazid
-resistance, which does not: resistant isolates enter ten-fold lower and lose
-two-thirds of their apparent tolerance once that is accounted for.
+uses, and all 33 are recorded as having failed it. Eighteen isolates
+ended at the same unmeasurable floor and a threshold on their starting density
+reproduces every label; for twelve, no count the assay could have returned would
+have changed the class. The label tracks growth
+state, which survives adjustment for starting density, and isoniazid resistance,
+which does not: resistant isolates enter ten-fold lower and lose two-thirds of
+their apparent tolerance once that is accounted for.
 
 In a six-laboratory exercise distributing one strain under one protocol, the
-population that fell faster crossed the detection limit later in 36.6 per cent
-comparisons, though the kill rate still carries more of the spread. A tolerance
+population that fell faster crossed the detection limit later in 21 to 37 per
+cent of comparisons, depending on how firmly the rate difference is required to
+be real, though the kill rate still carries more of the spread. A tolerance
 call reported without its starting density and quantification limit cannot be
 interpreted.
 
@@ -349,7 +349,9 @@ Across 191 pairs of flasks in the same treatment arm from different laboratories
 with 45 further pairs that the censoring could not settle and which are excluded
 rather than imputed, **70 pairs — 36.6 per cent (95 per cent CI 30.1 to 43.6) —
 are inversions**: the flask in which the population fell faster crossed the
-detection limit later (Table 6). The criterion *D_A*/*D_B* > *b_A*/*b_B* calls
+detection limit later (Table 6). Restricting to pairs whose rates differ by more
+than 0.10 log10 per day, so that the faster flask is unambiguously faster, leaves
+21.3 per cent of 94 pairs. The criterion *D_A*/*D_B* > *b_A*/*b_B* calls
 83.8 per cent of pairs correctly, so the inversions are accounted for by the
 arithmetic of the crossing-time decomposition in the Methods rather than by
 anything else.
@@ -363,6 +365,19 @@ anything else.
 | INH 1X MIC |  |  |  |  |  | 19.6% | 80.4% |
 | MXF 10X MIC |  |  |  |  |  | 39.4% | 60.6% |
 
+
+That figure is the most generous reading available and should be quoted with the
+range rather than alone. A pair contributes an inversion only if one flask really
+did fall faster, and the rates are estimated with error, so pairs whose rates
+barely differ contribute inversions cheaply. Requiring the two rates to differ by
+progressively more removes those pairs: at a gap of 0.02 log10 per day the rate
+is 34.5 per cent, at 0.05 it is 30.4 per cent, and at 0.10 log10 per day — a
+difference no reader would dispute — it is 21.3 per cent of 94 pairs (95 per cent
+CI 13.9 to 30.3). The decline is monotone, which is what noise in the rate
+estimates predicts. It does not reach zero, which is what a real effect predicts.
+The honest statement is that between a fifth and a third of cross-laboratory
+comparisons invert, depending on how firmly one insists the rate difference is
+established, and we quote 21.3 per cent where a single number is needed.
 
 The variance decomposition sets the size of the effect and bounds the claim. Of
 the variation available to move a clearance time, the distance term carries 39.4

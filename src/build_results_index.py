@@ -26,7 +26,7 @@ OUT = RES / "README.md"
 # Which experiments belong to which manuscript.
 PAPERS = {
     "Tolerance and the assay floor (manuscript/PAPER_COMPLETE.md)":
-        [f"exp{n}" for n in range(16, 26)]
+        [f"exp{n}" for n in range(16, 27)]
         + ["fig10", "fig11", "fig12", "fig13", "fig14"],
 }
 

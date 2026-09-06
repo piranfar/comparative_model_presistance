@@ -268,10 +268,25 @@ Across 191 pairs of flasks in the same treatment arm from different laboratories
 with 45 further pairs that the censoring could not settle and which are excluded
 rather than imputed, **70 pairs — 36.6 per cent (95 per cent CI 30.1 to 43.6) —
 are inversions**: the flask in which the population fell faster crossed the
-detection limit later (Table 6). The criterion *D_A*/*D_B* > *b_A*/*b_B* calls
+detection limit later (Table 6). Restricting to pairs whose rates differ by more
+than 0.10 log10 per day, so that the faster flask is unambiguously faster, leaves
+21.3 per cent of 94 pairs. The criterion *D_A*/*D_B* > *b_A*/*b_B* calls
 83.8 per cent of pairs correctly, so the inversions are accounted for by the
 arithmetic of the crossing-time decomposition in the Methods rather than by
 anything else.
+
+That figure is the most generous reading available and should be quoted with the
+range rather than alone. A pair contributes an inversion only if one flask really
+did fall faster, and the rates are estimated with error, so pairs whose rates
+barely differ contribute inversions cheaply. Requiring the two rates to differ by
+progressively more removes those pairs: at a gap of 0.02 log10 per day the rate
+is 34.5 per cent, at 0.05 it is 30.4 per cent, and at 0.10 log10 per day — a
+difference no reader would dispute — it is 21.3 per cent of 94 pairs (95 per cent
+CI 13.9 to 30.3). The decline is monotone, which is what noise in the rate
+estimates predicts. It does not reach zero, which is what a real effect predicts.
+The honest statement is that between a fifth and a third of cross-laboratory
+comparisons invert, depending on how firmly one insists the rate difference is
+established, and we quote 21.3 per cent where a single number is needed.
 
 The variance decomposition sets the size of the effect and bounds the claim. Of
 the variation available to move a clearance time, the distance term carries 39.4

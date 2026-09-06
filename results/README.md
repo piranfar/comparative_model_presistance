@@ -6,13 +6,13 @@ Outputs of the earlier paper are not here; they live in `version_one/results/`.
 
 | | tables | figures | receipts |
 | --- | ---: | ---: | ---: |
-| total | 38 | 5 | 10 |
+| total | 39 | 5 | 11 |
 
 ## Tolerance and the assay floor (manuscript/PAPER_COMPLETE.md)
 
 **Figures.** `fig10_rate_vs_duration`, `fig11_endpoint_collapse`, `fig12_independence`, `fig13_parameter_transfer`, `fig14_dynamic_range`
 
-**Tables (30).**
+**Tables (31).**
 
 | file | written by | used by |
 | --- | --- | --- |
@@ -46,6 +46,7 @@ Outputs of the earlier paper are not here; they live in `version_one/results/`.
 | `exp24_trajectory_shape.csv` | `exp24_trajectory_and_flag_audit.py` | quoted in the text only |
 | `exp25_observability_by_group.csv` | `exp25_observability_classes.py` | quoted in the text only |
 | `exp25_observability_classes.csv` | `exp25_observability_classes.py` | quoted in the text only |
+| `exp26_inversion_sensitivity.csv` | `exp26_counter_tests.py` | quoted in the text only |
 
 ## Unassigned
 
@@ -70,7 +71,7 @@ Outputs of the earlier paper are not here; they live in `version_one/results/`.
 
 ## Receipts
 
-10 JSON receipts, one per analysis stage. Each records the inputs, the headline outputs and the software versions the stage actually ran under, so a run under different versions is recorded rather than silently substituted.
+11 JSON receipts, one per analysis stage. Each records the inputs, the headline outputs and the software versions the stage actually ran under, so a run under different versions is recorded rather than silently substituted.
 
 ## Checking the numbers
 
