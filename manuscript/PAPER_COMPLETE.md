@@ -451,10 +451,11 @@ separate 6.9-fold at day 3, 48.2-fold at day 7 and 5.2-fold at day 14 (Fig. 3,
 Table 7). An experiment read at 14 days would report this drug as insensitive to
 a 32-fold change in dose. Fitted per interval on a bootstrap resampling all three
 replicates at both ends of every interval, the concentration slope is +0.059
-log10 per day per doubling over days 0 to 3 (p < 0.0001), +0.033 over days 3 to 7
-(p = 0.15) and −0.025 over days 7 to 14 (p < 0.0001); the early-versus-late
-contrast is firm (+0.084, 95 per cent interval +0.037 to +0.128) and the
-early-versus-middle contrast is not (p = 0.43).
+log10 per day per doubling over days 0 to 3 (95 per cent interval +0.030 to
++0.088, p = 0.013), +0.033 over days 3 to 7 (−0.052 to +0.118, p = 0.24) and
+−0.025 over days 7 to 14 (−0.060 to +0.010, p = 0.091); the early-versus-late
+contrast is firm (+0.084, +0.037 to +0.128) and the early-versus-middle contrast
+is not (p = 0.43).
 
 **Table 7.** The same 32-fold concentration range summarised at each sampling day (upper rows), and the concentration slope fitted separately in each interval (lower rows). Slopes and intervals are from the replicate-level bootstrap described in Section 2.
 

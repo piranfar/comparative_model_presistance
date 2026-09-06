@@ -706,11 +706,19 @@ def ctbp_model(I):
     u_lab_a = jnp.asarray(numpyro.sample(
         "u_lab_a", dist.Normal(0, 1).expand([max(I["n_labs"], 1)]))) * sigma_lab_a
     za = jnp.asarray(numpyro.sample("z_a", dist.Normal(0, 1).expand([S])))
-    a_struct = alpha[I["dep_idx"]] + jnp.where(lab_ok, u_lab_a[li], 0.0) + sigma_a[I["dep_idx"]] * za
-    a_flat = jnp.asarray(numpyro.sample(
-        "a_windels", dist.ImproperUniform(dist.constraints.real, (), ()).expand([S])))
-    isw = jnp.asarray(I["is_windels_series"].astype(float))
-    a = numpyro.deterministic("a", isw * a_flat + (1 - isw) * a_struct)
+    a = alpha[I["dep_idx"]] + jnp.where(lab_ok, u_lab_a[li], 0.0) + sigma_a[I["dep_idx"]] * za
+    # The flat intercept is sampled ONLY for the Windels series. Expanding it to
+    # every series would leave one improper, perfectly flat coordinate per
+    # non-Windels series: a posterior with no curvature at all in ~800
+    # directions, which NUTS answers by running every trajectory to the maximum
+    # tree depth. That is a correctness bug, not a tuning problem.
+    w_idx = np.nonzero(I["is_windels_series"])[0]
+    if w_idx.size:
+        a_flat = jnp.asarray(numpyro.sample(
+            "a_windels",
+            dist.ImproperUniform(dist.constraints.real, (), ()).expand([len(w_idx)])))
+        a = a.at[w_idx].set(a_flat)
+    a = numpyro.deterministic("a", a)
 
     si = I["sidx"]
     mu = a[si] - jnp.sum(jnp.asarray(I["W"]) * b[si], axis=1)
@@ -809,7 +817,7 @@ def init_values(I):
         "sigma_lab_a": 1.0,
         "u_lab_a": np.zeros(max(I["n_labs"], 1)),
         "z_a": np.zeros(S),
-        "a_windels": np.zeros(S),
+        "a_windels": np.zeros(int(I["is_windels_series"].sum())),
         "sigma_plate": 0.4,
         "sigma_proc_d": np.array([0.4, 0.3, 0.3, 0.5]),
         "pi_era4tb": 0.15,
@@ -1078,7 +1086,8 @@ def prior_predictive(I, seed=SEED, n=400):
     # in this check involves an intercept.
     from functools import partial
     model = numpyro.handlers.substitute(
-        partial(ctbp_model, I), {"a_windels": np.zeros(I["n_series"])})
+        partial(ctbp_model, I),
+        {"a_windels": np.zeros(int(I["is_windels_series"].sum()))})
     pred = Predictive(model, num_samples=n)
     s = pred(jax.random.PRNGKey(seed + 7))
     b = np.asarray(s["b"])

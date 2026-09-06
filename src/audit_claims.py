@@ -50,6 +50,44 @@ def check(label: str, claimed, computed, tol=0.05, unit=""):
 def main() -> int:
     rows = []
 
+    # --- exp21, the per-interval p-values --------------------------------
+    # Added after a manuscript revision caught three of these wrong in the body
+    # text. They had been carried over from an earlier draft and never
+    # rechecked against the regenerated table, and no audit line covered them.
+    f = load("exp21_interval_concentration_dependence.csv")
+    if f is not None:
+        g = f.set_index("interval")
+        for iv, claimed in (("days 0-3", 0.013), ("days 3-7", 0.24),
+                            ("days 7-14", 0.091)):
+            if iv in g.index:
+                rows.append(check(f"concentration slope p, {iv} (3.6)",
+                                  claimed, float(g.loc[iv, "p_value"]), 0.05))
+
+    # --- exp17, the Cox adjustment: p-values, not hazard ratios -----------
+    # A revision of this manuscript relabelled these three p-values as hazard
+    # ratios. Both quantities exist in the same table, so the audit now pins
+    # both and names which is which.
+    f = load("exp17_cox.csv")
+    if f is not None:
+        adj = f[f.model == "institute + starting density"].set_index("term")
+        for term, claimed_p, claimed_hr in (("institute_D", 0.138, 0.339),
+                                            ("institute_E", 0.172, 0.364),
+                                            ("institute_F", 0.576, 0.619)):
+            if term in adj.index:
+                rows.append(check(f"{term} adjusted P-VALUE (3.4)",
+                                  claimed_p, float(adj.loc[term, "p_value"]), 0.02))
+                rows.append(check(f"{term} adjusted HAZARD RATIO (not the p)",
+                                  claimed_hr, float(adj.loc[term, "hazard_ratio"]), 0.02))
+
+    # --- exp17, growth at one times MIC ----------------------------------
+    # The claim is net GROWTH in five of six laboratories, which is stronger
+    # than "little or no killing" and is what the numbers say.
+    f = load("exp17_kill_rates.csv")
+    if f is not None:
+        one = f[f.arm == "MXF 1x MIC"].dropna(subset=["kill_rate_tobit"])
+        rows.append(check("laboratories with net growth at 1x MIC (3.4: 5)",
+                          5, float((one.kill_rate_tobit < 0).sum()), 0.001))
+
     # --- exp22, the spine: dynamic range and the floored isolates --------
     # These are the numbers Sections 3.1 and 3.2 rest on. They are arithmetic
     # rather than statistical, so a drift here is a coding error, not noise.
