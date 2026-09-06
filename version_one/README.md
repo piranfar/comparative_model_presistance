@@ -52,13 +52,14 @@ check exists to keep that disagreement visible rather than to be silenced.
 
 The first paper is a simulation study: a state-structured pharmacodynamic model,
 its sensitivity and its identifiability, examined on synthetic data. The current
-paper is not a revision of it. It is an empirical reanalysis of five published
-deposits, and it lives at the repository root.
+paper is not a revision of it. It is an empirical reanalysis of four published
+deposits asking what a log-reduction tolerance endpoint measures once the assay
+floor is within reach of it, and it lives at the repository root.
 
 Several claims made here were later corrected, and the corrections are recorded
 rather than quietly applied. `manuscript/CORRECTIONS_LOG.md` holds them. The
 substantive ones: the reference numbering in the submitted bioRxiv v2 was wrong,
 four figures sat under the wrong legends, and the exposure convention was
-absolute rather than per-MIC in three places. The current paper's Section 3.4
+absolute rather than per-MIC in three places. The current paper's supplementary exposure mapping (Table S2)
 quantifies what that last error costs, which is why it appears there rather than
 being buried here.

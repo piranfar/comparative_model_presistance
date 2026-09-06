@@ -46,7 +46,7 @@ STAGES = [
 
     ("fig 1  the assay floor bounds the endpoint and decides the phenotype",
      "src.figures.fig14_dynamic_range"),
-    ("fig 2  a rate transfers; a clearance time does not",
+    ("fig 2  one protocol, six laboratories: the inoculum still decides",
      "src.figures.fig10_rate_vs_duration"),
     ("fig 3  the endpoint decides what is visible",
      "src.figures.fig11_endpoint_collapse"),

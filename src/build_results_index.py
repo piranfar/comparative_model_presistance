@@ -25,8 +25,9 @@ OUT = RES / "README.md"
 
 # Which experiments belong to which manuscript.
 PAPERS = {
-    "Rate versus duration (manuscript/PAPER_COMPLETE.md)":
-        [f"exp{n}" for n in range(16, 22)] + ["fig10", "fig11", "fig12", "fig13"],
+    "Tolerance and the assay floor (manuscript/PAPER_COMPLETE.md)":
+        [f"exp{n}" for n in range(16, 24)]
+        + ["fig10", "fig11", "fig12", "fig13", "fig14"],
 }
 
 # Outputs retained on purpose although nothing currently cites them.

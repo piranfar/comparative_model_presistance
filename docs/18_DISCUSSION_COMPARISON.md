@@ -1,7 +1,10 @@
 # Discussion: what others did, what we did, and why ours holds
 
 Our results are locked. This file is the comparison table the Discussion is
-written from. Every row follows one shape: **what they did, what we did, what
+written from. Sections 0 to 0c were added when the paper's spine moved from the
+divergence of two summaries to the failure of the log-reduction metric; sections
+1 to 7 predate that move and still stand, with section 1 now supporting Section
+3.4 rather than the whole argument. Every row follows one shape: **what they did, what we did, what
 differs, and why our choice is defensible.** Nothing here restates a prior
 finding as ours, and every citation below was verified against the live record
 rather than recalled.
@@ -9,6 +12,103 @@ rather than recalled.
 The rule applied throughout: where a prior study reached a different answer, the
 difference is traced to a specific methodological choice, and that choice is
 named. Disagreement without a named cause is not a defence.
+
+---
+
+## 0. The rule this paper does not claim to have discovered
+
+**Clinical microbiology, uncited because it is universal.** A culture taken after
+antibiotics have started is not evidence of sterility. It is why blood cultures
+are drawn before the first dose, and it is taught to every trainee.
+
+**What we do.** We concede it in the first sentence of the Introduction rather
+than rediscovering it in the Results. The paper is not about negative cultures.
+
+**What differs.** Nothing. This is the premise, and stating it as ours would be
+the fastest way to lose a referee.
+
+**Why this matters to the framing.** An earlier draft of this paper argued that a
+clearance time depends on the starting inoculum and a kill rate does not. That is
+the old rule with survival analysis on top. The current paper begins where that
+draft ended: given that everyone knows a threshold crossing is unreliable, what
+did the field build to replace it, and does the replacement work?
+
+---
+
+## 0b. MDK as the engineered answer, and where it fails
+
+**Brauner A, Fridman O, Gefen O, Balaban NQ.** *Nat Rev Microbiol*
+2016;14(5):320-30. doi:10.1038/nrmicro.2016.34. And **Brauner A, Shoresh N,
+Fridman O, Balaban NQ.** *Biophys J* 2017;112(12):2664-71.
+doi:10.1016/j.bpj.2017.05.014.
+
+**What they did.** Defined the minimum duration for killing as the tolerance
+counterpart to the MIC: the time to a specified fractional reduction, 90, 99 or
+99.99 per cent. The fraction is the design decision. A ratio to the starting
+population is scale-free, so on a log-linear decline the starting density cancels
+and the metric cannot be contaminated by how much culture went into the tube.
+They also warn, in the 2016 paper, that poor quantification of tolerance "may
+lead to the misclassification of tolerant strains".
+
+**What we do.** Accept the design entirely and test whether the property it was
+built to have survives the measurement. It does not, for a reason that is
+arithmetic rather than statistical: a q-log reduction is observable only where q
+logs of dynamic range exist above the assay floor, and when the final reading
+rests on the floor the recorded fraction reduces to L/N0 - the most
+inoculum-dependent quantity available.
+
+**What differs.** They analyse the estimand; we analyse the observability of the
+estimand. These are not in conflict. MDK is scale-free where the assay can
+resolve it and is a reading of the starting density where it cannot.
+
+**Why ours is acceptable.** The failure is bounded and specific, which is what
+makes it a fixable defect rather than an attack on the framework. In the deposit
+examined, no isolate lacks the range for the 90 or the 99 per cent endpoint:
+0 of 217 in both cases. It is the 99.99 per cent endpoint - the deepest, and the
+one the clinical classification uses - that 33 of 217 could not have reached
+under any drug effect. Alexandersen et al. 2025, working at MDK99, report no
+highly tolerant isolates, which is consistent with a shallow endpoint being safe.
+We are extending their framework at its deep end, not disputing it.
+
+---
+
+## 0c. The deposit that made this testable
+
+**Vijay S, Bao NLH, Vinh DN, Nhat LTH, Thu DDA, Quang NL, et al.** *eLife*
+2024;12:RP93243. doi:10.7554/eLife.93243. Open access, CC BY 4.0.
+
+**What they did.** Assayed 217 clinical *M. tuberculosis* isolates under
+rifampicin, scored each as low, medium or high tolerance, and reported
+associations between tolerance, resistance status and treatment history. Crucially
+for us, they deposited the classification, the MPN readings it was computed from,
+the starting densities, a growth-rate proxy and the resistance genotype in one
+file.
+
+**What we do.** Use their own classification as the object of study. We show the
+labels are a clean threshold on the recorded surviving fraction with no class
+overlap; that 18 isolates ended at the identical MPN floor and were nonetheless
+assigned survival values spanning exactly the 265-fold span of their starting
+densities; and that a single cut on starting density reproduces all 18 labels.
+
+**What differs.** They report an association between isoniazid resistance and
+tolerance. We find that association loses two thirds of its coefficient once the
+starting density enters the model, with an interval that then spans zero, and
+that the mechanism is visible in their own file: resistant isolates enter the
+assay ten-fold lower and 26 per cent of them lack the headroom the deepest
+endpoint needs, against 8 per cent of susceptible isolates.
+
+**Why ours is acceptable, and how it must be phrased.** This analysis exists only
+because they deposited the classification alongside its inputs, which most
+studies do not, and the paper says so. We do not dispute a single measurement. We
+add a covariate they did not have reason to consider and report what it does. The
+correct verb is *attenuates*, not *eliminates*: 0.259 to 0.089, a 66 per cent
+reduction, CI +0.086 to +0.431 becoming -0.108 to +0.285.
+
+**The one thing we must not claim.** That resistant isolates seed lower because
+resistance carries a fitness cost. We checked: they do not grow significantly
+more slowly here (p = 0.24), and 85 of them carry katG S315X, the allele that
+predominates clinically precisely because it is close to fitness-neutral. Why
+they seed lower is unexplained and is stated as such.
 
 ---
 
@@ -251,3 +351,16 @@ Chosen by us, so they are not chosen by a referee.
    original authors. The conclusion holds under both readings, 273–286 fold or
    628–658 fold, so it is stated as an open question about the source rather
    than a threat to the argument.
+7. The variance decomposition does not support the strong reading of our own
+   argument. Across the six-laboratory arms the rate term carries 61 to 80 per
+   cent of the spread in crossing time and the distance term 20 to 39 per cent.
+   A clearance time is a mixture in which the inoculum is a large minority, not
+   a measurement of the inoculum. We state this in the Results, not only in the
+   limitations, because it bounds the claim rather than qualifying it.
+8. Both surviving label associations sit in the 15-day panel. For growth the
+   difference between panels is itself supported (interaction p = 0.0072); for
+   resistance it is not (p = 0.088). And because the same isolates appear in both
+   panels the comparison is not independent, so it bounds the evidence rather
+   than establishing it. The mechanism predicts the pattern - by 60 days the
+   cultures are 38-fold denser and only 3 per cent of isolates are short of
+   headroom - but a prediction confirmed in one panel of two is reported as that.

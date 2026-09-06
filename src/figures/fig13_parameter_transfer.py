@@ -1,5 +1,5 @@
 """
-Figure 4. Published pharmacodynamic constants transfer only when they are rates.
+Figure S1. Published pharmacodynamic constants transfer only when they are rates.
 
 Run:  python -m src.figures.fig13_parameter_transfer
 

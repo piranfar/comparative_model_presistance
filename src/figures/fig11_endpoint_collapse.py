@@ -1,5 +1,5 @@
 """
-Figure 2. The endpoint decides whether a 32-fold concentration range is visible.
+Figure 3. The endpoint decides whether a 32-fold concentration range is visible.
 
 Run:  python -m src.figures.fig11_endpoint_collapse
 

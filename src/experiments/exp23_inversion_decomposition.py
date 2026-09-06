@@ -8,8 +8,8 @@ laboratories by kill rate and the ordering by clearance do not correspond. That
 is a statement about two rankings. It is not a measurement of how often the
 rankings actually invert, nor of what fraction of the spread in clearance times
 is bought by the rate and what fraction by the distance the population had to
-fall. Both are computable, and without them the central claim rests on a
-qualitative comparison.
+fall. Both are computable, and without them Section 3.5 would rest on a
+qualitative comparison between two rankings.
 
 THE ARITHMETIC. Over an interval in which the decline is close to log-linear,
 

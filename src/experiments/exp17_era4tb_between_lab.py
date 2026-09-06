@@ -3,6 +3,14 @@ A kill rate travels between laboratories. A time to clearance does not.
 
 Run:  python -m src.experiments.exp17_era4tb_between_lab
 
+WHERE THIS SITS IN THE ARGUMENT. This was once the paper. It is now Section
+3.4: the demonstration that what Sections 3.1 to 3.3 find in clinical isolates,
+where the inoculum is set by whatever the patient produced, also happens when
+one stock is deliberately distributed to six laboratories under one written
+protocol. The finding here is not that laboratories differ - they were asked
+not to - but that the difference lands on the duration endpoint and not on the
+rate.
+
 WHY THIS TEST EXISTS. The manuscript argues that a pharmacodynamic rate is a
 property of a drug, an organism and a physiological condition together, and that
 endpoints read as durations -- the minimum duration for killing, the time to

@@ -1,17 +1,18 @@
 """
-Figure 1. A kill rate transfers between laboratories; a time to clearance does not.
+Figure 2. Where the inoculum is set by protocol, the two summaries still diverge.
 
 Run:  python -m src.figures.fig10_rate_vs_duration
 
-This is the figure the paper rests on, and it is built so that the divergence is
-visible rather than argued. Panel A shows that every laboratory produces a kill
-rate. Panel B shows that half of them produce no clearance time at all, on the
-same flasks. Panel C shows what decides which half. Panel D shows that once the
-starting density is in the model, the laboratory stops explaining.
+This figure used to be the spine of the paper. It is now the demonstration
+that the arithmetic of Section 2.5 is not a property of clinical sampling: here
+one strain from one stock went to six laboratories under one written protocol,
+and the inoculum still decided which of them could produce a duration at all.
 
-The two panels that matter are A and B side by side: the same six laboratories,
-the same flasks, one endpoint estimable everywhere and the other undefined in
-three of six.
+Panel A shows that every laboratory produces a kill rate. Panel B shows that half
+of them produce no clearance time on the same flasks. Panel C shows what decides
+which half. Panel D shows what happens when the starting density enters a Cox
+model - three laboratories stop being distinguishable and one does not, which is
+reported rather than absorbed.
 
 Reads:
   results/tables/exp17_kill_rates.csv
@@ -176,7 +177,7 @@ def build():
     ax_d.set_yticks(yb, labs)
     ax_d.set_xlabel("p-value for the laboratory term (Cox model)")
     ax_d.set_ylabel("laboratory")
-    ax_d.set_title("Adjusting for the inoculum absorbs it", loc="left")
+    ax_d.set_title("Adjusting for the inoculum absorbs three of four", loc="left")
     ax_d.grid(axis="y", visible=False)
     st.panel_tag(ax_d, "D")
     st.note(ax_d, "Grey: laboratory alone. Arrow head: after adding starting\n"

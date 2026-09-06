@@ -1,5 +1,5 @@
 """
-Figure 3. Resistance and tolerance are separate axes, in two designs.
+Figure 4. Resistance and tolerance are separate axes, in two designs.
 
 Run:  python -m src.figures.fig12_independence
 
