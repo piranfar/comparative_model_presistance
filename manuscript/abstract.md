@@ -19,8 +19,8 @@ own tolerance classification, none lacks the headroom for a 90 or 99 per cent
 endpoint, while 33 lack it for the 99.99 per cent endpoint the classification
 uses, and all 33 are recorded as failing to reach it. Eighteen
 isolates ended at the same unmeasurable floor and a single threshold on their
-starting density reproduces every label they were given; because a floor reading
-bounds the class from above, six of those labels are undecidable. The label tracks
+starting density reproduces every label they were given; for twelve, no count the
+assay could have returned would have changed the class. The label tracks
 growth state, which survives adjustment for starting density, and isoniazid
 resistance, which does not: resistant isolates enter ten-fold lower and lose
 two-thirds of their apparent tolerance once that is accounted for.

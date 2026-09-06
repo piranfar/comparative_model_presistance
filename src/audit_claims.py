@@ -86,10 +86,10 @@ def main() -> int:
                           203, float(o["n_calls"]), 0.001))
         rows.append(check("determinable calls (2: 185)",
                           185, float(o["determinable"]), 0.001))
-        rows.append(check("bounded but tight, label stands (2: 12)",
-                          12, float(o["bounded_tight"]), 0.001))
-        rows.append(check("bounded loosely, label undecidable (2: 6 NOT 18)",
-                          6, float(o["bounded_loose"]), 0.001))
+        rows.append(check("labels forced by the inoculum alone (2: 12)",
+                          12, float(o["forced_by_inoculum"]), 0.001))
+        rows.append(check("labels undecidable from the assay (2: 6)",
+                          6, float(o["undecidable"]), 0.001))
         g = {x["group"]: x for x in r["by_susceptibility_group"]["15d"]}
         if "IR" in g and "IS" in g:
             rows.append(check("deep endpoint unreachable, resistant (2: 26.2%)",

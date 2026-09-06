@@ -16,20 +16,25 @@ tolerance. The recorded class is therefore an UPPER BOUND on the true class: suc
 an isolate may belong to a lower tolerance class than recorded, and can never
 belong to a higher one.
 
-This has an asymmetric consequence that the manuscript had missed. An isolate
-recorded in the LOWEST class is bounded above by a class it already occupies, so
-its label stands: it cannot be less tolerant than the least tolerant category.
-Only an isolate recorded ABOVE the lowest class has a label that could be wrong.
+An earlier version of this experiment stopped there and concluded that an isolate
+recorded in the lowest class keeps its label, since a class cannot be bounded
+below its own floor. That conceded too much, and the concession was wrong in our
+own disfavour. Whether the recorded label survives the bound is not the question.
+The question is whether the measurement could ever have returned a different one.
 
-So a tolerance call falls into one of three observability classes:
+Sweeping the true count across the entire range the floor admits, zero to L,
+gives the classes that were reachable at all. Where only one class is reachable,
+the label was fixed by the starting density before the drug was added: the assay
+could not have said anything else, and its reading contributed nothing.
 
-  DETERMINABLE     the day-5 reading is above the floor; the fraction is measured
-                   and the label is a measurement
-  BOUNDED, TIGHT   the reading is at the floor, and the recorded class is already
-                   the lowest available; the bound cannot move the label
-  BOUNDED, LOOSE   the reading is at the floor and the recorded class is above the
-                   lowest; the true class may be lower, and the label is not
-                   determinable from this assay
+So a tolerance call falls into one of three classes:
+
+  DETERMINABLE          the day-5 reading is above the floor; the fraction is
+                        measured and the label is a measurement
+  FORCED BY INOCULUM    the reading is at the floor and only one class was ever
+                        reachable; the label is arithmetic, not observation
+  UNDECIDABLE           the reading is at the floor and more than one class is
+                        reachable; the assay cannot say which
 
 Counting them says how much of a published classification survives its own
 measurement, which is a different and more useful number than counting how many
@@ -63,6 +68,16 @@ RECEIPTS = ROOT / "results" / "receipts"
 MPN_FLOOR = 23.0
 DEEP_ENDPOINT_LOGS = 4.0            # the 99.99 per cent endpoint
 CLASS_ORDER = {"Low": 0, "Medium": 1, "High": 2}
+# The deposited thresholds on the recorded surviving fraction, recovered in
+# exp22 by showing the classes do not overlap on it.
+CLASS_CUTS = (1e-3, 1e-2)
+
+
+def _class_of(fraction: float) -> str:
+    """Which tolerance class the deposited thresholds assign to a fraction."""
+    lo, hi = CLASS_CUTS
+    return "Low" if fraction < lo else ("Medium" if fraction <= hi else "High")
+
 LOWEST_CLASS = "Low"
 
 
@@ -74,8 +89,22 @@ def classify(d: pd.DataFrame, age: int) -> pd.DataFrame:
 
     at_floor = n5 <= MPN_FLOOR
     lowest = lab == LOWEST_CLASS
+
+    # An earlier version of this experiment called a floored reading in the
+    # lowest class "bounded, tight" and let its label stand, on the argument
+    # that the class cannot be bounded below its own floor. That conceded too
+    # much. The right question is not whether the recorded label survives the
+    # bound, but whether the measurement could ever have produced a different
+    # one. Sweep the true count across the whole range the floor admits, 0 to
+    # L, and see which classes are reachable. Where only one is, the label was
+    # FORCED by the starting density before the drug was added, and the assay
+    # contributed nothing to it.
+    reachable_low = np.array([_class_of(0.0)] * len(n0))          # count 0
+    reachable_high = np.array([_class_of(MPN_FLOOR / v) if v > 0 else None
+                               for v in n0])                       # count at L
+    forced = at_floor & (reachable_low == reachable_high)
     klass = np.where(~at_floor, "determinable",
-                     np.where(lowest, "bounded, tight", "bounded, loose"))
+                     np.where(forced, "forced by inoculum", "undecidable"))
 
     return pd.DataFrame({
         "culture_age_days": age,
@@ -93,12 +122,12 @@ def classify(d: pd.DataFrame, age: int) -> pd.DataFrame:
 def summarise(c: pd.DataFrame) -> dict:
     n = len(c)
     out = {"n_calls": n}
-    for k in ("determinable", "bounded, tight", "bounded, loose"):
+    for k in ("determinable", "forced by inoculum", "undecidable"):
         m = int((c["observability"] == k).sum())
         out[k.replace(", ", "_").replace(" ", "_")] = m
         out[k.replace(", ", "_").replace(" ", "_") + "_pct"] = 100 * m / n if n else np.nan
-    loose = c[c["observability"] == "bounded, loose"]
-    out["loose_recorded_classes"] = loose["recorded_class"].value_counts().to_dict()
+    loose = c[c["observability"] == "undecidable"]
+    out["undecidable_recorded_classes"] = loose["recorded_class"].value_counts().to_dict()
     out["n_deep_endpoint_unreachable"] = int((~c["deep_endpoint_reachable"]).sum())
     out["pct_deep_endpoint_unreachable"] = 100 * (~c["deep_endpoint_reachable"]).mean()
     return out
@@ -161,12 +190,12 @@ def main() -> int:
               f"own measurement? (n={s['n_calls']}) --")
         print(f"   determinable, reading above the floor : "
               f"{s['determinable']:3d}  ({s['determinable_pct']:.1f}%)")
-        print(f"   bounded but the bound is tight        : "
-              f"{s['bounded_tight']:3d}  ({s['bounded_tight_pct']:.1f}%)  "
-              f"already the lowest class, so the label stands")
-        print(f"   bounded and the label may be wrong    : "
-              f"{s['bounded_loose']:3d}  ({s['bounded_loose_pct']:.1f}%)  "
-              f"{s['loose_recorded_classes']}")
+        print(f"   forced by the inoculum alone          : "
+              f"{s['forced_by_inoculum']:3d}  ({s['forced_by_inoculum_pct']:.1f}%)  "
+              f"only one class was ever reachable")
+        print(f"   undecidable from the assay            : "
+              f"{s['undecidable']:3d}  ({s['undecidable_pct']:.1f}%)  "
+              f"{s['undecidable_recorded_classes']}")
         print(f"   deepest endpoint unreachable          : "
               f"{s['n_deep_endpoint_unreachable']:3d}  "
               f"({s['pct_deep_endpoint_unreachable']:.1f}%)")

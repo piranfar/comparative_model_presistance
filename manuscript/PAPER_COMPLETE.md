@@ -42,8 +42,8 @@ own tolerance classification, none lacks the headroom for a 90 or 99 per cent
 endpoint, while 33 lack it for the 99.99 per cent endpoint the classification
 uses, and all 33 are recorded as failing to reach it. Eighteen
 isolates ended at the same unmeasurable floor and a single threshold on their
-starting density reproduces every label they were given; because a floor reading
-bounds the class from above, six of those labels are undecidable. The label tracks
+starting density reproduces every label they were given; for twelve, no count the
+assay could have returned would have changed the class. The label tracks
 growth state, which survives adjustment for starting density, and isoniazid
 resistance, which does not: resistant isolates enter ten-fold lower and lose
 two-thirds of their apparent tolerance once that is accounted for.
@@ -184,31 +184,32 @@ twelve that began at 230 000 or above received 10⁻⁴ or less and were classif
 reproduces all eighteen (Table 3). For these isolates the recorded phenotype is a
 function of where the culture started and not of how rifampicin acted on it.
 
-**Table 3.** Isolates whose day-5 reading sat on the MPN floor, so that as far as the assay could resolve they were killed to the same degree. Because a reading at the floor gives a recorded fraction of L/N0, the spread in their apparent survival equals the spread in their starting densities exactly, and the labels they received differ. The last three columns sort every call in the panel, not only those at the floor: a floor reading bounds the class from above, so an isolate already recorded in the lowest class keeps its label and only those recorded above it can be undecidable.
+**Table 3.** Isolates whose day-5 reading sat on the MPN floor, so that as far as the assay could resolve they were killed to the same degree. Because a reading at the floor gives a recorded fraction of L/N0, the spread in their apparent survival equals the spread in their starting densities exactly, and the labels they received differ. The last three columns sort every call in the panel, not only those at the floor: a floor reading bounds the class from above; sweeping the true count across that range shows twelve labels for which only one class was ever reachable and six the assay cannot decide between.
 
-| Prior culture | At the floor | Starting density spread | Recorded survival spread | Labels assigned at the floor | Determinable | Bounded, label stands | Bounded, undecidable |
+| Prior culture | At the floor | Starting density spread | Recorded survival spread | Labels assigned at the floor | Determinable | Forced by inoculum | Undecidable |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
 | 15 days | 18 | 265x | 265x | Low: 12, Medium: 6 | 185 | 12 | 6 |
 | 60 days | 6 | 100x | 100x | Low: 6 | 191 | 6 | 0 |
 
 
-How many labels this actually puts in doubt is a smaller number, and the
-asymmetry that makes it smaller is worth stating because it is not obvious. A
-reading at the floor means the true count lies somewhere below it, so the true
-surviving fraction is at most *L*/*N₀* and the recorded class is an upper bound:
-such an isolate may belong to a lower tolerance class than recorded and can never
-belong to a higher one. An isolate already recorded in the lowest class is
-therefore bounded above by a class it already occupies, and its label stands. The
-twelve recorded as low are safe for this reason. Only the six recorded as medium
-have labels that could be wrong, and they could only be wrong downwards.
+The question this raises is not whether those labels are wrong but whether the
+assay could have returned any other answer, and for these eighteen it could not.
+A reading at the floor places the true count somewhere between zero and *L*.
+Sweeping the true count across that whole range and applying the deposited
+thresholds gives the classes that were reachable at all. For the twelve isolates
+that began at 230 000 per mL or above, every admissible count from zero to the
+floor yields a fraction below 10⁻³ and therefore the label **low**: the answer
+was fixed by the starting density before rifampicin was added, and the reading
+contributed nothing to it. For the six that began at 23 000, the admissible range
+spans the low–medium threshold, so the assay cannot say which class the isolate
+belongs to. Twelve labels are arithmetic and six are undecidable. None of the
+eighteen is a measurement of what the drug did.
 
-Sorting every call this way gives the fraction of a published classification that
-survives its own measurement (Table 3). At 15 days of prior culture, 185 of 203
-calls are determinable, 12 are bounded by a bound too tight to move them, and 6
-are bounded loosely enough that the class is not determinable from the assay. At
-60 days the same counts are 191, 6 and none, because the cultures are denser and
-few readings reach the floor. Three per cent of the labels are undecidable, not
-eighteen, and we report the smaller number.
+Sorting every call in the panel this way gives how much of a published
+classification is observation and how much is arithmetic (Table 3). At 15 days of
+prior culture, 185 of 203 calls are determinable, 12 are forced by the inoculum,
+and 6 are undecidable; at 60 days the counts are 191, 6 and none, because the
+cultures are denser and few readings reach the floor.
 
 The larger effect is at the deeper endpoint and it falls unevenly on the groups a
 study would compare. The 99.99 per cent endpoint is unreachable for 26.2 per cent
@@ -496,9 +497,11 @@ culture. Fifteen per cent of the clinical isolates examined here could not have
 demonstrated the deepest endpoint under any drug effect whatever, and all of them
 are recorded as having failed to demonstrate it. Eighteen isolates that ended at
 the same unmeasurable value carry tolerance labels that a single threshold on
-their starting density reproduces exactly. Because a floor reading bounds the
-class from above, and twelve of those eighteen already sit in the lowest class,
-six labels rather than eighteen are undecidable. We report the smaller number.
+their starting density reproduces exactly. Sweeping the true count across the
+range the floor admits shows why: for twelve of them only one class was ever
+reachable, so the label was fixed before the drug was added, and for the other
+six more than one class is reachable, so the assay cannot decide between them.
+Twelve are arithmetic and six are undecidable.
 
 The failure is specific and it is bounded. Neither the 90 nor the 99 per cent
 endpoint is compromised in this deposit: no isolate lacks headroom for either.
@@ -623,8 +626,8 @@ that the fraction stops being a fraction when the population reaches the floor,
 and becomes a reading of the starting density instead — in this deposit, for
 fifteen per cent of isolates at the depth the classification uses, and
 demonstrably for the eighteen isolates whose recorded phenotype a single
-threshold on their inoculum reproduces exactly, six of whose labels remain
-undecidable once the direction of the bound is taken into account.
+threshold on their inoculum reproduces exactly, and for whom no admissible count
+the assay could have returned would have changed the answer.
 
 The consequence is not that tolerance is an artefact. It is that a tolerance call
 made without its headroom cannot be told apart from an inoculum measurement, and
@@ -847,9 +850,9 @@ on the curve *L*/*N₀*, which is what a reading at the floor computes, so the
 265-fold span in their apparent survival is exactly the 265-fold span in their
 starting densities. The dotted lines are the deposited classification
 thresholds: the isolates fall either side of the low/medium cut according to
-where they began, not according to what rifampicin did. Because a floor reading
-bounds the class from above, the twelve below the cut keep their label and the
-six above it are the undecidable ones.
+where they began, not according to what rifampicin did. For the twelve below the
+cut no other class was reachable from any admissible count; for the six above it
+the admissible range straddles the cut and the class is undecidable.
 
 ![Figure 2](../results/figures/fig10_rate_vs_duration.png)
 

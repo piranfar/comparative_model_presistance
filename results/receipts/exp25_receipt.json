@@ -1,6 +1,6 @@
 {
   "script": "src/experiments/exp25_observability_classes.py",
-  "utc": "2026-09-06T04:12:26+00:00",
+  "utc": "2026-09-06T04:22:50+00:00",
   "data_source": "eLife 93243 supplementary file 2",
   "mpn_floor_per_ml": 23.0,
   "deep_endpoint_logs": 4.0,
@@ -9,11 +9,11 @@
       "n_calls": 203,
       "determinable": 185,
       "determinable_pct": 91.13300492610837,
-      "bounded_tight": 12,
-      "bounded_tight_pct": 5.911330049261084,
-      "bounded_loose": 6,
-      "bounded_loose_pct": 2.955665024630542,
-      "loose_recorded_classes": {
+      "forced_by_inoculum": 12,
+      "forced_by_inoculum_pct": 5.911330049261084,
+      "undecidable": 6,
+      "undecidable_pct": 2.955665024630542,
+      "undecidable_recorded_classes": {
         "Medium": 6
       },
       "n_deep_endpoint_unreachable": 31,
@@ -23,11 +23,11 @@
       "n_calls": 197,
       "determinable": 191,
       "determinable_pct": 96.95431472081218,
-      "bounded_tight": 6,
-      "bounded_tight_pct": 3.045685279187817,
-      "bounded_loose": 0,
-      "bounded_loose_pct": 0.0,
-      "loose_recorded_classes": {},
+      "forced_by_inoculum": 6,
+      "forced_by_inoculum_pct": 3.045685279187817,
+      "undecidable": 0,
+      "undecidable_pct": 0.0,
+      "undecidable_recorded_classes": {},
       "n_deep_endpoint_unreachable": 7,
       "pct_deep_endpoint_unreachable": 3.5532994923857872
     }

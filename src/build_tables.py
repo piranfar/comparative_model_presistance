@@ -103,12 +103,12 @@ def table3() -> str:
                      ", ".join(f"{k}: {v}" for k, v in
                                json.loads(f["label_counts"]).items()),
                      int(s["determinable"]),
-                     int(s["bounded_tight"]),
-                     int(s["bounded_loose"])])
+                     int(s["forced_by_inoculum"]),
+                     int(s["undecidable"])])
     d = pd.DataFrame(rows, columns=[
         "Prior culture", "At the floor", "Starting density spread",
         "Recorded survival spread", "Labels assigned at the floor",
-        "Determinable", "Bounded, label stands", "Bounded, undecidable"])
+        "Determinable", "Forced by inoculum", "Undecidable"])
     return ("**Table 3.** Isolates whose day-5 reading sat on the MPN floor, so "
             "that as far as the assay could resolve they were killed to the same "
             "degree. Because a reading at the floor gives a recorded fraction of "
@@ -116,8 +116,9 @@ def table3() -> str:
             "their starting densities exactly, and the labels they received "
             "differ. The last three columns sort every call in the panel, not "
             "only those at the floor: a floor reading bounds the class from "
-            "above, so an isolate already recorded in the lowest class keeps its "
-            "label and only those recorded above it can be undecidable."
+            "above; sweeping the true count across that range shows twelve labels "
+            "for which only one class was ever reachable and six the assay "
+            "cannot decide between."
             + chr(10) + chr(10) + md(d))
 
 
