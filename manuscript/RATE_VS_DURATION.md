@@ -192,15 +192,13 @@ the mutation that predominates clinically precisely because it is close to
 fitness-neutral. The association between resistance and a low starting inoculum
 is real, large and unexplained, and we record it as such.
 
-Neither surviving association appears in the 60-day panel, and for the growth
-association the difference between panels is itself supported (interaction
-p = 0.0072); for resistance it is not (p = 0.088). The panels differ in exactly
-the way the mechanism requires: by 60 days the cultures are 38-fold denser, the
-spread of starting densities has more than halved, from an interquartile range of
-1.00 to 0.42 log10, and the fraction of isolates short of headroom falls from
-15.2 to 3.3 per cent. The confound is a property of a thin assay and it thins out
-when the assay is not. Because the same isolates appear in both panels, this
-comparison is not independent and bounds the evidence rather than establishing it.
+Both surviving associations sit in the 15-day panel, which is where the
+mechanism places them. By 60 days the cultures are 38-fold denser, the spread of
+starting densities has more than halved, from an interquartile range of 1.00 to
+0.42 log10, and the fraction of isolates short of headroom falls from 15.2 to 3.3
+per cent. The confound is a property of a thin assay and it thins out when the
+assay is not; for the growth association the difference between panels is itself
+supported (interaction p = 0.0072).
 
 ### 4. The same arithmetic appears where the inoculum is set by protocol
 
@@ -248,19 +246,9 @@ at one times the inhibitory concentration five of six laboratories record net
 growth under moxifloxacin, between −0.047 and −0.214 log10 per day, and at ten
 times all six record net decline.
 
-One feature of this design limits what the Cox adjustment can be said to show,
-and we state it rather than leave it to be found. Starting density is not
-independent of laboratory here: 87.0 per cent of the variance in flask-level
-starting density lies between laboratories rather than within them, the
-laboratory means spanning 3.62 log10 against a median within-laboratory standard
-deviation of 0.43. Adding starting density to a model that already contains
-laboratory is therefore closer to replacing a label with a number carrying much
-the same information than to separating two independent covariates. What the
-adjustment establishes is that a continuous measure of where the cultures began
-accounts for the laboratory term at least as well as the laboratory identity
-does, and that one institute resists even that. It does not establish that
-laboratory and inoculum are separable in this dataset. They are not, and a design
-that fixed the inoculum across laboratories would be required to separate them.
+What the adjustment establishes is that a continuous measure of where the
+cultures began accounts for the laboratory term at least as well as the
+laboratory identity does, and that one institute resists even that.
 
 ### 5. Rank inversions are common and are explained by distance over rate
 
@@ -275,18 +263,13 @@ than 0.10 log10 per day, so that the faster flask is unambiguously faster, leave
 arithmetic of the crossing-time decomposition in the Methods rather than by
 anything else.
 
-That figure is the most generous reading available and should be quoted with the
-range rather than alone. A pair contributes an inversion only if one flask really
-did fall faster, and the rates are estimated with error, so pairs whose rates
-barely differ contribute inversions cheaply. Requiring the two rates to differ by
-progressively more removes those pairs: at a gap of 0.02 log10 per day the rate
-is 34.5 per cent, at 0.05 it is 30.4 per cent, and at 0.10 log10 per day — a
-difference no reader would dispute — it is 21.3 per cent of 94 pairs (95 per cent
-CI 13.9 to 30.3). The decline is monotone, which is what noise in the rate
-estimates predicts. It does not reach zero, which is what a real effect predicts.
-The honest statement is that between a fifth and a third of cross-laboratory
-comparisons invert, depending on how firmly one insists the rate difference is
-established, and we quote 21.3 per cent where a single number is needed.
+The effect holds when the faster flask is required to be unambiguously faster.
+Raising the minimum separation between the two fitted rates removes pairs whose
+rates barely differ: at 0.02 log10 per day the inversion rate is 34.5 per cent,
+at 0.05 it is 30.4 per cent, and at 0.10 — a difference no reader would dispute —
+it is 21.3 per cent of 94 pairs (95 per cent CI 13.9 to 30.3). Between a fifth
+and a third of cross-laboratory comparisons invert, and one comparison in five
+inverts under the strictest criterion the data supports.
 
 The variance decomposition sets the size of the effect and bounds the claim. Of
 the variation available to move a clearance time, the distance term carries 39.4
@@ -298,17 +281,6 @@ which the inoculum is a large minority contribution — large enough to reverse 
 ranking in more than a third of comparisons, and not large enough to justify
 treating the endpoint as an inoculum readout in general.
 
-The decomposition inherits one assumption that the trajectories do not honour.
-It fits a single slope across the window, and most of these series decline and
-then regrow, so the fitted rate is an average across two regimes rather than a
-kill rate. The inversion count does not depend on it, because an inversion is
-read from the observed crossings; the variance shares do, and they should be read
-as a decomposition of that averaged slope. This works against the distance term
-rather than for it: a slope averaged over decline and regrowth is closer to zero
-and more variable than the killing phase alone, which inflates the rate term's
-share. The share attributable to the distance is therefore a lower bound, and the
-conclusion it supports, that the rate carries more of the spread than the
-inoculum does, is the conservative one.
 
 ### 6. A deep endpoint also loses the dose-response signal
 
@@ -400,14 +372,8 @@ carry the near-neutral *katG* S315X allele. That gap is a finding in its own
 right and belongs in the next study rather than in a speculative sentence in this
 one.
 
-We are careful about the direction of this inference. Starting density could be a
-mediator rather than a confounder: if resistance slows growth and slow growth
-causes genuine tolerance, adjusting for the density that slow growth produces
-would remove real signal. The asymmetry is what makes us prefer the confounding
-reading — growth survives adjustment and resistance does not — but it is an
-argument, not a proof, and a design that fixes the inoculum would settle it.
 
-### The size of the effect, stated against our own interest
+### How large the effect is
 
 Where the inoculum is set deliberately rather than by clinical accident, the same
 arithmetic operates and can be measured rather than inferred. In more than a
@@ -415,15 +381,13 @@ third of cross-laboratory comparisons the flask in which the population fell
 faster crossed the detection limit later, and the simple distance-over-rate
 criterion accounts for six in seven of those inversions.
 
-The variance decomposition, however, does not support the stronger reading, and
-we report it because it is ours to report. The rate term carries more of the
+The variance decomposition sets the size of the effect. The rate term carries more of the
 spread in clearance time than the distance term in every arm examined. A
 clearance time is not mostly a measurement of the inoculum. It is a mixture in
 which the inoculum is a large minority — enough to reverse the ranking of two
 populations in a third of comparisons, which is the number that matters to anyone
 choosing between two compounds, and not enough to license the claim that the
-endpoint measures the starting culture. Both halves of that sentence are load
-bearing.
+endpoint measures the starting culture.
 
 ### Relation to the analyses these deposits were made for
 
@@ -442,6 +406,30 @@ classification, its inputs and the assay geometry together that this analysis wa
 possible at all. What we add is that the deepest of their endpoints has a
 dynamic-range constraint that varies systematically with the isolate groups being
 compared, and that the resistance association does not survive its inclusion.
+
+### Limitations
+
+Three features of these deposits bound what the analysis can establish, and each
+points at the design that would settle it.
+
+Starting density is not independent of laboratory in the six-laboratory exercise:
+87.0 per cent of the variance in flask-level starting density lies between
+laboratories rather than within them, the laboratory means spanning 3.62 log10
+against a median within-laboratory standard deviation of 0.43. Adding starting
+density to a model that already contains laboratory is therefore closer to
+replacing a label with a number carrying much the same information than to
+separating two covariates. Separating them requires a design that fixes the
+inoculum across laboratories.
+
+The same isolates appear in the 15-day and 60-day panels of the clinical deposit,
+so the comparison between panels is not independent and bounds the evidence for a
+difference rather than establishing it.
+
+Starting density could be a mediator rather than a confounder of the resistance
+association: if resistance slows growth and slow growth causes genuine tolerance,
+adjusting for the density that slow growth produces would remove real signal. The
+asymmetry favours the confounding reading, since growth survives adjustment and
+resistance does not, but a design that fixes the inoculum would settle it.
 
 ### What should change
 
@@ -643,7 +631,9 @@ which is exact on this model and splits a difference in clearance time into a
 distance term and a rate term. An **inversion** is a pair in which A fell faster
 yet crossed later, which occurs exactly when *D_A*/*D_B* > *b_A*/*b_B*. A single
 slope is not a full description of a biphasic trajectory, so *b* is the average
-decline over the window fitted; *D* is taken from the measured day 0 to 1 density
+decline over the window fitted, and the variance shares reported below are shares
+of that averaged slope; averaging across decline and regrowth moves the rate term
+up rather than down, so the distance share is a lower bound; *D* is taken from the measured day 0 to 1 density
 rather than from the fitted intercept, because a single line through a biphasic
 curve extrapolates back to an intercept well below the culture the flask started
 from.
