@@ -1,6 +1,29 @@
+---
+title: "Antibiotic tolerance is assigned from the starting inoculum wherever killing reaches the assay floor"
+short_title: "Assay-floor censoring confounds antibiotic tolerance"
+article_type: "Article"
+status: "Draft. Text not final; reference list deliberately not yet compiled."
+keywords:
+  - antibiotic tolerance
+  - minimum duration for killing
+  - Mycobacterium tuberculosis
+  - limit of quantification
+  - censored data
+  - time-kill kinetics
+  - inoculum effect
+---
+
 # Antibiotic tolerance is assigned from the starting inoculum wherever killing reaches the assay floor
 
-## 1. Introduction
+**Authors:** [to be inserted]
+
+**Correspondence:** [to be inserted]
+
+**Figures:** 4 | **Tables:** 8 | **Supplementary tables:** 2 | **Supplementary figures:** 1
+
+---
+
+## Introduction
 
 Every clinical microbiologist is taught that a culture taken after antibiotics
 have started is not evidence of sterility. It is why blood cultures are drawn
@@ -69,9 +92,337 @@ name are, in part, a record of how the assay was set up.
 
 ---
 
-## 2. Materials and methods
+## Results
 
-### 2.1 Datasets
+### 1. The assay floor limits the dynamic range available to a log-reduction endpoint
+
+The most probable number readings take the discrete values of an MPN table, and
+the day-5 column does not taper towards zero but stops. Eighteen isolates sit at
+exactly 23 per mL in the 15-day panel and six in the 60-day panel, with no value
+anywhere in the file below it (Fig. 1A). That is the behaviour of a floor rather
+than of a tail, and it is treated as one throughout.
+
+The consequence is that each isolate carries a fixed budget of observable
+killing. At 15 days of prior culture the starting densities span 3.36 to 7.79
+log10, so headroom spans 2.00 to 6.42 log10 (Fig. 1B, Table 2). Against that budget the
+three deposited endpoints behave very differently. No isolate lacks the headroom
+for a 90 or a 99 per cent reduction: 0 of 217 in both cases. **Thirty-three of
+217 isolates — 15.2 per cent — lack the headroom for the 99.99 per cent
+endpoint**, which is to say that a four-log reduction was unobservable for them
+before rifampicin was added.
+
+All 33 are recorded as not having reached it. Among the 184 isolates that did
+have four logs of headroom, 162 are at the ceiling, 88.0 per cent (Fisher exact
+p = 0.030). The deepest endpoint is therefore the only one at risk, and it is the
+one the tolerance classification is built on.
+
+### 2. Identical floor observations received different tolerance phenotypes
+
+The deposited tolerance level is a threshold on the recorded surviving fraction,
+with no overlap between classes: at day 5 and 15 days of prior culture, low
+tolerance covers fractions below 10⁻³, medium covers 10⁻³ to 10⁻², and high
+exceeds 10⁻². The label is a deterministic function of that fraction.
+
+Eighteen isolates ended at the floor, which is to say that as far as the assay
+could see they were killed to the same degree. Their recorded surviving fractions
+span 265-fold, from 3.8 × 10⁻⁶ to 1.0 × 10⁻³, and that span is exactly the
+265-fold span of their starting densities, because for a reading at the floor the
+recorded fraction is *L*/*N₀* (Fig. 1C). These are upper bounds on survival, not
+measurements of it.
+
+The tolerance labels assigned to them differ. Six isolates that began at 23 000
+per mL received a fraction of 10⁻³ and were classified **medium** tolerance;
+twelve that began at 230 000 or above received 10⁻⁴ or less and were classified
+**low**. Predicting the label from the starting density alone, with a single cut,
+reproduces all eighteen (Table 3). For these isolates the tolerance phenotype
+records where the culture started and nothing about how rifampicin acted on it.
+
+### 3. The deposited labels track growth state, and resistance only until density is included
+
+Eight association tests are available between the deposited label and its
+candidate determinants — two predictors, at two culture ages and two endpoint
+depths — and they are corrected as one family. Two survive (Table 4).
+
+The label tracks the **growth rate** of the isolate: slower growth accompanies a
+higher tolerance class, and the association survives adjustment for starting
+density (β = +0.027 per unit time to OD 0.4, p = 0.0025). It also tracks
+**isoniazid resistance**, until the starting density enters the model. Unadjusted,
+resistant isolates sit 0.259 tolerance classes higher (95 per cent CI +0.086 to
++0.431, p = 0.0035); adjusted, the coefficient falls by 66 per cent to +0.089
+(95 per cent CI −0.108 to +0.285, p = 0.374). The interval no longer excludes
+zero. We describe this as attenuation rather than elimination.
+
+The mechanism of that attenuation is measurable. Isoniazid-resistant isolates
+enter this assay at 5.36 log10 against 6.36 for susceptible isolates, ten-fold
+lower (Mann–Whitney p = 9.1 × 10⁻¹⁴), and 26 per cent of them lack the headroom
+for the deepest endpoint against 8 per cent of susceptible isolates. They are
+one log poorer in observable killing before the experiment begins.
+
+Why they seed lower is not established here, and the obvious explanation fails:
+resistant isolates do not grow significantly more slowly in this deposit (median
+time to OD 0.4 of 19 against 17, p = 0.24), and 85 of them carry *katG* S315X,
+the mutation that predominates clinically precisely because it is close to
+fitness-neutral. The association between resistance and a low starting inoculum
+is real, large and unexplained, and we record it as such.
+
+Neither surviving association appears in the 60-day panel, and for the growth
+association the difference between panels is itself supported (interaction
+p = 0.0072); for resistance it is not (p = 0.088). The panels differ in exactly
+the way the mechanism requires: by 60 days the cultures are 38-fold denser, the
+spread of starting densities has more than halved, from an interquartile range of
+1.00 to 0.42 log10, and the fraction of isolates short of headroom falls from
+15.2 to 3.3 per cent. The confound is a property of a thin assay and it thins out
+when the assay is not. Because the same isolates appear in both panels, this
+comparison is not independent and bounds the evidence rather than establishing it.
+
+### 4. The same arithmetic appears where the inoculum is set by protocol
+
+If the effect is a property of assay geometry rather than of clinical sampling,
+it should appear where one protocol, one strain and one stock are distributed
+deliberately. It does.
+
+At ten times the minimum inhibitory concentration of moxifloxacin all six
+laboratories return a positive kill rate spanning 5.2-fold, from 0.090 to 0.464
+log10 CFU/mL per day, and across all 30 laboratory-by-arm cells the Tobit and
+imputation estimates never differ by more than 0.003 log10 per day (Fig. 2A,
+Table 5). The duration endpoint behaves differently on the same flasks. Of 72
+treated flasks, 29 ever fell below the limit; institutes A, B and C cleared
+flasks in every arm and institutes D, E and F cleared none in any arm (Fig. 2B).
+For half the laboratories the time to clearance is right-censored throughout.
+
+The two orderings do not correspond. Ranked by starting density, the three lowest
+laboratories are exactly the three that cleared and the three highest exactly the
+three that did not, without exception; ranked by kill rate there is no such
+correspondence (Fig. 2C). Institute F, with the highest starting density at 6.53
+log10, kills faster than four of the other five at 0.223 log10 per day and never
+clears. Institute E returns the slowest rate of all at 0.090 and also never
+clears.
+
+Starting density separates flasks that ever cleared from those that never did
+with an area under the curve of 0.974 (Mann–Whitney p = 1.2 × 10⁻¹⁰). In a Cox
+model on laboratory alone, institutes D, E and F carry hazard ratios of 0.20 with
+p-values of 0.015, 0.016 and 0.015; adding starting density moves those to 0.138,
+0.172 and 0.576, and concordance rises from 0.896 to 0.930 (Fig. 2D). Institute C
+does not dissolve: it remains distinguishable after adjustment with a hazard
+ratio of 5.27 (p < 0.001), and it is also the fastest killer, which is the
+behaviour expected of a laboratory that genuinely kills faster. The Schoenfeld
+test gives no evidence against proportional hazards (smallest p = 0.63).
+
+Seventeen of the 32 flasks that fell below the limit were detectable again at a
+later visit, 14 of them in treated arms. Killing itself is real and
+dose-dependent: at one times the inhibitory concentration five of six
+laboratories record net growth under moxifloxacin, between −0.047 and −0.214
+log10 per day, and at ten times all six record net decline.
+
+### 5. Rank inversions are common and are explained by distance over rate
+
+Across 191 pairs of flasks in the same treatment arm from different laboratories,
+with 45 further pairs that the censoring could not settle and which are excluded
+rather than imputed, **70 pairs — 36.6 per cent (95 per cent CI 30.1 to 43.6) —
+are inversions**: the flask in which the population fell faster crossed the
+detection limit later (Table 6). The criterion *D_A*/*D_B* > *b_A*/*b_B* calls
+83.8 per cent of pairs correctly, so the inversions are accounted for by the
+arithmetic of the crossing-time decomposition in the Methods rather than by
+anything else.
+
+The variance decomposition sets the size of the effect and bounds the claim. Of
+the variation available to move a clearance time, the distance term carries 39.4
+per cent at ten times moxifloxacin, 31.4 per cent at ten times isoniazid and 19.6
+per cent at one times isoniazid; the rate term carries the remainder. **The rate
+contributes more of the spread than the distance does in every arm.** A clearance
+time is therefore not predominantly an inoculum measurement. It is a mixture, in
+which the inoculum is a large minority contribution — large enough to reverse the
+ranking in more than a third of comparisons, and not large enough to justify
+treating the endpoint as an inoculum readout in general.
+
+### 6. A deep endpoint also loses the dose-response signal
+
+In the concentration-by-time grid, survivors across a 32-fold range of apramycin
+separate 6.9-fold at day 3, 48.2-fold at day 7 and 5.2-fold at day 14 (Fig. 3,
+Table 7). An experiment read at 14 days would report this drug as insensitive to
+a 32-fold change in dose. Fitted per interval on a bootstrap resampling all three
+replicates at both ends of every interval, the concentration slope is +0.059
+log10 per day per doubling over days 0 to 3 (95 per cent interval +0.030 to
++0.088, p = 0.013), +0.033 over days 3 to 7 (−0.052 to +0.118, p = 0.24) and
+−0.025 over days 7 to 14 (−0.060 to +0.010, p = 0.091); the early-versus-late
+contrast is firm (+0.084, +0.037 to +0.128) and the early-versus-middle contrast
+is not (p = 0.43).
+
+The sign of the late slope is not claimed. By day 14 the highest arm sits at
+65 CFU/mL and the source states no limit of quantification; at any limit of
+100 CFU/mL or above, which is what routine 10 µL plating gives, that arm is
+censored and its apparent rate is a lower bound. What holds without any
+assumption about the floor is that the separation collapses.
+
+### 7. Resistance and tolerance remain separate axes
+
+That the two axes are separate is the premise of the framework that defines them
+(Brauner et al. 2016), and the deposits bound rather than assert it. The
+217-isolate file supports 24 comparisons between the concentration axis and the
+duration axis. Four reach nominal significance where 1.2 are expected by chance
+and none survives Benjamini–Hochberg correction (Fig. 4, Table 8). The four are
+negative, so a higher inhibitory concentration accompanies a *shorter* duration,
+which is not the direction a shared mechanism predicts, and they concentrate in
+the deepest endpoint — the one shown above to be compromised. The design
+resolves correlations of 0.14 to 0.25 depending on stratum.
+
+The same question in 126 evolved clones sharing an ancestor gives ρ = +0.043
+(p = 0.63) against a resolvable ρ of 0.175, and independence holds within every
+nutrient stratum separately.
+
+---
+
+## Discussion
+
+### What fails, and where
+
+That a negative culture under antibiotic exposure is not evidence of sterility is
+established clinical microbiology and is not what this paper reports. What it
+reports is that the quantitative metric introduced to replace that judgement
+carries the same defect into a number, where it is harder to see.
+
+The minimum duration for killing is scale-free by construction: a fractional
+reduction divides out the starting density, and that is the property that makes
+it the intended counterpart to the minimum inhibitory concentration. The property
+holds in the estimand. It fails in the measurement, for a reason that is
+arithmetic rather than statistical. A *q*-log reduction is observable only where
+*q* logs are visible, and when the final reading rests on the floor the recorded
+fraction reduces to *L*/*N₀* — a quantity determined entirely by the starting
+culture. Fifteen per cent of the clinical isolates examined here could not have
+demonstrated the deepest endpoint under any drug effect whatever, and all of them
+are recorded as having failed to demonstrate it. Eighteen isolates that ended at
+the same unmeasurable value carry tolerance labels that a single threshold on
+their starting density reproduces exactly.
+
+The failure is specific and it is bounded. Neither the 90 nor the 99 per cent
+endpoint is compromised in this deposit: no isolate lacks headroom for either.
+It is the 99.99 per cent endpoint that is unreachable for a substantial minority,
+and it is the deep endpoint the clinical classification uses. That specificity is
+what makes the problem fixable rather than fatal.
+
+### What the tolerance phenotype tracks instead
+
+Removing the assay's contribution leaves something rather than nothing, and what
+remains is biologically coherent. Growth state predicts the tolerance class and
+survives adjustment for starting density, which is the expected direction:
+isoniazid requires KatG activation and active cell-wall synthesis, rifampicin
+requires transcription, and a population that is not dividing presents less of
+what these drugs act on. Physiological state, not drug susceptibility, is the
+axis the classification is reading.
+
+The isoniazid-resistance association behaves differently and instructively. It is
+present unadjusted and loses two-thirds of its coefficient once starting density
+is included, with an interval that then spans zero. The mechanism is visible in
+the same file: resistant isolates enter the assay ten-fold lower and a quarter of
+them lack the headroom the endpoint requires. We do not know why they seed lower.
+The natural explanation — that resistance carries a fitness cost — is not
+supported here, since these isolates do not grow measurably more slowly and most
+carry the near-neutral *katG* S315X allele. That gap is a finding in its own
+right and belongs in the next study rather than in a speculative sentence in this
+one.
+
+We are careful about the direction of this inference. Starting density could be a
+mediator rather than a confounder: if resistance slows growth and slow growth
+causes genuine tolerance, adjusting for the density that slow growth produces
+would remove real signal. The asymmetry is what makes us prefer the confounding
+reading — growth survives adjustment and resistance does not — but it is an
+argument, not a proof, and a design that fixes the inoculum would settle it.
+
+### The size of the effect, stated against our own interest
+
+Where the inoculum is set deliberately rather than by clinical accident, the same
+arithmetic operates and can be measured rather than inferred. In more than a
+third of cross-laboratory comparisons the flask in which the population fell
+faster crossed the detection limit later, and the simple distance-over-rate
+criterion accounts for six in seven of those inversions.
+
+The variance decomposition, however, does not support the stronger reading, and
+we report it because it is ours to report. The rate term carries more of the
+spread in clearance time than the distance term in every arm examined. A
+clearance time is not mostly a measurement of the inoculum. It is a mixture in
+which the inoculum is a large minority — enough to reverse the ranking of two
+populations in a third of comparisons, which is the number that matters to anyone
+choosing between two compounds, and not enough to license the claim that the
+endpoint measures the starting culture. Both halves of that sentence are load
+bearing.
+
+### Relation to the analyses these deposits were made for
+
+Our reading and van Wijk's agree where they overlap. They report the inoculum
+spread themselves and conclude that baseline burden varied between laboratories
+while net drug effect varied less; that conclusion anticipates part of ours and
+belongs to them. The separation is that they excluded readings outside the
+quantification limits from numerical analysis, which is a defensible reporting
+decision that forecloses the question asked here, because it removes the
+observations from which a duration is built.
+
+Vijay and colleagues report associations between tolerance, resistance status and
+treatment history in the same isolates. We do not dispute the measurements; the
+deposit is unusually complete, and it is only because they deposited the
+classification, its inputs and the assay geometry together that this analysis was
+possible at all. What we add is that the deepest of their endpoints has a
+dynamic-range constraint that varies systematically with the isolate groups being
+compared, and that the resistance association does not survive its inclusion.
+
+### What should change
+
+**Report the starting density and the limit of quantification with every
+tolerance measurement.** Together they give the headroom, and without the
+headroom a log-reduction endpoint cannot be interpreted. Neither costs anything
+to record. Four of the deposits examined in the course of this project state no
+limit anywhere.
+
+**Choose the endpoint depth against the headroom actually available.** A 99 per
+cent endpoint was reachable for every isolate in this deposit and a 99.99 per
+cent endpoint for 85 per cent of them. Where the deep endpoint is wanted, the
+starting culture must be concentrated or the assay floor lowered until the budget
+covers it; where it cannot be, the shallower endpoint is the honest one. This is
+a design decision that is currently not being made.
+
+**Treat an endpoint at the floor as a bound, not a value.** A recorded fraction of
+*L*/*N₀* is an upper limit on survival. Analysed as a measurement it manufactures
+differences between isolates that were killed identically as far as anyone can
+tell.
+
+**Report physiological state as a required field.** It is what the classification
+is reading, and it is currently the least documented variable in the assay.
+
+**Fix the inoculum, or adjust for it, before comparing tolerance across groups.**
+The comparison that motivated this work — resistant against susceptible isolates
+— is confounded by a ten-fold difference in starting density whose cause is
+unknown. Until that is understood, group comparisons of tolerance in clinical
+isolates should carry the starting density as a covariate.
+
+---
+
+## Conclusion
+
+
+A negative culture under antibiotic exposure has never been evidence of
+sterility, and the field knows it. The remedy adopted was to stop asking whether
+the culture went negative and to start asking how far it fell, expressed as a
+fraction of where it began so that the starting culture could not matter. We find
+that the fraction stops being a fraction when the population reaches the floor,
+and becomes a reading of the starting density instead — in this deposit, for
+fifteen per cent of isolates at the depth the classification uses, and
+demonstrably for eighteen isolates whose phenotype a single threshold on their
+inoculum reproduces exactly.
+
+The consequence is not that tolerance is an artefact. It is that a tolerance call
+made without its headroom cannot be told apart from an inoculum measurement, and
+that the phenotype which does survive the correction is physiological state
+rather than drug susceptibility. Reporting the starting density and the
+quantification limit, matching endpoint depth to the range actually available,
+and treating a reading at the floor as a bound would make a tolerance
+classification mean the same thing in one laboratory as in the next. Until then,
+some of what the field calls tolerance is a record of how much culture went into
+the tube.
+
+---
+
+## Methods
+
+### Datasets
 
 Four published deposits are analysed (Table 1). None was generated for this
 study, all are openly licensed, and no dataset was selected after its result was
@@ -113,7 +464,7 @@ at 128, 32, 8, 4 and 1 µg/mL, triplicate log10 CFU at days 0, 3, 7 and 14, with
 concurrent drug-free control at every visit (Kaur et al. 2024; figshare 26462791,
 CC BY 4.0).
 
-### 2.2 Two kinds of limit, kept apart
+### Two kinds of limit, kept apart
 
 Two distinct censoring problems arise and are handled separately, because
 conflating them is the error this paper is about.
@@ -123,7 +474,7 @@ below a known value. In the six-laboratory deposit that value is a property of
 the plated volume, as above. In the clinical deposit the readings are most
 probable numbers taking the discrete values of an MPN table, and the day-5 column
 bottoms out at 23 per mL with a visible pile-up there; that value is treated as
-the floor, and Section 3.1 reports the evidence for it.
+the floor, and the first Results section reports the evidence for it.
 
 A **crossing time not observed within the study** is right-censored: the event
 has not happened yet, which is not the same as the event having no time. A flask
@@ -131,7 +482,7 @@ that never fell below the limit contributes the information that its crossing
 time exceeds its last visit, and enters the survival likelihood as such. It is
 never recorded as missing.
 
-### 2.3 Dynamic range
+### Dynamic range
 
 For an isolate starting at *N₀* against a floor *L*, the **headroom** is
 *H* = log10(*N₀*/*L*). It is the deepest reduction the assay can resolve and is
@@ -141,7 +492,7 @@ endpoint requiring a *q*-log reduction is **unreachable** for that isolate when
 surviving fraction of exactly *L*/*N₀*, which is an upper bound on its true
 survival rather than a measurement of it.
 
-### 2.4 Estimation
+### Estimation
 
 A **Tobit model** fits log10 CFU/mL linearly in time by maximum likelihood. An
 observed reading contributes the usual Gaussian density; a censored reading
@@ -165,7 +516,7 @@ A cell is fitted only when it retains at least six quantified readings at three
 distinct times; below that the slope is determined by the censoring pattern
 rather than by the counts.
 
-### 2.5 The decomposition of a crossing time
+### The decomposition of a crossing time
 
 Over an interval in which the decline is close to log-linear, log10 *N*(*t*) =
 *a* − *bt*, and with *ℓ* the log10 detection limit and *D* = *a* − *ℓ* the
@@ -183,7 +534,7 @@ rather than from the fitted intercept, because a single line through a biphasic
 curve extrapolates back to an intercept well below the culture the flask started
 from.
 
-### 2.6 Multiplicity
+### Multiplicity
 
 Where a question admits more than one test, every test the deposit supports is
 run, and the family is corrected by the Benjamini–Hochberg procedure at a false
@@ -191,7 +542,7 @@ discovery rate of 5 per cent. For each test we report the correlation the sample
 size could have resolved at 95 per cent confidence, so that a null is bounded
 rather than asserted.
 
-### 2.7 Reproducibility
+### Reproducibility
 
 Every number in this paper is regenerated by a script that writes a receipt
 recording the software versions it ran under, and a separate audit script
@@ -201,331 +552,44 @@ reports any that disagree. Analyses used Python 3.14 with numpy 2.5.0, scipy
 
 ---
 
-## 3. Results
+## Data and code availability
 
-### 3.1 The dynamic range available to a log-reduction endpoint
+Every dataset analysed here is already public under an open licence, and each is
+identified by its deposit in Table 1. Nothing in this study required new patient
+samples or new experimental data.
 
-The most probable number readings take the discrete values of an MPN table, and
-the day-5 column does not taper towards zero but stops. Eighteen isolates sit at
-exactly 23 per mL in the 15-day panel and six in the 60-day panel, with no value
-anywhere in the file below it (Fig. 1A). That is the behaviour of a floor rather
-than of a tail, and it is treated as one throughout.
-
-The consequence is that each isolate carries a fixed budget of observable
-killing. At 15 days of prior culture the starting densities span 3.36 to 7.79
-log10, so headroom spans 2.00 to 6.42 log10 (Fig. 1B, Table 2). Against that budget the
-three deposited endpoints behave very differently. No isolate lacks the headroom
-for a 90 or a 99 per cent reduction: 0 of 217 in both cases. **Thirty-three of
-217 isolates — 15.2 per cent — lack the headroom for the 99.99 per cent
-endpoint**, which is to say that a four-log reduction was unobservable for them
-before rifampicin was added.
-
-All 33 are recorded as not having reached it. Among the 184 isolates that did
-have four logs of headroom, 162 are at the ceiling, 88.0 per cent (Fisher exact
-p = 0.030). The deepest endpoint is therefore the only one at risk, and it is the
-one the tolerance classification is built on.
-
-### 3.2 Identical endpoints receive different tolerance phenotypes
-
-The deposited tolerance level is a threshold on the recorded surviving fraction,
-with no overlap between classes: at day 5 and 15 days of prior culture, low
-tolerance covers fractions below 10⁻³, medium covers 10⁻³ to 10⁻², and high
-exceeds 10⁻². The label is a deterministic function of that fraction.
-
-Eighteen isolates ended at the floor, which is to say that as far as the assay
-could see they were killed to the same degree. Their recorded surviving fractions
-span 265-fold, from 3.8 × 10⁻⁶ to 1.0 × 10⁻³, and that span is exactly the
-265-fold span of their starting densities, because for a reading at the floor the
-recorded fraction is *L*/*N₀* (Fig. 1C). These are upper bounds on survival, not
-measurements of it.
-
-The tolerance labels assigned to them differ. Six isolates that began at 23 000
-per mL received a fraction of 10⁻³ and were classified **medium** tolerance;
-twelve that began at 230 000 or above received 10⁻⁴ or less and were classified
-**low**. Predicting the label from the starting density alone, with a single cut,
-reproduces all eighteen (Table 3). For these isolates the tolerance phenotype
-records where the culture started and nothing about how rifampicin acted on it.
-
-### 3.3 What the deposited tolerance labels track
-
-Eight association tests are available between the deposited label and its
-candidate determinants — two predictors, at two culture ages and two endpoint
-depths — and they are corrected as one family. Two survive (Table 4).
-
-The label tracks the **growth rate** of the isolate: slower growth accompanies a
-higher tolerance class, and the association survives adjustment for starting
-density (β = +0.027 per unit time to OD 0.4, p = 0.0025). It also tracks
-**isoniazid resistance**, until the starting density enters the model. Unadjusted,
-resistant isolates sit 0.259 tolerance classes higher (95 per cent CI +0.086 to
-+0.431, p = 0.0035); adjusted, the coefficient falls by 66 per cent to +0.089
-(95 per cent CI −0.108 to +0.285, p = 0.374). The interval no longer excludes
-zero. We describe this as attenuation rather than elimination.
-
-The mechanism of that attenuation is measurable. Isoniazid-resistant isolates
-enter this assay at 5.36 log10 against 6.36 for susceptible isolates, ten-fold
-lower (Mann–Whitney p = 9.1 × 10⁻¹⁴), and 26 per cent of them lack the headroom
-for the deepest endpoint against 8 per cent of susceptible isolates. They are
-one log poorer in observable killing before the experiment begins.
-
-Why they seed lower is not established here, and the obvious explanation fails:
-resistant isolates do not grow significantly more slowly in this deposit (median
-time to OD 0.4 of 19 against 17, p = 0.24), and 85 of them carry *katG* S315X,
-the mutation that predominates clinically precisely because it is close to
-fitness-neutral. The association between resistance and a low starting inoculum
-is real, large and unexplained, and we record it as such.
-
-Neither surviving association appears in the 60-day panel, and for the growth
-association the difference between panels is itself supported (interaction
-p = 0.0072); for resistance it is not (p = 0.088). The panels differ in exactly
-the way the mechanism requires: by 60 days the cultures are 38-fold denser, the
-spread of starting densities has more than halved, from an interquartile range of
-1.00 to 0.42 log10, and the fraction of isolates short of headroom falls from
-15.2 to 3.3 per cent. The confound is a property of a thin assay and it thins out
-when the assay is not. Because the same isolates appear in both panels, this
-comparison is not independent and bounds the evidence rather than establishing it.
-
-### 3.4 The same arithmetic where the inoculum is set by protocol
-
-If the effect is a property of assay geometry rather than of clinical sampling,
-it should appear where one protocol, one strain and one stock are distributed
-deliberately. It does.
-
-At ten times the minimum inhibitory concentration of moxifloxacin all six
-laboratories return a positive kill rate spanning 5.2-fold, from 0.090 to 0.464
-log10 CFU/mL per day, and across all 30 laboratory-by-arm cells the Tobit and
-imputation estimates never differ by more than 0.003 log10 per day (Fig. 2A,
-Table 5). The duration endpoint behaves differently on the same flasks. Of 72
-treated flasks, 29 ever fell below the limit; institutes A, B and C cleared
-flasks in every arm and institutes D, E and F cleared none in any arm (Fig. 2B).
-For half the laboratories the time to clearance is right-censored throughout.
-
-The two orderings do not correspond. Ranked by starting density, the three lowest
-laboratories are exactly the three that cleared and the three highest exactly the
-three that did not, without exception; ranked by kill rate there is no such
-correspondence (Fig. 2C). Institute F, with the highest starting density at 6.53
-log10, kills faster than four of the other five at 0.223 log10 per day and never
-clears. Institute E returns the slowest rate of all at 0.090 and also never
-clears.
-
-Starting density separates flasks that ever cleared from those that never did
-with an area under the curve of 0.974 (Mann–Whitney p = 1.2 × 10⁻¹⁰). In a Cox
-model on laboratory alone, institutes D, E and F carry hazard ratios of 0.20 with
-p-values of 0.015, 0.016 and 0.015; adding starting density moves those to 0.138,
-0.172 and 0.576, and concordance rises from 0.896 to 0.930 (Fig. 2D). Institute C
-does not dissolve: it remains distinguishable after adjustment with a hazard
-ratio of 5.27 (p < 0.001), and it is also the fastest killer, which is the
-behaviour expected of a laboratory that genuinely kills faster. The Schoenfeld
-test gives no evidence against proportional hazards (smallest p = 0.63).
-
-Seventeen of the 32 flasks that fell below the limit were detectable again at a
-later visit, 14 of them in treated arms. Killing itself is real and
-dose-dependent: at one times the inhibitory concentration five of six
-laboratories record net growth under moxifloxacin, between −0.047 and −0.214
-log10 per day, and at ten times all six record net decline.
-
-### 3.5 How often the ranking inverts, and what buys the difference
-
-Across 191 pairs of flasks in the same treatment arm from different laboratories,
-with 45 further pairs that the censoring could not settle and which are excluded
-rather than imputed, **70 pairs — 36.6 per cent (95 per cent CI 30.1 to 43.6) —
-are inversions**: the flask in which the population fell faster crossed the
-detection limit later (Table 6). The criterion *D_A*/*D_B* > *b_A*/*b_B* calls
-83.8 per cent of pairs correctly, so the inversions are accounted for by the
-arithmetic of Section 2.5 rather than by anything else.
-
-The variance decomposition sets the size of the effect and bounds the claim. Of
-the variation available to move a clearance time, the distance term carries 39.4
-per cent at ten times moxifloxacin, 31.4 per cent at ten times isoniazid and 19.6
-per cent at one times isoniazid; the rate term carries the remainder. **The rate
-contributes more of the spread than the distance does in every arm.** A clearance
-time is therefore not predominantly an inoculum measurement. It is a mixture, in
-which the inoculum is a large minority contribution — large enough to reverse the
-ranking in more than a third of comparisons, and not large enough to justify
-treating the endpoint as an inoculum readout in general.
-
-### 3.6 A deep endpoint also loses the dose signal
-
-In the concentration-by-time grid, survivors across a 32-fold range of apramycin
-separate 6.9-fold at day 3, 48.2-fold at day 7 and 5.2-fold at day 14 (Fig. 3,
-Table 7). An experiment read at 14 days would report this drug as insensitive to
-a 32-fold change in dose. Fitted per interval on a bootstrap resampling all three
-replicates at both ends of every interval, the concentration slope is +0.059
-log10 per day per doubling over days 0 to 3 (95 per cent interval +0.030 to
-+0.088, p = 0.013), +0.033 over days 3 to 7 (−0.052 to +0.118, p = 0.24) and
-−0.025 over days 7 to 14 (−0.060 to +0.010, p = 0.091); the early-versus-late
-contrast is firm (+0.084, +0.037 to +0.128) and the early-versus-middle contrast
-is not (p = 0.43).
-
-The sign of the late slope is not claimed. By day 14 the highest arm sits at
-65 CFU/mL and the source states no limit of quantification; at any limit of
-100 CFU/mL or above, which is what routine 10 µL plating gives, that arm is
-censored and its apparent rate is a lower bound. What holds without any
-assumption about the floor is that the separation collapses.
-
-### 3.7 Resistance and tolerance remain separate axes
-
-That the two axes are separate is the premise of the framework that defines them
-(Brauner et al. 2016), and the deposits bound rather than assert it. The
-217-isolate file supports 24 comparisons between the concentration axis and the
-duration axis. Four reach nominal significance where 1.2 are expected by chance
-and none survives Benjamini–Hochberg correction (Fig. 4, Table 8). The four are
-negative, so a higher inhibitory concentration accompanies a *shorter* duration,
-which is not the direction a shared mechanism predicts, and they concentrate in
-the deepest endpoint — the one Section 3.1 shows is compromised. The design
-resolves correlations of 0.14 to 0.25 depending on stratum.
-
-The same question in 126 evolved clones sharing an ancestor gives ρ = +0.043
-(p = 0.63) against a resolvable ρ of 0.175, and independence holds within every
-nutrient stratum separately.
+The analysis code, the audit script and the machine-readable receipts recording
+the software versions each stage ran under will be released in a public
+repository on publication. Every number quoted in this manuscript is regenerated
+from the deposits by that code, and a separate audit stage recomputes each one
+from the table it came from and reports any that disagree.
 
 ---
 
-## 4. Discussion
+## Declarations
 
-### 4.1 What fails, and where
+**Ethics.** This study reanalysed publicly available, de-identified datasets. No
+new patient samples were collected and no new experimental data were generated.
 
-That a negative culture under antibiotic exposure is not evidence of sterility is
-established clinical microbiology and is not what this paper reports. What it
-reports is that the quantitative metric introduced to replace that judgement
-carries the same defect into a number, where it is harder to see.
+**Funding:** [to be inserted]
 
-The minimum duration for killing is scale-free by construction: a fractional
-reduction divides out the starting density, and that is the property that makes
-it the intended counterpart to the minimum inhibitory concentration. The property
-holds in the estimand. It fails in the measurement, for a reason that is
-arithmetic rather than statistical. A *q*-log reduction is observable only where
-*q* logs are visible, and when the final reading rests on the floor the recorded
-fraction reduces to *L*/*N₀* — a quantity determined entirely by the starting
-culture. Fifteen per cent of the clinical isolates examined here could not have
-demonstrated the deepest endpoint under any drug effect whatever, and all of them
-are recorded as having failed to demonstrate it. Eighteen isolates that ended at
-the same unmeasurable value carry tolerance labels that a single threshold on
-their starting density reproduces exactly.
+**Competing interests:** [to be inserted]
 
-The failure is specific and it is bounded. Neither the 90 nor the 99 per cent
-endpoint is compromised in this deposit: no isolate lacks headroom for either.
-It is the 99.99 per cent endpoint that is unreachable for a substantial minority,
-and it is the deep endpoint the clinical classification uses. That specificity is
-what makes the problem fixable rather than fatal.
+**Author contributions:** [to be inserted]
 
-### 4.2 What the tolerance phenotype tracks instead
-
-Removing the assay's contribution leaves something rather than nothing, and what
-remains is biologically coherent. Growth state predicts the tolerance class and
-survives adjustment for starting density, which is the expected direction:
-isoniazid requires KatG activation and active cell-wall synthesis, rifampicin
-requires transcription, and a population that is not dividing presents less of
-what these drugs act on. Physiological state, not drug susceptibility, is the
-axis the classification is reading.
-
-The isoniazid-resistance association behaves differently and instructively. It is
-present unadjusted and loses two-thirds of its coefficient once starting density
-is included, with an interval that then spans zero. The mechanism is visible in
-the same file: resistant isolates enter the assay ten-fold lower and a quarter of
-them lack the headroom the endpoint requires. We do not know why they seed lower.
-The natural explanation — that resistance carries a fitness cost — is not
-supported here, since these isolates do not grow measurably more slowly and most
-carry the near-neutral *katG* S315X allele. That gap is a finding in its own
-right and belongs in the next study rather than in a speculative sentence in this
-one.
-
-We are careful about the direction of this inference. Starting density could be a
-mediator rather than a confounder: if resistance slows growth and slow growth
-causes genuine tolerance, adjusting for the density that slow growth produces
-would remove real signal. The asymmetry is what makes us prefer the confounding
-reading — growth survives adjustment and resistance does not — but it is an
-argument, not a proof, and a design that fixes the inoculum would settle it.
-
-### 4.3 The size of the effect, stated against our own interest
-
-Where the inoculum is set deliberately rather than by clinical accident, the same
-arithmetic operates and can be measured rather than inferred. In more than a
-third of cross-laboratory comparisons the flask in which the population fell
-faster crossed the detection limit later, and the simple distance-over-rate
-criterion accounts for six in seven of those inversions.
-
-The variance decomposition, however, does not support the stronger reading, and
-we report it because it is ours to report. The rate term carries more of the
-spread in clearance time than the distance term in every arm examined. A
-clearance time is not mostly a measurement of the inoculum. It is a mixture in
-which the inoculum is a large minority — enough to reverse the ranking of two
-populations in a third of comparisons, which is the number that matters to anyone
-choosing between two compounds, and not enough to license the claim that the
-endpoint measures the starting culture. Both halves of that sentence are load
-bearing.
-
-### 4.4 Relation to the analyses these deposits were made for
-
-Our reading and van Wijk's agree where they overlap. They report the inoculum
-spread themselves and conclude that baseline burden varied between laboratories
-while net drug effect varied less; that conclusion anticipates part of ours and
-belongs to them. The separation is that they excluded readings outside the
-quantification limits from numerical analysis, which is a defensible reporting
-decision that forecloses the question asked here, because it removes the
-observations from which a duration is built.
-
-Vijay and colleagues report associations between tolerance, resistance status and
-treatment history in the same isolates. We do not dispute the measurements; the
-deposit is unusually complete, and it is only because they deposited the
-classification, its inputs and the assay geometry together that this analysis was
-possible at all. What we add is that the deepest of their endpoints has a
-dynamic-range constraint that varies systematically with the isolate groups being
-compared, and that the resistance association does not survive its inclusion.
-
-### 4.5 What should change
-
-**Report the starting density and the limit of quantification with every
-tolerance measurement.** Together they give the headroom, and without the
-headroom a log-reduction endpoint cannot be interpreted. Neither costs anything
-to record. Four of the deposits examined in the course of this project state no
-limit anywhere.
-
-**Choose the endpoint depth against the headroom actually available.** A 99 per
-cent endpoint was reachable for every isolate in this deposit and a 99.99 per
-cent endpoint for 85 per cent of them. Where the deep endpoint is wanted, the
-starting culture must be concentrated or the assay floor lowered until the budget
-covers it; where it cannot be, the shallower endpoint is the honest one. This is
-a design decision that is currently not being made.
-
-**Treat an endpoint at the floor as a bound, not a value.** A recorded fraction of
-*L*/*N₀* is an upper limit on survival. Analysed as a measurement it manufactures
-differences between isolates that were killed identically as far as anyone can
-tell.
-
-**Report physiological state as a required field.** It is what the classification
-is reading, and it is currently the least documented variable in the assay.
-
-**Fix the inoculum, or adjust for it, before comparing tolerance across groups.**
-The comparison that motivated this work — resistant against susceptible isolates
-— is confounded by a ten-fold difference in starting density whose cause is
-unknown. Until that is understood, group comparisons of tolerance in clinical
-isolates should carry the starting density as a covariate.
-
-### 4.6 Conclusion
-
-A negative culture under antibiotic exposure has never been evidence of
-sterility, and the field knows it. The remedy adopted was to stop asking whether
-the culture went negative and to start asking how far it fell, expressed as a
-fraction of where it began so that the starting culture could not matter. We find
-that the fraction stops being a fraction when the population reaches the floor,
-and becomes a reading of the starting density instead — in this deposit, for
-fifteen per cent of isolates at the depth the classification uses, and
-demonstrably for eighteen isolates whose phenotype a single threshold on their
-inoculum reproduces exactly.
-
-The consequence is not that tolerance is an artefact. It is that a tolerance call
-made without its headroom cannot be told apart from an inoculum measurement, and
-that the phenotype which does survive the correction is physiological state
-rather than drug susceptibility. Reporting the starting density and the
-quantification limit, matching endpoint depth to the range actually available,
-and treating a reading at the floor as a bound would make a tolerance
-classification mean the same thing in one laboratory as in the next. Until then,
-some of what the field calls tolerance is a record of how much culture went into
-the tube.
+**Archived version:** [commit identifier of the submitted version, to be inserted]
 
 ---
 
-## Figure captions
+## References
+
+[Deliberately not yet compiled. The reference list is held back until the text
+stops moving, so that citations are not renumbered repeatedly. Sources are named
+in full in the text and in the deposit table.]
+
+---
+
+## Figure legends
 
 **Figure 1. A log-reduction endpoint is bounded by the assay floor, and the bound
 decides the phenotype.** 217 clinical *M. tuberculosis* isolates under

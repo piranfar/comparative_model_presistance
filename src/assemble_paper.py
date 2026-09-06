@@ -83,7 +83,16 @@ def main() -> int:
     body = BODY.read_text(encoding="utf-8")
     tables = split_tables(TABLES.read_text(encoding="utf-8")) if TABLES.exists() else {}
 
-    title, rest = body.split("\n", 1)
+    # The body opens with YAML front matter for the submission version, so the
+    # head is three things rather than one: the front matter block, the H1
+    # title, and the author block under it. The abstract belongs after all of
+    # them. Splitting on the first newline put it after a bare "---".
+    front = ""
+    if body.startswith("---\n"):
+        end = body.index("\n---\n", 4) + len("\n---\n")
+        front, body = body[:end].rstrip(), body[end:].lstrip("\n")
+    head, rest = body.split("\n\n---\n\n", 1)
+    title = (front + "\n\n" + head).strip() if front else head.strip()
 
     # ---- abstract, if one has been written -------------------------------
     abstract = ABSTRACT.read_text(encoding="utf-8").strip() if ABSTRACT.exists() else ""
