@@ -6,7 +6,7 @@ Outputs of the earlier paper are not here; they live in `version_one/results/`.
 
 | | tables | figures | receipts |
 | --- | ---: | ---: | ---: |
-| total | 53 | 5 | 17 |
+| total | 62 | 5 | 20 |
 
 ## Tolerance and the assay floor (manuscript/PAPER_COMPLETE.md)
 
@@ -51,7 +51,7 @@ Outputs of the earlier paper are not here; they live in `version_one/results/`.
 
 ## Unassigned
 
-**Tables (21).**
+**Tables (30).**
 
 | file | written by | used by |
 | --- | --- | --- |
@@ -72,6 +72,15 @@ Outputs of the earlier paper are not here; they live in `version_one/results/`.
 | `exp32_interval_censored.csv` | `exp32_crossing_events.py` | `audit_claims` |
 | `exp32_recrossing.csv` | `exp32_crossing_events.py` | quoted in the text only |
 | `exp32_transitions.csv` | `exp32_crossing_events.py` | `audit_claims`, `build_tables` |
+| `exp33_floor_posterior.csv` | `exp33_floor_posterior.py` | `audit_claims`, `build_tables` |
+| `exp34_mediation.csv` | `exp34_mediation.py` | `audit_claims`, `build_tables` |
+| `exp34_mediation_paths.csv` | `exp34_mediation.py` | quoted in the text only |
+| `exp34_mediation_sensitivity.csv` | `exp34_mediation.py` | quoted in the text only |
+| `exp35_apramycin_exclusion.csv` | `exp35_review_strengthen.py` | quoted in the text only |
+| `exp35_binary_mediation.csv` | `exp35_review_strengthen.py` | `build_tables` |
+| `exp35_delta_h_ci.csv` | `exp35_review_strengthen.py` | quoted in the text only |
+| `exp35_ir_seeding_confounders.csv` | `exp35_review_strengthen.py` | `build_tables` |
+| `exp35_mediation_sensitivity_dense.csv` | `exp35_review_strengthen.py` | quoted in the text only |
 | `learn_boundaries.csv` | `-` | `learn_boundaries` |
 | `neural_structure.csv` | `-` | `neural_structure` |
 | `symbolic_boundaries.csv` | `-` | `symbolic_boundaries` |
@@ -85,7 +94,7 @@ Outputs of the earlier paper are not here; they live in `version_one/results/`.
 
 ## Receipts
 
-17 JSON receipts, one per analysis stage. Each records the inputs, the headline outputs and the software versions the stage actually ran under, so a run under different versions is recorded rather than silently substituted.
+20 JSON receipts, one per analysis stage. Each records the inputs, the headline outputs and the software versions the stage actually ran under, so a run under different versions is recorded rather than silently substituted.
 
 ## Checking the numbers
 

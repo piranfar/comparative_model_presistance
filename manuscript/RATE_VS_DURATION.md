@@ -1,7 +1,7 @@
 ---
-title: "Antibiotic tolerance is assigned from the starting inoculum wherever killing reaches the assay floor"
-short_title: "Assay-floor censoring confounds antibiotic tolerance"
-article_type: "Article"
+title: "Score only the kill the assay can see: starting density and the floor bound every MDK"
+short_title: "Headroom bounds every MDK"
+article_type: "Resource"
 status: "Draft. Text not final; reference list deliberately not yet compiled."
 keywords:
   - antibiotic tolerance
@@ -13,13 +13,13 @@ keywords:
   - inoculum effect
 ---
 
-# Antibiotic tolerance is assigned from the starting inoculum wherever killing reaches the assay floor
+# Score only the kill the assay can see: starting density and the floor bound every MDK
 
 **Authors:** [to be inserted]
 
 **Correspondence:** [to be inserted]
 
-**Figures:** 4 | **Tables:** 13 | **Supplementary tables:** 4
+**Figures:** 4 | **Tables:** 15 | **Boxes:** 1 | **Supplementary tables:** 6
 
 ---
 
@@ -100,15 +100,46 @@ name are, in part, a record of how the assay was set up.
 
 ---
 
+**Box 1. Four numbers that score an MDK.** *N₀* is the starting density. *L* is
+the smallest positive count the method can report — one colony in a plated volume
+*v* µL is *L* = 1 000/*v* per mL, and an MPN series uses the lowest table rung.
+Headroom is *h* = log10(*N₀*/*L*). A *q*-log endpoint is legal only if *h* ≥ *q*,
+which is the same as seeding at or above *L* · 10^*q*. If the last reading sits
+at *L*, the recorded fraction is *L*/*N₀*: an upper bound, not a measurement. Do
+not densify the inoculum solely to buy headroom; a shallower legal endpoint is
+the honest alternative, and growth state still belongs on the report.
+
+| Culture | *N₀* (per mL) | *L* (per mL) | Headroom | Legal endpoints | If the last reading is at *L* |
+| --- | ---: | ---: | ---: | --- | --- |
+| Thin clinical MPN | 23 000 | 23 | 3.00 | 90%, 99%, 99.9%; not 99.99% | Fraction 10⁻³. Low and medium both compatible: the rule cannot choose. |
+| Adequate clinical MPN | 230 000 | 23 | 4.00 | all four, including 99.99% | Fraction 10⁻⁴. Only low is compatible. |
+| 100 µL plate | 10⁵ | 10 | 4.00 | through 99.99%; not a 5-log call | Fraction 10⁻⁴. A 5-log MDK needs *N₀* ≥ 10⁶. |
+| 10 µL drop, same *N₀* | 10⁵ | 100 | 3.00 | through 99.9%; not 99.99% | Fraction 10⁻³. The pipette, not the isolate, removed one log. |
+
+The first two rows are the six medium against twelve low isolates that ended on
+the same MPN floor in the clinical file. The last two are why a written protocol
+does not standardise measurable depth: the plated volume sets *L*. To make both a
+four-log endpoint and a low class identifiable against *L* = 23 per mL, seed
+above *L* · max(10⁴, 1/*c*₁) = 230 000 per mL, or choose a shallower endpoint.
+
+---
+
 ## Results
 
-### 1. The assay floor limits the dynamic range available to a log-reduction endpoint
+### 1. Observable kill is bounded by the assay floor
 
 The most probable number readings take the discrete values of an MPN table, and
 the day-5 column does not taper towards zero but stops. Eighteen isolates sit at
 exactly 23 per mL in the 15-day panel and six in the 60-day panel, with no value
 anywhere in the file below it (Fig. 1A). That is the behaviour of a floor rather
 than of a tail, and it is treated as one throughout.
+
+The deposit states no limit of quantification, so that value is inferred and the
+inference is quantified rather than asserted. A discrete posterior over the
+most-probable-number rungs at or below the observed minimum places 95 per cent
+support on 9.2 to 23 per mL, a span of 0.40 log10 — narrow enough that the class
+labels of Section 3 are computed rather than refused (Table 14). Where a deposit
+gives no such evidence, those labels are refused instead of reported.
 
 The consequence is that each isolate carries a fixed budget of observable
 killing. At 15 days of prior culture the starting densities span 3.36 to 7.79
@@ -132,7 +163,9 @@ one the tolerance classification is built on.
 The deposited tolerance level is a threshold on the recorded surviving fraction,
 with no overlap between classes: at day 5 and 15 days of prior culture, low
 tolerance covers fractions below 10⁻³, medium covers 10⁻³ to 10⁻², and high
-exceeds 10⁻². The label is a deterministic function of that fraction.
+exceeds 10⁻². Applying those cuts reproduces every usable class in the file,
+203 of 203 (Table 3a), so what follows is an argument about the fraction the
+assay recorded and not about an independent clinical judgement.
 
 Eighteen isolates ended at the floor. They share one reported floor-level
 observation, but their true final counts are unknown below the assay limit, so
@@ -197,7 +230,7 @@ A comparison of tolerance between those groups is therefore in part a comparison
 of how well each group could be measured, which is the disposition the previous
 section quantifies.
 
-### 3. The boundaries name which isolates, not only how many
+### 3. The affected isolates are named before the drug is added
 
 Sections 1 and 2 counted isolates. The two boundaries of Section 2 of the Methods
 do more than that: given only the floor, the class thresholds and each isolate's
@@ -228,7 +261,7 @@ properties of this deposit, and the claim is a prediction that any dataset
 reporting a starting density, a floor and a threshold classification can be
 checked against.
 
-### 4. The deposited labels track growth state, and resistance only until density is included
+### 4. The classification tracks growth; the resistance association is carried by inoculum
 
 Eight association tests are available between the deposited label and its
 candidate determinants — two predictors, at two culture ages and two endpoint
@@ -259,6 +292,19 @@ enter this assay at 5.36 log10 against 6.36 for susceptible isolates, ten-fold
 lower (Mann–Whitney p = 9.1 × 10⁻¹⁴), and 26 per cent of them lack the headroom
 for the deepest endpoint against 8 per cent of susceptible isolates. They are
 one log poorer in observable killing before the experiment begins.
+
+A percentage attenuation is a descriptive ratio, not an estimand, so the path is
+also estimated directly. Decomposing the total effect of resistance on the
+tolerance class into a path through log10 starting density and a direct path
+gives a mediated effect of +0.166 classes (bootstrap 95 per cent CI +0.067 to
++0.279) against a direct effect of +0.091 (−0.116 to +0.287), so about 65 per
+cent of the association travels through the inoculum and the direct path covers
+zero. Restricting to baseline isolates leaves the mediated path intact (+0.159,
++0.053 to +0.295), and binary collapses of the outcome agree (Table S5). This
+rests on sequential ignorability, which no observational file can establish: a
+residual correlation between the mediator and outcome errors of about −0.24
+would nullify the point estimate. Only a design that fixes the inoculum settles
+it.
 
 These 217 isolates are not 217 independent observations. Forty-three are
 follow-up isolates drawn during treatment from patients who also contributed a
@@ -311,7 +357,7 @@ denser panel the starting density no longer decides who is called low; it still
 decides who can be called high. A single averaged slope, ordinal or linear, would
 have reported that as a null.
 
-### 5. The same arithmetic appears where the inoculum is set by protocol
+### 5. One written protocol does not produce one measurable depth
 
 If the effect is a property of assay geometry rather than of clinical sampling,
 it should appear where one protocol, one strain and one stock are distributed
@@ -426,7 +472,7 @@ per cent of the variance in starting density (permutation p < 0.0002) and 33.0
 per cent of the within-arm kill rate (p = 0.0048). It owns the duration endpoint
 outright, since three laboratories produce none at all.
 
-### 6. The turbidity standard fixes what goes in, not what can be measured
+### 6. A turbidity standard fixes what goes in, not what the plate can resolve
 
 A time-kill inoculum is not chosen freely: a suspension is matched to 0.5
 McFarland and diluted, and CLSI M26 puts the target near 5 × 10⁵ CFU/mL. If the
@@ -479,7 +525,7 @@ compliance. What determines the maximum observable log-kill depth is the measure
 starting density and the real assay floor, not the turbidity the
 preparation began from.
 
-### 7. Rank inversions are common and are explained by distance over rate
+### 7. Faster killing often crosses the floor later
 
 Across 191 pairs of flasks in the same treatment arm from different laboratories,
 with 45 further pairs that the censoring could not settle and which are excluded
@@ -519,7 +565,7 @@ ranking in more than a third of comparisons, and not large enough to justify
 treating the endpoint as an inoculum readout in general.
 
 
-### 8. The boundaries hold in a deposit the framework never saw
+### 8. The same boundaries hold in an experiment the framework never saw
 
 Every section so far tests the framework on the deposits it was built from. A
 search of five general repositories, the tuberculosis consortia, the persistence
@@ -549,7 +595,7 @@ into every boundary. And its treated arm reads at or below the limit already at
 day zero while the paired control reads about 10⁶, so that sample was drawn after
 exposure rather than before it.
 
-### 9. A deep endpoint also loses the dose-response signal
+### 9. A late endpoint can erase a 32-fold dose difference
 
 In the concentration-by-time grid, survivors across a 32-fold range of apramycin
 separate 6.9-fold at day 3, 48.2-fold at day 7 and 5.2-fold at day 14 (Fig. 3,
@@ -569,7 +615,7 @@ the value 10 µL plating would give, and an assumption rather than a derivation 
 that arm is censored and its apparent rate is a lower bound. What holds without
 any assumption about the floor is that the separation collapses.
 
-### 10. Resistance and tolerance remain separate axes
+### 10. Inhibitory concentration and killing duration remain separate axes
 
 That the two axes are separate is the premise of the framework that defines them
 (Brauner et al. 2016), and the deposits bound rather than assert it. The
@@ -625,6 +671,15 @@ Whether those cultures reached the floor is a question about rifampicin; which
 label they received once they had is a question about arithmetic, and it is the
 second that the starting density settles.
 
+The title is scoped to the floor, and it is worth saying exactly how far it
+reaches. In the 15-day panel, 12 of 203 usable calls have a single compatible
+class and 6 have more than one; the other 185 rest on a measured fraction. The
+kill rate still carries more of the variance in crossing time than the distance
+does, in every multi-laboratory arm. What fails universally is not every
+tolerance call but the *interpretability* of a deep log-reduction call reported
+without *N₀* and *L*. What the inoculum settles is the subset of labels for which
+killing has already reached the floor.
+
 The failure is specific and it is bounded. Neither the 90 nor the 99 per cent
 endpoint is compromised in this deposit: no isolate lacks headroom for either.
 It is the 99.99 per cent endpoint that is unreachable for a substantial minority,
@@ -674,7 +729,13 @@ The natural explanation — that resistance carries a fitness cost — is not
 supported here, since these isolates do not grow measurably more slowly and most
 carry the near-neutral *katG* S315X allele. That gap is a finding in its own
 right and belongs in the next study rather than in a speculative sentence in this
-one.
+one. What the deposit can rule out, it does: adjusting the
+resistance–inoculum association in turn for every usable pretreatment covariate
+the file carries — sampling time, growth, both inhibitory concentrations, the
+resistance mutation and both susceptibility calls — leaves the coefficient
+between −0.66 and −0.96, the largest attenuation being 22 per cent for the
+mutation identity (Table S6). The file records no referring site and no
+processing batch, so those cannot be tested at all.
 
 
 ### How large the effect is
@@ -969,6 +1030,48 @@ that never fell below the limit contributes the information that its crossing
 time exceeds its last visit, and enters the survival likelihood as such. It is
 never recorded as missing.
 
+### Floor posterior, refusal, and what is not learned
+
+The algebra of headroom and observability is closed form once *L* is known. What
+requires inference is *L* itself, and the two cases are not alike. A
+volume-derived floor — one colony in *V* µL is 1000/*V* per mL, and the observed
+minimum equals that value — is a point mass, with nothing to infer. A floor
+inferred from a pile-up on a most-probable-number rung carries a discrete
+posterior over the rungs at or below the observed minimum; the interval quoted is
+the 95 per cent highest-posterior-density support.
+
+That distinction is turned into a rule rather than a caveat. Where the verdict is
+that no floor is evidenced, or where the support spans more than one log10, the
+observability labels are **refused** rather than reported (Table 14). Surviving
+fractions written as exact zeros with no named *L* fall in that refused class, as
+does a deposit whose minimum occurs once in a continuous tail. The clinical
+deposit passes the rule with a support of 0.40 log10; two of the five deposits
+fail it and are labelled accordingly. This paper fits nothing to predict an MDK:
+once *L* is in hand the rest is derived.
+
+### Causal mediation of the resistance association
+
+The attenuation of the resistance coefficient once starting density enters the
+model is reported in the Results as a descriptive ratio, which is what it is.
+Separately, a linear product-of-coefficients mediation decomposes the total
+effect of isoniazid resistance on the day-5 tolerance class into an average
+causal mediation effect through log10 *N₀* and an average direct effect, with
+bootstrap percentile intervals from 5 000 resamples, repeated on the baseline
+stratum and on two binary collapses of the outcome.
+
+Sequential ignorability is assumed and is not testable here, so the estimate is
+accompanied by the sensitivity that matters: the residual correlation between
+mediator and outcome errors at which the point estimate crosses zero, which is
+about −0.24. The outcome is an ordinal class scored linearly, as in the
+association family; the binary collapses are reported because they do not depend
+on that scoring. No claim is made that unmeasured confounding is absent. The
+estimate replaces the attenuation percentage as the quantity cited for the
+pathway (Table S5).
+
+Fold-change figures such as 216-fold and 265-fold are ten raised to the unrounded
+log10 difference before display rounding, so that Δ*h* = 2.3349… is reported as
+216-fold rather than as 10^2.33.
+
 ### Dynamic range, and the two boundaries it sets
 
 For a culture starting at *N₀* against an assay floor *L*, two quantities
@@ -1099,8 +1202,11 @@ rather than asserted.
 Every number in this paper is regenerated by a script that writes a receipt
 recording the software versions it ran under, and a separate audit script
 recomputes each quantity quoted in the text from the table it came from and
-reports any that disagree. Analyses used Python 3.14 with numpy 2.5.0, scipy
-1.18.0, pandas 3.0.3 and lifelines 0.30.3.
+reports any that disagree. Every table is generated from the results files and
+the manuscript is assembled from that generated material, never edited
+downstream of it, so a table cannot drift from the analysis behind it. Analyses
+used Python 3.14 with numpy 2.5.0, scipy 1.18.0, pandas 3.0.3, statsmodels
+0.15.0 and lifelines 0.30.3.
 
 ---
 

@@ -1,0 +1,145 @@
+{
+  "script": "src/experiments/exp33_floor_posterior.py",
+  "utc": "2026-09-06T20:03:41.634145+00:00",
+  "max_log10_span_for_labels": 1.0,
+  "n_deposits": 7,
+  "n_passed": 7,
+  "all_passed": true,
+  "checks": [
+    {
+      "deposit": "Vijay 2024, clinical isolates (MPN per mL)",
+      "passed": true,
+      "expect_verdict": "INFERRED",
+      "got_verdict": "INFERRED",
+      "expect_refuse": false,
+      "got_refuse": false
+    },
+    {
+      "deposit": "ERA4TB, 100 uL plated (CFU per mL)",
+      "passed": true,
+      "expect_verdict": "DERIVED",
+      "got_verdict": "DERIVED",
+      "expect_refuse": false,
+      "got_refuse": false
+    },
+    {
+      "deposit": "ERA4TB, 10 uL plated (CFU per mL)",
+      "passed": true,
+      "expect_verdict": "DERIVED",
+      "got_verdict": "DERIVED",
+      "expect_refuse": false,
+      "got_refuse": false
+    },
+    {
+      "deposit": "ERA4TB, 2.5 uL plated (CFU per mL)",
+      "passed": true,
+      "expect_verdict": "DERIVED",
+      "got_verdict": "DERIVED",
+      "expect_refuse": false,
+      "got_refuse": false
+    },
+    {
+      "deposit": "Kaur 2024, apramycin grid (log10 CFU per mL)",
+      "passed": true,
+      "expect_verdict": "NONE",
+      "got_verdict": "NONE",
+      "expect_refuse": true,
+      "got_refuse": true
+    },
+    {
+      "deposit": "Windels 2024, evolved clones (surviving fraction)",
+      "passed": true,
+      "expect_verdict": "NONE",
+      "got_verdict": "NONE",
+      "expect_refuse": true,
+      "got_refuse": true
+    },
+    {
+      "deposit": "Dubey 2026, hollow fibre (CFU per mL)",
+      "passed": true,
+      "expect_verdict": "DERIVED",
+      "got_verdict": "DERIVED",
+      "expect_refuse": false,
+      "got_refuse": false
+    }
+  ],
+  "rows": [
+    {
+      "deposit": "Vijay 2024, clinical isolates (MPN per mL)",
+      "verdict": "INFERRED",
+      "candidate_floor": 23.0,
+      "ci_low": 9.2,
+      "ci_high": 23.0,
+      "log10_span": 0.3979400086720376,
+      "refuse_labels": false,
+      "reason": "33 readings sit exactly on the minimum, nothing lies below it, and the minimum is a value an MPN table returns; 95% support [9.2, 23] (span 0.398 log10)",
+      "validation_passed": true
+    },
+    {
+      "deposit": "ERA4TB, 100 uL plated (CFU per mL)",
+      "verdict": "DERIVED",
+      "candidate_floor": 10.0,
+      "ci_low": 10.0,
+      "ci_high": 10.0,
+      "log10_span": 0.0,
+      "refuse_labels": false,
+      "reason": "the minimum equals 1000/100, so the floor follows from the plated volume and is not an inference; volume derivation is a point mass",
+      "validation_passed": true
+    },
+    {
+      "deposit": "ERA4TB, 10 uL plated (CFU per mL)",
+      "verdict": "DERIVED",
+      "candidate_floor": 100.0,
+      "ci_low": 100.0,
+      "ci_high": 100.0,
+      "log10_span": 0.0,
+      "refuse_labels": false,
+      "reason": "the minimum equals 1000/10, so the floor follows from the plated volume and is not an inference; volume derivation is a point mass",
+      "validation_passed": true
+    },
+    {
+      "deposit": "ERA4TB, 2.5 uL plated (CFU per mL)",
+      "verdict": "DERIVED",
+      "candidate_floor": 400.0,
+      "ci_low": 400.0,
+      "ci_high": 400.0,
+      "log10_span": 0.0,
+      "refuse_labels": false,
+      "reason": "the minimum equals 1000/2.5, so the floor follows from the plated volume and is not an inference; volume derivation is a point mass",
+      "validation_passed": true
+    },
+    {
+      "deposit": "Kaur 2024, apramycin grid (log10 CFU per mL)",
+      "verdict": "NONE",
+      "candidate_floor": 39.99999999999999,
+      "ci_low": null,
+      "ci_high": null,
+      "log10_span": null,
+      "refuse_labels": true,
+      "reason": "the minimum appears once, which is what a continuous tail looks like; no floor is evidenced; refuse observability labels",
+      "validation_passed": true
+    },
+    {
+      "deposit": "Windels 2024, evolved clones (surviving fraction)",
+      "verdict": "NONE",
+      "candidate_floor": null,
+      "ci_low": null,
+      "ci_high": null,
+      "log10_span": null,
+      "refuse_labels": true,
+      "reason": "6 readings are exact zeros marking below-limit without a named L; refuse observability labels",
+      "validation_passed": true
+    },
+    {
+      "deposit": "Dubey 2026, hollow fibre (CFU per mL)",
+      "verdict": "DERIVED",
+      "candidate_floor": 10.0,
+      "ci_low": 10.0,
+      "ci_high": 10.0,
+      "log10_span": 0.0,
+      "refuse_labels": false,
+      "reason": "the minimum equals 1000/100, so the floor follows from the plated volume and is not an inference; volume derivation is a point mass",
+      "validation_passed": true
+    }
+  ]
+}

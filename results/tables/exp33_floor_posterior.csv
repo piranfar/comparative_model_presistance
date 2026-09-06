@@ -1,0 +1,8 @@
+deposit,verdict,candidate_floor,ci_low,ci_high,log10_span,refuse_labels,reason,validation_passed
+"Vijay 2024, clinical isolates (MPN per mL)",INFERRED,23.0,9.2,23.0,0.3979400086720376,False,"33 readings sit exactly on the minimum, nothing lies below it, and the minimum is a value an MPN table returns; 95% support [9.2, 23] (span 0.398 log10)",True
+"ERA4TB, 100 uL plated (CFU per mL)",DERIVED,10.0,10.0,10.0,0.0,False,"the minimum equals 1000/100, so the floor follows from the plated volume and is not an inference; volume derivation is a point mass",True
+"ERA4TB, 10 uL plated (CFU per mL)",DERIVED,100.0,100.0,100.0,0.0,False,"the minimum equals 1000/10, so the floor follows from the plated volume and is not an inference; volume derivation is a point mass",True
+"ERA4TB, 2.5 uL plated (CFU per mL)",DERIVED,400.0,400.0,400.0,0.0,False,"the minimum equals 1000/2.5, so the floor follows from the plated volume and is not an inference; volume derivation is a point mass",True
+"Kaur 2024, apramycin grid (log10 CFU per mL)",NONE,39.99999999999999,,,,True,"the minimum appears once, which is what a continuous tail looks like; no floor is evidenced; refuse observability labels",True
+"Windels 2024, evolved clones (surviving fraction)",NONE,,,,,True,6 readings are exact zeros marking below-limit without a named L; refuse observability labels,True
+"Dubey 2026, hollow fibre (CFU per mL)",DERIVED,10.0,10.0,10.0,0.0,False,"the minimum equals 1000/100, so the floor follows from the plated volume and is not an inference; volume derivation is a point mass",True

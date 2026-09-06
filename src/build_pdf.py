@@ -174,7 +174,10 @@ def display_lines(text: str) -> tuple[str, int]:
 
 def superscripts(text: str) -> str:
     """10^*q* and 10^Δ*h* are exponents; render them as such."""
+    # 10^*q* and 10^Δ*h*, where the exponent is an italicised symbol ...
     text = re.sub(r"\^(Δ?)\*([^*\n]+)\*", r"<sup>\1*\2*</sup>", text)
+    # ... and 10^2.33, where it is a bare number.
+    text = re.sub(r"\^(-?\d+(?:\.\d+)?)", r"<sup>\1</sup>", text)
     assert "^" not in text, "an exponent was not converted"
     return text
 

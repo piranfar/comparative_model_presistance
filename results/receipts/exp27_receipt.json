@@ -1,6 +1,6 @@
 {
   "script": "src/experiments/exp27_out_of_sample_boundaries.py",
-  "utc": "2026-09-06T19:21:14+00:00",
+  "utc": "2026-09-06T20:00:10+00:00",
   "data_source": "Dubey et al. 2026, Nat Commun 17(1), PMC13408132, CC BY 4.0",
   "floor": {
     "plated_volume_ul": 100.0,

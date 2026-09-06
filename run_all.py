@@ -71,6 +71,15 @@ STAGES = [
     ("exp32  first crossing below the boundary, and how often it holds",
      "src.experiments.exp32_crossing_events"),
 
+    ("exp33  a posterior over the floor, and when to refuse a label",
+     "src.experiments.exp33_floor_posterior"),
+
+    ("exp34  how much of the resistance association travels through inoculum",
+     "src.experiments.exp34_mediation"),
+
+    ("exp35  the strengtheners an external review asked for",
+     "src.experiments.exp35_review_strengthen"),
+
     ("fig 1  the assay floor bounds the endpoint and decides the phenotype",
      "src.figures.fig14_dynamic_range"),
     ("fig 2  one protocol, six laboratories: the inoculum still decides",

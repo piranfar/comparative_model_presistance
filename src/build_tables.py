@@ -517,6 +517,126 @@ def table13() -> str:
             "are 53 flasks with a crossing series and 42 with a returning one."
             + chr(10) + chr(10) + md(f))
 
+
+def table3a() -> str:
+    """The deposited class really is a threshold on the recorded fraction."""
+    r = json.loads((ROOT / "results" / "receipts" / "exp35_receipt.json")
+                   .read_text(encoding="utf-8"))
+    d = r["fraction_determinism"]
+    def sci(v: float) -> str:
+        m, e = f"{v:.1e}".split("e")
+        sup = str(int(e)).replace("-", "−")
+        digits = str.maketrans("0123456789−", "⁰¹²³⁴⁵⁶⁷⁸⁹⁻")
+        return f"{m} × 10{sup.translate(digits)}"
+
+    rows = [[c["label"], int(c["n"]), sci(c["min_fraction"]),
+             sci(c["max_fraction"]), c["label"], int(c["disagreements"])]
+            for c in d["classes"]]
+    rows.append(["All usable", int(d["n_usable"]), "-", "-", "-",
+                 int(d["n_disagree"])])
+    f = pd.DataFrame(rows, columns=[
+        "Recorded class", "n", "Min fraction", "Max fraction",
+        "Predicted from cuts", "Disagreements"])
+    return ("**Table 3a.** The deposited tolerance class at day 5 after 15 days "
+            "of prior culture is a threshold on the recorded surviving fraction, "
+            "with no overlap between classes: low below 10\u207b\u00b3, medium from "
+            "10\u207b\u00b3 to 10\u207b\u00b2 inclusive, high above 10\u207b\u00b2. Applying those cuts "
+            "reproduces every usable class in the file. This matters because the "
+            "argument that follows is about the fraction the assay recorded, not "
+            "about an independent clinical judgement."
+            + chr(10) + chr(10) + md(f, align_right_from=1))
+
+
+def table14() -> str:
+    """What is known about L, and when that is too little to label with."""
+    d = pd.read_csv(T / "exp33_floor_posterior.csv")
+    rows = []
+    for r in d.itertuples():
+        support = ("point mass" if r.verdict == "DERIVED"
+                   else ("-" if pd.isna(r.ci_low)
+                         else f"[{r.ci_low:.1f}, {r.ci_high:.1f}]"))
+        rows.append([r.deposit, r.verdict,
+                     "-" if pd.isna(r.candidate_floor) else f"{r.candidate_floor:,.0f}",
+                     support,
+                     "-" if pd.isna(r.log10_span) else f"{r.log10_span:.3f}",
+                     "yes" if r.refuse_labels else "no"])
+    f = pd.DataFrame(rows, columns=[
+        "Deposit", "Verdict", "Floor used", "95% support",
+        "Span (log10)", "Refuse observability labels"])
+    return ("**Table 14.** What is actually known about the assay floor in each "
+            "deposit, and the rule that follows from it. A floor derived from a "
+            "recorded plated volume is a point mass: one colony in that volume, "
+            "no inference required. A floor inferred from a pile-up on a "
+            "most-probable-number rung carries a posterior over the rungs at or "
+            "below the observed minimum, and the 95 per cent support is quoted. "
+            "Where no floor is evidenced at all, or where the support spans more "
+            "than one log10, the observability labels of Section 3 are refused "
+            "rather than reported -- a label is only as good as the floor it is "
+            "computed against."
+            + chr(10) + chr(10) + md(f, align_right_from=2))
+
+
+def tableS5() -> str:
+    """How much of the resistance association travels through the inoculum."""
+    d = pd.read_csv(T / "exp34_mediation.csv")
+    # exp35 repeats the linear fit as a reference row; exp34 already supplies it.
+    b = pd.read_csv(T / "exp35_binary_mediation.csv")
+    b = b[b.outcome != "linear_012"]
+    rows = []
+    for r in d.itertuples():
+        rows.append([
+            "Linear 0/1/2, " + {"all_IS_IR": "all IS/IR",
+                                "baseline_0M": "baseline isolates"}
+            .get(r.stratum, r.stratum.replace("_", " ")), int(r.n),
+            f"{r.total_c:+.3f} ({r.total_ci_low:+.3f}, {r.total_ci_high:+.3f})",
+            f"{r.ade_c_prime:+.3f} ({r.ade_ci_low:+.3f}, {r.ade_ci_high:+.3f})",
+            f"{r.acme:+.3f} ({r.acme_ci_low:+.3f}, {r.acme_ci_high:+.3f})",
+            f"{100 * r.prop_mediated:.0f}%"])
+    for r in b.itertuples():
+        rows.append([
+            {"high_vs_rest": "High versus rest",
+             "notlow_vs_low": "Not-low versus low"}.get(r.outcome, r.outcome),
+            int(r.n),
+            f"{r.total_c:+.3f}",
+            f"{r.ade:+.3f}",
+            f"{r.acme:+.3f} ({r.acme_ci_low:+.3f}, {r.acme_ci_high:+.3f})",
+            f"{100 * r.prop_mediated:.0f}%"])
+    f = pd.DataFrame(rows, columns=[
+        "Outcome and stratum", "n", "Total effect c (95% CI)",
+        "Direct effect c' (95% CI)", "Mediated effect (95% CI)",
+        "Proportion mediated"])
+    return ("**Table S5.** Decomposition of the isoniazid-resistance association "
+            "with the tolerance class into a path through log10 starting density "
+            "and a direct path, by the product of coefficients with bootstrap "
+            "percentile intervals. The mediated path excludes zero in every "
+            "specification and the direct path covers zero in every one. This "
+            "replaces the percentage attenuation the earlier analysis quoted, "
+            "which is a descriptive ratio rather than an estimand. Sequential "
+            "ignorability is assumed and is not testable here; the sensitivity "
+            "analysis in the Methods reports the residual correlation that would "
+            "nullify the estimate."
+            + chr(10) + chr(10) + md(f, align_right_from=1))
+
+
+def tableS6() -> str:
+    """What the deposit can and cannot rule out for the seeding gap."""
+    d = pd.read_csv(T / "exp35_ir_seeding_confounders.csv")
+    rows = [[r.covariate, r.kind, int(r.n), f"{r.beta_IR:+.3f}",
+             f"{r.p:.3g}", f"{100 * r.attenuation_of_IR_beta:.0f}%"]
+            for r in d.itertuples()]
+    f = pd.DataFrame(rows, columns=[
+        "Adjusted for", "Kind", "n", "Resistance coefficient", "p",
+        "Attenuation"])
+    return ("**Table S6.** Isoniazid-resistant isolates enter this assay ten-fold "
+            "lower than susceptible ones, and we do not know why. This is what "
+            "the deposit can rule out: the association between resistance and "
+            "starting density, adjusted in turn for every usable pretreatment "
+            "covariate the file carries. None removes it. The file records no "
+            "referring site and no processing batch, so those cannot be tested "
+            "at all, and the gap is reported as real, large and unexplained "
+            "rather than attributed to a mechanism the data cannot support."
+            + chr(10) + chr(10) + md(f, align_right_from=2))
+
 def main() -> int:
     OUT.parent.mkdir(parents=True, exist_ok=True)
     parts = ["# Tables",
@@ -525,8 +645,9 @@ def main() -> int:
              "`results/tables/`. Do not edit by hand: a value typed into this "
              "file can drift away from the analysis that produced it.",
              ""]
-    order = (table1, table2, table3, table4, table5, table6, table7, table8,
-             table9, table10, table11, table12, table13)
+    order = (table1, table2, table3, table3a, table4, table5, table6,
+             table7, table8, table9, table10, table11, table12, table13,
+             table14)
     for fn in order:
         parts.append(fn())
         parts.append("")
@@ -534,12 +655,12 @@ def main() -> int:
               "Held here so the Results stay on one line of reasoning. "
               "Table S1 supports Section 10 and Table S2 supports Section 6.",
               ""]
-    for fn in (tableS1, tableS2, tableS3, tableS4):
+    for fn in (tableS1, tableS2, tableS3, tableS4, tableS5, tableS6):
         parts.append(fn())
         parts.append("")
     OUT.write_text("\n".join(parts), encoding="utf-8")
     print(f"wrote {OUT.relative_to(ROOT)}")
-    for fn in order + (tableS1, tableS2, tableS3, tableS4):
+    for fn in order + (tableS1, tableS2, tableS3, tableS4, tableS5, tableS6):
         first = fn().split("\n")[0]
         print("   " + first[:96])
     return 0

@@ -1,0 +1,206 @@
+{
+  "script": "src/experiments/exp35_review_strengthen.py",
+  "utc": "2026-09-06T20:04:21.449014+00:00",
+  "has_site_or_batch_column": false,
+  "ir_seeding_top_attenuations": [
+    {
+      "covariate": "INH_mutation",
+      "kind": "categorical(k=4)",
+      "n": 203,
+      "beta_IR": -0.6622017196281891,
+      "se": 0.33003993035371715,
+      "p": 0.04617103248379075,
+      "attenuation_of_IR_beta": 0.22080195392135366,
+      "note": "adjusted for 4-level INH_mutation; deposit has no site/batch field"
+    },
+    {
+      "covariate": "MIC_INH",
+      "kind": "numeric",
+      "n": 186,
+      "beta_IR": -0.9631764252387267,
+      "se": 0.18119005922860196,
+      "p": 3.0671740655327255e-07,
+      "attenuation_of_IR_beta": -0.13334829301926687,
+      "note": "adjusted for numeric MIC_INH"
+    },
+    {
+      "covariate": "Time_to_0.4",
+      "kind": "numeric",
+      "n": 202,
+      "beta_IR": -0.8074679409780876,
+      "se": 0.0968352357395023,
+      "p": 1.2308171926530851e-14,
+      "attenuation_of_IR_beta": 0.049870419795131085,
+      "note": "adjusted for numeric Time_to_0.4"
+    },
+    {
+      "covariate": "Time_point",
+      "kind": "categorical(k=8)",
+      "n": 203,
+      "beta_IR": -0.8175014664888869,
+      "se": 0.12291752004157748,
+      "p": 2.8933449951015337e-10,
+      "attenuation_of_IR_beta": 0.03806419332129358,
+      "note": "adjusted for 8-level Time_point; deposit has no site/batch field"
+    },
+    {
+      "covariate": "MIC_RIF",
+      "kind": "numeric",
+      "n": 186,
+      "beta_IR": -0.8531113890495997,
+      "se": 0.1078992736372451,
+      "p": 2.4149753562640443e-13,
+      "attenuation_of_IR_beta": -0.0038372111267328357,
+      "note": "adjusted for numeric MIC_RIF"
+    }
+  ],
+  "binary_mediation": [
+    {
+      "outcome": "high_vs_rest",
+      "n": 203,
+      "total_c": 0.1211484593837534,
+      "ade": 0.01343406896786869,
+      "acme": 0.10771439041588475,
+      "prop_mediated": 0.8891106908316968,
+      "total_ci_low": -0.0008642230607205957,
+      "total_ci_high": 0.24177050176101247,
+      "ade_ci_low": -0.13064161524667423,
+      "ade_ci_high": 0.15329243035284312,
+      "acme_ci_low": 0.03672392437009556,
+      "acme_ci_high": 0.18859279942969379,
+      "acme_ci_excludes_zero": true
+    },
+    {
+      "outcome": "notlow_vs_low",
+      "n": 203,
+      "total_c": 0.13515406162464957,
+      "ade": 0.07736119715266271,
+      "acme": 0.05779286447198703,
+      "prop_mediated": 0.4276073081139775,
+      "total_ci_low": 0.037053237449594066,
+      "total_ci_high": 0.23047960471977144,
+      "ade_ci_low": -0.0381368302207896,
+      "ade_ci_high": 0.18974650723558445,
+      "acme_ci_low": 0.0030319195641900732,
+      "acme_ci_high": 0.12087228892720565,
+      "acme_ci_excludes_zero": true
+    },
+    {
+      "outcome": "linear_012",
+      "n": 203,
+      "total_c": 0.2563025210084025,
+      "ade": 0.09079526612053111,
+      "acme": 0.16550725488787185,
+      "prop_mediated": 0.645749617431371,
+      "total_ci_low": 0.08651441594316411,
+      "total_ci_high": 0.4250781561307343,
+      "ade_ci_low": -0.11586167733333236,
+      "ade_ci_high": 0.2873838251716774,
+      "acme_ci_low": 0.0670303491673109,
+      "acme_ci_high": 0.2789305646408524,
+      "acme_ci_excludes_zero": true
+    }
+  ],
+  "mediation_sensitivity": {
+    "rho_nullifies_point_acme": -0.2368346474977248,
+    "rho_drives_acme_to_boot_ci_low_boundary": -0.15,
+    "rho_makes_acme_nonpositive": -0.25,
+    "acme_boot_ci": [
+      0.0670303491673109,
+      0.2789305646408524
+    ],
+    "acme_at_0": 0.16550725488787185
+  },
+  "delta_h": [
+    {
+      "statistic": "delta_h_max_minus_min",
+      "n_laboratories": 4,
+      "estimate": 2.33492058252653,
+      "ci_low": 0.04693170413514025,
+      "ci_high": 2.33492058252653,
+      "note": "percentile CI of lab-cluster bootstrap of a range; upper equals the observed range by construction under resampling with replacement of 4 laboratories",
+      "laboratories": "B,C,D,F",
+      "lab_headrooms": "{\"B\": 2.6672085194289132, \"C\": 3.6055242320087, \"D\": 3.6524559361438405, \"F\": 5.002129101955443}"
+    },
+    {
+      "statistic": "between_lab_sd",
+      "n_laboratories": 4,
+      "estimate": 0.9607864997597664,
+      "ci_low": 0.023465852067570125,
+      "ci_high": 1.167460291263265,
+      "note": "preferred dispersion measure; not biased downward like the range",
+      "laboratories": "B,C,D,F",
+      "lab_headrooms": "{\"B\": 2.6672085194289132, \"C\": 3.6055242320087, \"D\": 3.6524559361438405, \"F\": 5.002129101955443}"
+    }
+  ],
+  "apramycin": [
+    {
+      "day": 3.0,
+      "grid_concentrations_ug_ml": "1,4,8,32,128",
+      "excluded_arm_ug_ml": 1.0,
+      "excluded_reason": "net growth / sub-threshold; not a kill arm",
+      "low_ug_ml": 4.0,
+      "high_ug_ml": 128.0,
+      "fold_range_used": 32.0,
+      "log10_separation_4_vs_128": 0.8391108321437564,
+      "survivor_ratio_4_over_128": 6.904159758219219,
+      "log10_separation_1_vs_128_if_included": 1.5485735713127058,
+      "survivor_ratio_1_over_128_if_included": 35.36499258117475
+    },
+    {
+      "day": 7.0,
+      "grid_concentrations_ug_ml": "1,4,8,32,128",
+      "excluded_arm_ug_ml": 1.0,
+      "excluded_reason": "net growth / sub-threshold; not a kill arm",
+      "low_ug_ml": 4.0,
+      "high_ug_ml": 128.0,
+      "fold_range_used": 32.0,
+      "log10_separation_4_vs_128": 1.6833333333333331,
+      "survivor_ratio_4_over_128": 48.231784822393045,
+      "log10_separation_1_vs_128_if_included": 4.269423499831909,
+      "survivor_ratio_1_over_128_if_included": 18596.16966288521
+    },
+    {
+      "day": 14.0,
+      "grid_concentrations_ug_ml": "1,4,8,32,128",
+      "excluded_arm_ug_ml": 1.0,
+      "excluded_reason": "net growth / sub-threshold; not a kill arm",
+      "low_ug_ml": 4.0,
+      "high_ug_ml": 128.0,
+      "fold_range_used": 32.0,
+      "log10_separation_4_vs_128": 0.7139089784588057,
+      "survivor_ratio_4_over_128": 5.174983607708489,
+      "log10_separation_1_vs_128_if_included": 6.352881707263976,
+      "survivor_ratio_1_over_128_if_included": 2253625.2881397065
+    }
+  ],
+  "fraction_determinism": {
+    "n_usable": 203,
+    "n_agree": 203,
+    "n_disagree": 0,
+    "cuts": "Low < 1e-3 <= Medium <= 1e-2 < High",
+    "classes": [
+      {
+        "label": "Low",
+        "n": 33,
+        "min_fraction": 3.7704918032786884e-06,
+        "max_fraction": 0.00046938775510204083,
+        "disagreements": 0
+      },
+      {
+        "label": "Medium",
+        "n": 124,
+        "min_fraction": 0.001,
+        "max_fraction": 0.01,
+        "disagreements": 0
+      },
+      {
+        "label": "High",
+        "n": 46,
+        "min_fraction": 0.026521739130434784,
+        "max_fraction": 10.0,
+        "disagreements": 0
+      }
+    ]
+  }
+}

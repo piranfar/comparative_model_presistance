@@ -1,0 +1,3 @@
+statistic,n_laboratories,estimate,ci_low,ci_high,note,laboratories,lab_headrooms
+delta_h_max_minus_min,4,2.33492058252653,0.04693170413514025,2.33492058252653,percentile CI of lab-cluster bootstrap of a range; upper equals the observed range by construction under resampling with replacement of 4 laboratories,"B,C,D,F","{""B"": 2.6672085194289132, ""C"": 3.6055242320087, ""D"": 3.6524559361438405, ""F"": 5.002129101955443}"
+between_lab_sd,4,0.9607864997597664,0.023465852067570125,1.167460291263265,preferred dispersion measure; not biased downward like the range,"B,C,D,F","{""B"": 2.6672085194289132, ""C"": 3.6055242320087, ""D"": 3.6524559361438405, ""F"": 5.002129101955443}"

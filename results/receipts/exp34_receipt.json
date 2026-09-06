@@ -1,0 +1,138 @@
+{
+  "script": "src/experiments/exp34_mediation.py",
+  "utc": "2026-09-06T20:03:55.447603+00:00",
+  "exposure": "INH-Suceptibility IR vs IS",
+  "mediator": "log10(mpn_T0_15days)",
+  "outcome": "Tolerant_level_D5_15 (Low=0, Medium=1, High=2)",
+  "method": "linear product-of-coefficients mediation; bootstrap percentile CI",
+  "n_boot": 5000,
+  "seed": 20260906,
+  "full": {
+    "n": 203,
+    "a_x_to_m": -0.8498503338923304,
+    "a_se": 0.10296575813094919,
+    "a_p": 2.009256701401058e-14,
+    "b_m_to_y": -0.194748708434161,
+    "b_se": 0.05814526456162065,
+    "b_p": 0.0009680620558184669,
+    "ade_c_prime": 0.09079526612053111,
+    "ade_se": 0.09821623343094471,
+    "ade_p": 0.3563699636525096,
+    "total_c": 0.2563025210084025,
+    "total_se": 0.08701072135328823,
+    "total_p": 0.0036031345089847433,
+    "acme": 0.16550725488787185,
+    "acme_via_difference": 0.16550725488787138,
+    "prop_mediated": 0.645749617431371,
+    "stratum": "all_IS_IR",
+    "baseline_only": false,
+    "acme_ci": [
+      0.0670303491673109,
+      0.2789305646408524
+    ],
+    "ade_ci": [
+      -0.11586167733333236,
+      0.2873838251716774
+    ],
+    "total_ci": [
+      0.08651441594316411,
+      0.4250781561307343
+    ],
+    "n_boot": 5000,
+    "seed": 20260906,
+    "acme_ci_excludes_zero": true,
+    "ade_c_prime_ci_excludes_zero": false,
+    "total_c_ci_excludes_zero": true
+  },
+  "baseline_only": {
+    "n": 168,
+    "a_x_to_m": -0.8175014664888893,
+    "a_se": 0.1256502770426564,
+    "a_p": 8.713859096950782e-10,
+    "b_m_to_y": -0.1940667084779954,
+    "b_se": 0.06146915589007353,
+    "b_p": 0.0018946230738052996,
+    "ade_c_prime": 0.06704045733301117,
+    "ade_se": 0.11147995915541405,
+    "ade_p": 0.5484203552284652,
+    "total_c": 0.22569027611044415,
+    "total_se": 0.10216436291745733,
+    "total_p": 0.02853762430312589,
+    "acme": 0.158649818777433,
+    "acme_via_difference": 0.15864981877743298,
+    "prop_mediated": 0.7029537183063921,
+    "stratum": "baseline_0M",
+    "baseline_only": true,
+    "acme_ci": [
+      0.052947326531199435,
+      0.29472898840697476
+    ],
+    "ade_ci": [
+      -0.15671188259881233,
+      0.29369760533550854
+    ],
+    "total_ci": [
+      0.03787695621593101,
+      0.40949983846115606
+    ],
+    "n_boot": 5000,
+    "seed": 20260906,
+    "acme_ci_excludes_zero": true,
+    "ade_c_prime_ci_excludes_zero": false,
+    "total_c_ci_excludes_zero": true
+  },
+  "residual_correlation_sensitivity": {
+    "sigma_m": 0.720742729754873,
+    "sigma_y": 0.5926654618151742,
+    "rho_nullifying_acme": -0.2368346474977248,
+    "acme_at_rho0": 0.16550725488787185,
+    "grid": [
+      {
+        "rho": -0.5,
+        "acme": -0.21235861162689906
+      },
+      {
+        "rho": -0.4,
+        "acme": -0.12441137748468208
+      },
+      {
+        "rho": -0.3,
+        "acme": -0.046273252433758225
+      },
+      {
+        "rho": -0.2,
+        "acme": 0.026271973638640405
+      },
+      {
+        "rho": -0.1,
+        "acme": 0.09610595055562801
+      },
+      {
+        "rho": 0.0,
+        "acme": 0.16550725488787185
+      },
+      {
+        "rho": 0.1,
+        "acme": 0.23657614916848452
+      },
+      {
+        "rho": 0.2,
+        "acme": 0.31156829569806216
+      },
+      {
+        "rho": 0.3,
+        "acme": 0.39327074376660953
+      },
+      {
+        "rho": 0.4,
+        "acme": 0.4855778172885024
+      },
+      {
+        "rho": 0.5,
+        "acme": 0.5945812442762942
+      }
+    ],
+    "note": "|\u03c1| at or beyond |rho_nullifying_acme| would bring ACME to zero under this linear sensitivity model"
+  },
+  "note": "No unmeasured-confounding claim. Linear coding of the ordinal label matches Exp22/31 so ACME is comparable to the published attenuation percent. Sensitivity: ACME(\u03c1) under Corr(\u03b5_M,\u03b5_Y)=\u03c1."
+}

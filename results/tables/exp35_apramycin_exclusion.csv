@@ -1,0 +1,4 @@
+day,grid_concentrations_ug_ml,excluded_arm_ug_ml,excluded_reason,low_ug_ml,high_ug_ml,fold_range_used,log10_separation_4_vs_128,survivor_ratio_4_over_128,log10_separation_1_vs_128_if_included,survivor_ratio_1_over_128_if_included
+3.0,"1,4,8,32,128",1.0,net growth / sub-threshold; not a kill arm,4.0,128.0,32.0,0.8391108321437564,6.904159758219219,1.5485735713127058,35.36499258117475
+7.0,"1,4,8,32,128",1.0,net growth / sub-threshold; not a kill arm,4.0,128.0,32.0,1.6833333333333331,48.231784822393045,4.269423499831909,18596.16966288521
+14.0,"1,4,8,32,128",1.0,net growth / sub-threshold; not a kill arm,4.0,128.0,32.0,0.7139089784588057,5.174983607708489,6.352881707263976,2253625.2881397065

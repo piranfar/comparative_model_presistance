@@ -1,6 +1,6 @@
 {
   "script": "src/experiments/exp16_tb_mic_mdk_independence.py",
-  "utc": "2026-09-06T19:20:45+00:00",
+  "utc": "2026-09-06T19:59:40+00:00",
   "data_source": "eLife 93243 supplementary file 2",
   "organism": "Mycobacterium tuberculosis, clinical isolates",
   "antibiotic": "rifampicin",

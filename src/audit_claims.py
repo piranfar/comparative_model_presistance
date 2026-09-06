@@ -245,6 +245,44 @@ def main() -> int:
         rows.append(check("treated arms, naive t25 (5: 5.77 d)",
                           5.765, float(g.loc[t, "weibull_naive_t25_days"]), 0.01))
 
+    # --- exp33, what is known about the floor ------------------------------
+    f = load("exp33_floor_posterior.csv")
+    if f is not None:
+        v = f.set_index("deposit")
+        row = [i for i in v.index if i.startswith("Vijay")][0]
+        rows.append(check("clinical floor posterior, lower support (1: 9.2)",
+                          9.2, float(v.loc[row, "ci_low"]), 0.02))
+        rows.append(check("clinical floor posterior, span log10 (1: 0.398)",
+                          0.398, float(v.loc[row, "log10_span"]), 0.01))
+        rows.append(check("deposits whose labels are refused (14: 2)",
+                          2, float(f["refuse_labels"].sum()), 0.001))
+
+    # --- exp34, the path through the inoculum ------------------------------
+    f = load("exp34_mediation.csv")
+    if f is not None:
+        g = f.set_index("stratum")
+        rows.append(check("mediated effect, all IS/IR (4: +0.166)",
+                          0.1655, float(g.loc["all_IS_IR", "acme"]), 0.02))
+        rows.append(check("its lower bootstrap bound excludes zero (4: +0.067)",
+                          0.0670, float(g.loc["all_IS_IR", "acme_ci_low"]), 0.05))
+        rows.append(check("direct effect covers zero, lower bound (4: -0.116)",
+                          -0.1159, float(g.loc["all_IS_IR", "ade_ci_low"]), 0.05))
+        rows.append(check("proportion mediated (4: 65%)",
+                          0.65, float(g.loc["all_IS_IR", "prop_mediated"]), 0.02))
+        rows.append(check("mediated effect, baseline only (4: +0.159)",
+                          0.1586, float(g.loc["baseline_0M", "acme"]), 0.02))
+
+    # --- exp35, what the deposit cannot rule out ---------------------------
+    r = receipt("exp35_receipt.json")
+    if r is not None:
+        d = r["fraction_determinism"]
+        rows.append(check("cuts reproduce every usable class (3a: 203)",
+                          203, float(d["n_agree"]), 0.001))
+        rows.append(check("disagreements between cuts and labels (3a: 0)",
+                          0, float(d["n_disagree"]), 1.0))
+        rows.append(check("residual correlation nullifying the path (Methods: -0.24)",
+                          -0.237, float(r["mediation_sensitivity"]["rho_nullifies_point_acme"]), 0.05))
+
     # --- exp27, the out-of-sample test ------------------------------------
     f = load("exp27_out_of_sample.csv")
     if f is not None:
