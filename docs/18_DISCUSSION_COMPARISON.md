@@ -112,6 +112,78 @@ they seed lower is unexplained and is stated as such.
 
 ---
 
+## 0d. The food-microbiology literature got here first, in its own terms
+
+**Garre A, Egea JA, Esnoz A, Palop A, Fernandez PS.** "Tail or artefact?
+Illustration of the impact that uncertainty of the serial dilution and cell
+enumeration methods has on microbial inactivation." *Food Research International*
+2019. PMID 30884713, doi:10.1016/j.foodres.2019.01.059. 33 citations.
+
+**What they did.** Analysed the uncertainty of serial dilution and viable
+counting, showed the binomial model is unbiased where the Poisson inflates
+variance, then simulated a generic inactivation experiment in which counting
+error is the ONLY source of variation. Their conclusion, in their own words: due
+to the uncertainty of the methodology and "the omission of zero-count plates
+because of the log-transformation, the simulated survival curve can have a tail",
+and "this phenomenon, which is usually attributed to biological variability, can
+be to some extent an artefact of the experimental design and/or methodology".
+
+**Why this matters more than any other paper found so far.** That is our argument
+in a different field, six years earlier: a survival phenomenon routinely read as
+biology is partly produced by how the enumeration handles counts at and below the
+limit. The family of argument is theirs. We cite it, and we stop presenting the
+general idea as new.
+
+**What differs, stated precisely rather than defensively.** Their mechanism is
+sampling uncertainty plus the dropping of zero-count plates under a log
+transform, and it distorts the SHAPE of a survivor curve. Ours is a hard floor
+plus a ratio endpoint, and it fixes a THRESHOLD PHENOTYPE: when the final reading
+rests on the floor the recorded fraction is exactly L/N0, so the class assigned
+is a function of the denominator. Their evidence is Monte Carlo simulation of a
+generic experiment; ours is a published classification of 217 real isolates, with
+the affected ones named. Their field never formalised the endpoint into a
+clinical phenotype; the antibiotic tolerance field did, as MDK.
+
+**The framing this forces on the Introduction.** Not "nobody has noticed that a
+detection limit bounds a log reduction" - predictive microbiology has worked with
+that for decades, and Penalver-Soto et al. build optimal experimental designs
+around a detection-limit constraint, stating the available reduction as initial
+count minus limit. The claim that survives is the TRANSFER: the antibiotic
+tolerance field adopted a log-reduction endpoint without adopting the design
+discipline the field that invented it had already built, and we show on a
+published classification what that costs.
+
+---
+
+## 0e. A methodological criticism of us, from the same group
+
+**Garre A, et al.** "The Most Probable Curve method - a robust approach to
+estimate kinetic models from low plate count data resulting in reduced
+uncertainty." *International Journal of Food Microbiology* 2022.
+
+**What they did.** Proposed a multilevel likelihood separating the true
+concentration, the actual concentration in the medium, and the counts on the
+plate, with the plate count Poisson given the dilution and the plated volume.
+They report that traditional normal-likelihood regression "has limitations when
+the data includes plates with low (or zero) cell counts", and that Poisson
+regression "uses an unrealistic likelihood function, making it unsuitable for
+survivor curves with several log-reductions".
+
+**Why this is aimed at us.** Our estimation is a Gaussian Tobit, Beal's M3. For
+plate counts at low numbers a normal likelihood is the thing they argue against,
+and a referee from quantitative microbiology will ask why we did not use a count
+likelihood when one built for this case exists.
+
+**The defensible answer and its limit.** Our conclusions do not rest on the
+likelihood: the headroom result is arithmetic, the floor result is arithmetic,
+and the two censoring estimators we do compare agree to 0.003 log10 per day. That
+defends robustness, not the choice. The right response is to say so plainly, cite
+the MPC method as the better estimator for this data type, and name refitting
+under a count likelihood as the obvious next step. Arguing that a Gaussian Tobit
+was the right tool would not survive contact with this group.
+
+---
+
 ## 1. ERA4TB, the six-laboratory exercise
 
 **van Wijk RC, Lucía A, Sudhakar PK, Sonnenkalb L, Gaudin C, Hoffmann E,
@@ -351,13 +423,22 @@ Chosen by us, so they are not chosen by a referee.
    original authors. The conclusion holds under both readings, 273–286 fold or
    628–658 fold, so it is stated as an open question about the source rather
    than a threat to the argument.
-7. The variance decomposition does not support the strong reading of our own
+7. The general idea that a survival phenomenon can be an artefact of how counts
+   at the limit are handled belongs to Garre et al. 2019 in food microbiology,
+   and the idea that a detection limit bounds the achievable log reduction is
+   routine in predictive microbiology. Neither is ours. Ours is the transfer to
+   a tolerance phenotype and the demonstration on a published classification.
+8. Our estimator is a Gaussian Tobit on plate-count data, and Garre et al. 2022
+   argue specifically against a normal likelihood at low counts. Our conclusions
+   are arithmetic rather than likelihood-dependent, but the choice is not the
+   best available and we say so rather than defend it.
+9. The variance decomposition does not support the strong reading of our own
    argument. Across the six-laboratory arms the rate term carries 61 to 80 per
    cent of the spread in crossing time and the distance term 20 to 39 per cent.
    A clearance time is a mixture in which the inoculum is a large minority, not
    a measurement of the inoculum. We state this in the Results, not only in the
    limitations, because it bounds the claim rather than qualifying it.
-8. Both surviving label associations sit in the 15-day panel. For growth the
+10. Both surviving label associations sit in the 15-day panel. For growth the
    difference between panels is itself supported (interaction p = 0.0072); for
    resistance it is not (p = 0.088). And because the same isolates appear in both
    panels the comparison is not independent, so it bounds the evidence rather
