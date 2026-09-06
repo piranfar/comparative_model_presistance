@@ -51,10 +51,15 @@ def table1() -> str:
          "apramycin, amikacin, 1-128 ug/mL",
          "5 concentrations x 4 days x 3 replicates",
          "figshare 26462791", "CC BY 4.0"],
+        ["Held out for validation", "*E. coli*, hollow fibre",
+         "amoxicillin-clavulanate",
+         "20 cultures, measured day-zero density, 100 uL plated",
+         "Nat Commun 2026 Source Data", "CC BY 4.0"],
     ]
     d = pd.DataFrame(rows, columns=["Dataset", "Organism", "Drug and range",
                                     "Design", "Deposit", "Licence"])
-    return ("**Table 1.** The four published deposits reanalysed. None was "
+    return ("**Table 1.** The five published deposits reanalysed. Four carry "
+            "the analysis and the fifth is held out to test it. None was "
             "generated for this study, and none was selected after its result "
             "was known.\n\n" + md(d, align_right_from=99))
 
@@ -232,10 +237,11 @@ def tableS1() -> str:
     d = pd.DataFrame(rows, columns=[
         "Constant", "State measured in", "Published (ln/h)", "Assumed (ln/h)",
         "Gap", "Source PMID"])
-    return ("**Table S1.** Every mycobacterial rate admissible under the rule of "
-            "Section 2.3, against the constant in routine use. Values reported as "
-            "a cumulative log reduction over a fixed window are excluded and are "
-            "not listed.\n\n" + md(d))
+    return ("**Table S1.** Every mycobacterial kill or growth rate we could "
+            "find reported as an instantaneous constant, against the value in "
+            "routine modelling use. Rates published only as a cumulative log "
+            "reduction over a fixed window are not convertible without assuming "
+            "the shape this paper is testing, and are excluded.\n\n" + md(d))
 
 
 def table7() -> str:
@@ -279,6 +285,66 @@ def tableS2() -> str:
             "another." + chr(10) + chr(10) + md(d))
 
 
+
+def table9() -> str:
+    """Measurable kill depth, reported on h and with each level of variation named."""
+    d = pd.read_csv(T / "exp28_measurable_depth.csv")
+    rows = []
+    for r in d.itertuples():
+        rows.append([
+            r.dataset, r.level_of_variation, int(r.n),
+            f"{r.median_log10_N0:.2f}", r.L_note,
+            "NA" if pd.isna(r.delta_h) else f"{r.delta_h:.2f}",
+            "NA" if pd.isna(r.fold_spread) else f"{r.fold_spread:,.0f}x",
+        ])
+    f = pd.DataFrame(rows, columns=[
+        "Dataset", "Level of variation", "n", "Median log10 N0",
+        "Quantification limit L", "delta h (log10)", "Fold"])
+    return ("**Table 9.** The deepest reduction each assay could resolve, as "
+            "h = log10(N0/L), with the quantification limit taken per sample "
+            "where it varies. Rows compare only within a level of variation: the "
+            "clinical rows describe between-isolate starting burden, which is "
+            "biological, and are not a measure of laboratory imprecision. Kaur "
+            "is NA because its three day-zero readings are technical replicates "
+            "of one preparation and cannot estimate between-preparation "
+            "reproducibility, and because that deposit states no quantification "
+            "limit." + chr(10) + chr(10) + md(f, align_right_from=2))
+
+
+def table10() -> str:
+    """The framework applied to a deposit it was not built from."""
+    d = pd.read_csv(T / "exp27_out_of_sample.csv")
+    rows = [[f"{int(r.endpoint_logs)} log ({r.endpoint_pct:g}%)",
+             f"{r.N_reach_per_ml:,.0f}", int(r.n_cultures),
+             int(r.n_unreachable), f"{r.pct_unreachable:.0f}%"]
+            for r in d.itertuples()]
+    f = pd.DataFrame(rows, columns=[
+        "Endpoint", "N_reach (per mL)", "Cultures", "Unreachable", "Per cent"])
+    return ("**Table 10.** Dubey et al. 2026, analysed cold. The floor is "
+            "derived from a stated 100 uL plated volume and corroborated inside "
+            "the file: all 229 genuine counts are multiples of ten and the "
+            "smallest is exactly ten. Starting densities are the 20 measured "
+            "day-zero counts, not the nominal inoculum the Methods state."
+            + chr(10) + chr(10) + md(f))
+
+
+def tableS3() -> str:
+    """The turbidity reference, kept out of the main tables on purpose."""
+    d = pd.read_csv(T / "exp28_supplementary_mcfarland.csv")
+    col = "fold_below_nominal_0.5_McFarland"
+    rows = [[a, f"{b:.2f}", f"{c:,.0f}x"] for a, b, c in
+            zip(d["dataset"], d["median_log10_N0"], d[col])]
+    f = pd.DataFrame(rows, columns=[
+        "Dataset", "Median log10 N0", "Fold below nominal 0.5 McFarland"])
+    return ("**Table S3.** Fold below the nominal 0.5 McFarland reference, "
+            "1.5e8 CFU/mL. Descriptive only, and not a protocol-compliance "
+            "metric. A time-kill inoculum is prepared by diluting from a "
+            "suspension matched to that turbidity, so every entry is expected to "
+            "sit far below it; the conversion of a turbidity to CFU/mL depends "
+            "on species, cell aggregation and preparation and is least reliable "
+            "for mycobacteria." + chr(10) + chr(10) + md(f))
+
+
 def main() -> int:
     OUT.parent.mkdir(parents=True, exist_ok=True)
     parts = ["# Tables",
@@ -287,20 +353,23 @@ def main() -> int:
              "`results/tables/`. Do not edit by hand: a value typed into this "
              "file can drift away from the analysis that produced it.",
              ""]
-    order = (table1, table2, table3, table4, table5, table6, table7, table8)
+    order = (table1, table2, table3, table4, table5, table6, table7, table8,
+             table9, table10)
     for fn in order:
         parts.append(fn())
         parts.append("")
     parts += ["---", "", "## Supplementary tables", "",
-              "These support Sections 4.2 and 4.5 but are not part of the "
-              "main argument, and are held here so the Results stay on one "
-              "line of reasoning.", ""]
-    for fn in (tableS1, tableS2):
+              "Held here so the Results stay on one line of reasoning. "
+              "Table S1 records what the field assumes about mycobacterial rate "
+              "constants and is background rather than evidence for any claim "
+              "made above; Tables S2 and S3 support Sections 10 and 6 "
+              "respectively.", ""]
+    for fn in (tableS1, tableS2, tableS3):
         parts.append(fn())
         parts.append("")
     OUT.write_text("\n".join(parts), encoding="utf-8")
     print(f"wrote {OUT.relative_to(ROOT)}")
-    for fn in order + (tableS1, tableS2):
+    for fn in order + (tableS1, tableS2, tableS3):
         first = fn().split("\n")[0]
         print("   " + first[:96])
     return 0

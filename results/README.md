@@ -6,7 +6,7 @@ Outputs of the earlier paper are not here; they live in `version_one/results/`.
 
 | | tables | figures | receipts |
 | --- | ---: | ---: | ---: |
-| total | 40 | 5 | 11 |
+| total | 41 | 5 | 13 |
 
 ## Tolerance and the assay floor (manuscript/PAPER_COMPLETE.md)
 
@@ -51,18 +51,19 @@ Outputs of the earlier paper are not here; they live in `version_one/results/`.
 
 ## Unassigned
 
-**Tables (8).**
+**Tables (9).**
 
 | file | written by | used by |
 | --- | --- | --- |
-| `ctbp_gap_by_condition.csv` | `exp24_clearance_prediction.py` | quoted in the text only |
-| `ctbp_hidden_burden.csv` | `exp24_clearance_prediction.py` | quoted in the text only |
-| `ctbp_identifiability_boundary.csv` | `exp24_clearance_prediction.py` | quoted in the text only |
-| `ctbp_tipping_points.csv` | `exp24_clearance_prediction.py` | quoted in the text only |
-| `ctbp_tlod_calibration.csv` | `exp24_clearance_prediction.py` | quoted in the text only |
-| `ctbp_two_timescale.csv` | `exp24_clearance_prediction.py` | quoted in the text only |
-| `ctbp_validation_summary.csv` | `exp24_clearance_prediction.py` | quoted in the text only |
-| `ctbp_variance_components.csv` | `exp24_clearance_prediction.py` | quoted in the text only |
+| `exp27_out_of_sample.csv` | `exp27_out_of_sample_boundaries.py` | `audit_claims`, `build_tables` |
+| `exp28_against_turbidity.csv` | `-` | quoted in the text only |
+| `exp28_measurable_depth.csv` | `exp28_standard_vs_realised.py` | `audit_claims`, `build_tables` |
+| `exp28_standard_vs_realised.csv` | `-` | quoted in the text only |
+| `exp28_supplementary_mcfarland.csv` | `exp28_standard_vs_realised.py` | `build_tables` |
+| `learn_boundaries.csv` | `-` | `learn_boundaries` |
+| `neural_structure.csv` | `-` | `neural_structure` |
+| `symbolic_boundaries.csv` | `-` | `symbolic_boundaries` |
+| `symbolic_trajectory.csv` | `-` | `symbolic_trajectory` |
 
 ## Kept on purpose, though nothing cites them
 
@@ -72,7 +73,7 @@ Outputs of the earlier paper are not here; they live in `version_one/results/`.
 
 ## Receipts
 
-11 JSON receipts, one per analysis stage. Each records the inputs, the headline outputs and the software versions the stage actually ran under, so a run under different versions is recorded rather than silently substituted.
+13 JSON receipts, one per analysis stage. Each records the inputs, the headline outputs and the software versions the stage actually ran under, so a run under different versions is recorded rather than silently substituted.
 
 ## Checking the numbers
 
