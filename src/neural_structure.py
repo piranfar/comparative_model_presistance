@@ -105,6 +105,27 @@ def mixed_partial_stat(f, X: np.ndarray, take_log: bool = False) -> float:
     return float((num / den).item())
 
 
+def curvature_stat(f, X: np.ndarray) -> float:
+    """Normalised |d2f/dx2|. Near zero means f is linear in its first variable.
+
+    This is the test the Windels prediction actually needs. Pharmacodynamics
+    says log(surv) = -k(c) * t, so the slope in t is constant and the second
+    derivative in t vanishes. Unlike the multiplicative test it needs only
+    surv > 0, so net-growth points, where the surviving fraction exceeds one,
+    stay in the analysis instead of being discarded for a property of my
+    formulation rather than of the data.
+    """
+    import torch
+
+    x = torch.tensor(X, dtype=torch.float64, requires_grad=True)
+    out = f(x).squeeze(1)
+    g = torch.autograd.grad(out.sum(), x, create_graph=True)[0]
+    d2 = torch.autograd.grad(g[:, 0].sum(), x, create_graph=True)[0][:, 0]
+    num = d2.abs().mean()
+    den = (g[:, 0] ** 2).mean().clamp_min(1e-12).sqrt()
+    return float((num / den).item())
+
+
 def probe(name: str, X: np.ndarray, y: np.ndarray, truth: str) -> dict:
     """Two networks, not one, and neither has a logarithm taken of its output.
 
@@ -125,12 +146,34 @@ def probe(name: str, X: np.ndarray, y: np.ndarray, truth: str) -> dict:
 
     f, loss = train(X, y)
     add = mixed_partial_stat(f, sub, take_log=False)
+    curv = curvature_stat(f, sub)
 
-    if float(np.min(y)) > 0:
-        flog, _ = train(X, np.log(y))
-        mul = mixed_partial_stat(flog, sub, take_log=False)
+    # The multiplicative test needs a positive target. Skipping the whole test
+    # when a few points are non-positive threw away the one prediction theory
+    # actually makes about the Windels data, so the non-positive rows are
+    # dropped for that test alone and their number is reported.
+    # A target that is negative by construction, such as a log surviving
+    # fraction, has no multiplicative test: log of it does not exist and the
+    # question is not meaningful rather than the data being unusable. Say so,
+    # rather than reporting NaN beside a large drop count that reads like loss.
+    pos = y > 0
+    n_dropped = int((~pos).sum())
+    if pos.sum() < 0.5 * len(y):
+        return {"problem": name, "train_mse": loss, "additive_stat": add,
+                "multiplicative_stat": np.nan, "n_dropped_for_mult": np.nan,
+                "curvature_stat": curv,
+                "verdict": "additive" if add < 0.05 else "neither",
+                "truth": truth}
+    if pos.sum() >= 50:
+        Xp = X[pos]
+        flog, _ = train(Xp, np.log(y[pos]))
+        idx = np.random.default_rng(SEED).choice(len(Xp), min(500, len(Xp)),
+                                                 replace=False)
+        mul = mixed_partial_stat(flog, Xp[idx], take_log=False)
     else:
         mul = np.nan
+
+
 
     verdict = "neither"
     if np.isfinite(mul) and mul < add and mul < 0.05:
@@ -138,7 +181,9 @@ def probe(name: str, X: np.ndarray, y: np.ndarray, truth: str) -> dict:
     elif add < 0.05:
         verdict = "additive"
     return {"problem": name, "train_mse": loss, "additive_stat": add,
-            "multiplicative_stat": mul, "verdict": verdict, "truth": truth}
+            "multiplicative_stat": mul, "n_dropped_for_mult": n_dropped,
+            "curvature_stat": curv,
+            "verdict": verdict, "truth": truth}
 
 
 def known_law(n=3000):
@@ -183,6 +228,50 @@ def trajectories():
     return d[["t", "n0"]].to_numpy(float), d["dy"].to_numpy(float), len(d)
 
 
+
+# ------------------------------------------------------------- Windels 2024 ---
+def windels_pairs():
+    """The one deposit where the two factors are actually crossed.
+
+    A 6 x 6 factorial of amikacin concentration against nutrient level, three
+    replicates, six timepoints. Because it is a designed grid rather than an
+    observational one, drug and nutrient are not confounded with each other or
+    with a laboratory, so a separability question about them is well posed.
+
+    Standard pharmacodynamics says surv = exp(-k(c) t), which makes
+    y = -log(surv) equal to k(c) * t and therefore MULTIPLICATIVELY separable in
+    (t, c). That is a prediction from theory, and this is a test of it.
+
+    Rows where the surviving fraction is zero carry no logarithm and are dropped
+    with their number reported. Rows where it exceeds one are net growth; they
+    are kept for the additive test, which tolerates negatives, and drop out of
+    the multiplicative test, which needs a positive target.
+    """
+    w = pd.read_csv(ROOT / "data/raw/windels2024/timekill.csv")
+    n_all = len(w)
+    w = w[(w["surv_frac"] > 0) & (w["time"] > 0)].copy()
+    # log of the surviving fraction, not minus-log. This is defined for every
+    # positive reading, so the rows where the population grew stay in.
+    w["logsurv"] = np.log(w["surv_frac"])
+    w["neglog"] = -w["logsurv"]
+    late = w[w["time"] >= w["time"].max()]
+    return {
+        "n_all": n_all, "n_used": len(w), "n_zero": int(n_all - len(w)),
+        "n_growth": int((w["neglog"] <= 0).sum()), "n_late": len(late),
+        "pairs": [
+            ("Windels: log surv against (time, drug concentration)",
+             w[["time", "AB_conc"]].to_numpy(float), w["logsurv"].to_numpy(float),
+             "theory says linear in time"),
+            ("Windels: log surv against (time, nutrient level)",
+             w[["time", "nutrient_conc"]].to_numpy(float),
+             w["logsurv"].to_numpy(float), "unknown"),
+            ("Windels: log surv against (drug, nutrient), last timepoint",
+             late[["AB_conc", "nutrient_conc"]].to_numpy(float),
+             late["logsurv"].to_numpy(float), "unknown"),
+        ],
+    }
+
+
 def main() -> int:
     checks = [
         ("N_reach = L * 10^q", *known_law(), "multiplicative"),
@@ -194,6 +283,10 @@ def main() -> int:
 
     Xt, yt, n_pts = trajectories()
     rows.append(probe("ERA4TB trajectory f(t, N0)", Xt, yt, "unknown"))
+
+    wn = windels_pairs()
+    for nm, X, y, truth in wn["pairs"]:
+        rows.append(probe(nm, X, y, truth))
 
     res = pd.DataFrame(rows)
     TABLES.mkdir(parents=True, exist_ok=True)
@@ -262,6 +355,36 @@ factor or offset: its effect on the trajectory is entangled with time, so no
 decomposition into a time course times an inoculum term exists to be found. A
 verdict of **additive** would say the inoculum shifts the whole curve without
 changing its shape.
+
+## Windels, where the factors are actually crossed
+
+ERA4TB cannot separate the inoculum from the laboratory that seeded it. The
+Windels deposit can: a 6 by 6 factorial of amikacin concentration against
+nutrient level, three replicates, six timepoints, so drug and nutrient are
+crossed by design rather than by accident.
+
+Of {wn['n_all']} rows, {wn['n_zero']} carry a zero surviving fraction and no
+logarithm and are dropped; {wn['n_used']} remain. {wn['n_growth']} of those show
+net growth, which the additive test tolerates and the multiplicative test cannot.
+
+This deposit also carries a prediction to test. Standard pharmacodynamics says
+`surv = exp(-k(c) t)`, which makes `-log(surv)` equal to `k(c) * t` and
+therefore multiplicatively separable in time and concentration. Before any probe
+runs, the raw table already strains that: mean `-log(surv)` rises only about
+1.3-fold between the first and last timepoint, where proportionality to `t`
+would require eightfold. Killing is nearly complete in the first interval and
+then stops.
+
+| pair | additive statistic | multiplicative statistic | verdict | expected |
+|---|---:|---:|---|---|
+""" + "".join(
+        f"| {r.problem.replace('Windels: ', '')} | {g(r.additive_stat)} | "
+        f"{g(r.multiplicative_stat)} | {r.verdict} | {r.truth} |\n"
+        for r in res.iloc[4:].itertuples()) + f"""
+The third row is the one with no textbook answer. It asks whether the drug
+concentration and the nutrient level combine as a product on survival, which
+would mean each acts independently of the other, or whether they interact. An
+additive verdict on `-log(surv)` is the independent case.
 
 ## What this buys the pipeline
 

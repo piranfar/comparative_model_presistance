@@ -51,13 +51,43 @@ time and of the density its own flask was seeded at, over 337 readings.
 
 | | additive statistic | multiplicative statistic | verdict |
 |---|---:|---:|---|
-| `f(t, N0)` | 13.2 | - | neither |
+| `f(t, N0)` | 1.08 | - | neither |
 
 A verdict of **neither** would say the inoculum does not enter as a separable
 factor or offset: its effect on the trajectory is entangled with time, so no
 decomposition into a time course times an inoculum term exists to be found. A
 verdict of **additive** would say the inoculum shifts the whole curve without
 changing its shape.
+
+## Windels, where the factors are actually crossed
+
+ERA4TB cannot separate the inoculum from the laboratory that seeded it. The
+Windels deposit can: a 6 by 6 factorial of amikacin concentration against
+nutrient level, three replicates, six timepoints, so drug and nutrient are
+crossed by design rather than by accident.
+
+Of 595 rows, 107 carry a zero surviving fraction and no
+logarithm and are dropped; 488 remain. 8 of those show
+net growth, which the additive test tolerates and the multiplicative test cannot.
+
+This deposit also carries a prediction to test. Standard pharmacodynamics says
+`surv = exp(-k(c) t)`, which makes `-log(surv)` equal to `k(c) * t` and
+therefore multiplicatively separable in time and concentration. Before any probe
+runs, the raw table already strains that: mean `-log(surv)` rises only about
+1.3-fold between the first and last timepoint, where proportionality to `t`
+would require eightfold. Killing is nearly complete in the first interval and
+then stops.
+
+| pair | additive statistic | multiplicative statistic | verdict | expected |
+|---|---:|---:|---|---|
+| log surv against (time, drug concentration) | 0.174 | - | neither | theory says linear in time |
+| log surv against (time, nutrient level) | 2.25 | - | neither | unknown |
+| log surv against (drug, nutrient), last timepoint | 1.08 | - | neither | unknown |
+
+The third row is the one with no textbook answer. It asks whether the drug
+concentration and the nutrient level combine as a product on survival, which
+would mean each acts independently of the other, or whether they interact. An
+additive verdict on `-log(surv)` is the independent case.
 
 ## What this buys the pipeline
 

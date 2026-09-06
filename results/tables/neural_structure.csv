@@ -1,5 +1,8 @@
-problem,train_mse,additive_stat,multiplicative_stat,verdict,truth
-N_reach = L * 10^q,1.514533808265887e-05,0.13338608149178838,0.005267475713011241,multiplicative,multiplicative
-a^2 + sqrt(b),1.0545284014891292e-06,0.017842071234009466,0.10168154569789982,additive,additive
-1 / (a + b),2.4230393497413874e-06,0.43965391981652574,0.19541057357026204,neither,neither
-"ERA4TB trajectory f(t, N0)",0.18661599573922463,13.17234729824561,,neither,unknown
+problem,train_mse,additive_stat,multiplicative_stat,n_dropped_for_mult,curvature_stat,verdict,truth
+N_reach = L * 10^q,1.514533808265887e-05,0.13338608149178838,0.005267475713011241,0.0,0.000515648827713201,multiplicative,multiplicative
+a^2 + sqrt(b),1.0545284014891292e-06,0.017842071234009466,0.10168154569789982,0.0,0.1520327825048223,additive,additive
+1 / (a + b),2.4230393497413874e-06,0.43965391981652574,0.19541057357026204,0.0,0.3514625167311904,neither,neither
+"ERA4TB trajectory f(t, N0)",0.18661599573922463,13.17234729824561,,,2.6495295240357715,neither,unknown
+"Windels: log surv against (time, drug concentration)",0.8907865913259276,0.17430544454037925,,,1.0152473267043618,neither,theory says linear in time
+"Windels: log surv against (time, nutrient level)",0.1986440281833505,2.252231191286437,,,0.6766369942013705,neither,unknown
+"Windels: log surv against (drug, nutrient), last timepoint",0.018509097149372888,1.0843580739687382,,,0.08587778952876195,neither,unknown
