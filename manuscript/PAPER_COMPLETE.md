@@ -562,6 +562,17 @@ a design decision that is currently not being made.
 differences between isolates that were killed identically as far as anyone can
 tell.
 
+None of this requires new apparatus or a statistician, and to make that concrete
+the four checks are released as a small command-line tool alongside the analysis
+code. Given a starting density and either an assay floor or a plated volume, it
+returns the headroom, states which of the 90, 99, 99.9 and 99.99 per cent
+endpoints that headroom can support, and reports the recorded fraction a
+floor-level reading would produce, labelled as the bound it is. Where a culture
+volume is known it also returns the viable burden a blank reading is consistent
+with; where it is not, it declines to compute it rather than assuming one. The
+tool exits non-zero when a requested endpoint is unreachable, so it can be run
+before an experiment rather than after it.
+
 **Report physiological state as a required field.** It is what the classification
 is reading, and it is currently the least documented variable in the assay.
 
@@ -757,9 +768,9 @@ Every dataset analysed here is already public under an open licence, and each is
 identified by its deposit in Table 1. Nothing in this study required new patient
 samples or new experimental data.
 
-The analysis code, the audit script and the machine-readable receipts recording
-the software versions each stage ran under will be released in a public
-repository on publication. Every number quoted in this manuscript is regenerated
+The analysis code, the audit script, the headroom tool described above and the
+machine-readable receipts recording the software versions each stage ran under
+will be released in a public repository on publication. Every number quoted in this manuscript is regenerated
 from the deposits by that code, and a separate audit stage recomputes each one
 from the table it came from and reports any that disagree.
 
