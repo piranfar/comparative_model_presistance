@@ -153,17 +153,25 @@ before rifampicin was added.
 All 33 are recorded as not having reached it. That is a census of the affected
 isolates rather than an estimate, and it is the load-bearing observation. Among
 the 184 isolates that did have four logs of headroom, 162 are also at the
-ceiling, 88.0 per cent; the contrast between 100 and 88 per cent is small enough
-that its nominal Fisher p of 0.030 does not survive restriction to the baseline
-isolates (p = 0.14), and nothing here rests on it. The deepest endpoint is therefore the only one at risk, and it is the
+ceiling, 88.0 per cent.
+
+No p-value is attached to that contrast, and the reason is worth stating rather
+than hiding in a caveat. An isolate short of four logs of headroom cannot record
+a four-log reduction: the 0 of 33 cell is fixed by arithmetic, not by biology, so
+the null of independence between ceiling status and headroom is false before any
+data are seen. A test of an impossible null returns a number, and that number
+means nothing. The census is the finding: every isolate that could not reach the
+endpoint is recorded as not having reached it, and 88 per cent of those that
+could are recorded the same way. The deepest endpoint is therefore the only one at risk, and it is the
 one the tolerance classification is built on.
 
 ### 2. Identical floor observations received different tolerance phenotypes
 
 The deposited tolerance level is a threshold on the recorded surviving fraction,
-with no overlap between classes: at day 5 and 15 days of prior culture, low
-tolerance covers fractions below 10⁻³, medium covers 10⁻³ to 10⁻², and high
-exceeds 10⁻². Applying those cuts reproduces every usable class in the file,
+with no overlap between classes. The thresholds themselves are not deposited;
+they are recovered here, and the data pin them only to the gaps between classes:
+at day 5 and 15 days of prior culture, low tolerance covers fractions below
+10⁻³, medium covers 10⁻³ to 10⁻², and high exceeds 10⁻². Applying those cuts reproduces every usable class in the file,
 203 of 203 (Table 3a), so what follows is an argument about the fraction the
 assay recorded and not about an independent clinical judgement.
 
@@ -245,10 +253,21 @@ class compatible with that reading and six have more than one. Those are the
 three counts Sections 1 and 2 report.
 
 Neither boundary predicts which isolates reach the floor; that depends on what
-rifampicin does. Both predict what a reading at the floor can be made to mean once
-it happens, and there the prediction is exact isolate by isolate rather than
-merely in aggregate: the set the algebra says has a single compatible class and
-the set the deposit records in the lowest class are the same set. The boundary case decides it. Six isolates sit at exactly 23 000 per
+rifampicin does. Both predict what a reading at the floor can be made to mean
+once it happens, and there the agreement with the deposit is exact isolate by
+isolate: the set the algebra says has a single compatible class and the set the
+deposit records in the lowest class are the same set.
+
+That agreement is an identity rather than a passed test, and saying so is the
+honest way to report it. Once the label is a cut on the recorded fraction
+(Table 3a) and every floor reading has a numerator of exactly *L*, the class of a
+floored isolate is a function of *N₀* alone, so the algebra cannot disagree with
+the deposit. What could have failed, and did not, is the premise: that the three
+classes separate cleanly on the recorded fraction at all, in 203 of 203 calls.
+The identity is what makes the boundary usable in advance — given a floor, a set
+of thresholds and a starting density, the affected isolates can be named before
+any reading is taken — and it is not independent evidence that the boundary is
+real. The boundary case decides it. Six isolates sit at exactly 23 000 per
 mL, which is *N*_id itself, so for them *L*/*N₀* = *c*₁ exactly, the interval
 [0, *L*/*N₀*] touches the threshold and spans two classes, and the strict
 inequality fails. Those six are precisely the ones with more than one compatible
@@ -261,7 +280,7 @@ properties of this deposit, and the claim is a prediction that any dataset
 reporting a starting density, a floor and a threshold classification can be
 checked against.
 
-### 4. The classification tracks growth; the resistance association is carried by inoculum
+### 4. The classification tracks growth; the resistance association is not separable from the inoculum
 
 Eight association tests are available between the deposited label and its
 candidate determinants — two predictors, at two culture ages and two endpoint
@@ -296,15 +315,25 @@ one log poorer in observable killing before the experiment begins.
 A percentage attenuation is a descriptive ratio, not an estimand, so the path is
 also estimated directly. Decomposing the total effect of resistance on the
 tolerance class into a path through log10 starting density and a direct path
-gives a mediated effect of +0.166 classes (bootstrap 95 per cent CI +0.067 to
+gives, on the 203 isolates with a usable class rather than the 202 the
+association family retains, a mediated effect of +0.166 classes (bootstrap
+95 per cent CI +0.067 to
 +0.279) against a direct effect of +0.091 (−0.116 to +0.287), so about 65 per
 cent of the association travels through the inoculum and the direct path covers
 zero. Restricting to baseline isolates leaves the mediated path intact (+0.159,
-+0.053 to +0.295), and binary collapses of the outcome agree (Table S5). This
-rests on sequential ignorability, which no observational file can establish: a
-residual correlation between the mediator and outcome errors of about −0.24
-would nullify the point estimate. Only a design that fixes the inoculum settles
-it.
++0.053 to +0.295), and binary collapses of the outcome agree (Table S5). Two things bound that estimate, and neither is a formality. It rests on
+sequential ignorability, which no observational file can establish: a residual
+correlation between the mediator and outcome errors of about −0.24 would nullify
+the point estimate, and one ordinary measured covariate already moves it about
+forty per cent of that way. More fundamentally, the mediator here is the
+denominator of the ratio the outcome is cut on. The tolerance class is a
+threshold on *N*₅/*N₀*, so a decomposition that routes resistance through *N₀* is
+in part recovering the censoring arithmetic this paper is about rather than a
+biological pathway from resistance to tolerance. That is not a reason to discard
+the estimate — it is the quantity a reader wants, because it says how much of the
+association is carried by the label's own denominator — but it is a reason not to
+read it as a mechanism. Only a design that fixes the inoculum separates the
+two.
 
 These 217 isolates are not 217 independent observations. Forty-three are
 follow-up isolates drawn during treatment from patients who also contributed a
@@ -371,10 +400,22 @@ Table 5). The duration endpoint behaves differently on the same flasks. The
 event it records is not clearance and not sterilisation but a **first observed
 crossing below the assay boundary**, and the distinction is not pedantic: most
 series that cross later read above the boundary again, including all five
-untreated series that cross. Of 72 treated flasks, 29 ever fell below their own
-floor; institutes A, B and C recorded crossings in every arm and institutes D, E
-and F recorded none in any arm (Fig. 2B). For half the laboratories the time to
-first crossing is right-censored throughout.
+untreated series that cross. The frame has to be stated,
+because the endpoint depends on it. The time-to-event analysis runs at the 100 µL
+quadruplicate plating, the most sensitive of the four, and there 29 of 72 treated
+flasks ever fall below the floor: institutes B and C record crossings in every
+arm, institute A in three of its four, and institutes D, E and F in none
+(Fig. 2B), so for half the laboratories the first-crossing time is right-censored
+throughout.
+
+That split is a property of the plating, not of the laboratories. Counting a
+crossing on **any** of the four platings gives 48 of 72 flasks, and every
+laboratory records at least one — D six, E one, F ten. The two facts are the same
+fact seen at two sensitivities, and they are exactly what this paper is about: a
+duration endpoint is defined against a floor, and the floor is a choice. The
+analysis keeps the single most sensitive plating so that the endpoint is
+consistently defined, and reports here what a different choice would have
+shown.
 
 The two orderings do not correspond. Ranked by starting density, the three lowest
 laboratories are exactly the three that recorded crossings and the three highest
@@ -533,9 +574,14 @@ rather than imputed, **70 pairs — 36.6 per cent — are inversions**: the flas
 below the assay floor later (Table 6). Restricting to pairs whose rates differ by more
 than 0.10 log10 per day, so that the faster flask is unambiguously faster, leaves
 21.3 per cent of 94 pairs. The criterion *D_A*/*D_B* > *b_A*/*b_B* calls
-83.8 per cent of pairs correctly, so the inversions are accounted for by the
-arithmetic of the crossing-time decomposition in the Methods rather than by
-anything else.
+83.8 per cent of all 191 pairs correctly, but that figure is carried by the easy
+majority: 63.4 per cent of pairs are not inversions, and the criterion gets 97.5
+per cent of those right against 60.0 per cent of the inversions themselves. The
+decomposition therefore identifies the mechanism — a pair inverts when the
+distance ratio exceeds the rate ratio — without predicting which pairs invert
+much better than three times in five. The residual is what a single averaged
+slope through a biphasic trajectory cannot capture, which the Methods state as a
+known limitation of *b*.
 
 The effect holds when the faster flask is required to be unambiguously faster.
 Raising the minimum separation between the two fitted rates removes pairs whose
@@ -743,8 +789,8 @@ processing batch, so those cannot be tested at all.
 Where the inoculum is set deliberately rather than by clinical accident, the same
 arithmetic operates and can be measured rather than inferred. In more than a
 third of cross-laboratory comparisons the flask in which the population fell
-faster crossed below the assay floor later, and the simple distance-over-rate
-criterion accounts for six in seven of those inversions. Resampling whole
+faster crossed below the assay floor later, and the distance-over-rate criterion
+accounts for three in five of them. Resampling whole
 laboratories rather than pairs leaves that rate poorly determined — 3.0 to 72.4
 per cent — so it is the mechanism and not the rate that the deposit establishes.
 
@@ -964,8 +1010,10 @@ below-limit readings retained as a placeholder (Dubey et al. 2026; article Sourc
 Data, CC BY 4.0). It was located by a search of five general repositories, the
 tuberculosis consortia, the persistence literature, food microbiology and the
 hollow-fibre field, and was the only deposit found carrying all three fields the
-boundaries require. It contributes to no analysis except Section 8, where the
-framework is applied to it cold.
+boundaries require. No boundary, threshold or modelling choice in this
+paper was informed by it: it was opened after all of them were fixed, and
+Section 8 is the only place it tests anything. It does appear as a descriptive
+row in Tables 9, 14 and S2, which is reporting rather than fitting.
 
 **Concentration-by-time grid.** Apramycin and amikacin against *M. tuberculosis*
 at 128, 32, 8, 4 and 1 µg/mL, triplicate log10 CFU at days 0, 3, 7 and 14, with a
@@ -1199,10 +1247,12 @@ rather than asserted.
 
 ### Reproducibility
 
-Every number in this paper is regenerated by a script that writes a receipt
-recording the software versions it ran under, and a separate audit script
-recomputes each quantity quoted in the text from the table it came from and
-reports any that disagree. Every table is generated from the results files and
+Every number in this paper is regenerated by a script that writes a machine-
+readable receipt of what it computed, and a separate audit script recomputes 114
+of the quantities quoted in the text from the tables they came from and reports
+any that disagree. The audit is not exhaustive: it pins the load-bearing counts,
+every headline interval and every figure a conclusion rests on, and it does not
+pin every cell of every table. Every table is generated from the results files and
 the manuscript is assembled from that generated material, never edited
 downstream of it, so a table cannot drift from the analysis behind it. Analyses
 used Python 3.14 with numpy 2.5.0, scipy 1.18.0, pandas 3.0.3, statsmodels

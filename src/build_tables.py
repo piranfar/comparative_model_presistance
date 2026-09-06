@@ -164,7 +164,8 @@ def table4() -> str:
             "construction, which is where the resistance association stops "
             "clearing its corrected threshold. Standard errors are model-based; "
             "the deposit carries no patient identifier, so none can be clustered "
-            "on the true grouping."
+            "on the true grouping, and the intervals here are model-based; "
+            "a clustered variant is reported in Table S3."
             + chr(10) + chr(10) + md(d, align_right_from=4))
 
 

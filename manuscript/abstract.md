@@ -14,17 +14,16 @@ threshold, only the lowest class is compatible with a censored reading.
 Reaching the floor is the drug's doing; the label it then permits is not.
 
 In 217 clinical *Mycobacterium tuberculosis* isolates classified for rifampicin
-tolerance, no isolate lacks the range for a 90 or 99 per cent
-endpoint; 33 lack it for the 99.99 per cent endpoint the classification uses,
+tolerance, none lacks the range for a 90 or 99 per cent endpoint; 33 lack it for the 99.99 per cent endpoint the classification uses,
 and all 33 are recorded as failing. Of eighteen isolates whose reading was
 censored, twelve admit one compatible class and six admit two. The label tracks
 growth state, which survives adjustment for starting density, and isoniazid
-resistance, which does not: most of it travels through a ten-fold lower
-inoculum (mediated effect +0.166 classes, +0.067 to +0.279;
-the direct effect spans zero).
+resistance, which does not. Most of that association is carried by a ten-fold
+lower inoculum, though the inoculum is also the denominator the label is cut on,
+so the decomposition measures censoring arithmetic as much as biology.
 
-Under one written protocol, six laboratories differed by 4.40 log10 in the
-deepest kill they could demonstrate once plated volume is counted. In a
+Under one written protocol, laboratories differed by 4.40 log10 in the deepest
+kill they could demonstrate once plated volume is counted. In a
 hollow-fibre experiment the framework never saw, five of twenty cultures cannot
 show five logs. A tolerance call reported without *N₀* and *L* cannot be
 interpreted; Box 1 is the calculation, and it needs no new apparatus.

@@ -283,6 +283,27 @@ def main() -> int:
         rows.append(check("residual correlation nullifying the path (Methods: -0.24)",
                           -0.237, float(r["mediation_sensitivity"]["rho_nullifies_point_acme"]), 0.05))
 
+    # --- the two figures an adversarial review corrected --------------------
+    f = load("exp23_inversions.csv")
+    if f is not None:
+        pred = f.distance_ratio > f.rate_ratio
+        obs = f.inversion.astype(bool)
+        rows.append(check("D/b criterion, all pairs (7: 83.8%)",
+                          0.838, float((pred == obs).mean()), 0.01))
+        rows.append(check("D/b criterion, inversions only (7: 60.0%)",
+                          0.600, float((pred == obs)[obs].mean()), 0.01))
+        rows.append(check("pairs that are not inversions (7: 63.4%)",
+                          0.634, float((~obs).mean()), 0.01))
+
+    f = load("exp32_recrossing.csv")
+    if f is not None:
+        tr = f[f.arm != "untreated"]
+        flask = tr.groupby(["institute", "arm", "replicate"])["ever_crossed_below"].any()
+        rows.append(check("treated flasks crossing on any plating (5: 48)",
+                          48, float(flask.sum()), 0.001))
+        rows.append(check("treated flasks in the deposit (5: 72)",
+                          72, float(len(flask)), 0.001))
+
     # --- exp27, the out-of-sample test ------------------------------------
     f = load("exp27_out_of_sample.csv")
     if f is not None:
