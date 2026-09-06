@@ -17,6 +17,8 @@ from __future__ import annotations
 from pathlib import Path
 
 import numpy as np
+import json
+
 import pandas as pd
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -26,6 +28,12 @@ T = ROOT / "results" / "tables"
 def load(name: str):
     p = T / name
     return pd.read_csv(p) if p.exists() else None
+
+
+def receipt(name: str):
+    """Read a receipt, or None if the stage has not been run."""
+    p = ROOT / "results" / "receipts" / name
+    return json.loads(p.read_text(encoding="utf-8")) if p.exists() else None
 
 
 def check(label: str, claimed, computed, tol=0.05, unit=""):
@@ -41,6 +49,65 @@ def check(label: str, claimed, computed, tol=0.05, unit=""):
 
 def main() -> int:
     rows = []
+
+    # --- exp22, the spine: dynamic range and the floored isolates --------
+    # These are the numbers Sections 3.1 and 3.2 rest on. They are arithmetic
+    # rather than statistical, so a drift here is a coding error, not noise.
+    f = load("exp22_headroom.csv")
+    if f is not None:
+        g = f[f.culture_age_days == 15].set_index("group")
+        rows.append(check("isolates short of 4-log headroom at 15 days (3.1: 33)",
+                          33, float(g.loc["cannot reach 4 logs", "n_isolates"]), 0.001))
+        rows.append(check("of those, recorded at the ceiling (3.1: 100%)",
+                          1.0, float(g.loc["cannot reach 4 logs", "fraction_at_ceiling"]),
+                          0.001))
+        rows.append(check("with ample headroom, at the ceiling (3.1: 88.0%)",
+                          0.880, float(g.loc["has 4 logs of headroom", "fraction_at_ceiling"]),
+                          0.01))
+
+    r = receipt("exp22_receipt.json")
+    if r is not None:
+        at = next(x for x in r["isolates_at_floor"] if x["culture_age_days"] == 15)
+        rows.append(check("isolates ending at the MPN floor (3.2: 18)",
+                          18, float(at["n_isolates_at_floor"]), 0.001))
+        # The claim that makes the paper: the spread in recorded survival is not
+        # merely similar to the spread in starting density, it IS it.
+        rows.append(check("their survival spread equals their inoculum spread (3.2)",
+                          float(at["start_density_fold_range"]),
+                          float(at["apparent_survival_fold_range"]), 0.001, "x"))
+        gap = r["starting_density_by_resistance"]["15d"]
+        rows.append(check("resistant isolates start lower (3.3: 10.0-fold)",
+                          10.0, float(gap["fold_lower_in_resistant"]), 0.05, "x"))
+
+    f = load("exp22_label_associations.csv")
+    if f is not None:
+        rows.append(check("label tests in the family (3.3: 8)",
+                          8, float(len(f)), 0.001))
+        rows.append(check("surviving Benjamini-Hochberg (3.3: 2)",
+                          2, float(f.survives_bh.sum()), 0.001))
+        res = f[(f.predictor == "resistance") & (f.culture_age_days == 15)
+                & (f.endpoint_depth == "D5")]
+        if len(res) == 1:
+            b0 = float(res.beta.iloc[0])
+            b1 = float(res.beta_after_adjusting_for_start_density.iloc[0])
+            rows.append(check("attenuation of the resistance coefficient (3.3: 66%)",
+                              0.66, (b0 - b1) / b0, 0.03))
+
+    # --- exp23, the inversion rate ---------------------------------------
+    r = receipt("exp23_receipt.json")
+    if r is not None:
+        inv = r["inversions"]
+        rows.append(check("inversion rate (3.5: 36.6%)",
+                          0.366, float(inv["inversion_rate"]), 0.01))
+        rows.append(check("comparable pairs (3.5: 191)",
+                          191, float(inv["n_comparable_pairs"]), 0.001))
+        # The share that argues AGAINST the strong reading. It is audited for
+        # exactly that reason: a number that limits our own claim must not drift
+        # quietly in the direction we would prefer.
+        mxf = r["variance_decomposition"].get("MXF 10X MIC")
+        if mxf:
+            rows.append(check("distance share, MXF 10x (3.5: 39.4%)",
+                              0.394, float(mxf["share_distance"]), 0.02))
 
     # --- exp16, the family correction ------------------------------------
     f = load("exp16_tb_independence.csv")

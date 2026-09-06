@@ -6,7 +6,7 @@ Outputs of the earlier paper are not here; they live in `version_one/results/`.
 
 | | tables | figures | receipts |
 | --- | ---: | ---: | ---: |
-| total | 24 | 4 | 7 |
+| total | 34 | 5 | 9 |
 
 ## Rate versus duration (manuscript/PAPER_COMPLETE.md)
 
@@ -41,12 +41,24 @@ Outputs of the earlier paper are not here; they live in `version_one/results/`.
 
 ## Unassigned
 
-**Tables (2).**
+**Figures.** `fig14_dynamic_range`
+
+**Tables (12).**
 
 | file | written by | used by |
 | --- | --- | --- |
-| `exp22_headroom.csv` | `exp22_tolerance_dynamic_range.py` | quoted in the text only |
-| `exp22_label_associations.csv` | `exp22_tolerance_dynamic_range.py` | quoted in the text only |
+| `ctbp_gap_by_condition.csv` | `exp24_clearance_prediction.py` | quoted in the text only |
+| `ctbp_hidden_burden.csv` | `exp24_clearance_prediction.py` | quoted in the text only |
+| `ctbp_identifiability_boundary.csv` | `exp24_clearance_prediction.py` | quoted in the text only |
+| `ctbp_tipping_points.csv` | `exp24_clearance_prediction.py` | quoted in the text only |
+| `ctbp_tlod_calibration.csv` | `exp24_clearance_prediction.py` | quoted in the text only |
+| `ctbp_two_timescale.csv` | `exp24_clearance_prediction.py` | quoted in the text only |
+| `ctbp_validation_summary.csv` | `exp24_clearance_prediction.py` | quoted in the text only |
+| `ctbp_variance_components.csv` | `exp24_clearance_prediction.py` | quoted in the text only |
+| `exp22_headroom.csv` | `exp22_tolerance_dynamic_range.py` | `audit_claims`, `build_tables` |
+| `exp22_label_associations.csv` | `exp22_tolerance_dynamic_range.py` | `audit_claims`, `build_tables` |
+| `exp23_flask_parameters.csv` | `exp23_inversion_decomposition.py` | quoted in the text only |
+| `exp23_inversions.csv` | `exp23_inversion_decomposition.py` | quoted in the text only |
 
 ## Kept on purpose, though nothing cites them
 
@@ -56,7 +68,7 @@ Outputs of the earlier paper are not here; they live in `version_one/results/`.
 
 ## Receipts
 
-7 JSON receipts, one per analysis stage. Each records the inputs, the headline outputs and the software versions the stage actually ran under, so a run under different versions is recorded rather than silently substituted.
+9 JSON receipts, one per analysis stage. Each records the inputs, the headline outputs and the software versions the stage actually ran under, so a run under different versions is recorded rather than silently substituted.
 
 ## Checking the numbers
 

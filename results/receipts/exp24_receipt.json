@@ -1,0 +1,665 @@
+{
+  "script": "src/experiments/exp24_clearance_prediction.py",
+  "utc": "2026-09-06T02:04:46+00:00",
+  "wall_seconds": 547.9,
+  "software": {
+    "python": "3.14.6",
+    "numpy": "2.5.0",
+    "pandas": "3.0.3",
+    "scipy": "1.18.0",
+    "numpyro": "0.21.0",
+    "jax": "0.11.1",
+    "platform": "Windows-11-10.0.26200-SP0"
+  },
+  "seeds": {
+    "master": 20260905,
+    "mcmc_main": 20260905,
+    "v1": 20260916,
+    "v2": 20261005,
+    "v4": 20260960,
+    "v5": 20260926,
+    "v6": 20260914,
+    "gate": 20260905
+  },
+  "mcmc": {
+    "warmup": 15,
+    "draws": 15,
+    "chains": 1,
+    "target_accept": 0.9,
+    "max_tree_depth": 12,
+    "validation_warmup": 15,
+    "validation_draws": 15,
+    "validation_chains": 1,
+    "note": "validation and sensitivity refits use the same chain length as the primary fit"
+  },
+  "LN10": 2.302585092994046,
+  "rate_axis_of_every_reported_field": "log10 per day unless a column name ends in per_hour; no natural-log rate is emitted",
+  "declared_V_mL": {
+    "era4tb": null,
+    "kaur": null,
+    "vijay": null,
+    "windels": null
+  },
+  "V_provenance": {
+    "era4tb": "ABSENT - the deposit's Volume column is PLATED volume only",
+    "kaur": "ABSENT - the workbook records no vessel volume",
+    "vijay": "ABSENT - MPN is reported per mL; no vessel volume anywhere",
+    "windels": "ABSENT - no absolute density at all, let alone a volume"
+  },
+  "V_scenario_grid": [
+    1.0,
+    10.0,
+    100.0,
+    1000.0
+  ],
+  "build_log": {
+    "era4tb_rows_in_tidy_file": 2751,
+    "era4tb_bql_flags_total": 498,
+    "era4tb_bql_flags_contradicted": 125,
+    "era4tb_censored_rows_in_untreated_flasks": 5,
+    "era4tb_no_value_reported_not_censored": 133,
+    "era4tb_post_drug_baseline_flasks": 45,
+    "era4tb_excluded_pre_inoculation_rows": 39,
+    "era4tb_excluded_50uL_rows_volume_disagrees_with_comment": 2,
+    "era4tb_excluded_rows_with_no_plating_volume": 1,
+    "era4tb_excluded_inoculumTKA_series_single_visit_after_day0": [
+      "era4tb_E_inoculumTKA_r1",
+      "era4tb_E_inoculumTKA_r2",
+      "era4tb_E_inoculumTKA_r3"
+    ],
+    "era4tb_excluded_unit_groups_no_usable_n0": [
+      "era4tb_A_MXF10x_r1",
+      "era4tb_A_untreated_r3",
+      "era4tb_B_INH10x_r1",
+      "era4tb_B_INH1x_r2",
+      "era4tb_B_INH1x_r3",
+      "era4tb_B_MXF1x_r2",
+      "era4tb_E_untreated_r2",
+      "era4tb_E_untreated_r3"
+    ],
+    "era4tb_rows_used": 2366,
+    "era4tb_series_used": 82,
+    "kaur_rows_in_tidy_file": 345,
+    "kaur_excluded_biofilm_rows_no_time_axis": 156,
+    "kaur_baseline_anchor_rows_added": 69,
+    "kaur_rows_used": 258,
+    "kaur_series_used": 75,
+    "vijay_rows_in_tidy_file": 1932,
+    "vijay_readings_absent_and_not_emitted_by_extractor": 21,
+    "vijay_distinct_mpn_rungs": 30,
+    "vijay_floor_readings_left_censored_at_log10_23": 33,
+    "vijay_rows_used": 1932,
+    "vijay_series_used": 644,
+    "windels_rows_in_tidy_file": 595,
+    "windels_zero_surv_frac_rows_excluded_no_derivable_limit": 6,
+    "windels_excluded_series_single_timepoint": [
+      "windels_nut0.9_ab400_r1"
+    ],
+    "windels_rows_used": 588,
+    "windels_series_used": 101,
+    "series_with_terminal_segment_truncated": 14,
+    "terminal_segment_truncation_by_block": {
+      "era4tb": 12,
+      "kaur_intracellular": 0,
+      "kaur_planktonic": 0,
+      "vijay": 0,
+      "windels": 2
+    },
+    "n_series": 902,
+    "n_rows": 5144,
+    "n_era4tb_sample_visits": 614,
+    "n_labs": 6,
+    "n_vijay_isolates": 217,
+    "LN10": 2.302585092994046,
+    "rate_units_everywhere": "log10 per day"
+  },
+  "prior_predictive": {
+    "prior_b_tail_median_era4tb_log10_per_day": -0.01937722319893625,
+    "prior_P_b_tail_positive_era4tb": 0.4946341463414634,
+    "prior_symmetric_about_zero": true,
+    "prior_admits_sterilisation": true,
+    "prior_admits_unbounded_regrowth": true,
+    "prior_b_tail_q05": -2.466462685225709,
+    "prior_b_tail_q95": 2.573758511722635,
+    "units": "log10 per day"
+  },
+  "convergence": {
+    "censored": {
+      "per_parameter": {
+        "beta": {
+          "max_r_hat": 2.4312768225113084,
+          "min_ess": -55.827045728480776
+        },
+        "tau_d": {
+          "max_r_hat": 1.930110714416819,
+          "min_ess": 3.349820698830169
+        },
+        "sigma_lab": {
+          "max_r_hat": 1.2896204072215183,
+          "min_ess": 9.211595989428929
+        },
+        "sigma_iso": {
+          "max_r_hat": 0.9586457104635933,
+          "min_ess": 13.340157540142377
+        },
+        "sigma_series_d": {
+          "max_r_hat": 1.1044835640788262,
+          "min_ess": 6.711162603164434
+        },
+        "sigma_plate": {
+          "max_r_hat": 1.447017979131351,
+          "min_ess": 6.723713686097936
+        },
+        "sigma_proc_d": {
+          "max_r_hat": 2.2658524427083306,
+          "min_ess": 3.0241874388194177
+        },
+        "pi_era4tb": {
+          "max_r_hat": 0.9271311861931013,
+          "min_ess": 18.776115273711078
+        },
+        "b": {
+          "max_r_hat": 3.0002285853730193,
+          "min_ess": -22422.530272188334
+        }
+      },
+      "max_r_hat": 3.0002285853730193,
+      "min_ess": -22422.530272188334,
+      "gate_pass": false,
+      "seconds": 20.74389123916626
+    },
+    "reclassified": {
+      "per_parameter": {
+        "beta": {
+          "max_r_hat": 2.427948975114204,
+          "min_ess": -1524.601144097813
+        },
+        "tau_d": {
+          "max_r_hat": 2.402866591309056,
+          "min_ess": 3.1482824715677364
+        },
+        "sigma_lab": {
+          "max_r_hat": 1.968602536760293,
+          "min_ess": 4.389249642198143
+        },
+        "sigma_iso": {
+          "max_r_hat": 0.9277163709048569,
+          "min_ess": 9.643714050077003
+        },
+        "sigma_series_d": {
+          "max_r_hat": 0.9406530425942456,
+          "min_ess": -577.918683815478
+        },
+        "sigma_plate": {
+          "max_r_hat": 1.136501219785602,
+          "min_ess": 5.644114331804733
+        },
+        "sigma_proc_d": {
+          "max_r_hat": 1.6734890812701926,
+          "min_ess": 4.9382771600272335
+        },
+        "pi_era4tb": {
+          "max_r_hat": 0.9258283074261702,
+          "min_ess": 25.729932356834688
+        },
+        "b": {
+          "max_r_hat": 2.826466480948959,
+          "min_ess": -2118.35952993123
+        }
+      },
+      "max_r_hat": 2.826466480948959,
+      "min_ess": -2118.35952993123,
+      "gate_pass": false,
+      "seconds": 5.647013187408447,
+      "scope": "era4tb only"
+    },
+    "dropped": {
+      "per_parameter": {
+        "beta": {
+          "max_r_hat": 2.4325624247020743,
+          "min_ess": -203.07157064043898
+        },
+        "tau_d": {
+          "max_r_hat": 1.2263181869788715,
+          "min_ess": 9.73572351194866
+        },
+        "sigma_lab": {
+          "max_r_hat": 1.251798402464232,
+          "min_ess": 9.735894871769826
+        },
+        "sigma_iso": {
+          "max_r_hat": 0.9393947523179327,
+          "min_ess": -51.85919418622642
+        },
+        "sigma_series_d": {
+          "max_r_hat": 1.19413086726149,
+          "min_ess": 6.1420031891965134
+        },
+        "sigma_plate": {
+          "max_r_hat": 1.2586404593119886,
+          "min_ess": 5.93207530851782
+        },
+        "sigma_proc_d": {
+          "max_r_hat": 1.24962268949536,
+          "min_ess": 7.123308891519937
+        },
+        "pi_era4tb": {
+          "max_r_hat": 0.9382797408648301,
+          "min_ess": 18.25153027011857
+        },
+        "b": {
+          "max_r_hat": 1.533364394282104,
+          "min_ess": -455.7578438477694
+        }
+      },
+      "max_r_hat": 2.4325624247020743,
+      "min_ess": -455.7578438477694,
+      "gate_pass": false,
+      "seconds": 4.875732898712158,
+      "scope": "era4tb only"
+    }
+  },
+  "coupling_check_joint_vs_era4tb_only": {
+    "joint_era4tb_b_tail_median_log10_per_day": -0.10385460285203961,
+    "era4tb_only_b_tail_median_log10_per_day": -0.10791216890264305,
+    "joint_P_b_tail_le_0": 0.7626016260162601,
+    "era4tb_only_P_b_tail_le_0": 0.7715447154471544,
+    "seconds": 7.443361043930054,
+    "note": "if these differ materially the scoped refits below are not interchangeable with the joint fit and must be read as such"
+  },
+  "scoped_refit_declaration": "Every validation and sensitivity refit is scoped to the deposit whose data it changes or predicts. That is legitimate because every regression coefficient, random-walk SD, process SD and intercept hyper-parameter in this model is deposit-specific; the only shared parameter is sigma_rate_hyper. The size of that coupling is measured in coupling_check_joint_vs_era4tb_only rather than assumed.",
+  "identifiability_gate": {
+    "max_censored_fraction_for_width": 0.409375,
+    "stated_width": 0.2,
+    "worst_bias_inside_boundary": 1.0447301411289884,
+    "min_coverage_inside_boundary": 0.0
+  },
+  "V7_negative_controls": {
+    "n_untreated_series": 15,
+    "fraction_untreated_with_negative_median_b_tail": 0.8666666666666667,
+    "mean_P_T_ext_infinite_untreated": 0.8222222222222223,
+    "per_untreated_series": [
+      {
+        "unit_group": "era4tb_A_untreated_r1",
+        "b_tail_median": -0.07497188378199034,
+        "P_b_tail_le_0": 1.0
+      },
+      {
+        "unit_group": "era4tb_A_untreated_r2",
+        "b_tail_median": -0.10004453225880729,
+        "P_b_tail_le_0": 1.0
+      },
+      {
+        "unit_group": "era4tb_B_untreated_r1",
+        "b_tail_median": -0.16651386516842215,
+        "P_b_tail_le_0": 1.0
+      },
+      {
+        "unit_group": "era4tb_B_untreated_r2",
+        "b_tail_median": -0.1275188290618202,
+        "P_b_tail_le_0": 1.0
+      },
+      {
+        "unit_group": "era4tb_B_untreated_r3",
+        "b_tail_median": -0.11477977771204931,
+        "P_b_tail_le_0": 1.0
+      },
+      {
+        "unit_group": "era4tb_C_untreated_r1",
+        "b_tail_median": -0.03288307590632061,
+        "P_b_tail_le_0": 0.8666666666666667
+      },
+      {
+        "unit_group": "era4tb_C_untreated_r2",
+        "b_tail_median": -0.036402365202651304,
+        "P_b_tail_le_0": 0.9333333333333333
+      },
+      {
+        "unit_group": "era4tb_C_untreated_r3",
+        "b_tail_median": -0.041727579054342864,
+        "P_b_tail_le_0": 0.9333333333333333
+      },
+      {
+        "unit_group": "era4tb_D_untreated_r1",
+        "b_tail_median": -0.061102174390104375,
+        "P_b_tail_le_0": 0.7333333333333333
+      },
+      {
+        "unit_group": "era4tb_D_untreated_r2",
+        "b_tail_median": -0.04038394122606101,
+        "P_b_tail_le_0": 0.9333333333333333
+      },
+      {
+        "unit_group": "era4tb_D_untreated_r3",
+        "b_tail_median": 0.002283544930159347,
+        "P_b_tail_le_0": 0.4666666666666667
+      },
+      {
+        "unit_group": "era4tb_E_untreated_r1",
+        "b_tail_median": -0.027092494526964096,
+        "P_b_tail_le_0": 0.8
+      },
+      {
+        "unit_group": "era4tb_F_untreated_r1",
+        "b_tail_median": -0.018818140714878532,
+        "P_b_tail_le_0": 0.6666666666666666
+      },
+      {
+        "unit_group": "era4tb_F_untreated_r2",
+        "b_tail_median": 0.0016886635982785428,
+        "P_b_tail_le_0": 0.4666666666666667
+      },
+      {
+        "unit_group": "era4tb_F_untreated_r3",
+        "b_tail_median": -0.00022628649421812134,
+        "P_b_tail_le_0": 0.5333333333333333
+      }
+    ],
+    "pi_era4tb_posterior_median": 0.021605922167137442,
+    "pi_era4tb_posterior_90": [
+      0.014688308433539904,
+      0.024589515831744107
+    ],
+    "censored_readings_in_untreated_flasks": [
+      {
+        "unit_group": "era4tb_B_untreated_r2",
+        "time_days": 2.0,
+        "plated_volume_uL": 100.0,
+        "mu_median_log10": 3.987964761169902,
+        "p_blank_at_mu": 4.034952799385838e-09
+      },
+      {
+        "unit_group": "era4tb_B_untreated_r3",
+        "time_days": 1.0,
+        "plated_volume_uL": 100.0,
+        "mu_median_log10": 3.6889710680694594,
+        "p_blank_at_mu": 1.1324384856196518e-07
+      },
+      {
+        "unit_group": "era4tb_C_untreated_r3",
+        "time_days": 1.0,
+        "plated_volume_uL": 100.0,
+        "mu_median_log10": 4.6010192228695,
+        "p_blank_at_mu": 1.125117700623089e-12
+      },
+      {
+        "unit_group": "era4tb_D_untreated_r1",
+        "time_days": 2.0,
+        "plated_volume_uL": 2.5,
+        "mu_median_log10": 5.249214730306356,
+        "p_blank_at_mu": 1.768067441351276e-07
+      },
+      {
+        "unit_group": "era4tb_D_untreated_r3",
+        "time_days": 14.0,
+        "plated_volume_uL": 2.5,
+        "mu_median_log10": 6.241156961972377,
+        "p_blank_at_mu": 6.629115604053397e-13
+      }
+    ],
+    "labF_day1_MXF1x_rows": [
+      {
+        "unit_group": "era4tb_F_MXF1x_r1",
+        "plated_volume_uL": 100.0,
+        "y_log10": 6.88081359228079,
+        "censored": false
+      },
+      {
+        "unit_group": "era4tb_F_MXF1x_r1",
+        "plated_volume_uL": 10.0,
+        "y_log10": 6.17609125905568,
+        "censored": false
+      },
+      {
+        "unit_group": "era4tb_F_MXF1x_r1",
+        "plated_volume_uL": 10.0,
+        "y_log10": 6.17609125905568,
+        "censored": false
+      },
+      {
+        "unit_group": "era4tb_F_MXF1x_r1",
+        "plated_volume_uL": 2.5,
+        "y_log10": NaN,
+        "censored": true
+      },
+      {
+        "unit_group": "era4tb_F_MXF1x_r2",
+        "plated_volume_uL": 100.0,
+        "y_log10": 6.70757017609794,
+        "censored": false
+      },
+      {
+        "unit_group": "era4tb_F_MXF1x_r2",
+        "plated_volume_uL": 10.0,
+        "y_log10": 5.95424250943933,
+        "censored": false
+      },
+      {
+        "unit_group": "era4tb_F_MXF1x_r2",
+        "plated_volume_uL": 10.0,
+        "y_log10": 6.04139268515823,
+        "censored": false
+      },
+      {
+        "unit_group": "era4tb_F_MXF1x_r2",
+        "plated_volume_uL": 2.5,
+        "y_log10": NaN,
+        "censored": true
+      },
+      {
+        "unit_group": "era4tb_F_MXF1x_r3",
+        "plated_volume_uL": 100.0,
+        "y_log10": 6.50514997831991,
+        "censored": false
+      },
+      {
+        "unit_group": "era4tb_F_MXF1x_r3",
+        "plated_volume_uL": 10.0,
+        "y_log10": 6.07918124604763,
+        "censored": false
+      },
+      {
+        "unit_group": "era4tb_F_MXF1x_r3",
+        "plated_volume_uL": 2.5,
+        "y_log10": NaN,
+        "censored": true
+      }
+    ],
+    "n_flask_by_volume_series_returning_above_limit": 62,
+    "note": "a full censored likelihood absorbs the returning series; a first-passage survival endpoint would have fired early on all of them"
+  },
+  "V1_plate_holdout": {
+    "n_held_out_rows": 570,
+    "n_uncensored": 489,
+    "n_censored": 81,
+    "coverage_90": 0.7914110429447853,
+    "predicted_blank_rate": 0.10658932682290159,
+    "observed_blank_rate": 0.14210526315789473,
+    "fold_error_on_blank_rate": 0.7500730406056038,
+    "rmse_log10": 0.6109155692495278,
+    "mae_log10": 0.433883533114484,
+    "bias_in_1_to_2_log10_window": 0.4356199598091781,
+    "n_in_1_to_2_window": 22,
+    "brier_score": 0.05557743724715056,
+    "fit_seconds": 6.418311357498169,
+    "gate_pass": false
+  },
+  "V2_leave_one_lab_out": [
+    {
+      "fold": "lab_A",
+      "n_series": 13,
+      "n_rows": 361,
+      "n_censored": 123,
+      "predicted_blank_rate": 0.2745891539080708,
+      "observed_blank_rate": 0.3407202216066482,
+      "coverage_90": 0.9831932773109243,
+      "mean_log_score": -2.2222068229033933,
+      "rmse_log10": 1.6722237893912841,
+      "n_series_ever_censored": 8,
+      "zero_event_fold": false,
+      "fit_seconds": 8.871458053588867
+    },
+    {
+      "fold": "lab_B",
+      "n_series": 11,
+      "n_rows": 271,
+      "n_censored": 94,
+      "predicted_blank_rate": 0.2500064909937732,
+      "observed_blank_rate": 0.34686346863468637,
+      "coverage_90": 0.9209039548022598,
+      "mean_log_score": -2.0075063092568763,
+      "rmse_log10": 1.3211444841089661,
+      "n_series_ever_censored": 9,
+      "zero_event_fold": false,
+      "fit_seconds": 8.737065076828003
+    }
+  ],
+  "V3_windels_leave_one_cell_out": {
+    "n_cells": 6,
+    "median_rmse_log10": 1.835364891945508,
+    "n_extrapolation_cells": 0,
+    "substitution": "Windels-only submodel; declared, see docstring of v3_windels_cells"
+  },
+  "V4_vijay": {
+    "fold": "vijay_60d_held_out",
+    "n_series_scored": 204,
+    "observed_mean_day5_log10_drop": 1.503537674836235,
+    "predicted_mean_day5_log10_drop": 0.016075924353633954,
+    "coverage_90": 0.5931372549019608,
+    "pit_ks_statistic": 0.5568627450980391,
+    "pit_ks_pvalue": 4.5176957013708357e-60,
+    "readout_distinct_y_values": 29,
+    "note": "the readout resolves ~1 log10; the model is neither credited nor penalised for structure finer than the decade ladder",
+    "fit_seconds": 8.642051696777344
+  },
+  "V5_sensitivity": {
+    "vijay_left_censor_only": {
+      "deposit": "vijay",
+      "arm_b_tail_median_log10_per_day": 0.22857790974102743,
+      "primary_b_tail_median_log10_per_day": 0.23472805469287855,
+      "arm_P_b_tail_le_0": 0.07846790890269151,
+      "primary_P_b_tail_le_0": 0.07732919254658385,
+      "seconds": 6.127211332321167
+    },
+    "windels_zeros_censored_at_bound": {
+      "deposit": "windels",
+      "arm_b_tail_median_log10_per_day": 3.6729028936395025,
+      "primary_b_tail_median_log10_per_day": 3.5863065227514204,
+      "arm_P_b_tail_le_0": 0.011221122112211221,
+      "primary_P_b_tail_le_0": 0.0026402640264026403,
+      "seconds": 6.7759950160980225
+    },
+    "kaur_declared_external_floor_1p60": {
+      "deposit": "kaur",
+      "arm_b_tail_median_log10_per_day": 0.08010622927425282,
+      "primary_b_tail_median_log10_per_day": 0.0909731298922007,
+      "arm_P_b_tail_le_0": 0.3546666666666667,
+      "primary_P_b_tail_le_0": 0.336,
+      "seconds": 5.63622260093689
+    },
+    "kaur_without_baseline_anchor": {
+      "deposit": "kaur",
+      "arm_b_tail_median_log10_per_day": 0.0927996706057379,
+      "primary_b_tail_median_log10_per_day": 0.0909731298922007,
+      "arm_P_b_tail_le_0": 0.3502222222222222,
+      "primary_P_b_tail_le_0": 0.336,
+      "seconds": 3.503655433654785
+    },
+    "bql_censored": {
+      "deposit": "era4tb",
+      "arm_b_tail_median_log10_per_day": -0.10385460285203961,
+      "primary_b_tail_median_log10_per_day": -0.10385460285203961,
+      "arm_P_b_tail_le_0": 0.7626016260162601
+    },
+    "bql_reclassified": {
+      "deposit": "era4tb",
+      "arm_b_tail_median_log10_per_day": -0.10794224053135101,
+      "primary_b_tail_median_log10_per_day": -0.10385460285203961,
+      "arm_P_b_tail_le_0": 0.7691056910569106
+    },
+    "bql_dropped": {
+      "deposit": "era4tb",
+      "arm_b_tail_median_log10_per_day": -0.10700667377284902,
+      "primary_b_tail_median_log10_per_day": -0.10385460285203961,
+      "arm_P_b_tail_le_0": 0.7520325203252033
+    },
+    "V_mL_10fold_either_way": {
+      "note": "Delta scales as H = L + log10(V), so a 10-fold change in V moves the gap by exactly 1/b_tail days at every condition. The full surface over V in {1, 10, 100, 1000} mL is already in ctbp_gap_by_condition.csv; this arm is exact arithmetic and needs no refit."
+    }
+  },
+  "V6_sbc": {
+    "n_simulations": 60,
+    "b_tail_bias_log10_per_day": 0.19689086990965848,
+    "b_tail_nominal_90_coverage": 0.38333333333333336,
+    "P_inf_agreement": 0.8333333333333334,
+    "delta_median_relative_error": -0.1912962365739819,
+    "statement": "validates the INFERENCE MACHINERY, not the assumption; it is not evidence that any T_ext is correct"
+  },
+  "empirical_two_timescale": {
+    "windels_early_rate_log10_per_hour_min": -0.02371326703960584,
+    "windels_early_rate_log10_per_hour_max": 6.92445303860748,
+    "windels_terminal_rate_log10_per_hour_p10": 0.0491710682256323,
+    "windels_terminal_rate_log10_per_hour_p90": 0.2742777336329816,
+    "windels_n_terminal_series": 99,
+    "windels_terminal_vs_nutrient_spearman": 0.34136634165928464,
+    "windels_terminal_vs_nutrient_p": 0.0005444074900571664,
+    "windels_terminal_vs_log10dose_spearman": 0.2621115050966541,
+    "windels_terminal_vs_log10dose_p": 0.00877120692962598,
+    "era4tb_treated_100uL_series_with_ge3_uncensored": 64,
+    "era4tb_n_terminal_rate_non_positive": 46,
+    "era4tb_P_terminal_rate_le_0_empirical": 0.71875,
+    "era4tb_non_positive_by_arm": {
+      "INH10x": "10/13",
+      "INH1x": "15/15",
+      "MXF10x": "5/18",
+      "MXF1x": "16/18"
+    },
+    "era4tb_n_rebound_gt_1_log10_from_nadir": 44,
+    "era4tb_n_rebound_gt_2_log10_from_nadir": 35
+  },
+  "headline": {
+    "H_log10_cells_100uL_in_10mL": 2.0,
+    "H_cells_100uL_in_10mL": 100.0,
+    "H_log10_cells_2p5uL_in_10mL": 3.6020599913279625,
+    "H_cells_2p5uL_in_10mL": 4000.000000000001,
+    "pipette_swing_log10": 1.6020599913279625,
+    "P_T_ext_infinite_era4tb_posterior": 0.7626016260162601,
+    "P_T_ext_infinite_era4tb_empirical": 0.71875,
+    "era4tb_conditions_with_P_inf_above_half": 4,
+    "era4tb_n_conditions": 5,
+    "in_sample_brier_score_T_LOD": 0.0465826176433239,
+    "in_sample_blank_rate_pred": 0.16734071041953436,
+    "in_sample_blank_rate_obs": 0.18765849535080303,
+    "V1_out_of_sample_coverage_90": 0.7914110429447853,
+    "V1_out_of_sample_rmse_log10": 0.6109155692495278,
+    "V1_out_of_sample_blank_rate_pred": 0.10658932682290159,
+    "V1_out_of_sample_blank_rate_obs": 0.14210526315789473,
+    "V1_gate": "FAIL - Delta reported as a BOUND",
+    "era4tb_Delta_median_days_range_conditional_on_b_tail_positive": [
+      10.797362540186235,
+      143.97168610401735
+    ]
+  },
+  "tables_written": [
+    "results/tables/ctbp_hidden_burden.csv",
+    "results/tables/ctbp_gap_by_condition.csv",
+    "results/tables/ctbp_tlod_calibration.csv",
+    "results/tables/ctbp_two_timescale.csv",
+    "results/tables/ctbp_tipping_points.csv",
+    "results/tables/ctbp_variance_components.csv",
+    "results/tables/ctbp_identifiability_boundary.csv",
+    "results/tables/ctbp_validation_summary.csv"
+  ],
+  "what_must_not_be_claimed": [
+    "T_ext was measured, estimated from data, or validated. It was not and cannot be: no deposit contains a single reading below its own limit and the deepest uncensored absolute reading anywhere is 1.000 log10 CFU/mL.",
+    "A single headline gap in days. Delta has infinite mean and undefined variance; only conditional quantiles are reported.",
+    "Any T_ext without a declared V. No deposit records a culture volume.",
+    "A starting-density effect on the rate. n0 is a designed variable nowhere.",
+    "A concentration-response curve, EC50, Emax or Hill exponent.",
+    "That the four physiological-state axes share a coordinate. They do not.",
+    "That E[N] < 1 is sterility. Under a Poisson bridge it is 0.368.",
+    "That V6 validates T_ext. It validates the estimator given the model.",
+    "That the piecewise-linear random walk is a mechanism or a persister compartment. It is a declared smoothing prior.",
+    "Anything about a patient. This is an in vitro flask at constant concentration."
+  ]
+}

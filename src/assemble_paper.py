@@ -34,10 +34,12 @@ FIGDIR = ROOT / "results" / "figures"
 OUT = ROOT / "manuscript" / "PAPER_COMPLETE.md"
 
 FIGURES = {
-    1: "fig10_rate_vs_duration",
-    2: "fig11_endpoint_collapse",
-    3: "fig12_independence",
-    4: "fig13_parameter_transfer",
+    1: "fig14_dynamic_range",
+    2: "fig10_rate_vs_duration",
+    3: "fig11_endpoint_collapse",
+    4: "fig12_independence",
+    # fig13_parameter_transfer supports Section 4.5 and Table S1. It is not part
+    # of the main line of argument and is not embedded in the body.
 }
 
 

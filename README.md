@@ -1,12 +1,20 @@
-# Duration endpoints misclassify antibiotic tolerance by measuring inoculum size rather than killing dynamics
+# Antibiotic tolerance is assigned from the starting inoculum wherever killing reaches the assay floor
 
-A reanalysis of four published deposits, asking what happens to the two ways
-antibiotic killing is summarised — as a rate, and as a duration — when the same
-protocol is run in six different laboratories.
+Every clinical microbiologist knows a culture taken after antibiotics have
+started is not evidence of sterility. The field's answer was to stop asking
+whether a culture went negative and to ask how far it fell — a fraction of the
+starting population, so that the starting population could not matter.
 
-The finding is an asymmetry. Every laboratory produces a kill rate. Half of them
-produce no clearance time at all, on the same flasks, and which half is decided
-by where their cultures started rather than by how fast the drug killed.
+This is a reanalysis of four published deposits showing that the fraction stops
+being a fraction once the population reaches the assay floor, and becomes a
+reading of the starting density instead.
+
+In 217 clinical *M. tuberculosis* isolates carrying their authors' own tolerance
+classification: no isolate lacks the range to demonstrate a 99% kill, 33 of 217
+lack it for the 99.99% kill the classification uses, and all 33 are recorded as
+having failed. Eighteen isolates ended at the same unmeasurable floor and a
+single threshold on their starting density reproduces every tolerance label they
+were given.
 
 ## Layout
 
@@ -31,7 +39,7 @@ pip install -r requirements.txt
 python run_all.py
 ```
 
-Fourteen stages, about forty seconds. Each writes a table and a receipt
+Seventeen stages, under a minute. Each writes a table and a receipt
 recording the software versions it actually ran under, then the last stage
 recomputes every quantity the manuscript quotes from the table it came from and
 reports any that disagree.
@@ -47,12 +55,14 @@ caught by it rather than by rereading.
 
 | stage | question |
 |---|---|
-| exp16 | Do MIC and the minimum duration for killing move together in 217 clinical isolates? |
+| exp22 | What does a published tolerance classification actually track? |
+| exp23 | How often does the faster-killed flask disappear later, and why? |
 | exp17 | Six laboratories, one protocol: does a rate travel where a duration does not? |
-| exp18 | Do published pharmacodynamic constants transfer to a slow grower? |
-| exp19 | What does a nominal concentration actually deliver once the evolved MIC is known? |
+| exp16 | Do MIC and the minimum duration for killing move together in 217 clinical isolates? |
 | exp20 | What does the choice of endpoint do to a 32-fold dose range? |
 | exp21 | Is the concentration slope the same early and late? |
+| exp18 | Do published pharmacodynamic constants transfer to a slow grower? (supplementary) |
+| exp19 | What does a nominal concentration actually deliver once the evolved MIC is known? (supplementary) |
 
 `results/README.md` maps every output to the script that writes it and the
 script or manuscript section that uses it.
