@@ -6,13 +6,13 @@ Outputs of the earlier paper are not here; they live in `version_one/results/`.
 
 | | tables | figures | receipts |
 | --- | ---: | ---: | ---: |
-| total | 34 | 5 | 9 |
+| total | 36 | 5 | 9 |
 
 ## Tolerance and the assay floor (manuscript/PAPER_COMPLETE.md)
 
 **Figures.** `fig10_rate_vs_duration`, `fig11_endpoint_collapse`, `fig12_independence`, `fig13_parameter_transfer`, `fig14_dynamic_range`
 
-**Tables (26).**
+**Tables (28).**
 
 | file | written by | used by |
 | --- | --- | --- |
@@ -20,7 +20,7 @@ Outputs of the earlier paper are not here; they live in `version_one/results/`.
 | `exp16_tb_independence.csv` | `exp16_tb_mic_mdk_independence.py` | `audit_claims`, `build_tables`, `fig12_independence` |
 | `exp17_baseline.csv` | `exp17_era4tb_between_lab.py` | `build_tables`, `fig10_rate_vs_duration` |
 | `exp17_censoring.csv` | `exp17_era4tb_between_lab.py` | quoted in the text only |
-| `exp17_cox.csv` | `exp17_era4tb_between_lab.py` | `fig10_rate_vs_duration` |
+| `exp17_cox.csv` | `exp17_era4tb_between_lab.py` | `audit_claims`, `fig10_rate_vs_duration` |
 | `exp17_endpoint_spread.csv` | `exp17_era4tb_between_lab.py` | quoted in the text only |
 | `exp17_kill_rates.csv` | `exp17_era4tb_between_lab.py` | `audit_claims`, `build_tables`, `fig10_rate_vs_duration` |
 | `exp17_survival.csv` | `exp17_era4tb_between_lab.py` | `build_tables`, `fig10_rate_vs_duration` |
@@ -37,11 +37,13 @@ Outputs of the earlier paper are not here; they live in `version_one/results/`.
 | `exp20_floor_sensitivity.csv` | `exp20_regimen_design.py` | `fig11_endpoint_collapse` |
 | `exp20_kill_grid.csv` | `exp20_regimen_design.py` | `fig11_endpoint_collapse` |
 | `exp21_combination.csv` | `exp21_sequential_and_combination.py` | quoted in the text only |
-| `exp21_interval_concentration_dependence.csv` | `exp21_sequential_and_combination.py` | `build_tables` |
+| `exp21_interval_concentration_dependence.csv` | `exp21_sequential_and_combination.py` | `audit_claims`, `build_tables` |
 | `exp22_headroom.csv` | `exp22_tolerance_dynamic_range.py` | `audit_claims`, `build_tables` |
 | `exp22_label_associations.csv` | `exp22_tolerance_dynamic_range.py` | `audit_claims`, `build_tables` |
 | `exp23_flask_parameters.csv` | `exp23_inversion_decomposition.py` | quoted in the text only |
 | `exp23_inversions.csv` | `exp23_inversion_decomposition.py` | quoted in the text only |
+| `exp24_flag_consistency.csv` | `exp24_trajectory_and_flag_audit.py` | quoted in the text only |
+| `exp24_trajectory_shape.csv` | `exp24_trajectory_and_flag_audit.py` | quoted in the text only |
 
 ## Unassigned
 

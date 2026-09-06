@@ -208,11 +208,32 @@ ratio of 5.27 (p < 0.001), and it is also the fastest killer, which is the
 behaviour expected of a laboratory that genuinely kills faster. The Schoenfeld
 test gives no evidence against proportional hazards (smallest p = 0.63).
 
-Seventeen of the 32 flasks that fell below the limit were detectable again at a
-later visit, 14 of them in treated arms. Killing itself is real and
-dose-dependent: at one times the inhibitory concentration five of six
-laboratories record net growth under moxifloxacin, between −0.047 and −0.214
-log10 per day, and at ten times all six record net decline.
+Killing here is not sustained, and this is stronger than a caveat about
+individual flasks. Of the 64 treated series carrying at least three quantified
+readings at the most sensitive plating volume, the final step is not a decline in
+48, and 44 end more than one log10 above their own lowest reading, with a median
+rebound of 2.17 log10 and a largest of 5.54. Seventeen of the 32 flasks that fell
+below the limit were detectable again at a later visit, 14 of them in treated
+arms. A crossing of the detection limit in this deposit is therefore usually a
+transient rather than an endpoint, which is a further reason it summarises less
+than the trajectory that produced it. Killing itself is real and dose-dependent:
+at one times the inhibitory concentration five of six laboratories record net
+growth under moxifloxacin, between −0.047 and −0.214 log10 per day, and at ten
+times all six record net decline.
+
+One feature of this design limits what the Cox adjustment can be said to show,
+and we state it rather than leave it to be found. Starting density is not
+independent of laboratory here: 87.0 per cent of the variance in flask-level
+starting density lies between laboratories rather than within them, the
+laboratory means spanning 3.62 log10 against a median within-laboratory standard
+deviation of 0.43. Adding starting density to a model that already contains
+laboratory is therefore closer to replacing a label with a number carrying much
+the same information than to separating two independent covariates. What the
+adjustment establishes is that a continuous measure of where the cultures began
+accounts for the laboratory term at least as well as the laboratory identity
+does, and that one institute resists even that. It does not establish that
+laboratory and inoculum are separable in this dataset. They are not, and a design
+that fixed the inoculum across laboratories would be required to separate them.
 
 ### 5. Rank inversions are common and are explained by distance over rate
 
@@ -234,6 +255,18 @@ time is therefore not predominantly an inoculum measurement. It is a mixture, in
 which the inoculum is a large minority contribution — large enough to reverse the
 ranking in more than a third of comparisons, and not large enough to justify
 treating the endpoint as an inoculum readout in general.
+
+The decomposition inherits one assumption that the trajectories do not honour.
+It fits a single slope across the window, and most of these series decline and
+then regrow, so the fitted rate is an average across two regimes rather than a
+kill rate. The inversion count does not depend on it, because an inversion is
+read from the observed crossings; the variance shares do, and they should be read
+as a decomposition of that averaged slope. This works against the distance term
+rather than for it: a slope averaged over decline and regrowth is closer to zero
+and more variable than the killing phase alone, which inflates the rate term's
+share. The share attributable to the distance is therefore a lower bound, and the
+conclusion it supports, that the rate carries more of the spread than the
+inoculum does, is the conservative one.
 
 ### 6. A deep endpoint also loses the dose-response signal
 
@@ -475,6 +508,17 @@ the plated volume, as above. In the clinical deposit the readings are most
 probable numbers taking the discrete values of an MPN table, and the day-5 column
 bottoms out at 23 per mL with a visible pile-up there; that value is treated as
 the floor, and the first Results section reports the evidence for it.
+
+The six-laboratory deposit also carries the evidence for judging each reading
+against its own volume rather than pooling. Each sample is plated at four
+volumes at the same visit, so a below-limit flag can be checked against the other
+platings of the same flask. Of its 498 flags, 83, or 16.7 per cent, are
+contradicted: another plating of the same sample at the same visit, with a limit
+at least as sensitive, returns a quantified count above the flagged reading's
+limit. Those flags record a drop that missed rather than a culture that fell.
+Pooling the four volumes to a single limit would treat them as evidence about the
+population; judging each against the limit its own volume implies does not, and
+that is the reason the analysis is built the way it is.
 
 A **crossing time not observed within the study** is right-censored: the event
 has not happened yet, which is not the same as the event having no time. A flask

@@ -44,6 +44,9 @@ STAGES = [
     ("exp23  how often the faster-killed flask disappears later",
      "src.experiments.exp23_inversion_decomposition"),
 
+    ("exp24  trajectory shape, flag consistency, and what the Cox model separates",
+     "src.experiments.exp24_trajectory_and_flag_audit"),
+
     ("fig 1  the assay floor bounds the endpoint and decides the phenotype",
      "src.figures.fig14_dynamic_range"),
     ("fig 2  one protocol, six laboratories: the inoculum still decides",

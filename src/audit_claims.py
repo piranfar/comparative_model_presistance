@@ -50,6 +50,31 @@ def check(label: str, claimed, computed, tol=0.05, unit=""):
 def main() -> int:
     rows = []
 
+    # --- exp24, the three properties a design review found we had missed --
+    # Two of these constrain our own argument rather than support it, which is
+    # why they are pinned: a number that limits a claim must not be free to
+    # drift in the direction we would prefer.
+    r = receipt("exp24_receipt.json")
+    if r is not None:
+        tr = r["trajectory_shape"]
+        rows.append(check("treated series measured for shape (4: 64)",
+                          64, float(tr["n_treated_series"]), 0.001))
+        rows.append(check("final step not a decline (4: 48)",
+                          48, float(tr["n_terminal_step_not_a_decline"]), 0.001))
+        rows.append(check("rebound over 1 log10 from nadir (4: 44)",
+                          44, float(tr["n_rebound_over_1_log"]), 0.001))
+        rows.append(check("median rebound (4: 2.17 log10)",
+                          2.17, float(tr["median_rebound_log10"]), 0.02))
+        fc = r["flag_consistency"]
+        rows.append(check("BQL flags contradicted (methods: 83)",
+                          83, float(fc["n_contradicted"]), 0.001))
+        rows.append(check("share of flags contradicted (methods: 16.7%)",
+                          0.167, float(fc["fraction_of_all_flags_contradicted"]), 0.02))
+        co = r["starting_density_vs_laboratory"]
+        # The number that most limits Section 4's Cox result.
+        rows.append(check("starting density variance that is laboratory (4: 87.0%)",
+                          0.870, float(co["variance_explained_by_laboratory"]), 0.01))
+
     # --- exp21, the per-interval p-values --------------------------------
     # Added after a manuscript revision caught three of these wrong in the body
     # text. They had been carried over from an earlier draft and never
