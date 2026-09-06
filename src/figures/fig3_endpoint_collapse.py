@@ -1,7 +1,7 @@
 """
 Figure 3. The endpoint decides whether a 32-fold concentration range is visible.
 
-Run:  python -m src.figures.fig11_endpoint_collapse
+Run:  python -m src.figures.fig3_endpoint_collapse
 
 Panel A is the raw grid, so the reader sees the trajectories before any summary
 of them. Panel B is the summary that matters: how far apart the top and bottom
@@ -148,7 +148,7 @@ def build():
                   f"interval, {N_BOOT:,} draws. The late sign is not claimed: the\n"
                   "top arm may be censored (panel A).", y=-0.30)
 
-    return st.save(fig, "fig11_endpoint_collapse")
+    return st.save(fig, "fig3_endpoint_collapse")
 
 
 if __name__ == "__main__":

@@ -149,7 +149,7 @@ def vijay_groups() -> pd.DataFrame:
             "dataset": f"Vijay, {age}-day culture",
             "level_of_variation": "between clinical isolates",
             "n": int(len(v)), "median_log10_N0": float(np.log10(v).median()),
-            "L_note": f"{VIJAY_FLOOR:g} CFU/mL, inferred",
+            "L_note": f"{VIJAY_FLOOR:g} MPN/mL, inferred",
             "delta_h": float(h.max() - h.min()),
         })
     return pd.DataFrame(rows)

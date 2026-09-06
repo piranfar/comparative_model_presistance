@@ -1,7 +1,7 @@
 """
 Figure 2. Where the inoculum is set by protocol, the two summaries still diverge.
 
-Run:  python -m src.figures.fig10_rate_vs_duration
+Run:  python -m src.figures.fig2_rate_vs_duration
 
 This figure used to be the spine of the paper. It is now the demonstration
 that the arithmetic of Section 2.5 is not a property of clinical sampling: here
@@ -184,7 +184,7 @@ def build():
                   "density. Blue crosses from significant to not. Orange (C)\n"
                   "stays significant and also has the fastest rate.", y=-0.30)
 
-    return st.save(fig, "fig10_rate_vs_duration")
+    return st.save(fig, "fig2_rate_vs_duration")
 
 
 if __name__ == "__main__":

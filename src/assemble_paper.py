@@ -34,10 +34,10 @@ FIGDIR = ROOT / "results" / "figures"
 OUT = ROOT / "manuscript" / "PAPER_COMPLETE.md"
 
 FIGURES = {
-    1: "fig14_dynamic_range",
-    2: "fig10_rate_vs_duration",
-    3: "fig11_endpoint_collapse",
-    4: "fig12_independence",
+    1: "fig1_dynamic_range",
+    2: "fig2_rate_vs_duration",
+    3: "fig3_endpoint_collapse",
+    4: "fig4_independence",
     # fig13_parameter_transfer belongs to the published-rate-constant comparison,
     # which is no longer part of this paper. The figure stays in results/ as a
     # record of the work; it is neither embedded nor listed as supplementary.
@@ -82,7 +82,16 @@ def main() -> int:
     if not BODY.exists():
         raise SystemExit(f"missing {BODY}")
     body = BODY.read_text(encoding="utf-8")
-    tables = split_tables(TABLES.read_text(encoding="utf-8")) if TABLES.exists() else {}
+    # The supplementary block is a trailing section of tables.md. It has to be
+    # separated before splitting, or it rides along with whichever numbered table
+    # happens to come last and is spliced into the middle of a Results section.
+    tables_md = TABLES.read_text(encoding="utf-8") if TABLES.exists() else ""
+    supplementary = ""
+    marker = "\n## Supplementary tables"
+    if marker in tables_md:
+        i = tables_md.index(marker)
+        tables_md, supplementary = tables_md[:i], tables_md[i:].strip()
+    tables = split_tables(tables_md)
 
     # The body opens with YAML front matter for the submission version, so the
     # head is three things rather than one: the front matter block, the H1
@@ -135,6 +144,8 @@ def main() -> int:
     if abstract:
         parts += [abstract, ""]
     parts += [rest.rstrip(), ""]
+    if supplementary:
+        parts += ["---", "", supplementary, ""]
     if missing:
         parts += ["---", "",
                   "## Still to be added",

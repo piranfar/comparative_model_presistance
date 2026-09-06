@@ -19,7 +19,7 @@ keywords:
 
 **Correspondence:** [to be inserted]
 
-**Figures:** 4 | **Tables:** 15 | **Boxes:** 1 | **Supplementary tables:** 6
+**Figures:** 4 | **Tables:** 16 | **Boxes:** 1 | **Supplementary tables:** 7
 
 ## Abstract
 
@@ -89,10 +89,10 @@ only if *q* logs are visible, and what is visible is bounded below by the assay'
 floor. Writing *L* for that floor and *N₀* for the starting density, an isolate
 has
 
-    headroom  H = log10(N₀ / L)
+    headroom  h = log10(N₀ / L)
 
-and no experiment can demonstrate a reduction deeper than *H*, however completely
-the drug worked. Where *H < q* the endpoint is unreachable before the drug is
+and no experiment can demonstrate a reduction deeper than *h*, however completely
+the drug worked. Where *h* < *q* the endpoint is unreachable before the drug is
 added. Worse, when the final reading sits *at* the floor, the recorded fraction
 is not a measurement at all but the ratio *L/N₀* — the most starting-density-
 dependent quantity available. The metric designed to be inoculum-independent
@@ -100,7 +100,7 @@ becomes a pure inoculum readout precisely at the depth where tolerance is scored
 
 The two failures are different in kind, and this paper keeps them apart. Whether
 an endpoint is reachable at all is settled by the assay geometry before the drug
-is added, since *H* depends only on the starting culture and the floor. Whether a
+is added, since *h* depends only on the starting culture and the floor. Whether a
 reading that has reached the floor can be classified is settled by the geometry
 too, but only once the drug has driven the population down to it: reaching the
 floor takes a reduction of the isolate's entire headroom, and that is the drug's
@@ -125,10 +125,29 @@ tracks — drug susceptibility, or the physiological state of the culture. Two
 further deposits establish that the same arithmetic governs killing experiments
 where inoculum is controlled by protocol rather than by clinical accident: a
 six-laboratory consortium exercise distributing one strain under one written
-protocol, and a concentration-by-time grid in the same organism. If the
+protocol, and a concentration-by-time grid in the same organism. From the first
+we also ask whether a faster-killing flask reliably crosses the floor sooner, and
+from the second whether a late endpoint can erase a dose difference that an early
+one resolves. A fourth deposit, held out until every boundary was fixed, tests
+whether the boundaries locate the same limit in an experiment they were not built
+from. Finally we ask whether the concentration and duration axes are separate in
+these files, which is the premise the framework defining them rests on. All five
+deposits are published and openly licensed, and none was generated for this study
+(Table 1). If the
 hypothesis holds, a tolerance call reported without its starting density and its
 assay floor cannot be interpreted, and the phenotypes assigned in its
 name are, in part, a record of how the assay was set up.
+
+**Table 1.** The five published deposits reanalysed. Four carry the analysis and the fifth is held out to test it. None was generated for this study. The held-out deposit was opened after every boundary and threshold was fixed, which the commit history of the analysis repository timestamps; the other four were selected for the fields they carry, and that selection is not separately registered.
+
+| Dataset | Organism | Drug and range | Design | Deposit | Licence |
+| --- | --- | --- | --- | --- | --- |
+| Six-laboratory exercise | *M. tuberculosis* H37Rv | moxifloxacin, isoniazid, 1x and 10x MIC | 90 flasks, 2 775 readings | figshare 19766083 | CC BY 4.0 |
+| Clinical isolates | *M. tuberculosis*, 217 isolates | rifampicin | 6 duration endpoints per isolate | eLife 93243, suppl. file 2 | CC BY 4.0 |
+| Evolved clones | *E. coli*, 126 clones | amikacin | MIC and persister fraction per clone | Zenodo 7550302 | CC BY 4.0 |
+| Concentration-by-time grid | *M. tuberculosis* | apramycin 1-128 ug/mL (amikacin arm not analysed) | 5 concentrations x 4 days x 3 replicates | figshare 26462791 | CC BY 4.0 |
+| Held out for validation | *E. coli*, hollow fibre | amoxicillin-clavulanate | 20 cultures, measured day-zero density, 100 uL plated | Nat Commun 2026 Source Data | CC BY 4.0 |
+
 
 ---
 
@@ -137,9 +156,7 @@ the smallest positive count the method can report — one colony in a plated vol
 *v* µL is *L* = 1 000/*v* per mL, and an MPN series uses the lowest table rung.
 Headroom is *h* = log10(*N₀*/*L*). A *q*-log endpoint is legal only if *h* ≥ *q*,
 which is the same as seeding at or above *L* · 10^*q*. If the last reading sits
-at *L*, the recorded fraction is *L*/*N₀*: an upper bound, not a measurement. Do
-not densify the inoculum solely to buy headroom; a shallower legal endpoint is
-the honest alternative, and growth state still belongs on the report.
+at *L*, the recorded fraction is *L*/*N₀*: an upper bound, not a measurement.
 
 | Culture | *N₀* (per mL) | *L* (per mL) | Headroom | Legal endpoints | If the last reading is at *L* |
 | --- | ---: | ---: | ---: | --- | --- |
@@ -148,11 +165,12 @@ the honest alternative, and growth state still belongs on the report.
 | 100 µL plate | 10⁵ | 10 | 4.00 | through 99.99%; not a 5-log call | Fraction 10⁻⁴. A 5-log MDK needs *N₀* ≥ 10⁶. |
 | 10 µL drop, same *N₀* | 10⁵ | 100 | 3.00 | through 99.9%; not 99.99% | Fraction 10⁻³. The pipette, not the isolate, removed one log. |
 
-The first two rows are the six medium against twelve low isolates that ended on
-the same MPN floor in the clinical file. The last two are why a written protocol
-does not standardise measurable depth: the plated volume sets *L*. To make both a
-four-log endpoint and a low class identifiable against *L* = 23 per mL, seed
-above *L* · max(10⁴, 1/*c*₁) = 230 000 per mL, or choose a shallower endpoint.
+The first two rows are the two starting densities that recur in the clinical
+deposit analysed below, and Section 2 reports what became of the isolates that
+began at each. The last two are why a written protocol does not standardise
+measurable depth: the plated volume sets *L*. To make both a four-log endpoint
+and a low class identifiable against *L* = 23 per mL, seed above
+*L* · max(10⁴, 1/*c*₁) = 230 000 per mL, or choose a shallower endpoint.
 
 ---
 
@@ -170,10 +188,10 @@ The deposit states no limit of quantification, so that value is inferred and the
 inference is quantified rather than asserted. A discrete posterior over the
 most-probable-number rungs at or below the observed minimum places 95 per cent
 support on 9.2 to 23 per mL, a span of 0.40 log10 — narrow enough that the class
-labels of Section 3 are computed rather than refused (Table 14). Where a deposit
+labels of Section 3 are computed rather than refused (Table 2). Where a deposit
 gives no such evidence, those labels are refused instead of reported.
 
-**Table 14.** What is actually known about the assay floor in each deposit, and the rule that follows from it. A floor derived from a recorded plated volume is a point mass: one colony in that volume, no inference required. A floor inferred from a pile-up on a most-probable-number rung carries a posterior over the rungs at or below the observed minimum, and the 95 per cent support is quoted. Where no floor is evidenced at all, or where the support spans more than one log10, the observability labels of Section 3 are refused rather than reported -- a label is only as good as the floor it is computed against.
+**Table 2.** What is actually known about the assay floor in each deposit, and the rule that follows from it. A floor derived from a recorded plated volume is a point mass: one colony in that volume, no inference required. A floor inferred from a pile-up on a most-probable-number rung carries a posterior over the rungs at or below the observed minimum, and the 95 per cent support is quoted. Where no floor is evidenced at all, or where the support spans more than one log10, the observability labels of Section 3 are refused rather than reported -- a label is only as good as the floor it is computed against.
 
 | Deposit | Verdict | Floor used | 95% support | Span (log10) | Refuse observability labels |
 | --- | --- | ---: | ---: | ---: | ---: |
@@ -203,7 +221,7 @@ on the recorded fraction and no day-2 accounting is offered for it.
 
 The consequence is that each isolate carries a fixed budget of observable
 killing. At 15 days of prior culture the starting densities span 3.36 to 7.79
-log10, so headroom spans 2.00 to 6.42 log10 (Fig. 1B, Table 2); both spans are
+log10, so headroom spans 2.00 to 6.42 log10 (Fig. 1B, Table 3); both spans are
 the same 4.42 log10, and the fold figures quoted throughout are ten raised to the
 unrounded difference rather than to the displayed one. Against that budget the
 three deposited endpoints behave very differently. No isolate lacks the headroom
@@ -212,7 +230,7 @@ for a 90 or a 99 per cent reduction: 0 of 217 in both cases. **Thirty-three of
 endpoint**, which is to say that a four-log reduction was unobservable for them
 before rifampicin was added.
 
-**Table 2.** The reduction each tolerance endpoint requires against the reduction the assay can resolve. Headroom is the distance from an isolate's starting density to the MPN floor of 23 per mL. An isolate short of headroom cannot reach that endpoint however completely the drug worked, and every such isolate is recorded at the assay ceiling.
+**Table 3.** The reduction each tolerance endpoint requires against the reduction the assay can resolve. Headroom is the distance from an isolate's starting density to the MPN floor of 23 per mL. An isolate short of headroom cannot reach that endpoint however completely the drug worked, and every such isolate is recorded at the assay ceiling.
 
 | Prior culture | Endpoint | Isolates | Short of headroom | Fraction short | At ceiling: short vs ample |
 | --- | ---: | ---: | ---: | ---: | ---: |
@@ -224,10 +242,15 @@ before rifampicin was added.
 | 60 days | 99.99% (4 log) | 210 | 7 | 3.3% | 100% vs 95% |
 
 
-All 33 are recorded as not having reached it. That is a census of the affected
-isolates rather than an estimate, and it is the load-bearing observation. Among
-the 184 isolates that did have four logs of headroom, 162 are also at the
-ceiling, 88.0 per cent.
+All 33 are recorded as not having reached it — at the **assay ceiling**,
+which is a census of the affected isolates rather than an estimate, and it is the load-bearing observation. The ceiling is a
+different censoring mechanism from the floor and should not be read as its
+mirror. The floor censors the measurement scale: a count below *L*
+is not reported as a count. The ceiling censors time: the killing assay runs six
+days, so an isolate that has not reached its endpoint by then is recorded at the
+last day rather than at the day it would have reached. One is a limit on how deep
+the assay can see, the other on how long it looks. Among the 184 isolates that
+did have four logs of headroom, 162 are also at the ceiling, 88.0 per cent.
 
 No p-value is attached to that contrast, and the reason is worth stating rather
 than hiding in a caveat. An isolate short of four logs of headroom cannot record
@@ -246,12 +269,12 @@ with no overlap between classes. The thresholds themselves are not deposited;
 they are recovered here, and the data pin them only to the gaps between classes:
 at day 5 and 15 days of prior culture, low tolerance covers fractions below
 10⁻³, medium covers 10⁻³ to 10⁻², and high exceeds 10⁻². Applying those cuts reproduces every usable class in the file,
-203 of 203 (Table 3a) — usable meaning the 203 of 217 isolates whose label is
+203 of 203 (Table 4) — usable meaning the 203 of 217 isolates whose label is
 one of the three ordered classes, the other 14 carrying a fourth, unordered MDR
-category that no ordered analysis can place (Table 15) — so what follows is an argument about the fraction the
+category that no ordered analysis can place (Table 5) — so what follows is an argument about the fraction the
 assay recorded and not about an independent clinical judgement.
 
-**Table 15.** Every analysis set in this paper, and the exclusion that produced it. The manuscript quotes a dozen different denominators, each correct for its own analysis; this is where a reader checks which is which. The MDR tolerance label is a fourth, unordered category and is dropped wherever an ordered outcome is fitted; the growth proxy is missing for one isolate; and five treated flasks in the six-laboratory deposit carry no usable starting density, which is why a comparison over 72 flasks is reported on 67. Whether these exclusions are plausibly ignorable is tested in Table S7.
+**Table 5.** Every analysis set in this paper, and the exclusion that produced it. The manuscript quotes a dozen different denominators, each correct for its own analysis; this is where a reader checks which is which. The MDR tolerance label is a fourth, unordered category and is dropped wherever an ordered outcome is fitted; the growth proxy is missing for one isolate; and five treated flasks in the six-laboratory deposit carry no usable starting density, which is why a comparison over 72 flasks is reported on 67. Whether these exclusions are plausibly ignorable is tested in Table S1.
 
 | Deposit | Panel | Stratum | Stage | n | Excluded here |
 | --- | --- | --- | --- | ---: | ---: |
@@ -290,107 +313,15 @@ assay recorded and not about an independent clinical judgement.
 | ERA4TB six-laboratory | - | - | treated series | 288 | -72 |
 | ERA4TB six-laboratory | - | - | cross-laboratory pairs in the same arm | 191 | - |
 
----
 
-## Supplementary tables
+**Table 4.** The deposited tolerance class at day 5 after 15 days of prior culture is a threshold on the recorded surviving fraction, with no overlap between classes: low below 10⁻³, medium from 10⁻³ to 10⁻² inclusive, high above 10⁻². Applying those cuts reproduces every usable class in the file. This matters because the argument that follows is about the fraction the assay recorded, not about an independent clinical judgement.
 
-Held here so the Results stay on one line of reasoning. Table S1 supports Section 10 and Table S2 supports Section 6.
-
-**Table S1.** The same nominal concentration expressed in multiples of the minimum inhibitory concentration each population actually evolved to. At 25 ug/mL the same number denotes a sub-inhibitory exposure in one nutrient condition and a strongly inhibitory one in another.
-
-| Nominal concentration (ug/mL) | Nutrient levels | Lowest exposure (x MIC) | Highest exposure (x MIC) | Spread | Straddles the MIC |
+| Recorded class | n | Min fraction | Max fraction | Predicted from cuts | Disagreements |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| 12.5 | 3 | 1.49 | 4.74 | 3.2x | no |
-| 25 | 3 | 0.55 | 9.47 | 17.1x | yes |
-| 50 | 2 | 5.08 | 10.95 | 2.2x | no |
-| 100 | 1 | 9.72 | 9.72 | 1.0x | no |
-
-**Table S2.** Fold below the nominal 0.5 McFarland reference, 1.5e8 CFU/mL. Descriptive only, and not a protocol-compliance metric. A time-kill inoculum is prepared by diluting from a suspension matched to that turbidity, so every entry is expected to sit far below it; the conversion of a turbidity to CFU/mL depends on species, cell aggregation and preparation and is least reliable for mycobacteria.
-
-| Dataset | Median log10 N0 | Fold below nominal 0.5 McFarland |
-| --- | ---: | ---: |
-| ERA4TB, between laboratories at 100 uL | 4.63 | 3,525x |
-| ERA4TB, every laboratory and plating volume | 4.29 | 7,751x |
-| Vijay, 15-day culture | 5.79 | 246x |
-| Vijay, 60-day culture | 7.36 | 7x |
-| Kaur, planktonic | 7.03 | 14x |
-| Kaur, intracellular | 5.94 | 170x |
-| Dubey, hollow fibre | 6.08 | 123x |
-
-**Table S3.** The ordinal reanalysis against the linear model it replaces, member for member. The linear model scores the ordering 0, 1, 2, which assumes the two class steps are equal; the ordinal model does not. Every direction agrees and the same two members survive correction under both, so the linear treatment did not manufacture the result -- but the coefficients it reports are in a unit that does not exist, which is why the ordinal fit is the one in the main table.
-
-| Predictor | Prior culture | Depth | Linear beta | p (linear) | Survives BH | Odds ratio | p (ordinal) | Survives BH  | Same direction |
-| --- | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| growth | 15 d | D5 | +0.0266 | 0.0025 | yes | 1.096 | 0.0030 | yes | yes |
-| resistance | 15 d | D5 | +0.2589 | 0.0035 | yes | 2.317 | 0.0042 | yes | yes |
-| growth | 60 d | D2 | -0.0195 | 0.0590 | no | 0.933 | 0.0470 | no | yes |
-| growth | 15 d | D2 | +0.0116 | 0.0812 | no | 1.068 | 0.0618 | no | yes |
-| resistance | 15 d | D2 | +0.0515 | 0.4446 | no | 1.295 | 0.4529 | no | yes |
-| growth | 60 d | D5 | -0.0041 | 0.6999 | no | 0.976 | 0.4605 | no | yes |
-| resistance | 60 d | D2 | -0.0551 | 0.5486 | no | 0.836 | 0.5400 | no | yes |
-| resistance | 60 d | D5 | +0.0389 | 0.6797 | no | 1.111 | 0.7150 | no | yes |
-
-**Table S4.** Sensitivity of the load-bearing counts to the choice of floor, per deposit, showing only the counts a conclusion rests on. The clinical sweep steps through every three-tube most-probable-number rung at or below 23 per mL: the number of isolates short of four logs of headroom moves only between 28 and 33 across the whole range, which is why the inferred floor is safe to use. The six-laboratory rows compare judging each reading against the floor its own plated volume implies with pooling all four volumes to one floor, and price what pooling would cost. The Kaur deposit records no plated volume, so its row shows what assuming one would do: the four-log endpoint stays reachable throughout while h itself moves by 1.6 log10.
-
-| Deposit | Floor assumed | % counts a pooled floor discards | % flags contradicted | 4-log reachable | at the floor | h | measured | median h | one class | several classes | short of 4 logs | short, baseline only | written as exact zero |
-| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| Dubey 2026, hollow fibre | 10 uL plated | - | - | - | - | - | - | 4.08 | - | - | 5 | - | - |
-| Dubey 2026, hollow fibre | 100 uL plated, as the deposit's staging record gives | - | - | - | - | - | - | 5.08 | - | - | 0 | - | - |
-| Dubey 2026, hollow fibre | 50 uL plated | - | - | - | - | - | - | 4.78 | - | - | 0 | - | - |
-| Dubey 2026, hollow fibre | the below-limit placeholder taken literally | - | - | - | - | - | - | 6.08 | - | - | 0 | - | - |
-| ERA4TB, six laboratories | per-volume (as analysed) | 0 | 16.67 | - | - | - | - | - | - | - | - | - | - |
-| ERA4TB, six laboratories | pooled at the geometric mean of the per-volume floors | 1.04 | 38.96 | - | - | - | - | - | - | - | - | - | - |
-| ERA4TB, six laboratories | pooled at the least sensitive volume, 2.5 uL | 5.94 | 15.26 | - | - | - | - | - | - | - | - | - | - |
-| ERA4TB, six laboratories | pooled at the modal volume, 10 uL | 1.13 | 28.71 | - | - | - | - | - | - | - | - | - | - |
-| ERA4TB, six laboratories | pooled at the most sensitive volume, 100 uL | 0 | 43.17 | - | - | - | - | - | - | - | - | - | - |
-| Kaur 2024, apramycin grid | 10 uL plated, if it had been stated | - | - | True | - | 5.03 | - | - | - | - | - | - | - |
-| Kaur 2024, apramycin grid | 100 uL plated, if it had been stated | - | - | True | - | 6.03 | - | - | - | - | - | - | - |
-| Kaur 2024, apramycin grid | 2.5 uL plated, if it had been stated | - | - | True | - | 4.43 | - | - | - | - | - | - | - |
-| Kaur 2024, apramycin grid | the observed minimum, which occurs once | - | - | True | - | 5.43 | - | - | - | - | - | - | - |
-| Vijay 2024, clinical isolates | floor = 11 MPN/mL | - | - | - | 0 | - | 203 | - | 0 | 0 | 33 | 21 | - |
-| Vijay 2024, clinical isolates | floor = 14 MPN/mL | - | - | - | 0 | - | 203 | - | 0 | 0 | 33 | 21 | - |
-| Vijay 2024, clinical isolates | floor = 15 MPN/mL | - | - | - | 0 | - | 203 | - | 0 | 0 | 33 | 21 | - |
-| Vijay 2024, clinical isolates | floor = 20 MPN/mL | - | - | - | 0 | - | 203 | - | 0 | 0 | 33 | 21 | - |
-| Vijay 2024, clinical isolates | floor = 21 MPN/mL | - | - | - | 0 | - | 203 | - | 0 | 0 | 33 | 21 | - |
-| Vijay 2024, clinical isolates | floor = 23 MPN/mL | - | - | - | 18 | - | 185 | - | 12 | 6 | 33 | 21 | - |
-| Vijay 2024, clinical isolates | floor = 3 MPN/mL | - | - | - | 0 | - | 203 | - | 0 | 0 | 28 | 17 | - |
-| Vijay 2024, clinical isolates | floor = 3.6 MPN/mL | - | - | - | 0 | - | 203 | - | 0 | 0 | 28 | 17 | - |
-| Vijay 2024, clinical isolates | floor = 7.2 MPN/mL | - | - | - | 0 | - | 203 | - | 0 | 0 | 33 | 21 | - |
-| Vijay 2024, clinical isolates | floor = 7.4 MPN/mL | - | - | - | 0 | - | 203 | - | 0 | 0 | 33 | 21 | - |
-| Vijay 2024, clinical isolates | floor = 9.2 MPN/mL | - | - | - | 0 | - | 203 | - | 0 | 0 | 33 | 21 | - |
-| Windels 2024, evolved clones | no floor is recoverable | - | - | - | - | - | - | - | - | - | - | - | 6 |
-
-**Table S5.** Decomposition of the isoniazid-resistance association with the tolerance class into a path through log10 starting density and a direct path, by the product of coefficients with bootstrap percentile intervals. The mediated path excludes zero in every specification and the direct path covers zero in every one. This replaces the percentage attenuation the earlier analysis quoted, which is a descriptive ratio rather than an estimand. Sequential ignorability is assumed and is not testable here; the sensitivity analysis in the Methods reports the residual correlation that would nullify the estimate.
-
-| Outcome and stratum | n | Total effect c (95% CI) | Direct effect c' (95% CI) | Mediated effect (95% CI) | Proportion mediated |
-| --- | ---: | ---: | ---: | ---: | ---: |
-| Linear 0/1/2, all IS/IR | 203 | +0.256 (+0.087, +0.425) | +0.091 (-0.116, +0.287) | +0.166 (+0.067, +0.279) | 65% |
-| Linear 0/1/2, baseline isolates | 168 | +0.226 (+0.038, +0.409) | +0.067 (-0.157, +0.294) | +0.159 (+0.053, +0.295) | 70% |
-| High versus rest | 203 | +0.121 | +0.013 | +0.108 (+0.037, +0.189) | 89% |
-| Not-low versus low | 203 | +0.135 | +0.077 | +0.058 (+0.003, +0.121) | 43% |
-
-**Table S6.** Isoniazid-resistant isolates enter this assay ten-fold lower than susceptible ones, and we do not know why. This is what the deposit can and cannot rule out. Six of the nine pretreatment covariates are recorded almost exclusively for resistant isolates, so their missingness is the exposure and adjusting for them conditions on it; the two susceptibility calls are missing on identical rows, which is why they return identical coefficients. Those rows are shown with their coefficients so the circularity is visible, but they do not bound anything. Only 2 covariates are recorded at rates unrelated to susceptibility, and adjusting for either leaves the coefficient within five per cent of its unadjusted value. The file records no referring site and no processing batch, so those cannot be tested at all.
-
-| Covariate | Recorded, resistant | Recorded, susceptible | Can it adjust? | Resistance coefficient | Attenuation |
-| --- | ---: | ---: | ---: | ---: | ---: |
-| INH_MGIT_DST | 82/84 | 0/119 | PROXY | -0.851 | -0% |
-| RIF_MGIT_DST | 82/84 | 0/119 | PROXY | -0.851 | -0% |
-| INH_mutation | 79/84 | 1/119 | PARTIAL | -0.662 | 22% |
-| INH_Mykrobe | 76/84 | 0/119 | PROXY | - | - |
-| RIF_Mykrobe | 76/84 | 0/119 | PROXY | - | - |
-| MIC_INH | 67/84 | 119/119 | PARTIAL | -0.963 | -13% |
-| MIC_RIF | 67/84 | 119/119 | PARTIAL | -0.853 | -0% |
-| Time_to_0.4 | 83/84 | 119/119 | INDEPENDENT | -0.807 | 5% |
-| Time_point | 84/84 | 119/119 | INDEPENDENT | -0.818 | 4% |
-
-**Table S7.** The comparison the Methods promise: rows dropped from the association family against rows retained, on starting density and susceptibility. The MDR exclusion differs in susceptibility by construction, since those isolates are outside the resistant-versus-susceptible contrast the family tests. The one difference not by construction is in the 60-day panel, where the dropped rows sit higher in starting density (p = 0.027); it affects 20 rows and no conclusion drawn from that panel.
-
-| Panel | Exclusion | Dropped | Retained | Median log10 N0 retained | Median log10 N0 dropped | p | Resistant, retained | Resistant, dropped | p  |
-| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| 15-day | label missing or 'MDR' | 14 | 202 | 5.79 | 5.36 | 0.198 | 41% | 0% | 0.001 |
-| 15-day | growth proxy missing | 1 | 202 | 5.79 | 6.79 | 0.149 | 41% | 100% | 0.414 |
-| 60-day | label missing or 'MDR' | 20 | 196 | 7.36 | 7.79 | 0.027 | 40% | 20% | 0.093 |
-| 60-day | growth proxy missing | 1 | 196 | 7.36 | 7.36 | 0.749 | 40% | 100% | 0.406 |
+| Low | 33 | 3.8 × 10⁻⁶ | 4.7 × 10⁻⁴ | Low | 0 |
+| Medium | 124 | 1.0 × 10⁻³ | 1.0 × 10⁻² | Medium | 0 |
+| High | 46 | 2.7 × 10⁻² | 1.0 × 10¹ | High | 0 |
+| All usable | 203 | - | - | - | 0 |
 
 
 Eighteen isolates ended at the floor. They share one reported floor-level
@@ -412,25 +343,16 @@ The tolerance labels assigned to them differ. Six isolates that began at 23 000
 per mL received a fraction of 10⁻³ and were classified **medium** tolerance;
 twelve that began at 230 000 or above received 10⁻⁴ or less and were classified
 **low**. Predicting the label from the starting density alone, with a single cut,
-reproduces all eighteen (Table 3). That is a statement about the classification
+reproduces all eighteen (Table 6). That is a statement about the classification
 step and not about the killing: conditional on a reading censored at the floor,
 the starting density fixes which label the published rule is able to return.
 
-**Table 3.** Isolates whose day-5 reading was censored at the MPN floor. They share one reported floor-level observation, but their true final counts are unknown below the limit, so the assay cannot distinguish their final viable burdens; because their starting densities differ, the same reading also implies a different range of compatible fractional reductions in each. The recorded fraction is L/N0, so the spread in apparent survival equals the spread in starting density exactly, and the labels differ accordingly. The last three columns sort every call in the panel, not only the censored ones: a censored reading bounds the class from above, and sweeping the true count across the admissible range leaves twelve calls with a single compatible class and six with more than one. Reaching the floor at all is a property of the killing; which class is then compatible is a property of the starting density and the floor.
+**Table 6.** Isolates whose day-5 reading was censored at the MPN floor. They share one reported floor-level observation, but their true final counts are unknown below the limit, so the assay cannot distinguish their final viable burdens; because their starting densities differ, the same reading also implies a different range of compatible fractional reductions in each. The recorded fraction is L/N0, so the spread in apparent survival equals the spread in starting density exactly, and the labels differ accordingly. The last three columns sort every call in the panel, not only the censored ones: a censored reading bounds the class from above, and sweeping the true count across the admissible range leaves twelve calls with a single compatible class and six with more than one. Reaching the floor at all is a property of the killing; which class is then compatible is a property of the starting density and the floor.
 
 | Prior culture | At the floor | Starting density spread | Recorded survival spread | Labels assigned at the floor | Measured | Single compatible class | Multiple compatible classes |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
 | 15 days | 18 | 265x | 265x | Low: 12, Medium: 6 | 185 | 12 | 6 |
 | 60 days | 6 | 100x | 100x | Low: 6 | 191 | 6 | 0 |
-
-**Table 3a.** The deposited tolerance class at day 5 after 15 days of prior culture is a threshold on the recorded surviving fraction, with no overlap between classes: low below 10⁻³, medium from 10⁻³ to 10⁻² inclusive, high above 10⁻². Applying those cuts reproduces every usable class in the file. This matters because the argument that follows is about the fraction the assay recorded, not about an independent clinical judgement.
-
-| Recorded class | n | Min fraction | Max fraction | Predicted from cuts | Disagreements |
-| --- | ---: | ---: | ---: | ---: | ---: |
-| Low | 33 | 3.8 × 10⁻⁶ | 4.7 × 10⁻⁴ | Low | 0 |
-| Medium | 124 | 1.0 × 10⁻³ | 1.0 × 10⁻² | Medium | 0 |
-| High | 46 | 2.7 × 10⁻² | 1.0 × 10¹ | High | 0 |
-| All usable | 203 | - | - | - | 0 |
 
 
 The question this raises is not whether those labels are wrong but which labels
@@ -459,7 +381,7 @@ the fact that the reading was censored, and for six it is not determinate at all
 None of the eighteen is a measurement of the surviving fraction.
 
 Sorting every call in the panel this way separates the labels the assay measured
-from the labels the censoring rule fixed (Table 3). At 15 days of prior culture,
+from the labels the censoring rule fixed (Table 6). At 15 days of prior culture,
 185 of 203 calls rest on a reading above the floor and are measured; for 12 the
 reading is censored and only one class is compatible with it; for 6 the reading
 is censored and more than one class is compatible. At 60 days the counts are 191,
@@ -497,14 +419,29 @@ deposit records in the lowest class are the same set.
 
 That agreement is an identity rather than a passed test, and saying so is the
 honest way to report it. Once the label is a cut on the recorded fraction
-(Table 3a) and every floor reading has a numerator of exactly *L*, the class of a
+(Table 4) and every floor reading has a numerator of exactly *L*, the class of a
 floored isolate is a function of *N₀* alone, so the algebra cannot disagree with
 the deposit. What could have failed, and did not, is the premise: that the three
 classes separate cleanly on the recorded fraction at all, in 203 of 203 calls.
-The identity is what makes the boundary usable in advance — given a floor, a set
-of thresholds and a starting density, the affected isolates can be named before
-any reading is taken — and it is not independent evidence that the boundary is
-real. The boundary case decides it. Six isolates sit at exactly 23 000 per
+
+The resolution of the agreement also has to be stated. Among the eighteen the
+starting density takes only five values — 23 000 for six isolates, then 230 000
+for eight, and 610 000, 2.3 × 10⁶ and 6.1 × 10⁶ for one, one and two — and **no
+isolate lies strictly between *N*_id and *N*_reach**. Any cut placed anywhere in
+that decade reproduces the same twelve-six split, so the split locates the
+boundary only to within an order of magnitude and is not by itself a sharp test
+of where it sits.
+
+What is sharp is the boundary case, and it is the part of this section that
+discriminates. Six isolates sit at exactly 23 000 per mL, which is *N*_id itself,
+so for them *L*/*N₀* equals *c*₁ exactly, the interval [0, *L*/*N₀*] touches the
+threshold from below and spans two classes, and the strict inequality fails.
+Those six are precisely the six the deposit records as medium rather than low. A
+rule written with the inequality the other way would have called all six low and
+been wrong six times out of six. That is a test the arithmetic could have failed
+and did not, and it is what licenses using the boundary in advance: given a
+floor, a set of thresholds and a starting density, the affected isolates can be
+named before any reading is taken. The boundary case decides it. Six isolates sit at exactly 23 000 per
 mL, which is *N*_id itself, so for them *L*/*N₀* = *c*₁ exactly, the interval
 [0, *L*/*N₀*] touches the threshold and spans two classes, and the strict
 inequality fails. Those six are precisely the ones with more than one compatible
@@ -521,20 +458,20 @@ checked against.
 
 Eight association tests are available between the deposited label and its
 candidate determinants — two predictors, at two culture ages and two endpoint
-depths — and they are corrected as one family. Two survive (Table 4).
+depths — and they are corrected as one family. Two survive (Table 7).
 
-**Table 4.** The family of 8 tests between the deposited tolerance label and its candidate determinants, fitted as proportional-odds ordinal logistic regression and corrected together at a false discovery rate of 5%. 2 survive. An odds ratio above one means higher odds of a higher tolerance class. The proportional-odds column is a Brant test per predictor; the assumption holds throughout this family. The final column repeats each test on the baseline isolates, one per patient by construction, which is where the resistance association stops clearing its corrected threshold. Standard errors are model-based; the deposit carries no patient identifier, so none can be clustered on the true grouping, and the intervals here are model-based; a clustered variant is reported in Table S3.
+**Table 7.** The family of 8 tests between the deposited tolerance label and its candidate determinants, fitted as proportional-odds ordinal logistic regression and corrected together at a false discovery rate of 5%. 2 survive. An odds ratio above one means higher odds of a higher tolerance class; time to OD 0.4 is in days and runs inversely to growth rate, so above one there means SLOWER growth accompanies a higher class. The proportional-odds column is a Brant test per predictor; the assumption holds throughout this family. The final column repeats each test on the baseline isolates, one per patient by construction, which is where the resistance association stops clearing its corrected threshold. Standard errors are model-based; the deposit carries no patient identifier, so none can be clustered on the true grouping, and the intervals here are model-based; a clustered variant is reported in Table S2.
 
-| Predictor | Prior culture | Depth | For starting density | n | Odds ratio (95% CI) | p | Survives BH | Prop. odds p | Baseline isolates only |
+| Predictor | Prior culture | Reading day | For starting density | n | Odds ratio (95% CI) | p | Survives BH | Prop. odds p | Baseline isolates only |
 | --- | --- | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| growth | 15 d | D5 | adjusted | 202 | 1.096 (1.03-1.16) | 0.0030 | yes | 0.152 | 1.12 (p=0.002, survives) |
-| resistance | 15 d | D5 | unadjusted | 202 | 2.317 (1.30-4.12) | 0.0042 | yes | 0.417 | 2.11 (p=0.031, no) |
-| growth | 60 d | D2 | adjusted | 196 | 0.933 (0.87-1.00) | 0.0470 | no | 0.688 | 0.92 (p=0.032, no) |
-| growth | 15 d | D2 | adjusted | 202 | 1.068 (1.00-1.14) | 0.0618 | no | 0.243 | 1.07 (p=0.108, no) |
-| resistance | 15 d | D2 | unadjusted | 202 | 1.295 (0.66-2.54) | 0.4529 | no | 0.479 | 1.07 (p=0.876, no) |
-| growth | 60 d | D5 | adjusted | 196 | 0.976 (0.91-1.04) | 0.4605 | no | 0.875 | 0.99 (p=0.703, no) |
-| resistance | 60 d | D2 | unadjusted | 196 | 0.836 (0.47-1.48) | 0.5400 | no | 0.075 | 1.11 (p=0.774, no) |
-| resistance | 60 d | D5 | unadjusted | 196 | 1.111 (0.63-1.95) | 0.7150 | no | 0.067 | 1.61 (p=0.186, no) |
+| time to OD 0.4 | 15 d | day 5 | adjusted | 202 | 1.096 (1.03-1.16) | 0.0030 | yes | 0.152 | 1.12 (p=0.002, survives) |
+| resistance | 15 d | day 5 | unadjusted | 202 | 2.317 (1.30-4.12) | 0.0042 | yes | 0.417 | 2.11 (p=0.031, no) |
+| time to OD 0.4 | 60 d | day 2 | adjusted | 196 | 0.933 (0.87-1.00) | 0.0470 | no | 0.688 | 0.92 (p=0.032, no) |
+| time to OD 0.4 | 15 d | day 2 | adjusted | 202 | 1.068 (1.00-1.14) | 0.0618 | no | 0.243 | 1.07 (p=0.108, no) |
+| resistance | 15 d | day 2 | unadjusted | 202 | 1.295 (0.66-2.54) | 0.4529 | no | 0.479 | 1.07 (p=0.876, no) |
+| time to OD 0.4 | 60 d | day 5 | adjusted | 196 | 0.976 (0.91-1.04) | 0.4605 | no | 0.875 | 0.99 (p=0.703, no) |
+| resistance | 60 d | day 2 | unadjusted | 196 | 0.836 (0.47-1.48) | 0.5400 | no | 0.075 | 1.11 (p=0.774, no) |
+| resistance | 60 d | day 5 | unadjusted | 196 | 1.111 (0.63-1.95) | 0.7150 | no | 0.067 | 1.61 (p=0.186, no) |
 
 
 The label is an ordered categorical outcome, low below medium below high, and it
@@ -542,7 +479,7 @@ is modelled as one: a linear coefficient on a 0, 1, 2 score would assert that th
 step from low to medium equals the step from medium to high, and nothing
 establishes that. Associations are therefore reported as odds ratios from
 proportional-odds ordinal logistic regression, with the proportional-odds
-assumption tested rather than assumed (Methods; Table 4).
+assumption tested rather than assumed (Methods; Table 7).
 
 The label tracks the **growth rate** of the isolate: slower growth accompanies a
 higher tolerance class, and the association survives adjustment for starting
@@ -572,7 +509,7 @@ association family retains, a mediated effect of +0.166 classes (bootstrap
 +0.279) against a direct effect of +0.091 (−0.116 to +0.287), so about 65 per
 cent of the association travels through the inoculum and the direct path covers
 zero. Restricting to baseline isolates leaves the mediated path intact (+0.159,
-+0.053 to +0.295), and binary collapses of the outcome agree (Table S5). Two things bound that estimate, and neither is a formality. It rests on
++0.053 to +0.295), and binary collapses of the outcome agree (Table S3). Two things bound that estimate, and neither is a formality. It rests on
 sequential ignorability, which no observational file can establish: a residual
 correlation between the mediator and outcome errors of about −0.24 would nullify
 the point estimate, and one ordinary measured covariate already moves it about
@@ -608,10 +545,26 @@ Why they seed lower is not established here, and the obvious explanation fails:
 resistant isolates do not grow significantly more slowly in this deposit (median
 time to OD 0.4 of 19 against 17, p = 0.24), and 85 of them carry *katG* S315X,
 the mutation that predominates clinically precisely because it is close to
-fitness-neutral. The association between resistance and a low starting inoculum
-is real, large and unexplained, and we record it as such. The only two covariates
-whose recording is independent of susceptibility move it by at most five per
-cent.
+fitness-neutral. What the deposit can rule out is less than we first reported, and the correction
+runs in our favour. Six of the nine pretreatment covariates the file carries
+cannot adjust this association at all, because their missingness *is* the
+exposure: the two susceptibility calls and the two Mykrobe calls are recorded for
+82 of 84 resistant isolates and for none of the 119 susceptible ones, and the
+mutation identity for 79 and one. Conditioning on such a column conditions on
+resistance, which is why the two susceptibility rows agree to three significant
+figures — they are missing on exactly the same rows and contribute the same
+design matrix. That also disposes of the largest attenuation we previously
+quoted, 22 per cent for the mutation identity, which was an artefact of the same
+circularity.
+
+Two covariates are missing at rates unrelated to susceptibility and can be used:
+the growth proxy and months on treatment. Adjusting for either leaves the
+coefficient at −0.81 or −0.82 against an unadjusted −0.85, an attenuation of at
+most five per cent (Table S4). The seeding gap is therefore more robust than the
+earlier sweep suggested, not less. The file records no referring site and no
+processing batch, so those cannot be tested at all. The association between
+resistance and a low starting inoculum is real, large and unexplained, and we
+record it as such.
 
 Both surviving associations sit in the 15-day panel, which is where the
 mechanism places them. By 60 days the cultures are 38-fold denser, the spread of
@@ -645,7 +598,7 @@ If the effect is a property of assay geometry rather than of clinical sampling,
 it should appear where one protocol, one strain and one stock are distributed
 deliberately. It does.
 
-The starting densities in Table 5 need their basis stated before they are used.
+The starting densities in Table 8 need their basis stated before they are used.
 Each is the mean of quantified readings at day 0 or day 1 at the 100 µL plating,
 pooled over that laboratory's arms. Institute A deposits no day-zero reading at
 all, and among treated flasks only C and D do, so for four of the six the figure
@@ -656,7 +609,7 @@ available runs the other way: re-running the whole analysis on a day-one exposur
 for every laboratory leaves the ordering, the area under the curve and the
 laboratory-level exact test unchanged.
 
-**Table 5.** Moxifloxacin at ten times MIC. Every laboratory yields a rate; three record no crossing below the assay boundary in any arm. The final column counts first observed crossings, which are not clearances: across the deposit 60% of the series that cross read above the boundary again at a later visit. The two censoring estimators agree to 0.003 log10 per day. The starting density is the mean of quantified readings at day 0 or day 1 at the 100 uL plating, pooled over all of that laboratory's arms; the reading-day column says which visits contributed. Institute A deposits no day-zero reading at all, and among treated flasks only institutes C and D do, so for the rest this figure rests partly on readings taken after 24 hours of drug. Section 6 and Table 9 instead use untreated day-zero readings only, so the two tables are not expected to match.
+**Table 8.** Moxifloxacin at ten times MIC. Every laboratory yields a rate; three record no crossing below the assay floor in any arm. The final column counts first observed crossings, which are not clearances: across the deposit 60% of the series that cross read above the boundary again at a later visit. The two censoring estimators agree to 0.003 log10 per day. The starting density is the mean of quantified readings at day 0 or day 1 at the 100 uL plating, pooled over all of that laboratory's arms; the reading-day column says which visits contributed. Institute A deposits no day-zero reading at all, and among treated flasks only institutes C and D do, so for the rest this figure rests partly on readings taken after 24 hours of drug. Section 6 and Table 9 instead use untreated day-zero readings only, so the two tables are not expected to match.
 
 | Lab | Starting density (log10 CFU/mL) | Reading day | Kill rate (log10/day) | 95% profile interval | By imputation | Readings censored | Flasks ever crossing the boundary (treated arms) |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -672,9 +625,9 @@ At ten times the minimum inhibitory concentration of moxifloxacin all six
 laboratories return a positive kill rate spanning 5.2-fold, from 0.090 to 0.464
 log10 CFU/mL per day, and across all 30 laboratory-by-arm cells the Tobit and
 imputation estimates never differ by more than 0.003 log10 per day (Fig. 2A,
-Table 5). The duration endpoint behaves differently on the same flasks. The
+Table 8). The duration endpoint behaves differently on the same flasks. The
 event it records is not clearance and not sterilisation but a **first observed
-crossing below the assay boundary**, and the distinction is not pedantic: most
+crossing below the assay floor**, and the distinction is not pedantic: most
 series that cross later read above the boundary again, including all five
 untreated series that cross. The frame has to be stated,
 because the endpoint depends on it. The time-to-event analysis runs at the 100 µL
@@ -751,7 +704,7 @@ median of four days, with 45 per cent back within three. Those 360 series come
 from 90 flasks, four platings each, so they are not 360 independent observations;
 counted by flask, 53 contain a crossing series and 42 of those contain a
 returning one. A crossing below the
-assay boundary in this deposit is therefore usually a transient rather than an
+assay floor in this deposit is therefore usually a transient rather than an
 endpoint, which is a further reason it summarises less than the trajectory that
 produced it. Killing itself is real and dose-dependent:
 at one times the inhibitory concentration five of six laboratories record net
@@ -766,10 +719,10 @@ next visit with probability 0.22. The gradient runs with drug pressure — that
 probability is 1.00 in untreated series, 0.37 to 0.92 at one times MIC and 0.07
 to 0.18 at ten times — which says the event is at least partly a property of the
 plate rather than of the drug. Of the 360 series, only 56, or 15.6 per cent, show
-the shape a survival model assumes: one crossing that holds (Table 13). Two hundred and
+the shape a survival model assumes: one crossing that holds (Table 10). Two hundred and
 twenty never cross at all, 65 cross and return, and 19 oscillate more than once.
 
-**Table 13.** What follows a first observed crossing below the assay boundary. The state below the boundary is not absorbing: a series sitting below it reads above again at the next visit with probability 0.22 overall, and that probability rises as drug pressure falls, which is what a plating artefact does. Only 56 of 360 series, 15.6 per cent, show the shape a survival model assumes -- one crossing that holds. The 360 series are four platings of each of 90 flasks and are not independent; the flask-level counts are 53 flasks with a crossing series and 42 with a returning one.
+**Table 10.** What follows a first observed crossing below the assay floor. The state below the boundary is not absorbing: a series sitting below it reads above again at the next visit with probability 0.22 overall, and that probability rises as drug pressure falls, which is what a plating artefact does. Only 56 of 360 series, 15.6 per cent, show the shape a survival model assumes -- one crossing that holds. The 360 series are four platings of each of 90 flasks and are not independent; the flask-level counts are 53 flasks with a crossing series and 42 with a returning one.
 
 | Series | n | Visit pairs | P(above to below) | P(below to above) | Never below | One crossing, holds | One crossing, returns | Crosses repeatedly | Shape the model assumes |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -825,7 +778,7 @@ any volume, its series beginning at day one, and institute A's three readings at
 that plating are flagged above the quantification limit rather than counted. Two
 of the four sit between twenty and a hundred-fold below the CLSI target. Every
 figure in this section is on that one basis — untreated, day zero, 100 µL — which
-is not the basis of Table 5 and is not expected to match it.
+is not the basis of Table 8 and is not expected to match it.
 
 Reported as headroom at a fixed plating volume the spread is Δ*h* = 2.33 log10, a
 216-fold difference in measurable capacity under one written protocol (Table 9),
@@ -843,8 +796,8 @@ draws is a fragile statistic: its cluster-bootstrap 95 per cent interval runs fr
 | --- | --- | ---: | ---: | ---: | ---: | ---: |
 | ERA4TB, between laboratories at 100 uL | between laboratories, one written protocol | 12 | 4.63 | 10 CFU/mL, derived from 100 uL plated | 2.33 | 216x |
 | ERA4TB, every laboratory and plating volume | laboratories and plated volumes together | 56 | 4.29 | 10, 100 or 400 CFU/mL by volume | 4.40 | 25,123x |
-| Vijay, 15-day culture | between clinical isolates | 217 | 5.79 | 23 CFU/mL, inferred | 4.42 | 26,522x |
-| Vijay, 60-day culture | between clinical isolates | 210 | 7.36 | 23 CFU/mL, inferred | 5.43 | 269,565x |
+| Vijay, 15-day culture | between clinical isolates | 217 | 5.79 | 23 MPN/mL, inferred | 4.42 | 26,522x |
+| Vijay, 60-day culture | between clinical isolates | 210 | 7.36 | 23 MPN/mL, inferred | 5.43 | 269,565x |
 | Kaur, planktonic | technical replicates of one preparation | 3 | 7.03 | not stated in the deposit | NA | NA |
 | Kaur, intracellular | technical replicates of one preparation | 3 | 5.94 | not stated in the deposit | NA | NA |
 | Dubey, hollow fibre | between cultures, one laboratory | 20 | 6.08 | 10 CFU/mL, derived from 100 uL plated | 0.60 | 4x |
@@ -872,7 +825,7 @@ so 12.2-fold above nominal — computed from the unrounded median, which Table 9
 displays rounded to 6.08 log10.
 
 Distance from the McFarland reference is descriptive and is reported as such
-(Table S2). Sitting far below it is the intended state, since the inoculum is
+(Table S5). Sitting far below it is the intended state, since the inoculum is
 prepared by diluting from it, and the figure is not a measure of protocol
 compliance. What determines the maximum observable log-kill depth is the measured
 starting density and the real assay floor, not the turbidity the
@@ -883,7 +836,7 @@ preparation began from.
 Across 191 pairs of flasks in the same treatment arm from different laboratories,
 with 45 further pairs that the censoring could not settle and which are excluded
 rather than imputed, **70 pairs — 36.6 per cent — are inversions**: the flask in which the population fell faster crossed
-below the assay floor later (Table 6). Restricting to pairs whose rates differ by more
+below the assay floor later (Table 11). Restricting to pairs whose rates differ by more
 than 0.10 log10 per day, so that the faster flask is unambiguously faster, leaves
 21.3 per cent of 94 pairs. The criterion *D_A*/*D_B* > *b_A*/*b_B* calls
 83.8 per cent of all 191 pairs correctly, but that figure is carried by the easy
@@ -895,7 +848,7 @@ much better than three times in five. The residual is what a single averaged
 slope through a biphasic trajectory cannot capture, which the Methods state as a
 known limitation of *b*.
 
-**Table 6.** Pairs of flasks in the same arm from different laboratories. An inversion is a pair in which the population that fell faster crossed below the assay floor later. 45 further pairs that the censoring could not settle are excluded rather than imputed. The last two columns decompose the spread in crossing time; the rate term is the larger in every arm.
+**Table 11.** Pairs of flasks in the same arm from different laboratories. An inversion is a pair in which the population that fell faster crossed below the assay floor later. 45 further pairs that the censoring could not settle are excluded rather than imputed. The last two columns decompose the spread in crossing time; the rate term is the larger in every arm.
 
 | Arm | Comparable pairs | Inversions | Rate | 95% CI | Called by D/b criterion | Variance: distance | Variance: rate |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -951,11 +904,11 @@ with the smallest exactly ten. Sixty-nine further entries read as one, which no
 Across the 20 cultures with a measured day-zero density, headroom runs 4.85 to
 5.45 log10. Endpoints at 1, 2, 3 and 4 logs are reachable for every culture; a
 5-log endpoint is unreachable for 5 of 20; a 6-log endpoint is unreachable for
-all 20 (Table 10). The framework therefore locates, on data it was not built
+all 20 (Table 12). The framework therefore locates, on data it was not built
 from, the depth at which a sterilisation claim in this experiment stops being
 demonstrable.
 
-**Table 10.** Dubey et al. 2026, analysed cold. The floor is derived from a stated 100 uL plated volume and corroborated inside the file: all 229 genuine counts are multiples of ten and the smallest is exactly ten. Starting densities are the 20 measured day-zero counts, not the nominal inoculum the Methods state.
+**Table 12.** Dubey et al. 2026, analysed cold. The floor is derived from a stated 100 uL plated volume and corroborated inside the file: all 229 genuine counts are multiples of ten and the smallest is exactly ten. Starting densities are the 20 measured day-zero counts, not the nominal inoculum the Methods state.
 
 | Endpoint | N_reach (per mL) | Cultures | Unreachable | Per cent |
 | --- | ---: | ---: | ---: | ---: |
@@ -979,7 +932,7 @@ exposure rather than before it.
 
 In the concentration-by-time grid, survivors across a 32-fold range of apramycin
 separate 6.9-fold at day 3, 48.2-fold at day 7 and 5.2-fold at day 14 (Fig. 3,
-Table 7). An experiment read at 14 days would report this drug as insensitive to
+Table 13). An experiment read at 14 days would report this drug as insensitive to
 a 32-fold change in dose. Fitted per interval on a bootstrap resampling all three
 replicates at both ends of every interval, the concentration slope is +0.059
 log10 per day per doubling over days 0 to 3 (95 per cent interval +0.030 to
@@ -988,7 +941,7 @@ log10 per day per doubling over days 0 to 3 (95 per cent interval +0.030 to
 contrast is firm (+0.084, +0.037 to +0.128) and the early-versus-middle contrast
 is not (p = 0.43).
 
-**Table 7.** The same 32-fold concentration range summarised at each sampling day (upper rows), and the concentration slope fitted separately in each interval (lower rows). Slopes and intervals are from the replicate-level bootstrap described in Section 2.
+**Table 13.** The same 32-fold concentration range summarised at each sampling day (upper rows), and the concentration slope fitted separately in each interval (lower rows). Slopes and intervals are from the replicate-level bootstrap described in Section 2.
 
 | Read at | Survivor ratio (low/high dose) | log10 separation | Slope per doubling | 95% interval | p |
 | --- | ---: | ---: | ---: | ---: | ---: |
@@ -1013,16 +966,16 @@ That the two axes are separate is the premise of the framework that defines them
 (Brauner et al. 2016), and the deposits bound rather than assert it. The
 217-isolate file supports 24 comparisons between the concentration axis and the
 duration axis, and those 24 are the correction family throughout: the
-Benjamini–Hochberg critical values in Table 8 are ranked against 24, not against
+Benjamini–Hochberg critical values in Table 14 are ranked against 24, not against
 the size of any one stratum. Four reach nominal significance where 1.2 are
-expected by chance and none survives correction (Fig. 4, Table 8). The four are
+expected by chance and none survives correction (Fig. 4, Table 14). The four are
 negative, so a higher inhibitory concentration accompanies a *shorter* duration,
 which is not the direction a shared mechanism predicts, and they concentrate in
 the deepest endpoint — the one Section 1 shows is compromised. Across all 24 tests the design
 resolves correlations of 0.14 to 0.25 depending on stratum; the six strongest,
-which Table 8 lists, span 0.14 to 0.18.
+which Table 14 lists, span 0.14 to 0.18.
 
-**Table 8.** The six strongest of the 24 comparisons the 217-isolate file supports. 4 reach nominal significance where 1.2 are expected by chance; none exceeds its Benjamini-Hochberg critical value. The final column is the correlation each design could have resolved at 95% confidence.
+**Table 14.** The six strongest of the 24 comparisons the 217-isolate file supports. 4 reach nominal significance where 1.2 are expected by chance; none exceeds its Benjamini-Hochberg critical value, which is ranked against the full family of 24 rather than against any one stratum. MDK99 and MDK99.99 are the minimum durations for a 99 and a 99.99 per cent reduction, the endpoints the text names in words. The final column is the correlation each design could have resolved at 95% confidence.
 
 | Stratum | Endpoint | n | Spearman rho | p | BH critical value | Survives correction | Resolvable rho |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -1050,7 +1003,7 @@ The same question in 126 evolved clones sharing an ancestor gives ρ = +0.043
 nutrient stratum separately. Stratifying is not optional there: the nominal
 concentration is not a fixed exposure across those strata, since at 25 µg/mL the
 same figure spans 0.55 to 9.47 times the inhibitory concentration each population
-evolved to and straddles it (Table S1).
+evolved to and straddles it (Table S6).
 
 ---
 
@@ -1140,24 +1093,9 @@ The natural explanation — that resistance carries a fitness cost — is not
 supported here, since these isolates do not grow measurably more slowly and most
 carry the near-neutral *katG* S315X allele. That gap is a finding in its own
 right and belongs in the next study rather than in a speculative sentence in this
-one. What the deposit can rule out is less than we first
-reported, and the correction runs in our favour. Six of the nine pretreatment
-covariates the file carries cannot adjust this association at all, because their
-missingness *is* the exposure: the two susceptibility calls and the two Mykrobe
-calls are recorded for 82 of 84 resistant isolates and for none of the 119
-susceptible ones, and the mutation identity for 79 and one. Conditioning on such
-a column conditions on resistance, which is why the two susceptibility rows agree
-to three significant figures — they are missing on exactly the same rows and
-contribute the same design matrix. That also disposes of the largest attenuation
-we previously quoted, 22 per cent for the mutation identity, which was an
-artefact of the same circularity.
-
-Two covariates are missing at rates unrelated to susceptibility and can be used:
-the growth proxy and months on treatment. Adjusting for either leaves the
-coefficient at −0.81 or −0.82 against an unadjusted −0.85, an attenuation of at
-most five per cent (Table S6). The seeding gap is therefore more robust than the
-earlier sweep suggested, not less. The file records no referring site and no
-processing batch, so those cannot be tested at all.
+one. Nor is it explained away by anything else the file records: of its nine
+pretreatment covariates only two can legitimately be adjusted for, and neither
+moves the association by more than five per cent (Section 4).
 
 
 ### How large the effect is
@@ -1207,11 +1145,11 @@ points at the design that would settle it.
 
 Every conclusion this paper draws from the two primary deposits has been
 recomputed at the level its observations are actually independent, and the result
-is tabulated rather than summarised (Table 12): twenty survive unchanged, seven
+is tabulated rather than summarised (Table 15): twenty survive unchanged, seven
 survive with materially wider uncertainty, and five do not survive and have been
 removed from the text.
 
-**Table 12.** Every conclusion this paper draws from the two primary deposits, against uncertainty recomputed at the level the observations are actually independent. 20 survive unchanged, 7 survive with materially wider uncertainty, and 5 do not survive. Each verdict applies to the claim as it was originally stated. Three of the five failures are gone from the text entirely; for the other two a weaker statement is retained and is marked as such where it appears -- the Cox coefficient trade is now reported as hazard ratios with no p-value, and institute C as the laboratory whose crossings its starting density does not account for rather than as a tested contrast. The five that fail are all between-laboratory p-values computed on flasks: every flask in a laboratory shares a starting culture, so a comparison that looks like 67 flasks is six laboratories, and for a three-against-three split of six clusters the smallest attainable two-sided p is 0.10. They are deleted rather than corrected, because there is nothing to correct them to.
+**Table 15.** Every conclusion this paper draws from the two primary deposits, against uncertainty recomputed at the level the observations are actually independent. 20 survive unchanged, 7 survive with materially wider uncertainty, and 5 do not survive. Each verdict applies to the claim as it was originally stated. Three of the five failures are gone from the text entirely; for the other two a weaker statement is retained and is marked as such where it appears -- the Cox coefficient trade is now reported as hazard ratios with no p-value, and institute C as the laboratory whose crossings its starting density does not account for rather than as a tested contrast. The five that fail are all between-laboratory p-values computed on flasks: every flask in a laboratory shares a starting culture, so a comparison that looks like 67 flasks is six laboratories, and for a three-against-three split of six clusters the smallest attainable two-sided p is 0.10. They are deleted rather than corrected, because there is nothing to correct them to.
 
 | Section | Conclusion as stated | Units treated as independent | Independent clusters | Method used instead | Verdict |
 | --- | --- | --- | ---: | ---: | ---: |
@@ -1315,6 +1253,13 @@ one has established. Proportional-odds regression costs nothing to run, reports
 in odds ratios, and — where the proportionality it assumes fails, as it does here
 at 60 days — says so rather than averaging two different effects into one null.
 
+**Do not densify the inoculum merely to buy headroom.** Seeding higher makes a
+deep endpoint legal, and it also changes the experiment: a denser culture is a
+different physiological state, and this paper's own finding is that physiological
+state is what the tolerance label tracks. Where the headroom will not carry the
+endpoint, the shallower endpoint is the honest choice, and the growth state
+belongs on the report either way.
+
 **Treat an endpoint at the floor as a bound, not a value.** A recorded fraction of
 *L*/*N₀* is an upper limit on survival, not an estimate of it. Analysed as a
 measurement it manufactures differences between isolates whose final viable
@@ -1381,17 +1326,6 @@ study and all are openly licensed. The held-out deposit was opened only after
 every boundary and threshold was fixed, which the commit history of the analysis
 repository timestamps; the other four were chosen for the fields they carry, and
 that choice is not separately registered.
-
-**Table 1.** The five published deposits reanalysed. Four carry the analysis and the fifth is held out to test it. None was generated for this study. The held-out deposit was opened after every boundary and threshold was fixed, which the commit history of the analysis repository timestamps; the other four were selected for the fields they carry, and that selection is not separately registered.
-
-| Dataset | Organism | Drug and range | Design | Deposit | Licence |
-| --- | --- | --- | --- | --- | --- |
-| Six-laboratory exercise | *M. tuberculosis* H37Rv | moxifloxacin, isoniazid, 1x and 10x MIC | 90 flasks, 2 775 readings | figshare 19766083 | CC BY 4.0 |
-| Clinical isolates | *M. tuberculosis*, 217 isolates | rifampicin | 6 duration endpoints per isolate | eLife 93243, suppl. file 2 | CC BY 4.0 |
-| Evolved clones | *E. coli*, 126 clones | amikacin | MIC and persister fraction per clone | Zenodo 7550302 | CC BY 4.0 |
-| Concentration-by-time grid | *M. tuberculosis* | apramycin 1-128 ug/mL (amikacin arm not analysed) | 5 concentrations x 4 days x 3 replicates | figshare 26462791 | CC BY 4.0 |
-| Held out for validation | *E. coli*, hollow fibre | amoxicillin-clavulanate | 20 cultures, measured day-zero density, 100 uL plated | Nat Commun 2026 Source Data | CC BY 4.0 |
-
 
 **Clinical isolates with a deposited tolerance classification.** 217 *M.
 tuberculosis* isolates assayed under rifampicin, each carrying a minimum
@@ -1464,10 +1398,17 @@ therefore an **operational assay floor**: where a plated volume is recorded it i
 the **minimum reportable positive count**, one colony in that volume, and where
 none is recorded it is inferred from the deposit and is labelled as inferred. The
 term limit of quantification is used only in reporting what a source states.
-What *L* is in each deposit, how it was arrived at, and how replicate plates and
-plated volumes were treated is tabulated deposit by deposit (Table 11).
 
-**Table 11.** What the boundary *L* is in each deposit analysed. No deposit reports a validated limit of quantification with a value. The six-laboratory file names the concept in the definitions of its below- and above-quantification-limit columns but defines it as whether the plate was countable, which is an operator's judgement. DERIVED means the value follows arithmetically from a recorded plated volume; INFERRED means it was read off the deposit's own behaviour and is labelled as inferred wherever it is used; NONE means no floor is evidenced and none is assumed; FLAGGED means the deposit marks below-limit readings without naming a value, which fixes no floor either. Where a plated volume is recorded the honest term is the minimum reportable positive count, one colony in that volume; elsewhere it is an operational assay floor.
+Those two names are the precise ones and are used where *L* is defined or its
+provenance discussed. In running text *L* is the **assay floor**, and that is the
+only short form used, so that "boundary" is left free for the two derived
+boundaries of the next subsection and never denotes a value. The event a
+time-to-event analysis records is correspondingly a first observed crossing below
+the assay floor.
+What *L* is in each deposit, how it was arrived at, and how replicate plates and
+plated volumes were treated is tabulated deposit by deposit (Table 16).
+
+**Table 16.** What the boundary *L* is in each deposit analysed. No deposit reports a validated limit of quantification with a value. The six-laboratory file names the concept in the definitions of its below- and above-quantification-limit columns but defines it as whether the plate was countable, which is an operator's judgement. DERIVED means the value follows arithmetically from a recorded plated volume; INFERRED means it was read off the deposit's own behaviour and is labelled as inferred wherever it is used; NONE means no floor is evidenced and none is assumed; FLAGGED means the deposit marks below-limit readings without naming a value, which fixes no floor either. Where a plated volume is recorded the honest term is the minimum reportable positive count, one colony in that volume; elsewhere it is an operational assay floor.
 
 | Deposit | States an LOD | States an LOQ | Value used | Units | How obtained | What it should be called |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -1476,6 +1417,8 @@ plated volumes were treated is tabulated deposit by deposit (Table 11).
 | Windels 2024 | no | no | none; no value is recoverable | surviving fraction, dimensionless | FLAGGED | no floor is established; a below-limit reading is written as exact zero and fixes no value |
 | Kaur 2024 | no | no | none; no floor is used | log10 CFU per mL | NONE | no floor is evidenced; the smallest reading is the smallest reading |
 | Dubey 2026 | no | no | 10 | CFU per mL | DERIVED | minimum reportable positive count |
+
+---
 
 
 Two distinct censoring problems arise and are handled separately, because
@@ -1510,7 +1453,7 @@ three-tube MPN table returns below 23. The number of isolates lacking four logs
 of headroom is 33 at a floor of 23 and does not fall below 28 at a floor of 3.0,
 the lowest such table returns. The conclusion holds across the whole range, so it
 is not an artefact of where we place the floor, and the same sweep is run for
-every deposit that carries a floor (Table S4).
+every deposit that carries a floor (Table S7).
 
 The six-laboratory deposit also carries the evidence for judging each reading
 against its own volume rather than pooling. Each sample is plated at four
@@ -1546,7 +1489,7 @@ the 95 per cent highest-posterior-density support.
 
 That distinction is turned into a rule rather than a caveat. Where the verdict is
 that no floor is evidenced, or where the support spans more than one log10, the
-observability labels are **refused** rather than reported (Table 14). Surviving
+observability labels are **refused** rather than reported (Table 2). Surviving
 fractions written as exact zeros with no named *L* fall in that refused class, as
 does a deposit whose minimum occurs once in a continuous tail. The clinical
 deposit passes the rule with a support of 0.40 log10; two of the five deposits
@@ -1570,7 +1513,7 @@ about −0.24. The outcome is an ordinal class scored linearly, as in the
 association family; the binary collapses are reported because they do not depend
 on that scoring. No claim is made that unmeasured confounding is absent. The
 estimate replaces the attenuation percentage as the quantity cited for the
-pathway (Table S5).
+pathway (Table S3).
 
 Fold-change figures such as 216-fold and 265-fold are ten raised to the unrounded
 log10 difference before display rounding, so that Δ*h* = 2.3349… is reported as
@@ -1579,7 +1522,7 @@ log10 difference before display rounding, so that Δ*h* = 2.3349… is reported 
 ### What each analysis was fitted to
 
 A dozen different denominators appear in this paper and each is correct for its
-own analysis, so every one of them is derived in a single place (Table 15). The
+own analysis, so every one of them is derived in a single place (Table 5). The
 reductions are few and they are named: the MDR tolerance label is a fourth,
 unordered category and is dropped wherever an ordered outcome is fitted, taking
 14 rows from the 15-day panel and 20 from the 60-day; the growth proxy is missing
@@ -1596,7 +1539,7 @@ zero, leaving 261.
 
 Whether these exclusions are plausibly ignorable is tested rather than asserted:
 dropped rows are compared with retained rows on starting density and
-susceptibility (Table S7). The MDR exclusion differs in susceptibility by
+susceptibility (Table S1). The MDR exclusion differs in susceptibility by
 construction. The only difference not by construction is in the 60-day panel,
 where the 20 dropped rows sit higher in starting density.
 
@@ -1606,7 +1549,7 @@ For a culture starting at *N₀* against an assay floor *L*, two quantities
 are used and are kept apart, because they are not interchangeable:
 
   *H* = *N₀*/*L*, a ratio;
-  *h* = log10(*N₀*/*L*), the **headroom**, in log10 CFU/mL.
+  *h* = log10(*N₀*/*L*), the **headroom**, in log10 units.
 
 The headroom is the deepest reduction the assay can resolve. It is fixed by the
 dilution scheme and the starting culture before any drug acts, and variation
@@ -1674,7 +1617,7 @@ are compared with the retained ones on starting density and susceptibility.
 Because the deposit carries no patient identifier, the repeated-isolate structure
 is handled by a baseline-only stratum rather than by a random effect, and the
 linear models of the earlier analysis are retained as a sensitivity comparison
-(Table S3).
+(Table S2).
 
 **Time-to-event analysis** treats the **first observed crossing below the assay
 boundary** as the event, with series never falling below their own floor
@@ -1779,7 +1722,7 @@ in full in the text and in the deposit table.]
 
 ## Figure legends
 
-![Figure 1](../results/figures/fig14_dynamic_range.png)
+![Figure 1](../results/figures/fig1_dynamic_range.png)
 
 **Figure 1. A log-reduction endpoint is bounded by the assay floor, and the bound
 decides the phenotype.** 217 clinical *M. tuberculosis* isolates under
@@ -1804,7 +1747,7 @@ the cut, no count the assay admits leaves any class but **low** compatible; for
 the six above it the compatible range straddles the cut and two classes
 remain.
 
-![Figure 2](../results/figures/fig10_rate_vs_duration.png)
+![Figure 2](../results/figures/fig2_rate_vs_duration.png)
 
 **Figure 2. Where the inoculum is set by protocol, the two summaries still
 diverge.** Six laboratories, one written protocol, one stock of *M. tuberculosis*
@@ -1812,7 +1755,7 @@ H37Rv, moxifloxacin at ten times the minimum inhibitory concentration.
 (**A**) The kill rate by censored maximum likelihood with 95 per cent
 profile-likelihood intervals; every laboratory yields one, spanning 5.2-fold.
 (**B**) Kaplan–Meier curves for time to the first observed crossing below the
-assay boundary. Three
+assay floor. Three
 curves never descend: those laboratories recorded no flask below the limit in any
 arm, so their first-crossing times are right-censored throughout. (**C**) The two
 summaries against each other. The three lowest starting densities are exactly the
@@ -1828,7 +1771,7 @@ between-laboratory test is available and none is claimed. Blue marks a term
 crossing the conventional threshold, which is a description of the movement and
 not a finding.
 
-![Figure 3](../results/figures/fig11_endpoint_collapse.png)
+![Figure 3](../results/figures/fig3_endpoint_collapse.png)
 
 **Figure 3. A late endpoint cannot resolve a 32-fold concentration range.**
 Apramycin against *M. tuberculosis*, five concentrations, triplicate counts.
@@ -1840,7 +1783,7 @@ the lowest and highest concentration at each sampling day, rising to 48.2-fold a
 day 7 and collapsing to 5.2-fold at day 14. (**C**) The concentration slope fitted
 separately in each interval from a replicate-level bootstrap, 20 000 draws.
 
-![Figure 4](../results/figures/fig12_independence.png)
+![Figure 4](../results/figures/fig4_independence.png)
 
 **Figure 4. Resistance and tolerance occupy separate axes, in two designs.**
 (**A**) All 24 comparisons between the concentration axis and the duration axis
@@ -1850,3 +1793,105 @@ none survives. (**B**) The censoring behind them: the fraction of isolates at th
 assay ceiling rises with endpoint depth, and the nominal hits concentrate where
 censoring is heaviest. (**C**) The same question in 126 evolved *E. coli* clones,
 by nutrient stratum.
+
+---
+
+## Supplementary tables
+
+Held here so the Results stay on one line of reasoning. Table S6 supports Section 10 and Table S5 supports Section 6.
+
+**Table S1.** The comparison the Methods promise: rows dropped from the association family against rows retained, on starting density and susceptibility. The MDR exclusion differs in susceptibility by construction, since those isolates are outside the resistant-versus-susceptible contrast the family tests. The one difference not by construction is in the 60-day panel, where the dropped rows sit higher in starting density (p = 0.027); it affects 20 rows and no conclusion drawn from that panel.
+
+| Panel | Exclusion | Dropped | Retained | Median log10 N0 retained | Median log10 N0 dropped | p | Resistant, retained | Resistant, dropped | p  |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| 15-day | label missing or 'MDR' | 14 | 202 | 5.79 | 5.36 | 0.198 | 41% | 0% | 0.001 |
+| 15-day | growth proxy missing | 1 | 202 | 5.79 | 6.79 | 0.149 | 41% | 100% | 0.414 |
+| 60-day | label missing or 'MDR' | 20 | 196 | 7.36 | 7.79 | 0.027 | 40% | 20% | 0.093 |
+| 60-day | growth proxy missing | 1 | 196 | 7.36 | 7.36 | 0.749 | 40% | 100% | 0.406 |
+
+**Table S2.** The ordinal reanalysis against the linear model it replaces, member for member. The linear model scores the ordering 0, 1, 2, which assumes the two class steps are equal; the ordinal model does not. Every direction agrees and the same two members survive correction under both, so the linear treatment did not manufacture the result -- but the coefficients it reports are in a unit that does not exist, which is why the ordinal fit is the one in the main table.
+
+| Predictor | Prior culture | Reading day | Linear beta | p (linear) | Survives BH | Odds ratio | p (ordinal) | Survives BH  | Same direction |
+| --- | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| time to OD 0.4 | 15 d | day 5 | +0.0266 | 0.0025 | yes | 1.096 | 0.0030 | yes | yes |
+| resistance | 15 d | day 5 | +0.2589 | 0.0035 | yes | 2.317 | 0.0042 | yes | yes |
+| time to OD 0.4 | 60 d | day 2 | -0.0195 | 0.0590 | no | 0.933 | 0.0470 | no | yes |
+| time to OD 0.4 | 15 d | day 2 | +0.0116 | 0.0812 | no | 1.068 | 0.0618 | no | yes |
+| resistance | 15 d | day 2 | +0.0515 | 0.4446 | no | 1.295 | 0.4529 | no | yes |
+| time to OD 0.4 | 60 d | day 5 | -0.0041 | 0.6999 | no | 0.976 | 0.4605 | no | yes |
+| resistance | 60 d | day 2 | -0.0551 | 0.5486 | no | 0.836 | 0.5400 | no | yes |
+| resistance | 60 d | day 5 | +0.0389 | 0.6797 | no | 1.111 | 0.7150 | no | yes |
+
+**Table S3.** Decomposition of the isoniazid-resistance association with the tolerance class into a path through log10 starting density and a direct path, by the product of coefficients with bootstrap percentile intervals. The mediated path excludes zero in every specification and the direct path covers zero in every one. This replaces the percentage attenuation the earlier analysis quoted, which is a descriptive ratio rather than an estimand. Sequential ignorability is assumed and is not testable here; the sensitivity analysis in the Methods reports the residual correlation that would nullify the estimate.
+
+| Outcome and stratum | n | Total effect c (95% CI) | Direct effect c' (95% CI) | Mediated effect (95% CI) | Proportion mediated |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Linear 0/1/2, all IS/IR | 203 | +0.256 (+0.087, +0.425) | +0.091 (-0.116, +0.287) | +0.166 (+0.067, +0.279) | 65% |
+| Linear 0/1/2, baseline isolates | 168 | +0.226 (+0.038, +0.409) | +0.067 (-0.157, +0.294) | +0.159 (+0.053, +0.295) | 70% |
+| High versus rest | 203 | +0.121 | +0.013 | +0.108 (+0.037, +0.189) | 89% |
+| Not-low versus low | 203 | +0.135 | +0.077 | +0.058 (+0.003, +0.121) | 43% |
+
+**Table S4.** Isoniazid-resistant isolates enter this assay ten-fold lower than susceptible ones, and we do not know why. This is what the deposit can and cannot rule out. Six of the nine pretreatment covariates are recorded almost exclusively for resistant isolates, so their missingness is the exposure and adjusting for them conditions on it; the two susceptibility calls are missing on identical rows, which is why they return identical coefficients. Those rows are shown with their coefficients so the circularity is visible, but they do not bound anything. Only 2 covariates are recorded at rates unrelated to susceptibility, and adjusting for either leaves the coefficient within five per cent of its unadjusted value. The file records no referring site and no processing batch, so those cannot be tested at all.
+
+| Covariate | Recorded, resistant | Recorded, susceptible | Can it adjust? | Resistance coefficient | Attenuation |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| INH_MGIT_DST | 82/84 | 0/119 | PROXY | -0.851 | -0% |
+| RIF_MGIT_DST | 82/84 | 0/119 | PROXY | -0.851 | -0% |
+| INH_mutation | 79/84 | 1/119 | PARTIAL | -0.662 | 22% |
+| INH_Mykrobe | 76/84 | 0/119 | PROXY | - | - |
+| RIF_Mykrobe | 76/84 | 0/119 | PROXY | - | - |
+| MIC_INH | 67/84 | 119/119 | PARTIAL | -0.963 | -13% |
+| MIC_RIF | 67/84 | 119/119 | PARTIAL | -0.853 | -0% |
+| Time_to_0.4 | 83/84 | 119/119 | INDEPENDENT | -0.807 | 5% |
+| Time_point | 84/84 | 119/119 | INDEPENDENT | -0.818 | 4% |
+
+**Table S5.** Fold below the nominal 0.5 McFarland reference, 1.5e8 CFU/mL. Descriptive only, and not a protocol-compliance metric. A time-kill inoculum is prepared by diluting from a suspension matched to that turbidity, so every entry is expected to sit far below it; the conversion of a turbidity to CFU/mL depends on species, cell aggregation and preparation and is least reliable for mycobacteria.
+
+| Dataset | Median log10 N0 | Fold below nominal 0.5 McFarland |
+| --- | ---: | ---: |
+| ERA4TB, between laboratories at 100 uL | 4.63 | 3,525x |
+| ERA4TB, every laboratory and plating volume | 4.29 | 7,751x |
+| Vijay, 15-day culture | 5.79 | 246x |
+| Vijay, 60-day culture | 7.36 | 7x |
+| Kaur, planktonic | 7.03 | 14x |
+| Kaur, intracellular | 5.94 | 170x |
+| Dubey, hollow fibre | 6.08 | 123x |
+
+**Table S6.** The same nominal concentration expressed in multiples of the minimum inhibitory concentration each population actually evolved to. At 25 ug/mL the same number denotes a sub-inhibitory exposure in one nutrient condition and a strongly inhibitory one in another.
+
+| Nominal concentration (ug/mL) | Nutrient levels | Lowest exposure (x MIC) | Highest exposure (x MIC) | Spread | Straddles the MIC |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| 12.5 | 3 | 1.49 | 4.74 | 3.2x | no |
+| 25 | 3 | 0.55 | 9.47 | 17.1x | yes |
+| 50 | 2 | 5.08 | 10.95 | 2.2x | no |
+| 100 | 1 | 9.72 | 9.72 | 1.0x | no |
+
+**Table S7.** Sensitivity of the load-bearing counts to the choice of floor, per deposit, showing only the counts a conclusion rests on. The clinical sweep steps through every three-tube most-probable-number rung at or below 23 per mL: the number of isolates short of four logs of headroom moves only between 28 and 33 across the whole range, which is why the inferred floor is safe to use. The six-laboratory rows compare judging each reading against the floor its own plated volume implies with pooling all four volumes to one floor, and price what pooling would cost. The Kaur deposit records no plated volume, so its row shows what assuming one would do: the four-log endpoint stays reachable throughout while h itself moves by 1.6 log10.
+
+| Deposit | Floor assumed | % counts a pooled floor discards | % flags contradicted | 4-log reachable | at the floor | h | measured | median h | one class | several classes | short of 4 logs | short, baseline only | written as exact zero |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| Dubey 2026, hollow fibre | 10 uL plated | - | - | - | - | - | - | 4.08 | - | - | 5 | - | - |
+| Dubey 2026, hollow fibre | 100 uL plated, as the deposit's staging record gives | - | - | - | - | - | - | 5.08 | - | - | 0 | - | - |
+| Dubey 2026, hollow fibre | 50 uL plated | - | - | - | - | - | - | 4.78 | - | - | 0 | - | - |
+| Dubey 2026, hollow fibre | the below-limit placeholder taken literally | - | - | - | - | - | - | 6.08 | - | - | 0 | - | - |
+| ERA4TB, six laboratories | per-volume (as analysed) | 0 | 16.67 | - | - | - | - | - | - | - | - | - | - |
+| ERA4TB, six laboratories | pooled at the geometric mean of the per-volume floors | 1.04 | 38.96 | - | - | - | - | - | - | - | - | - | - |
+| ERA4TB, six laboratories | pooled at the least sensitive volume, 2.5 uL | 5.94 | 15.26 | - | - | - | - | - | - | - | - | - | - |
+| ERA4TB, six laboratories | pooled at the modal volume, 10 uL | 1.13 | 28.71 | - | - | - | - | - | - | - | - | - | - |
+| ERA4TB, six laboratories | pooled at the most sensitive volume, 100 uL | 0 | 43.17 | - | - | - | - | - | - | - | - | - | - |
+| Kaur 2024, apramycin grid | 10 uL plated, if it had been stated | - | - | True | - | 5.03 | - | - | - | - | - | - | - |
+| Kaur 2024, apramycin grid | 100 uL plated, if it had been stated | - | - | True | - | 6.03 | - | - | - | - | - | - | - |
+| Kaur 2024, apramycin grid | 2.5 uL plated, if it had been stated | - | - | True | - | 4.43 | - | - | - | - | - | - | - |
+| Kaur 2024, apramycin grid | the observed minimum, which occurs once | - | - | True | - | 5.43 | - | - | - | - | - | - | - |
+| Vijay 2024, clinical isolates | floor = 11 MPN/mL | - | - | - | 0 | - | 203 | - | 0 | 0 | 33 | 21 | - |
+| Vijay 2024, clinical isolates | floor = 14 MPN/mL | - | - | - | 0 | - | 203 | - | 0 | 0 | 33 | 21 | - |
+| Vijay 2024, clinical isolates | floor = 15 MPN/mL | - | - | - | 0 | - | 203 | - | 0 | 0 | 33 | 21 | - |
+| Vijay 2024, clinical isolates | floor = 20 MPN/mL | - | - | - | 0 | - | 203 | - | 0 | 0 | 33 | 21 | - |
+| Vijay 2024, clinical isolates | floor = 21 MPN/mL | - | - | - | 0 | - | 203 | - | 0 | 0 | 33 | 21 | - |
+| Vijay 2024, clinical isolates | floor = 23 MPN/mL | - | - | - | 18 | - | 185 | - | 12 | 6 | 33 | 21 | - |
+| Vijay 2024, clinical isolates | floor = 3 MPN/mL | - | - | - | 0 | - | 203 | - | 0 | 0 | 28 | 17 | - |
+| Vijay 2024, clinical isolates | floor = 3.6 MPN/mL | - | - | - | 0 | - | 203 | - | 0 | 0 | 28 | 17 | - |
+| Vijay 2024, clinical isolates | floor = 7.2 MPN/mL | - | - | - | 0 | - | 203 | - | 0 | 0 | 33 | 21 | - |
+| Vijay 2024, clinical isolates | floor = 7.4 MPN/mL | - | - | - | 0 | - | 203 | - | 0 | 0 | 33 | 21 | - |
+| Vijay 2024, clinical isolates | floor = 9.2 MPN/mL | - | - | - | 0 | - | 203 | - | 0 | 0 | 33 | 21 | - |
+| Windels 2024, evolved clones | no floor is recoverable | - | - | - | - | - | - | - | - | - | - | - | 6 |

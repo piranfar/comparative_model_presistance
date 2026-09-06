@@ -2,7 +2,7 @@
 Figure 1. A log-reduction endpoint is bounded by the assay floor, and the bound
 decides the phenotype.
 
-Run:  python -m src.figures.fig14_dynamic_range
+Run:  python -m src.figures.fig1_dynamic_range
 
 This is the figure the rebuilt paper rests on, and it is drawn so the argument is
 visible rather than asserted.
@@ -131,7 +131,7 @@ def main() -> int:
     st.panel_tag(ax, "C")
 
     fig.tight_layout()
-    paths = st.save(fig, "fig14_dynamic_range")
+    paths = st.save(fig, "fig1_dynamic_range")
 
     n_short = int((head < 4).sum())
     print(f"-- figure 1 --")

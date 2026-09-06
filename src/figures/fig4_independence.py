@@ -1,7 +1,7 @@
 """
 Figure 4. Resistance and tolerance are separate axes, in two designs.
 
-Run:  python -m src.figures.fig12_independence
+Run:  python -m src.figures.fig4_independence
 
 Panel A is the whole family of twenty-four comparisons the 217-isolate file
 supports, each against the Benjamini-Hochberg critical value it has to beat. It
@@ -115,7 +115,7 @@ def build():
                   "at 95% confidence. Every estimate falls inside its own band,\n"
                   "so the null is bounded rather than asserted.", y=-0.32)
 
-    return st.save(fig, "fig12_independence")
+    return st.save(fig, "fig4_independence")
 
 
 if __name__ == "__main__":

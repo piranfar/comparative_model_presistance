@@ -1,8 +1,8 @@
 dataset,level_of_variation,n,median_log10_N0,L_note,delta_h,fold_spread
 "ERA4TB, between laboratories at 100 uL","between laboratories, one written protocol",12,4.62899008407627,"10 CFU/mL, derived from 100 uL plated",2.33492058252653,216.23230733015092
 "ERA4TB, every laboratory and plating volume",laboratories and plated volumes together,56,4.286707852572519,"10, 100 or 400 CFU/mL by volume",4.400069110627485,25122.861875921873
-"Vijay, 15-day culture",between clinical isolates,217,5.785329835010767,"23 CFU/mL, inferred",4.423601998993174,26521.739130434777
-"Vijay, 60-day culture",between clinical isolates,210,7.361727836017593,"23 CFU/mL, inferred",5.430663853480661,269565.2173913045
+"Vijay, 15-day culture",between clinical isolates,217,5.785329835010767,"23 MPN/mL, inferred",4.423601998993174,26521.739130434777
+"Vijay, 60-day culture",between clinical isolates,210,7.361727836017593,"23 MPN/mL, inferred",5.430663853480661,269565.2173913045
 "Kaur, planktonic",technical replicates of one preparation,3,7.033423755486949,not stated in the deposit,,
 "Kaur, intracellular",technical replicates of one preparation,3,5.944482672150168,not stated in the deposit,,
 "Dubey, hollow fibre","between cultures, one laboratory",20,6.084484323277383,"10 CFU/mL, derived from 100 uL plated",0.6020599913279625,4.000000000000001

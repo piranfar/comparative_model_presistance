@@ -1,6 +1,6 @@
 {
   "script": "src/experiments/exp28_standard_vs_realised.py",
-  "utc": "2026-09-06T21:19:27+00:00",
+  "utc": "2026-09-06T21:35:30+00:00",
   "definitions": {
     "H_i": "N0_i / L_i",
     "h_i": "log10(N0_i / L_i), deepest measurable reduction",
@@ -279,7 +279,7 @@
       "level_of_variation": "between clinical isolates",
       "n": 217,
       "median_log10_N0": 5.785329835010767,
-      "L_note": "23 CFU/mL, inferred",
+      "L_note": "23 MPN/mL, inferred",
       "delta_h": 4.423601998993174,
       "fold_spread": 26521.739130434777
     },
@@ -288,7 +288,7 @@
       "level_of_variation": "between clinical isolates",
       "n": 210,
       "median_log10_N0": 7.361727836017593,
-      "L_note": "23 CFU/mL, inferred",
+      "L_note": "23 MPN/mL, inferred",
       "delta_h": 5.430663853480661,
       "fold_spread": 269565.2173913045
     },

@@ -67,7 +67,7 @@ def table1() -> str:
             "separately registered.\n\n" + md(d, align_right_from=99))
 
 
-def table2() -> str:
+def table3() -> str:
     """The dynamic range each endpoint needs against the range available."""
     h = pd.read_csv(T / "exp22_headroom.csv")
     rows = []
@@ -86,7 +86,7 @@ def table2() -> str:
     d = pd.DataFrame(rows, columns=[
         "Prior culture", "Endpoint", "Isolates", "Short of headroom",
         "Fraction short", "At ceiling: short vs ample"])
-    return ("**Table 2.** The reduction each tolerance endpoint requires against "
+    return ("**Table 3.** The reduction each tolerance endpoint requires against "
             "the reduction the assay can resolve. Headroom is the distance from "
             "an isolate's starting density to the MPN floor of 23 per mL. An "
             "isolate short of headroom cannot reach that endpoint however "
@@ -94,7 +94,7 @@ def table2() -> str:
             "the assay ceiling." + chr(10) + chr(10) + md(d))
 
 
-def table3() -> str:
+def table6() -> str:
     """Isolates at the floor, and how many of their labels are decidable."""
     r = json.loads((ROOT / "results" / "receipts" / "exp22_receipt.json")
                    .read_text(encoding="utf-8"))
@@ -117,7 +117,7 @@ def table3() -> str:
         "Prior culture", "At the floor", "Starting density spread",
         "Recorded survival spread", "Labels assigned at the floor",
         "Measured", "Single compatible class", "Multiple compatible classes"])
-    return ("**Table 3.** Isolates whose day-5 reading was censored at the MPN "
+    return ("**Table 6.** Isolates whose day-5 reading was censored at the MPN "
             "floor. They share one reported floor-level observation, but their "
             "true final counts are unknown below the limit, so the assay cannot "
             "distinguish their final viable burdens; because their starting "
@@ -135,7 +135,7 @@ def table3() -> str:
             + chr(10) + chr(10) + md(d))
 
 
-def table4() -> str:
+def table7() -> str:
     """What the deposited tolerance label tracks, on the ordering it actually is."""
     a = (pd.read_csv(T / "exp30_model_comparison.csv")
            .query("in_bh_family").sort_values("p_ordinal"))
@@ -145,22 +145,26 @@ def table4() -> str:
                 f"{r.or_ordinal_baseline_only:.2f} (p={r.p_ordinal_baseline_only:.3f}, "
                 f"{'survives' if r.survives_bh_ordinal_baseline_only else 'no'})")
         rows.append([
-            r.predictor, f"{int(r.culture_age_days)} d", r.endpoint_depth,
+            {"growth": "time to OD 0.4"}.get(r.predictor, r.predictor),
+            f"{int(r.culture_age_days)} d",
+            {"D5": "day 5", "D2": "day 2"}.get(r.endpoint_depth, r.endpoint_depth),
             "adjusted" if r.adjusted_for_N0 else "unadjusted", int(r.n_ordinal),
             f"{r.odds_ratio:.3f} ({r.ci_low:.2f}-{r.ci_high:.2f})",
             f"{r.p_ordinal:.4f}",
             "yes" if r.survives_bh_ordinal else "no",
             f"{r.proportional_odds_p:.3f}", base])
     d = pd.DataFrame(rows, columns=[
-        "Predictor", "Prior culture", "Depth", "For starting density", "n",
+        "Predictor", "Prior culture", "Reading day", "For starting density", "n",
         "Odds ratio (95% CI)", "p", "Survives BH", "Prop. odds p",
         "Baseline isolates only"])
     n = int(a["survives_bh_ordinal"].sum())
-    return (f"**Table 4.** The family of {len(a)} tests between the deposited "
+    return (f"**Table 7.** The family of {len(a)} tests between the deposited "
             f"tolerance label and its candidate determinants, fitted as "
             f"proportional-odds ordinal logistic regression and corrected "
             f"together at a false discovery rate of 5%. {n} survive. An odds "
-            "ratio above one means higher odds of a higher tolerance class. The "
+            "ratio above one means higher odds of a higher tolerance class; time "
+            "to OD 0.4 is in days and runs inversely to growth rate, so above one "
+            "there means SLOWER growth accompanies a higher class. The "
             "proportional-odds column is a Brant test per predictor; the "
             "assumption holds throughout this family. The final column repeats "
             "each test on the baseline isolates, one per patient by "
@@ -168,11 +172,11 @@ def table4() -> str:
             "clearing its corrected threshold. Standard errors are model-based; "
             "the deposit carries no patient identifier, so none can be clustered "
             "on the true grouping, and the intervals here are model-based; "
-            "a clustered variant is reported in Table S3."
+            "a clustered variant is reported in Table S2."
             + chr(10) + chr(10) + md(d, align_right_from=4))
 
 
-def table6() -> str:
+def table11() -> str:
     """How often the ranking inverts, and what buys the difference."""
     r = json.loads((ROOT / "results" / "receipts" / "exp23_receipt.json")
                    .read_text(encoding="utf-8"))
@@ -189,7 +193,7 @@ def table6() -> str:
     d = pd.DataFrame(rows, columns=[
         "Arm", "Comparable pairs", "Inversions", "Rate", "95% CI",
         "Called by D/b criterion", "Variance: distance", "Variance: rate"])
-    return (f"**Table 6.** Pairs of flasks in the same arm from different "
+    return (f"**Table 11.** Pairs of flasks in the same arm from different "
             f"laboratories. An inversion is a pair in which the population that "
             f"fell faster crossed below the assay floor later. "
             f"{inv['undecidable_pairs']} further pairs that the censoring could "
@@ -198,7 +202,7 @@ def table6() -> str:
             "in every arm." + chr(10) + chr(10) + md(d))
 
 
-def table5() -> str:
+def table8() -> str:
     """Kill rate and first crossing, per laboratory, in the arm that kills."""
     r = pd.read_csv(T / "exp17_kill_rates.csv")
     b = pd.read_csv(T / "exp17_baseline.csv").set_index("Institute")
@@ -226,8 +230,8 @@ def table5() -> str:
         "Kill rate (log10/day)",
         "95% profile interval", "By imputation", "Readings censored",
         "Flasks ever crossing the boundary (treated arms)"])
-    return ("**Table 5.** Moxifloxacin at ten times MIC. Every laboratory yields "
-            "a rate; three record no crossing below the assay boundary in any arm. "
+    return ("**Table 8.** Moxifloxacin at ten times MIC. Every laboratory yields "
+            "a rate; three record no crossing below the assay floor in any arm. "
             "The final column counts first observed crossings, which are not "
             "clearances: across the deposit 60% of the series that cross read "
             "above the boundary again at a later visit. The two censoring "
@@ -242,7 +246,7 @@ def table5() -> str:
             "match.\n\n" + md(d))
 
 
-def table8() -> str:
+def table14() -> str:
     """The family of MIC-versus-duration tests, and what survives it."""
     i = pd.read_csv(T / "exp16_tb_independence.csv").sort_values("p_value")
     top = i.head(6).copy()
@@ -255,15 +259,18 @@ def table8() -> str:
         "Stratum", "Endpoint", "n", "Spearman rho", "p", "BH critical value",
         "Survives correction", "Resolvable rho"])
     n_nom = int((i["p_value"] < 0.05).sum())
-    return (f"**Table 8.** The six strongest of the {len(i)} comparisons the "
+    return (f"**Table 14.** The six strongest of the {len(i)} comparisons the "
             f"217-isolate file supports. {n_nom} reach nominal significance where "
             f"{0.05 * len(i):.1f} are expected by chance; none exceeds its "
-            "Benjamini-Hochberg critical value. The final column is the "
+            "Benjamini-Hochberg critical value, which is ranked against the full "
+            "family of 24 rather than against any one stratum. MDK99 and MDK99.99 "
+            "are the minimum durations for a 99 and a 99.99 per cent reduction, "
+            "the endpoints the text names in words. The final column is the "
             "correlation each design could have resolved at 95% confidence.\n\n"
             + md(d))
 
 
-def table7() -> str:
+def table13() -> str:
     """What the endpoint does to a 32-fold concentration range."""
     s = pd.read_csv(T / "exp20_endpoint_separation.csv")
     iv = pd.read_csv(T / "exp21_interval_concentration_dependence.csv")
@@ -278,18 +285,20 @@ def table7() -> str:
     d = pd.DataFrame(rows, columns=[
         "Read at", "Survivor ratio (low/high dose)", "log10 separation",
         "Slope per doubling", "95% interval", "p"])
-    return ("**Table 7.** The same 32-fold concentration range summarised at each "
+    return ("**Table 13.** The same 32-fold concentration range summarised at each "
             "sampling day (upper rows), and the concentration slope fitted "
             "separately in each interval (lower rows). Slopes and intervals are "
             "from the replicate-level bootstrap described in Section 2.\n\n"
             + md(d))
 
 
-def tableS3() -> str:
+def tableS2() -> str:
     """The ordered fit against the linear one it replaces."""
     a = (pd.read_csv(T / "exp30_model_comparison.csv")
            .query("in_bh_family").sort_values("p_ordinal"))
-    rows = [[r.predictor, f"{int(r.culture_age_days)} d", r.endpoint_depth,
+    rows = [[{"growth": "time to OD 0.4"}.get(r.predictor, r.predictor),
+             f"{int(r.culture_age_days)} d",
+             {"D5": "day 5", "D2": "day 2"}.get(r.endpoint_depth, r.endpoint_depth),
              f"{r.beta_linear:+.4f}", f"{r.p_linear:.4f}",
              "yes" if r.survives_bh_linear else "no",
              f"{r.odds_ratio:.3f}", f"{r.p_ordinal:.4f}",
@@ -297,9 +306,9 @@ def tableS3() -> str:
              "yes" if r.same_direction else "no"]
             for r in a.itertuples()]
     d = pd.DataFrame(rows, columns=[
-        "Predictor", "Prior culture", "Depth", "Linear beta", "p (linear)",
+        "Predictor", "Prior culture", "Reading day", "Linear beta", "p (linear)",
         "Survives BH", "Odds ratio", "p (ordinal)", "Survives BH ", "Same direction"])
-    return ("**Table S3.** The ordinal reanalysis against the linear model it "
+    return ("**Table S2.** The ordinal reanalysis against the linear model it "
             "replaces, member for member. The linear model scores the ordering "
             "0, 1, 2, which assumes the two class steps are equal; the ordinal "
             "model does not. Every direction agrees and the same two members "
@@ -310,7 +319,7 @@ def tableS3() -> str:
             + chr(10) + chr(10) + md(d, align_right_from=3))
 
 
-def tableS1() -> str:
+def tableS6() -> str:
     """What one nominal concentration means once the evolved MIC is known."""
     m = pd.read_csv(T / "exp19_exposure_mapping.csv")
     rows = [[f"{r.AB_conc_ug_ml:g}", int(r.n_nutrient_levels),
@@ -322,7 +331,7 @@ def tableS1() -> str:
         "Nominal concentration (ug/mL)", "Nutrient levels",
         "Lowest exposure (x MIC)", "Highest exposure (x MIC)", "Spread",
         "Straddles the MIC"])
-    return ("**Table S1.** The same nominal concentration expressed in multiples "
+    return ("**Table S6.** The same nominal concentration expressed in multiples "
             "of the minimum inhibitory concentration each population actually "
             "evolved to. At 25 ug/mL the same number denotes a sub-inhibitory "
             "exposure in one nutrient condition and a strongly inhibitory one in "
@@ -355,7 +364,7 @@ def table9() -> str:
             "limit." + chr(10) + chr(10) + md(f, align_right_from=2))
 
 
-def table10() -> str:
+def table12() -> str:
     """The framework applied to a deposit it was not built from."""
     d = pd.read_csv(T / "exp27_out_of_sample.csv")
     rows = [[f"{int(r.endpoint_logs)} log ({r.endpoint_pct:g}%)",
@@ -364,7 +373,7 @@ def table10() -> str:
             for r in d.itertuples()]
     f = pd.DataFrame(rows, columns=[
         "Endpoint", "N_reach (per mL)", "Cultures", "Unreachable", "Per cent"])
-    return ("**Table 10.** Dubey et al. 2026, analysed cold. The floor is "
+    return ("**Table 12.** Dubey et al. 2026, analysed cold. The floor is "
             "derived from a stated 100 uL plated volume and corroborated inside "
             "the file: all 229 genuine counts are multiples of ten and the "
             "smallest is exactly ten. Starting densities are the 20 measured "
@@ -372,7 +381,7 @@ def table10() -> str:
             + chr(10) + chr(10) + md(f))
 
 
-def tableS2() -> str:
+def tableS5() -> str:
     """The turbidity reference, kept out of the main tables on purpose."""
     d = pd.read_csv(T / "exp28_supplementary_mcfarland.csv")
     col = "fold_below_nominal_0.5_McFarland"
@@ -380,7 +389,7 @@ def tableS2() -> str:
             zip(d["dataset"], d["median_log10_N0"], d[col])]
     f = pd.DataFrame(rows, columns=[
         "Dataset", "Median log10 N0", "Fold below nominal 0.5 McFarland"])
-    return ("**Table S2.** Fold below the nominal 0.5 McFarland reference, "
+    return ("**Table S5.** Fold below the nominal 0.5 McFarland reference, "
             "1.5e8 CFU/mL. Descriptive only, and not a protocol-compliance "
             "metric. A time-kill inoculum is prepared by diluting from a "
             "suspension matched to that turbidity, so every entry is expected to "
@@ -390,7 +399,7 @@ def tableS2() -> str:
 
 
 
-def table11() -> str:
+def table16() -> str:
     """What L is, deposit by deposit, and how we came by it."""
     d = pd.read_csv(T / "exp29_floor_provenance.csv")
     rows = [[r.dataset.split(",")[0],
@@ -403,7 +412,7 @@ def table11() -> str:
     f = pd.DataFrame(rows, columns=[
         "Deposit", "States an LOD", "States an LOQ", "Value used", "Units",
         "How obtained", "What it should be called"])
-    return ("**Table 11.** What the boundary *L* is in each deposit analysed. No "
+    return ("**Table 16.** What the boundary *L* is in each deposit analysed. No "
             "deposit reports a validated limit of quantification with a value. "
             "The six-laboratory file names the concept in the definitions of its "
             "below- and above-quantification-limit columns but defines it as "
@@ -420,7 +429,7 @@ def table11() -> str:
             + chr(10) + chr(10) + md(f))
 
 
-def tableS4() -> str:
+def tableS7() -> str:
     """What the load-bearing counts do under a different floor."""
     d = pd.read_csv(T / "exp29_floor_sensitivity.csv")
     # One row per (deposit, floor scenario); only the counts a conclusion rests on.
@@ -461,7 +470,7 @@ def tableS4() -> str:
     for c in w.columns[2:]:
         w[c] = w[c].map(fmt)
     w = w.rename(columns={"dataset": "Deposit", "scenario": "Floor assumed"})
-    return ("**Table S4.** Sensitivity of the load-bearing counts to the choice "
+    return ("**Table S7.** Sensitivity of the load-bearing counts to the choice "
             "of floor, per deposit, showing only the counts a conclusion rests "
             "on. The clinical sweep steps through every three-tube "
             "most-probable-number rung at or below 23 per mL: the number of "
@@ -476,7 +485,7 @@ def tableS4() -> str:
             + chr(10) + chr(10) + md(w, align_right_from=2))
 
 
-def table12() -> str:
+def table15() -> str:
     """What survives once the clustering is respected, conclusion by conclusion."""
     d = pd.read_csv(T / "exp31_recomputed_inference.csv")
     order = {"NOT SUPPORTED": 0, "WEAKENED": 1, "SUPPORTED": 2}
@@ -489,7 +498,7 @@ def table12() -> str:
         "Section", "Conclusion as stated", "Units treated as independent",
         "Independent clusters", "Method used instead", "Verdict"])
     n = d.verdict.value_counts()
-    return (f"**Table 12.** Every conclusion this paper draws from the two "
+    return (f"**Table 15.** Every conclusion this paper draws from the two "
             f"primary deposits, against uncertainty recomputed at the level the "
             f"observations are actually independent. "
             f"{int(n.get('SUPPORTED', 0))} survive unchanged, "
@@ -511,7 +520,7 @@ def table12() -> str:
             + chr(10) + chr(10) + md(f, align_right_from=3))
 
 
-def table13() -> str:
+def table10() -> str:
     """What a crossing below the boundary turns out to be."""
     d = pd.read_csv(T / "exp32_transitions.csv")
     d = d[d.stratum_kind.isin(["overall", "arm"])]
@@ -528,8 +537,8 @@ def table13() -> str:
         "Series", "n", "Visit pairs", "P(above to below)", "P(below to above)",
         "Never below", "One crossing, holds", "One crossing, returns",
         "Crosses repeatedly", "Shape the model assumes"])
-    return ("**Table 13.** What follows a first observed crossing below the "
-            "assay boundary. The state below the boundary is not absorbing: a "
+    return ("**Table 10.** What follows a first observed crossing below the "
+            "assay floor. The state below the boundary is not absorbing: a "
             "series sitting below it reads above again at the next visit with "
             "probability 0.22 overall, and that probability rises as drug "
             "pressure falls, which is what a plating artefact does. Only 56 of "
@@ -540,7 +549,7 @@ def table13() -> str:
             + chr(10) + chr(10) + md(f))
 
 
-def table3a() -> str:
+def table4() -> str:
     """The deposited class really is a threshold on the recorded fraction."""
     r = json.loads((ROOT / "results" / "receipts" / "exp35_receipt.json")
                    .read_text(encoding="utf-8"))
@@ -559,7 +568,7 @@ def table3a() -> str:
     f = pd.DataFrame(rows, columns=[
         "Recorded class", "n", "Min fraction", "Max fraction",
         "Predicted from cuts", "Disagreements"])
-    return ("**Table 3a.** The deposited tolerance class at day 5 after 15 days "
+    return ("**Table 4.** The deposited tolerance class at day 5 after 15 days "
             "of prior culture is a threshold on the recorded surviving fraction, "
             "with no overlap between classes: low below 10\u207b\u00b3, medium from "
             "10\u207b\u00b3 to 10\u207b\u00b2 inclusive, high above 10\u207b\u00b2. Applying those cuts "
@@ -569,7 +578,7 @@ def table3a() -> str:
             + chr(10) + chr(10) + md(f, align_right_from=1))
 
 
-def table14() -> str:
+def table2() -> str:
     """What is known about L, and when that is too little to label with."""
     d = pd.read_csv(T / "exp33_floor_posterior.csv")
     rows = []
@@ -588,7 +597,7 @@ def table14() -> str:
     f = pd.DataFrame(rows, columns=[
         "Deposit", "Verdict", "Floor used", "95% support",
         "Span (log10)", "Refuse observability labels"])
-    return ("**Table 14.** What is actually known about the assay floor in each "
+    return ("**Table 2.** What is actually known about the assay floor in each "
             "deposit, and the rule that follows from it. A floor derived from a "
             "recorded plated volume is a point mass: one colony in that volume, "
             "no inference required. A floor inferred from a pile-up on a "
@@ -601,7 +610,7 @@ def table14() -> str:
             + chr(10) + chr(10) + md(f, align_right_from=2))
 
 
-def tableS5() -> str:
+def tableS3() -> str:
     """How much of the resistance association travels through the inoculum."""
     d = pd.read_csv(T / "exp34_mediation.csv")
     # exp35 repeats the linear fit as a reference row; exp34 already supplies it.
@@ -630,7 +639,7 @@ def tableS5() -> str:
         "Outcome and stratum", "n", "Total effect c (95% CI)",
         "Direct effect c' (95% CI)", "Mediated effect (95% CI)",
         "Proportion mediated"])
-    return ("**Table S5.** Decomposition of the isoniazid-resistance association "
+    return ("**Table S3.** Decomposition of the isoniazid-resistance association "
             "with the tolerance class into a path through log10 starting density "
             "and a direct path, by the product of coefficients with bootstrap "
             "percentile intervals. The mediated path excludes zero in every "
@@ -643,7 +652,7 @@ def tableS5() -> str:
             + chr(10) + chr(10) + md(f, align_right_from=1))
 
 
-def tableS6() -> str:
+def tableS4() -> str:
     """What the deposit can, and cannot, rule out for the seeding gap."""
     a = pd.read_csv(T / "exp35_ir_seeding_confounders.csv").set_index("covariate")
     ind = pd.read_csv(T / "exp36_covariate_independence.csv")
@@ -662,7 +671,7 @@ def tableS6() -> str:
         "Covariate", "Recorded, resistant", "Recorded, susceptible",
         "Can it adjust?", "Resistance coefficient", "Attenuation"])
     n_ok = int(ind.usable_for_adjustment.sum())
-    return ("**Table S6.** Isoniazid-resistant isolates enter this assay ten-fold "
+    return ("**Table S4.** Isoniazid-resistant isolates enter this assay ten-fold "
             "lower than susceptible ones, and we do not know why. This is what the "
             "deposit can and cannot rule out. Six of the nine pretreatment "
             "covariates are recorded almost exclusively for resistant isolates, so "
@@ -678,7 +687,7 @@ def tableS6() -> str:
 
 
 
-def table15() -> str:
+def table5() -> str:
     """Every denominator, traced to the exclusion that produced it."""
     d = pd.read_csv(T / "exp37_analysis_flow.csv")
     rows = [[r.deposit, r.panel, r.stratum, r.stage, int(r.n),
@@ -686,7 +695,7 @@ def table15() -> str:
             for r in d.itertuples()]
     f = pd.DataFrame(rows, columns=[
         "Deposit", "Panel", "Stratum", "Stage", "n", "Excluded here"])
-    return ("**Table 15.** Every analysis set in this paper, and the exclusion "
+    return ("**Table 5.** Every analysis set in this paper, and the exclusion "
             "that produced it. The manuscript quotes a dozen different "
             "denominators, each correct for its own analysis; this is where a "
             "reader checks which is which. The MDR tolerance label is a fourth, "
@@ -695,10 +704,10 @@ def table15() -> str:
             "treated flasks in the six-laboratory deposit carry no usable "
             "starting density, which is why a comparison over 72 flasks is "
             "reported on 67. Whether these exclusions are plausibly ignorable is "
-            "tested in Table S7." + chr(10) + chr(10) + md(f, align_right_from=4))
+            "tested in Table S1." + chr(10) + chr(10) + md(f, align_right_from=4))
 
 
-def tableS7() -> str:
+def tableS1() -> str:
     """Do the dropped rows differ from the retained ones?"""
     d = pd.read_csv(T / "exp37_dropped_vs_retained.csv")
     rows = [[r.panel, r.exclusion, int(r.n_dropped), int(r.n_retained),
@@ -712,7 +721,7 @@ def tableS7() -> str:
         "Panel", "Exclusion", "Dropped", "Retained", "Median log10 N0 retained",
         "Median log10 N0 dropped", "p", "Resistant, retained",
         "Resistant, dropped", "p "])
-    return ("**Table S7.** The comparison the Methods promise: rows dropped from "
+    return ("**Table S1.** The comparison the Methods promise: rows dropped from "
             "the association family against rows retained, on starting density "
             "and susceptibility. The MDR exclusion differs in susceptibility by "
             "construction, since those isolates are outside the "
@@ -730,24 +739,22 @@ def main() -> int:
              "`results/tables/`. Do not edit by hand: a value typed into this "
              "file can drift away from the analysis that produced it.",
              ""]
-    order = (table1, table2, table3, table3a, table4, table5, table6,
-             table7, table8, table9, table10, table11, table12, table13,
-             table14, table15)
+    order = (table1, table2, table3, table4, table5, table6, table7, table8,
+             table9, table10, table11, table12, table13, table14, table15,
+             table16)
     for fn in order:
         parts.append(fn())
         parts.append("")
     parts += ["---", "", "## Supplementary tables", "",
               "Held here so the Results stay on one line of reasoning. "
-              "Table S1 supports Section 10 and Table S2 supports Section 6.",
+              "Table S6 supports Section 10 and Table S5 supports Section 6.",
               ""]
-    for fn in (tableS1, tableS2, tableS3, tableS4, tableS5, tableS6,
-               tableS7):
+    for fn in (tableS1, tableS2, tableS3, tableS4, tableS5, tableS6, tableS7):
         parts.append(fn())
         parts.append("")
     OUT.write_text("\n".join(parts), encoding="utf-8")
     print(f"wrote {OUT.relative_to(ROOT)}")
-    for fn in order + (tableS1, tableS2, tableS3, tableS4, tableS5,
-                       tableS6, tableS7):
+    for fn in order + (tableS1, tableS2, tableS3, tableS4, tableS5, tableS6, tableS7):
         first = fn().split("\n")[0]
         print("   " + first[:96])
     return 0

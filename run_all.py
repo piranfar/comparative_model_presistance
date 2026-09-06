@@ -87,13 +87,13 @@ STAGES = [
      "src.experiments.exp37_analysis_flow"),
 
     ("fig 1  the assay floor bounds the endpoint and decides the phenotype",
-     "src.figures.fig14_dynamic_range"),
+     "src.figures.fig1_dynamic_range"),
     ("fig 2  one protocol, six laboratories: the inoculum still decides",
-     "src.figures.fig10_rate_vs_duration"),
+     "src.figures.fig2_rate_vs_duration"),
     ("fig 3  the endpoint decides what is visible",
-     "src.figures.fig11_endpoint_collapse"),
+     "src.figures.fig3_endpoint_collapse"),
     ("fig 4  resistance and tolerance as separate axes",
-     "src.figures.fig12_independence"),
+     "src.figures.fig4_independence"),
     ("fig S1 which published constants transfer",
      "src.figures.fig13_parameter_transfer"),
 

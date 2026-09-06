@@ -10,32 +10,32 @@ Outputs of the earlier paper are not here; they live in `version_one/results/`.
 
 ## Tolerance and the assay floor (manuscript/PAPER_COMPLETE.md)
 
-**Figures.** `fig10_rate_vs_duration`, `fig11_endpoint_collapse`, `fig12_independence`, `fig13_parameter_transfer`, `fig14_dynamic_range`
+**Figures.** `fig13_parameter_transfer`
 
 **Tables (32).**
 
 | file | written by | used by |
 | --- | --- | --- |
-| `exp16_tb_censoring.csv` | `exp16_tb_mic_mdk_independence.py` | `fig12_independence` |
-| `exp16_tb_independence.csv` | `exp16_tb_mic_mdk_independence.py` | `audit_claims`, `build_tables`, `fig12_independence` |
-| `exp17_baseline.csv` | `exp17_era4tb_between_lab.py` | `build_tables`, `fig10_rate_vs_duration` |
+| `exp16_tb_censoring.csv` | `exp16_tb_mic_mdk_independence.py` | `fig4_independence` |
+| `exp16_tb_independence.csv` | `exp16_tb_mic_mdk_independence.py` | `audit_claims`, `build_tables`, `fig4_independence` |
+| `exp17_baseline.csv` | `exp17_era4tb_between_lab.py` | `build_tables`, `fig2_rate_vs_duration` |
 | `exp17_censoring.csv` | `exp17_era4tb_between_lab.py` | quoted in the text only |
-| `exp17_cox.csv` | `exp17_era4tb_between_lab.py` | `audit_claims`, `fig10_rate_vs_duration` |
+| `exp17_cox.csv` | `exp17_era4tb_between_lab.py` | `audit_claims`, `fig2_rate_vs_duration` |
 | `exp17_endpoint_spread.csv` | `exp17_era4tb_between_lab.py` | quoted in the text only |
-| `exp17_kill_rates.csv` | `exp17_era4tb_between_lab.py` | `audit_claims`, `build_tables`, `fig10_rate_vs_duration` |
-| `exp17_survival.csv` | `exp17_era4tb_between_lab.py` | `build_tables`, `fig10_rate_vs_duration` |
+| `exp17_kill_rates.csv` | `exp17_era4tb_between_lab.py` | `audit_claims`, `build_tables`, `fig2_rate_vs_duration` |
+| `exp17_survival.csv` | `exp17_era4tb_between_lab.py` | `build_tables`, `fig2_rate_vs_duration` |
 | `exp18_cycle_balance.csv` | `exp18_slow_grower_transferability.py` | `fig13_parameter_transfer` |
 | `exp18_kappa_sweep.csv` | `exp18_slow_grower_transferability.py` | quoted in the text only |
 | `exp18_parameter_gaps.csv` | `exp18_slow_grower_transferability.py` | `fig13_parameter_transfer` |
 | `exp18_shape_ratio.csv` | `exp18_slow_grower_transferability.py` | `fig13_parameter_transfer` |
 | `exp18_unit_sensitivity.csv` | `exp18_slow_grower_transferability.py` | `audit_claims` |
-| `exp19_axis_independence.csv` | `exp19_windels_mic_mapping.py` | `fig12_independence` |
+| `exp19_axis_independence.csv` | `exp19_windels_mic_mapping.py` | `fig4_independence` |
 | `exp19_exposure_mapping.csv` | `exp19_windels_mic_mapping.py` | `build_tables` |
 | `exp19_mic_by_condition.csv` | `exp19_windels_mic_mapping.py` | quoted in the text only |
-| `exp20_endpoint_separation.csv` | `exp20_regimen_design.py` | `audit_claims`, `build_tables`, `fig11_endpoint_collapse` |
+| `exp20_endpoint_separation.csv` | `exp20_regimen_design.py` | `audit_claims`, `build_tables`, `fig3_endpoint_collapse` |
 | `exp20_exposure_efficiency.csv` | `exp20_regimen_design.py` | quoted in the text only |
-| `exp20_floor_sensitivity.csv` | `exp20_regimen_design.py` | `fig11_endpoint_collapse` |
-| `exp20_kill_grid.csv` | `exp20_regimen_design.py` | `fig11_endpoint_collapse` |
+| `exp20_floor_sensitivity.csv` | `exp20_regimen_design.py` | `fig3_endpoint_collapse` |
+| `exp20_kill_grid.csv` | `exp20_regimen_design.py` | `fig3_endpoint_collapse` |
 | `exp21_combination.csv` | `exp21_sequential_and_combination.py` | quoted in the text only |
 | `exp21_interval_concentration_dependence.csv` | `exp21_sequential_and_combination.py` | `audit_claims`, `build_tables` |
 | `exp22_floor_sensitivity.csv` | `exp22_tolerance_dynamic_range.py` | `audit_claims` |
@@ -50,6 +50,8 @@ Outputs of the earlier paper are not here; they live in `version_one/results/`.
 | `exp26_inversion_sensitivity.csv` | `exp26_counter_tests.py` | quoted in the text only |
 
 ## Unassigned
+
+**Figures.** `fig1_dynamic_range`, `fig2_rate_vs_duration`, `fig3_endpoint_collapse`, `fig4_independence`
 
 **Tables (35).**
 
