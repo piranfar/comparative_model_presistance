@@ -20,7 +20,17 @@ Two sharper checks ride along, because the blunt question cannot see them:
     states a different total for the same thing (a legend that once said
     "the 174 baseline isolates" over a body that said 167);
   * a stated percentage that does not equal the count and denominator stated
-    beside it, and Box 1 headroom against log10(N0/L).
+    beside it, and Box 1 headroom against log10(N0/L);
+  * a sentence that contradicts itself -- an "all N" restating neither of the
+    two counts in front of it, or "Of T subjects, A ... and B ..." where A and
+    B do not make T. These need no index, which matters, because the index is
+    nearly powerless on small counts: every integer below 100 occurs somewhere
+    in the results, so an existence test can never catch a real number quoted
+    for the wrong quantity;
+  * the coverage itself, against the inventory the paper's own front matter
+    declares and the table blocks tables.md holds -- a sweep that scans three
+    figure legends where the paper has four has failed at its own job, and
+    would otherwise report that silently as a smaller total.
 
 Conventions learned from the Methods, and deliberately NOT flagged: h is
 dimensionless; a bare power of ten is a threshold or an endpoint definition,
@@ -440,10 +450,17 @@ N_OF_M = re.compile(
     r"(?P<mid>[^.;()]{0,40}?)"
     r"(?<![\d.])(?P<p>\d{1,3}(?:\.\d+)?)\s*(?:%|per\s+cent)", re.I)
 
-# an apposition -- "56 of 360 series, 15.6 per cent" -- not a clause that
-# happens to end in an endpoint name
-MID_STOP = re.compile(r"\b(?:the|in|below|above|band|than|compared|for|with)\b",
-                      re.I)
+# "below the 99.99 per cent endpoint" names a threshold, not a share of the
+# ratio in front of it; so does "at 95 per cent confidence". Both are refused
+# by what FOLLOWS the percentage, which is precise. A comparative between the
+# ratio and the percentage means the percentage belongs to a second subject.
+# Nothing else is refused, so "56 of 360 series IN THE POOLED SET, 15.6 per
+# cent" is still an apposition and is still checked.
+MID_STOP = re.compile(r"\b(?:than|compared|versus|vs\.?|against|whereas|"
+                      r"while|but)\b", re.I)
+PCT_IS_THRESHOLD = re.compile(
+    r"\s*(?:endpoint|threshold|reduction|confidence|interval|level|support|"
+    r"critical|significance|cut|kill|point)\b", re.I)
 
 
 def _num(tok):
@@ -466,7 +483,9 @@ def check_stated_percentages(regions):
                 continue
             # "below the 99.99 per cent endpoint" is an endpoint name, not a
             # share of the ratio in front of it
-            if p in ENDPOINT_CONSTANTS or MID_STOP.search(m.group("mid")):
+            if (p in ENDPOINT_CONSTANTS
+                    or MID_STOP.search(m.group("mid"))
+                    or PCT_IS_THRESHOLD.match(r["text"][m.end():m.end() + 30])):
                 continue
             got = 100.0 * n / d
             praw = m.group("p")
@@ -488,9 +507,13 @@ def check_stated_percentages(regions):
 # "the 174 baseline isolates", "all 33 isolates": a denominator the legend
 # asserts for the table it labels. A partitive -- "six strongest OF the 24
 # comparisons" -- says the table is a subset and is excluded.
+# re.I, because the same assertion at the start of a sentence -- "The 174
+# baseline isolates ..." -- is the same defect as "of the 174 baseline
+# isolates" in the middle of one, and \d{1,4} because a single-digit
+# denominator ("the 6 laboratories") is a denominator too.
 DENOM = re.compile(
     r"(?<!\bof )(?<!\bof the )(?:the|all|every|these|those)\s+"
-    r"(?P<n>\d{2,4})\s+(?:[a-z-]+\s+){0,2}" + COUNT_NOUN)
+    r"(?P<n>\d{1,4})\s+(?:[a-z-]+\s+){0,2}" + COUNT_NOUN, re.I)
 
 COUNT_COL = re.compile(
     r"^\**(?:n|no\.?|count|isolates?|flasks?|series|rows?|calls?|pairs?|"
@@ -554,6 +577,80 @@ def check_legend_against_own_body(regions, idx):
                            % (" ".join(m.group(0).split()), rival)),
                 "expected": "a count the body carries, nearest is %g" % rival,
                 "found": "%g" % v,
+            })
+    return out
+
+
+# --------------------------------------------------------------------------
+# a region that contradicts itself
+# --------------------------------------------------------------------------
+#
+# The traceability sweep above asks only whether a value exists SOMEWHERE in
+# the generated material. That question is nearly powerless on small counts --
+# every integer below 100 occurs somewhere in the results -- so a legend that
+# quotes a real number for the wrong quantity sails through it. The two rules
+# below do not ask where a number came from. They ask whether the sentence
+# holding it is consistent with itself, which needs no index at all.
+
+# a decimal point is not a full stop: "99.99 per cent endpoint, and all 33"
+_SENT = r"(?:[^.]|\.(?=\d))"
+
+# "Thirty-three of 217 ... and all 33 are recorded as failing": the "all N"
+# restates one of the two counts in front of it. It must be one of them.
+RESTATED = re.compile(
+    r"(?<![\d.])(?P<n>\d{1,4}|" + WORDNUM_SRC + r")\s+of\s+(?:the\s+)?"
+    r"(?P<d>\d{1,4})\b(?P<mid>" + _SENT + r"{0,180}?)"
+    r"\ball\s+(?P<k>\d{1,4})\b(?!\s*(?:of\b|per\s+cent|%))", re.I)
+
+
+def check_restated_counts(regions):
+    """An "all N" that restates neither the numerator nor the denominator it
+    was written to restate."""
+    out = []
+    for r in regions:
+        for m in RESTATED.finditer(r["text"]):
+            n, d, k = _num(m.group("n")), float(m.group("d")), float(m.group("k"))
+            if n is None or k in (n, d):
+                continue
+            out.append({
+                "severity": "high", "kind": "restated-count",
+                "where": "%s (line %d)" % (r["label"], r["line"]),
+                "detail": ("\"%s\" says all %g, but the counts it restates are "
+                           "%g and %g."
+                           % (" ".join(m.group(0).split()), k, n, d)),
+                "expected": "all %g" % n, "found": "all %g" % k,
+            })
+    return out
+
+
+# "Of eighteen isolates whose reading was censored, twelve admit one
+# compatible class and six admit two": the parts must make the whole.
+PARTITION = re.compile(
+    r"(?:^|(?<=[.!?])\s|\n)Of\s+(?P<t>" + WORDNUM_SRC + r"|\d{1,4})\s+"
+    r"(?P<noun>[a-z]{3,})\b(?P<mid>" + _SENT + r"{0,120}?),\s*"
+    r"(?P<a>" + WORDNUM_SRC + r"|\d{1,4})\s+(?P<m2>" + _SENT + r"{0,80}?)"
+    r"\band\s+(?P<b>" + WORDNUM_SRC + r"|\d{1,4})\b")
+
+
+def check_partitions(regions):
+    """"Of T subjects, A do this and B do that" where A + B is not T."""
+    out = []
+    for r in regions:
+        for m in PARTITION.finditer(r["text"]):
+            t, a, b = (_num(m.group(g)) for g in ("t", "a", "b"))
+            if None in (t, a, b) or min(t, a, b) <= 0:
+                continue
+            if a >= t or b >= t:            # not a partition of t at all
+                continue
+            if abs((a + b) - t) < 1e-9:
+                continue
+            out.append({
+                "severity": "high", "kind": "partition-total",
+                "where": "%s (line %d)" % (r["label"], r["line"]),
+                "detail": ("\"%s\" splits %g %s into %g and %g, which make %g."
+                           % (" ".join(m.group(0).split()), t, m.group("noun"),
+                              a, b, a + b)),
+                "expected": "parts summing to %g" % t, "found": "%g" % (a + b),
             })
     return out
 
@@ -675,6 +772,86 @@ def _split_legal(cell):
     return legal, refused
 
 
+# --------------------------------------------------------------------------
+# is the coverage itself complete?
+# --------------------------------------------------------------------------
+#
+# A coverage sweep that silently scans three figure legends where the paper
+# has four has failed at its own job: the region it never saw is the one
+# nobody checked. The paper states its own inventory in its front matter, and
+# tables.md states which table blocks exist, so both are checkable.
+
+INVENTORY = re.compile(
+    r"\*\*Figures:\*\*\s*(?P<fig>\d+)\s*\|\s*\*\*Tables:\*\*\s*(?P<tab>\d+)"
+    r"\s*\|\s*\*\*Boxes:\*\*\s*(?P<box>\d+)"
+    r"(?:\s*\|\s*\*\*Supplementary\s+tables:\*\*\s*(?P<supp>\d+))?", re.I)
+
+
+def check_inventory(text, regions, tables_md):
+    """The regions actually segmented, against the inventory the paper
+    declares and the table blocks tables.md holds."""
+    out = []
+    labels = [r["label"].split()[1] for r in regions
+              if r["region"] == "table legend"]
+    got = {
+        "figure legends": sum(1 for r in regions if r["region"] == "figure legend"),
+        "boxes": sum(1 for r in regions if r["region"] == "box"),
+        "main tables": sum(1 for n in labels if not n.upper().startswith("S")),
+        "supplementary tables": sum(1 for n in labels if n.upper().startswith("S")),
+    }
+
+    m = INVENTORY.search(text)
+    if m:
+        want = {"figure legends": int(m.group("fig")),
+                "main tables": int(m.group("tab")),
+                "boxes": int(m.group("box"))}
+        if m.group("supp"):
+            want["supplementary tables"] = int(m.group("supp"))
+        for what, n in sorted(want.items()):
+            # a document that carries no table block at all is not the
+            # assembled paper -- RATE_VS_DURATION.md is the prose, and its
+            # tables are spliced in only at assembly. Do not accuse it of
+            # losing sixteen tables it never held.
+            if not labels and "tables" in what:
+                continue
+            if got[what] != n:
+                out.append({
+                    "severity": "high", "kind": "coverage-incomplete",
+                    "where": "front matter vs the assembled paper",
+                    "detail": ("the paper declares %d %s but %d were found and "
+                               "scanned, so %d region(s) went unread."
+                               % (n, what, got[what], abs(n - got[what]))),
+                    "expected": "%d %s" % (n, what),
+                    "found": "%d" % got[what],
+                })
+
+    if tables_md.strip() and labels:
+        gen = set(r["label"].split()[1] for r in segment(tables_md)
+                  if r["region"] == "table legend")
+        pap = set(labels)
+        for num in sorted(gen - pap):
+            out.append({
+                "severity": "high", "kind": "coverage-incomplete",
+                "where": "Table %s" % num,
+                "detail": ("build_tables.py generated Table %s into tables.md "
+                           "but the assembled paper carries no such table, so "
+                           "nothing about it is checked." % num),
+                "expected": "Table %s spliced into the paper" % num,
+                "found": "absent",
+            })
+        for num in sorted(pap - gen):
+            out.append({
+                "severity": "high", "kind": "coverage-incomplete",
+                "where": "Table %s" % num,
+                "detail": ("the paper carries Table %s but tables.md does not, "
+                           "so it was written by hand and no generated block "
+                           "backs it." % num),
+                "expected": "a generated block in tables.md",
+                "found": "absent",
+            })
+    return out
+
+
 def check_table_blocks_are_generated(text, tables_md):
     """The assembled paper splices tables.md verbatim. A table block that no
     longer matches the generated one means the paper is stale against the
@@ -733,9 +910,12 @@ def check(text: str, ctx: dict) -> list[dict]:
 
     findings = []
     findings += check_stated_percentages(regions)
+    findings += check_restated_counts(regions)
+    findings += check_partitions(regions)
     findings += check_legend_against_own_body(regions, idx)
     findings += check_box_arithmetic(regions)
     findings += check_table_blocks_are_generated(text, tables_md)
+    findings += check_inventory(text, regions, tables_md)
 
     counts = {}
     for r in regions:

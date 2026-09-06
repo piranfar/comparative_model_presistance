@@ -1,6 +1,6 @@
 {
   "script": "src/experiments/exp25_observability_classes.py",
-  "utc": "2026-09-06T22:09:07+00:00",
+  "utc": "2026-09-06T22:35:21+00:00",
   "data_source": "eLife 93243 supplementary file 2",
   "mpn_floor_per_ml": 23.0,
   "deep_endpoint_logs": 4.0,

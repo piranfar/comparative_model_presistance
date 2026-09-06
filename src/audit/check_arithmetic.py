@@ -845,20 +845,102 @@ def check_legend_tallies(doc: Doc) -> list[dict]:
         for sent in re.split(r"(?<=[.])\s+", tbl.legend):
             ints = [int(x) for x in re.findall(r"(?<![\d.])(\d+)(?![\d.])",
                                                sent)]
-            if len(ints) < 2 or sum(ints) != n_rows:
+            if len(ints) < 2:
+                continue
+            # A sentence is a tally of the column beneath it if its integers
+            # sum to the row count -- or if it has one integer per category
+            # and lands near the row count.  The second case matters: the
+            # natural way to miscount a tally is to change one of its parts,
+            # which breaks the sum, and a rule that insisted on the sum would
+            # be blind to exactly the error it exists to find.
+            slack = max(2.0, 0.25 * n_rows)
+            if not (sum(ints) == n_rows
+                    or (len(ints) == len(cats)
+                        and all(0 <= i <= n_rows for i in ints)
+                        and abs(sum(ints) - n_rows) <= slack)):
                 continue
             _tally("legend tally against its own column (tables)")
             if sorted(ints, reverse=True) == cats:
                 continue
+            total = (f" (they total {sum(ints)} against {n_rows} rows)"
+                     if sum(ints) != n_rows else "")
             out.append(finding(
                 "medium", "legend-tally",
                 f"{tbl.label or 'table'} legend (line {tbl.line})",
                 f"the legend counts {', '.join(str(i) for i in ints)}, but the "
                 f"'{col}' column of the {n_rows} rows below it divides as "
-                f"{', '.join(str(c) for c in cats)}.",
+                f"{', '.join(str(c) for c in cats)}{total}.",
                 expected=", ".join(str(c) for c in cats),
                 found=", ".join(str(i) for i in ints)))
             break
+    return out
+
+
+def check_partition_sums(doc: Doc) -> list[dict]:
+    """A table that splits its own n into mutually exclusive states -- Table
+    10's 'never below', 'one crossing, holds', 'one crossing, returns' and
+    'crosses repeatedly' -- prints the parts and the whole, so the addition is
+    checkable.  A run is only trusted as a partition once it adds up on at
+    least four fifths of the rows that define it, which is what tells a real
+    breakdown apart from three columns that happen to sum on one row."""
+    out: list[dict] = []
+    for tbl in doc.tables:
+        if len(tbl.rows) < 3 or len(tbl.headers) < 4:
+            continue
+        ncols = len(tbl.headers)
+        cols: list[list[Q | None]] = []
+        for ci in range(ncols):
+            col: list[Q | None] = []
+            for row in tbl.rows:
+                raw = row[ci] if ci < len(row) else ""
+                q = cell_scalar(raw)
+                if (q is None or "%" in raw or q.value < 0
+                        or q.value != int(q.value)):
+                    col.append(None)
+                else:
+                    col.append(q)
+            cols.append(col)
+
+        best = None
+        for ti in range(ncols):
+            if sum(1 for v in cols[ti] if v is not None) < 3:
+                continue
+            for a in range(ncols):
+                for b in range(a + 3, ncols + 1):     # runs of three or more
+                    if a <= ti < b:
+                        continue
+                    parts = list(range(a, b))
+                    hits, misses = 0, []
+                    for ri in range(len(tbl.rows)):
+                        t = cols[ti][ri]
+                        vals = [cols[cj][ri] for cj in parts]
+                        if t is None or any(v is None for v in vals):
+                            continue
+                        s = sum(v.value for v in vals)
+                        if abs(s - t.value) < 1e-9:
+                            hits += 1
+                        else:
+                            misses.append((ri, s, t))
+                    defined = hits + len(misses)
+                    if defined < 3 or hits < 2 or hits < 0.8 * defined:
+                        continue
+                    cand = (hits, -len(misses), ti, parts, misses)
+                    if best is None or cand[:2] > best[:2]:
+                        best = cand
+        if best is None:
+            continue
+        hits, _, ti, parts, misses = best
+        _tally("partition adds to its own total (tables)", hits + len(misses))
+        names = " + ".join(tbl.headers[cj] or f"col{cj}" for cj in parts)
+        for ri, s, t in misses:
+            lbl = tbl.rows[ri][0] if tbl.rows[ri] else f"row {ri + 1}"
+            out.append(finding(
+                "high", "partition-sum",
+                f"{tbl.label or 'table'}, row '{lbl}' "
+                f"(line {tbl.row_lines[ri]})",
+                f"'{names}' comes to {s:g}, but '{tbl.headers[ti]}' on the "
+                f"same row is {t.text}; every other row of the table adds up.",
+                expected=t.text, found=f"{s:g}"))
     return out
 
 
@@ -1575,12 +1657,75 @@ _EST_3 = re.compile(
     r"\(\s*(?P<pt>[+-]?\d+(?:\.\d+)?)\s*,\s*(?P<lo>[+-]?\d+(?:\.\d+)?)\s+to\s+"
     r"(?P<hi>[+-]?\d+(?:\.\d+)?)\s*\)")
 _EST_4 = re.compile(
-    r"\(\s*(?:[a-z ]{0,20})?95 per cent (?:CI|interval)\s+"
+    r"\(\s*(?:[a-z-]+[\s\n]+){0,3}95 per cent (?:CI|interval)\s+"
+    r"(?P<lo>[+-]?\d+(?:\.\d+)?)\s+to\s+(?P<hi>[+-]?\d+(?:\.\d+)?)")
+# "OR 1.096 per day of time to OD 0.4, 95 per cent CI 1.032 to 1.164": the
+# estimate is pinned by its own marker, and the interval is introduced by an
+# explicit cue, so the prose between them may carry numbers of its own.
+_EST_5 = re.compile(
+    _MARKER + r"\b[^0-9(\n]{0,32}?(?P<pt>[+-]?\d+(?:\.\d+)?)"
+    r"(?P<gap>[^\n]{0,70}?),\s*(?:[a-z-]+\s+){0,2}95 per cent (?:CI|interval)\s+"
     r"(?P<lo>[+-]?\d+(?:\.\d+)?)\s+to\s+(?P<hi>[+-]?\d+(?:\.\d+)?)")
 
 _NOT_A_POINT = re.compile(
     r"\b(?:day|days|Table|Section|Fig|Figure|panel|rank|volume|"
     r"institutes?|visit|visits|month|months|percentile)\b", re.I)
+
+
+def _decimals(text: str) -> int:
+    t = text.strip()
+    return len(t.split(".", 1)[1]) if "." in t else 0
+
+
+def _point_before(work: str, pos: int, back: int = 130, max_skips: int = 4,
+                  want_decimals: int = 0) -> Q | None:
+    """The point estimate an interval ending at ``pos`` belongs to.
+
+    Walking backwards and taking the first number is not enough: the clause
+    that introduces an estimate often names a day range or a scale first --
+    "+0.059 log10 per day per doubling over days 0 to 3 (95 per cent interval
+    ...)" -- so a candidate is refused, and the walk continues, when it is
+    glued to letters (the 10 of log10), when it is an index rather than a
+    measurement, or when it is the 95 of "95 per cent".
+
+    A candidate printed to fewer decimals than the interval it would have to
+    sit inside is refused the same way, because an estimate and its interval
+    are printed at one precision: "a mediated effect of +0.166 classes on the
+    203 usable rows (95 per cent CI +0.067 to +0.279)" passes over 203 and
+    nominates +0.166.  The walk never crosses a sentence boundary and never
+    passes more than ``max_skips`` refusals, because a number from the wrong
+    clause is worse than no check at all.
+    """
+    lo_bound = max(0, pos - back)
+    before = work[lo_bound:pos]
+    stop = 0
+    for sm in _HARD_STOP.finditer(before):
+        stop = sm.end()
+    before = before[stop:]
+    skips = 0
+    for m in reversed(list(_NUMBER_RE.finditer(before))):
+        prev_ch = before[m.start() - 1] if m.start() > 0 else " "
+        nxt = before[m.end():m.end() + 9]
+        bad = (
+            prev_ch.isalnum() or prev_ch in "._^"
+            or re.match(r"^[A-Za-z]", nxt)
+            or re.match(r"^\s*per cent", nxt)
+            or _NOT_A_POINT.search(before[max(0, m.start() - 30):m.start()])
+        )
+        if bad:
+            skips += 1
+            if skips > max_skips:
+                return None
+            continue
+        if want_decimals and _decimals(m.group(0)) < min(want_decimals, 1):
+            # a whole number where the interval carries decimals is a count
+            # in the same clause ("on the 203 usable rows"), not the estimate
+            skips += 1
+            if skips > max_skips:
+                return None
+            continue
+        return parse_q(m.group(0))
+    return None
 
 
 def check_intervals(doc: Doc) -> list[dict]:
@@ -1605,6 +1750,7 @@ def check_intervals(doc: Doc) -> list[dict]:
             found=f"{pt.text} ({lo.text} to {hi.text})"))
 
     for rx, how in ((_EST_1, "prose, marker-led"),
+                    (_EST_5, "prose, marker-led across a clause"),
                     (_EST_2, "prose, point then interval"),
                     (_EST_3, "prose, point inside the bracket")):
         for m in rx.finditer(work):
@@ -1616,6 +1762,14 @@ def check_intervals(doc: Doc) -> list[dict]:
             if rx is _EST_2:
                 before = work[max(0, m.start() - 30):m.start("pt")]
                 if _NOT_A_POINT.search(before):
+                    # the number against the bracket is a day or a rank, not
+                    # an estimate; the estimate is further back in the clause
+                    pt2 = _point_before(
+                        work, m.start("pt"), 70, 3,
+                        max(_decimals(m.group("lo")), _decimals(m.group("hi"))))
+                    if pt2 is None:
+                        continue
+                    record(pt2, lo, hi, m.start(), how + ", index skipped")
                     continue
             record(pt, lo, hi, m.start(), how)
 
@@ -1624,15 +1778,9 @@ def check_intervals(doc: Doc) -> list[dict]:
         hi = parse_q(m.group("hi"))
         if not (lo and hi):
             continue
-        before = work[max(0, m.start() - 110):m.start()]
-        cands = list(_NUMBER_RE.finditer(before))
-        if not cands:
-            continue
-        last = cands[-1]
-        pre = before[max(0, last.start() - 30):last.start()]
-        if _NOT_A_POINT.search(pre):
-            continue
-        pt = parse_q(last.group(0))
+        pt = _point_before(
+            work, m.start(), 130, 4,
+            max(_decimals(m.group("lo")), _decimals(m.group("hi"))))
         if pt is None:
             continue
         record(pt, lo, hi, m.start(), "prose, CI in parentheses")
@@ -1644,6 +1792,11 @@ def check_intervals(doc: Doc) -> list[dict]:
 _CELL_EST = re.compile(
     r"^(?P<pt>[+-]?[\d.]+)\s*%?\s*\(\s*(?P<lo>[+-]?[\d.]+)\s*(?:to|,|-)\s*"
     r"(?P<hi>[+-]?[\d.]+)\s*\)\s*%?$")
+# a cell that states its estimate in words before bracketing the interval:
+# "36.6% of 191 cross-laboratory pairs are inversions (95% CI 30.1-43.6)"
+_CELL_CI = re.compile(
+    r"\(\s*(?:[a-z-]+\s+){0,3}95\s*(?:%|per cent)\s*(?:CI|interval)\s+"
+    r"(?P<lo>[+-]?\d+(?:\.\d+)?)\s*(?:to|-|,)\s*(?P<hi>[+-]?\d+(?:\.\d+)?)")
 
 
 def _check_table_intervals(doc: Doc) -> list[dict]:
@@ -1651,6 +1804,27 @@ def _check_table_intervals(doc: Doc) -> list[dict]:
     for tbl in doc.tables:
         for ri, row in enumerate(tbl.rows):
             for ci, cell in enumerate(row):
+                cm = _CELL_CI.search(cell)
+                if cm:
+                    lo = parse_q(cm.group("lo"))
+                    hi = parse_q(cm.group("hi"))
+                    pt = _point_before(
+                        cell, cm.start(), 200, 4,
+                        max(_decimals(cm.group("lo")),
+                            _decimals(cm.group("hi"))))
+                    if pt and lo and hi and lo.value <= hi.value:
+                        _tally('interval brackets its estimate (table cell)')
+                        if not (lo.lo - 1e-12 <= pt.value <= hi.hi + 1e-12):
+                            out.append(finding(
+                                "high", "interval-brackets",
+                                f"{tbl.label or 'table'}, row "
+                                f"'{row[0]}' (line {tbl.row_lines[ri]})",
+                                f"column '{tbl.headers[ci]}' quotes an "
+                                f"interval of {lo.text} to {hi.text} for a "
+                                f"stated {pt.text}, which it does not "
+                                f"contain.",
+                                expected=f"{lo.text} <= {pt.text} <= {hi.text}",
+                                found=cell.strip()[:90]))
                 m = _CELL_EST.match(cell.strip())
                 if m:
                     pt = parse_q(m.group("pt"))
@@ -1717,6 +1891,7 @@ def check(text: str, ctx: dict) -> list[dict]:
     findings: list[dict] = []
     findings += check_percentages(doc)
     findings += check_table_columns(doc)
+    findings += check_partition_sums(doc)
     findings += check_exclusion_arithmetic(doc)
     findings += check_legend_tallies(doc)
     findings += check_folds(doc)

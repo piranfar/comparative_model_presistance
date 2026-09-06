@@ -6,7 +6,9 @@ Three families of check are run over the assembled manuscript
 (a) THE SELF-AUDIT TABLE.  One table recomputes every conclusion at the level its
     observations are actually independent and carries a ``Verdict`` column.  A
     conclusion marked ``NOT SUPPORTED`` must not still be *asserted* anywhere in
-    the body, a table legend or a figure legend.  Matching is fuzzy -- on the
+    the body, a table legend, a figure legend or a table's own body rows (each
+    row is matched on its own, so numbers from unrelated rows cannot pool into
+    a spurious match).  Matching is fuzzy -- on the
     distinctive numbers and content words of the conclusion string -- and is
     suppressed where the surrounding text reports the claim as withdrawn, as
     description without inference, or explicitly declines to attach a test to it.
@@ -15,11 +17,20 @@ Three families of check are run over the assembled manuscript
     set as a stage, an n and a count excluded.  Every ``n = ...``, every bare
     analysis-set denominator carrying a reported statistic, every explicit ``n``
     column of another table, and every stated exclusion count should trace to a
-    value that account holds.  Four things are deliberately not flagged, because
-    the flow account does not promise them: counts belonging to deposits it does
-    not cover; one arm of a split whose arms sum to a traced total; a table
-    column that decomposes a traced total; and a subset defined by its own
-    outcome ("the 140 series that cross") rather than by an exclusion.
+    value that account holds.  A stated exclusion is checked against exclusions
+    rather than against any number anywhere: when the sentence names a panel,
+    the count must be one that panel actually records, so an exclusion cannot
+    be waved through by an unrelated stage that happens to carry the same
+    integer.  The account's own chain is checked too -- a stage that removes k
+    rows must have a sibling stage of the same panel holding exactly k more --
+    because it is the standard everything else is measured against.  Five
+    things are deliberately not flagged, because the flow account does not
+    promise them: counts belonging to deposits it does not cover; one arm of a
+    split whose arms sum to a traced total; a table column that decomposes a
+    traced total; a subset defined by its own outcome ("the 140 series that
+    cross") rather than by an exclusion; and a stacked set that is a small
+    multiple of a stage named in the same row ("420 isolate-panel", two panels
+    of the same 210 isolates).
 
 (c) CROSS-REFERENCE RESOLUTION.  Every ``Table N``, ``Table SN``, ``Figure N``,
     ``Fig. NX``, ``Section N`` and ``Box N`` reference must resolve to something

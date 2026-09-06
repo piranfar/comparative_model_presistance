@@ -425,6 +425,16 @@ def inherit(text: str, occ: list[Occurrence]) -> None:
             cur, prv = occ[k], occ[k - 1]
             if cur.label is None and prv.label not in (None, "ci_bound",
                                                        "count"):
+                # "(OR 0.480, 0.340 to 0.677, p = ...)" -- the comma after an
+                # effect estimate introduces its interval, not a second
+                # estimate, so an effect label must not run on into the left
+                # member of an "A to B" pair.  Without this, every lower
+                # confidence bound in the paper is labelled an odds ratio,
+                # and 0.340 collides with the hazard ratio 0.34.
+                if prv.label in _EFFECT and k + 1 < len(occ):
+                    nxt_gap = _joined(text, cur, occ[k + 1])
+                    if nxt_gap is not None and nxt_gap.lower() == "to":
+                        continue
                 flat = _joined(text, prv, cur)
                 if flat is not None:
                     cur.label, cur.gap, moved = prv.label, flat, True
@@ -660,6 +670,113 @@ def _cross_unit_ratio(lines: list[str], tag: str) -> list[dict]:
     return out
 
 
+# A deposit's *densities* wear its unit too, not only its floor.  The floor
+# rules above key on the six floor values, so "the clinical isolates enter at
+# 5.36 log10 CFU/mL" -- an MPN deposit wearing a colony-count unit on a number
+# that is not a floor -- passed straight through them.  This rule works per
+# sentence, and only where a numeral is actually attached to the unit: the
+# Table S5 legend says "divided by a reference stated in CFU/mL" while naming
+# the clinical rows, and that is disclosure, not a density.
+# "clinical *Mycobacterium tuberculosis* isolates" is the Abstract's way of
+# saying clinical isolates, and a cue that misses it makes the Abstract look
+# like a plated section, which would be a false positive waiting to happen the
+# first time someone writes a correct MPN figure there.
+_DENS_CLIN = re.compile(r"vijay|clinical[^.\n]{0,40}?isolates?"
+                        r"|most probable number|most-probable-number"
+                        r"|\bMPN\b", re.I)
+_DENS_PLATE = re.compile(r"ERA4TB|six-laborator|van Wijk|Dubey|hollow.fibre"
+                         r"|hollow.fiber|plated volume|plating|plated|colony"
+                         r"|colonies|institute", re.I)
+_BRIDGE = re.compile(r"^[\s,]*(log\s?10|logs?|×|x)?[\s,]*$", re.I)
+
+
+def _attached(sentence: str, unit_start: int) -> str | None:
+    """The literal that this unit belongs to, or None when the unit is being
+    named rather than used ("a reference stated in CFU/mL")."""
+    for a, b, lit, _v, _s in _numbers(sentence):
+        if b <= unit_start and _BRIDGE.match(sentence[b:unit_start]):
+            return lit
+    return None
+
+
+def _blocks(lines: list[str]):
+    """Contiguous runs of prose, rejoined, with the line each one starts at.
+
+    The manuscript is hard-wrapped, so a sentence about the clinical deposit
+    routinely names it on one line and gives its density on the next.  Working
+    line by line would look at half a sentence and see no deposit at all.
+    """
+    buf, start = [], 0
+    for i, ln in enumerate(lines + [""]):
+        if not ln.strip() or ln.lstrip().startswith("|") or ln.startswith("#"):
+            if buf:
+                yield start, " ".join(buf)
+            buf = []
+        else:
+            if not buf:
+                start = i
+            buf.append(ln.strip())
+
+
+def _section_deposit(lines: list[str]) -> list[str | None]:
+    """Per line: 'clin', 'plate' or None for the deposit its section is about.
+
+    A sentence often names no deposit at all -- "Isoniazid-resistant isolates
+    enter this assay at 5.36 log10" is the clinical panel, and says so only by
+    the section it sits in.  The section is used only where it is unambiguous:
+    it names one deposit and never the other.  Where a section discusses both,
+    as Section 6 and the Abstract do, it yields no cue and the rule stays out.
+    """
+    bounds = [i for i, l in enumerate(lines) if l.startswith("#")]
+    out: list[str | None] = [None] * len(lines)
+    for a, b in zip([0] + bounds, bounds + [len(lines)]):
+        body = "\n".join(lines[a:b])
+        bare = _MPN_UNIT.sub(" ", _CFU_UNIT.sub(" ", body))
+        cl, pl = bool(_DENS_CLIN.search(bare)), bool(_DENS_PLATE.search(bare))
+        if cl == pl:
+            continue
+        for k in range(a, min(b, len(lines))):
+            out[k] = "clin" if cl else "plate"
+    return out
+
+
+def _density_units(lines: list[str], tag: str) -> list[dict]:
+    out = []
+    sect = _section_deposit(lines)
+    for i, block in _blocks(lines):
+        for sent in re.split(r"(?<=[.;])\s+", block):
+            # The cue search must not see the unit it is judging: "6.00 log10
+            # MPN/mL" contains the token MPN, which would otherwise make every
+            # mis-united plated density look like a clinical sentence.
+            bare = _MPN_UNIT.sub(" ", _CFU_UNIT.sub(" ", sent))
+            clin, plate = _DENS_CLIN.search(bare), _DENS_PLATE.search(bare)
+            if not clin and not plate:
+                s = sect[i] if i < len(sect) else None
+                clin, plate = (s == "clin") or None, (s == "plate") or None
+            for rx, want, other, kind, why in (
+                (_CFU_UNIT, clin, plate, "unit-mpn-as-cfu",
+                 "the clinical deposit reports most probable numbers, not "
+                 "colony-forming units"),
+                (_MPN_UNIT, plate, clin, "unit-cfu-as-mpn",
+                 "the plated deposits report colony counts; only the clinical "
+                 "deposit reports most probable numbers"),
+            ):
+                m = rx.search(sent)
+                if not m or not want or other:
+                    continue
+                lit = _attached(sent, m.start())
+                if lit is None:
+                    continue
+                out.append(_flag(
+                    "high", kind, f"{tag}paragraph at line {i + 1}",
+                    f"a density of {lit} is printed as {m.group(0)} in a "
+                    f"sentence about the "
+                    f"{'clinical' if want is clin else 'plated'}"
+                    f" deposit; {why}", f"{lit} in the other unit",
+                    sent.strip()[:150]))
+    return out
+
+
 def unit_consistency(text: str, label: str = "") -> list[dict]:
     findings = []
     lines = text.split("\n")
@@ -716,6 +833,7 @@ def unit_consistency(text: str, label: str = "") -> list[dict]:
                     m.group(0).strip()))
 
     findings += _cross_unit_ratio(lines, tag)
+    findings += _density_units(lines, tag)
 
     # whole table rows: a deposit's row must wear that deposit's unit
     for i, ln in enumerate(lines):
@@ -804,6 +922,27 @@ _PLANTS = [
      "resistance, which does not.",
      "resistance, which does not. Resistant isolates carry "
      "p = 2.317 (1.30 to 4.12)."),
+    # The commonest real failure is barer than the historical one: prose
+    # restating a table's estimate under the wrong name, with none of the
+    # table's other numbers beside it to corroborate the match.
+    ("prose restating an odds ratio as a hazard ratio, with no corroboration",
+     "in odds ratios, and — where the proportionality it assumes fails",
+     "in odds ratios (a hazard ratio of 0.480 for each ten-fold rise), and "
+     "— where the proportionality it assumes fails"),
+    ("the Abstract renaming the odds ratio behind 'times the odds'",
+     "isoniazid\nresistance, which does not.",
+     "isoniazid\nresistance, which does not (hazard ratio 2.32)."),
+    ("a two-figure p-value renamed a hazard ratio in a table legend",
+     "**Table 7.** The family of 8 tests",
+     "**Table 7.** Growth carries a hazard ratio of 0.0030. "
+     "The family of 8 tests"),
+    ("a clinical density -- not a floor -- printed as CFU/mL",
+     "enter this assay at 5.36 log10 against 6.36 for susceptible isolates",
+     "enter this assay at 5.36 log10 CFU/mL against 6.36 for susceptible "
+     "isolates"),
+    ("a plated density -- not a floor -- printed as MPN/mL",
+     "gives realised densities of 3.67, 4.61, 4.65 and 6.00 log10 CFU/mL",
+     "gives realised densities of 3.67, 4.61, 4.65 and 6.00 log10 MPN/mL"),
 ]
 
 

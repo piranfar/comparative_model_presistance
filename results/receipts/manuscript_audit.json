@@ -1,28 +1,19 @@
 {
   "script": "src/audit_manuscript.py",
-  "utc": "2026-09-06T22:13:12+00:00",
+  "utc": "2026-09-06T22:39:22+00:00",
   "checkers": [
     "check_arithmetic",
     "check_consistency",
     "check_coverage",
     "check_identity"
   ],
-  "n_words_audited": 25624,
+  "n_words_audited": 25933,
   "counts": {
     "high": 0,
-    "medium": 1,
+    "medium": 0,
     "low": 1
   },
   "findings": [
-    {
-      "severity": "medium",
-      "kind": "denominator-not-in-flow-table",
-      "where": "line 1546",
-      "detail": "A count of 20 (row) is quoted, but no stage of the analysis-flow table (Table 5) has that n or that exclusion count, so the flow account cannot say which set it is.",
-      "expected": "an n of 20 among the stages of Table 5",
-      "found": "ws from the 15-day panel and 20 from the 60-day; the growth proxy is missing for one isolate; six 60-day labels are absent; and fi",
-      "checker": "check_consistency"
-    },
     {
       "severity": "low",
       "kind": "coverage-summary",
