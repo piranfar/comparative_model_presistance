@@ -87,25 +87,37 @@ def table2() -> str:
 
 
 def table3() -> str:
-    """Isolates that ended at the floor, and the labels they were given."""
+    """Isolates at the floor, and how many of their labels are decidable."""
     r = json.loads((ROOT / "results" / "receipts" / "exp22_receipt.json")
                    .read_text(encoding="utf-8"))
+    o = json.loads((ROOT / "results" / "receipts" / "exp25_receipt.json")
+                   .read_text(encoding="utf-8"))["observability"]
     rows = []
     for f in r["isolates_at_floor"]:
-        counts = json.loads(f["label_counts"])
-        rows.append([f"{int(f['culture_age_days'])} days",
+        age = int(f["culture_age_days"])
+        s = o[f"{age}d"]
+        rows.append([f"{age} days",
                      int(f["n_isolates_at_floor"]),
                      f"{f['start_density_fold_range']:.0f}x",
                      f"{f['apparent_survival_fold_range']:.0f}x",
-                     ", ".join(f"{k}: {v}" for k, v in counts.items())])
+                     ", ".join(f"{k}: {v}" for k, v in
+                               json.loads(f["label_counts"]).items()),
+                     int(s["determinable"]),
+                     int(s["bounded_tight"]),
+                     int(s["bounded_loose"])])
     d = pd.DataFrame(rows, columns=[
-        "Prior culture", "Isolates at the floor", "Starting density spread",
-        "Recorded survival spread", "Tolerance labels assigned"])
+        "Prior culture", "At the floor", "Starting density spread",
+        "Recorded survival spread", "Labels assigned at the floor",
+        "Determinable", "Bounded, label stands", "Bounded, undecidable"])
     return ("**Table 3.** Isolates whose day-5 reading sat on the MPN floor, so "
             "that as far as the assay could resolve they were killed to the same "
             "degree. Because a reading at the floor gives a recorded fraction of "
             "L/N0, the spread in their apparent survival equals the spread in "
-            "their starting densities exactly. The labels they received differ."
+            "their starting densities exactly, and the labels they received "
+            "differ. The last three columns sort every call in the panel, not "
+            "only those at the floor: a floor reading bounds the class from "
+            "above, so an isolate already recorded in the lowest class keeps its "
+            "label and only those recorded above it can be undecidable."
             + chr(10) + chr(10) + md(d))
 
 

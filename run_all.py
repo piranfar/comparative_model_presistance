@@ -47,6 +47,9 @@ STAGES = [
     ("exp24  trajectory shape, flag consistency, and what the Cox model separates",
      "src.experiments.exp24_trajectory_and_flag_audit"),
 
+    ("exp25  how much of a published classification survives its measurement",
+     "src.experiments.exp25_observability_classes"),
+
     ("fig 1  the assay floor bounds the endpoint and decides the phenotype",
      "src.figures.fig14_dynamic_range"),
     ("fig 2  one protocol, six laboratories: the inoculum still decides",

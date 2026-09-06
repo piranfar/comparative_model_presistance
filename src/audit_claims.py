@@ -75,6 +75,28 @@ def main() -> int:
         rows.append(check("starting density variance that is laboratory (4: 87.0%)",
                           0.870, float(co["variance_explained_by_laboratory"]), 0.01))
 
+    # --- exp25, how much of the classification survives its measurement ---
+    # The "six, not eighteen" numbers. These SHRINK this paper's claim and are
+    # pinned for that reason: an earlier draft said eighteen labels were in
+    # doubt, and the direction of the bound says six are.
+    r = receipt("exp25_receipt.json")
+    if r is not None:
+        o = r["observability"]["15d"]
+        rows.append(check("tolerance calls classified, 15d (2: 203)",
+                          203, float(o["n_calls"]), 0.001))
+        rows.append(check("determinable calls (2: 185)",
+                          185, float(o["determinable"]), 0.001))
+        rows.append(check("bounded but tight, label stands (2: 12)",
+                          12, float(o["bounded_tight"]), 0.001))
+        rows.append(check("bounded loosely, label undecidable (2: 6 NOT 18)",
+                          6, float(o["bounded_loose"]), 0.001))
+        g = {x["group"]: x for x in r["by_susceptibility_group"]["15d"]}
+        if "IR" in g and "IS" in g:
+            rows.append(check("deep endpoint unreachable, resistant (2: 26.2%)",
+                              26.2, float(g["IR"]["pct_deep_endpoint_unreachable"]), 0.02))
+            rows.append(check("deep endpoint unreachable, susceptible (2: 7.6%)",
+                              7.56, float(g["IS"]["pct_deep_endpoint_unreachable"]), 0.02))
+
     # --- exp21, the per-interval p-values --------------------------------
     # Added after a manuscript revision caught three of these wrong in the body
     # text. They had been carried over from an earlier draft and never

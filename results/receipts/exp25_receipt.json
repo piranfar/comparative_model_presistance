@@ -1,0 +1,73 @@
+{
+  "script": "src/experiments/exp25_observability_classes.py",
+  "utc": "2026-09-06T04:12:26+00:00",
+  "data_source": "eLife 93243 supplementary file 2",
+  "mpn_floor_per_ml": 23.0,
+  "deep_endpoint_logs": 4.0,
+  "observability": {
+    "15d": {
+      "n_calls": 203,
+      "determinable": 185,
+      "determinable_pct": 91.13300492610837,
+      "bounded_tight": 12,
+      "bounded_tight_pct": 5.911330049261084,
+      "bounded_loose": 6,
+      "bounded_loose_pct": 2.955665024630542,
+      "loose_recorded_classes": {
+        "Medium": 6
+      },
+      "n_deep_endpoint_unreachable": 31,
+      "pct_deep_endpoint_unreachable": 15.270935960591133
+    },
+    "60d": {
+      "n_calls": 197,
+      "determinable": 191,
+      "determinable_pct": 96.95431472081218,
+      "bounded_tight": 6,
+      "bounded_tight_pct": 3.045685279187817,
+      "bounded_loose": 0,
+      "bounded_loose_pct": 0.0,
+      "loose_recorded_classes": {},
+      "n_deep_endpoint_unreachable": 7,
+      "pct_deep_endpoint_unreachable": 3.5532994923857872
+    }
+  },
+  "by_susceptibility_group": {
+    "15d": [
+      {
+        "group": "IR",
+        "n": 84,
+        "pct_determinable": 91.66666666666666,
+        "pct_deep_endpoint_unreachable": 26.190476190476193,
+        "median_headroom_log10": 4.0,
+        "fisher_p_unreachable": 0.0005630647809615917
+      },
+      {
+        "group": "IS",
+        "n": 119,
+        "pct_determinable": 90.75630252100841,
+        "pct_deep_endpoint_unreachable": 7.563025210084033,
+        "median_headroom_log10": 5.0,
+        "fisher_p_unreachable": 0.0005630647809615917
+      }
+    ],
+    "60d": [
+      {
+        "group": "IR",
+        "n": 80,
+        "pct_determinable": 93.75,
+        "pct_deep_endpoint_unreachable": 5.0,
+        "median_headroom_log10": 6.0,
+        "fisher_p_unreachable": 0.444941643384403
+      },
+      {
+        "group": "IS",
+        "n": 117,
+        "pct_determinable": 99.14529914529915,
+        "pct_deep_endpoint_unreachable": 2.564102564102564,
+        "median_headroom_log10": 6.0,
+        "fisher_p_unreachable": 0.444941643384403
+      }
+    ]
+  }
+}
