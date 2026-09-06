@@ -137,8 +137,93 @@ be checked against it, and a single dataset in which the affected isolates are
 not those the algebra names would refute it.
 
 ---
+---
 
-## 5. What the algebra does not give
+## 6. The same boundaries in the other two deposits
+
+`N_reach = L * 10^q` needs only a floor and an endpoint depth, so it is
+computable wherever the floor is known. `N_id = L / c_1` needs a classification
+threshold, and neither of the deposits below carries a classification, so for
+them `N_id` is reported as a function of a threshold rather than as a number.
+
+### ERA4TB, where the floor is derived rather than assumed
+
+Counts are per mL and one colony in a plated volume `v` microlitres is `1000/v`
+per mL, so the floor follows from the pipette and both boundaries are exact.
+
+| plated volume | L (per mL) | N_reach at q=2 | N_reach at q=4 |
+|---|---:|---:|---:|
+| 100 uL | 10 | 1,000 | 100,000 |
+| 10 uL | 100 | 10,000 | 1,000,000 |
+| 2.5 uL | 400 | 40,000 | 4,000,000 |
+
+Against those boundaries, the measured starting density of each laboratory on
+the most sensitive volume decides how deep a kill that laboratory could ever
+have demonstrated.
+
+| laboratory | starting density (log10) | headroom (log10) | deepest q reachable |
+|---|---:|---:|---:|
+| A | 2.95 | 1.95 | 1 |
+| B | 3.16 | 2.16 | 2 |
+| C | 4.02 | 3.02 | 3 |
+| D | 4.69 | 3.69 | 3 |
+| E | 4.95 | 3.95 | 3 |
+| F | 6.53 | 5.53 | 5 |
+
+**The six laboratories were not running the same assay.** One written protocol,
+one strain, one stock, and a measurement capacity spanning q = 1 to
+q = 5. The laboratory at the bottom of that range could not have
+demonstrated a two-log kill on any flask, however completely the drug worked;
+the one at the top could have demonstrated five. That is a property of the
+inocula they happened to seed, and it is fixed before the drug is added.
+
+On a 2.5 microlitre drop rather than a 100 microlitre quadruplicate the same
+cultures lose 1.6 logs of headroom, so the deepest reachable q falls by one or
+two for every laboratory. The choice of pipette moves the measurement capacity
+as much as a difference between laboratories does.
+
+### Kaur, where the floor is not stated
+
+The workbook records no plated volume and no dilution factor, so `L` cannot be
+derived and every boundary below is conditional on an assumption. The measured
+day-0 control density is 7.02 log10 CFU/mL.
+
+| assumed L (per mL) | headroom (log10) | deepest q reachable |
+|---|---:|---:|
+| 10 | 6.02 | 6 |
+| 100 | 5.02 | 5 |
+| 400 | 4.41 | 4 |
+
+This deposit starts high enough that the deepest endpoint is reachable under any
+plausible floor, so nothing here is compromised. It is listed because the
+calculation cannot be done properly on a deposit that does not publish its limit,
+and that is the point rather than an aside.
+
+### N_id where there is no classification
+
+Neither deposit assigns a tolerance class, so neither has a `c_1`. Should a
+classification be applied to either, the boundary follows immediately:
+
+| lowest threshold c_1 | N_id at L = 10 | N_id at L = 100 | N_id at L = 400 |
+|---|---:|---:|---:|
+| 10^-1 | 100 | 1,000 | 4,000 |
+| 10^-2 | 1,000 | 10,000 | 40,000 |
+| 10^-3 | 10,000 | 100,000 | 400,000 |
+| 10^-4 | 100,000 | 1,000,000 | 4,000,000 |
+
+A reading on the floor from a culture seeded above the relevant entry carries no
+information about the class it is assigned to.
+
+### A note on three rows
+
+The ERA4TB deposit contains two rows with a plated volume of 50 microlitres
+whose comment field reads "100ul quad", and one row with no volume at all. All
+three are from institute C and all three are in the untreated arm, so they enter
+no analysis here. They are recorded because a volume that disagrees with its own
+comment is exactly the kind of thing a floor derived from volume depends on.
+
+
+## 7. What the algebra does not give
 
 It says nothing about whether a reachable endpoint was reached, nothing about
 the drug, and nothing about the biology of an isolate. It bounds what the
