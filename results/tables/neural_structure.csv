@@ -1,0 +1,5 @@
+problem,train_mse,additive_stat,multiplicative_stat,verdict,truth
+N_reach = L * 10^q,1.514533808265887e-05,0.13338608149178838,0.005267475713011241,multiplicative,multiplicative
+a^2 + sqrt(b),1.0545284014891292e-06,0.017842071234009466,0.10168154569789982,additive,additive
+1 / (a + b),2.4230393497413874e-06,0.43965391981652574,0.19541057357026204,neither,neither
+"ERA4TB trajectory f(t, N0)",0.18661599573922463,13.17234729824561,,neither,unknown
