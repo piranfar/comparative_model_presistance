@@ -6,7 +6,7 @@ Outputs of the earlier paper are not here; they live in `version_one/results/`.
 
 | | tables | figures | receipts |
 | --- | ---: | ---: | ---: |
-| total | 22 | 4 | 6 |
+| total | 24 | 4 | 7 |
 
 ## Rate versus duration (manuscript/PAPER_COMPLETE.md)
 
@@ -39,6 +39,15 @@ Outputs of the earlier paper are not here; they live in `version_one/results/`.
 | `exp21_combination.csv` | `exp21_sequential_and_combination.py` | quoted in the text only |
 | `exp21_interval_concentration_dependence.csv` | `exp21_sequential_and_combination.py` | `build_tables` |
 
+## Unassigned
+
+**Tables (2).**
+
+| file | written by | used by |
+| --- | --- | --- |
+| `exp22_headroom.csv` | `exp22_tolerance_dynamic_range.py` | quoted in the text only |
+| `exp22_label_associations.csv` | `exp22_tolerance_dynamic_range.py` | quoted in the text only |
+
 ## Kept on purpose, though nothing cites them
 
 - **`exp21_combination.csv`** — the withdrawn combination result. Retained as the record of a claim this project made and then withdrew, so the withdrawal is auditable rather than invisible.
@@ -47,7 +56,7 @@ Outputs of the earlier paper are not here; they live in `version_one/results/`.
 
 ## Receipts
 
-6 JSON receipts, one per analysis stage. Each records the inputs, the headline outputs and the software versions the stage actually ran under, so a run under different versions is recorded rather than silently substituted.
+7 JSON receipts, one per analysis stage. Each records the inputs, the headline outputs and the software versions the stage actually ran under, so a run under different versions is recorded rather than silently substituted.
 
 ## Checking the numbers
 

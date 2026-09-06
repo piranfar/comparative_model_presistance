@@ -41,6 +41,9 @@ STAGES = [
     ("exp22  what a published tolerance classification tracks",
      "src.experiments.exp22_tolerance_dynamic_range"),
 
+    ("exp23  how often the faster-killed flask disappears later",
+     "src.experiments.exp23_inversion_decomposition"),
+
     ("fig 1  a rate transfers; a clearance time does not",
      "src.figures.fig10_rate_vs_duration"),
     ("fig 2  the endpoint decides what is visible",
