@@ -1,0 +1,18 @@
+{
+  "citation": "Dubey V, Darlow C, Gerada A, Unsworth J, Sheth E, Reza N, Farrington N, Haldenby S, Warren D, Liu X, Howard A, Hope W, et al. Molecular pharmacodynamics of amoxicillin-clavulanic acid for urinary tract infections caused by Escherichia coli. Nature Communications 2026;17(1).",
+  "doi": "10.1038/s41467-026-74323-2",
+  "pmid": "42288477",
+  "pmc": "PMC13408132",
+  "file": "41467_2026_74323_MOESM4_ESM.xlsx, the article Source Data file, stored here as source_data.xlsx",
+  "bytes": 2962815,
+  "licence": "CC BY 4.0",
+  "redistributable": true,
+  "why_this_deposit": "The only deposit found in an overnight search of five repositories, the TB consortia, the persistence literature, food microbiology and the hollow-fibre field that carries all three fields the boundary framework needs: a plated volume from which the floor is DERIVED, measured per-culture starting densities rather than a nominal inoculum, and raw counts with below-limit readings retained as a placeholder rather than deleted.",
+  "floor": "L = 10 CFU/mL, from 100 uL plated with counts reported per mL. Corroborated inside the file: all 229 genuine counts are exact multiples of 10 and the smallest is exactly 10.",
+  "known_quirks": [
+    "Entries of exactly 1 in the drug-treated columns are the below-limit placeholder, not counts; a 100 uL plate cannot return 1 per mL.",
+    "Column headers say 'log10 CFU/mL' but the columns hold linear CFU/mL.",
+    "The Methods give a nominal inoculum of 1e5 CFU/mL; the measured t=0 counts are 7e5 to 2.8e6, so using the nominal figure would put a full order of magnitude into every boundary.",
+    "The drug-treated arm reads at or below the limit already at t=0 while its paired control reads about 1e6, so that sample was taken after exposure rather than before."
+  ]
+}

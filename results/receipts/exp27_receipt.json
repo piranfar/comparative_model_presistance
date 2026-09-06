@@ -1,0 +1,74 @@
+{
+  "script": "src/experiments/exp27_out_of_sample_boundaries.py",
+  "utc": "2026-09-06T06:41:15+00:00",
+  "data_source": "Dubey et al. 2026, Nat Commun 17(1), PMC13408132, CC BY 4.0",
+  "floor": {
+    "plated_volume_ul": 100.0,
+    "derived_floor_per_ml": 10.0,
+    "n_genuine_counts": 229,
+    "n_on_the_grid": 229,
+    "fraction_on_the_grid": 1.0,
+    "smallest_genuine_count": 10.0,
+    "n_below_limit_placeholders": 69,
+    "corroborated": true
+  },
+  "n_cultures_with_measured_start": 20,
+  "start_density_range": [
+    700000.0,
+    2800000.0
+  ],
+  "headroom_range_log10": [
+    4.845098040014257,
+    5.447158031342219
+  ],
+  "boundaries": [
+    {
+      "endpoint_logs": 1.0,
+      "endpoint_pct": 90.0,
+      "N_reach_per_ml": 100.0,
+      "n_cultures": 20,
+      "n_unreachable": 0,
+      "pct_unreachable": 0.0
+    },
+    {
+      "endpoint_logs": 2.0,
+      "endpoint_pct": 99.0,
+      "N_reach_per_ml": 1000.0,
+      "n_cultures": 20,
+      "n_unreachable": 0,
+      "pct_unreachable": 0.0
+    },
+    {
+      "endpoint_logs": 3.0,
+      "endpoint_pct": 99.9,
+      "N_reach_per_ml": 10000.0,
+      "n_cultures": 20,
+      "n_unreachable": 0,
+      "pct_unreachable": 0.0
+    },
+    {
+      "endpoint_logs": 4.0,
+      "endpoint_pct": 99.99,
+      "N_reach_per_ml": 100000.0,
+      "n_cultures": 20,
+      "n_unreachable": 0,
+      "pct_unreachable": 0.0
+    },
+    {
+      "endpoint_logs": 5.0,
+      "endpoint_pct": 99.99900000000001,
+      "N_reach_per_ml": 1000000.0,
+      "n_cultures": 20,
+      "n_unreachable": 5,
+      "pct_unreachable": 25.0
+    },
+    {
+      "endpoint_logs": 6.0,
+      "endpoint_pct": 99.9999,
+      "N_reach_per_ml": 10000000.0,
+      "n_cultures": 20,
+      "n_unreachable": 20,
+      "pct_unreachable": 100.0
+    }
+  ]
+}
