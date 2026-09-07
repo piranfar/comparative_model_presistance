@@ -207,6 +207,60 @@ def main() -> int:
                   f"10 uL says {r.klass_10:6} (fraction {r.reported_fraction_10:.2e})")
     w.to_csv(TABLES / "exp38_boundary_tests.csv", index=False)
 
+    # ---- how much of that depends on where the cut is ------------------
+    # The count above is taken at this deposit's own class cuts. That is one
+    # arbitrary choice, and a result that only holds at one threshold is worth
+    # less than a result that survives a sweep -- so sweep it. This is the
+    # quantity that could have come out zero: the arithmetic guarantees that
+    # two platings of one sample report different FRACTIONS, and guarantees
+    # nothing at all about whether those fractions land either side of a cut.
+    sweep = []
+    for c1 in (1e-2, 1e-3, 1e-4):
+        straddles = ((w.reported_fraction_10 < c1) !=
+                     (w.reported_fraction_100 < c1))
+        sweep.append({"c1": c1, "n_straddling": int(straddles.sum()),
+                      "n_sample_times": int(len(w)),
+                      "share": float(straddles.mean())})
+    sw = pd.DataFrame(sweep)
+    sw.to_csv(TABLES / "exp38_threshold_sweep.csv", index=False)
+    print("\n   and how much of that depends on where the class cut falls:")
+    for r in sw.itertuples():
+        print(f"      c1 = {r.c1:.0e}:  {r.n_straddling:2d} of {r.n_sample_times} "
+              f"sample-times straddle it  ({r.share:.0%})")
+
+    # ---- the arm ceilings, paired within a flask ----------------------
+    # Reporting the deepest reachable reduction per ARM invites the comparison
+    # to be taken across flasks: the best flask at one plating against a
+    # different flask at the other. That is not the claim. The claim is about
+    # ONE culture split between two platings, so the table is per flask and the
+    # two platings sit in the same row where a reader cannot mismatch them.
+    # Headroom is taken as the MAXIMUM over the flask's readings, which is the
+    # same quantity prediction 1 tests. The floor rises with the dilution the
+    # sample was read at, so the day-zero reading -- taken at the heaviest
+    # dilution, because that is where the colonies are countable -- has the
+    # WORST floor of the series and understates the ceiling by two logs. The
+    # depth an experiment can report is set by its neat plating at the end, not
+    # by the dilution it needed at the start.
+    hd = (g.groupby(["arm", "flask", "volume_ul"], as_index=False)
+          .agg(n0=("n0", "first"), floor=("floor", "min"),
+               headroom=("headroom", "max")))
+    hd = hd.pivot_table(index=["arm", "flask"], columns="volume_ul",
+                        values=["n0", "floor", "headroom"], aggfunc="first")
+    hd.columns = [f"{a}_{int(b)}ul" for a, b in hd.columns]
+    hd = hd.reset_index()
+    hd["headroom_gained_by_plating_more"] = hd.headroom_100ul - hd.headroom_10ul
+    hd.to_csv(TABLES / "exp38_headroom_by_flask.csv", index=False)
+    mid = hd[hd.arm == "MID"]
+    print(f"\n   at the standard inoculum, the deepest REPORTABLE reduction, "
+          f"per flask:")
+    print(f"      10 uL  : {mid.headroom_10ul.min():.2f} to "
+          f"{mid.headroom_10ul.max():.2f} logs")
+    print(f"      100 uL : {mid.headroom_100ul.min():.2f} to "
+          f"{mid.headroom_100ul.max():.2f} logs")
+    print(f"      the gain from plating ten times the volume is "
+          f"{mid.headroom_gained_by_plating_more.mean():.2f} logs, and log10(10) "
+          f"is 1.00")
+
     # ---- prediction 2 --------------------------------------------------
     print("\n-- P2: a floored reading reports L/N0, not the killing --")
     cen = g[g.censored].copy()
@@ -245,7 +299,9 @@ def main() -> int:
         "prediction_3": {"paired_sample_times": len(w),
                          "with_a_censored_plating": n_cen,
                          "labels_differ": n_dis,
-                         "labels_differ_and_censored": dis_cen},
+                         "labels_differ_and_censored": dis_cen,
+                         "threshold_sweep": sweep},
+        "arm_ceilings_by_flask": hd.to_dict("records"),
         "prediction_2": ({"n_censored": int(len(cen)), "within_one_floor": p2}
                          if len(cen) else None),
     }, indent=2, default=str), encoding="utf-8")

@@ -16,6 +16,7 @@ from __future__ import annotations
 from pathlib import Path
 
 import json
+import math
 
 import pandas as pd
 
@@ -495,6 +496,65 @@ def tableS7() -> str:
 
 
 
+def tableS9() -> str:
+    """The prospective experiment's two platings, paired within each flask.
+
+    Paired because the alternative invites a mismatch. Quoting an arm's best
+    figure at one plating against its best at the other takes the numerator
+    from one flask and the denominator from another, which is how an earlier
+    draft came to compare 3.93 logs in flask 1 against 4.88 in flask 2 and
+    describe them as one culture. Here the two platings of a culture share a
+    row and cannot be crossed.
+    """
+    d = pd.read_csv(T / "exp38_headroom_by_flask.csv")
+    d = d.sort_values(["arm", "flask"])
+    rows = [[r.arm.title(), str(r.flask),
+             f"{r.n0_10ul:,.0f}", f"{r.n0_100ul:,.0f}",
+             f"{r.headroom_10ul:.2f}", f"{r.headroom_100ul:.2f}",
+             f"{r.headroom_gained_by_plating_more:+.2f}"]
+            for r in d.itertuples()]
+    f = pd.DataFrame(rows, columns=[
+        "Arm", "Flask", "*N*₀ at 10 µL (per mL)", "*N*₀ at 100 µL (per mL)",
+        "*h* at 10 µL", "*h* at 100 µL", "Gain"])
+    mid = d[d.arm == "MID"]
+    return (f"**Table S9.** The deepest reduction each culture in the "
+            f"prospective experiment could report, at each of its two platings. "
+            f"*h* = log10(*N*₀/*L*) with *L* one colony in the pooled volume "
+            f"plated, taken at the lowest dilution the series was read at, "
+            f"which is where the floor is lowest and the reportable depth "
+            f"greatest. The two platings of one flask share a row: at the "
+            f"standard inoculum the 10 µL plating ceiling runs "
+            f"{mid.headroom_10ul.min():.2f} to {mid.headroom_10ul.max():.2f} "
+            f"logs and the 100 µL ceiling {mid.headroom_100ul.min():.2f} to "
+            f"{mid.headroom_100ul.max():.2f}, so a four-log endpoint is "
+            f"unreportable at one plating and reportable at the other in the "
+            f"same culture. The gain column is close to the log10(10) = 1.00 "
+            f"that plating ten times the volume buys; it is not exactly 1.00 "
+            f"because each plating measures its own *N*₀ and the two "
+            f"measurements differ."
+            + chr(10) + chr(10) + md(f, align_right_from=2))
+
+
+def tableS10() -> str:
+    """Where the class cut falls, and how much of the disagreement depends on it."""
+    d = pd.read_csv(T / "exp38_threshold_sweep.csv")
+    rows = [[f"10^{round(math.log10(r.c1))}",
+             f"{r.n_straddling} of {r.n_sample_times}",
+             f"{r.share:.0%}"] for r in d.itertuples()]
+    f = pd.DataFrame(rows, columns=[
+        "Class threshold *c*₁", "Sample-times whose two platings straddle it",
+        "Share"])
+    return ("**Table S10.** How often one culture receives two different "
+            "tolerance labels from its two platings, swept across the class "
+            "threshold. That two platings report different fractions is "
+            "arithmetic; that those fractions land either side of a cut is not, "
+            "and this is the quantity that could have come out zero. At a cut "
+            "of one per cent the window is nearly shut. At one in a thousand, "
+            "where the clinical classification reanalysed here cuts its lowest "
+            "class, it is one sample-time in six."
+            + chr(10) + chr(10) + md(f, align_right_from=1))
+
+
 def tableS8() -> str:
     """What survives once the clustering is respected, conclusion by conclusion."""
     d = pd.read_csv(T / "exp31_recomputed_inference.csv")
@@ -784,13 +844,13 @@ def main() -> int:
               "Table S6 supports Section 10 and Table S5 supports Section 6.",
               ""]
     for fn in (tableS1, tableS2, tableS3, tableS4, tableS5, tableS6, tableS7,
-                tableS8):
+                tableS8, tableS9, tableS10):
         parts.append(fn())
         parts.append("")
     OUT.write_text("\n".join(parts), encoding="utf-8")
     print(f"wrote {OUT.relative_to(ROOT)}")
-    for fn in order + (tableS1, tableS2, tableS3, tableS4, tableS5, tableS6, tableS7,
-                tableS8):
+    for fn in order + (tableS1, tableS2, tableS3, tableS4, tableS5, tableS6,
+                       tableS7, tableS8, tableS9, tableS10):
         first = fn().split("\n")[0]
         print("   " + first[:96])
     return 0

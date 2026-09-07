@@ -1,6 +1,6 @@
 {
   "script": "src/audit_manuscript.py",
-  "utc": "2026-09-07T18:18:56+00:00",
+  "utc": "2026-09-07T18:24:25+00:00",
   "checkers": [
     "check_arithmetic",
     "check_census",
@@ -11,7 +11,7 @@
     "check_identity",
     "check_terms"
   ],
-  "n_words_audited": 29739,
+  "n_words_audited": 30182,
   "counts": {
     "high": 0,
     "medium": 2,
@@ -40,7 +40,7 @@
       "severity": "low",
       "kind": "audit-count-summary",
       "where": "whole repository",
-      "detail": "src/audit_claims.py runs 142 checks (run); 3 place(s) state that number: Methods (PAPER_COMPLETE.md) line 1814 = 142; manuscript/RATE_VS_DURATION.md line 1561 = 142; README.md line 44 = 142",
+      "detail": "src/audit_claims.py runs 142 checks (run); 3 place(s) state that number: Methods (PAPER_COMPLETE.md) line 1809 = 142; manuscript/RATE_VS_DURATION.md line 1556 = 142; README.md line 44 = 142",
       "expected": "142",
       "found": "142, 142, 142",
       "checker": "check_census"
@@ -75,7 +75,7 @@
     {
       "severity": "low",
       "kind": "quantity-in-words-and-figures",
-      "where": "discussion, How large the effect is (line 1233) and results, 7. The population that fell faster often crossed the floor l (line 918)",
+      "where": "discussion, How large the effect is (line 1228) and results, 7. The population that fell faster often crossed the floor l (line 918)",
       "detail": "\"a third\" states in words what 36.6 per cent states in figures; the two sentences share assay, crossed, faster, fell, flask. Check they are the same quantity -- this rule matches on wording, not on arithmetic, because 36.6 is not a rounding of 33.3333",
       "expected": "the figure, or the word, in both places",
       "found": "\"a third\" against 36.6 per cent",
@@ -85,18 +85,18 @@
       "severity": "low",
       "kind": "scope-summary",
       "where": "whole manuscript",
-      "detail": "46 claims are stated in the Results and repeated in a legend or in the self-audit table; 46 carry every qualifier family the Results attach to them",
+      "detail": "47 claims are stated in the Results and repeated in a legend or in the self-audit table; 47 carry every qualifier family the Results attach to them",
       "expected": "every repeated claim as narrowly scoped as its original",
-      "found": "46 of 46",
+      "found": "47 of 47",
       "checker": "check_census"
     },
     {
       "severity": "low",
       "kind": "coverage-summary",
       "where": "whole manuscript",
-      "detail": "abstract (1): 13 numeric claims, 13 traceable, 13 of those to a results table or receipt, 3 tokens skipped as conventions; box (1): 9 numeric claims, 9 traceable, 9 of those to a results table or receipt, 5 tokens skipped as conventions; figure legend (4): 44 numeric claims, 44 traceable, 44 of those to a results table or receipt, 9 tokens skipped as conventions; table legend (23): 96 numeric claims, 96 traceable, 96 of those to a results table or receipt, 26 tokens skipped as conventions",
+      "detail": "abstract (1): 13 numeric claims, 13 traceable, 13 of those to a results table or receipt, 3 tokens skipped as conventions; box (1): 9 numeric claims, 9 traceable, 9 of those to a results table or receipt, 5 tokens skipped as conventions; figure legend (4): 44 numeric claims, 44 traceable, 44 of those to a results table or receipt, 9 tokens skipped as conventions; table legend (25): 108 numeric claims, 108 traceable, 108 of those to a results table or receipt, 28 tokens skipped as conventions",
       "expected": "every region scanned",
-      "found": "162 numeric claims outside table bodies",
+      "found": "174 numeric claims outside table bodies",
       "checker": "check_coverage"
     },
     {

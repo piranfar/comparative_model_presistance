@@ -22,7 +22,7 @@ ORCID: [0000-0003-3653-5739](https://orcid.org/0000-0003-3653-5739)
 
 **Correspondence:** Vahhab Piranfar, vahab.p@gmail.com
 
-**Figures:** 4 | **Tables:** 15 | **Boxes:** 1 | **Supplementary tables:** 8
+**Figures:** 4 | **Tables:** 15 | **Boxes:** 1 | **Supplementary tables:** 10
 
 ## Abstract
 
@@ -1107,23 +1107,18 @@ densities and plated at two volumes, three flasks each, 216 plate readings.
 
 The seeding is deliberately chosen so that the middle arm is the 5 × 10⁵ per mL
 the standard specifies. Realised densities were 6.4 × 10⁴, 4.4 × 10⁵ and
-3.8 × 10⁶ per mL. **At the standard inoculum plated the standard way, the deepest
-reduction that could be reported was 3.93 logs — the arm's own ceiling, not the
-drug's** — while the same cultures plated at 100 µL reported 4.88.
+3.8 × 10⁶ per mL. **At the standard inoculum plated at 10 µL, the deepest
+reduction the three flasks could report ran from 3.71 to 3.93 logs — each arm's
+own ceiling, not the drug's** — while those same three cultures plated at 100 µL
+ran from 4.88 to 5.05 (Table S9). Every flask is paired with itself across the
+two platings, so the gain is a property of the plating and not of the culture.
 
 That much is arithmetic, as Box 1 says. So is the observation that two platings
 of one sample carry different labels when both sit at their floors, since the
 labels are then *L*₁/*N*₀ and *L*₂/*N*₀. **The quantity that could have come out
 zero is how often a real experiment lands in the window where those two fractions
-straddle the cut**, and it depends on where the cut is:
-
-| Class threshold *c*₁ | Sample-times whose two platings straddle it |
-| --- | ---: |
-| 10⁻² | 1 of 54 (2%) |
-| 10⁻³ | 9 of 54 (17%) |
-| 10⁻⁴ | 8 of 54 (15%) |
-
-At a threshold of one per cent the window is nearly shut. At one in a thousand,
+straddle the cut**, and it depends on where the cut is (Table S10). At a
+threshold of one per cent the window is nearly shut. At one in a thousand,
 which is where the clinical classification analysed above cuts its lowest class,
 one sample-time in six receives two different labels from one culture. Nothing
 about the biology differs between the two readings: there is one flask, one drug
@@ -2308,3 +2303,25 @@ Held here so the Results stay on one line of reasoning. Table S6 supports Sectio
 | 6 | including the choice of plated volume widens the spread in measurable depth to 4.40 log10 | up to 4 volumes x 5 laboratories laboratory-by-volume channel | 6 | no resampling required for the volume term | SUPPORTED |
 | 7 | the criterion D_A/D_B > b_A/b_B calls 83.8% of pairs correctly | 191 pair of flasks | 6 | cluster bootstrap over whole laboratories | SUPPORTED |
 | Methods | 83 of 498 below-limit flags (16.7%) are contradicted by another plating of the same sample at the same visit | 498 flag (one reading) | 6 | cluster bootstrap over whole laboratories | SUPPORTED |
+
+**Table S9.** The deepest reduction each culture in the prospective experiment could report, at each of its two platings. *h* = log10(*N*₀/*L*) with *L* one colony in the pooled volume plated, taken at the lowest dilution the series was read at, which is where the floor is lowest and the reportable depth greatest. The two platings of one flask share a row: at the standard inoculum the 10 µL plating ceiling runs 3.71 to 3.93 logs and the 100 µL ceiling 4.88 to 5.05, so a four-log endpoint is unreportable at one plating and reportable at the other in the same culture. The gain column is close to the log10(10) = 1.00 that plating ten times the volume buys; it is not exactly 1.00 because each plating measures its own *N*₀ and the two measurements differ.
+
+| Arm | Flask | *N*₀ at 10 µL (per mL) | *N*₀ at 100 µL (per mL) | *h* at 10 µL | *h* at 100 µL | Gain |
+| --- | --- | ---: | ---: | ---: | ---: | ---: |
+| High | 1 | 3,600,000 | 4,050,000 | 4.86 | 5.91 | +1.05 |
+| High | 2 | 4,450,000 | 3,300,000 | 4.95 | 5.82 | +0.87 |
+| High | 3 | 4,450,000 | 3,950,000 | 4.95 | 5.90 | +0.95 |
+| Low | 1 | 58,000 | 78,000 | 3.06 | 4.19 | +1.13 |
+| Low | 2 | 42,500 | 65,000 | 2.93 | 4.11 | +1.18 |
+| Low | 3 | 45,500 | 50,000 | 2.96 | 4.00 | +1.04 |
+| Mid | 1 | 425,000 | 565,000 | 3.93 | 5.05 | +1.12 |
+| Mid | 2 | 340,000 | 380,000 | 3.83 | 4.88 | +1.05 |
+| Mid | 3 | 255,000 | 375,000 | 3.71 | 4.88 | +1.17 |
+
+**Table S10.** How often one culture receives two different tolerance labels from its two platings, swept across the class threshold. That two platings report different fractions is arithmetic; that those fractions land either side of a cut is not, and this is the quantity that could have come out zero. At a cut of one per cent the window is nearly shut. At one in a thousand, where the clinical classification reanalysed here cuts its lowest class, it is one sample-time in six.
+
+| Class threshold *c*₁ | Sample-times whose two platings straddle it | Share |
+| --- | ---: | ---: |
+| 10^-2 | 1 of 54 | 2% |
+| 10^-3 | 9 of 54 | 17% |
+| 10^-4 | 8 of 54 | 15% |

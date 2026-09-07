@@ -721,23 +721,18 @@ densities and plated at two volumes, three flasks each, 216 plate readings.
 
 The seeding is deliberately chosen so that the middle arm is the 5 × 10⁵ per mL
 the standard specifies. Realised densities were 6.4 × 10⁴, 4.4 × 10⁵ and
-3.8 × 10⁶ per mL. **At the standard inoculum plated the standard way, the deepest
-reduction that could be reported was 3.93 logs — the arm's own ceiling, not the
-drug's** — while the same cultures plated at 100 µL reported 4.88.
+3.8 × 10⁶ per mL. **At the standard inoculum plated at 10 µL, the deepest
+reduction the three flasks could report ran from 3.71 to 3.93 logs — each arm's
+own ceiling, not the drug's** — while those same three cultures plated at 100 µL
+ran from 4.88 to 5.05 (Table S11). Every flask is paired with itself across the
+two platings, so the gain is a property of the plating and not of the culture.
 
 That much is arithmetic, as Box 1 says. So is the observation that two platings
 of one sample carry different labels when both sit at their floors, since the
 labels are then *L*₁/*N*₀ and *L*₂/*N*₀. **The quantity that could have come out
 zero is how often a real experiment lands in the window where those two fractions
-straddle the cut**, and it depends on where the cut is:
-
-| Class threshold *c*₁ | Sample-times whose two platings straddle it |
-| --- | ---: |
-| 10⁻² | 1 of 54 (2%) |
-| 10⁻³ | 9 of 54 (17%) |
-| 10⁻⁴ | 8 of 54 (15%) |
-
-At a threshold of one per cent the window is nearly shut. At one in a thousand,
+straddle the cut**, and it depends on where the cut is (Table S12). At a
+threshold of one per cent the window is nearly shut. At one in a thousand,
 which is where the clinical classification analysed above cuts its lowest class,
 one sample-time in six receives two different labels from one culture. Nothing
 about the biology differs between the two readings: there is one flask, one drug
@@ -892,7 +887,7 @@ points at the design that would settle it.
 The first limitation is one this paper has already acted on rather than merely
 declared. Every conclusion drawn from the two primary deposits was recomputed at
 the level its observations are actually independent, and the outcome is
-tabulated rather than summarised (Table S11): twenty survive unchanged, six
+tabulated rather than summarised (Table S13): twenty survive unchanged, six
 survive with materially wider uncertainty, five do not survive and **have already
 been removed from the text above**, and one is withdrawn because its null is
 false before any data are seen. The five and the one are not claims this paper
@@ -1165,7 +1160,7 @@ by nutrient stratum.
 
 ## Supplemental material
 
-The supplemental file carries the full Materials and Methods, the analyses named above as supplementary text, and 20 supplemental tables. Table S12, Table S13, Table S14, Table S15, Table S16, Table S17, Table S18, Table S19 and Table S20 support analyses reported there rather than in this article, and are listed so that every supplemental item is named in the manuscript.
+The supplemental file carries the full Materials and Methods, the analyses named above as supplementary text, and 22 supplemental tables. Table S14, Table S15, Table S16, Table S17, Table S18, Table S19, Table S20, Table S21 and Table S22 support analyses reported there rather than in this article, and are listed so that every supplemental item is named in the manuscript.
 
 
 ## Tables

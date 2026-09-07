@@ -22,7 +22,7 @@ ORCID: [0000-0003-3653-5739](https://orcid.org/0000-0003-3653-5739)
 
 **Correspondence:** Vahhab Piranfar, vahab.p@gmail.com
 
-**Figures:** 4 | **Tables:** 15 | **Boxes:** 1 | **Supplementary tables:** 8
+**Figures:** 4 | **Tables:** 15 | **Boxes:** 1 | **Supplementary tables:** 10
 
 ---
 
@@ -867,23 +867,18 @@ densities and plated at two volumes, three flasks each, 216 plate readings.
 
 The seeding is deliberately chosen so that the middle arm is the 5 × 10⁵ per mL
 the standard specifies. Realised densities were 6.4 × 10⁴, 4.4 × 10⁵ and
-3.8 × 10⁶ per mL. **At the standard inoculum plated the standard way, the deepest
-reduction that could be reported was 3.93 logs — the arm's own ceiling, not the
-drug's** — while the same cultures plated at 100 µL reported 4.88.
+3.8 × 10⁶ per mL. **At the standard inoculum plated at 10 µL, the deepest
+reduction the three flasks could report ran from 3.71 to 3.93 logs — each arm's
+own ceiling, not the drug's** — while those same three cultures plated at 100 µL
+ran from 4.88 to 5.05 (Table S9). Every flask is paired with itself across the
+two platings, so the gain is a property of the plating and not of the culture.
 
 That much is arithmetic, as Box 1 says. So is the observation that two platings
 of one sample carry different labels when both sit at their floors, since the
 labels are then *L*₁/*N*₀ and *L*₂/*N*₀. **The quantity that could have come out
 zero is how often a real experiment lands in the window where those two fractions
-straddle the cut**, and it depends on where the cut is:
-
-| Class threshold *c*₁ | Sample-times whose two platings straddle it |
-| --- | ---: |
-| 10⁻² | 1 of 54 (2%) |
-| 10⁻³ | 9 of 54 (17%) |
-| 10⁻⁴ | 8 of 54 (15%) |
-
-At a threshold of one per cent the window is nearly shut. At one in a thousand,
+straddle the cut**, and it depends on where the cut is (Table S10). At a
+threshold of one per cent the window is nearly shut. At one in a thousand,
 which is where the clinical classification analysed above cuts its lowest class,
 one sample-time in six receives two different labels from one culture. Nothing
 about the biology differs between the two readings: there is one flask, one drug

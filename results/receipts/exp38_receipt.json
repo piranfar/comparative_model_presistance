@@ -1,6 +1,6 @@
 {
   "script": "src/experiments/exp38_boundary_experiment.py",
-  "utc": "2026-09-07T16:04:13+00:00",
+  "utc": "2026-09-07T18:22:15+00:00",
   "source_workbook": "BOUNDARY_TEST_BLIND.xlsx",
   "n_plate_readings": 216,
   "n_sample_platings": 108,
@@ -255,8 +255,129 @@
     "paired_sample_times": 54,
     "with_a_censored_plating": 14,
     "labels_differ": 10,
-    "labels_differ_and_censored": 5
+    "labels_differ_and_censored": 5,
+    "threshold_sweep": [
+      {
+        "c1": 0.01,
+        "n_straddling": 1,
+        "n_sample_times": 54,
+        "share": 0.018518518518518517
+      },
+      {
+        "c1": 0.001,
+        "n_straddling": 9,
+        "n_sample_times": 54,
+        "share": 0.16666666666666666
+      },
+      {
+        "c1": 0.0001,
+        "n_straddling": 8,
+        "n_sample_times": 54,
+        "share": 0.14814814814814814
+      }
+    ]
   },
+  "arm_ceilings_by_flask": [
+    {
+      "arm": "HIGH",
+      "flask": "1",
+      "floor_10ul": 50.0,
+      "floor_100ul": 5.0,
+      "headroom_10ul": 4.857332496431268,
+      "headroom_100ul": 5.9084850188786495,
+      "n0_10ul": 3600000.0,
+      "n0_100ul": 4050000.0,
+      "headroom_gained_by_plating_more": 1.0511525224473814
+    },
+    {
+      "arm": "HIGH",
+      "flask": "2",
+      "floor_10ul": 50.0,
+      "floor_100ul": 5.0,
+      "headroom_10ul": 4.949390006644912,
+      "headroom_100ul": 5.819543935541868,
+      "n0_10ul": 4450000.0,
+      "n0_100ul": 3300000.0,
+      "headroom_gained_by_plating_more": 0.870153928896956
+    },
+    {
+      "arm": "HIGH",
+      "flask": "3",
+      "floor_10ul": 50.0,
+      "floor_100ul": 5.0,
+      "headroom_10ul": 4.949390006644912,
+      "headroom_100ul": 5.897627091290442,
+      "n0_10ul": 4450000.0,
+      "n0_100ul": 3950000.0,
+      "headroom_gained_by_plating_more": 0.9482370846455295
+    },
+    {
+      "arm": "LOW",
+      "flask": "1",
+      "floor_10ul": 50.0,
+      "floor_100ul": 5.0,
+      "headroom_10ul": 3.0644579892269186,
+      "headroom_100ul": 4.193124598354461,
+      "n0_10ul": 58000.0,
+      "n0_100ul": 78000.0,
+      "headroom_gained_by_plating_more": 1.1286666091275426
+    },
+    {
+      "arm": "LOW",
+      "flask": "2",
+      "floor_10ul": 50.0,
+      "floor_100ul": 5.0,
+      "headroom_10ul": 2.929418925714293,
+      "headroom_100ul": 4.113943352306837,
+      "n0_10ul": 42500.0,
+      "n0_100ul": 65000.0,
+      "headroom_gained_by_plating_more": 1.184524426592544
+    },
+    {
+      "arm": "LOW",
+      "flask": "3",
+      "floor_10ul": 50.0,
+      "floor_100ul": 5.0,
+      "headroom_10ul": 2.9590413923210934,
+      "headroom_100ul": 4.0,
+      "n0_10ul": 45500.0,
+      "n0_100ul": 50000.0,
+      "headroom_gained_by_plating_more": 1.0409586076789066
+    },
+    {
+      "arm": "MID",
+      "flask": "1",
+      "floor_10ul": 50.0,
+      "floor_100ul": 5.0,
+      "headroom_10ul": 3.929418925714293,
+      "headroom_100ul": 5.05307844348342,
+      "n0_10ul": 425000.0,
+      "n0_100ul": 565000.0,
+      "headroom_gained_by_plating_more": 1.123659517769127
+    },
+    {
+      "arm": "MID",
+      "flask": "2",
+      "floor_10ul": 50.0,
+      "floor_100ul": 5.0,
+      "headroom_10ul": 3.832508912706236,
+      "headroom_100ul": 4.880813592280791,
+      "n0_10ul": 340000.0,
+      "n0_100ul": 380000.0,
+      "headroom_gained_by_plating_more": 1.0483046795745552
+    },
+    {
+      "arm": "MID",
+      "flask": "3",
+      "floor_10ul": 50.0,
+      "floor_100ul": 5.0,
+      "headroom_10ul": 3.7075701760979363,
+      "headroom_100ul": 4.8750612633917,
+      "n0_10ul": 255000.0,
+      "n0_100ul": 375000.0,
+      "headroom_gained_by_plating_more": 1.1674910872937638
+    }
+  ],
   "prediction_2": {
     "n_censored": 22,
     "within_one_floor": {
