@@ -119,6 +119,8 @@ STAGES = [
      "src.audit_claims"),
     ("check   read the legends, the box and the abstract the audit cannot",
      "src.audit_manuscript"),
+    ("read    one file to review the whole submission in, and its PDF",
+     "src.build_review_copy"),
 ]
 
 
