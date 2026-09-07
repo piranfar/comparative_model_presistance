@@ -110,6 +110,22 @@ def main() -> int:
     cols = list(rows[0].keys()) if rows else []
     out_cols = cols + [c for c in EXTRA if c not in cols]
 
+    # MERGE, do not overwrite. datasets.csv is the hand-curated seed; corpus.csv
+    # also accumulates datasets found by search and entered directly, and those
+    # have no row upstream to regenerate them from. An earlier version of this
+    # script rebuilt corpus.csv from the seed alone and silently destroyed
+    # fifty-two of them on its next run.
+    carried = 0
+    if CORPUS.exists():
+        seed_ids = {r.get("study_id", "") for r in rows}
+        for r in csv.DictReader(CORPUS.open(encoding="utf-8-sig")):
+            if r.get("study_id") and r["study_id"] not in seed_ids:
+                rows.append(r)
+                carried += 1
+        for c in out_cols:
+            for r in rows:
+                r.setdefault(c, "")
+
     # The licences are already recorded, in a different file. data/raw/SOURCES.json
     # carries a licence and a redistributable flag per source key; the manifest
     # carries study_ids like DRUSANO2018 against keys like drusano2018. Matching
@@ -173,6 +189,7 @@ def main() -> int:
 
     print(f"wrote {CORPUS.relative_to(ROOT)}  ({len(rows)} datasets)")
     print(f"   licences recovered from SOURCES.json: {matched}")
+    print(f"   carried forward from the existing corpus: {carried}")
     counts: dict[str, int] = {}
     for r in rows:
         counts[r["licence_class"]] = counts.get(r["licence_class"], 0) + 1

@@ -1,9 +1,16 @@
 study_id,contact_name,contact_email,letter,sent_date,reply_date,outcome,scope_granted,evidence_file,notes
-TSUJI2012,,,A,,,not sent,,,ASK_FIRST; licence as recorded: none stated
+TSUJI2012,,,A,,,not sent,,,ASK_FIRST; licence as recorded: none
 DRUSANO2018,,,A,,,not sent,,,"USE_OK_FACTS_ONLY; licence as recorded: Free in PMC, no open-access licence"
-BROWN2015,,,B,,,not sent,,,ASK_FIRST; licence as recorded: UNVERIFIED
+BROWN2015,,,B,,,not sent,,,ASK_FIRST; licence as recorded: none
 FERRO2014,,,A,,,not sent,,,"USE_OK_FACTS_ONLY; licence as recorded: Taverne Article 25fa, institutional deposit"
-FERRO2015,,,A,,,not sent,,,ASK_FIRST; licence as recorded: none stated
+FERRO2015,,,A,,,not sent,,,ASK_FIRST; licence as recorded: none
 GUMBO2004,,,A,,,not sent,,,USE_OK_FACTS_ONLY; licence as recorded: paywalled
 DESTEENWINKEL2010,,,A,,,not sent,,,USE_OK_FACTS_ONLY; licence as recorded: paywalled
-MAURER2014,,,A,,,not sent,,,ASK_FIRST; licence as recorded: UNVERIFIED
+MAURER2014,,,A,,,not sent,,,ASK_FIRST; licence as recorded: none
+BIOENERGETIC2025,,,B,,,not sent,,,"USE_OK_REDIST_NO; licence as recorded: CC BY-NC-ND 4.0. Read from the creativecommons.org URL inside the PMC JATS XML for PMC12149317 and corroborated by the Europe PMC license field. NOT redistributable in a public repository, and the ND "
+SEBASTIAN2025,,,B,,,not sent,,,"USE_OK_REDIST_NO; licence as recorded: CC BY-NC-ND 4.0 — confirmed twice: Europe PMC core record returns 'cc by-nc-nd', and I read the licence paragraph in the article XML: '...Attribution-NonCommercial-NoDerivatives 4.0 International Lice"
+XU2026,,,B,,,not sent,,,"USE_OK_REDIST_NO; licence as recorded: CC BY-NC-ND 4.0 — Europe PMC core record for PMC13201773 returns 'cc by-nc-nd', and the article XML carries the standard '...Attribution-NonCommercial-NoDerivatives 4.0 ... You do not have permission "
+PRETOMANID,,,B,,,not sent,,,"ASK_FIRST; licence as recorded: NOT STATED ON THE REPOSITORY RECORD — I checked and must say so plainly. The BioStudies record exposes only ReleaseDate, RootPath and AttachTo=SourceData; there is no licence or accessTags field. Seco"
+FLORFENICOL2019,,,B,,,not sent,,,"ASK_FIRST; licence as recorded: NOT STATED ON THE REPOSITORY RECORD — the BioStudies record carries only DataSource=Europe PMC, Title, ReleaseDate and AttachTo=EuropePMC, with no licence field and accessTags null. Secondary evidence"
+CEFTAZIDIME2021,,,B,,,not sent,,,"ASK_FIRST; licence as recorded: NOT STATED ON THE REPOSITORY RECORD — BioStudies exposes only DataSource=Europe PMC, Title, ReleaseDate, AttachTo=EuropePMC; no licence field, accessTags null. Secondary evidence only: Europe PMC repo"
+ENOBLOCK,,,B,,,not sent,,,"ASK_FIRST; licence as recorded: NOT STATED ON THE REPOSITORY RECORD — as with the pretomanid record, BioStudies SourceData exposes only ReleaseDate, RootPath and AttachTo, with no licence field. Secondary evidence only: the parent E"
