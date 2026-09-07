@@ -22,7 +22,7 @@ ORCID: [0000-0003-3653-5739](https://orcid.org/0000-0003-3653-5739)
 
 **Correspondence:** Vahhab Piranfar, vahab.p@gmail.com
 
-**Figures:** 4 | **Tables:** 15 | **Boxes:** 1 | **Supplementary tables:** 8
+**Figures:** 4 | **Tables:** 15 | **Boxes:** 1 | **Supplementary tables:** 10
 
 ---
 

@@ -79,6 +79,14 @@ CROSSREF = re.compile(
     r"Supplementary\s+Tables?)\s+S?$")
 DEPOSIT = re.compile(r"(figshare|zenodo|elife|nat\s+commun|doi|pmid|accession|"
                      r"biorxiv|medrxiv)", re.I)
+# A culture-collection number is a name, not a quantity: "ATCC 25922" is the
+# strain, and asking which results table 25922 came from is the wrong question.
+# Anchored to the end of the preceding text on purpose. The deposit pattern
+# above is allowed to match anywhere in the last 40 characters, which is right
+# for "figshare 19766083" but wrong here -- searching that far back would also
+# exempt the 3.93 in "in ATCC 25922 the depth was 3.93", and that number is a
+# result and has to be traced like any other.
+STRAIN = re.compile(r"\b(?:ATCC|NCTC|DSM|CIP|NCIMB|CCUG)\s*$", re.I)
 VERSIONW = re.compile(r"(?:version|python|pandas|numpy|scipy|lifelines|"
                       r"statsmodels|\bv)\s*$", re.I)
 
@@ -175,6 +183,9 @@ def _is_convention(v, raw, before, after, kind):
         return True
     # deposit identifiers and accession numbers
     if DEPOSIT.search(before[-40:]):
+        return True
+    # a culture-collection number immediately after its collection's name
+    if STRAIN.search(before):
         return True
     # software versions
     if re.fullmatch(r"\d+\.\d+\.\d+", raw) or VERSIONW.search(before):
