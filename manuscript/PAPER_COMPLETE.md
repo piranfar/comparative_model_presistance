@@ -141,14 +141,18 @@ the growth rate, the isoniazid susceptibility and the killing readings the call
 was built from. The classification, the inputs to it, and the assay geometry that
 bounds it are all in the same file.
 
-The aim of this study is to determine what a log-reduction tolerance
-classification measures when the assay floor is within reach of the endpoint, and
-to establish whether real isolates have been assigned tolerance phenotypes on
-that basis. We test the hypothesis that a deep log-reduction endpoint is
-inoculum-dependent through its observability even though it is
-inoculum-independent in its definition, using the classification and the assay
-geometry of 217 clinical isolates; we then ask what the resulting phenotype
-tracks — drug susceptibility, or the physiological state of the culture. Two
+The aim of this study is to characterise the range over which a log-reduction
+tolerance endpoint is measurable at all, and to establish whether real isolates
+have been assigned tolerance phenotypes from outside it. Two boundaries on the
+starting density follow from the definitions — one deciding whether an endpoint
+is reachable, the other whether a floor-level reading identifies a class — and
+both are computed from quantities a time-kill protocol already records, so
+neither asks a laboratory to measure anything new. We then test the hypothesis
+that a deep log-reduction endpoint is inoculum-dependent through its
+observability even though it is inoculum-independent in its definition, using the
+classification and the assay geometry of 217 clinical isolates; we then ask what
+the resulting phenotype tracks — drug susceptibility, or the physiological state
+of the culture. Two
 further deposits establish that the same arithmetic governs killing experiments
 where inoculum is controlled by protocol rather than by clinical accident: a
 six-laboratory consortium exercise distributing one strain under one written
@@ -160,9 +164,10 @@ whether the boundaries locate the same depth in an experiment they were not buil
 from. Finally we ask whether the concentration and duration axes are separate in
 these files, which is the premise the framework defining them rests on. All five
 deposits are published and openly licensed, and none was generated for this study
-(Table 1). If the
-hypothesis holds, a tolerance call reported without its starting density and its
-assay floor cannot be interpreted, and the phenotypes assigned in its
+(Table 1). The two boundaries are then tested forward rather than backward, in a
+prospective experiment built to break them, with every prediction written down
+before a plate was counted. If the hypothesis holds, a tolerance call reported without its starting density
+and its assay floor cannot be interpreted, and the phenotypes assigned in its
 name are, in part, a record of how the assay was set up.
 
 **Table 1.** The five published deposits reanalysed. Four carry the analysis and the fifth is held out to test it. None was generated for this study. The held-out deposit was opened after every boundary and threshold was fixed, which the commit history of the analysis repository timestamps; the other four were selected for the fields they carry, and that selection is not separately registered.
