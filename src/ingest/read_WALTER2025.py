@@ -17,8 +17,19 @@ READ THIS BEFORE USING THE NUMBERS
     hours. Two labels cannot be turned into a single time and are left blank:
     "3 weeks before therapy start (-3)", which is negative, and "4-6 weeks of
     therapy", which is a range. Both keep their verbatim label in `arm`/`notes`.
-  - Sheet 3a labels its baseline column simply "before therapy" with no offset;
-    it is taken as t = 0 (start of exposure) and the note says so.
+  - Sheet 3a labels its baseline row simply "before therapy" with no offset,
+    and its time_h is left BLANK. It is tempting to call that t = 0, but this
+    workbook itself forbids the shortcut: on sheet 1a&b the merged header
+    "before Therapy" (D3:H4) spans TWO rows, "3 weeks before therapy start
+    (-3)" and "therapy start (0)". In this deposit "before therapy" is a phase,
+    not a time, so sheet 3a's four baseline mice get no time_h and the note
+    says why.
+  - `replicate` is the spreadsheet COLUMN the value sits in (mouseC, mouseAB,
+    ...). That is the only mouse identifier the deposit provides, and using the
+    column rather than a running count keeps a gap in the middle of a group
+    from silently renumbering the mice after it. The deposit does not say
+    whether one column is the same animal at successive timepoints, so do not
+    assume it is.
 
 NOT READ: sheets 2a&b, 5f, 6a, 6b, S2a-d, S3a, S3c and S8 of this workbook, and
 the whole of MOESM4-11, are LC-MS/MS drug concentrations, Caco-2 permeability or
@@ -32,6 +43,7 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 from openpyxl import load_workbook
+from openpyxl.utils import get_column_letter
 
 from src.ingest import COLUMNS
 
@@ -102,8 +114,12 @@ def parse_time(label: str) -> tuple[float, str]:
     if low.startswith("therapy start"):
         return 0.0, "therapy start (t = 0) as the source labels it"
     if low == "before therapy":
-        return 0.0, ("source says only 'before therapy' with no offset; taken "
-                     "as t = 0, the start of exposure")
+        return np.nan, (
+            "source says only 'before therapy', with no offset, so time_h is "
+            "BLANK: elsewhere in this same workbook (sheet 1a&b, merged header "
+            "D3:H4) 'before Therapy' labels a block containing BOTH '3 weeks "
+            "before therapy start (-3)' AND 'therapy start (0)', so the phrase "
+            "does not fix a single time and is not read as t = 0")
     m = re.match(r"^\s*(\d+(?:\.\d+)?)\s*-\s*(\d+(?:\.\d+)?)\s*w", low)
     if m:
         return np.nan, (f"source label '{s}' is a RANGE of times, not a single "
@@ -130,28 +146,29 @@ def read(d: Path) -> pd.DataFrame:
         g = _filled(ws)
         groups = {c: _txt(g.get((grp_row, c), ""))
                   for c in range(3, ws.max_column + 1)}
-        seen: dict[str, int] = {}
         for r in range(first_row, ws.max_row + 1):
             lbl = _txt(g.get((r, 2), ""))
             if not lbl or lbl.lower().startswith("sex"):
                 continue
             t, why = parse_time(lbl)
-            seen.clear()
             for c in range(3, ws.max_column + 1):
                 val = _num(ws.cell(row=r, column=c).value)
                 arm = groups.get(c, "")
                 if np.isnan(val) or not arm:
                     continue
-                seen[arm] = seen.get(arm, 0) + 1
                 drug, dose, unit = parse_arm(arm)
                 add(sheet=sheet, drug=drug, concentration=dose, conc_unit=unit,
                     arm=(f"{arm} | {lbl} [Fig {sheet}]" if np.isnan(t)
                          else f"{arm} [Fig {sheet}]"),
-                    replicate=f"mouse{seen[arm]}", time_h=t, cfu_per_ml=val,
+                    replicate=f"mouse{get_column_letter(c)}",
+                    time_h=t, cfu_per_ml=val,
                     readout=LUNG,
                     notes=f"Figure {sheet}; {why}; dose is an administered "
                           f"mg/kg body-weight dose, not a medium concentration; "
-                          f"the workbook does not name the organism")
+                          f"replicate is the spreadsheet column, the only mouse "
+                          f"identifier the deposit gives -- it is NOT stated "
+                          f"whether one column is the same animal across "
+                          f"timepoints; the workbook does not name the organism")
 
     # ---- 3a: one row per condition, sex given per column ------------------
     ws = wb["3a"]
@@ -170,7 +187,8 @@ def read(d: Path) -> pd.DataFrame:
                 continue
             n += 1
             add(sheet="3a", drug=drug, concentration=dose, conc_unit=unit,
-                arm=f"{lbl} [Fig 3a]", replicate=f"mouse{n}", time_h=t,
+                arm=f"{lbl} [Fig 3a]",
+                replicate=f"mouse{get_column_letter(c)}", time_h=t,
                 cfu_per_ml=val,
                 readout=LUNG,
                 notes=f"Figure 3a; {why}; sex of this mouse as the sheet "
@@ -188,17 +206,15 @@ def read(d: Path) -> pd.DataFrame:
             if not lbl:
                 continue
             t, why = parse_time(lbl)
-            seen: dict[str, int] = {}
             for c in range(3, ws.max_column + 1):
                 val = _num(ws.cell(row=r, column=c).value)
                 arm = groups.get(c, "")
                 if np.isnan(val) or not arm:
                     continue
-                seen[arm] = seen.get(arm, 0) + 1
                 drug, dose, unit = parse_arm(arm)
                 add(sheet=sheet, drug=drug, concentration=dose, conc_unit=unit,
                     arm=f"{arm} | {lbl} [Fig {sheet}]",
-                    replicate=f"mouse{seen[arm]}",
+                    replicate=f"mouse{get_column_letter(c)}",
                     time_h=t, cfu_per_ml=val, readout=readout,
                     notes=f"Figure {sheet}; {why}; sex of this mouse as the "
                           f"sheet states it: {sexes.get(c, '') or 'not given'}; "

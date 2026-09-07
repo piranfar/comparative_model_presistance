@@ -5,8 +5,8 @@ CC BY-NC-ND: used here, not redistributed.
 
 Every sheet carries its own prose caption in row 2, which is how the drug, the
 concentration, the strains and the medium were established for each one; the
-caption is quoted verbatim in the notes of every row read from it. Fifteen
-sheets carry a quantity against "Time (hours)"; those are read. The other sixty
+caption is quoted verbatim in the notes of every row read from it. Seventeen
+sheets carry a quantity against "Time (hours)"; those are read. The other fifty-eight
 are metabolite pools, oxygen-consumption and acidification rates, mutation
 rates, resistance-evolution MIC curves, expression values, flow cytometry and
 checkerboards, and are not.
@@ -52,10 +52,20 @@ SHEETS DELIBERATELY NOT READ, AND WHY
       time column: a duplicate of rows already read.
   the "4 hour fraction survival" sub-blocks at the foot of 'Ext. Fig. 1f',
       'Ext. Fig. 1g' and 'Ext. Fig. 1h' -- likewise the t = 4 rows repeated.
-  'Fig. 1c', 'Ext. Fig. 7a'        OD600 growth curves in hours, but with NO
-      drug in them at all; growth curves rather than exposure.
+  sixteen whole series that this workbook prints on two or three sheets each --
+      see _dedupe() below. The deposit admits the habit in two captions ("These
+      data are replicated from Figure 1"), and does it silently elsewhere: the
+      pF1 and pNOX curves of 'Fig. 1h' reappear as the "MOPS rich" arm of
+      'Fig. 5e' and the "WT" arm of 'Ext. Fig. 2e'; the MG1655 curve of
+      'Fig. 4a' reappears on 'Fig. 5a' and 'Ext. Fig. 1e'; the dAtpA curve of
+      'Fig. 5a' reappears on 'Fig. 5d'. Kept once each, on the first sheet that
+      prints them, with the other sheets named in the notes -- 140 readings that
+      would otherwise have been counted twice or three times.
   'Fig. 1f', 'Ext. Fig. 4d'        OD600 against a CONCENTRATION axis
       (ciprofloxacin, piceatannol), not against time. Dose-response, not kill.
+      ('Fig. 1c' and 'Ext. Fig. 7a' ARE read: they are OD600 against time in
+      hours, the quantity named by the deposit, with no drug -- growth-control
+      rows, which the schema takes with drug blank.)
   'Fig. 1a', 'Fig. 1b', 'Ext. Fig. 7c', 'Ext. Fig. 7d'   metabolite pools
   'Fig. 1d', 'Fig. 1e', 'Fig. 3c', 'Ext. Fig. 4a', 'Ext. Fig. 7b'  OCR / ECAR
   'Fig. 1g', 'Fig. 3g'-'Fig. 3j', 'Fig. 6a'-'Fig. 6e', 'Ext. Fig. 1c',
@@ -134,6 +144,17 @@ CFG: dict[str, dict] = {
 }
 
 # The one sheet with absolute counts. Its groups are the treatments.
+# Two sheets are plain optical density against time in hours, with the quantity
+# named by the deposit itself ("OD600" printed over the data) and NO drug in
+# them -- growth controls, which the schema takes with drug left blank. They are
+# returned as OD600 readings; an optical density is never turned into a count.
+OD_SHEETS = {
+    "Fig. 1c": "Growth curves for pEmpty, pF1, and pNOX cells grown in MOPS "
+               "rich media",
+    "Ext. Fig. 7a": "Growth curves for MG1655 and dAtpA cells grown in MOPS "
+                    "rich media",
+}
+
 CFU_SHEET = "Ext. Fig. 4e"
 CFU_ARMS = {
     "+ 1% DMSO": ("", np.nan, ""),
@@ -174,7 +195,7 @@ def read(d: Path) -> pd.DataFrame:
     rows: list[dict] = []
 
     for sheet in xl.sheet_names:
-        if sheet not in CFG and sheet != CFU_SHEET:
+        if sheet not in CFG and sheet != CFU_SHEET and sheet not in OD_SHEETS:
             continue
         df = pd.read_excel(path, sheet_name=sheet, header=None)
         caption = _txt(df.iat[1, 0])
@@ -212,7 +233,30 @@ def read(d: Path) -> pd.DataFrame:
                             "time_h": t,
                             "floor_basis": FLOOR_BASIS,
                         }
-                        if sheet == CFU_SHEET:
+                        if sheet in OD_SHEETS:
+                            row.update({
+                                "strain": label, "drug": "",
+                                "concentration": np.nan, "conc_unit": "",
+                                "readout": "OD600",
+                                "floor_basis": "not applicable: an optical "
+                                               "density, not a count",
+                                "notes": ("od600=" + format(v, ".6g")
+                                          + ". The schema has no column for a "
+                                            "non-count reading, so the value is "
+                                            "kept here and cfu_per_ml is left "
+                                            "blank -- an optical density is "
+                                            "never converted to a count. The "
+                                            "quantity is the deposit's own: "
+                                            "'" + quantity + "' is printed over "
+                                            "these columns and the axis is '"
+                                            "Time (hours)'. No drug is present "
+                                            "in this experiment, so drug is "
+                                            "blank. Replicates are named by "
+                                            "column position, the deposit gives "
+                                            "no identifiers. Sheet caption: '"
+                                          + caption + "'. " + ORGANISM_NOTE),
+                            })
+                        elif sheet == CFU_SHEET:
                             drug, conc, unit = CFU_ARMS.get(label, ("", np.nan, ""))
                             row.update({
                                 "strain": "MG1655", "drug": drug,
@@ -257,8 +301,59 @@ def read(d: Path) -> pd.DataFrame:
                                             "identifiers. Sheet caption: '"
                                           + caption + "'. " + ORGANISM_NOTE),
                             })
+                        row["_series"] = "␟".join(
+                            [sheet, block, label, str(k)])
+                        row["_value"] = v
                         rows.append(row)
 
     if not rows:
         return empty()
-    return finish(pd.DataFrame(rows), "BIOENERGETIC2025")
+    return finish(_dedupe(pd.DataFrame(rows)), "BIOENERGETIC2025")
+
+
+def _dedupe(df: pd.DataFrame) -> pd.DataFrame:
+    """Drop series this workbook prints on more than one sheet.
+
+    This deposit replots the same cultures in several panels and says so in two
+    places itself -- 'Fig. 6a' is captioned "These data are replicated from
+    Figure 1 to facilitate comparisons" and 'Ext. Fig. 8a' "replicated from
+    Extended Data Figure 1c". The same habit runs through the lethality sheets
+    without a caption to warn of it: sixteen four-point series appear on two or
+    three sheets each, identical value for identical value --
+
+      pF1 and pNOX under 18 ng/mL ciprofloxacin: 'Fig. 1h', again as the
+        "MOPS rich" arm of 'Fig. 5e', and again as the "WT" arm of 'Ext. Fig. 2e'
+      MG1655 under 16 ng/mL: 'Fig. 4a', again as "MOPS rich" on 'Fig. 5a',
+        and again as "MG1655 (16 ng/mL)" on 'Ext. Fig. 1e'
+      dAtpA under 16 ng/mL: 'Fig. 5a', again as "MOPS rich" on 'Fig. 5d'
+
+    A series is kept once, on the first sheet the workbook prints it on, and
+    every sheet and arm it also appears under is named in the notes of the rows
+    that are kept. Without this the corpus would count 140 of these 1,004
+    readings twice or three times, and no downstream reader could tell which.
+    """
+    df = df.copy()
+    values: dict[str, list] = {}
+    for series, g in df.groupby("_series", sort=False):
+        values[series] = tuple(zip(g["time_h"], g["_value"]))
+    order = {s: i for i, s in enumerate(df["_series"].drop_duplicates())}
+    alias: dict[tuple, list[str]] = {}
+    for series, v in values.items():
+        alias.setdefault(v, []).append(series)
+    drop: set[str] = set()
+    extra: dict[str, str] = {}
+    for v, members in alias.items():
+        if len(members) == 1:
+            continue
+        members.sort(key=lambda s: order[s])
+        drop |= set(members[1:])
+        extra[members[0]] = (
+            "; the identical series is also printed on this workbook's "
+            + ", ".join("'" + m.split("␟")[0] + "' ("
+                        + " / ".join(x for x in m.split("␟")[1:3] if x)
+                        + ")" for m in members[1:])
+            + " -- the same cultures replotted, returned ONCE here so they are "
+              "not counted twice")
+    df["notes"] = df["notes"] + df["_series"].map(lambda s: extra.get(s, ""))
+    df = df[~df["_series"].isin(drop)]
+    return df.drop(columns=["_series", "_value"])

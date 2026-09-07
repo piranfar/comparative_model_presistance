@@ -29,6 +29,14 @@ WHAT IS NOT READ, AND WHY
                       Fig.1G; subset with pause = 0", and all 48 of its readings
                       match Fig.1G rows on (Rundate, Pause, Treatment, biorep,
                       Timepoint). Read from Fig.1G only, to avoid double-counting.
+  Fig.4B              VERIFIED DUPLICATE. The Overview's own line for this sheet
+                      reads "Subset of the time-kill data for Fig. 4 C panel 1",
+                      and every one of its 48 rows is present verbatim in
+                      Fig.4C_and_Fig.S8A panel 1 -- matched on all twelve shared
+                      fields (time_h, ab1, conc1, xMIC1, ab2, conc2, xMIC2,
+                      strain, biol.rep, cfu, survival, run), 48 of 48. Read from
+                      Fig.4C_and_Fig.S8A only. Fig.4B carries 47 usable CFU
+                      readings, none of them new.
   Fig.S5              DUPLICATE in kind: a 6 h CFU/OD correlation table whose
                       rows are labelled with the figure they came from (S1B and
                       so on), i.e. the same tubes already read from those sheets.
@@ -222,7 +230,11 @@ def read(d: Path) -> pd.DataFrame:
                       "the 'spot' column, so they are recorded as CFU/mL. "
                       "Concentrations are not in the deposit: the Overview says "
                       "only that IC75 concentrations were used. 'ndc' is the "
-                      "source's no-drug control. Run date "
+                      "source's no-drug control. Observation, recorded but NOT "
+                      "acted on: every value on this sheet is an integer "
+                      "multiple of 1e6/7, which is the arithmetic of a 7 uL spot "
+                      "at a 1000-fold dilution -- but the deposit states no "
+                      "volume and no dilution, so neither is recorded. Run date "
                       + _txt(r["rundate"])[:10]),
         })
 
@@ -263,17 +275,10 @@ def read(d: Path) -> pd.DataFrame:
                       "the species P. aeruginosa'"),
         })
 
-    # ---- Fig.4B: exemplary PA14 vs CpxS T163P curves
-    df = _block(d, "Fig.4B", 0, 0, 12)
-    new = _hysteresis(
-        df, "Fig.4B", "cfu", rep_col="biol.rep",
-        extra=lambda r: ("xMIC1 " + _g(r["xMIC1"]) + " / xMIC2 " + _g(r["xMIC2"]),
-                         "run " + _txt(r["run"]) + "; the Overview gives xMIC1 "
-                         "and xMIC2 as the pre- and main-treatment "
-                         "concentrations as multiples of that strain's MIC"))
-    for row, (_, r) in zip(new, df.iterrows()):
-        row["replicate"] = _txt(r["run"]) + "/rep" + _txt(r["biol.rep"])
-    rows += new
+    # ---- Fig.4B is NOT read: the Overview calls it "Subset of the time-kill
+    # data for Fig. 4 C panel 1", and all 48 of its rows were checked against
+    # Fig.4C_and_Fig.S8A panel 1 and matched on every shared field. Reading it
+    # would count 47 cultures twice.
 
     # ---- Fig.4C / Fig.4D: Cpx mutants and CpxS over-expression (cols A-N)
     for sheet in ("Fig.4C_and_Fig.S8A", "Fig.4D_and_Fig.S8B"):
@@ -300,9 +305,9 @@ def read(d: Path) -> pd.DataFrame:
         rows.append({
             "source_file": XLSX, "sheet": "Fig.5A",
             "strain": _txt(r["strain"]),
-            "drug": "gen" if gen else "",
+            "drug": "Gentamicin" if gen else "",
             "arm": ("pre " + _txt(r["ab1"]) + " | main "
-                    + ("gen" if gen else "none")),
+                    + ("Gentamicin" if gen else "none")),
             "replicate": _txt(r["biol.rep"]),
             "time_h": t, "cfu_per_ml": _num(r["cfu"]),
             "floor_basis": FLOOR_BASIS, "readout": "CFU",
@@ -371,9 +376,10 @@ def read(d: Path) -> pd.DataFrame:
     if not rows:
         return empty()
     out = pd.DataFrame(rows)
-    # 34 CFU cells are empty in the deposit (23 on Fig.2A, 4 on Fig.1G, 4 on
-    # Fig.5A, 2 on Fig.4C, 1 on Fig.4B). A blank cell is not a reading, so those
-    # rows are dropped rather than carried as a count of nothing.
+    # 33 CFU cells are empty in the deposit, on the sheets this reader takes:
+    # 23 on Fig.2A, 4 on Fig.1G, 4 on Fig.5A, 2 on Fig.4C_and_Fig.S8A. A blank
+    # cell is not a reading, so those rows are dropped rather than carried as a
+    # count of nothing -- and never as a zero, which would invent a measurement.
     blank = (out.readout == "CFU") & out.cfu_per_ml.isna()
     out = out[~blank]
     return finish(out, "BUCHHOLZ2026")

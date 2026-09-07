@@ -79,8 +79,24 @@ def main() -> int:
             failed.append((study_id, f"{type(exc).__name__}: {exc}"))
             traceback.print_exc(limit=1)
             continue
+        # Two ways a floor can be present, and they are different findings.
+        # STATED means the depositor named a limit as a number and therefore
+        # thought about it. DERIVED means nobody named one, but the plated
+        # volume survives in the file and the floor follows by arithmetic --
+        # the information is there by accident rather than by intent. Counting
+        # them together, as an earlier version of this table did, turns "two
+        # deposits report their detection limit" into "five do".
+        stated = df.floor_basis.str.contains(
+            r"stated in the sheet|LOD column|limit of detection\b.*\d",
+            case=False, regex=True, na=False) & df.floor_cfu_per_ml.notna()
+        derived = df.floor_cfu_per_ml.notna() & ~stated
         frames.append(df)
         cover.append({
+            "floor_regime": ("stated by the source" if stated.any()
+                             else "derived from a stated plated volume"
+                             if derived.any() else "none"),
+            "floor_stated_rows": int(stated.sum()),
+            "floor_derived_rows": int(derived.sum()),
             "study_id": study_id,
             "rows": len(df),
             "series": df.groupby(["arm", "replicate"], dropna=False).ngroups,
@@ -112,10 +128,19 @@ def main() -> int:
     print(cv[["study_id", "rows", "series", "timepoints", "with_a_count",
               "with_a_floor"]].to_string(index=False))
 
-    n_floor = (cv.with_a_floor > 0).sum()
-    print(f"\n   datasets stating a floor: {n_floor} of {len(cv)}")
-    print(f"   readings whose censoring cannot be decided: "
-          f"{int(cv.floor_unknown_rows.sum()):,} of {len(long):,}")
+    n_stated = int((cv.floor_stated_rows > 0).sum())
+    n_derived = int((cv.floor_derived_rows > 0).sum())
+    print(f"\n   deposits that STATE a detection limit as a number : "
+          f"{n_stated} of {len(cv)}  ({int(cv.floor_stated_rows.sum()):,} readings)")
+    print(f"   deposits where it is DERIVABLE from a stated volume: "
+          f"{n_derived} of {len(cv)}  ({int(cv.floor_derived_rows.sum()):,} readings)")
+    print(f"   readings whose censoring cannot be decided from the file: "
+          f"{int(cv.floor_unknown_rows.sum()):,} of {len(long):,} "
+          f"({100*cv.floor_unknown_rows.sum()/len(long):.1f}%)")
+    print("\n   whether that last number means anything depends on the papers, "
+          "not the files:\n   a deposit whose article states the limit in its "
+          "methods is a different case\n   from one where nobody recorded it at "
+          "all. exp39 settles that.")
     if failed:
         print(f"\n   {len(failed)} reader(s) failed:")
         for s, why in failed:

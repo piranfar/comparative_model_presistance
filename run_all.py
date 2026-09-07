@@ -86,6 +86,9 @@ STAGES = [
     ("exp37  every denominator, traced to the exclusion that produced it",
      "src.experiments.exp37_analysis_flow"),
 
+    ("exp38  the boundaries tested forward, on an experiment built to break them",
+     "src.experiments.exp38_boundary_experiment"),
+
     ("fig 1  the assay floor bounds the endpoint and decides the phenotype",
      "src.figures.fig1_dynamic_range"),
     ("fig 2  one protocol, six laboratories: the inoculum still decides",

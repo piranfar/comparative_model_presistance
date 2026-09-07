@@ -60,9 +60,13 @@ AND ONE FAMILY WHERE THE LABELS CONTRADICT EACH OTHER. The four series starting
 "0829_5X MIC CEFEPIME" on '0829 FEP TOLERANCE', and headed "WT_5X CEFEPIME" in
 the right-hand half of '1097 1645 & DBL FEP TOLERA', where they serve as the
 denominator of the SP_1645 fold enrichment. One of those two labels is wrong and
-nothing in the deposit says which. Both are returned, as labelled, each carrying
-a note naming the other, so that nobody downstream treats them as two
-independent experiments.
+nothing in the deposit says which. They are ONE set of cultures, so they are
+returned ONCE -- with `strain` BLANK, because that is the field the deposit
+contradicts itself on, and both printed headers quoted in `arm` and in the
+notes. The drug (cefepime) and the multiple of MIC (5x) agree between the two
+labels and are kept. Censoring is left unknown for that block: the sheet's
+"no WT could be recovered" note is about the wild type, and whether this block
+is the wild type is precisely what is in dispute.
 
 WHAT IS NOT READ, AND WHY
   the 19 sheets whose names end GROWTH -- '1888 1890 noABX GROWTH',
@@ -237,58 +241,78 @@ def read(d: Path) -> pd.DataFrame:
                 "label": (strain.upper(), drug.upper()[:3], conc),
             })
 
-    # group identical blocks, then split each group by the label it carries
+    # Blocks whose full content is identical are the SAME cultures printed
+    # more than once. One copy is returned, whatever the labels say, so that a
+    # reading is never counted twice; where the labels agree, that label is
+    # used, and where they contradict each other the contradicted field is left
+    # blank rather than resolved by guesswork.
     by_sig: dict[tuple, list[dict]] = {}
     for b in found:
         by_sig.setdefault(b["sig"], []).append(b)
 
     rows: list[dict] = []
-    for sig, group in by_sig.items():
-        by_label: dict[tuple, list[dict]] = {}
-        for b in group:
-            by_label.setdefault(b["label"], []).append(b)
-        for label, same in by_label.items():
-            b = dict(same[0])
-            # the N.B. about non-recovery may sit on any sheet the block was
-            # printed on; keep it whichever copy is the representative
-            b["nb"] = next((x["nb"] for x in same if x["nb"]), "")
-            dup = ""
-            if len(same) > 1:
-                dup = ("; the identical block is printed on "
-                       + ", ".join("'" + x["sheet"] + "'" for x in same)
-                       + " -- returned once, not once per sheet")
-            if len(by_label) > 1:
-                others = ["'" + x["header"] + "' on '" + x["sheet"] + "'"
-                          for lab, xs in by_label.items() if lab != label
-                          for x in xs]
-                dup += ("; CONTRADICTION IN THE DEPOSIT: exactly these readings "
-                        "also appear headed " + ", ".join(others)
-                        + ". One of those labels is wrong and the file gives no "
-                          "way to tell which, so both are returned as labelled "
-                          "and neither should be treated as an independent "
-                          "experiment")
-            for letter, t, v in b["readings"]:
-                censored = ""
-                note = (UNIT_CAVEAT + "; " + b["head_note"]
-                        + "; concentration is the multiple of MIC named in that "
-                          "header, the workbook gives no mg/L value" + dup)
-                if b["nb"] and t == 24 and b["strain"].upper().startswith("WT"):
-                    censored = "yes"
-                    note += ("; the deposit states on this sheet: '" + b["nb"]
-                             + "'. That is the source's own word that these 24 h "
-                               "wild-type readings are non-detections, so they "
-                               "are marked censored -- but no floor value is "
-                               "recorded, because 'no colonies recovered' is not "
-                               "a number")
-                rows.append({
-                    "source_file": XLSX, "sheet": b["sheet"],
-                    "strain": b["strain"], "drug": b["drug"],
-                    "concentration": b["conc"],
-                    "conc_unit": "xMIC" if not np.isnan(b["conc"]) else "",
-                    "arm": b["header"], "replicate": letter,
-                    "time_h": t, "cfu_per_ml": v, "censored": censored,
-                    "floor_basis": FLOOR_BASIS, "readout": "CFU", "notes": note,
-                })
+    for sig, same in by_sig.items():
+        b = dict(same[0])
+        b["nb"] = next((x["nb"] for x in same if x["nb"]), "")
+        labels = {x["label"] for x in same}
+        printed = ", ".join(sorted({"'" + x["header"] + "' on '" + x["sheet"]
+                                    + "'" for x in same}))
+        dup = ""
+        if len({x["sheet"] for x in same}) > 1 or len(same) > 1:
+            dup = ("; the identical block -- every replicate letter, time and "
+                   "value -- is printed as " + printed + ". It is returned ONCE, "
+                   "not once per printing, so that the same cultures are not "
+                   "counted twice")
+        contradicted = len(labels) > 1
+        if contradicted:
+            # the parts of the label the copies still agree on may be kept; a
+            # part they disagree on is blanked and the disagreement recorded.
+            strains = {x["strain"] for x in same}
+            drugs = {x["drug"].upper()[:3] for x in same}
+            concs = {x["conc"] for x in same}
+            if len(strains) > 1:
+                b["strain"] = ""
+            if len(drugs) > 1:
+                b["drug"] = ""
+            if len(concs) > 1:
+                b["conc"] = np.nan
+            b["head_note"] = ("block headers as printed, and they disagree: "
+                              + printed)
+            dup += ("; CONTRADICTION IN THE DEPOSIT: these same readings carry "
+                    "two different labels -- " + printed + ". Nothing in the "
+                    "file says which is right, so the fields they disagree on "
+                    "are left BLANK here and both printed headers are recorded "
+                    "in this note. Do not treat the two as independent "
+                    "experiments; they are one set of cultures")
+        for letter, t, v in b["readings"]:
+            censored = ""
+            note = (UNIT_CAVEAT + "; " + b["head_note"]
+                    + "; concentration is the multiple of MIC named in that "
+                      "header, the workbook gives no mg/L value" + dup)
+            if b["nb"] and t == 24 and not contradicted                     and b["strain"].upper().startswith("WT"):
+                censored = "yes"
+                note += ("; the deposit states on this sheet: '" + b["nb"]
+                         + "'. That is the source's own word that these 24 h "
+                           "wild-type readings are non-detections, so they "
+                           "are marked censored -- but no floor value is "
+                           "recorded, because 'no colonies recovered' is not "
+                           "a number")
+            elif b["nb"] and t == 24 and contradicted:
+                note += ("; the sheet carries the note '" + b["nb"] + "', but "
+                         "censoring is left UNKNOWN for this block: that note "
+                         "is about the wild type, and whether this block is the "
+                         "wild type is exactly what the deposit contradicts "
+                         "itself about")
+            rows.append({
+                "source_file": XLSX, "sheet": b["sheet"],
+                "strain": b["strain"], "drug": b["drug"],
+                "concentration": b["conc"],
+                "conc_unit": "xMIC" if not np.isnan(b["conc"]) else "",
+                "arm": " / ".join(sorted({x["header"] for x in same})),
+                "replicate": letter,
+                "time_h": t, "cfu_per_ml": v, "censored": censored,
+                "floor_basis": FLOOR_BASIS, "readout": "CFU", "notes": note,
+            })
 
     if not rows:
         return empty()
