@@ -106,6 +106,7 @@ METHODS_KEEP_IN_MAIN = {
 KEEP_AS_MAIN_TABLE = {"1", "3", "6"}
 # --------------------------------------------------------------------------
 
+COUNTS = re.compile(r"^\*\*Figures:\*\*.*$", re.M)
 HEAD3 = re.compile(r"^### (.*)$", re.M)
 HEAD2 = re.compile(r"^## (.*)$", re.M)
 TABLE_REF = re.compile(r"\bTable (S?\d+)\b")
@@ -334,7 +335,11 @@ def main() -> int:
                    "Methods in the supplemental file.*", ""]
     for s in gather(MAIN, "Materials and Methods"):
         main_parts += [f"### {s.title}", "", s.body.strip(), ""]
-    for parent in ("Acknowledgments", "References", "Figure legends"):
+    # "References" is skipped: the prose file carries an empty placeholder
+    # heading, and the numbered list is generated below from this file's own
+    # citation order. Emitting the placeholder too would put an empty References
+    # section above the real one.
+    for parent in ("Acknowledgments", "Figure legends"):
         if parent in preambles:
             main_parts += [f"## {parent}", "", preambles[parent].strip(), ""]
 
@@ -396,6 +401,42 @@ def main() -> int:
     if supp_tabs:
         supp_text += "\n\n## Supplementary tables\n\n" + "\n\n".join(supp_tabs) + "\n"
 
+    # ---- the abstract, and an honest count of the display items -------
+    # Both are things a reader meets before anything else and a journal checks
+    # first. The prose file's own count describes the long document and is
+    # simply wrong here: the article carries three tables, not fifteen.
+    n_figs = len({s for s in FIG_REF.findall(main_text) if not s.startswith("S")})
+    main_text = COUNTS.sub(
+        f"**Figures:** {n_figs} | **Tables:** {len(main_tabs)} | "
+        f"**Boxes:** 1 | **Supplemental tables:** {len(supp_tabs)}",
+        main_text, count=1)
+    if ABSTRACT.exists():
+        abs_md = ABSTRACT.read_text(encoding="utf-8").strip()
+        anchor = "\n## Introduction"
+        if anchor in main_text:
+            main_text = main_text.replace(anchor, "\n" + abs_md + "\n" + anchor, 1)
+        else:
+            problems.append("no Introduction heading to place the abstract before")
+
+    # ---- number the references, separately for each file --------------
+    # Each file is numbered in ITS OWN citation order, which is what a reader of
+    # one of them needs and what ASM asks for: a reference cited only in the
+    # supplemental material belongs to the supplement's list, and one cited in
+    # both appears in both lists under whatever number each file gives it.
+    try:
+        from src.build_references import build_list, load_bib, substitute
+        bib = load_bib()
+        main_text, main_order = substitute(main_text, bib)
+        supp_text, supp_order = substitute(supp_text, bib)
+        main_text += "\n\n" + build_list(main_order, bib)
+        if supp_order:
+            supp_text += ("\n\n" + build_list(supp_order, bib)
+                          .replace("## References",
+                                   "## References cited in this supplemental "
+                                   "material", 1))
+    except SystemExit as exc:
+        problems.append(f"references not numbered: {exc}")
+
     check(main_text, supp_text, table_remap, problems)
 
     MAIN_OUT.write_text(main_text, encoding="utf-8")
@@ -411,6 +452,13 @@ def main() -> int:
 
     # ---- report ------------------------------------------------------
     def wc(t: str) -> int:
+        """The word count a journal's limit is actually about.
+
+        Table bodies and the reference list are excluded because no journal
+        counts them against a text limit, and including them here would make
+        the number that decides how deep to cut the prose wrong by thousands.
+        """
+        t = re.split(r"^## References", t, maxsplit=1, flags=re.M)[0]
         return len(re.sub(r"^\|.*$", "", t, flags=re.M).split())
 
     print(f"main text   {wc(main_text):>7,} words, {len(main_tabs)} tables "

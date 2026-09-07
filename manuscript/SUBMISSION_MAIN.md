@@ -22,9 +22,42 @@ ORCID: [0000-0003-3653-5739](https://orcid.org/0000-0003-3653-5739)
 
 **Correspondence:** Vahhab Piranfar, vahab.p@gmail.com
 
-**Figures:** 4 | **Tables:** 15 | **Boxes:** 1 | **Supplementary tables:** 10
+**Figures:** 4 | **Tables:** 3 | **Boxes:** 1 | **Supplemental tables:** 22
 
 ---
+
+## Abstract
+
+A negative culture after antibiotics has never meant sterility, so tolerance is
+scored by how far the population fell: the minimum duration for killing. That
+endpoint is a fraction of the starting count, so the inoculum should cancel. It
+does in the definition, and fails once killing reaches the assay's floor. Five
+published time-kill deposits are reanalysed, and one experiment tests it
+prospectively.
+
+Two boundaries follow from the definitions. For a floor *L*, the smallest
+reportable positive count, a *q*-log endpoint is observable only above
+*L*·10^*q*; above *L*/*c*₁, with *c*₁ the lowest class threshold, a censored
+reading is compatible only with the lowest class. Reaching the floor is the
+drug's doing; the label it then permits is not.
+
+Of 217 clinical *Mycobacterium tuberculosis* isolates classified for rifampicin
+tolerance, 33 lack the range for the 99.99 per cent endpoint used, and all 33
+are recorded as failing. Of eighteen read at the floor, twelve admit one class
+and six admit two. The label tracks growth state; isoniazid resistance does not,
+and most of it travels through a ten-fold lower inoculum, the denominator the
+label is cut on.
+
+Under one written protocol, six laboratories differed by 4.40 log10 in
+demonstrable kill depth. Prospectively, *Escherichia coli* ATCC 25922 at the
+standard inoculum could report 3.71–3.93 logs at 10 µL and 4.88–5.05 at 100 µL;
+at a cut of 10⁻³, nine of 54 sample-times took two different labels from one
+culture. A tolerance call reported without its starting density and its assay
+floor cannot be interpreted.
+
+**Keywords:** antibiotic tolerance; minimum duration for killing;
+*Mycobacterium tuberculosis*; assay floor; censored data; time-kill kinetics;
+inoculum effect
 
 ## Introduction
 
@@ -35,7 +68,7 @@ carries over into the medium, and drives the population beneath what the plate
 can see; the plate then reports absence, and absence is not what happened. The
 rule is old, it is correct, and nobody disputes it.
 
-Tuberculosis makes the rule expensive. Regimens run for four to six months [[R1]], the
+Tuberculosis makes the rule expensive. Regimens run for four to six months (1), the
 compounds that could shorten them must be selected from in vitro killing
 experiments, and the phenotype invoked to explain why treatment takes so long —
 tolerance, the capacity of a genetically susceptible population to survive
@@ -48,7 +81,7 @@ Rather than asking whether a culture went negative, the modern definition asks
 how many logs the population fell: the minimum duration for killing, MDK, is the
 time to a specified fractional reduction — 90, 99 or 99.99 per cent — and it is
 proposed as the tolerance counterpart to the minimum inhibitory concentration
-[[R2]][[R3]]. The choice of a *fraction* is the
+(2, 3). The choice of a *fraction* is the
 whole point. A ratio to the starting population is scale-free: on a log-linear
 decline at rate *b*, the time to a *q*-log reduction is *q/b*, and the starting
 density cancels. By construction, MDK cannot be contaminated by how much culture
@@ -80,20 +113,20 @@ doing.
 The bound is already in the papers that defined the assays. Vijay and colleagues,
 introducing the most-probable-number MDK for rifampicin, treated an MDK99.99
 longer than ten days as high tolerance beyond the **time** window of the assay,
-not as a statement about the count floor [[R53]]. In the 217-isolate
+not as a statement about the count floor (4). In the 217-isolate
 classification that follows from that assay they report that MDK99.99 at 15 days
 of recovery could be calculated for only 22 of 209 isolates and that the rest lay,
-in their words, "beyond the assay limits" [[R51]]. The ERA4TB consortium requires below- and
+in their words, "beyond the assay limits" (5). The ERA4TB consortium requires below- and
 above-quantification-limit flags together with the limit of quantification, and
-notes that pharmacometric models can use those flags [[R23]]; the same
+notes that pharmacometric models can use those flags (6); the same
 six-laboratory comparison then excluded both from its numerical analysis. Their
 2025 protocol states the geometry of the pipette explicitly: a 2.5 µL drop has a
 limit of detection above 2.6 log10 CFU/mL, and a lower limit requires a larger
-plated volume [[R34]]. Independently, a 2025 pharmacokinetic-pharmacodynamic
+plated volume (7). Independently, a 2025 pharmacokinetic-pharmacodynamic
 analysis of hollow-fibre CFU series showed that censoring counts below 10 CFU
-biases regimen ranking [[R54]], and a within-host tuberculosis tolerance study
+biases regimen ranking (8), and a within-host tuberculosis tolerance study
 chose a shallower MDK threshold specifically so that more isolates could enter
-the analysis [[R55]].
+the analysis (9).
 
 None of these converts a floor-level reading into the classification rule it
 becomes: when the last count sits at *L*, the recorded fraction is *L*/*N*₀, and
@@ -104,7 +137,7 @@ plate being unable to see; and recording a below-limit flag is not the same as
 scoring a duration from the points so recorded.
 
 This is testable rather than arguable, because one published deposit assigns the
-tolerance phenotype itself. Vijay and colleagues [[R5]][[R51]] scored 217 clinical
+tolerance phenotype itself. Vijay and colleagues (5, 10) scored 217 clinical
 *Mycobacterium tuberculosis* isolates as having low, medium or high tolerance to
 rifampicin, and deposited alongside each call the starting most probable number,
 the growth rate, the isoniazid susceptibility and the killing readings the call
@@ -122,10 +155,10 @@ tracks — drug susceptibility, or the physiological state of the culture. Two
 further deposits establish that the same arithmetic governs killing experiments
 where inoculum is controlled by protocol rather than by clinical accident: a
 six-laboratory consortium exercise distributing one strain under one written
-protocol [[R4]][[R23]], and a concentration-by-time grid in the same organism [[R7]][[R37]]. From the first
+protocol (6, 11), and a concentration-by-time grid in the same organism (12, 13). From the first
 we also ask whether a faster-killing flask reliably crosses the floor sooner, and
 from the second whether a late endpoint can erase a dose difference that an early
-one resolves. A fourth deposit [[R8]][[R36]], held out until every boundary was fixed, tests
+one resolves. A fourth deposit (14, 15), held out until every boundary was fixed, tests
 whether the boundaries locate the same depth in an experiment they were not built
 from. Finally we ask whether the concentration and duration axes are separate in
 these files, which is the premise the framework defining them rests on. All five
@@ -139,7 +172,7 @@ name are, in part, a record of how the assay was set up.
 
 **Box 1. Four numbers that score an MDK.** *N₀* is the starting density. *L* is
 the smallest positive count the method can report — one colony in a plated volume
-*v* µL is *L* = 1 000/*v* per mL, and an MPN series uses the lowest table rung [[R9]][[R10]].
+*v* µL is *L* = 1 000/*v* per mL, and an MPN series uses the lowest table rung (16, 17).
 Headroom is *h* = log10(*N₀*/*L*). A *q*-log endpoint is legal only if *h* ≥ *q*,
 which is the same as seeding at or above *L* · 10^*q*. If the last reading sits
 at *L*, the recorded fraction is *L*/*N₀*: an upper bound, not a measurement.
@@ -180,13 +213,13 @@ how often a real experiment lands in that window. It could be none of the time.
 
 ### 1. Observable kill is bounded by the assay floor
 
-The most probable number readings take the discrete values of an MPN table [[R9]][[R10]], and
+The most probable number readings take the discrete values of an MPN table (16, 17), and
 the day-5 column does not taper towards zero but stops. Eighteen isolates sit at
 exactly 23 per mL in the 15-day panel and six in the 60-day panel, with no value
 anywhere in the file below it (Fig. 1A). That is the behaviour of a floor rather
 than of a tail, and it is treated as one throughout.
 
-The deposit states no limit of quantification [[R5]], so that value is inferred and the
+The deposit states no limit of quantification (10), so that value is inferred and the
 inference is quantified rather than asserted. A discrete posterior over the
 most-probable-number rungs at or below the observed minimum places 95 per cent
 support on 9.2 to 23 per mL, a span of 0.40 log10 — narrow enough that the class
@@ -314,7 +347,7 @@ is censored and more than one class is compatible. At 60 days the counts are 191
 The larger effect is at the deeper endpoint and it falls unevenly on the groups a
 study would compare. The 99.99 per cent endpoint is unreachable for 22 of 84
 isoniazid-resistant isolates, 26.2 per cent, against 9 of 119 susceptible ones,
-7.6 per cent (Fisher exact p = 0.00056 [[R11]]); the remaining two of the 33 fall outside
+7.6 per cent (Fisher exact p = 0.00056 (18)); the remaining two of the 33 fall outside
 that contrast, being MDR. Their median headroom differs by a full log, 4 against
 5.
 A comparison of tolerance between those groups is therefore in part a comparison
@@ -400,7 +433,7 @@ to 0.677, p = 2.9 × 10⁻⁵).
 
 The mechanism of that attenuation is measurable. Isoniazid-resistant isolates
 enter this assay at 5.36 log10 against 6.36 for susceptible isolates, ten-fold
-lower (Mann–Whitney p = 9.1 × 10⁻¹⁴) [[R18]], and 26.2 per cent of them lack the
+lower (Mann–Whitney p = 9.1 × 10⁻¹⁴) (19), and 26.2 per cent of them lack the
 headroom for the deepest endpoint against 7.6 per cent of susceptible isolates
 (Section 2). They are one log poorer in observable killing before the experiment
 begins.
@@ -462,7 +495,7 @@ Why they seed lower is not established here, and the obvious explanation fails:
 resistant isolates do not grow significantly more slowly in this deposit (median
 time to OD 0.4 of 19 against 17, p = 0.24), and 85 of them carry *katG* S315X,
 the mutation that predominates clinically precisely because it is close to
-fitness-neutral [[R21]][[R22]]. What the deposit can rule out is less than we first reported, and the correction
+fitness-neutral (20, 21). What the deposit can rule out is less than we first reported, and the correction
 runs in our favour. Seven of the nine pretreatment covariates the file carries
 cannot adjust this association, and they fail in two different ways. Five of them
 are recorded almost exclusively for resistant isolates, so their missingness *is*
@@ -510,9 +543,9 @@ assay is not. Those two panels are columns on the same spreadsheet rows — 210
 isolates appear in both — so every comparison between them is within-isolate and
 is made that way. Pairing sharpens rather than softens the result: 26 isolates
 lose their headroom shortfall between panels and none acquires one (exact McNemar
-p = 3.0 × 10⁻⁸ against an unpaired p of 2 × 10⁻⁵) [[R19]], eleven leave the floor and none
+p = 3.0 × 10⁻⁸ against an unpaired p of 2 × 10⁻⁵) (22), eleven leave the floor and none
 joins it (p = 9.8 × 10⁻⁴), and every isolate whose headroom changes gains
-(Wilcoxon signed-rank p = 1.3 × 10⁻³³) [[R20]]. The interquartile range of starting
+(Wilcoxon signed-rank p = 1.3 × 10⁻³³) (23). The interquartile range of starting
 density falls by 0.58 log10.
 
 It does not vanish, and the ordinal treatment is what shows where it goes.
@@ -532,7 +565,7 @@ have reported that as a null.
 If the effect is a property of assay geometry rather than of clinical sampling,
 it should appear where one protocol, one strain and one stock are distributed
 deliberately. Van Wijk and colleagues (2023) ran exactly that exercise, sending a
-single stock of H37Rv to six blinded laboratories under one written protocol [[R23]][[R4]]. It
+single stock of H37Rv to six blinded laboratories under one written protocol (6, 11). It
 does.
 
 The starting densities in Table S7 need their basis stated before they are used.
@@ -650,7 +683,7 @@ twenty never cross at all, 65 cross and return, and 19 oscillate more than once.
 The second is that the crossing time is never observed. It lies between the last
 visit above the floor and the first visit below it, and the naive treatment
 pins it to the later end, which biases every duration late by construction rather
-than merely imprecisely. Fitted as interval-censored data [[R29]] at the most sensitive
+than merely imprecisely. Fitted as interval-censored data (24) at the most sensitive
 plating, the tenth percentile of the first crossing falls from 2.95 to 1.82 days
 and the twenty-fifth from 11.24 to 9.64; across the treated arms at all four
 platings the twenty-fifth percentile falls from 5.77 to 3.67 days, a 36 per cent
@@ -677,7 +710,7 @@ literature, food microbiology and the hollow-fibre field returned one deposit
 carrying all three fields the boundaries require, and it was analysed cold.
 
 Dubey and colleagues (2026) report amoxicillin-clavulanate against *Escherichia
-coli* in a hollow-fibre system [[R36]][[R8]]. Their Methods state 100 µL plated with counts per
+coli* in a hollow-fibre system (14, 15). Their Methods state 100 µL plated with counts per
 mL, so *L* = 10 CFU/mL is derived rather than inferred, and the derivation is
 corroborated inside the file: a 100 µL plate reporting per mL can return only
 multiples of ten, and all 229 genuine counts in the deposit are multiples of ten
@@ -701,7 +734,7 @@ exposure rather than before it.
 
 ### 7. A late endpoint can erase a 32-fold dose difference
 
-The deposit carries apramycin at 1, 4, 8, 32 and 128 µg/mL [[R37]][[R7]]. The 1 µg/mL arm
+The deposit carries apramycin at 1, 4, 8, 32 and 128 µg/mL (12, 13). The 1 µg/mL arm
 shows net growth rather than killing and is excluded from the dose comparison, so
 the range compared is 4 to 128 µg/mL: 32-fold, five doublings. Across it,
 survivors separate 6.9-fold at day 3, 48.2-fold at day 7 and 5.2-fold at day 14 (Fig. 3,
@@ -822,8 +855,8 @@ fixes what enters the flask does not thereby fix what the assay can resolve.
 Removing the assay's contribution leaves something rather than nothing, and what
 remains is biologically coherent. Growth state predicts the tolerance class and
 survives adjustment for starting density, which is the expected direction:
-isoniazid requires KatG activation and active cell-wall synthesis [[R39]], rifampicin
-requires transcription [[R40]], and a population that is not dividing presents less of
+isoniazid requires KatG activation and active cell-wall synthesis (25), rifampicin
+requires transcription (26), and a population that is not dividing presents less of
 what these drugs act on. Physiological state, not drug susceptibility, is the
 axis the classification is reading.
 
@@ -840,7 +873,7 @@ per cent of them lack the headroom the endpoint requires. We do not know why the
 seed lower.
 The natural explanation — that resistance carries a fitness cost — is not
 supported here, since these isolates do not grow measurably more slowly and most
-carry the near-neutral *katG* S315X allele [[R21]][[R22]]. That gap is a finding in its own
+carry the near-neutral *katG* S315X allele (20, 21). That gap is a finding in its own
 right and belongs in the next study rather than in a speculative sentence in this
 one. Nor is it explained away by anything else the file records: of its nine
 pretreatment covariates only two can legitimately be adjusted for, and neither
@@ -873,14 +906,14 @@ endpoint measures the starting culture.
 
 Our reading and van Wijk's agree where they overlap. They report the inoculum
 spread themselves and conclude that baseline burden varied between laboratories
-while net drug effect varied less [[R23]]; that conclusion anticipates part of ours and
+while net drug effect varied less (6); that conclusion anticipates part of ours and
 belongs to them. The separation is that they excluded readings outside the
 quantification limits from numerical analysis, which is a defensible reporting
 decision that forecloses the question asked here, because it removes the
 observations from which a duration is built.
 
 Vijay and colleagues report associations between tolerance, resistance status and
-treatment history in the same isolates [[R51]]. We do not dispute the measurements; the
+treatment history in the same isolates (5). We do not dispute the measurements; the
 deposit is unusually complete, and it is only because they deposited the
 classification, its inputs and the assay geometry together that this analysis was
 possible at all. What we add is that the deepest of their endpoints has a
@@ -1065,7 +1098,7 @@ Source Data of Dubey and colleagues, which was held out of every fitting step.
 
 The analysis code, both audit scripts, the headroom tool described above and the
 machine-readable receipts recording the software versions each stage ran under
-are deposited in a public repository [[R52]], with the documentation needed to install
+are deposited in a public repository (27), with the documentation needed to install
 and run them and a test dataset with the control parameter settings used here.
 Code created to generate the results and to interpret the data is included. The
 repository is dual-licensed, MIT for the code and CC BY 4.0 for the manuscript,
@@ -1094,10 +1127,6 @@ The author declares no competing interests.
 Vahhab Piranfar is the sole author and is responsible for conceptualisation,
 methodology, software, formal analysis, investigation, data curation, writing of
 the original draft, review and editing, and visualisation.
-
----
-
-## References
 
 ---
 
@@ -1204,3 +1233,60 @@ The supplemental file carries the full Materials and Methods, the analyses named
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
 | 15 days | 18 | 265x | 265x | Low: 12, Medium: 6 | 185 | 12 | 6 |
 | 60 days | 6 | 100x | 100x | Low: 6 | 191 | 6 | 0 |
+
+
+## References
+
+1. World Health Organization. 2022. WHO consolidated guidelines on tuberculosis. Module 4: treatment — drug-susceptible tuberculosis treatment. World Health Organization, Geneva, Switzerland. https://iris.who.int/handle/10665/353829.
+
+2. Brauner A, Fridman O, Gefen O, Balaban NQ. 2016. Distinguishing between resistance, tolerance and persistence to antibiotic treatment. Nat Rev Microbiol 14:320-330. https://doi.org/10.1038/nrmicro.2016.34.
+
+3. Brauner A, Shoresh N, Fridman O, Balaban NQ. 2017. An experimental framework for quantifying bacterial tolerance. Biophys J 112:2664-2671. https://doi.org/10.1016/j.bpj.2017.05.014.
+
+4. Vijay S, Vinh DN, Hai HT, Ha VTN, Dung VTM, Dinh TD, Nhung HN, Tram TTB, Aldridge BB, Hanh NT, Thu DDA, Phu NH, Thwaites GE, Thuong NTT. 2021. Ribosomal protein S1 is required for growth and antibiotic tolerance in Mycobacterium tuberculosis. Antimicrob Agents Chemother 65:e00429-21.
+
+5. Vijay S, Bao NLH, Vinh DN, Nhat LTH, Thu DDA, Quang NL, Trieu LPT, Nhung HN, Ha VTN, Thai PVK, Ha DTM, Lan NH, Caws M, Thwaites GE, Javid B, Thuong NT. 2024. Rifampicin tolerance and growth fitness among isoniazid-resistant clinical *Mycobacterium tuberculosis* isolates from a longitudinal study. Elife 13:RP93243. https://doi.org/10.7554/eLife.93243.
+
+6. van Wijk RC, Lucía A, Sudhakar PK, Sonnenkalb L, Gaudin C, Hoffmann E, Dremierre B, Aguilar-Ayala DA, Dal Molin M, Rybniker J, de Giorgi S, Cioetto-Mazzabò L, Segafreddo G, Manganelli R, Degiacomi G, Recchia D, Pasca MR, Simonsson USH, Ramón-García S. 2023. Implementing best practices on data generation and reporting of *Mycobacterium tuberculosis* in vitro assays within the ERA4TB consortium. iScience 26:106411. https://doi.org/10.1016/j.isci.2023.106411.
+
+7. Rabodoarivelo MS, Hoffmann E, Gaudin C, Aguilar-Ayala DA, Galizia J, Sonnenkalb L, Dal Molin M, Cioetto-Mazzabò L, Degiacomi G, Recchia D, Rybniker J, Manganelli R, Pasca MR, Ramón-García S, Lucía A. 2025. Protocol to quantify bacterial burden in time-kill assays using colony-forming units and most probable number readouts for *Mycobacterium tuberculosis*. STAR Protoc 6:103643. https://doi.org/10.1016/j.xpro.2025.103643.
+
+8. 2025. Handling of bacterial counts below the limit of quantification in pharmacokinetic-pharmacodynamic analysis biases regimen ranking. CPT Pharmacometrics Syst Pharmacol. https://doi.org/10.1002/psp4.70140.
+
+9. 2025. Within-host antibiotic tolerance in Mycobacterium tuberculosis. bioRxiv. https://doi.org/10.1101/2025.07.29.667394.
+
+10. Vijay S, Bao NLH, Vinh DN, Nhat LTH, Thu DDA, Quang NL, Trieu LPT, Nhung HN, Ha VTN, Thai PVK, Ha DTM, Lan NH, Caws M, Thwaites GE, Javid B, Thuong NT. 2024. Supplementary file 2 to "Rifampicin tolerance and growth fitness among isoniazid-resistant clinical *Mycobacterium tuberculosis* isolates from a longitudinal study" (elife-93243-supp2-v1.xlsx). eLife. https://doi.org/10.7554/eLife.93243.
+
+11. van Wijk RC, Lucía Quintana A, Ramón-García S. 2023. *Mycobacterium tuberculosis* time kill assay data of the standardized protocol within the ERA4TB consortium. figshare. https://doi.org/10.6084/m9.figshare.19766083.v1.
+
+12. Kaur P. 2024. Apramycin kills replicating and non-replicating *Mycobacterium tuberculosis* — raw data. figshare. https://doi.org/10.6084/m9.figshare.26462791.v1.
+
+13. Kaur P, Ramya VK, Naveenkumar CN, Bharathkumar K, Singh M, Hobbie SN, Shandil RK, Narayanan S. 2024. Apramycin kills replicating and non-replicating *Mycobacterium tuberculosis*. Front Trop Dis 5:1413211. https://doi.org/10.3389/fitd.2024.1413211.
+
+14. Dubey V, Darlow C, Gerada A, Unsworth J, Sheth E, Reza N, Farrington N, Haldenby S, Warren D, Liu X, Howard A, Hope W. 2026. Source Data to "Molecular pharmacodynamics of amoxicillin-clavulanic acid for urinary tract infections caused by *Escherichia coli*" (41467_2026_74323_MOESM4_ESM.xlsx). Nature Communications. https://doi.org/10.1038/s41467-026-74323-2.
+
+15. Dubey V, Darlow C, Gerada A, Unsworth J, Sheth E, Reza N, Farrington N, Haldenby S, Warren D, Liu X, Howard A, Hope W. 2026. Molecular pharmacodynamics of amoxicillin-clavulanic acid for urinary tract infections caused by *Escherichia coli*. Nat Commun 17:7504. https://doi.org/10.1038/s41467-026-74323-2.
+
+16. Cochran WG. 1950. Estimation of bacterial densities by means of the "most probable number". Biometrics 6:105. https://doi.org/10.2307/3001491.
+
+17. Blodgett R. 2023. BAM appendix 2: most probable number from serial dilutions. Bacteriological analytical manual. US Food and Drug Administration, Silver Spring, MD. https://www.fda.gov/food/laboratory-methods-food/bam-appendix-2-most-probable-number-serial-dilutions.
+
+18. Fisher RA. 1922. On the interpretation of χ² from contingency tables, and the calculation of P. J R Stat Soc 85:87-94. https://doi.org/10.2307/2340521.
+
+19. Mann HB, Whitney DR. 1947. On a test of whether one of two random variables is stochastically larger than the other. Ann Math Stat 18:50-60. https://doi.org/10.1214/aoms/1177730491.
+
+20. Pym AS, Saint-Joanis B, Cole ST. 2002. Effect of *katG* mutations on the virulence of *Mycobacterium tuberculosis* and the implication for transmission in humans. Infect Immun 70:4955-4960. https://doi.org/10.1128/IAI.70.9.4955-4960.2002.
+
+21. van Soolingen D, de Haas PEW, van Doorn HR, Kuijper E, Rinder H, Borgdorff MW. 2000. Mutations at amino acid position 315 of the *katG* gene are associated with high-level resistance to isoniazid, other drug resistance, and successful transmission of *Mycobacterium tuberculosis* in the Netherlands. J Infect Dis 182:1788-1790. https://doi.org/10.1086/317598.
+
+22. McNemar Q. 1947. Note on the sampling error of the difference between correlated proportions or percentages. Psychometrika 12:153-157. https://doi.org/10.1007/BF02295996.
+
+23. Wilcoxon F. 1945. Individual comparisons by ranking methods. Biom Bull 1:80. https://doi.org/10.2307/3001968.
+
+24. Turnbull BW. 1976. The empirical distribution function with arbitrarily grouped, censored and truncated data. J R Stat Soc Series B Stat Methodol 38:290-295. https://doi.org/10.1111/j.2517-6161.1976.tb01597.x.
+
+25. Vilchèze C, Jacobs WR Jr. 2007. The mechanism of isoniazid killing: clarity through the scope of genetics. Annu Rev Microbiol 61:35-50. https://doi.org/10.1146/annurev.micro.61.111606.122346.
+
+26. Campbell EA, Korzheva N, Mustaev A, Murakami K, Nair S, Goldfarb A, Darst SA. 2001. Structural mechanism for rifampicin inhibition of bacterial RNA polymerase. Cell 104:901-912. https://doi.org/10.1016/S0092-8674(01)00286-0.
+
+27. Piranfar V. 2026. Analysis code, audit scripts and headroom tool for "Score only the kill the assay can see: starting density and the floor bound every MDK".
