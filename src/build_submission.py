@@ -106,6 +106,14 @@ METHODS_KEEP_IN_MAIN = {
 KEEP_AS_MAIN_TABLE = {"1", "3", "6"}
 # --------------------------------------------------------------------------
 
+# A paragraph carrying this marker leaves the article and lands in the
+# supplement, under a heading naming the section it came from. Shortening a
+# manuscript by deleting is irreversible and loses the answer to the referee who
+# asks the question the deleted paragraph answered; marking moves it somewhere
+# it is still published, still numbered and still cited. The marker sits at the
+# end of the paragraph so it never interrupts a sentence being read in the
+# source file.
+SUPP_MARK = re.compile(r"\s*<!--\s*supp\s*-->\s*$", re.M)
 COUNTS = re.compile(r"^\*\*Figures:\*\*.*$", re.M)
 HEAD3 = re.compile(r"^### (.*)$", re.M)
 HEAD2 = re.compile(r"^## (.*)$", re.M)
@@ -124,10 +132,29 @@ class Section:
     dest: str = MAIN
     why: str = ""
     new_label: str = ""         # "3" in the main text, "S2" in the supplement
+    deferred: list[str] = field(default_factory=list)   # marked paragraphs
 
     @property
     def words(self) -> int:
         return len(self.body.split())
+
+    def defer_marked(self) -> None:
+        """Pull the marked paragraphs out of the body and hold them aside.
+
+        Only meaningful for a section that stays in the article; a section that
+        moves wholesale takes its marked paragraphs with it, and splitting them
+        out again would scatter one argument across two places in one file.
+        """
+        if self.dest != MAIN:
+            return
+        keep, moved = [], []
+        for para in re.split(r"\n{2,}", self.body.strip()):
+            if SUPP_MARK.search(para):
+                moved.append(SUPP_MARK.sub("", para).rstrip())
+            else:
+                keep.append(para)
+        self.body = "\n\n".join(keep) + "\n"
+        self.deferred = moved
 
 
 def split_sections(prose: str) -> tuple[str, list[Section], dict[str, str]]:
@@ -315,6 +342,8 @@ def main() -> int:
     front, sections, preambles = split_sections(prose)
     route(sections)
     remap_sec = assign_labels(sections)
+    for s in sections:
+        s.defer_marked()
     problems: list[str] = []
 
     # ---- assemble the two bodies -------------------------------------
@@ -348,11 +377,21 @@ def main() -> int:
                   "and the floor bound every MDK**", "", "Vahhab Piranfar", "",
                   "---", ""]
     moved_results = gather(SUPP, "Results")
-    if moved_results:
+    deferred = [s for s in sections if s.deferred]
+    if moved_results or deferred:
         supp_parts += ["## Supplementary text", ""]
         for s in moved_results:
             supp_parts += [f"### Text {s.new_label}. {s.title}", "",
                            s.body.strip(), ""]
+        for s in deferred:
+            where = (f"Section {s.new_label}" if s.parent == "Results"
+                     and s.new_label else s.parent)
+            supp_parts += [f"### Extended results for {where}: {s.title}", "",
+                           "*Material held back from the article for length. It "
+                           "is reported here rather than dropped, because each "
+                           "paragraph answers a question a reader of that "
+                           "section may reasonably ask.*", ""]
+            supp_parts += ["\n\n".join(s.deferred), ""]
     supp_parts += ["## Supplementary methods", ""]
     for s in gather(SUPP, "Materials and Methods"):
         supp_parts += [f"### {s.title}", "", s.body.strip(), ""]
@@ -471,8 +510,10 @@ def main() -> int:
             continue
         arrow = "stays" if s.dest == MAIN else "MOVES"
         lab = f"{s.number}." if s.number else " "
+        held = sum(len(p.split()) for p in s.deferred)
+        tail = f"  ({held}w held back)" if held else ""
         print(f"   {arrow}  {lab:>4} {s.title[:52]:52} {s.words:>5}w"
-              f"  {s.new_label or ''}")
+              f"  {s.new_label or '':3}{tail}")
 
     if problems:
         print(f"\n   {len(problems)} problem(s):")
