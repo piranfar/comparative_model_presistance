@@ -56,7 +56,7 @@ def main() -> int:
     n5 = d[f"mpn_T5_{AGE}days"].astype(float)
     head = np.log10(n0 / FLOOR)
 
-    fig, axes = plt.subplots(1, 3, figsize=(11.4, 3.5))
+    fig, axes = plt.subplots(1, 3, figsize=(7.0, 3.3))
 
     # -- A: the floor is a floor, not a tail ---------------------------------
     ax = axes[0]
@@ -74,7 +74,7 @@ def main() -> int:
             fontsize=7.5, color=st.INK_SECONDARY, va="center")
     ax.set_xlabel("day-5 most probable number (log10 per mL)")
     ax.set_ylabel("isolates")
-    ax.set_title("The readings stop; they do not taper", fontsize=9, loc="left")
+    ax.set_title("The readings stop;\nthey do not taper", fontsize=9, loc="left")
     st.panel_tag(ax, "A")
 
     # -- B: the budget each isolate has --------------------------------------
@@ -94,7 +94,7 @@ def main() -> int:
                     alpha=0.13, zorder=2)
     ax.set_xlabel("isolates, ranked by headroom")
     ax.set_ylabel("headroom (log10 above the floor)")
-    ax.set_title("What each isolate could ever demonstrate", fontsize=9, loc="left")
+    ax.set_title("What each isolate\ncould ever demonstrate", fontsize=9, loc="left")
     st.panel_tag(ax, "B")
 
     # -- C: the eighteen isolates that ended at the floor --------------------
@@ -127,7 +127,7 @@ def main() -> int:
     ax.legend(frameon=False, fontsize=7.5, loc="upper right")
     ax.set_xlabel("starting density (log10 per mL)")
     ax.set_ylabel("recorded surviving fraction (log10)")
-    ax.set_title("Same endpoint, different phenotype", fontsize=9, loc="left")
+    ax.set_title("Same endpoint,\ndifferent phenotype", fontsize=9, loc="left")
     st.panel_tag(ax, "C")
 
     fig.tight_layout()

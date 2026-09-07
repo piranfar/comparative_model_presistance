@@ -99,8 +99,12 @@ STAGES = [
 
     ("tables  build the manuscript tables from the results",
      "src.build_tables"),
+    ("refs    number the references in citation order",
+     "src.build_references"),
     ("paper   assemble the complete document",
      "src.assemble_paper"),
+    ("supp    the supplemental file AAC wants separately",
+     "src.build_supplement"),
     ("index   map results/ to the paper it serves",
      "src.build_results_index"),
     ("audit   recompute every quoted number from its table",

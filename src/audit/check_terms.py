@@ -153,6 +153,7 @@ WHERE THIS IS BLIND, so nobody reads more guarantee into it than it gives
 """
 from __future__ import annotations
 
+import ast
 import bisect
 import re
 import sys
@@ -850,6 +851,11 @@ _ABBR_STANDARD = {
     # standard statistics
     "CI": "confidence interval; the manuscript writes '95 per cent CI' throughout",
     "IQR": "interquartile range; the range is named in full at the same result",
+    # submission apparatus, not terms of art: every journal prints these
+    # unexpanded, and expanding them would read as an error
+    "ORCID": "the persistent author identifier, printed unexpanded by every journal",
+    "URL": "standard, and here only inside a bracketed placeholder for the repository",
+    "DOI": "the digital object identifier, printed unexpanded by every journal",
     # drug and deposit codes, used only as arm labels or column names in tables
     # whose legends name the drug in full
     "INH": "isoniazid, an arm label in Tables 6, 10 and S4",
@@ -900,7 +906,13 @@ def _regions(p: Paper) -> list[tuple[str, list[tuple[int, int]]]]:
     # included.  Taking the main region to start where the Abstract ends left
     # the YAML keywords, the author block and the figure counts inside no
     # region at all, so an abbreviation written there was never judged.
-    used = sorted(title + abstract)
+    # The reference list is not prose and must be excluded before the main
+    # region is cut, or every author's initials read as an unexpanded
+    # abbreviation: ASM style is "Brauner A, Fridman O, Gefen O, Balaban NQ",
+    # and "NQ", "PVK" and "VTN" are initials, not terms anyone can expand.
+    # Compiling the list turned one medium finding into forty overnight.
+    refs = p.span_of("References")
+    used = sorted(title + abstract + ([refs] if refs else []))
     main: list[tuple[int, int]] = []
     cur = 0
     for a, b in used:
@@ -1247,6 +1259,72 @@ def _confusion(p: Paper, tok: str, offs: list[int], other: str,
 # entry points
 # --------------------------------------------------------------------------
 
+_FIG_BANNED = (
+    (r"\bcleared\b", "cleared"), (r"\bclearance\b", "clearance"),
+    (r"\bclears\b", "clears"), (r"\bsterilis", "sterilised"),
+    (r"below the limit", "below the limit"),
+    (r"below the boundary", "below the boundary"),
+    (r"assay boundary", "assay boundary"), (r"assay limit", "assay limit"),
+)
+
+
+def _check_figure_annotations(ctx: dict) -> list[dict]:
+    """The vocabulary rule, applied to the words drawn INTO the figures.
+
+    A figure legend is prose and every checker here reads it. The text baked into
+    the image is not: it lives in a string literal in src/figures/, is rendered to
+    pixels, and no amount of reading the manuscript will find it. That is not
+    hypothetical -- the round-two sweep renamed the survival event from
+    "clearance" to "first observed crossing below the assay floor" everywhere in
+    the prose, and Figure 2 went on saying "cleared", "never cleared" and "no
+    clearance time exists" in three panels and a caption, because the sweep read
+    the manuscript and the figure is a picture.
+
+    So this reads the figure scripts and applies the same rule to their visible
+    strings. Docstrings and comments are exempt: they are not published. Variable
+    names are exempt for the same reason.
+    """
+    root = Path(ctx.get("root", "."))
+    figdir = root / "src" / "figures"
+    if not figdir.is_dir():
+        return []
+    findings: list[dict] = []
+    for src in sorted(figdir.glob("fig*.py")):
+        try:
+            tree = ast.parse(src.read_text(encoding="utf-8"))
+        except (OSError, SyntaxError):
+            continue
+        docstrings = set()
+        for node in ast.walk(tree):
+            if isinstance(node, (ast.Module, ast.FunctionDef, ast.ClassDef,
+                                 ast.AsyncFunctionDef)):
+                d = ast.get_docstring(node, clean=False)
+                if d:
+                    docstrings.add(d)
+        for node in ast.walk(tree):
+            if not (isinstance(node, ast.Constant) and isinstance(node.value, str)):
+                continue
+            s = node.value
+            if s in docstrings or len(s) < 4:
+                continue
+            for pat, label in _FIG_BANNED:
+                if re.search(pat, s, re.I):
+                    findings.append({
+                        "severity": "high",
+                        "kind": "figure-annotation-off-vocabulary",
+                        "where": f"{src.relative_to(root)} line {node.lineno}",
+                        "detail": (f"A string drawn into the figure uses "
+                                   f"\"{label}\", which the Methods reserve or "
+                                   f"forbid. No checker that reads the manuscript "
+                                   f"can see this text, because it is rendered to "
+                                   f"pixels."),
+                        "expected": "the manuscript's own vocabulary",
+                        "found": s.strip()[:110],
+                    })
+                    break
+    return findings
+
+
 def check(text: str, ctx: dict) -> list[dict]:
     """Return a list of findings.  Empty list means clean."""
     if not text:
@@ -1258,7 +1336,8 @@ def check(text: str, ctx: dict) -> list[dict]:
                 + _check_boundary(p)
                 + _check_limit(p)
                 + _check_event_names(p)
-                + _check_abbreviations(p))
+                + _check_abbreviations(p)
+                + _check_figure_annotations(ctx))
     order = {"high": 0, "medium": 1, "low": 2}
     findings.sort(key=lambda f: (order.get(f["severity"], 3), f["kind"],
                                  f["where"]))

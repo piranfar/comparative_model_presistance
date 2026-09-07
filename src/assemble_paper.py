@@ -148,13 +148,16 @@ def main() -> int:
     missing = []
     if not abstract:
         missing.append("the abstract")
-    if "## References" not in rest:
-        missing.append("the reference list, deliberately held back until the "
-                       "text stops moving")
-    if "Declarations" not in rest and "Statements" not in rest:
-        missing.append("the author declarations: funding, competing interests, "
-                       "author contributions, and the archived commit for the "
-                       "submitted version")
+    # AAC carries funding, competing interests and contributor roles inside
+    # Acknowledgments, unheaded, rather than under a Declarations heading of
+    # their own -- so that is the section to check for.
+    if "## Acknowledgments" not in rest:
+        missing.append("the Acknowledgments section, which is where AAC carries "
+                       "funding, competing interests and contributor roles")
+    for phrase, what in (("no specific grant", "the funding statement"),
+                         ("competing interests", "the competing-interests statement")):
+        if phrase not in rest:
+            missing.append(what)
 
     parts = [title, ""]
     if abstract:
@@ -170,9 +173,35 @@ def main() -> int:
         parts += [f"{i}. {m.capitalize()}." for i, m in enumerate(missing, 1)]
         parts += [""]
 
-    OUT.write_text("\n".join(parts), encoding="utf-8")
+    text = "\n".join(parts)
 
-    text = OUT.read_text(encoding="utf-8")
+    # ---- citation-sequence numbering, done last --------------------------
+    # AAC numbers references in order of first citation. The sources carry keys
+    # ([[R12]]), never numbers, so that moving a paragraph cannot leave a stale
+    # number behind. The numbering therefore has to happen HERE, on the finished
+    # document: the tables are spliced in above, and a table legend that cites a
+    # source changes the order. Doing it in the source files would number them in
+    # the order the files happen to be read.
+    n_refs = 0
+    try:
+        from src.build_references import load_bib, substitute, build_list
+        bib = load_bib()
+        text, order = substitute(text, bib)
+        n_refs = len(order)
+        refs = build_list(order, bib)
+        if "## References" in text:
+            head, _, tail = text.partition("## References")
+            nxt = tail.find("\n## ")
+            text = head + refs.rstrip() + "\n" + (tail[nxt:] if nxt >= 0 else "")
+        else:
+            text += "\n" + refs
+    except SystemExit as exc:
+        print(f"   ! references not numbered: {exc}")
+    except ImportError:
+        print("   ! src/build_references.py not importable; keys left in place")
+
+    OUT.write_text(text, encoding="utf-8")
+
     n_words = len(text.split())
     print(f"wrote {OUT.relative_to(ROOT)}")
     print(f"   {n_words:,} words")

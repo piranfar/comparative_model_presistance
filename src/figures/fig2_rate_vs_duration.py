@@ -9,7 +9,7 @@ one strain from one stock went to six laboratories under one written protocol,
 and the inoculum still decided which of them could produce a duration at all.
 
 Panel A shows that every laboratory produces a kill rate. Panel B shows that half
-of them produce no clearance time on the same flasks. Panel C shows what decides
+of them produce no crossing time on the same flasks. Panel C shows what decides
 which half. Panel D shows what happens when the starting density enters a Cox
 model - three laboratories stop being distinguishable and one does not, which is
 reported rather than absorbed.
@@ -33,7 +33,7 @@ ARM = "MXF 10x MIC"
 
 
 def kaplan_meier(times, events):
-    """Survival of the 'not yet cleared' state. No library, so it is auditable."""
+    """Survival of the 'not yet crossed' state. No library, so it is auditable."""
     t = np.asarray(times, float)
     e = np.asarray(events, int)
     order = np.argsort(t)
@@ -73,7 +73,7 @@ def build():
     col = {inst: (st.BLUE if cleared.get(inst, False) else st.ORANGE)
            for inst in r.index}
 
-    fig = plt.figure(figsize=(7.4, 6.4))
+    fig = plt.figure(figsize=(7.0, 6.4))
     gs = fig.add_gridspec(2, 2, height_ratios=[1.0, 0.95])
     ax_a = fig.add_subplot(gs[0, 0])
     ax_b = fig.add_subplot(gs[0, 1])
@@ -95,8 +95,8 @@ def build():
     ax_a.grid(axis="y", visible=False)
     st.panel_tag(ax_a, "A")
     st.note(ax_a, f"{ARM}. Bars are 95% profile-likelihood intervals from the\n"
-                  "censored (Tobit) fit. Blue: laboratory ever cleared a flask\n"
-                  "at the 100 uL plating; orange: never, in any arm.", y=-0.30)
+                  "censored (Tobit) fit. Blue: laboratory with a flask ever below\n"
+                  "the floor at the 100 uL plating; orange: never, in any arm.", y=-0.30)
 
     # ---- B: half of them yield no duration -------------------------------
     flat = []
@@ -124,7 +124,7 @@ def build():
     st.panel_tag(ax_b, "B")
     st.note(ax_b, "Kaplan-Meier, all treated flasks, 100 uL plating. Three\n"
                   "curves never descend: those laboratories recorded no flask\n"
-                  "below the limit in any arm, so no clearance time exists.",
+                  "below the floor in any arm, so no crossing time exists.",
             y=-0.30)
 
     # ---- C: what decides which half --------------------------------------
@@ -141,17 +141,17 @@ def build():
     lo, hi = ax_c.get_ylim()
     ax_c.set_ylim(lo - 0.06 * (hi - lo), hi + 0.06 * (hi - lo))
     lo2, hi2 = ax_c.get_ylim()
-    ax_c.text(cut - 0.08, lo2, "cleared ", ha="right", va="bottom", fontsize=7.2,
+    ax_c.text(cut - 0.08, lo2, "crossed ", ha="right", va="bottom", fontsize=7.2,
               color=st.BLUE, fontweight="semibold")
-    ax_c.text(cut + 0.08, lo2, " never cleared", ha="left", va="bottom",
+    ax_c.text(cut + 0.08, lo2, " never crossed", ha="left", va="bottom",
               fontsize=7.2, color=st.ORANGE, fontweight="semibold")
     ax_c.set_xlabel("starting density (log$_{10}$ CFU/mL)")
     ax_c.set_ylabel("kill rate (log$_{10}$ CFU/mL per day)")
     ax_c.set_title("The inoculum splits them; the rate does not", loc="left")
     st.panel_tag(ax_c, "C")
     st.note(ax_c, "The three lowest starting densities are exactly the three\n"
-                  "laboratories that cleared at the 100 uL plating. F kills\n"
-                  "faster than four of the other five and never clears.", y=-0.30)
+                  "laboratories that crossed at the 100 uL plating. F kills\n"
+                  "faster than four of the other five and never crosses.", y=-0.30)
 
     # ---- D: the laboratory stops explaining ------------------------------
     before = cox[cox["model"] == "institute only"].set_index("term")["p_value"]

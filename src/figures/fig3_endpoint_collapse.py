@@ -76,7 +76,7 @@ def build():
     days = [0.0, 3.0, 7.0, 14.0]
     draws = bootstrap_slopes(reps, concs, days, rng)
 
-    fig = plt.figure(figsize=(7.4, 5.9))
+    fig = plt.figure(figsize=(7.0, 5.9))
     gs = fig.add_gridspec(2, 2, height_ratios=[1.0, 0.9])
     ax_a = fig.add_subplot(gs[0, :])
     ax_b = fig.add_subplot(gs[1, 0])

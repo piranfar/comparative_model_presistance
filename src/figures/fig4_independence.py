@@ -36,7 +36,7 @@ def build():
     cen = pd.read_csv(T / "exp16_tb_censoring.csv")
     clones = pd.read_csv(T / "exp19_axis_independence.csv")
 
-    fig = plt.figure(figsize=(7.4, 6.6))
+    fig = plt.figure(figsize=(7.0, 6.6))
     gs = fig.add_gridspec(2, 2, height_ratios=[1.25, 0.85])
     ax_a = fig.add_subplot(gs[0, :])
     ax_b = fig.add_subplot(gs[1, 0])

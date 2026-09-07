@@ -26,6 +26,9 @@ import matplotlib.pyplot as plt
 ROOT = Path(__file__).resolve().parents[2]
 FIGDIR = ROOT / "results" / "figures"
 
+# AAC accepts 300-600 dpi and names 600 as the ceiling.
+SUBMISSION_DPI = 600
+
 # ------------------------------------------------------------------ tokens ---
 SURFACE = "#fcfcfb"
 INK = "#0b0b0b"
@@ -60,7 +63,9 @@ def apply() -> None:
         "savefig.dpi": 300,
         "figure.dpi": 110,
         "font.family": "sans-serif",
-        "font.sans-serif": ["Segoe UI", "DejaVu Sans", "Arial"],
+        # AAC requires Arial, Helvetica or Times New Roman in figures, so Arial
+        # leads and the others are only fallbacks for machines without it.
+        "font.sans-serif": ["Arial", "Helvetica", "DejaVu Sans"],
         "font.size": 8.5,
         "axes.titlesize": 9.5,
         "axes.titleweight": "semibold",
@@ -157,12 +162,41 @@ def synthetic_stamp(fig, text: str = "SYNTHETIC DATA - no experimental "
 
 
 def save(fig, stem: str) -> list[Path]:
-    """Save as PNG for review and PDF for submission. Returns the paths."""
+    """PNG to read, PDF to typeset, TIFF to submit. Returns the paths.
+
+    AAC takes PDF at initial submission but requires TIFF or EPS at revision, at
+    300-600 dpi, in bitmap, grayscale or RGB. Matplotlib writes RGBA, which is not
+    on that list, so the TIFF is flattened onto the surface colour and converted
+    to RGB rather than handed over with an alpha channel. Writing it now means the
+    revision package needs no second pass over the figures.
+    """
     FIGDIR.mkdir(parents=True, exist_ok=True)
     out = []
     for ext in ("png", "pdf"):
         path = FIGDIR / f"{stem}.{ext}"
         fig.savefig(path, bbox_inches="tight")
         out.append(path)
+
+    w, h = fig.get_size_inches()
+    if w > 7.0 or h > 9.0:
+        print(f"   ! {stem} is {w:.1f} x {h:.1f} in; AAC recommends 7 x 9 or less")
+
+    tif = FIGDIR / f"{stem}.tif"
+    try:
+        from PIL import Image
+        png = FIGDIR / f"{stem}.png"
+        im = Image.open(png)
+        if im.mode in ("RGBA", "LA", "P"):
+            flat = Image.new("RGB", im.size, SURFACE)
+            im = im.convert("RGBA")
+            flat.paste(im, mask=im.split()[-1])
+            im = flat
+        else:
+            im = im.convert("RGB")
+        im.save(tif, format="TIFF", compression="tiff_lzw",
+                dpi=(SUBMISSION_DPI, SUBMISSION_DPI))
+        out.append(tif)
+    except ImportError:
+        print(f"   ! Pillow not installed; {tif.name} not written")
     plt.close(fig)
     return out
