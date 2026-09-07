@@ -1,18 +1,18 @@
 ---
-title: "Score only the kill the assay can see: starting density and the floor bound every MDK"
-short_title: "Headroom bounds every MDK"
+title: "The detection floor bounds what a time-kill assay can report: minimum duration for killing and log-reduction endpoints in five published deposits and a prospective test"
+short_title: "The detection floor bounds time-kill endpoints"
 article_type: "Research Article"
 keywords:
-  - antibiotic tolerance
+  - time-kill assay
+  - limit of quantification
   - minimum duration for killing
-  - Mycobacterium tuberculosis
-  - assay floor
+  - antibiotic tolerance
+  - colony counting
   - censored data
-  - time-kill kinetics
   - inoculum effect
 ---
 
-# Score only the kill the assay can see: starting density and the floor bound every MDK
+# The detection floor bounds what a time-kill assay can report: minimum duration for killing and log-reduction endpoints in five published deposits and a prospective test
 
 **Author:** Vahhab Piranfar¹
 

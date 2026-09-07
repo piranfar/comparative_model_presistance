@@ -1,6 +1,6 @@
 {
   "script": "src/audit_manuscript.py",
-  "utc": "2026-09-07T18:37:42+00:00",
+  "utc": "2026-09-07T18:57:40+00:00",
   "checkers": [
     "check_arithmetic",
     "check_census",
@@ -11,26 +11,17 @@
     "check_identity",
     "check_terms"
   ],
-  "n_words_audited": 30337,
+  "n_words_audited": 30366,
   "counts": {
     "high": 0,
-    "medium": 2,
+    "medium": 1,
     "low": 8
   },
   "findings": [
     {
       "severity": "medium",
-      "kind": "abbreviation-not-expanded",
-      "where": "line 2 (front matter)",
-      "detail": "\"MDK\" is used in the title with no expansion of it anywhere in the title, though it is expanded later in the paper. The title, the Abstract and the main text are read separately, so each has to carry its own first use.",
-      "expected": "the term written out at the first use of MDK",
-      "found": "starting density and the floor bound every MDK\" short_title: \"Headroom bounds every MDK\" article_type: \"Research Article\" keywords",
-      "checker": "check_terms"
-    },
-    {
-      "severity": "medium",
       "kind": "limit-outside-its-declared-sense",
-      "where": "line 118 (Introduction)",
+      "where": "line 117 (Introduction)",
       "detail": "\"limit\" appears here in none of the senses the Methods reserve it for. Check that it is not standing in for the assay floor *L*.",
       "expected": "the assay floor *L*",
       "found": "m requires below- and above-quantification-limit flags together with the limit of quantification, and notes that pharmacometric mo",
@@ -40,7 +31,7 @@
       "severity": "low",
       "kind": "audit-count-summary",
       "where": "whole repository",
-      "detail": "src/audit_claims.py runs 142 checks (run); 3 place(s) state that number: Methods (PAPER_COMPLETE.md) line 1823 = 142; manuscript/RATE_VS_DURATION.md line 1569 = 142; README.md line 44 = 142",
+      "detail": "src/audit_claims.py runs 142 checks (run); 3 place(s) state that number: Methods (PAPER_COMPLETE.md) line 1822 = 142; manuscript/RATE_VS_DURATION.md line 1569 = 142; README.md line 44 = 142",
       "expected": "142",
       "found": "142, 142, 142",
       "checker": "check_census"
@@ -57,7 +48,7 @@
     {
       "severity": "low",
       "kind": "named-items-not-resolved",
-      "where": "other (line 145): \"Two further deposits establish that the same arithmetic governs killing experiments where inoculum is controll\"",
+      "where": "other (line 144): \"Two further deposits establish that the same arithmetic governs killing experiments where inoculum is controll\"",
       "detail": "resolved: the sentence says 2 and then names a list. Not resolved: 2 of its 4 items do not open with a determiner or a count (11); 13)), so the list runs into qualifying clauses and cannot be counted mechanically. Count it by eye",
       "expected": "2 items named",
       "found": "a list of 4 fragments",
@@ -66,7 +57,7 @@
     {
       "severity": "low",
       "kind": "named-items-not-resolved",
-      "where": "results, 4. The classification tracks growth; the resistance associat (line 622): \"Five of them are recorded almost exclusively for resistant isolates, so their missingness is the exposure: the\"",
+      "where": "results, 4. The classification tracks growth; the resistance associat (line 621): \"Five of them are recorded almost exclusively for resistant isolates, so their missingness is the exposure: the\"",
       "detail": "resolved: the sentence says 5 and then names a list. Not resolved: 2 of its 6 items do not open with a determiner or a count (for none of the 119 susceptible on; none), so the list runs into qualifying clauses and cannot be counted mechanically. Count it by eye",
       "expected": "5 items named",
       "found": "a list of 6 fragments",
@@ -75,7 +66,7 @@
     {
       "severity": "low",
       "kind": "quantity-in-words-and-figures",
-      "where": "discussion, How large the effect is (line 1246) and results, 7. The population that fell faster often crossed the floor l (line 936)",
+      "where": "discussion, How large the effect is (line 1245) and results, 7. The population that fell faster often crossed the floor l (line 935)",
       "detail": "\"a third\" states in words what 36.6 per cent states in figures; the two sentences share assay, crossed, faster, fell, flask. Check they are the same quantity -- this rule matches on wording, not on arithmetic, because 36.6 is not a rounding of 33.3333",
       "expected": "the figure, or the word, in both places",
       "found": "\"a third\" against 36.6 per cent",

@@ -13,7 +13,7 @@ reportable positive count, a *q*-log endpoint is observable only above
 reading is compatible only with the lowest class. Reaching the floor is the
 drug's doing; the label it then permits is not.
 
-Of 217 clinical *Mycobacterium tuberculosis* isolates classified for rifampicin
+Of 217 *Mycobacterium tuberculosis* isolates classified for rifampicin
 tolerance, 33 lack the range for the 99.99 per cent endpoint used, and all 33
 are recorded as failing. Of eighteen read at the floor, twelve admit one class
 and six admit two. The label tracks growth state; isoniazid resistance does not,
@@ -24,9 +24,8 @@ Under one written protocol, six laboratories differed by 4.40 log10 in
 demonstrable kill depth. Prospectively, *Escherichia coli* ATCC 25922 at the
 standard inoculum could report 3.71–3.93 logs at 10 µL and 4.88–5.05 at 100 µL;
 at a cut of 10⁻³, nine of 54 sample-times took two different labels from one
-culture. A tolerance call reported without its starting density and its assay
+culture. A tolerance call reported without its starting density and assay
 floor cannot be interpreted.
 
-**Keywords:** antibiotic tolerance; minimum duration for killing;
-*Mycobacterium tuberculosis*; assay floor; censored data; time-kill kinetics;
-inoculum effect
+**Keywords:** time-kill assay; limit of quantification; minimum duration for
+killing; antibiotic tolerance; colony counting; censored data; inoculum effect

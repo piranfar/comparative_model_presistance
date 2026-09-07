@@ -57,11 +57,13 @@ def main() -> int:
     uncited = [t for t in items
                if not re.search(rf"{t}\b", prose) and not re.search(rf"{t}\b", main_tables)]
 
+    # Taken from the prose front matter, not repeated here. A title repeated in
+    # six files is a title that is wrong in five of them the day it changes.
+    tm = re.search(r'^title:\s*"(.+)"\s*$', prose, re.M)
     body = [
         "# Supplemental material",
         "",
-        "**Score only the kill the assay can see: starting density and the floor "
-        "bound every MDK**",
+        f"**{tm.group(1) if tm else '[no title in the front matter]'}**",
         "",
         "Vahhab Piranfar",
         "",

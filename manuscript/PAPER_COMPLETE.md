@@ -1,18 +1,18 @@
 ---
-title: "Score only the kill the assay can see: starting density and the floor bound every MDK"
-short_title: "Headroom bounds every MDK"
+title: "The detection floor bounds what a time-kill assay can report: minimum duration for killing and log-reduction endpoints in five published deposits and a prospective test"
+short_title: "The detection floor bounds time-kill endpoints"
 article_type: "Research Article"
 keywords:
-  - antibiotic tolerance
+  - time-kill assay
+  - limit of quantification
   - minimum duration for killing
-  - Mycobacterium tuberculosis
-  - assay floor
+  - antibiotic tolerance
+  - colony counting
   - censored data
-  - time-kill kinetics
   - inoculum effect
 ---
 
-# Score only the kill the assay can see: starting density and the floor bound every MDK
+# The detection floor bounds what a time-kill assay can report: minimum duration for killing and log-reduction endpoints in five published deposits and a prospective test
 
 **Author:** Vahhab Piranfar¹
 
@@ -39,7 +39,7 @@ reportable positive count, a *q*-log endpoint is observable only above
 reading is compatible only with the lowest class. Reaching the floor is the
 drug's doing; the label it then permits is not.
 
-Of 217 clinical *Mycobacterium tuberculosis* isolates classified for rifampicin
+Of 217 *Mycobacterium tuberculosis* isolates classified for rifampicin
 tolerance, 33 lack the range for the 99.99 per cent endpoint used, and all 33
 are recorded as failing. Of eighteen read at the floor, twelve admit one class
 and six admit two. The label tracks growth state; isoniazid resistance does not,
@@ -50,12 +50,11 @@ Under one written protocol, six laboratories differed by 4.40 log10 in
 demonstrable kill depth. Prospectively, *Escherichia coli* ATCC 25922 at the
 standard inoculum could report 3.71–3.93 logs at 10 µL and 4.88–5.05 at 100 µL;
 at a cut of 10⁻³, nine of 54 sample-times took two different labels from one
-culture. A tolerance call reported without its starting density and its assay
+culture. A tolerance call reported without its starting density and assay
 floor cannot be interpreted.
 
-**Keywords:** antibiotic tolerance; minimum duration for killing;
-*Mycobacterium tuberculosis*; assay floor; censored data; time-kill kinetics;
-inoculum effect
+**Keywords:** time-kill assay; limit of quantification; minimum duration for
+killing; antibiotic tolerance; colony counting; censored data; inoculum effect
 
 ## Introduction
 
@@ -2033,7 +2032,7 @@ the original draft, review and editing, and visualisation.
 
 52. Davidson-Pilon C. 2019. lifelines: survival analysis in Python. J Open Source Softw 4:1317. https://doi.org/10.21105/joss.01317.
 
-53. Piranfar V. 2026. Analysis code, audit scripts and headroom tool for "Score only the kill the assay can see: starting density and the floor bound every MDK".
+53. Piranfar V. 2026. Analysis code, audit scripts and headroom tool for "The detection floor bounds what a time-kill assay can report: minimum duration for killing and log-reduction endpoints in five published deposits and a prospective test".
 
 ## Figure legends
 

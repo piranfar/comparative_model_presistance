@@ -1,6 +1,6 @@
 # Supplemental material
 
-**Score only the kill the assay can see: starting density and the floor bound every MDK**
+**The detection floor bounds what a time-kill assay can report: minimum duration for killing and log-reduction endpoints in five published deposits and a prospective test**
 
 Vahhab Piranfar
 

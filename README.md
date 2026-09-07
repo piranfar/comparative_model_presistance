@@ -83,8 +83,7 @@ If you use the code or the analyses, cite the manuscript; `CITATION.cff` carries
 the machine-readable form. If you use any of the deposits, cite their depositors
 rather than this repository — none of that data was generated here.
 
-Vahhab Piranfar. *Score only the kill the assay can see: starting density and the
-floor bound every MDK.* ORCID [0000-0003-3653-5739](https://orcid.org/0000-0003-3653-5739).
+Vahhab Piranfar. *The detection floor bounds what a time-kill assay can report: minimum duration for killing and log-reduction endpoints in five published deposits and a prospective test* ORCID [0000-0003-3653-5739](https://orcid.org/0000-0003-3653-5739).
 
 ## Licence
 

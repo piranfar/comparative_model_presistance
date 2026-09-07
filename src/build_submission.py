@@ -449,10 +449,12 @@ def main() -> int:
         if parent in preambles:
             main_parts += [f"## {parent}", "", preambles[parent].strip(), ""]
 
-    supp_parts = ["# Supplemental material", "",
-                  "**Score only the kill the assay can see: starting density "
-                  "and the floor bound every MDK**", "", "Vahhab Piranfar", "",
-                  "---", ""]
+    # Read the title rather than repeating it. It was hard-coded in six files,
+    # and retargeting the manuscript to a different journal changed it in one.
+    m = re.search(r'^title:\s*"(.+)"\s*$', prose, re.M)
+    title = m.group(1) if m else "[no title in the front matter]"
+    supp_parts = ["# Supplemental material", "", f"**{title}**", "",
+                  "Vahhab Piranfar", "", "---", ""]
     moved_results = gather(SUPP, "Results")
     deferred = [s for s in sections if s.deferred]
     if moved_results or deferred:
