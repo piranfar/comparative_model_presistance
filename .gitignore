@@ -89,3 +89,11 @@ data/raw/external_survival/Stepanyan_2015_Mol-Ecol.zip
 data/raw/external_survival/Stewart&Rozen_archived_data.xls
 data/raw/external_survival/R_long_data_Alex_and_Sara_CFU_counts.csv
 data/raw/external_survival/pnas.1903836116.sapp.pdf
+
+# (4) the corpus. data/corpus/open/ is tracked: CC BY and CC0 only, shippable.
+# data/corpus/restricted/ is everything else -- fetched, used by the pipeline,
+# and deliberately kept out of git, because a file can be taken off a disk but
+# not out of a public history. src/fetch_corpus.py decides which is which from
+# the licence_class column of data/manifests/corpus.csv, and its SHIP_EVERYTHING
+# switch moves them all into the tracked directory when the permissions are in.
+data/corpus/restricted/

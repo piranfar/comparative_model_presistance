@@ -1,0 +1,9 @@
+study_id,contact_name,contact_email,letter,sent_date,reply_date,outcome,scope_granted,evidence_file,notes
+TSUJI2012,,,A,,,not sent,,,ASK_FIRST; licence as recorded: none stated
+DRUSANO2018,,,A,,,not sent,,,"USE_OK_FACTS_ONLY; licence as recorded: Free in PMC, no open-access licence"
+BROWN2015,,,B,,,not sent,,,ASK_FIRST; licence as recorded: UNVERIFIED
+FERRO2014,,,A,,,not sent,,,"USE_OK_FACTS_ONLY; licence as recorded: Taverne Article 25fa, institutional deposit"
+FERRO2015,,,A,,,not sent,,,ASK_FIRST; licence as recorded: none stated
+GUMBO2004,,,A,,,not sent,,,USE_OK_FACTS_ONLY; licence as recorded: paywalled
+DESTEENWINKEL2010,,,A,,,not sent,,,USE_OK_FACTS_ONLY; licence as recorded: paywalled
+MAURER2014,,,A,,,not sent,,,ASK_FIRST; licence as recorded: UNVERIFIED
