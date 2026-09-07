@@ -6,7 +6,7 @@ Outputs of the earlier paper are not here; they live in `version_one/results/`.
 
 | | tables | figures | receipts |
 | --- | ---: | ---: | ---: |
-| total | 67 | 5 | 23 |
+| total | 72 | 5 | 25 |
 
 ## Tolerance and the assay floor (manuscript/PAPER_COMPLETE.md)
 
@@ -84,10 +84,15 @@ Outputs of the earlier paper are not here; they live in `version_one/results/`.
 
 **Figures.** `fig13_parameter_transfer`
 
-**Tables (4).**
+**Tables (9).**
 
 | file | written by | used by |
 | --- | --- | --- |
+| `corpus_coverage.csv` | `-` | `build_corpus_long` |
+| `exp38_boundary_tests.csv` | `exp38_boundary_experiment.py` | quoted in the text only |
+| `exp38_experiment_readings.csv` | `exp38_boundary_experiment.py` | quoted in the text only |
+| `exp40_floor_signatures.csv` | `exp40_corpus_landscape.py` | quoted in the text only |
+| `exp40_landscape.csv` | `exp40_corpus_landscape.py` | quoted in the text only |
 | `learn_boundaries.csv` | `-` | `learn_boundaries` |
 | `neural_structure.csv` | `-` | `neural_structure` |
 | `symbolic_boundaries.csv` | `-` | `symbolic_boundaries` |
@@ -101,7 +106,7 @@ Outputs of the earlier paper are not here; they live in `version_one/results/`.
 
 ## Receipts
 
-23 JSON receipts, one per analysis stage. Each records the inputs, the headline outputs and the software versions the stage actually ran under, so a run under different versions is recorded rather than silently substituted.
+25 JSON receipts, one per analysis stage. Each records the inputs, the headline outputs and the software versions the stage actually ran under, so a run under different versions is recorded rather than silently substituted.
 
 ## Checking the numbers
 

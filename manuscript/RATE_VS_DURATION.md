@@ -77,6 +77,32 @@ too, but only once the drug has driven the population down to it: reaching the
 floor takes a reduction of the isolate's entire headroom, and that is the drug's
 doing.
 
+The bound is already in the papers that defined the assays. Vijay and colleagues,
+introducing the most-probable-number MDK for rifampicin, treated an MDK99.99
+longer than ten days as high tolerance beyond the **time** window of the assay,
+not as a statement about the count floor [[R53]]. In the 217-isolate
+classification that follows from that assay they report that MDK99.99 at 15 days
+of recovery could be calculated for only 22 of 209 isolates and that the rest lay,
+in their words, "beyond the assay limits" [[R51]]. The ERA4TB consortium requires below- and
+above-quantification-limit flags together with the limit of quantification, and
+notes that pharmacometric models can use those flags [[R23]]; the same
+six-laboratory comparison then excluded both from its numerical analysis. Their
+2025 protocol states the geometry of the pipette explicitly: a 2.5 µL drop has a
+limit of detection above 2.6 log10 CFU/mL, and a lower limit requires a larger
+plated volume [[R34]]. Independently, a 2025 pharmacokinetic-pharmacodynamic
+analysis of hollow-fibre CFU series showed that censoring counts below 10 CFU
+biases regimen ranking [[R54]], and a within-host tuberculosis tolerance study
+chose a shallower MDK threshold specifically so that more isolates could enter
+the analysis [[R55]].
+
+None of these converts a floor-level reading into the classification rule it
+becomes: when the last count sits at *L*, the recorded fraction is *L*/*N*₀, and
+the low, medium or high label is then a cut on starting density. That is the gap
+this paper fills. Two further failures have to be kept distinct from it. A
+duration ceiling — the assay stopped looking — is not a count floor, which is the
+plate being unable to see; and recording a below-limit flag is not the same as
+scoring a duration from the points so recorded.
+
 This is testable rather than arguable, because one published deposit assigns the
 tolerance phenotype itself. Vijay and colleagues [[R5]][[R51]] scored 217 clinical
 *Mycobacterium tuberculosis* isolates as having low, medium or high tolerance to
@@ -131,6 +157,20 @@ began at each. The last two are why a written protocol does not standardise
 measurable depth: the plated volume sets *L*. To make both a four-log endpoint
 and a low class identifiable against *L* = 23 per mL, seed above
 *L* · max(10⁴, 1/*c*₁) = 230 000 per mL, or choose a shallower endpoint.
+
+Two of the claims this arithmetic supports are not testable and should not be
+read as though they were. If the last reading sits at the floor, the recorded
+reduction cannot exceed *h*, because a deeper one would require a count below
+*L*. And the recorded fraction is then *L*/*N*₀, so its correlation with *N*₀ is
+−1 whatever the numbers are, including random ones. Both follow from the
+definition of a censored reading, and neither is evidence about a drug.
+
+What is testable is what happens when one sample is plated at two volumes under a
+fixed class threshold. If both readings sit at their own floors the labels are
+*L*₁/*N*₀ and *L*₂/*N*₀, and they differ only when those two fractions fall on
+opposite sides of the cut — which is again arithmetic. The empirical quantity is
+how often a real experiment lands in that window. It could be none of the time.
+
 
 ---
 
@@ -812,6 +852,42 @@ nutrient stratum separately. Stratifying is not optional there: the nominal
 concentration is not a fixed exposure across those strata, since at 25 µg/mL the
 same figure spans 0.55 to 9.47 times the inhibitory concentration each population
 evolved to and straddles it (Table S6).
+
+---
+
+### 11. One culture, two plated volumes, two tolerance labels
+
+Every result above reads a deposit somebody else made for another purpose. This
+one reads an experiment designed to try to break *N*_reach and *N*_id, with its
+predictions written down before a plate was counted: *Escherichia coli* ATCC
+25922, of the American Type Culture Collection — the reference strain the
+standard names for quality control — against
+ciprofloxacin at ten times its inhibitory concentration, seeded at three
+densities and plated at two volumes, three flasks each, 216 plate readings.
+
+The seeding is deliberately chosen so that the middle arm is the 5 × 10⁵ per mL
+the standard specifies. Realised densities were 6.4 × 10⁴, 4.4 × 10⁵ and
+3.8 × 10⁶ per mL. **At the standard inoculum plated the standard way, the deepest
+reduction that could be reported was 3.93 logs — the arm's own ceiling, not the
+drug's** — while the same cultures plated at 100 µL reported 4.88.
+
+That much is arithmetic, as Box 1 says. So is the observation that two platings
+of one sample carry different labels when both sit at their floors, since the
+labels are then *L*₁/*N*₀ and *L*₂/*N*₀. **The quantity that could have come out
+zero is how often a real experiment lands in the window where those two fractions
+straddle the cut**, and it depends on where the cut is:
+
+| Class threshold *c*₁ | Sample-times whose two platings straddle it |
+| --- | ---: |
+| 10⁻² | 1 of 54 (2%) |
+| 10⁻³ | 9 of 54 (17%) |
+| 10⁻⁴ | 8 of 54 (15%) |
+
+At a threshold of one per cent the window is nearly shut. At one in a thousand,
+which is where the clinical classification analysed above cuts its lowest class,
+one sample-time in six receives two different labels from one culture. Nothing
+about the biology differs between the two readings: there is one flask, one drug
+and one moment, and the pipette decides.
 
 ---
 

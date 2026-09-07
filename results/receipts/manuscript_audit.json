@@ -1,6 +1,6 @@
 {
   "script": "src/audit_manuscript.py",
-  "utc": "2026-09-07T04:24:55+00:00",
+  "utc": "2026-09-07T15:29:54+00:00",
   "checkers": [
     "check_arithmetic",
     "check_census",
@@ -11,10 +11,10 @@
     "check_identity",
     "check_terms"
   ],
-  "n_words_audited": 28692,
+  "n_words_audited": 29548,
   "counts": {
     "high": 0,
-    "medium": 1,
+    "medium": 2,
     "low": 8
   },
   "findings": [
@@ -28,10 +28,19 @@
       "checker": "check_terms"
     },
     {
+      "severity": "medium",
+      "kind": "limit-outside-its-declared-sense",
+      "where": "line 117 (Introduction)",
+      "detail": "\"limit\" appears here in none of the senses the Methods reserve it for. Check that it is not standing in for the assay floor *L*.",
+      "expected": "the assay floor *L*",
+      "found": "m requires below- and above-quantification-limit flags together with the limit of quantification, and notes that pharmacometric mo",
+      "checker": "check_terms"
+    },
+    {
       "severity": "low",
       "kind": "audit-count-summary",
       "where": "whole repository",
-      "detail": "src/audit_claims.py runs 142 checks (run); 3 place(s) state that number: Methods (PAPER_COMPLETE.md) line 1761 = 142; manuscript/RATE_VS_DURATION.md line 1470 = 142; README.md line 44 = 142",
+      "detail": "src/audit_claims.py runs 142 checks (run); 3 place(s) state that number: Methods (PAPER_COMPLETE.md) line 1837 = 142; manuscript/RATE_VS_DURATION.md line 1546 = 142; README.md line 44 = 142",
       "expected": "142",
       "found": "142, 142, 142",
       "checker": "check_census"
@@ -40,16 +49,16 @@
       "severity": "low",
       "kind": "census-summary",
       "where": "whole manuscript",
-      "detail": "2 censuses of the form 'N of the M <things>' were checked against the parts the text names and partition cleanly; 2 are answerable to a table whose rows equal M and are the only ones the arithmetic runs on; 24 have no such table and are counted here rather than checked",
+      "detail": "2 censuses of the form 'N of the M <things>' were checked against the parts the text names and partition cleanly; 2 are answerable to a table whose rows equal M and are the only ones the arithmetic runs on; 25 have no such table and are counted here rather than checked",
       "expected": "every checkable census partitioned",
-      "found": "2 resolved, 2 gated on a table, 24 not checkable",
+      "found": "2 resolved, 2 gated on a table, 25 not checkable",
       "checker": "check_census"
     },
     {
       "severity": "low",
       "kind": "named-items-not-resolved",
-      "where": "other (line 118): \"Two further deposits establish that the same arithmetic governs killing experiments where inoculum is controll\"",
-      "detail": "resolved: the sentence says 2 and then names a list. Not resolved: 2 of its 4 items do not open with a determiner or a count (7); 9)), so the list runs into qualifying clauses and cannot be counted mechanically. Count it by eye",
+      "where": "other (line 144): \"Two further deposits establish that the same arithmetic governs killing experiments where inoculum is controll\"",
+      "detail": "resolved: the sentence says 2 and then names a list. Not resolved: 2 of its 4 items do not open with a determiner or a count (11); 13)), so the list runs into qualifying clauses and cannot be counted mechanically. Count it by eye",
       "expected": "2 items named",
       "found": "a list of 4 fragments",
       "checker": "check_census"
@@ -57,7 +66,7 @@
     {
       "severity": "low",
       "kind": "named-items-not-resolved",
-      "where": "results, 4. The classification tracks growth; the resistance associat (line 564): \"Five of them are recorded almost exclusively for resistant isolates, so their missingness is the exposure: the\"",
+      "where": "results, 4. The classification tracks growth; the resistance associat (line 604): \"Five of them are recorded almost exclusively for resistant isolates, so their missingness is the exposure: the\"",
       "detail": "resolved: the sentence says 5 and then names a list. Not resolved: 2 of its 6 items do not open with a determiner or a count (for none of the 119 susceptible on; none), so the list runs into qualifying clauses and cannot be counted mechanically. Count it by eye",
       "expected": "5 items named",
       "found": "a list of 6 fragments",
@@ -66,7 +75,7 @@
     {
       "severity": "low",
       "kind": "quantity-in-words-and-figures",
-      "where": "discussion, How large the effect is (line 1157) and results, 7. The population that fell faster often crossed the floor l (line 878)",
+      "where": "discussion, How large the effect is (line 1233) and results, 7. The population that fell faster often crossed the floor l (line 918)",
       "detail": "\"a third\" states in words what 36.6 per cent states in figures; the two sentences share assay, crossed, faster, fell, flask. Check they are the same quantity -- this rule matches on wording, not on arithmetic, because 36.6 is not a rounding of 33.3333",
       "expected": "the figure, or the word, in both places",
       "found": "\"a third\" against 36.6 per cent",
@@ -85,9 +94,9 @@
       "severity": "low",
       "kind": "coverage-summary",
       "where": "whole manuscript",
-      "detail": "abstract (1): 13 numeric claims, 13 traceable, 13 of those to a results table or receipt, 3 tokens skipped as conventions; box (1): 8 numeric claims, 8 traceable, 8 of those to a results table or receipt, 5 tokens skipped as conventions; figure legend (4): 44 numeric claims, 44 traceable, 44 of those to a results table or receipt, 9 tokens skipped as conventions; table legend (23): 96 numeric claims, 96 traceable, 96 of those to a results table or receipt, 26 tokens skipped as conventions",
+      "detail": "abstract (1): 13 numeric claims, 13 traceable, 13 of those to a results table or receipt, 3 tokens skipped as conventions; box (1): 9 numeric claims, 9 traceable, 9 of those to a results table or receipt, 5 tokens skipped as conventions; figure legend (4): 44 numeric claims, 44 traceable, 44 of those to a results table or receipt, 9 tokens skipped as conventions; table legend (23): 96 numeric claims, 96 traceable, 96 of those to a results table or receipt, 26 tokens skipped as conventions",
       "expected": "every region scanned",
-      "found": "161 numeric claims outside table bodies",
+      "found": "162 numeric claims outside table bodies",
       "checker": "check_coverage"
     },
     {
