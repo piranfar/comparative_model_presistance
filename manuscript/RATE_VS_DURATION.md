@@ -22,7 +22,7 @@ ORCID: [0000-0003-3653-5739](https://orcid.org/0000-0003-3653-5739)
 
 **Correspondence:** Vahhab Piranfar, vahab.p@gmail.com
 
-**Figures:** 4 | **Tables:** 16 | **Boxes:** 1 | **Supplementary tables:** 7
+**Figures:** 4 | **Tables:** 15 | **Boxes:** 1 | **Supplementary tables:** 8
 
 ---
 
@@ -1034,12 +1034,15 @@ by isolates that are not independent.
 Four features of these deposits bound what the analysis can establish, and each
 points at the design that would settle it.
 
-Every conclusion this paper draws from the two primary deposits has been
-recomputed at the level its observations are actually independent, and the result
-is tabulated rather than summarised (Table 15): twenty survive unchanged, six
-survive with materially wider uncertainty, five do not survive and have been
-removed from the text, and one is withdrawn because its null is false before any
-data are seen.
+The first limitation is one this paper has already acted on rather than merely
+declared. Every conclusion drawn from the two primary deposits was recomputed at
+the level its observations are actually independent, and the outcome is
+tabulated rather than summarised (Table S8): twenty survive unchanged, six
+survive with materially wider uncertainty, five do not survive and **have already
+been removed from the text above**, and one is withdrawn because its null is
+false before any data are seen. The five and the one are not claims this paper
+makes; they are claims it tested and dropped, and the ledger is here so a reader
+can check that the dropping was done rather than promised.
 
 The between-laboratory evidence is six clusters. Every flask in a laboratory
 shares a starting culture, so the effective sample size for any comparison
@@ -1238,7 +1241,7 @@ recorded plated volume and per-culture time-course counts together — without
 being able to evidence its extent. The claim that no deposit was selected after
 its result was known rests on the commit history of this repository rather than
 on a registration, and readers should weigh it accordingly. It does appear
-descriptively — a row of its own in Tables 2, 5, 9, 16, S5 and S7, and a table of
+descriptively — a row of its own in Tables 2, 5, 9, 15, S5 and S7, and a table of
 its own in Table 12 — which is reporting rather than fitting.
 
 **Concentration-by-time grid.** Apramycin and amikacin against *M. tuberculosis*
@@ -1266,7 +1269,7 @@ boundaries of the next subsection and never denotes a value. The event a
 time-to-event analysis records is correspondingly a first observed crossing below
 the assay floor.
 What *L* is in each deposit, how it was arrived at, and how replicate plates and
-plated volumes were treated is tabulated deposit by deposit (Table 16).
+plated volumes were treated is tabulated deposit by deposit (Table 15).
 
 Two distinct censoring problems arise and are handled separately, because
 conflating them is the error this paper is about.
@@ -1352,6 +1355,18 @@ effect of isoniazid resistance on the day-5 tolerance class into an average
 causal mediation effect through log10 *N₀* and an average direct effect [[R16]][[R17]], with
 bootstrap percentile intervals from 5 000 resamples, repeated on the baseline
 stratum and on two binary collapses of the outcome.
+
+There is a sharper objection than untestable ignorability, and it has to be met
+with a number rather than a concession. For an isolate whose day-5 reading sits
+at the floor the recorded fraction is *L*/*N*₀ exactly, so the class is a
+function of the starting density and the decomposition recovers arithmetic. That
+holds for the eighteen isolates that ended at the floor and for no others: in
+the remaining 185 the numerator was measured and can move independently of
+*N*₀. Refitting on those 185 alone, the mediated path does not weaken but
+strengthens, to +0.227 classes (0.118 to 0.348), while the direct path collapses
+to +0.008 (−0.197 to 0.208) and the proportion mediated rises from 0.65 to 0.96.
+Removing exactly the isolates for which the criticism is true leaves the effect
+larger, so it is not an artefact of them.
 
 Sequential ignorability is assumed and is not testable here, so the estimate is
 accompanied by the sensitivity that matters: the residual correlation between

@@ -181,7 +181,7 @@ def table7() -> str:
             "identifier, so no standard error here can be clustered on the true "
             "grouping and every interval in this table is model-based; the "
             "baseline-isolate column is the sensitivity analysis that stands in "
-            "for clustering, and Table 15 records what each conclusion is worth "
+            "for clustering, and Table S8 records what each conclusion is worth "
             "once it is applied."
             + chr(10) + chr(10) + md(d, align_right_from=4))
 
@@ -417,7 +417,7 @@ def tableS5() -> str:
 
 
 
-def table16() -> str:
+def table15() -> str:
     """What L is, deposit by deposit, and how we came by it."""
     d = pd.read_csv(T / "exp29_floor_provenance.csv")
     rows = [[r.dataset.split(",")[0],
@@ -430,7 +430,7 @@ def table16() -> str:
     f = pd.DataFrame(rows, columns=[
         "Deposit", "States an LOD", "States an LOQ", "Value used", "Units",
         "How obtained", "What it should be called"])
-    return ("**Table 16.** What the assay floor *L* is in each deposit analysed. No "
+    return ("**Table 15.** What the assay floor *L* is in each deposit analysed. No "
             "deposit reports a validated limit of quantification with a value. "
             "The six-laboratory file names the concept in the definitions of its "
             "below- and above-quantification-limit columns but defines it as "
@@ -495,7 +495,7 @@ def tableS7() -> str:
 
 
 
-def table15() -> str:
+def tableS8() -> str:
     """What survives once the clustering is respected, conclusion by conclusion."""
     d = pd.read_csv(T / "exp31_recomputed_inference.csv")
     order = {"NOT SUPPORTED": 0, "WITHDRAWN": 1, "WEAKENED": 2,
@@ -510,7 +510,7 @@ def table15() -> str:
         "Units treated as independent",
         "Independent clusters", "Method used instead", "Verdict"])
     n = d.verdict.value_counts()
-    return (f"**Table 15.** Every conclusion this paper draws from the two "
+    return (f"**Table S8.** Every conclusion this paper draws from the two "
             f"primary deposits, against uncertainty recomputed at the level the "
             f"observations are actually independent. "
             f"{int(n.get('SUPPORTED', 0))} survive unchanged, "
@@ -775,8 +775,7 @@ def main() -> int:
              "file can drift away from the analysis that produced it.",
              ""]
     order = (table1, table2, table3, table4, table5, table6, table7, table8,
-             table9, table10, table11, table12, table13, table14, table15,
-             table16)
+             table9, table10, table11, table12, table13, table14, table15)
     for fn in order:
         parts.append(fn())
         parts.append("")
@@ -784,12 +783,14 @@ def main() -> int:
               "Held here so the Results stay on one line of reasoning. "
               "Table S6 supports Section 10 and Table S5 supports Section 6.",
               ""]
-    for fn in (tableS1, tableS2, tableS3, tableS4, tableS5, tableS6, tableS7):
+    for fn in (tableS1, tableS2, tableS3, tableS4, tableS5, tableS6, tableS7,
+                tableS8):
         parts.append(fn())
         parts.append("")
     OUT.write_text("\n".join(parts), encoding="utf-8")
     print(f"wrote {OUT.relative_to(ROOT)}")
-    for fn in order + (tableS1, tableS2, tableS3, tableS4, tableS5, tableS6, tableS7):
+    for fn in order + (tableS1, tableS2, tableS3, tableS4, tableS5, tableS6, tableS7,
+                tableS8):
         first = fn().split("\n")[0]
         print("   " + first[:96])
     return 0

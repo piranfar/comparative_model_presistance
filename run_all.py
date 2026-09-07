@@ -89,6 +89,9 @@ STAGES = [
     ("exp38  the boundaries tested forward, on an experiment built to break them",
      "src.experiments.exp38_boundary_experiment"),
 
+    ("exp41  is the mediation a tautology? refit without the censored isolates",
+     "src.experiments.exp41_mediation_without_floor"),
+
     ("fig 1  the assay floor bounds the endpoint and decides the phenotype",
      "src.figures.fig1_dynamic_range"),
     ("fig 2  one protocol, six laboratories: the inoculum still decides",

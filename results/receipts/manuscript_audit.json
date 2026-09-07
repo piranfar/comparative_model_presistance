@@ -1,6 +1,6 @@
 {
   "script": "src/audit_manuscript.py",
-  "utc": "2026-09-07T15:29:54+00:00",
+  "utc": "2026-09-07T16:05:08+00:00",
   "checkers": [
     "check_arithmetic",
     "check_census",
@@ -11,7 +11,7 @@
     "check_identity",
     "check_terms"
   ],
-  "n_words_audited": 29548,
+  "n_words_audited": 29739,
   "counts": {
     "high": 0,
     "medium": 2,
@@ -40,7 +40,7 @@
       "severity": "low",
       "kind": "audit-count-summary",
       "where": "whole repository",
-      "detail": "src/audit_claims.py runs 142 checks (run); 3 place(s) state that number: Methods (PAPER_COMPLETE.md) line 1837 = 142; manuscript/RATE_VS_DURATION.md line 1546 = 142; README.md line 44 = 142",
+      "detail": "src/audit_claims.py runs 142 checks (run); 3 place(s) state that number: Methods (PAPER_COMPLETE.md) line 1814 = 142; manuscript/RATE_VS_DURATION.md line 1561 = 142; README.md line 44 = 142",
       "expected": "142",
       "found": "142, 142, 142",
       "checker": "check_census"
@@ -85,9 +85,9 @@
       "severity": "low",
       "kind": "scope-summary",
       "where": "whole manuscript",
-      "detail": "52 claims are stated in the Results and repeated in a legend or in the self-audit table; 52 carry every qualifier family the Results attach to them",
+      "detail": "46 claims are stated in the Results and repeated in a legend or in the self-audit table; 46 carry every qualifier family the Results attach to them",
       "expected": "every repeated claim as narrowly scoped as its original",
-      "found": "52 of 52",
+      "found": "46 of 46",
       "checker": "check_census"
     },
     {
@@ -103,7 +103,7 @@
       "severity": "low",
       "kind": "deposit-table-map",
       "where": "manuscript/tables.md",
-      "detail": "Vijay: rows in 1*, 2, 5, 9, 16, S5, S7; legend only in no table; van Wijk / ERA4TB: rows in 1*, 2, 5, 9, 15*, 16, S5, S7; legend only in 8*, 11*; Windels: rows in 1*, 2, 16, S7; legend only in no table; Kaur: rows in 1*, 2, 9, 16, S5, S7; legend only in no table; Dubey: rows in 1*, 2, 5, 9, 16, S5, S7; legend only in 12. A starred table matched a description rather than the depositor's name",
+      "detail": "Vijay: rows in 1*, 2, 5, 9, 15, S5, S7; legend only in no table; van Wijk / ERA4TB: rows in 1*, 2, 5, 9, 15, S5, S7, S8*; legend only in 8*, 11*; Windels: rows in 1*, 2, 15, S7; legend only in no table; Kaur: rows in 1*, 2, 9, 15, S5, S7; legend only in no table; Dubey: rows in 1*, 2, 5, 9, 15, S5, S7; legend only in 12. A starred table matched a description rather than the depositor's name",
       "expected": "3 claims about a table's contents were checked; 0 denied or supposed rather than asserted, and skipped",
       "found": "aliases learned: Vijay = clinical isolates; van Wijk / ERA4TB = laboratories / laboratory plating / six-laboratory; Windels = clones evolved; Kaur = apramycin grid / intracellular / planktonic; Dubey = fibre hollow",
       "checker": "check_deposits"

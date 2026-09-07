@@ -1,0 +1,39 @@
+{
+  "script": "src/experiments/exp41_mediation_without_floor.py",
+  "utc": "2026-09-07T16:04:23+00:00",
+  "objection": "peer review: the mediator is the denominator of the outcome, so the mediation is a tautology",
+  "floor_mpn_per_ml": 23.0,
+  "n_total": 203,
+  "n_floored": 18,
+  "n_boot": 5000,
+  "seed": 20260907,
+  "strata": [
+    {
+      "n": 203,
+      "acme": 0.1655072548878738,
+      "acme_lo": 0.06535468263271978,
+      "acme_hi": 0.27770914955895853,
+      "ade": 0.09079526612053111,
+      "ade_lo": -0.11343770953868672,
+      "ade_hi": 0.2964281552641199,
+      "total": 0.2563025210084025,
+      "prop_mediated": 0.6457496174313786,
+      "n_boot_used": 5000,
+      "stratum": "all isolates with an ordered label"
+    },
+    {
+      "n": 185,
+      "acme": 0.22724905120682828,
+      "acme_lo": 0.11772568204637263,
+      "acme_hi": 0.3480480232698246,
+      "ade": 0.008441184483406904,
+      "ade_lo": -0.19712591590428533,
+      "ade_hi": 0.20846038440423448,
+      "total": 0.23569023569023584,
+      "prop_mediated": 0.9641852601203994,
+      "n_boot_used": 5000,
+      "stratum": "FLOORED ISOLATES REMOVED"
+    }
+  ],
+  "verdict": "the mediated path survives with the censored isolates removed, so it is not an artefact of the subset where the class is arithmetic"
+}

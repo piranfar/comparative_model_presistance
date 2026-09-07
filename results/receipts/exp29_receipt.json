@@ -1,6 +1,6 @@
 {
   "script": "src/experiments/exp29_floor_provenance.py",
-  "utc": "2026-09-07T15:24:13+00:00",
+  "utc": "2026-09-07T15:59:21+00:00",
   "data_sources": [
     "eLife 93243 supplementary file 2 (Vijay et al. 2024)",
     "figshare 19766083 (ERA4TB / van Wijk et al. 2023)",
