@@ -1,6 +1,6 @@
 {
   "script": "src/experiments/exp28_standard_vs_realised.py",
-  "utc": "2026-09-06T22:35:26+00:00",
+  "utc": "2026-09-07T01:31:40+00:00",
   "definitions": {
     "H_i": "N0_i / L_i",
     "h_i": "log10(N0_i / L_i), deepest measurable reduction",
@@ -263,6 +263,7 @@
       "median_log10_N0": 4.62899008407627,
       "L_note": "10 CFU/mL, derived from 100 uL plated",
       "delta_h": 2.33492058252653,
+      "median_N0": NaN,
       "fold_spread": 216.23230733015092
     },
     {
@@ -272,6 +273,7 @@
       "median_log10_N0": 4.286707852572519,
       "L_note": "10, 100 or 400 CFU/mL by volume",
       "delta_h": 4.400069110627485,
+      "median_N0": NaN,
       "fold_spread": 25122.861875921873
     },
     {
@@ -281,6 +283,7 @@
       "median_log10_N0": 5.785329835010767,
       "L_note": "23 MPN/mL, inferred",
       "delta_h": 4.423601998993174,
+      "median_N0": NaN,
       "fold_spread": 26521.739130434777
     },
     {
@@ -290,6 +293,7 @@
       "median_log10_N0": 7.361727836017593,
       "L_note": "23 MPN/mL, inferred",
       "delta_h": 5.430663853480661,
+      "median_N0": NaN,
       "fold_spread": 269565.2173913045
     },
     {
@@ -299,6 +303,7 @@
       "median_log10_N0": 7.033423755486949,
       "L_note": "not stated in the deposit",
       "delta_h": NaN,
+      "median_N0": NaN,
       "fold_spread": NaN
     },
     {
@@ -308,6 +313,7 @@
       "median_log10_N0": 5.944482672150168,
       "L_note": "not stated in the deposit",
       "delta_h": NaN,
+      "median_N0": NaN,
       "fold_spread": NaN
     },
     {
@@ -317,6 +323,7 @@
       "median_log10_N0": 6.084484323277383,
       "L_note": "10 CFU/mL, derived from 100 uL plated",
       "delta_h": 0.6020599913279625,
+      "median_N0": 1215000.0,
       "fold_spread": 4.000000000000001
     }
   ]

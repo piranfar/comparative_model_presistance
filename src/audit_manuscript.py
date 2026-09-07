@@ -31,7 +31,10 @@ consistency table was built from:
                 their stated span, intervals against the estimates they bracket
   consistency   claims the paper's own self-audit marks unsupported that are
                 still asserted somewhere, sample sizes with no line in the flow
-                account, and cross-references that resolve to nothing
+                account, cross-references that resolve to nothing, and a block
+                of prose that says the same thing twice, which is what a
+                paragraph looks like when the passage its rewrite replaced was
+                never deleted
 
 WHAT A FINDING MEANS. A high finding is a contradiction: two places in the
 manuscript that cannot both be right. Those fail the run. Medium and low are

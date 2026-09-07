@@ -1,5 +1,12 @@
 """
-Figure S1. Published pharmacodynamic constants transfer only when they are rates.
+Published pharmacodynamic constants transfer only when they are rates.
+
+NOT A FIGURE OF THIS PAPER. It belongs to the published-rate-constant comparison,
+which is no longer part of the manuscript; src/assemble_paper.py neither embeds
+it nor lists it as supplementary, and the front matter declares four figures and
+no supplementary figures. It is kept as a record of the work. It was once
+labelled "Figure S1", and that label survived here after the figure left the
+paper.
 
 Run:  python -m src.figures.fig13_parameter_transfer
 

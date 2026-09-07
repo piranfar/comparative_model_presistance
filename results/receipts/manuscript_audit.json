@@ -1,27 +1,94 @@
 {
   "script": "src/audit_manuscript.py",
-  "utc": "2026-09-06T22:40:28+00:00",
+  "utc": "2026-09-07T01:35:49+00:00",
   "checkers": [
     "check_arithmetic",
+    "check_census",
     "check_consistency",
     "check_coverage",
-    "check_identity"
+    "check_deposits",
+    "check_duplication",
+    "check_identity",
+    "check_terms"
   ],
-  "n_words_audited": 25938,
+  "n_words_audited": 26954,
   "counts": {
     "high": 0,
-    "medium": 0,
-    "low": 1
+    "medium": 1,
+    "low": 7
   },
   "findings": [
+    {
+      "severity": "medium",
+      "kind": "abbreviation-not-expanded",
+      "where": "line 2 (front matter)",
+      "detail": "\"MDK\" is used in the title with no expansion of it anywhere in the title, though it is expanded later in the paper. The title, the Abstract and the main text are read separately, so each has to carry its own first use.",
+      "expected": "the term written out at the first use of MDK",
+      "found": "starting density and the floor bound every MDK\" short_title: \"Headroom bounds every MDK\" article_type: \"Resource\" status: \"Draft.",
+      "checker": "check_terms"
+    },
+    {
+      "severity": "low",
+      "kind": "audit-count-summary",
+      "where": "whole repository",
+      "detail": "src/audit_claims.py runs 142 checks (run); 3 place(s) state that number: Methods (PAPER_COMPLETE.md) line 1758 = 142; manuscript/RATE_VS_DURATION.md line 1463 = 142; README.md line 44 = 142",
+      "expected": "142",
+      "found": "142, 142, 142",
+      "checker": "check_census"
+    },
+    {
+      "severity": "low",
+      "kind": "census-summary",
+      "where": "whole manuscript",
+      "detail": "2 censuses of the form 'N of the M <things>' were checked against the parts the text names and partition cleanly; 2 are answerable to a table whose rows equal M and are the only ones the arithmetic runs on; 23 have no such table and are counted here rather than checked",
+      "expected": "every checkable census partitioned",
+      "found": "2 resolved, 2 gated on a table, 23 not checkable",
+      "checker": "check_census"
+    },
+    {
+      "severity": "low",
+      "kind": "named-items-not-resolved",
+      "where": "results, 4. The classification tracks growth; the resistance associat (line 565): \"Five of them are recorded almost exclusively for resistant isolates, so their missingness is the exposure: the\"",
+      "detail": "resolved: the sentence says 5 and then names a list. Not resolved: 2 of its 6 items do not open with a determiner or a count (for none of the 119 susceptible on; none), so the list runs into qualifying clauses and cannot be counted mechanically. Count it by eye",
+      "expected": "5 items named",
+      "found": "a list of 6 fragments",
+      "checker": "check_census"
+    },
+    {
+      "severity": "low",
+      "kind": "quantity-in-words-and-figures",
+      "where": "discussion, How large the effect is (line 1158) and results, 7. The population that fell faster often crossed the floor l (line 879)",
+      "detail": "\"a third\" states in words what 36.6 per cent states in figures; the two sentences share assay, crossed, faster, fell, flask. Check they are the same quantity -- this rule matches on wording, not on arithmetic, because 36.6 is not a rounding of 33.3333",
+      "expected": "the figure, or the word, in both places",
+      "found": "\"a third\" against 36.6 per cent",
+      "checker": "check_census"
+    },
+    {
+      "severity": "low",
+      "kind": "scope-summary",
+      "where": "whole manuscript",
+      "detail": "52 claims are stated in the Results and repeated in a legend or in the self-audit table; 52 carry every qualifier family the Results attach to them",
+      "expected": "every repeated claim as narrowly scoped as its original",
+      "found": "52 of 52",
+      "checker": "check_census"
+    },
     {
       "severity": "low",
       "kind": "coverage-summary",
       "where": "whole manuscript",
-      "detail": "abstract (1): 11 numeric claims, 11 traceable, 11 of those to a results table or receipt, 9 tokens skipped as conventions; box (1): 6 numeric claims, 6 traceable, 6 of those to a results table or receipt, 5 tokens skipped as conventions; figure legend (4): 41 numeric claims, 41 traceable, 41 of those to a results table or receipt, 9 tokens skipped as conventions; table legend (23): 84 numeric claims, 84 traceable, 84 of those to a results table or receipt, 24 tokens skipped as conventions",
+      "detail": "abstract (1): 12 numeric claims, 12 traceable, 12 of those to a results table or receipt, 6 tokens skipped as conventions; box (1): 6 numeric claims, 6 traceable, 6 of those to a results table or receipt, 5 tokens skipped as conventions; figure legend (4): 44 numeric claims, 44 traceable, 44 of those to a results table or receipt, 9 tokens skipped as conventions; table legend (23): 96 numeric claims, 96 traceable, 96 of those to a results table or receipt, 26 tokens skipped as conventions",
       "expected": "every region scanned",
-      "found": "142 numeric claims outside table bodies",
+      "found": "158 numeric claims outside table bodies",
       "checker": "check_coverage"
+    },
+    {
+      "severity": "low",
+      "kind": "deposit-table-map",
+      "where": "manuscript/tables.md",
+      "detail": "Vijay: rows in 1*, 2, 5, 9, 16, S5, S7; legend only in no table; van Wijk / ERA4TB: rows in 1*, 2, 5, 9, 15*, 16, S5, S7; legend only in 8*, 11*; Windels: rows in 1*, 2, 16, S7; legend only in no table; Kaur: rows in 1*, 2, 9, 16, S5, S7; legend only in no table; Dubey: rows in 1*, 2, 5, 9, 16, S5, S7; legend only in 12. A starred table matched a description rather than the depositor's name",
+      "expected": "3 claims about a table's contents were checked; 0 denied or supposed rather than asserted, and skipped",
+      "found": "aliases learned: Vijay = clinical isolates; van Wijk / ERA4TB = laboratories / laboratory plating / six-laboratory; Windels = clones evolved; Kaur = apramycin grid / intracellular / planktonic; Dubey = fibre hollow",
+      "checker": "check_deposits"
     }
   ]
 }

@@ -36,9 +36,10 @@ endpoints, even though the reachability boundary does.
 THREE. MOST OF THE COVARIATE SWEEP WAS CONDITIONING ON THE EXPOSURE. exp35 asks
 what the deposit can rule out for the unexplained ten-fold seeding gap, by
 adjusting the resistance-to-inoculum association for each pretreatment covariate
-in turn. Six of the eight covariates are recorded only for resistant isolates:
-INH_MGIT_DST and RIF_MGIT_DST are present for 0 of 119 susceptible isolates and
-82 of 84 resistant ones, and the two Mykrobe calls behave identically. Their
+in turn. Seven of the nine covariates cannot adjust it. Four are recorded for
+one exposure group only: INH_MGIT_DST and RIF_MGIT_DST are present for 0 of 119
+susceptible isolates and 82 of 84 resistant ones, and the two Mykrobe calls for
+0 of 119 and 76 of 84. Their
 MISSINGNESS is the exposure. Adjusting for such a column is not a sensitivity
 analysis, and it explains a detail that looked like a coincidence: the
 INH_MGIT_DST and RIF_MGIT_DST rows are identical to three significant figures
@@ -49,6 +50,22 @@ INH_mutation is nearly as bad -- 79 of 84 resistant, 1 of 119 susceptible -- and
 it is the row the Discussion singled out as the largest attenuation at 22 per
 cent. That attenuation is an artefact of conditioning on a proxy for the
 exposure.
+
+MIC_INH and MIC_RIF fail differently again, and they are the sixth and seventh.
+They are recorded for 119 of 119 susceptible isolates and 67 of 84 resistant
+ones, so their missingness sits inside the exposed group rather than across the
+contrast, and they are not confounders either: MIC_INH separates IS from IR with
+no overlap at all, so it is the exposure on a graded scale. Adjusting for it
+inflates the standard error from 0.103 to 0.181, drops the 17 resistant isolates
+that carry no MIC (186 rows against 203), and moves the coefficient AWAY from
+zero, -0.850 to -0.963. The attenuation column is (base - adjusted) / base, so
+that prints as -13 per cent: an amplification, not an attenuation, and it cannot
+bound the seeding gap downwards.
+
+Neither Mykrobe column gets a coefficient at all. Inside the IS/IR stratum each
+takes a single value -- INH_Mykrobe is 'R' on all 76 rows that have it,
+RIF_Mykrobe is 'S' on all 76 -- so exp35's categorical branch skips them at
+`nun < 2` and no model is fitted.
 
 The correction runs in our own disfavour and then back again. Only two
 covariates, the growth proxy and months on treatment, are missing at rates

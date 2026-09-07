@@ -1,6 +1,6 @@
 {
   "script": "src/experiments/exp37_analysis_flow.py",
-  "utc": "2026-09-06T22:38:58+00:00",
+  "utc": "2026-09-07T01:35:21+00:00",
   "distinct_denominators": [
     12,
     20,
@@ -32,6 +32,8 @@
     210,
     211,
     217,
+    261,
+    262,
     288,
     360,
     498,
@@ -418,6 +420,24 @@
       "stage": "cross-laboratory pairs in the same arm",
       "n": 191,
       "excluded_here": 0,
+      "appears_in_manuscript_as": ""
+    },
+    {
+      "deposit": "ERA4TB six-laboratory",
+      "panel": "-",
+      "stratum": "derived units",
+      "stage": "treated series with a quantified day-0 or day-1 reading in their own plating",
+      "n": 262,
+      "excluded_here": 26,
+      "appears_in_manuscript_as": ""
+    },
+    {
+      "deposit": "ERA4TB six-laboratory",
+      "panel": "-",
+      "stratum": "derived units",
+      "stage": "of those, not already below their own floor at day zero (the descriptive Cox set)",
+      "n": 261,
+      "excluded_here": 1,
       "appears_in_manuscript_as": ""
     },
     {

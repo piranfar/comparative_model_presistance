@@ -119,13 +119,14 @@ def table6() -> str:
         "Measured", "Single compatible class", "Multiple compatible classes"])
     return ("**Table 6.** Isolates whose day-5 reading was censored at the MPN "
             "floor. They share one reported floor-level observation, but their "
-            "true final counts are unknown below the limit, so the assay cannot "
+            "true final counts are unknown below the floor, so the assay cannot "
             "distinguish their final viable burdens; because their starting "
             "densities differ, the same reading also implies a different range of "
             "compatible fractional reductions in each. The recorded fraction is "
             "L/N0, so the spread in apparent survival equals the spread in "
             "starting density exactly, and the labels differ accordingly. The "
-            "last three columns sort every call in the panel, not only the "
+            "last three columns sort every call in the 15-day panel, not only "
+            "the "
             "censored ones: a censored reading bounds the class from above, and "
             "sweeping the true count across the admissible range leaves twelve "
             "calls with a single compatible class and six with more than one. "
@@ -161,18 +162,27 @@ def table7() -> str:
     return (f"**Table 7.** The family of {len(a)} tests between the deposited "
             f"tolerance label and its candidate determinants, fitted as "
             f"proportional-odds ordinal logistic regression and corrected "
-            f"together at a false discovery rate of 5%. {n} survive. An odds "
+            f"together by the Benjamini-Hochberg procedure at a false discovery "
+            f"rate of 5%; the \"survives BH\" column is that correction. {n} "
+            f"survive. An odds "
             "ratio above one means higher odds of a higher tolerance class; time "
-            "to OD 0.4 is in days and runs inversely to growth rate, so above one "
+            "to an optical density (OD) of 0.4 is in days and runs inversely to "
+            "growth rate, so above one "
             "there means SLOWER growth accompanies a higher class. The "
             "proportional-odds column is a Brant test per predictor; the "
-            "assumption holds throughout this family. The final column repeats "
+            "assumption holds for every predictor in this family. Starting "
+            "density enters the adjusted fits as a covariate rather than as a "
+            "member of the family, and it is where proportional odds fails, at "
+            "60 days at the deepest endpoint; that failure and the released fit "
+            "are reported in Section 4. The final column repeats "
             "each test on the baseline isolates, one per patient by "
             "construction, which is where the resistance association stops "
-            "clearing its corrected threshold. Standard errors are model-based; "
-            "the deposit carries no patient identifier, so none can be clustered "
-            "on the true grouping, and the intervals here are model-based; "
-            "a clustered variant is reported in Table S2."
+            "clearing its corrected threshold. The deposit carries no patient "
+            "identifier, so no standard error here can be clustered on the true "
+            "grouping and every interval in this table is model-based; the "
+            "baseline-isolate column is the sensitivity analysis that stands in "
+            "for clustering, and Table 15 records what each conclusion is worth "
+            "once it is applied."
             + chr(10) + chr(10) + md(d, align_right_from=4))
 
 
@@ -197,9 +207,14 @@ def table11() -> str:
             f"laboratories. An inversion is a pair in which the population that "
             f"fell faster crossed below the assay floor later. "
             f"{inv['undecidable_pairs']} further pairs that the censoring could "
-            "not settle are excluded rather than imputed. The last two columns "
-            "decompose the spread in crossing time; the rate term is the larger "
-            "in every arm." + chr(10) + chr(10) + md(d))
+            "not settle are excluded rather than imputed. The last two "
+            "columns decompose the spread in crossing time; the rate term is "
+            "the larger in each of the three arms that can be decomposed. "
+            "Moxifloxacin at one times MIC is not among them: the "
+            "decomposition is taken on log *D* and log *b*, five of six "
+            "laboratories record net growth in that arm, and only one flask "
+            "in it returns a positive fitted rate, so there is no spread in "
+            "the rate to divide." + chr(10) + chr(10) + md(d))
 
 
 def table8() -> str:
@@ -229,12 +244,13 @@ def table8() -> str:
         "Lab", "Starting density (log10 CFU/mL)", "Reading day",
         "Kill rate (log10/day)",
         "95% profile interval", "By imputation", "Readings censored",
-        "Flasks ever crossing the boundary (treated arms)"])
+        "Flasks ever crossing the floor (treated arms)"])
     return ("**Table 8.** Moxifloxacin at ten times MIC. Every laboratory yields "
-            "a rate; three record no crossing below the assay floor in any arm. "
+            "a rate; three record no crossing below the assay floor in any arm "
+            "at the 100 uL plating. "
             "The final column counts first observed crossings, which are not "
             "clearances: across the deposit 60% of the series that cross read "
-            "above the boundary again at a later visit. The two censoring "
+            "above the floor again at a later visit. The two censoring "
             "estimators agree to 0.003 log10 per day. The starting density is the "
             "mean of quantified readings at day 0 or day 1 at the 100 uL plating, "
             "pooled over all of that laboratory's arms; the reading-day column "
@@ -414,7 +430,7 @@ def table16() -> str:
     f = pd.DataFrame(rows, columns=[
         "Deposit", "States an LOD", "States an LOQ", "Value used", "Units",
         "How obtained", "What it should be called"])
-    return ("**Table 16.** What the boundary *L* is in each deposit analysed. No "
+    return ("**Table 16.** What the assay floor *L* is in each deposit analysed. No "
             "deposit reports a validated limit of quantification with a value. "
             "The six-laboratory file names the concept in the definitions of its "
             "below- and above-quantification-limit columns but defines it as "
@@ -482,14 +498,16 @@ def tableS7() -> str:
 def table15() -> str:
     """What survives once the clustering is respected, conclusion by conclusion."""
     d = pd.read_csv(T / "exp31_recomputed_inference.csv")
-    order = {"NOT SUPPORTED": 0, "WEAKENED": 1, "SUPPORTED": 2}
+    order = {"NOT SUPPORTED": 0, "WITHDRAWN": 1, "WEAKENED": 2,
+             "SUPPORTED": 3}
     d = d.assign(_o=d.verdict.map(order)).sort_values(["_o", "manuscript_section"])
     rows = [[str(r.manuscript_section), r.conclusion,
              f"{r.n_naive_units} {r.unit_treated_as_independent}",
              str(r.n_independent_clusters), r.clustered_method, r.verdict]
             for r in d.itertuples()]
     f = pd.DataFrame(rows, columns=[
-        "Section", "Conclusion as stated", "Units treated as independent",
+        "Section", "Conclusion as originally stated",
+        "Units treated as independent",
         "Independent clusters", "Method used instead", "Verdict"])
     n = d.verdict.value_counts()
     return (f"**Table 15.** Every conclusion this paper draws from the two "
@@ -497,7 +515,9 @@ def table15() -> str:
             f"observations are actually independent. "
             f"{int(n.get('SUPPORTED', 0))} survive unchanged, "
             f"{int(n.get('WEAKENED', 0))} survive with materially wider "
-            f"uncertainty, and {int(n.get('NOT SUPPORTED', 0))} do not survive. "
+            f"uncertainty, {int(n.get('NOT SUPPORTED', 0))} do not survive, and "
+            f"{int(n.get('WITHDRAWN', 0))} is withdrawn because its null is "
+            "false before any data are seen. "
             "Each verdict applies to the claim as it was originally stated. "
             "Three of the five failures are gone from the text entirely; for the "
             "other two a weaker statement is retained and is marked as such where "
@@ -515,7 +535,7 @@ def table15() -> str:
 
 
 def table10() -> str:
-    """What a crossing below the boundary turns out to be."""
+    """What a crossing below the floor turns out to be."""
     d = pd.read_csv(T / "exp32_transitions.csv")
     d = d[d.stratum_kind.isin(["overall", "arm"])]
     rows = []
@@ -532,7 +552,7 @@ def table10() -> str:
         "Never below", "One crossing, holds", "One crossing, returns",
         "Crosses repeatedly", "Shape the model assumes"])
     return ("**Table 10.** What follows a first observed crossing below the "
-            "assay floor. The state below the boundary is not absorbing: a "
+            "assay floor. The state below the floor is not absorbing: a "
             "series sitting below it reads above again at the next visit with "
             "probability 0.22 overall, and that probability rises as drug "
             "pressure falls, which is what a plating artefact does. Only 56 of "
@@ -667,13 +687,30 @@ def tableS4() -> str:
     n_ok = int(ind.usable_for_adjustment.sum())
     return ("**Table S4.** Isoniazid-resistant isolates enter this assay ten-fold "
             "lower than susceptible ones, and we do not know why. This is what the "
-            "deposit can and cannot rule out. Six of the nine pretreatment "
-            "covariates are recorded almost exclusively for resistant isolates, so "
-            "their missingness is the exposure and adjusting for them conditions on "
-            "it; the two susceptibility calls are missing on identical rows, which "
-            "is why they return identical coefficients. Those rows are shown with "
-            "their coefficients so the circularity is visible, but they do not "
-            f"bound anything. Only {n_ok} covariates are recorded at rates unrelated "
+            "deposit can and cannot rule out. The verdict column is decided "
+            "on the two recorded-rate columns beside it: PROXY means the "
+            "covariate is recorded for no isolate in one of the two exposure "
+            "groups, so its missingness is the exposure; PARTIAL means both "
+            "groups record it but the missingness is still tied to the "
+            "exposure (Fisher exact p < 10⁻⁶); INDEPENDENT means it is not. "
+            "Seven of the nine covariates are therefore unusable, and they "
+            "fail in two ways. Five are recorded almost exclusively for "
+            "resistant isolates: the two susceptibility calls, the two "
+            "Mykrobe calls and the mutation identity. The susceptibility "
+            "calls are missing on identical rows, which is why they return "
+            "identical coefficients, and the Mykrobe calls carry a single "
+            "value wherever they are recorded in this stratum, so no model "
+            "can be fitted for them and no coefficient is printed. The "
+            "other two are the drug MICs, recorded for every susceptible "
+            "isolate and 67 of 84 resistant ones; the isoniazid MIC "
+            "separates the two groups completely, so adjusting for it "
+            "conditions on a graded reading of the exposure. A negative "
+            "attenuation is an amplification: the adjusted coefficient sits "
+            "further from zero than the unadjusted one, which is what the "
+            "isoniazid MIC does at 13 per cent. A coefficient is printed "
+            "wherever one exists so the circularity is visible, but none of "
+            "these seven bounds anything. "
+            f"Only {n_ok} covariates are recorded at rates unrelated "
             "to susceptibility, and adjusting for either leaves the coefficient "
             "within five per cent of its unadjusted value. The file records no "
             "referring site and no processing batch, so those cannot be tested at "

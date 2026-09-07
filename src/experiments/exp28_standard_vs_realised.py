@@ -200,6 +200,12 @@ def dubey_group() -> pd.DataFrame:
         "dataset": "Dubey, hollow fibre",
         "level_of_variation": "between cultures, one laboratory",
         "n": int(len(s)), "median_log10_N0": float(np.log10(s).median()),
+        # Reported in Sections 6 and 8 as a count, so it has to be pinned as one.
+        # For an even n the two medians differ -- 1,215,000 against 1,214,743 --
+        # and both land on a rounding tie at three significant figures, which is
+        # how the text came to carry 1.22 x 10^6 while the pipeline computed
+        # 6.0845. Quoting four figures removes the tie and the argument.
+        "median_N0": float(s.median()),
         "L_note": f"{DUBEY_FLOOR:g} CFU/mL, derived from 100 uL plated",
         "delta_h": float(h.max() - h.min()),
     }])

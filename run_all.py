@@ -94,7 +94,7 @@ STAGES = [
      "src.figures.fig3_endpoint_collapse"),
     ("fig 4  resistance and tolerance as separate axes",
      "src.figures.fig4_independence"),
-    ("fig S1 which published constants transfer",
+    ("aside   which published constants transfer (not a figure of this paper)",
      "src.figures.fig13_parameter_transfer"),
 
     ("tables  build the manuscript tables from the results",

@@ -10,9 +10,9 @@ Outputs of the earlier paper are not here; they live in `version_one/results/`.
 
 ## Tolerance and the assay floor (manuscript/PAPER_COMPLETE.md)
 
-**Figures.** `fig13_parameter_transfer`
+**Figures.** `fig1_dynamic_range`, `fig2_rate_vs_duration`, `fig3_endpoint_collapse`, `fig4_independence`
 
-**Tables (32).**
+**Tables (63).**
 
 | file | written by | used by |
 | --- | --- | --- |
@@ -48,15 +48,6 @@ Outputs of the earlier paper are not here; they live in `version_one/results/`.
 | `exp25_observability_by_group.csv` | `exp25_observability_classes.py` | quoted in the text only |
 | `exp25_observability_classes.csv` | `exp25_observability_classes.py` | quoted in the text only |
 | `exp26_inversion_sensitivity.csv` | `exp26_counter_tests.py` | quoted in the text only |
-
-## Unassigned
-
-**Figures.** `fig1_dynamic_range`, `fig2_rate_vs_duration`, `fig3_endpoint_collapse`, `fig4_independence`
-
-**Tables (35).**
-
-| file | written by | used by |
-| --- | --- | --- |
 | `exp27_out_of_sample.csv` | `exp27_out_of_sample_boundaries.py` | `audit_claims`, `build_tables` |
 | `exp28_against_turbidity.csv` | `-` | quoted in the text only |
 | `exp28_measurable_depth.csv` | `exp28_standard_vs_realised.py` | `audit_claims`, `build_tables` |
@@ -88,6 +79,15 @@ Outputs of the earlier paper are not here; they live in `version_one/results/`.
 | `exp36_visit_floors.csv` | `exp36_visit_floors_and_covariates.py` | quoted in the text only |
 | `exp37_analysis_flow.csv` | `exp37_analysis_flow.py` | `build_tables` |
 | `exp37_dropped_vs_retained.csv` | `exp37_analysis_flow.py` | `build_tables` |
+
+## Unassigned
+
+**Figures.** `fig13_parameter_transfer`
+
+**Tables (4).**
+
+| file | written by | used by |
+| --- | --- | --- |
 | `learn_boundaries.csv` | `-` | `learn_boundaries` |
 | `neural_structure.csv` | `-` | `neural_structure` |
 | `symbolic_boundaries.csv` | `-` | `symbolic_boundaries` |

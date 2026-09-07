@@ -182,8 +182,10 @@ def main() -> int:
         v = r["verdicts"]
         rows.append(check("conclusions that survive clustering (12: 20)",
                           20, float(v["SUPPORTED"]), 0.001))
-        rows.append(check("conclusions weakened by clustering (12: 7)",
-                          7, float(v["WEAKENED"]), 0.001))
+        rows.append(check("conclusions weakened by clustering (12: 6)",
+                          6, float(v["WEAKENED"]), 0.001))
+        rows.append(check("conclusions withdrawn as meaningless (12: 1)",
+                          1, float(v.get("WITHDRAWN", 0)), 0.001))
         rows.append(check("conclusions that do not survive (12: 5)",
                           5, float(v["NOT SUPPORTED"]), 0.001))
 
@@ -327,6 +329,8 @@ def main() -> int:
                           23000, float(g.loc["day 2", "N_id"]), 0.001))
         rows.append(check("short of 4 logs against the day-2 floor (1: 121)",
                           121, float(g.loc["day 2", "n_short_4log"]), 0.001))
+        rows.append(check("short of 4 logs against the day-5 floor (1: 31)",
+                          31, float(g.loc["day 5", "n_short_4log"]), 0.001))
         rows.append(check("day-2 readings at their floor (1: 18)",
                           18, float(g.loc["day 2", "n_at_floor"]), 0.001))
         rows.append(check("of those, one compatible class (1: 11)",
@@ -376,6 +380,18 @@ def main() -> int:
         kaur_na = bool(f[f.dataset.str.startswith("Kaur")]["delta_h"].isna().all())
         rows.append(check("Kaur delta h reported as NA, not a number", 1,
                           1.0 if kaur_na else 0.0, 0.001))
+        # Sections 6 and 8 quote the Dubey inoculum as a count, and the count
+        # and log medians differ in the fourth figure. Pin the one the text
+        # quotes, at the precision the text quotes it, or the two drift apart
+        # again the way 1.22 x 10^6 did.
+        rows.append(check("Dubey median day-zero count (6, 8: 1.215e6)",
+                          1.215e6, float(d.loc["Dubey, hollow fibre",
+                                               "median_N0"]), 0.0005,
+                          unit=" per mL"))
+        rows.append(check("Dubey inoculum above nominal (6: 12.15-fold)",
+                          12.15, float(d.loc["Dubey, hollow fibre",
+                                             "median_N0"]) / 1e5, 0.0005,
+                          unit="x"))
 
     # --- exp26, the counter-tests -----------------------------------------
     # The strictest inversion rate is pinned because it is the number that

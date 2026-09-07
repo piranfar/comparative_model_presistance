@@ -99,6 +99,41 @@ def clinical_flow(d: pd.DataFrame) -> list[dict]:
     return rows
 
 
+def _cox_counts() -> dict:
+    """The descriptive Cox's own exclusions, read from exp32's receipt.
+
+    Recomputing them here would let this account and the analysis drift apart,
+    which is the failure it is supposed to detect.
+    """
+    r = json.loads((RECEIPTS / "exp32_receipt.json").read_text(encoding="utf-8"))
+
+    def find(o):
+        if isinstance(o, dict):
+            if "n_series_dropped_total" in o:
+                return o
+            for v in o.values():
+                if (hit := find(v)) is not None:
+                    return hit
+        elif isinstance(o, list):
+            for v in o:
+                if (hit := find(v)) is not None:
+                    return hit
+        return None
+
+    b = find(r)
+    if b is None:
+        raise RuntimeError("exp32 receipt carries no Cox exclusion block; "
+                           "run exp32 before exp37")
+    no_start = int(b["n_series_dropped_no_early_quantified_reading"])
+    below0 = int(b["n_series_dropped_already_below_at_day_zero"])
+    n = int(b["n_series"])
+    if no_start + below0 != int(b["n_series_dropped_total"]):
+        raise RuntimeError("exp32's two Cox exclusions do not sum to its total")
+    return {"n_series": n, "dropped_no_early_quantified_reading": no_start,
+            "dropped_already_below_at_day_zero": below0,
+            "kept_after_no_start": n + below0}
+
+
 def era_flow() -> list[dict]:
     e = pd.read_csv(ERA, encoding="latin-1")
     s = pd.read_csv(TABLES / "exp17_survival.csv")
@@ -137,7 +172,19 @@ def era_flow() -> list[dict]:
     treated100 = e100[e100.Sample != "untreated"]
     long_enough = (treated100[treated100.CFU.notna()]
                    .groupby(["Institute", "Sample", "Replicate"]).size())
+    # The descriptive Cox drops two more sets on top of the 288 treated series,
+    # and the manuscript states the chain 360 -> 288 -> 261 in prose. Until now
+    # 261 appeared in no line of this account, so a reader meeting it had
+    # nowhere to look it up -- the exact defect this script exists to prevent,
+    # in the one deposit whose chain it did not carry to the end.
+    cox = _cox_counts()
     derived = [
+        ("treated series with a quantified day-0 or day-1 reading in their own "
+         "plating", cox["kept_after_no_start"],
+         cox["dropped_no_early_quantified_reading"]),
+        ("of those, not already below their own floor at day zero (the "
+         "descriptive Cox set)", cox["n_series"],
+         cox["dropped_already_below_at_day_zero"]),
         ("cross-laboratory pairs, strict rate separation",
          len(inv_strict) if inv_strict is not None else 94, 0),
         ("flasks contributing those pairs",

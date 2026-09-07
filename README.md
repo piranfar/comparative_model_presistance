@@ -39,10 +39,12 @@ pip install -r requirements.txt
 python run_all.py
 ```
 
-Seventeen stages, under a minute. Each writes a table and a receipt
-recording the software versions it actually ran under, then the last stage
-recomputes every quantity the manuscript quotes from the table it came from and
-reports any that disagree.
+Thirty-two stages, under a minute. Each writes a table and a receipt
+recording the software versions it actually ran under, then two audit stages
+close the run: the first recomputes 142 pinned quantities from the tables they
+came from, and the second reads the table legends, the figure legends, Box 1
+and the Abstract that the first never sees. Both report anything that
+disagrees.
 
 ```bash
 python -m src.audit_claims

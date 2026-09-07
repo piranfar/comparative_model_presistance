@@ -95,8 +95,8 @@ def build():
     ax_a.grid(axis="y", visible=False)
     st.panel_tag(ax_a, "A")
     st.note(ax_a, f"{ARM}. Bars are 95% profile-likelihood intervals from the\n"
-                  "censored (Tobit) fit. Blue: laboratory ever cleared a flask.\n"
-                  "Orange: never cleared, in any arm.", y=-0.30)
+                  "censored (Tobit) fit. Blue: laboratory ever cleared a flask\n"
+                  "at the 100 uL plating; orange: never, in any arm.", y=-0.30)
 
     # ---- B: half of them yield no duration -------------------------------
     flat = []
@@ -122,9 +122,9 @@ def build():
     ax_b.set_ylabel("fraction of flasks still detectable")
     ax_b.set_title("A duration is undefined in three", loc="left")
     st.panel_tag(ax_b, "B")
-    st.note(ax_b, "Kaplan-Meier over all treated flasks. Three curves never\n"
-                  "descend: those laboratories recorded no flask below the\n"
-                  "limit in any arm, so no clearance time exists for them.",
+    st.note(ax_b, "Kaplan-Meier, all treated flasks, 100 uL plating. Three\n"
+                  "curves never descend: those laboratories recorded no flask\n"
+                  "below the limit in any arm, so no clearance time exists.",
             y=-0.30)
 
     # ---- C: what decides which half --------------------------------------
@@ -150,8 +150,8 @@ def build():
     ax_c.set_title("The inoculum splits them; the rate does not", loc="left")
     st.panel_tag(ax_c, "C")
     st.note(ax_c, "The three lowest starting densities are exactly the three\n"
-                  "laboratories that cleared. F kills faster than four of the\n"
-                  "other five and never clears.", y=-0.30)
+                  "laboratories that cleared at the 100 uL plating. F kills\n"
+                  "faster than four of the other five and never clears.", y=-0.30)
 
     # ---- D: the laboratory stops explaining ------------------------------
     before = cox[cox["model"] == "institute only"].set_index("term")["p_value"]

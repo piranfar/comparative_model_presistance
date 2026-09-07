@@ -1,6 +1,6 @@
 {
   "script": "src/experiments/exp31_clustering_audit.py",
-  "utc": "2026-09-06T22:37:17+00:00",
+  "utc": "2026-09-07T01:33:36+00:00",
   "data_sources": [
     "eLife 93243 supplementary file 2",
     "ERA4TB standardised time-kill, figshare 19766083"
@@ -556,7 +556,8 @@
   },
   "verdicts": {
     "SUPPORTED": 20,
-    "WEAKENED": 7,
-    "NOT SUPPORTED": 5
+    "WEAKENED": 6,
+    "NOT SUPPORTED": 5,
+    "WITHDRAWN": 1
   }
 }

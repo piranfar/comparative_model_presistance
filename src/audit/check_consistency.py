@@ -1,6 +1,6 @@
 """Checker 4 -- does the manuscript agree with itself and with its own audit table?
 
-Three families of check are run over the assembled manuscript
+Four families of check are run over the assembled manuscript
 (``manuscript/PAPER_COMPLETE.md``):
 
 (a) THE SELF-AUDIT TABLE.  One table recomputes every conclusion at the level its
@@ -37,6 +37,14 @@ Three families of check are run over the assembled manuscript
     that exists.  Methods subsections are unnumbered, so ``Section N of the
     Methods`` cannot resolve; and a ``described in Section N`` pointer whose
     subject never occurs in the section it names is dangling too.
+
+(d) SUPERSEDED PASSAGES.  A rewrite that leaves its predecessor in place says
+    the same thing twice, and check (a) cannot see it: that check's universe is
+    the conclusions the self-audit table lists as ``NOT SUPPORTED``, so a reading
+    retracted in the prose alone lies outside it.  Two sentences of one block
+    that share most of their content words are flagged instead, because that is
+    what a paragraph looks like when the passage its rewrite replaced was never
+    deleted.
 
 Run standalone with::
 
@@ -446,6 +454,21 @@ _OUT_OF_SCOPE = re.compile(
 # defined by its own outcome, not by an exclusion a flow account could list.
 _RELCLAUSE_RE = re.compile(r"\s+(?:that|which|whose|who)\s")
 
+# A count set against an "A of B <unit>" proportion but given no base of its
+# own: "121 of 203 isolates lack the headroom ... where 31 do".  _DENOM_RE
+# captures the DENOMINATOR -- the number after the preposition, with a unit
+# noun behind it -- so a numerator written bare produces no candidate at all
+# and is never tested against anything.  Existence in the flow account is no
+# defence here: 31 is a real count on the 203 base, but nothing in the
+# sentence says so, and the reader cannot tell 203 from 217.
+_BARE_COUNT_RE = re.compile(
+    r"\b(?:where|while|whereas|against|versus|compared with|but|and)\s+"
+    r"(" + _NUM_PAT + r")\s+"
+    r"(?:do|does|did|are|is|was|were|lacks?|falls?|sits?|rests?|reach(?:es)?)\b"
+    r"(?!\s+(?:of|out of)\b)",
+    re.I,
+)
+
 
 def _flow_values(tab: dict) -> set[int]:
     grid = tab["grid"]
@@ -638,6 +661,27 @@ def _check_denominators(ms: Manuscript) -> list[dict]:
                                     # exclusion the flow account could list
             unit = re.sub(r"\s+", " ", m.group(2).strip().lower())
             cands.append((v, unit, lineno, _ctx(btxt, m.start()), None))
+        # a numerator quoted with no base of its own, in a sentence that has
+        # already shown the reader an "A of B <unit>" pair.  This one cannot
+        # go through `cands`: the collapse there is keyed on whether the value
+        # is a traced flow number, and the defect is the missing denominator,
+        # not the value.
+        for m in _BARE_COUNT_RE.finditer(btxt):
+            sent = _sentence(btxt, m.start())
+            if _OUT_OF_SCOPE.search(sent) or not _DENOM_RE.search(sent):
+                continue
+            findings_pre.append({
+                "severity": "medium",
+                "kind": "count-without-a-stated-denominator",
+                "where": f"line {lineno}",
+                "detail": (
+                    f"The count {m.group(1)} is set against a stated "
+                    f"'A of B' proportion in the same sentence but is given "
+                    f"no denominator of its own, so which set it counts is "
+                    f"left to the reader to guess."),
+                "expected": f"'{m.group(1)} of <denominator> <unit>'",
+                "found": _ctx(btxt, m.start()),
+            })
 
     # -- explicit n columns of every table --------------------------------
     for tnum, t in ms.tables.items():
@@ -909,6 +953,60 @@ def _methods_section_finding(ms: Manuscript, lineno: int, phrase: str,
 
 
 # --------------------------------------------------------------------------
+# (d) superseded passages left in place
+# --------------------------------------------------------------------------
+
+def _sentences(block: str) -> list[str]:
+    flat = re.sub(r"\s+", " ", _plain(_normalise(block)))
+    return [s.strip() for s in re.split(r"(?<=[.!?]) +", flat) if s.strip()]
+
+
+def _check_superseded(ms: Manuscript) -> list[dict]:
+    """A rewrite that leaves its predecessor in place repeats itself.
+
+    The withdrawn-claim check above can only see conclusions the self-audit
+    table lists as NOT SUPPORTED.  A reading retracted in the prose alone --
+    'that agreement is an identity rather than a passed test' -- is outside
+    its universe, and the sentence that reasserts the retracted reading may
+    carry no number for the numeric fingerprint to catch.  What a leftover
+    passage does carry is a near-duplicate of the text that replaced it, so
+    look for that instead.
+    """
+    findings: list[dict] = []
+    for lineno, block in ms.blocks:
+        if _plain(_normalise(block)).lstrip().startswith("|"):
+            continue
+        if _CAPTION_RE.match(block):
+            continue
+        sents = _sentences(block)
+        bags = [set(_content_words(s)) for s in sents]
+        for i, bag_i in enumerate(bags):
+            if len(bag_i) < 6:
+                continue
+            for j in range(i + 1, len(bags)):
+                bag_j = bags[j]
+                if len(bag_j) < 6:
+                    continue
+                overlap = len(bag_i & bag_j) / len(bag_i | bag_j)
+                if overlap < 0.70:
+                    continue
+                findings.append({
+                    "severity": "high",
+                    "kind": "superseded-passage-left-in-place",
+                    "where": f"line {lineno}",
+                    "detail": (
+                        "Two sentences in one block say the same thing, which "
+                        "is what a paragraph looks like when the passage its "
+                        "rewrite replaced was never deleted.  Check whether "
+                        "the later one reasserts a reading the earlier one "
+                        "retracts."),
+                    "expected": "one statement of the claim, in its revised form",
+                    "found": f"{sents[i][:150]} || {sents[j][:150]}",
+                })
+    return findings
+
+
+# --------------------------------------------------------------------------
 # entry points
 # --------------------------------------------------------------------------
 
@@ -921,7 +1019,8 @@ def check(text: str, ctx: dict) -> list[dict]:
     ms = Manuscript(text)
     findings = (_check_self_audit(ms)
                 + _check_denominators(ms)
-                + _check_crossrefs(ms))
+                + _check_crossrefs(ms)
+                + _check_superseded(ms))
     order = {"high": 0, "medium": 1, "low": 2}
     findings.sort(key=lambda f: (order.get(f["severity"], 3), f["kind"]))
     return findings

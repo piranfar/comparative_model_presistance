@@ -1196,12 +1196,14 @@ def main() -> int:
         "isolate", "up to 43 follow-ups repeat a patient", 217, "174 patients min",
         f"{full['fraction_at_ceiling_short']:.3f} vs {full['fraction_at_ceiling_ample']:.3f}",
         f"Fisher p = {full['ceiling_fisher_p']:.3f}",
-        "baseline-only Fisher exact",
+        "none: the null is arithmetically impossible",
         f"{base['fraction_at_ceiling_short']:.3f} vs {base['fraction_at_ceiling_ample']:.3f}",
         f"Fisher p = {base['ceiling_fisher_p']:.3f}",
-        "WEAKENED" if base["ceiling_fisher_p"] >= 0.05 else "SUPPORTED",
-        "the contrast is 100% against 88%, which no test can make large; "
-        "the count, not the p-value, is what Section 1 needs")
+        "WITHDRAWN",
+        "an isolate short of four logs of headroom cannot record a four-log "
+        "reduction, so the 0 of 33 cell is fixed by arithmetic and the null of "
+        "independence is false before any data are seen; Section 1 reports the "
+        "census and no test")
 
     add("Vijay clinical", "2",
         "18 isolates at the floor; their survival span IS their inoculum span",

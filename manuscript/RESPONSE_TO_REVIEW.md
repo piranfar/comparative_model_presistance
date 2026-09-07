@@ -60,7 +60,7 @@ states exactly that, so the verdict column and the text no longer disagree.
 
 The Methods claim is corrected too. It no longer asserts that the manuscript
 cannot drift from the analysis; it states that every table is generated and the
-manuscript assembled from that generated material, that the audit recomputes 138
+manuscript assembled from that generated material, that the audit recomputes 142
 quantities, and that this coverage is not exhaustive. New static checks now read
 the table legends, the figure legends, Box 1 and the Abstract, which the audit
 previously never parsed.
@@ -176,7 +176,8 @@ no disagreement, one decade shallower.
 Because *L* and *c*₁ both shift by ten, the identifiability boundary does not
 move: *N*_id = 23 000 per mL at both visits. The reachability boundary does move,
 and the consequence is large — 121 of 203 isolates lack four logs of headroom
-against the day-2 floor where 31 do against the day-5 floor. Eighteen day-2
+against the day-2 floor, where 31 of those 203 isolates lack it against the
+day-5 floor. Eighteen day-2
 readings rest on their own floor, eleven with a single compatible class and seven
 with more than one. At 60 days no decade cuts reproduce the day-2 classes (109 of
 197), so that rule is not a decade threshold and no day-2 accounting is offered
@@ -203,13 +204,21 @@ subsection rather than numbering it.
 
 **M12 — Table S4 [S6] adjusts the exposure for itself.** Confirmed, and the
 problem is larger than the reviewer could see from the manuscript. The exposure is
-`INH-Suceptibility == "IR"`. Six of the nine pretreatment covariates are recorded
-almost exclusively for resistant isolates: the two susceptibility calls and the
-two Mykrobe calls for 82 of 84 resistant isolates and for **none** of the 119
-susceptible ones, and the mutation identity for 79 and one. Their missingness is
+`INH-Suceptibility == "IR"`. Seven of the nine pretreatment covariates cannot
+adjust it, and they fail in two ways. Five are recorded almost exclusively for
+resistant isolates: the two susceptibility calls for 82 of 84 resistant isolates
+and for **none** of the 119 susceptible ones, the two Mykrobe calls for 76 and
+none, and the mutation identity for 79 and one. Their missingness is
 the exposure, so conditioning on them conditions on resistance. That also explains
 the identical rows the reviewer noticed: `INH_MGIT_DST` and `RIF_MGIT_DST` are
-missing on exactly the same rows and contribute the same design matrix.
+missing on exactly the same rows and contribute the same design matrix. The two
+Mykrobe columns take a single value inside this stratum, so no model can be
+fitted for them and Table S4 shows no coefficient. The other two failures are the
+drug MICs, recorded for **all** 119 susceptible isolates and 67 of 84 resistant
+ones: `MIC_INH` separates the two groups with no overlap, so adjusting for it
+conditions on a graded reading of the exposure, and it moves the coefficient from
+−0.85 to −0.96 — an amplification of 13 per cent, which is why it cannot bound
+the gap either.
 
 The 22 per cent attenuation we had highlighted came from the mutation identity and
 was an artefact of the same circularity. Only two covariates — the growth proxy
@@ -363,7 +372,7 @@ from the analysis output rather than by choosing between the printed ones.
 | 14 | Kaur floor "none" vs "40" | A deposit with no evidenced floor no longer prints one (M3) |
 | 15 | BH threshold 0.0021 vs 0.0083 | The family is 24 and is now named at both locations; the family-of-six reading is given as the alternative it is (M6) |
 | 16 | Resolvable ρ 0.14–0.25 vs 0.14–0.18 | 0.14–0.25 across all 24 tests, 0.14–0.18 across the six tabulated. Both now stated (M6) |
-| 17 | Dubey 12.2-fold vs 12.0 recomputed | 12.2 from the unrounded median of 1.22 × 10⁶, which displays as 6.08 log10. The convention is now stated |
+| 17 | Dubey 12.2-fold vs 12.0 recomputed | The reviewer was right to query it. The 20 day-zero counts have a median of exactly 1,215,000 per mL, and their log10s a median of 6.0845, which is 1,214,743 — both 12.15-fold above the nominal 10⁵, and both a rounding tie at three significant figures, which is how 12.2 arose. The text now reads 1.215 × 10⁶ and 12.15-fold, and the count median is pinned by the audit so the two cannot part again |
 | 18 | Headroom span 4.42 vs 4.43 | Both are the same unrounded 4.4236; the text now says so |
 | 19 | Table 8 [5] header "all arms" | Corrected to "treated arms" (m13) |
 | 20 | Two keyword lists | One list of seven (m1) |

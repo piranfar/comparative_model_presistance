@@ -109,10 +109,26 @@ def main() -> int:
 
     # ---- splice each table in after the paragraph that first cites it ----
     positions = first_citation_positions(rest, max(tables) if tables else 0)
+    # The numbering and the placement were computed by different rules, and it
+    # showed: tables are numbered on first citation ANYWHERE, while the splice
+    # above prefers a citation inside the Results. Table 5's first Results
+    # citation precedes Table 4's, so Table 5's body was laid out first and a
+    # reader following the text met them in reverse order. Forcing the splice
+    # positions to be non-decreasing in table number makes the body order match
+    # the numbering by construction. A table can then sit a paragraph or two
+    # after the sentence that first cites it, which is ordinary; sitting BEFORE
+    # it is not.
+    running = -1
+    for n in sorted(positions):
+        running = positions[n] = max(positions[n], running)
+
     # Splice by descending POSITION, not descending table number. Table 4 sits
     # earlier in the text than Table 2, so inserting in numeric order shifts
     # every position after the one just used and the later tables land adrift.
-    for n, at in sorted(positions.items(), key=lambda kv: kv[1], reverse=True):
+    # Ties are now common, since clamping creates them; within a tie the higher
+    # number goes in first so the lower one ends up above it.
+    for n, at in sorted(positions.items(),
+                        key=lambda kv: (kv[1], kv[0]), reverse=True):
         if n not in tables:
             continue
         block = "\n\n" + tables[n] + "\n"
