@@ -1,6 +1,6 @@
 {
   "script": "src/experiments/exp24_trajectory_and_flag_audit.py",
-  "utc": "2026-09-07T04:05:13+00:00",
+  "utc": "2026-09-07T04:20:47+00:00",
   "data_source": "van Wijk et al. 2023, figshare 19766083",
   "most_sensitive_plated_volume_ul": 100.0,
   "rebound_threshold_log10": 1.0,

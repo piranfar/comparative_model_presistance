@@ -1,3 +1,13 @@
+This repository holds three kinds of material, and one licence cannot describe
+them all honestly. Each is licensed separately below. See LICENSES/ for the full
+text of each licence.
+
+--------------------------------------------------------------------------------
+1. CODE — MIT
+--------------------------------------------------------------------------------
+Everything under src/, version_one/src/, run_all.py, version_one/run_all.py and
+requirements.txt.
+
 MIT License
 
 Copyright (c) 2026 Vahhab Piranfar
@@ -20,5 +30,49 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
-The documentation and figures in this repository are licensed separately, under
-Creative Commons Attribution 4.0 International (CC BY 4.0).
+--------------------------------------------------------------------------------
+2. MANUSCRIPTS, FIGURES, TABLES AND RESULTS — CC BY 4.0
+--------------------------------------------------------------------------------
+Everything under manuscript/, docs/, results/, version_one/manuscript/ and
+version_one/results/, and this README.
+
+Copyright (c) 2026 Vahhab Piranfar, licensed under the Creative Commons
+Attribution 4.0 International licence (CC BY 4.0).
+https://creativecommons.org/licenses/by/4.0/
+
+You may share and adapt this material for any purpose, including commercially,
+provided you give appropriate credit, link to the licence, and indicate if
+changes were made.
+
+CC BY 4.0 is chosen deliberately rather than a more restrictive Creative Commons
+variant. The American Society for Microbiology requires that a repository
+carrying code behind a submitted manuscript be licensed no more restrictively
+than CC BY, and a NonCommercial or NoDerivatives clause here would make this work
+unusable for the purpose it argues for: recomputing a published tolerance call
+against its own assay floor.
+
+--------------------------------------------------------------------------------
+3. THIRD-PARTY DATA — each under its depositor's own licence, not mine
+--------------------------------------------------------------------------------
+Everything under data/. None of it was generated here and none of it is mine to
+relicense. Every deposit is recorded in data/raw/SOURCES.json and in a
+PROVENANCE.json beside the files, with its source, its DOI or accession, its
+licence and a redistributable flag.
+
+The deposits reanalysed in the current manuscript are all CC BY 4.0:
+
+  Vijay et al. 2024        eLife 93243, supplementary file 2
+  van Wijk et al. 2023     figshare 19766083
+  Windels et al. 2024      Zenodo 10.5281/zenodo.7550302
+  Kaur et al. 2024         figshare 26462791
+  Dubey et al. 2026        Nature Communications Source Data
+
+Attribute those to their depositors, not to this repository. If you redistribute
+any of them, carry their CC BY attribution.
+
+Some third-party material used by the earlier study in version_one/ is NOT
+redistributable — CC BY-NC-ND, subscription, or with no open licence at all — and
+its bytes are therefore excluded from this repository by .gitignore. The
+provenance and the fetch route are kept so the analysis can still be reproduced
+by anyone who obtains the files from the original deposit. data/raw/SOURCES.json
+marks each such entry "redistributable": false.

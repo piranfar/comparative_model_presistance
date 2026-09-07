@@ -1,0 +1,62 @@
+cff-version: 1.2.0
+title: >-
+  Score only the kill the assay can see: starting density and the floor bound
+  every MDK
+message: >-
+  If you use this software or the analyses it produces, please cite the
+  manuscript below. If you use any of the deposits reanalysed here, cite their
+  depositors, not this repository.
+type: software
+authors:
+  - given-names: Vahhab
+    family-names: Piranfar
+    email: vahab.p@gmail.com
+    orcid: 'https://orcid.org/0000-0003-3653-5739'
+repository-code: 'https://github.com/piranfar/comparative_model_presistance'
+abstract: >-
+  A reanalysis of five published antibiotic time-kill deposits showing that the
+  minimum duration for killing, though scale-free in its definition, is bounded
+  in measurement by the assay's detection floor. Two boundaries follow from the
+  definitions alone: a q-log endpoint is observable only above L times 10^q, and
+  above L divided by the lowest class threshold, a floor-censored reading is
+  compatible with only the lowest tolerance class whatever the drug did. Every
+  number in the manuscript is regenerated from the public deposits by this code,
+  and two audit stages check the text against the results it reports.
+keywords:
+  - antibiotic tolerance
+  - minimum duration for killing
+  - Mycobacterium tuberculosis
+  - assay floor
+  - censored data
+  - time-kill kinetics
+  - inoculum effect
+  - reproducible research
+license: MIT
+license-url: 'https://github.com/piranfar/comparative_model_presistance/blob/main/LICENSE'
+version: '2.0.0'
+date-released: '2026-09-07'
+references:
+  - type: article
+    title: >-
+      Rifampicin tolerance and growth fitness among isoniazid-resistant clinical
+      Mycobacterium tuberculosis isolates from a longitudinal study
+    authors:
+      - family-names: Vijay
+        given-names: Srinivasan
+    year: 2024
+    journal: eLife
+    volume: 13
+    doi: 10.7554/eLife.93243
+    notes: The clinical deposit reanalysed here. CC BY 4.0.
+  - type: article
+    title: >-
+      Implementing best practises on data generation and reporting of
+      Mycobacterium tuberculosis time kill assays
+    authors:
+      - family-names: van Wijk
+        given-names: Rob C.
+    year: 2023
+    journal: iScience
+    volume: 26
+    doi: 10.6084/m9.figshare.19766083
+    notes: The six-laboratory deposit reanalysed here. CC BY 4.0.

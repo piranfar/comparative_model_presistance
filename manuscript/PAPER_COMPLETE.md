@@ -18,9 +18,9 @@ keywords:
 
 ¹[department, institution, city, country — to be inserted]
 
-ORCID: [to be inserted]
+ORCID: [0000-0003-3653-5739](https://orcid.org/0000-0003-3653-5739)
 
-**Correspondence:** Vahhab Piranfar, [institutional email — to be inserted]
+**Correspondence:** Vahhab Piranfar, vahab.p@gmail.com
 
 **Figures:** 4 | **Tables:** 16 | **Boxes:** 1 | **Supplementary tables:** 7
 
@@ -1835,9 +1835,12 @@ The analysis code, both audit scripts, the headroom tool described above and the
 machine-readable receipts recording the software versions each stage ran under
 are deposited in a public repository (50), with the documentation needed to install
 and run them and a test dataset with the control parameter settings used here.
-Code created to generate the results and to interpret the data is included; the
-repository licence is no more restrictive than CC BY. [Repository URL and the
-commit identifier of the submitted version to be inserted.]
+Code created to generate the results and to interpret the data is included. The
+repository is dual-licensed, MIT for the code and CC BY 4.0 for the manuscript,
+figures and results, which is no more restrictive than CC BY; the deposits keep
+their depositors' own licences and are not relicensed here. It is at
+https://github.com/piranfar/comparative_model_presistance. [The commit
+identifier of the submitted version is to be inserted at submission.]
 
 Every number quoted in this manuscript is regenerated from the deposits by that
 code, and two audit stages check it: one recomputes the pinned quantities — the

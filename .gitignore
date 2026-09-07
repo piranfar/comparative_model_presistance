@@ -72,3 +72,20 @@ data/raw/_fetched/
 # a 1.6 MB binary that changes on every build, so the recipe is tracked and the
 # output is not.
 build/
+
+# (3) third-party bytes this repository may not redistribute.
+# data/raw/SOURCES.json records each one with a licence and a redistributable
+# flag; these are the entries flagged false, plus files whose licence was never
+# established. They belong to version one's external comparison (exp11, exp12),
+# and the fetch route for each is in SOURCES.json, so the analysis is still
+# reproducible by anyone who obtains them from the original deposit.
+data/raw/Vogwill+JEB+persistence+resistance.xlsx
+data/raw/Stepanyan_2015_Mol-Ecol.zip
+data/raw/Stewart&Rozen_archived_data.xls
+data/raw/R_long_data_Alex_and_Sara_CFU_counts.csv
+data/raw/pnas.1903836116.sapp.pdf
+data/raw/external_survival/Vogwill+JEB+persistence+resistance.xlsx
+data/raw/external_survival/Stepanyan_2015_Mol-Ecol.zip
+data/raw/external_survival/Stewart&Rozen_archived_data.xls
+data/raw/external_survival/R_long_data_Alex_and_Sara_CFU_counts.csv
+data/raw/external_survival/pnas.1903836116.sapp.pdf

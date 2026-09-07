@@ -5,7 +5,7 @@ started is not evidence of sterility. The field's answer was to stop asking
 whether a culture went negative and to ask how far it fell — a fraction of the
 starting population, so that the starting population could not matter.
 
-This is a reanalysis of four published deposits showing that the fraction stops
+This is a reanalysis of five published deposits showing that the fraction stops
 being a fraction once the population reaches the assay floor, and becomes a
 reading of the starting density instead.
 
@@ -39,7 +39,7 @@ pip install -r requirements.txt
 python run_all.py
 ```
 
-Thirty-two stages, under a minute. Each writes a table and a receipt
+Thirty-four stages, about five minutes. Each writes a table and a receipt
 recording the software versions it actually ran under, then two audit stages
 close the run: the first recomputes 142 pinned quantities from the tables they
 came from, and the second reads the table legends, the figure legends, Box 1
@@ -71,13 +71,40 @@ script or manuscript section that uses it.
 
 ## Data
 
-Four openly licensed deposits, none generated for this study and none chosen
+Five openly licensed deposits, none generated for this study and none chosen
 after its result was known. `data/raw/SOURCES.json` records every external
 source with its licence and whether its bytes may be redistributed; several are
 free to read but not to redistribute, and are registered by URL only.
 `src/fetch_external_data.py` retrieves what publishers serve openly.
 
+## Citing this work
+
+If you use the code or the analyses, cite the manuscript; `CITATION.cff` carries
+the machine-readable form. If you use any of the deposits, cite their depositors
+rather than this repository — none of that data was generated here.
+
+Vahhab Piranfar. *Score only the kill the assay can see: starting density and the
+floor bound every MDK.* ORCID [0000-0003-3653-5739](https://orcid.org/0000-0003-3653-5739).
+
 ## Licence
 
-Code under the terms in `LICENSE`. Every reanalysed deposit is CC BY 4.0 or CC0
-and is cited in the manuscript and in `data/raw/SOURCES.json`.
+Three kinds of material, licensed separately, with the full terms in `LICENSE`:
+
+| what | where | licence |
+|---|---|---|
+| code | `src/`, `run_all.py`, `version_one/src/` | MIT |
+| manuscripts, figures, tables, results | `manuscript/`, `docs/`, `results/` | CC BY 4.0 |
+| third-party data | `data/` | each depositor's own licence |
+
+CC BY 4.0 rather than a NonCommercial or NoDerivatives variant, deliberately: a
+paper arguing that published tolerance calls should be recomputable against their
+own assay floor cannot licence its own material in a way that stops anyone doing
+it.
+
+The five deposits reanalysed here are all CC BY 4.0 and are attributed to their
+depositors in the manuscript and in `data/raw/SOURCES.json`. Third-party material
+that may **not** be redistributed — CC BY-NC-ND, subscription, or carrying no
+open licence — is excluded from this repository by `.gitignore`, with its
+provenance and fetch route kept so the work stays reproducible by anyone who
+obtains it from the original deposit. `SOURCES.json` marks each such entry
+`"redistributable": false`.
