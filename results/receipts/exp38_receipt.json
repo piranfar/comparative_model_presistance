@@ -1,0 +1,269 @@
+{
+  "script": "src/experiments/exp38_boundary_experiment.py",
+  "utc": "2026-09-07T13:40:49+00:00",
+  "source_workbook": "BOUNDARY_TEST_BLIND.xlsx",
+  "n_plate_readings": 216,
+  "n_sample_platings": 108,
+  "arms": [
+    {
+      "arm": "LOW",
+      "target_n0": 50000.0,
+      "realised_n0": 64333.333333333336,
+      "h_100ul": 3.8084360542881113,
+      "h_10ul": 2.8084360542881113,
+      "q_log_legal_100ul": "False",
+      "q_log_legal_10ul": "False"
+    },
+    {
+      "arm": "MID",
+      "target_n0": 500000.0,
+      "realised_n0": 440000.0,
+      "h_100ul": 4.643452676486188,
+      "h_10ul": 3.6434526764861874,
+      "q_log_legal_100ul": "True",
+      "q_log_legal_10ul": "False"
+    },
+    {
+      "arm": "HIGH",
+      "target_n0": 5000000.0,
+      "realised_n0": 3766666.6666666665,
+      "h_100ul": 5.575957188763757,
+      "h_10ul": 4.575957188763757,
+      "q_log_legal_100ul": "True",
+      "q_log_legal_10ul": "True"
+    }
+  ],
+  "prediction_1": [
+    {
+      "prediction": 1,
+      "arm": "LOW",
+      "volume_ul": 100.0,
+      "flask": "1",
+      "n0": 78000.0,
+      "headroom": 4.193124598354461,
+      "deepest_reported_drop": 4.193124598354461,
+      "q_log_legal": true,
+      "q_log_achieved": true,
+      "verdict": "as predicted"
+    },
+    {
+      "prediction": 1,
+      "arm": "LOW",
+      "volume_ul": 100.0,
+      "flask": "2",
+      "n0": 65000.0,
+      "headroom": 4.113943352306837,
+      "deepest_reported_drop": 4.113943352306837,
+      "q_log_legal": true,
+      "q_log_achieved": true,
+      "verdict": "as predicted"
+    },
+    {
+      "prediction": 1,
+      "arm": "LOW",
+      "volume_ul": 100.0,
+      "flask": "3",
+      "n0": 50000.0,
+      "headroom": 4.0,
+      "deepest_reported_drop": 4.0,
+      "q_log_legal": true,
+      "q_log_achieved": true,
+      "verdict": "as predicted"
+    },
+    {
+      "prediction": 1,
+      "arm": "LOW",
+      "volume_ul": 10.0,
+      "flask": "1",
+      "n0": 58000.0,
+      "headroom": 3.0644579892269186,
+      "deepest_reported_drop": 3.0644579892269186,
+      "q_log_legal": false,
+      "q_log_achieved": false,
+      "verdict": "as predicted"
+    },
+    {
+      "prediction": 1,
+      "arm": "LOW",
+      "volume_ul": 10.0,
+      "flask": "2",
+      "n0": 42500.0,
+      "headroom": 2.929418925714293,
+      "deepest_reported_drop": 2.929418925714293,
+      "q_log_legal": false,
+      "q_log_achieved": false,
+      "verdict": "as predicted"
+    },
+    {
+      "prediction": 1,
+      "arm": "LOW",
+      "volume_ul": 10.0,
+      "flask": "3",
+      "n0": 45500.0,
+      "headroom": 2.9590413923210934,
+      "deepest_reported_drop": 2.9590413923210934,
+      "q_log_legal": false,
+      "q_log_achieved": false,
+      "verdict": "as predicted"
+    },
+    {
+      "prediction": 1,
+      "arm": "MID",
+      "volume_ul": 100.0,
+      "flask": "1",
+      "n0": 565000.0,
+      "headroom": 5.05307844348342,
+      "deepest_reported_drop": 4.752048447819439,
+      "q_log_legal": true,
+      "q_log_achieved": true,
+      "verdict": "as predicted"
+    },
+    {
+      "prediction": 1,
+      "arm": "MID",
+      "volume_ul": 100.0,
+      "flask": "2",
+      "n0": 380000.0,
+      "headroom": 4.880813592280791,
+      "deepest_reported_drop": 4.880813592280791,
+      "q_log_legal": true,
+      "q_log_achieved": true,
+      "verdict": "as predicted"
+    },
+    {
+      "prediction": 1,
+      "arm": "MID",
+      "volume_ul": 100.0,
+      "flask": "3",
+      "n0": 375000.0,
+      "headroom": 4.8750612633917,
+      "deepest_reported_drop": 4.8750612633917,
+      "q_log_legal": true,
+      "q_log_achieved": true,
+      "verdict": "as predicted"
+    },
+    {
+      "prediction": 1,
+      "arm": "MID",
+      "volume_ul": 10.0,
+      "flask": "1",
+      "n0": 425000.0,
+      "headroom": 3.929418925714293,
+      "deepest_reported_drop": 3.929418925714293,
+      "q_log_legal": false,
+      "q_log_achieved": false,
+      "verdict": "as predicted"
+    },
+    {
+      "prediction": 1,
+      "arm": "MID",
+      "volume_ul": 10.0,
+      "flask": "2",
+      "n0": 340000.0,
+      "headroom": 3.832508912706236,
+      "deepest_reported_drop": 3.832508912706236,
+      "q_log_legal": false,
+      "q_log_achieved": false,
+      "verdict": "as predicted"
+    },
+    {
+      "prediction": 1,
+      "arm": "MID",
+      "volume_ul": 10.0,
+      "flask": "3",
+      "n0": 255000.0,
+      "headroom": 3.7075701760979363,
+      "deepest_reported_drop": 3.7075701760979363,
+      "q_log_legal": false,
+      "q_log_achieved": false,
+      "verdict": "as predicted"
+    },
+    {
+      "prediction": 1,
+      "arm": "HIGH",
+      "volume_ul": 100.0,
+      "flask": "1",
+      "n0": 4050000.0,
+      "headroom": 5.9084850188786495,
+      "deepest_reported_drop": 5.431363764158987,
+      "q_log_legal": true,
+      "q_log_achieved": true,
+      "verdict": "as predicted"
+    },
+    {
+      "prediction": 1,
+      "arm": "HIGH",
+      "volume_ul": 100.0,
+      "flask": "2",
+      "n0": 3300000.0,
+      "headroom": 5.819543935541868,
+      "deepest_reported_drop": 5.041392685158225,
+      "q_log_legal": true,
+      "q_log_achieved": true,
+      "verdict": "as predicted"
+    },
+    {
+      "prediction": 1,
+      "arm": "HIGH",
+      "volume_ul": 100.0,
+      "flask": "3",
+      "n0": 3950000.0,
+      "headroom": 5.897627091290442,
+      "deepest_reported_drop": 5.897627091290442,
+      "q_log_legal": true,
+      "q_log_achieved": true,
+      "verdict": "as predicted"
+    },
+    {
+      "prediction": 1,
+      "arm": "HIGH",
+      "volume_ul": 10.0,
+      "flask": "1",
+      "n0": 3600000.0,
+      "headroom": 4.857332496431268,
+      "deepest_reported_drop": 4.556302500767287,
+      "q_log_legal": true,
+      "q_log_achieved": true,
+      "verdict": "as predicted"
+    },
+    {
+      "prediction": 1,
+      "arm": "HIGH",
+      "volume_ul": 10.0,
+      "flask": "2",
+      "n0": 4450000.0,
+      "headroom": 4.949390006644912,
+      "deepest_reported_drop": 4.949390006644912,
+      "q_log_legal": true,
+      "q_log_achieved": true,
+      "verdict": "as predicted"
+    },
+    {
+      "prediction": 1,
+      "arm": "HIGH",
+      "volume_ul": 10.0,
+      "flask": "3",
+      "n0": 4450000.0,
+      "headroom": 4.949390006644912,
+      "deepest_reported_drop": 4.949390006644912,
+      "q_log_legal": true,
+      "q_log_achieved": true,
+      "verdict": "as predicted"
+    }
+  ],
+  "prediction_3": {
+    "paired_sample_times": 54,
+    "with_a_censored_plating": 14,
+    "labels_differ": 10,
+    "labels_differ_and_censored": 5
+  },
+  "prediction_2": {
+    "n_censored": 22,
+    "within_one_floor": {
+      "floor": 50.0,
+      "n": 14,
+      "corr_log_n0": -0.9999999999999999,
+      "spread_ratio_fraction_over_n0": 0.9999999999999999
+    }
+  }
+}

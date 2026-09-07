@@ -43,6 +43,7 @@ import hashlib
 import json
 import sys
 import urllib.error
+import urllib.parse
 import urllib.request
 from datetime import datetime, timezone
 from pathlib import Path
@@ -155,6 +156,55 @@ def resolve(field: str) -> tuple[list[tuple[str, str]], str]:
                       for f in rec["data"]["latestVersion"]["files"]]
                 if fs:
                     return fs[:12], "DataverseNO API"
+            # Springer/Nature Source Data. The manifest rows name the exact
+            # file -- 41467_2026_71460_MOESM6_ESM.xlsx -- because whoever found
+            # it wrote it down, so build the static-content URL from the
+            # article DOI and that name rather than scraping the article page.
+            if (mo := re.search(r"(4\d{4}_\d{4}_\d+_MOESM\d+_ESM\.\w+)", field)):
+                doi = re.search(r"10\.1038/(s4\d{4}-\d{3}-\d{5}-\w)", field)
+                if doi:
+                    art = urllib.parse.quote(f"10.1038/{doi.group(1)}", safe="")
+                    return ([(mo.group(1),
+                              f"https://static-content.springer.com/esm/"
+                              f"art%3A{art}/MediaObjects/{mo.group(1)}")],
+                            "Springer Source Data")
+
+            # Europe PMC hands back every supplementary file of an article as
+            # one zip, which covers the whole family of "Source Data" deposits
+            # that live beside a paper rather than in a repository.
+            if (mp := re.search(r"PMC(\d{6,})", field)):
+                return ([(f"PMC{mp.group(1)}_supplementary.zip",
+                          f"https://www.ebi.ac.uk/europepmc/webservices/rest/"
+                          f"PMC{mp.group(1)}/supplementaryFiles")],
+                        "Europe PMC supplementary files")
+
+            if "biostudies" in u and (mb := re.search(r"(S-[A-Z]+-[\w.-]+)", u)):
+                acc = mb.group(1)
+                rec = _json("https://www.ebi.ac.uk/biostudies/api/v1/studies/"
+                            f"{acc}")
+                fs = []
+                def walk(node):
+                    if isinstance(node, dict):
+                        if node.get("path") and node.get("size"):
+                            fs.append((node["path"].split("/")[-1],
+                                       "https://www.ebi.ac.uk/biostudies/files/"
+                                       f"{acc}/{node['path']}"))
+                        for v in node.values():
+                            walk(v)
+                    elif isinstance(node, list):
+                        for v in node:
+                            walk(v)
+                walk(rec)
+                if fs:
+                    return fs[:12], "BioStudies API"
+
+            if "data.4tu.nl" in u and (m4 := re.search(r"datasets/([\w-]+)", u)):
+                rec = _json(f"https://data.4tu.nl/api/datasets/{m4.group(1)}")
+                fs = [(f.get("name", "file"), f["downloadUrl"])
+                      for f in rec.get("files", []) if f.get("downloadUrl")]
+                if fs:
+                    return fs[:12], "4TU API"
+
             if "datadryad.org" in u:
                 return [], ("Dryad answers its download endpoint with a bot "
                             "interstitial; fetch by hand from the record page")
