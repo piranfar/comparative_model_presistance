@@ -770,6 +770,23 @@ locates the depth at which a sterilisation claim stops being demonstrable: five
 of twenty cultures cannot show a five-log reduction, and none of the twenty can
 show six.
 
+Everything above is read backwards, out of files made for other purposes, and a
+derivation that only ever explains the past is worth less than one that survives
+being aimed at the future. So *N*_reach and *N*_id were used to design an
+experiment against themselves, with the predictions recorded before a plate was
+counted. At
+the inoculum the standard specifies, the deepest reduction the three cultures
+could report ran 3.71 to 3.93 logs at the 10 µL plating and 4.88 to 5.05 at
+100 µL — the four-log endpoint unreportable at one plating and comfortable at the
+other, in the same flask, on the same afternoon. That much is arithmetic and
+could not have failed. What could have failed is whether a real experiment ever
+lands in the window where the two platings straddle a class threshold, and at the
+cut the clinical classification uses it does so for nine of 54 sample-times: one
+culture, two labels, and nothing between them but the pipette. That is the
+boundary behaving as a design constraint rather than as a post-hoc explanation,
+and it is the reason the calculation in Box 1 belongs before an experiment rather
+than after it.
+
 The same arithmetic answers the objection that the starting density is fixed by
 protocol. It is fixed as a turbidity, and a turbidity is not a viable count. Under
 one written protocol the realised densities differed enough to change the deepest
