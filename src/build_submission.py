@@ -138,7 +138,31 @@ class Section:
     def words(self) -> int:
         return len(self.body.split())
 
-    def defer_marked(self) -> None:
+    # A paragraph that opens by pointing backwards cannot follow a paragraph
+    # that has just been removed. This is the one failure mode paragraph-level
+    # deferral creates that section-level routing does not, and it is invisible
+    # in a diff: the article still reads as English, it just refers to something
+    # that is no longer there. The first version of the Section 4 cut left
+    # "Restricted to it, the two surviving associations part company" with no
+    # antecedent, because the paragraph defining the stratum had gone.
+    # Deliberately narrow: a BARE pronoun or demonstrative, one with no noun of
+    # its own. "These 217 isolates" and "That last objection" carry their
+    # antecedent with them and survive a deletion above; "Restricted to it" and
+    # "They do not" do not. A wider pattern was tried first and fired on three
+    # paragraphs, two of which were fine -- and a check that cries wolf twice
+    # for every catch is a check that gets ignored on the day it is right.
+    _VERB = (r"(?:is|are|was|were|does|do|did|has|have|had|will|would|can|"
+             r"could|holds?|fails?|follows?|sits?|shows?|leaves?|gives?|"
+             r"remains?|stands?)")
+    ANAPHORA = re.compile(
+        r"^\s*(?:"
+        r"Restricted to (?:it|that|them|those)\b"
+        r"|(?:It|They|Both|Either|Neither|Such|This|That|These|Those)\s+"
+        + _VERB + r"\b"
+        r"|The (?:other|second|remaining) (?:two|three|four|one)\b"
+        r")", re.I)
+
+    def defer_marked(self, problems: list[str]) -> None:
         """Pull the marked paragraphs out of the body and hold them aside.
 
         Only meaningful for a section that stays in the article; a section that
@@ -147,12 +171,20 @@ class Section:
         """
         if self.dest != MAIN:
             return
-        keep, moved = [], []
+        keep, moved, prev_deferred = [], [], False
         for para in re.split(r"\n{2,}", self.body.strip()):
             if SUPP_MARK.search(para):
                 moved.append(SUPP_MARK.sub("", para).rstrip())
-            else:
-                keep.append(para)
+                prev_deferred = True
+                continue
+            if prev_deferred and self.ANAPHORA.match(para):
+                problems.append(
+                    f"{self.parent} / {self.title[:40]}: a deferred paragraph is "
+                    f"followed by one that points back at it -- "
+                    f"“{' '.join(para.split()[:7])}...” has lost its "
+                    f"antecedent")
+            prev_deferred = False
+            keep.append(para)
         self.body = "\n\n".join(keep) + "\n"
         self.deferred = moved
 
@@ -342,9 +374,9 @@ def main() -> int:
     front, sections, preambles = split_sections(prose)
     route(sections)
     remap_sec = assign_labels(sections)
-    for s in sections:
-        s.defer_marked()
     problems: list[str] = []
+    for s in sections:
+        s.defer_marked(problems)
 
     # ---- assemble the two bodies -------------------------------------
     def gather(dest: str, parent: str) -> list[Section]:

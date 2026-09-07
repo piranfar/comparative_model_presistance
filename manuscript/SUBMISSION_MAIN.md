@@ -411,13 +411,6 @@ Eight association tests are available between the deposited label and its
 candidate determinants — two predictors, at two culture ages and two endpoint
 depths — and they are corrected as one family. Two survive (Table S4).
 
-The label is an ordered categorical outcome, low below medium below high, and it
-is modelled as one: a linear coefficient on a 0, 1, 2 score would assert that the
-step from low to medium equals the step from medium to high, and nothing
-establishes that. Associations are therefore reported as odds ratios from
-proportional-odds ordinal logistic regression, with the proportional-odds
-assumption tested rather than assumed (Methods; Table S4).
-
 The label tracks the **growth rate** of the isolate: slower growth accompanies a
 higher tolerance class, and the association survives adjustment for starting
 density (OR 1.096 per day of time to OD 0.4, 95 per cent CI 1.032 to 1.164,
@@ -473,17 +466,12 @@ the effect larger, so it is not an artefact of them. What it remains is an
 association in observational data, and the caution above about mechanism is
 unaffected.
 
-These 217 isolates are not 217 independent observations. Forty-three are
-follow-up isolates drawn during treatment from patients who also contributed a
-baseline isolate, so up to 86 rows sit in clusters of two, but the deposit
-carries no patient identifier: Archive and Sample-ID are unique per row and no
-column among the 48 has the multiplicity a patient key would need. The pairing is
-not recoverable, so no standard error can be clustered on the true grouping, and
-we do not pretend otherwise. What is available is the exact substitute, a
-baseline-only stratum in which every isolate is from a different patient by
-construction (Time_point = 0M, n = 167 at 15 days).
+These 217 isolates are not 217 independent patients, and the deposit carries no
+patient key with which to say so in a standard error. What it does carry is the
+exact substitute: a baseline-only stratum in which every isolate comes from a
+different patient by construction (Time_point = 0M, n = 167 at 15 days).
 
-Restricted to it, the two surviving associations part company. Growth holds and
+Restricted to that stratum, the two surviving associations part company. Growth holds and
 still survives correction (OR 1.116, 1.040 to 1.198, p = 0.0024). Resistance does
 not: OR 2.11 (1.07 to 4.16, p = 0.031), which is second in the family of eight
 and so is tested against a Benjamini–Hochberg critical value of 0.0125. The
@@ -491,50 +479,7 @@ resistance association therefore depends on isolates that are not independent of
 one another, and it is already the association that starting density explains
 away. We report it as the weaker of the two on both counts.
 
-Why they seed lower is not established here, and the obvious explanation fails:
-resistant isolates do not grow significantly more slowly in this deposit (median
-time to OD 0.4 of 19 against 17, p = 0.24), and 85 of them carry *katG* S315X,
-the mutation that predominates clinically precisely because it is close to
-fitness-neutral (20, 21). What the deposit can rule out is less than we first reported, and the correction
-runs in our favour. Seven of the nine pretreatment covariates the file carries
-cannot adjust this association, and they fail in two different ways. Five of them
-are recorded almost exclusively for resistant isolates, so their missingness *is*
-the exposure: the two susceptibility calls for 82 of 84 resistant isolates and
-for none of the 119 susceptible ones, the two Mykrobe calls for 76 and none, and
-the mutation identity for 79 and one. Conditioning on such a column conditions on
-resistance, which is why the two susceptibility rows agree to three significant
-figures — they are missing on exactly the same rows and contribute the same
-design matrix. That also disposes of the largest attenuation we previously
-quoted, 22 per cent for the mutation identity, which was an artefact of the same
-circularity. The two Mykrobe columns carry a single value wherever they are
-recorded in this stratum, so no adjusted coefficient exists for them at all and
-Table S6 prints none.
-
-The other two are the isoniazid and rifampicin MICs, and their missingness runs
-the other way: they are recorded for all 119 susceptible isolates and for 67 of
-84 resistant ones, so what is absent sits inside the exposed group rather than
-across the contrast. That does not make them confounders. The isoniazid MIC
-separates the two groups completely in this deposit — no resistant isolate
-overlaps any susceptible one — so it is the exposure measured on a graded scale
-rather than something to adjust the exposure for, and the fit says so: the
-standard error on the resistance coefficient inflates from 0.103 to 0.181, and
-the complete case drops 17 resistant isolates and no susceptible one, leaving 186
-rows against 203. It is also the second-largest movement in Table S6, and it runs
-the wrong way for a confounding explanation: with the isoniazid MIC in the model
-the seeding gap grows from −0.85 to −0.96, an amplification of 13 per cent rather
-than an attenuation. The rifampicin MIC, which does not separate the groups,
-moves it by less than half a per cent.
-
-The remaining two are missing at rates unrelated to susceptibility and can be
-used: the growth proxy and months on treatment. Adjusting for either leaves the
-coefficient at −0.81 or −0.82 against an unadjusted −0.85, an attenuation of at
-most five per cent (Table S6). The seeding gap is therefore more robust than the
-earlier sweep suggested, not less. The file records no referring site and no
-processing batch, so those cannot be tested at all. The association between
-resistance and a low starting inoculum is real, large and unexplained, and we
-record it as such.
-
-Both surviving associations sit in the 15-day panel, which is where the
+The two surviving associations sit in the 15-day panel, which is where the
 mechanism places them. By 60 days the cultures are 38-fold denser, the spread of
 starting densities has more than halved, from an interquartile range of 1.00 to
 0.42 log10, and the fraction of isolates short of headroom falls from 15.2 to 3.3
@@ -543,9 +488,9 @@ assay is not. Those two panels are columns on the same spreadsheet rows — 210
 isolates appear in both — so every comparison between them is within-isolate and
 is made that way. Pairing sharpens rather than softens the result: 26 isolates
 lose their headroom shortfall between panels and none acquires one (exact McNemar
-p = 3.0 × 10⁻⁸ against an unpaired p of 2 × 10⁻⁵) (22), eleven leave the floor and none
+p = 3.0 × 10⁻⁸ against an unpaired p of 2 × 10⁻⁵) (20), eleven leave the floor and none
 joins it (p = 9.8 × 10⁻⁴), and every isolate whose headroom changes gains
-(Wilcoxon signed-rank p = 1.3 × 10⁻³³) (23). The interquartile range of starting
+(Wilcoxon signed-rank p = 1.3 × 10⁻³³) (21). The interquartile range of starting
 density falls by 0.58 log10.
 
 It does not vanish, and the ordinal treatment is what shows where it goes.
@@ -568,22 +513,11 @@ deliberately. Van Wijk and colleagues (2023) ran exactly that exercise, sending 
 single stock of H37Rv to six blinded laboratories under one written protocol (6, 11). It
 does.
 
-The starting densities in Table S7 need their basis stated before they are used.
-Each is the mean of quantified readings at day 0 or day 1 at the 100 µL plating,
-pooled over that laboratory's arms. Institute A deposits no day-zero reading at
-all, and among treated flasks only C and D do, so for four of the six the figure
-rests partly on readings taken after twenty-four hours of drug — by which point
-the ten-times-MIC arms have already lost between 0.7 and 2.4 log10. A day-zero
-comparison across all six is therefore not available, and the check that is
-available runs the other way: re-running the whole analysis on a day-one exposure
-for every laboratory leaves the ordering, the area under the curve and the
-laboratory-level exact test unchanged.
-
 At ten times the minimum inhibitory concentration of moxifloxacin all six
 laboratories return a positive kill rate spanning 5.2-fold, from 0.090 to 0.464
 log10 CFU/mL per day, and across all 30 laboratory-by-arm cells the Tobit and
 imputation estimates never differ by more than 0.003 log10 per day (Fig. 2A,
-Table S7). The duration endpoint behaves differently on the same flasks. The
+Table S6). The duration endpoint behaves differently on the same flasks. The
 event it records is not clearance and not sterilisation but a **first observed
 crossing below the assay floor**, and the distinction is not pedantic: most
 series that cross later read above the floor again, including all five
@@ -622,32 +556,6 @@ what it forbids. In short: the exact laboratory-level test returns 0.10, which i
 the smallest value the design can return, and there is no within-laboratory
 fallback once the treatment arm is held fixed.
 
-The Cox fits are reported for the same reason and with the same restraint. On
-laboratory alone, institutes D, E and F carry hazard ratios of 0.20, 0.21 and
-0.20; adding starting density moves those to 0.34, 0.36 and 0.62, and concordance
-rises from 0.896 to 0.930 (Fig. 2D). Institute C moves the other way, from 3.0 to
-5.3, and it is also the fastest killer, which is the behaviour expected of a
-laboratory that genuinely kills faster. No p-value is attached to any of these
-terms, and the panel that displays them is a display of that movement rather than
-a test of it. The tested covariate
-is constant within cluster, and with six laboratories and six parameters the
-cluster-robust covariance is singular by construction; fitting it anyway does not
-fail loudly but returns a smaller p than the one it was meant to correct. A
-coefficient that moves on adjustment is a statement about how far starting
-density and laboratory identity overlap in this design, not evidence that one
-explains the other.
-
-Where an interval is quoted from that fit it is a cluster bootstrap and not the
-model's own. For the starting-density coefficient the laboratory-clustered
-interval is −1.11 to −0.51, half again as wide as the model's −0.91 to −0.48 and
-two and a half times the flask-clustered −0.81 to −0.56; quoting the model's
-interval is not conservative, it is wrong in an unpredictable direction. For the
-laboratory contrasts the laboratory bootstrap is the wrong instrument, since it
-keeps each laboratory's flasks together and the contrast barely moves, so the
-flask-clustered interval is quoted there instead. The crossings behind each
-laboratory's coefficient are also worth stating plainly: 43 of 48 series in
-institute C against 1 of 48 in institute E.
-
 Killing here is not sustained, and this is stronger than a caveat about
 individual flasks. Of the 64 treated series carrying at least three quantified
 readings at the most sensitive plating volume, the final step is not a decline in
@@ -668,30 +576,6 @@ produced it. Killing itself is real and dose-dependent:
 at one times the inhibitory concentration five of six laboratories record net
 growth under moxifloxacin, between −0.047 and −0.214 log10 per day, and at ten
 times all six record net decline.
-
-Two consequences follow, and they matter for anyone who reads a duration off
-such an experiment. The first is that the state below the floor is not
-absorbing. Of 2 232 visit-to-visit transitions, 144 go from above to below and 95
-go from below to above, so a series sitting below the floor leaves it at the
-next visit with probability 0.22. The gradient runs with drug pressure — that
-probability is 1.00 in untreated series, 0.37 to 0.92 at one times MIC and 0.07
-to 0.18 at ten times — which says the event is at least partly a property of the
-plate rather than of the drug. Of the 360 series, only 56, or 15.6 per cent, show
-the shape a survival model assumes: one crossing that holds (Table S8). Two hundred and
-twenty never cross at all, 65 cross and return, and 19 oscillate more than once.
-
-The second is that the crossing time is never observed. It lies between the last
-visit above the floor and the first visit below it, and the naive treatment
-pins it to the later end, which biases every duration late by construction rather
-than merely imprecisely. Fitted as interval-censored data (24) at the most sensitive
-plating, the tenth percentile of the first crossing falls from 2.95 to 1.82 days
-and the twenty-fifth from 11.24 to 9.64; across the treated arms at all four
-platings the twenty-fifth percentile falls from 5.77 to 3.67 days, a 36 per cent
-shortening. The non-parametric interval-censored curve sits below the naive
-Kaplan–Meier at every visit at which crossings are still being recorded — by
-0.081 at day 3 and 0.031 at day 7 — and the two coincide only from day 14, where
-both are flat. A duration read off the naive curve is therefore too long, and by
-about a day at the depths that matter.
 
 What the adjustment establishes is descriptive and is worth stating as such: a
 continuous measure of where the cultures began accounts for the laboratory term
@@ -720,7 +604,7 @@ with the smallest exactly ten. Sixty-nine further entries read as one, which no
 Across the 20 cultures with a measured day-zero density, headroom runs 4.85 to
 5.45 log10. Endpoints at 1, 2, 3 and 4 logs are reachable for every culture; a
 5-log endpoint is unreachable for 5 of 20; a 6-log endpoint is unreachable for
-all 20 (Table S9). The framework therefore locates, on data it was not built
+all 20 (Table S7). The framework therefore locates, on data it was not built
 from, the depth at which a sterilisation claim in this experiment stops being
 demonstrable.
 
@@ -738,7 +622,7 @@ The deposit carries apramycin at 1, 4, 8, 32 and 128 µg/mL (12, 13). The 1 µg/
 shows net growth rather than killing and is excluded from the dose comparison, so
 the range compared is 4 to 128 µg/mL: 32-fold, five doublings. Across it,
 survivors separate 6.9-fold at day 3, 48.2-fold at day 7 and 5.2-fold at day 14 (Fig. 3,
-Table S10). An experiment read at 14 days would report this drug as insensitive to
+Table S8). An experiment read at 14 days would report this drug as insensitive to
 a 32-fold change in dose. Fitted per interval on a bootstrap resampling all three
 replicates at both ends of every interval, the concentration slope is +0.059
 log10 per day per doubling over days 0 to 3 (95 per cent interval +0.030 to
@@ -769,14 +653,14 @@ the standard specifies. Realised densities were 6.4 × 10⁴, 4.4 × 10⁵ and
 3.8 × 10⁶ per mL. **At the standard inoculum plated at 10 µL, the deepest
 reduction the three flasks could report ran from 3.71 to 3.93 logs — each arm's
 own ceiling, not the drug's** — while those same three cultures plated at 100 µL
-ran from 4.88 to 5.05 (Table S11). Every flask is paired with itself across the
+ran from 4.88 to 5.05 (Table S9). Every flask is paired with itself across the
 two platings, so the gain is a property of the plating and not of the culture.
 
 That much is arithmetic, as Box 1 says. So is the observation that two platings
 of one sample carry different labels when both sit at their floors, since the
 labels are then *L*₁/*N*₀ and *L*₂/*N*₀. **The quantity that could have come out
 zero is how often a real experiment lands in the window where those two fractions
-straddle the cut**, and it depends on where the cut is (Table S12). At a
+straddle the cut**, and it depends on where the cut is (Table S10). At a
 threshold of one per cent the window is nearly shut. At one in a thousand,
 which is where the clinical classification analysed above cuts its lowest class,
 one sample-time in six receives two different labels from one culture. Nothing
@@ -855,8 +739,8 @@ fixes what enters the flask does not thereby fix what the assay can resolve.
 Removing the assay's contribution leaves something rather than nothing, and what
 remains is biologically coherent. Growth state predicts the tolerance class and
 survives adjustment for starting density, which is the expected direction:
-isoniazid requires KatG activation and active cell-wall synthesis (25), rifampicin
-requires transcription (26), and a population that is not dividing presents less of
+isoniazid requires KatG activation and active cell-wall synthesis (22), rifampicin
+requires transcription (23), and a population that is not dividing presents less of
 what these drugs act on. Physiological state, not drug susceptibility, is the
 axis the classification is reading.
 
@@ -873,7 +757,7 @@ per cent of them lack the headroom the endpoint requires. We do not know why the
 seed lower.
 The natural explanation — that resistance carries a fitness cost — is not
 supported here, since these isolates do not grow measurably more slowly and most
-carry the near-neutral *katG* S315X allele (20, 21). That gap is a finding in its own
+carry the near-neutral *katG* S315X allele (24, 25). That gap is a finding in its own
 right and belongs in the next study rather than in a speculative sentence in this
 one. Nor is it explained away by anything else the file records: of its nine
 pretreatment covariates only two can legitimately be adjusted for, and neither
@@ -932,7 +816,7 @@ points at the design that would settle it.
 The first limitation is one this paper has already acted on rather than merely
 declared. Every conclusion drawn from the two primary deposits was recomputed at
 the level its observations are actually independent, and the outcome is
-tabulated rather than summarised (Table S13): twenty survive unchanged, six
+tabulated rather than summarised (Table S11): twenty survive unchanged, six
 survive with materially wider uncertainty, five do not survive and **have already
 been removed from the text above**, and one is withdrawn because its null is
 false before any data are seen. The five and the one are not claims this paper
@@ -1098,7 +982,7 @@ Source Data of Dubey and colleagues, which was held out of every fitting step.
 
 The analysis code, both audit scripts, the headroom tool described above and the
 machine-readable receipts recording the software versions each stage ran under
-are deposited in a public repository (27), with the documentation needed to install
+are deposited in a public repository (26), with the documentation needed to install
 and run them and a test dataset with the control parameter settings used here.
 Code created to generate the results and to interpret the data is included. The
 repository is dual-licensed, MIT for the code and CC BY 4.0 for the manuscript,
@@ -1201,7 +1085,7 @@ by nutrient stratum.
 
 ## Supplemental material
 
-The supplemental file carries the full Materials and Methods, the analyses named above as supplementary text, and 22 supplemental tables. Table S14, Table S15, Table S16, Table S17, Table S18, Table S19, Table S20, Table S21 and Table S22 support analyses reported there rather than in this article, and are listed so that every supplemental item is named in the manuscript.
+The supplemental file carries the full Materials and Methods, the analyses named above as supplementary text, and 22 supplemental tables. Table S12, Table S13, Table S14, Table S15, Table S16, Table S17, Table S18, Table S19, Table S20, Table S21 and Table S22 support analyses reported there rather than in this article, and are listed so that every supplemental item is named in the manuscript.
 
 
 ## Tables
@@ -1275,18 +1159,16 @@ The supplemental file carries the full Materials and Methods, the analyses named
 
 19. Mann HB, Whitney DR. 1947. On a test of whether one of two random variables is stochastically larger than the other. Ann Math Stat 18:50-60. https://doi.org/10.1214/aoms/1177730491.
 
-20. Pym AS, Saint-Joanis B, Cole ST. 2002. Effect of *katG* mutations on the virulence of *Mycobacterium tuberculosis* and the implication for transmission in humans. Infect Immun 70:4955-4960. https://doi.org/10.1128/IAI.70.9.4955-4960.2002.
+20. McNemar Q. 1947. Note on the sampling error of the difference between correlated proportions or percentages. Psychometrika 12:153-157. https://doi.org/10.1007/BF02295996.
 
-21. van Soolingen D, de Haas PEW, van Doorn HR, Kuijper E, Rinder H, Borgdorff MW. 2000. Mutations at amino acid position 315 of the *katG* gene are associated with high-level resistance to isoniazid, other drug resistance, and successful transmission of *Mycobacterium tuberculosis* in the Netherlands. J Infect Dis 182:1788-1790. https://doi.org/10.1086/317598.
+21. Wilcoxon F. 1945. Individual comparisons by ranking methods. Biom Bull 1:80. https://doi.org/10.2307/3001968.
 
-22. McNemar Q. 1947. Note on the sampling error of the difference between correlated proportions or percentages. Psychometrika 12:153-157. https://doi.org/10.1007/BF02295996.
+22. Vilchèze C, Jacobs WR Jr. 2007. The mechanism of isoniazid killing: clarity through the scope of genetics. Annu Rev Microbiol 61:35-50. https://doi.org/10.1146/annurev.micro.61.111606.122346.
 
-23. Wilcoxon F. 1945. Individual comparisons by ranking methods. Biom Bull 1:80. https://doi.org/10.2307/3001968.
+23. Campbell EA, Korzheva N, Mustaev A, Murakami K, Nair S, Goldfarb A, Darst SA. 2001. Structural mechanism for rifampicin inhibition of bacterial RNA polymerase. Cell 104:901-912. https://doi.org/10.1016/S0092-8674(01)00286-0.
 
-24. Turnbull BW. 1976. The empirical distribution function with arbitrarily grouped, censored and truncated data. J R Stat Soc Series B Stat Methodol 38:290-295. https://doi.org/10.1111/j.2517-6161.1976.tb01597.x.
+24. Pym AS, Saint-Joanis B, Cole ST. 2002. Effect of *katG* mutations on the virulence of *Mycobacterium tuberculosis* and the implication for transmission in humans. Infect Immun 70:4955-4960. https://doi.org/10.1128/IAI.70.9.4955-4960.2002.
 
-25. Vilchèze C, Jacobs WR Jr. 2007. The mechanism of isoniazid killing: clarity through the scope of genetics. Annu Rev Microbiol 61:35-50. https://doi.org/10.1146/annurev.micro.61.111606.122346.
+25. van Soolingen D, de Haas PEW, van Doorn HR, Kuijper E, Rinder H, Borgdorff MW. 2000. Mutations at amino acid position 315 of the *katG* gene are associated with high-level resistance to isoniazid, other drug resistance, and successful transmission of *Mycobacterium tuberculosis* in the Netherlands. J Infect Dis 182:1788-1790. https://doi.org/10.1086/317598.
 
-26. Campbell EA, Korzheva N, Mustaev A, Murakami K, Nair S, Goldfarb A, Darst SA. 2001. Structural mechanism for rifampicin inhibition of bacterial RNA polymerase. Cell 104:901-912. https://doi.org/10.1016/S0092-8674(01)00286-0.
-
-27. Piranfar V. 2026. Analysis code, audit scripts and headroom tool for "Score only the kill the assay can see: starting density and the floor bound every MDK".
+26. Piranfar V. 2026. Analysis code, audit scripts and headroom tool for "Score only the kill the assay can see: starting density and the floor bound every MDK".

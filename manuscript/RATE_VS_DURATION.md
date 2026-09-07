@@ -381,7 +381,7 @@ is modelled as one: a linear coefficient on a 0, 1, 2 score would assert that th
 step from low to medium equals the step from medium to high, and nothing
 establishes that. Associations are therefore reported as odds ratios from
 proportional-odds ordinal logistic regression, with the proportional-odds
-assumption tested rather than assumed (Methods; Table 7).
+assumption tested rather than assumed (Methods; Table 7). <!--supp-->
 
 The label tracks the **growth rate** of the isolate: slower growth accompanies a
 higher tolerance class, and the association survives adjustment for starting
@@ -446,9 +446,14 @@ column among the 48 has the multiplicity a patient key would need. The pairing i
 not recoverable, so no standard error can be clustered on the true grouping, and
 we do not pretend otherwise. What is available is the exact substitute, a
 baseline-only stratum in which every isolate is from a different patient by
-construction (Time_point = 0M, n = 167 at 15 days).
+construction (Time_point = 0M, n = 167 at 15 days). <!--supp-->
 
-Restricted to it, the two surviving associations part company. Growth holds and
+These 217 isolates are not 217 independent patients, and the deposit carries no
+patient key with which to say so in a standard error. What it does carry is the
+exact substitute: a baseline-only stratum in which every isolate comes from a
+different patient by construction (Time_point = 0M, n = 167 at 15 days).
+
+Restricted to that stratum, the two surviving associations part company. Growth holds and
 still survives correction (OR 1.116, 1.040 to 1.198, p = 0.0024). Resistance does
 not: OR 2.11 (1.07 to 4.16, p = 0.031), which is second in the family of eight
 and so is tested against a Benjamini–Hochberg critical value of 0.0125. The
@@ -473,7 +478,7 @@ design matrix. That also disposes of the largest attenuation we previously
 quoted, 22 per cent for the mutation identity, which was an artefact of the same
 circularity. The two Mykrobe columns carry a single value wherever they are
 recorded in this stratum, so no adjusted coefficient exists for them at all and
-Table S4 prints none.
+Table S4 prints none. <!--supp-->
 
 The other two are the isoniazid and rifampicin MICs, and their missingness runs
 the other way: they are recorded for all 119 susceptible isolates and for 67 of
@@ -488,7 +493,7 @@ rows against 203. It is also the second-largest movement in Table S4, and it run
 the wrong way for a confounding explanation: with the isoniazid MIC in the model
 the seeding gap grows from −0.85 to −0.96, an amplification of 13 per cent rather
 than an attenuation. The rifampicin MIC, which does not separate the groups,
-moves it by less than half a per cent.
+moves it by less than half a per cent. <!--supp-->
 
 The remaining two are missing at rates unrelated to susceptibility and can be
 used: the growth proxy and months on treatment. Adjusting for either leaves the
@@ -497,9 +502,9 @@ most five per cent (Table S4). The seeding gap is therefore more robust than the
 earlier sweep suggested, not less. The file records no referring site and no
 processing batch, so those cannot be tested at all. The association between
 resistance and a low starting inoculum is real, large and unexplained, and we
-record it as such.
+record it as such. <!--supp-->
 
-Both surviving associations sit in the 15-day panel, which is where the
+The two surviving associations sit in the 15-day panel, which is where the
 mechanism places them. By 60 days the cultures are 38-fold denser, the spread of
 starting densities has more than halved, from an interquartile range of 1.00 to
 0.42 log10, and the fraction of isolates short of headroom falls from 15.2 to 3.3
@@ -542,7 +547,7 @@ the ten-times-MIC arms have already lost between 0.7 and 2.4 log10. A day-zero
 comparison across all six is therefore not available, and the check that is
 available runs the other way: re-running the whole analysis on a day-one exposure
 for every laboratory leaves the ordering, the area under the curve and the
-laboratory-level exact test unchanged.
+laboratory-level exact test unchanged. <!--supp-->
 
 At ten times the minimum inhibitory concentration of moxifloxacin all six
 laboratories return a positive kill rate spanning 5.2-fold, from 0.090 to 0.464
@@ -600,7 +605,7 @@ cluster-robust covariance is singular by construction; fitting it anyway does no
 fail loudly but returns a smaller p than the one it was meant to correct. A
 coefficient that moves on adjustment is a statement about how far starting
 density and laboratory identity overlap in this design, not evidence that one
-explains the other.
+explains the other. <!--supp-->
 
 Where an interval is quoted from that fit it is a cluster bootstrap and not the
 model's own. For the starting-density coefficient the laboratory-clustered
@@ -611,7 +616,7 @@ laboratory contrasts the laboratory bootstrap is the wrong instrument, since it
 keeps each laboratory's flasks together and the contrast barely moves, so the
 flask-clustered interval is quoted there instead. The crossings behind each
 laboratory's coefficient are also worth stating plainly: 43 of 48 series in
-institute C against 1 of 48 in institute E.
+institute C against 1 of 48 in institute E. <!--supp-->
 
 Killing here is not sustained, and this is stronger than a caveat about
 individual flasks. Of the 64 treated series carrying at least three quantified
@@ -643,7 +648,7 @@ probability is 1.00 in untreated series, 0.37 to 0.92 at one times MIC and 0.07
 to 0.18 at ten times — which says the event is at least partly a property of the
 plate rather than of the drug. Of the 360 series, only 56, or 15.6 per cent, show
 the shape a survival model assumes: one crossing that holds (Table 10). Two hundred and
-twenty never cross at all, 65 cross and return, and 19 oscillate more than once.
+twenty never cross at all, 65 cross and return, and 19 oscillate more than once. <!--supp-->
 
 The second is that the crossing time is never observed. It lies between the last
 visit above the floor and the first visit below it, and the naive treatment
@@ -656,7 +661,7 @@ shortening. The non-parametric interval-censored curve sits below the naive
 Kaplan–Meier at every visit at which crossings are still being recorded — by
 0.081 at day 3 and 0.031 at day 7 — and the two coincide only from day 14, where
 both are flat. A duration read off the naive curve is therefore too long, and by
-about a day at the depths that matter.
+about a day at the depths that matter. <!--supp-->
 
 What the adjustment establishes is descriptive and is worth stating as such: a
 continuous measure of where the cultures began accounts for the laboratory term

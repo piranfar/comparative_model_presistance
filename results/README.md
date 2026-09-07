@@ -6,7 +6,7 @@ Outputs of the earlier paper are not here; they live in `version_one/results/`.
 
 | | tables | figures | receipts |
 | --- | ---: | ---: | ---: |
-| total | 73 | 5 | 26 |
+| total | 75 | 5 | 26 |
 
 ## Tolerance and the assay floor (manuscript/PAPER_COMPLETE.md)
 
@@ -84,13 +84,15 @@ Outputs of the earlier paper are not here; they live in `version_one/results/`.
 
 **Figures.** `fig13_parameter_transfer`
 
-**Tables (10).**
+**Tables (12).**
 
 | file | written by | used by |
 | --- | --- | --- |
 | `corpus_coverage.csv` | `-` | `build_corpus_long` |
 | `exp38_boundary_tests.csv` | `exp38_boundary_experiment.py` | quoted in the text only |
 | `exp38_experiment_readings.csv` | `exp38_boundary_experiment.py` | quoted in the text only |
+| `exp38_headroom_by_flask.csv` | `exp38_boundary_experiment.py` | `build_tables` |
+| `exp38_threshold_sweep.csv` | `exp38_boundary_experiment.py` | `build_tables` |
 | `exp40_floor_signatures.csv` | `exp40_corpus_landscape.py` | quoted in the text only |
 | `exp40_landscape.csv` | `exp40_corpus_landscape.py` | quoted in the text only |
 | `exp41_mediation_without_floor.csv` | `exp41_mediation_without_floor.py` | quoted in the text only |
