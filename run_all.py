@@ -111,6 +111,8 @@ STAGES = [
      "src.assemble_paper"),
     ("supp    the supplemental file AAC wants separately",
      "src.build_supplement"),
+    ("split   the short main text and its supplement, for submission",
+     "src.build_submission"),
     ("index   map results/ to the paper it serves",
      "src.build_results_index"),
     ("audit   recompute every quoted number from its table",
