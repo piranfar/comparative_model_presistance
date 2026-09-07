@@ -270,14 +270,24 @@ def rewrite_section_refs(text: str, remap: dict[int, str], where: str,
 
 
 def split_tables(tables_md: str) -> tuple[dict[str, str], list[str]]:
-    """Split tables.md into {label: block} keyed by '7' or 'S3', in file order."""
+    """Split tables.md into {label: block} keyed by '7' or 'S3', in file order.
+
+    Each block is trimmed at the first structural break after its own content.
+    Splitting on the NEXT table alone makes the last table before a heading
+    swallow that heading: the original Table 15 arrived carrying the whole
+    "## Supplementary tables" heading and its preamble, so the built supplement
+    had that heading twice, once in the middle of a table. A rule or a heading
+    at the start of a line ends the block; a `|---|` row inside a table body
+    does not, because it starts with a pipe.
+    """
     blocks: dict[str, str] = {}
     order: list[str] = []
     for part in re.split(r"(?=^\*\*Table S?\d+\.)", tables_md, flags=re.M):
         m = re.match(r"\*\*Table (S?\d+)\.", part.strip())
         if not m:
             continue
-        blocks[m.group(1)] = part.strip()
+        cut = re.search(r"^(?:-{3,}\s*|#{1,6} .*)$", part, re.M)
+        blocks[m.group(1)] = part[:cut.start()].strip() if cut else part.strip()
         order.append(m.group(1))
     return blocks, order
 
@@ -355,6 +365,16 @@ def check(main: str, supp: str, table_remap: dict[str, str],
             problems.append(f"main text cites Table {lab}, which is not in the main file")
     # 3. A supplement that cites a main table is fine; a main text that cites a
     #    section number that no longer exists is not, and is caught upstream.
+    # 3b. A heading may appear once. Two "## Supplementary tables" headings is
+    #     what a table block swallowing the heading after it looks like from
+    #     the outside, and it is invisible unless counted.
+    for doc, name in ((main, "article"), (supp, "supplement")):
+        seen: dict[str, int] = {}
+        for h in re.findall(r"^#{2,3} (.+)$", doc, re.M):
+            seen[h.strip()] = seen.get(h.strip(), 0) + 1
+        for h, n in seen.items():
+            if n > 1:
+                problems.append(f"the {name} carries the heading '{h}' {n} times")
     # 4. A display item in the article must not rest on an analysis that left
     #    it. Figure 2's panel D plots a descriptive Cox model; deferring the
     #    paragraph that reported that model put the panel in the article and

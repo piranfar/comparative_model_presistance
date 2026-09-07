@@ -958,12 +958,6 @@ pandas 3.0.3 (38), statsmodels 0.15.0 (39) and lifelines 0.30.3
 | Kaur 2024 | no | no | none; no floor is used | log10 CFU per mL | NONE | no floor is evidenced; the smallest reading is the smallest reading |
 | Dubey 2026 | no | no | 10 | CFU per mL | DERIVED | minimum reportable positive count |
 
----
-
-## Supplementary tables
-
-Held here so the Results stay on one line of reasoning. Table S17 supports Text S3 and Table S14 supports Text S1.
-
 **Table S20.** Sensitivity of the load-bearing counts to the choice of floor. Each deposit is sensitive to a different thing, so the table is long rather than wide: one row per deposit, floor scenario and quantity. The clinical sweep steps through every three-tube most-probable-number rung at or below 23 per mL, and the number of isolates short of four logs of headroom moves only between 28 and 33 across the whole range, which is why the inferred floor is safe to use. The six-laboratory rows price what pooling the four plating volumes to one floor would cost. The Kaur deposit records no plated volume, so its rows show what assuming one would do: the four-log endpoint stays reachable throughout while the headroom itself moves by 1.6 log10.
 
 | Deposit | Floor assumed | Quantity | Value |
