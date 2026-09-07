@@ -2,7 +2,7 @@ parent,old_number,title,destination,new_label,words,why
 Results,1,Observable kill is bounded by the assay floor,main,1,811,the boundary itself; without it there is no paper
 Results,2,Identical floor observations received different tolerance labels,main,2,889,the boundary changing a published label -- the core claim
 Results,3,The affected isolates are named before the drug is added,main,3,555,the affected isolates are identified before treatment; short and load-bearing
-Results,4,The classification tracks growth; the resistance association is not separable from the inoculum,main,4,1640,"what the phenotype tracks instead, and the mediation the referee attacked; longest section, cut hard rather than moved"
+Results,4,The classification tracks growth; the resistance association is not separable from the inoculum,main,4,1773,"what the phenotype tracks instead, and the mediation the referee attacked; longest section, cut hard rather than moved"
 Results,5,One written protocol does not produce one measurable depth,main,5,1616,"six laboratories, one protocol -- the generality argument"
 Results,6,"A turbidity standard fixes what goes in, not what the plate can resolve",supplement,S1,709,"corroboration: the turbidity standard fixes the inoculum, not the resolvable depth. Supports Section 5, does not extend it"
 Results,7,The population that fell faster often crossed the floor later,supplement,S2,556,the inversion decomposition; a consequence of the boundary rather than evidence for it
@@ -20,7 +20,7 @@ Discussion,,Conclusion,main,,249,"part of the argument, not the evidence"
 Materials and Methods,,Datasets,supplement,,858,detailed methods move wholesale
 Materials and Methods,,"Two kinds of limit, kept apart",supplement,,883,detailed methods move wholesale
 Materials and Methods,,"Floor posterior, refusal, and what is not learned",supplement,,194,detailed methods move wholesale
-Materials and Methods,,Causal mediation of the resistance association,supplement,,339,detailed methods move wholesale
+Materials and Methods,,Causal mediation of the resistance association,supplement,,295,detailed methods move wholesale
 Materials and Methods,,What each analysis was fitted to,supplement,,244,detailed methods move wholesale
 Materials and Methods,,"Dynamic range, and the two boundaries it sets",supplement,,371,detailed methods move wholesale
 Materials and Methods,,Estimation,supplement,,770,detailed methods move wholesale

@@ -428,6 +428,18 @@ association is carried by the label's own denominator — but it is a reason not
 read it as a mechanism. Only a design that fixes the inoculum separates the
 two.
 
+That last objection can be tested rather than merely conceded, because it is
+true of a subset one can name. The recorded fraction is *L*/*N₀* exactly for the
+eighteen isolates whose day-5 reading sits at the floor, and for no others: in
+the remaining 185 the numerator was measured and is free to move independently
+of *N₀*. Refitting on those 185 alone, the mediated path does not weaken but
+strengthens, to +0.227 classes (+0.118 to +0.348), while the direct path
+collapses to +0.008 (−0.197 to +0.208) and the proportion mediated rises from
+0.65 to 0.96. Deleting exactly the isolates for which the criticism holds leaves
+the effect larger, so it is not an artefact of them. What it remains is an
+association in observational data, and the caution above about mechanism is
+unaffected.
+
 These 217 isolates are not 217 independent observations. Forty-three are
 follow-up isolates drawn during treatment from patients who also contributed a
 baseline isolate, so up to 86 rows sit in clusters of two, but the deposit

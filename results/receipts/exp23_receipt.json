@@ -1,6 +1,6 @@
 {
   "script": "src/experiments/exp23_inversion_decomposition.py",
-  "utc": "2026-09-07T15:59:05+00:00",
+  "utc": "2026-09-07T18:28:39+00:00",
   "data_source": "van Wijk et al. 2023, figshare 19766083",
   "clearance_limit_log10": 1.0,
   "fit_window_days": 14,

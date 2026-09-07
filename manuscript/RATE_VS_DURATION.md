@@ -426,6 +426,18 @@ association is carried by the label's own denominator — but it is a reason not
 read it as a mechanism. Only a design that fixes the inoculum separates the
 two.
 
+That last objection can be tested rather than merely conceded, because it is
+true of a subset one can name. The recorded fraction is *L*/*N₀* exactly for the
+eighteen isolates whose day-5 reading sits at the floor, and for no others: in
+the remaining 185 the numerator was measured and is free to move independently
+of *N₀*. Refitting on those 185 alone, the mediated path does not weaken but
+strengthens, to +0.227 classes (+0.118 to +0.348), while the direct path
+collapses to +0.008 (−0.197 to +0.208) and the proportion mediated rises from
+0.65 to 0.96. Deleting exactly the isolates for which the criticism holds leaves
+the effect larger, so it is not an artefact of them. What it remains is an
+association in observational data, and the caution above about mechanism is
+unaffected.
+
 These 217 isolates are not 217 independent observations. Forty-three are
 follow-up isolates drawn during treatment from patients who also contributed a
 baseline isolate, so up to 86 rows sit in clusters of two, but the deposit
@@ -1351,17 +1363,13 @@ causal mediation effect through log10 *N₀* and an average direct effect [[R16]
 bootstrap percentile intervals from 5 000 resamples, repeated on the baseline
 stratum and on two binary collapses of the outcome.
 
-There is a sharper objection than untestable ignorability, and it has to be met
-with a number rather than a concession. For an isolate whose day-5 reading sits
-at the floor the recorded fraction is *L*/*N*₀ exactly, so the class is a
-function of the starting density and the decomposition recovers arithmetic. That
-holds for the eighteen isolates that ended at the floor and for no others: in
-the remaining 185 the numerator was measured and can move independently of
-*N*₀. Refitting on those 185 alone, the mediated path does not weaken but
-strengthens, to +0.227 classes (0.118 to 0.348), while the direct path collapses
-to +0.008 (−0.197 to 0.208) and the proportion mediated rises from 0.65 to 0.96.
-Removing exactly the isolates for which the criticism is true leaves the effect
-larger, so it is not an artefact of them.
+The refit that answers the objection about the mediator being the outcome's own
+denominator is reported in Section 4. Its stratum is defined here: an isolate is
+excluded from it when its day-5 reading is at or below the floor of 23 MPN per
+mL, which is the condition under which the recorded fraction is *L*/*N*₀ and the
+class carries no measured numerator. Eighteen of the 203 meet it. The refit is
+the same estimator on the remaining 185, with the same seed and the same 5 000
+resamples, so the two are comparable term by term.
 
 Sequential ignorability is assumed and is not testable here, so the estimate is
 accompanied by the sensitivity that matters: the residual correlation between
