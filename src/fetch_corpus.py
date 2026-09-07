@@ -11,25 +11,25 @@ is ordinary scholarship, and in most jurisdictions measurements are facts rather
 than protected expression. So every row with a URL is downloaded and every
 downloaded dataset is available to the pipeline. Nothing here gates the science.
 
-WHAT IS GATED IS GIT, AND ONLY GIT. Files land in one of two directories:
+NOTHING IS COMMITTED. The whole of data/corpus/ is ignored by git, whatever the
+licence. What the repository carries instead is the manifest -- every dataset
+with its URL, DOI and licence -- and this script, which rebuilds the corpus on
+any machine from those links. The links are the deliverable; the bytes belong to
+their depositors.
 
-  data/corpus/open/<study_id>/        CC BY or CC0 -- tracked, shipped, cited
-  data/corpus/restricted/<study_id>/  everything else -- on disk, used by the
-                                      pipeline, ignored by git
+That decision removes a whole class of problem rather than managing it. No
+licence question can turn into a publication question, no deposit's size can make
+the repository painful to clone, and the awkward asymmetry disappears: taking a
+file off a disk is instant, while taking it out of a public git history means
+rewriting history and force-pushing over everyone who has the old copy.
 
-The split exists because of an asymmetry that is easy to miss. Taking a file off
-a disk is instant. Taking it out of a public git history is not: it survives in
-every clone, every fork and every cache, and removing it means rewriting history
-and force-pushing over everyone who has the old copy. So "we will sort the
-licences out later" stays true for the restricted directory and stops being true
-the moment those bytes are committed.
+The two directories remain, because the distinction is still worth seeing at a
+glance:
 
-MOVING THEM IN. When a permission arrives, record it in
-data/manifests/permissions.csv, set the row's licence_class to USE_OK_REDIST_OK
-in the manifest, and re-run: the file moves to open/ and becomes shippable. To
-move everything in at once regardless -- an author's call, not this script's --
-set SHIP_EVERYTHING below to True and re-run. One line, and the .gitignore rule
-is written to match.
+  data/corpus/open/<study_id>/        CC BY or CC0 -- free to redistribute if we
+                                      ever choose to
+  data/corpus/restricted/<study_id>/  everything else -- analysed on the same
+                                      terms, redistributed by nobody
 
 EVERY DOWNLOAD IS RECORDED. Each directory gets a PROVENANCE.json with the URL,
 the retrieval time, the SHA-256 of every file and the licence as recorded. That
@@ -38,6 +38,7 @@ is what makes a later licence question answerable instead of archaeological.
 from __future__ import annotations
 
 import csv
+import re
 import hashlib
 import json
 import sys
@@ -61,6 +62,28 @@ UA = ("Mozilla/5.0 (research corpus builder; contact vahab.p@gmail.com) "
       "python-urllib")
 TIMEOUT = 60
 
+# None of the corpus is committed, so this is no longer about GitHub's 100 MB
+# file limit -- it is about disk and about relevance. The largest things in these
+# deposits are raw imaging and plate-reader dumps measured in gigabytes, and none
+# of it is a count series. Anything above the cap is left unfetched with its URL
+# recorded in the provenance, so a deliberate `--all` run or a manual download
+# can still take it.
+MAX_FILE_MB = 500
+
+# A deposit is usually a whole paper's data, and most of it is not ours. One
+# record here is a 197 MB snapshot of a software repository; another carries 96 MB
+# of microscopy and membrane-potential imaging beside the 0.4 MB of time-kill
+# curves that is the only part this project reads. Fetching by name keeps the
+# corpus to what the analysis uses, which is also what makes it reviewable.
+WANTED = re.compile(
+    r"time.?kill|kill.?curve|killing|cfu|colony|colonies|viable|count|"
+    r"survival|persist|toleran|mic|growth|od600|plate|raw.?data|source.?data|"
+    r"supplement|dataset|data_s|\.csv$|\.tsv$", re.I)
+UNWANTED = re.compile(
+    r"microscop|image|imaging|movie|video|micrograph|tiff|\.czi|\.nd2|"
+    r"flow.?cytom|facs|sequenc|fastq|genome|\.bam|\.sam|\.vcf|"
+    r"membrane_potential|biosensor|renv\.lock|\.git", re.I)
+
 
 def shippable(licence_class: str) -> bool:
     return SHIP_EVERYTHING or licence_class.strip() == "USE_OK_REDIST_OK"
@@ -74,10 +97,104 @@ def sha256(p: Path) -> str:
     return h.hexdigest()
 
 
+def _json(url: str):
+    req = urllib.request.Request(url, headers={"User-Agent": UA,
+                                               "Accept": "application/json"})
+    with urllib.request.urlopen(req, timeout=TIMEOUT) as r:
+        return json.loads(r.read().decode("utf-8", "replace"))
+
+
+def resolve(field: str) -> tuple[list[tuple[str, str]], str]:
+    """Turn a manifest URL field into (filename, url) pairs to download.
+
+    The field is prose as often as it is a link -- agents wrote things like
+    "https://zenodo.org/records/123 (article: https://pmc...)" and
+    "https://pmc.../PMC123/ ; file at https://static-content.springer.com/...".
+    A record page is not a dataset: fetching zenodo.org/records/123 returns a
+    web page. So each repository is resolved through its API to the actual
+    files, and any explicit file URL written in the field is preferred over the
+    landing page, because whoever wrote it had already found the file.
+
+    Returns (files, note). An empty list with a note is the honest outcome when
+    a repository cannot be resolved -- Dryad currently answers its download
+    endpoint with a bot interstitial, so those are recorded, not faked.
+    """
+    urls = re.findall(r"https?://[^\s,;)\]]+", field or "")
+    if not urls:
+        return [], "no URL in the manifest row"
+
+    # An explicit file URL beats a landing page.
+    direct = [u for u in urls
+              if re.search(r"\.(csv|tsv|xlsx?|zip|txt|json|dat)(\?|$)", u, re.I)
+              or "static-content.springer.com" in u
+              or "ndownloader.figshare.com" in u
+              or "/api/access/datafile/" in u]
+    if direct:
+        return [(u.rstrip("/").split("/")[-1].split("?")[0] or "download", u)
+                for u in direct[:6]], "explicit file URL from the manifest"
+
+    for u in urls:
+        try:
+            if "zenodo.org" in u and (m := re.search(r"/records?/(\d+)", u)):
+                rec = _json(f"https://zenodo.org/api/records/{m.group(1)}")
+                fs = [(f.get("key") or "file", f["links"]["self"])
+                      for f in rec.get("files", []) if f.get("links")]
+                if fs:
+                    return fs[:12], "Zenodo API"
+            if "figshare.com" in u and (m := re.search(r"/(\d{6,})", u)):
+                rec = _json(f"https://api.figshare.com/v2/articles/{m.group(1)}")
+                fs = [(f["name"], f["download_url"]) for f in rec.get("files", [])]
+                if fs:
+                    return fs[:12], "figshare API"
+            if "dataverse.no" in u and (m := re.search(r"doi:([^\s&]+)", u)):
+                rec = _json("https://dataverse.no/api/datasets/:persistentId/"
+                            f"?persistentId=doi:{m.group(1)}")
+                fs = [(f["dataFile"]["filename"],
+                       "https://dataverse.no/api/access/datafile/"
+                       f"{f['dataFile']['id']}")
+                      for f in rec["data"]["latestVersion"]["files"]]
+                if fs:
+                    return fs[:12], "DataverseNO API"
+            if "datadryad.org" in u:
+                return [], ("Dryad answers its download endpoint with a bot "
+                            "interstitial; fetch by hand from the record page")
+        except (urllib.error.URLError, urllib.error.HTTPError, KeyError,
+                ValueError, TimeoutError, OSError) as exc:
+            return [], f"resolver failed: {type(exc).__name__}: {exc}"
+
+    return [], ("only a landing page in the manifest; no file URL and no API "
+                "route for this host")
+
+
+def choose(files: list[tuple[str, str]]) -> tuple[list[tuple[str, str]], list[str]]:
+    """Keep the files the analysis reads; report what was left and why.
+
+    A deposit with one file is taken whole -- there is nothing to choose between,
+    and guessing from a single name risks discarding the only data there is.
+    """
+    if len(files) <= 1:
+        return files, []
+    keep, dropped = [], []
+    for name, url in files:
+        if UNWANTED.search(name):
+            dropped.append(f"{name} (not a count series)")
+        elif WANTED.search(name):
+            keep.append((name, url))
+        else:
+            dropped.append(f"{name} (name matches nothing the analysis reads)")
+    # If the filter rejected everything, it is the filter that is wrong, not the
+    # deposit; take it all rather than silently returning an empty dataset.
+    return (keep, dropped) if keep else (files, [])
+
+
 def download(url: str, dest: Path) -> tuple[bool, str]:
     try:
         req = urllib.request.Request(url, headers={"User-Agent": UA})
         with urllib.request.urlopen(req, timeout=TIMEOUT) as r:
+            size = r.headers.get("Content-Length")
+            if size and int(size) > MAX_FILE_MB * 1_000_000:
+                return False, (f"{int(size)/1e6:.0f} MB exceeds the {MAX_FILE_MB} MB "
+                               f"cap; not fetched, URL recorded")
             data = r.read()
     except (urllib.error.URLError, urllib.error.HTTPError, TimeoutError,
             OSError, ValueError) as exc:
@@ -126,10 +243,9 @@ def main(argv: list[str]) -> int:
         for k in ("open", "restricted"):
             for n in held[k]:
                 print(f"   {k:11} {n}")
-        print(f"\nSHIP_EVERYTHING = {SHIP_EVERYTHING}")
-        print("   restricted datasets are used by the pipeline and ignored by git"
-              if not SHIP_EVERYTHING else
-              "   EVERYTHING is being placed in the tracked directory")
+        print("\n   the whole corpus is local: data/corpus/ is gitignored, and "
+              "the manifest\n   is what travels. Any clone rebuilds this from "
+              "the links in it.")
         return 0
 
     got = skipped = failed = 0
@@ -150,18 +266,34 @@ def main(argv: list[str]) -> int:
             skipped += 1
             print(f"   ok {sid:20} already held in {base.name}/")
             continue
-        if dry:
-            print(f"   would fetch {sid:20} -> {base.name}/  {url[:60]}")
+        files, note = resolve(url)
+        if not files:
+            skipped += 1
+            print(f"   -- {sid:20} {note}")
             continue
-        name = url.rstrip("/").split("/")[-1] or "download"
-        okd, msg = download(url, d / name)
-        if okd:
+        if dry:
+            print(f"   would fetch {sid:20} {len(files)} file(s) via {note} "
+                  f"-> {base.name}/")
+            continue
+        files, dropped = choose(files)
+        for msg in dropped:
+            print(f"      skipped {msg}")
+        log, okc = [], 0
+        for name, furl in files:
+            name = re.sub(r"[^\w.\-]+", "_", name)[:120] or "download"
+            okd, msg = download(furl, d / name)
+            log.append((furl, msg))
+            okc += okd
+            if not okd:
+                print(f"      ! {name}: {msg}")
+        if okc:
             got += 1
-            provenance(d, row, [(url, msg)])
-            print(f"   got {sid:20} -> {base.name}/{name}  ({msg})")
+            provenance(d, row, log)
+            print(f"   got {sid:20} {okc}/{len(files)} file(s) via {note} "
+                  f"-> {base.name}/")
         else:
             failed += 1
-            print(f"   !! {sid:20} {msg}")
+            print(f"   !! {sid:20} every file failed ({note})")
 
     print(f"\n{got} fetched, {skipped} already held or without a URL, {failed} failed")
     n_open = len([p for p in OPEN_DIR.iterdir() if p.is_dir()]) if OPEN_DIR.exists() else 0

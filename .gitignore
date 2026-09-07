@@ -90,10 +90,12 @@ data/raw/external_survival/Stewart&Rozen_archived_data.xls
 data/raw/external_survival/R_long_data_Alex_and_Sara_CFU_counts.csv
 data/raw/external_survival/pnas.1903836116.sapp.pdf
 
-# (4) the corpus. data/corpus/open/ is tracked: CC BY and CC0 only, shippable.
-# data/corpus/restricted/ is everything else -- fetched, used by the pipeline,
-# and deliberately kept out of git, because a file can be taken off a disk but
-# not out of a public history. src/fetch_corpus.py decides which is which from
-# the licence_class column of data/manifests/corpus.csv, and its SHIP_EVERYTHING
-# switch moves them all into the tracked directory when the permissions are in.
-data/corpus/restricted/
+# (4) the corpus. NONE of it is tracked, whatever its licence. The repository
+# carries the manifest -- every dataset with its URL, DOI and licence -- and
+# src/fetch_corpus.py, which rebuilds the whole corpus on any machine from those
+# links. That is the same policy this file already applies to bulk third-party
+# data above: the provenance and the fetch route are the durable things, and the
+# bytes belong to their depositors. It also means no licence question can ever
+# become a publication question, and no deposit's size can make the repository
+# unusable to clone.
+data/corpus/
