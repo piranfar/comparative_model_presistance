@@ -1,4 +1,4 @@
-"""GOORMAGHTIGH2021 -- PLoS Biology 10.1371/journal.pbio.3001194, S1 Data.
+"""MANUSE2021 -- PLoS Biology 10.1371/journal.pbio.3001194, S1 Data.
 
 The supplementary zip unpacks to four workbooks. Three are tables of strains,
 plasmids and primers (s011, s012, s013) with no measurements in them. The fourth,
@@ -77,7 +77,7 @@ import pandas as pd
 
 from src.ingest import empty, finish
 
-STUDY = "GOORMAGHTIGH2021"
+STUDY = "MANUSE2021"
 SOURCE = "_unpacked/PMC8084331_supplementary/pbio.3001194.s015.xlsx"
 COUNT_SHEET = "Fig S1A"
 OD_SHEETS = ("Fig S2A left", "Fig S2A right", "Fig S2B left", "Fig S2B right",

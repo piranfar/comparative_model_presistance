@@ -1,0 +1,51 @@
+{
+  "script": "src/experiments/exp40_corpus_landscape.py",
+  "utc": "2026-09-07T15:03:08+00:00",
+  "n_readings": 64015,
+  "n_deposits": 29,
+  "organisms": {
+    "P. aeruginosa": 5396,
+    "Escherichia coli": 5164,
+    "Acinetobacter baumannii": 2761,
+    "S. pneumoniae": 2554,
+    "E. coli": 2108,
+    "Mycobacterium tuberculosis": 556,
+    "Mtb": 388,
+    "A. baumannii": 144
+  },
+  "drugs": {
+    "Ampicillin": 4424,
+    "GEN": 2434,
+    "CIP": 1442,
+    "ciprofloxacin": 1030,
+    "gen": 911,
+    "QM": 684,
+    "meropenem": 622,
+    "ampicillin": 609,
+    "LZD": 558,
+    "streptomycin": 413,
+    "BDQ": 360,
+    "meropenem + polymyxin B": 357,
+    "meropenem + colistin": 331,
+    "colistin": 294,
+    "Enoblock": 288,
+    "Col": 288,
+    "Col + ENO": 288,
+    "Rif": 252,
+    "polymyxin B": 232,
+    "meropenem + ampicillin-sulbactam": 224
+  },
+  "floor_recovered_from_the_data": [
+    "EDOO2026",
+    "JOVANOVIC2026"
+  ],
+  "pile_up_is_a_stand_in_for_zero": [
+    "AGUILAR2025",
+    "MOLECULAR2026",
+    "ZHU2022"
+  ],
+  "note": "PIRANFAR2026 is this project own experiment and is excluded from both lists, which are about what other groups deposited.",
+  "n_series": 2478,
+  "n_series_falling": 1718,
+  "n_series_returning": 292
+}
