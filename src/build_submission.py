@@ -355,7 +355,32 @@ def check(main: str, supp: str, table_remap: dict[str, str],
             problems.append(f"main text cites Table {lab}, which is not in the main file")
     # 3. A supplement that cites a main table is fine; a main text that cites a
     #    section number that no longer exists is not, and is caught upstream.
-    # 4. Figures: the main text must not cite a figure it does not carry.
+    # 4. A display item in the article must not rest on an analysis that left
+    #    it. Figure 2's panel D plots a descriptive Cox model; deferring the
+    #    paragraph that reported that model put the panel in the article and
+    #    its explanation in the supplement, which is not a thing a reader can
+    #    follow. Detected by vocabulary rather than by semantics: if a named
+    #    method appears in an article legend and nowhere in the article's own
+    #    Results or Methods, the text that carried it has gone.
+    METHODS_VOCAB = ("Cox", "Tobit", "Turnbull", "Kaplan", "Brant",
+                     "proportional odds", "proportional-odds", "mediation",
+                     "cluster bootstrap", "permutation", "Benjamini")
+    LEGEND = re.compile(r"^\*\*(?:Fig\.|Figure|Table) \d+\..*?(?=\n\n|\Z)",
+                        re.M | re.S)
+    legends = "\n".join(m.group(0) for m in LEGEND.finditer(main))
+    # Cut each legend out where it sits. Joining them into one string and
+    # calling replace() removes nothing, because the joined string appears
+    # nowhere in the document -- which is how the first version of this check
+    # passed silently on the case it was written for.
+    body_only = LEGEND.sub("", main)
+    for term in METHODS_VOCAB:
+        if re.search(rf"\b{re.escape(term)}", legends, re.I) and \
+                not re.search(rf"\b{re.escape(term)}", body_only, re.I):
+            problems.append(
+                f"an article legend names '{term}' but no text in the article "
+                f"does; the paragraph that explained it has moved to the "
+                f"supplement, leaving the display item unsupported")
+    # 5. Figures: the main text must not cite a figure it does not carry.
     for m in FIG_REF.finditer(main):
         lab = m.group(1)
         if lab.startswith("S"):

@@ -775,7 +775,7 @@ cluster-robust covariance is singular by construction; fitting it anyway does no
 fail loudly but returns a smaller p than the one it was meant to correct. A
 coefficient that moves on adjustment is a statement about how far starting
 density and laboratory identity overlap in this design, not evidence that one
-explains the other. <!--supp-->
+explains the other.
 
 Where an interval is quoted from that fit it is a cluster bootstrap and not the
 model's own. For the starting-density coefficient the laboratory-clustered
@@ -818,7 +818,7 @@ probability is 1.00 in untreated series, 0.37 to 0.92 at one times MIC and 0.07
 to 0.18 at ten times — which says the event is at least partly a property of the
 plate rather than of the drug. Of the 360 series, only 56, or 15.6 per cent, show
 the shape a survival model assumes: one crossing that holds (Table 10). Two hundred and
-twenty never cross at all, 65 cross and return, and 19 oscillate more than once. <!--supp-->
+twenty never cross at all, 65 cross and return, and 19 oscillate more than once.
 
 The second is that the crossing time is never observed. It lies between the last
 visit above the floor and the first visit below it, and the naive treatment
@@ -831,7 +831,7 @@ shortening. The non-parametric interval-censored curve sits below the naive
 Kaplan–Meier at every visit at which crossings are still being recorded — by
 0.081 at day 3 and 0.031 at day 7 — and the two coincide only from day 14, where
 both are flat. A duration read off the naive curve is therefore too long, and by
-about a day at the depths that matter. <!--supp-->
+about a day at the depths that matter.
 
 What the adjustment establishes is descriptive and is worth stating as such: a
 continuous measure of where the cultures began accounts for the laboratory term
