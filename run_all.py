@@ -126,6 +126,8 @@ STAGES = [
      "src.audit_manuscript"),
     ("read    one file to review the whole submission in, and its PDF",
      "src.build_review_copy"),
+    ("blind   the same paper with the organism masked, for a topic-blind read",
+     "src.build_blinded_copy"),
 ]
 
 

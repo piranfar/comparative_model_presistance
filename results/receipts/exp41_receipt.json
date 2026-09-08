@@ -1,6 +1,6 @@
 {
   "script": "src/experiments/exp41_mediation_without_floor.py",
-  "utc": "2026-09-08T17:03:25+00:00",
+  "utc": "2026-09-08T17:34:18+00:00",
   "objection": "peer review: the mediator is the denominator of the outcome, so the mediation is a tautology",
   "floor_mpn_per_ml": 23.0,
   "n_total": 203,

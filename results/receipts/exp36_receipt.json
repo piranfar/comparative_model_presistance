@@ -1,6 +1,6 @@
 {
   "script": "src/experiments/exp36_visit_floors_and_covariates.py",
-  "utc": "2026-09-08T17:03:15+00:00",
+  "utc": "2026-09-08T17:34:07+00:00",
   "data_source": "eLife 93243 supplementary file 2",
   "starting_density_censoring": {
     "n_on_the_day0_minimum": {

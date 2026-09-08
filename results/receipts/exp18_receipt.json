@@ -1,6 +1,6 @@
 {
   "script": "src/experiments/exp18_slow_grower_transferability.py",
-  "utc": "2026-09-08T16:58:49+00:00",
+  "utc": "2026-09-08T17:29:19+00:00",
   "psi_axis": "natural log per hour, confirmed from survival() and net_rates()",
   "psi_max_as_run": 0.9903225806451612,
   "psi_max_naive_B_minus_D": 0.7,
