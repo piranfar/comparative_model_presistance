@@ -489,6 +489,21 @@ def main() -> int:
         rows.append(check("resistant isolates start lower (4: 10.0-fold)",
                           10.0, float(gap["fold_lower_in_resistant"]), 0.05, "x"))
 
+    # --- exp42, the corpus sweep quoted in Section 8 --------------------
+    # These three numbers went into the manuscript from a script rather than
+    # from a table, which is how a figure drifts. Pinned so they cannot.
+    r = receipt("exp42_receipt.json")
+    if r is not None:
+        rows.append(check("corpus deposits ingested (8: 29)",
+                          29, float(r["corpus_deposits"]), 0.001))
+        rows.append(check("of those, boundaries computable (8: 13)",
+                          13, float(len(r["on_firm_tiers"])
+                                    + len(r["above_a_placeholder"])), 0.001))
+        rows.append(check("series tested against their own floor (8: 1822)",
+                          1822, float(r["n_series"]), 0.001))
+        rows.append(check("series violating their own floor (8: 0)",
+                          0, float(r["n_series_violating_headroom"]), 0.001))
+
     f = load("exp22_label_associations.csv")
     if f is not None:
         rows.append(check("label tests in the family (4: 8)",

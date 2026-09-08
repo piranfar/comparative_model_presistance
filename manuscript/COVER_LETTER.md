@@ -77,7 +77,7 @@ deposited with the analysis code.
 **Reproducibility.** Every number in the manuscript is regenerated from the public
 deposits and the deposited experiment by committed code, which writes a
 machine-readable receipt of what it computed. Two audit stages then check the text
-against those results: one recomputes 145 pinned quantities from the tables they
+against those results: one recomputes 149 pinned quantities from the tables they
 came from; the other reads the table legends, the figure legends, Box 1 and the
 Abstract, which the first does not parse. The manuscript states plainly what those
 audits do not cover.

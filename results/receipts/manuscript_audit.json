@@ -1,6 +1,6 @@
 {
   "script": "src/audit_manuscript.py",
-  "utc": "2026-09-08T03:29:29+00:00",
+  "utc": "2026-09-08T03:32:57+00:00",
   "checkers": [
     "check_arithmetic",
     "check_census",
@@ -11,7 +11,7 @@
     "check_identity",
     "check_terms"
   ],
-  "n_words_audited": 31525,
+  "n_words_audited": 31672,
   "counts": {
     "high": 0,
     "medium": 1,
@@ -31,9 +31,9 @@
       "severity": "low",
       "kind": "audit-count-summary",
       "where": "whole repository",
-      "detail": "src/audit_claims.py runs 145 checks (run); 3 place(s) state that number: Methods (PAPER_COMPLETE.md) line 1917 = 145; manuscript/RATE_VS_DURATION.md line 1664 = 145; README.md line 44 = 145",
-      "expected": "145",
-      "found": "145, 145, 145",
+      "detail": "src/audit_claims.py runs 149 checks (run); 3 place(s) state that number: Methods (PAPER_COMPLETE.md) line 1929 = 149; manuscript/RATE_VS_DURATION.md line 1676 = 149; README.md line 44 = 149",
+      "expected": "149",
+      "found": "149, 149, 149",
       "checker": "check_census"
     },
     {
@@ -66,7 +66,7 @@
     {
       "severity": "low",
       "kind": "quantity-in-words-and-figures",
-      "where": "discussion, How large the effect is (line 1340) and results, 7. The population that fell faster often crossed the floor l (line 966)",
+      "where": "discussion, How large the effect is (line 1352) and results, 7. The population that fell faster often crossed the floor l (line 966)",
       "detail": "\"a third\" states in words what 36.6 per cent states in figures; the two sentences share assay, crossed, faster, fell, flask. Check they are the same quantity -- this rule matches on wording, not on arithmetic, because 36.6 is not a rounding of 33.3333",
       "expected": "the figure, or the word, in both places",
       "found": "\"a third\" against 36.6 per cent",
@@ -76,9 +76,9 @@
       "severity": "low",
       "kind": "scope-summary",
       "where": "whole manuscript",
-      "detail": "49 claims are stated in the Results and repeated in a legend or in the self-audit table; 49 carry every qualifier family the Results attach to them",
+      "detail": "50 claims are stated in the Results and repeated in a legend or in the self-audit table; 50 carry every qualifier family the Results attach to them",
       "expected": "every repeated claim as narrowly scoped as its original",
-      "found": "49 of 49",
+      "found": "50 of 50",
       "checker": "check_census"
     },
     {

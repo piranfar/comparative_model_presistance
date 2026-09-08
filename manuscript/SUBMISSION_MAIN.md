@@ -657,10 +657,22 @@ outright, since three laboratories produce none at all.
 
 ### 6. The same boundaries hold in an experiment the framework never saw
 
-Every section so far tests the framework on the deposits it was built from. A
-search of five general repositories, the tuberculosis consortia, the persistence
-literature, food microbiology and the hollow-fibre field returned one deposit
-carrying all three fields the boundaries require, and it was analysed cold.
+Every section so far tests the framework on the deposits it was built from, and
+all of them are *Mycobacterium tuberculosis*. A search of five general
+repositories, the tuberculosis consortia, the persistence literature, food
+microbiology and the hollow-fibre field returned one deposit that carried all
+three fields the boundaries require and could be analysed cold.
+
+That was true of the search described. It is no longer true of the analysis
+repository, which now holds 29 ingested deposits, of which 13 permit the
+boundaries to be computed once the floor is established on the same tiers this
+paper uses for its own — stated by the depositor, derived from a recorded plated
+volume, or inferred from a pile-up on a plate-plausible value. Across those the
+condition the boundaries imply, that no series may present as a measurement a
+reduction deeper than its own floor allows, holds in 1 822 of 1 822 series in
+five species. Those deposits are described in the data release rather than here,
+because none was held out: the point of this section is a deposit opened after
+every boundary and threshold was fixed, and only one qualifies on that ground.
 
 Dubey and colleagues (2026) report amoxicillin-clavulanate against *Escherichia
 coli* in a hollow-fibre system (16, 17). Their Methods state 100 µL plated with counts per
