@@ -715,5 +715,16 @@
     "publisher": "",
     "repository": "",
     "identifier": "https://doi.org/10.1038/s41579-019-0196-3"
+  },
+  "R57": {
+    "kind": "dataset",
+    "authors": "Evangelopoulos D, Prosser G, Rodgers A, Dagg B, Khatri B, Bhagwat A, Gonzalo X, Kolyva A, Bertozzi G, Silva-Pereira TT, Gibbons N, Bhatt A, Sabharwal N, Perdigao J, Portugal I, Rodrigues C, Duarte R, Gomes M, Cirillo DM, McHugh TD",
+    "year": "2022",
+    "title": "Data from: Comparative evaluation of viable count, molecular bacterial load and most probable number for the enumeration of Mycobacterium tuberculosis in murine tissue",
+    "journal": "",
+    "publisher": "",
+    "repository": "University College London Research Data Repository",
+    "identifier": "https://doi.org/10.5522/04/19175153.v2",
+    "retrieved": "2026-09-07"
   }
 }

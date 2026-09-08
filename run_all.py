@@ -92,6 +92,9 @@ STAGES = [
     ("exp41  is the mediation a tautology? refit without the censored isolates",
      "src.experiments.exp41_mediation_without_floor"),
 
+    ("exp43  what a second method finds in lungs the plate calls sterile",
+     "src.experiments.exp43_below_the_floor_is_not_zero"),
+
     ("fig 1  the assay floor bounds the endpoint and decides the phenotype",
      "src.figures.fig1_dynamic_range"),
     ("fig 2  one protocol, six laboratories: the inoculum still decides",

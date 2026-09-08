@@ -41,7 +41,7 @@ python run_all.py
 
 Thirty-four stages, about five minutes. Each writes a table and a receipt
 recording the software versions it actually ran under, then two audit stages
-close the run: the first recomputes 149 pinned quantities from the tables they
+close the run: the first recomputes 152 pinned quantities from the tables they
 came from, and the second reads the table legends, the figure legends, Box 1
 and the Abstract that the first never sees. Both report anything that
 disagrees.

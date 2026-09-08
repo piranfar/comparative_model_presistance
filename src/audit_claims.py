@@ -504,6 +504,21 @@ def main() -> int:
         rows.append(check("series violating their own floor (8: 0)",
                           0, float(r["n_series_violating_headroom"]), 0.001))
 
+    # --- exp43, what a second method finds where the plate finds nothing ---
+    # The Discussion's strongest empirical claim, so every figure in it is
+    # recomputed from the deposit rather than transcribed.
+    r = receipt("exp43_receipt.json")
+    if r is not None:
+        rows.append(check("lungs sterile by plate with an MPN run (D: 18)",
+                          18, float(r["n_animals_sterile_by_plate_with_mpn"]),
+                          0.001))
+        rows.append(check("lowest MPN in a plate-sterile lung (D: 1450)",
+                          1450, float(r["lowest_mpn_in_a_plate_sterile_lung"]),
+                          0.001))
+        rows.append(check("highest MPN in a plate-sterile lung (D: 18700)",
+                          18700, float(r["highest_mpn_in_a_plate_sterile_lung"]),
+                          0.001))
+
     f = load("exp22_label_associations.csv")
     if f is not None:
         rows.append(check("label tests in the family (4: 8)",

@@ -1,0 +1,16 @@
+{
+  "script": "src/experiments/exp43_below_the_floor_is_not_zero.py",
+  "utc": "2026-09-08T05:32:49+00:00",
+  "deposit": "EVANGELOPOULOS2022, figshare 10.5522/04/19175153.v2, CC BY 4.0",
+  "source_file": "34079879.xlsx",
+  "n_arms": 13,
+  "arms_sterile_by_plate_with_mpn": [
+    "RZL60(8wk PT)",
+    "RZL60",
+    "RZL60/MXF300/PZA450"
+  ],
+  "n_animals_sterile_by_plate_with_mpn": 18,
+  "lowest_mpn_in_a_plate_sterile_lung": 1450.0066700500922,
+  "highest_mpn_in_a_plate_sterile_lung": 18699.930825331186,
+  "note": "This deposit carries no time series and no pre-treatment count, so no headroom is computable from it and it does not enter the boundary sweep. It is used for one observation."
+}
