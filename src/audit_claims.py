@@ -458,6 +458,22 @@ def main() -> int:
         rows.append(check("with ample headroom, at the ceiling (1: 88.0%)",
                           0.880, float(g.loc["has 4 logs of headroom", "fraction_at_ceiling"]),
                           0.01))
+        # The Discussion answers the objection that this runs backwards by
+        # quoting the two counts and the test, not the percentage, because a
+        # reader checking a direction wants the numerator and the denominator.
+        rows.append(check("with ample headroom, isolates at the ceiling (D: 162)",
+                          162, float(g.loc["has 4 logs of headroom", "n_at_mdk_ceiling"]),
+                          0.001))
+        rows.append(check("with ample headroom, isolates in total (D: 184)",
+                          184, float(g.loc["has 4 logs of headroom", "n_isolates"]),
+                          0.001))
+        # Tolerance is relative here, and 0.029957 rounds to 0.030 at the two
+        # significant figures the text quotes; 0.001 relative would fail a
+        # correctly rounded number, which is a checker fault rather than a
+        # manuscript one.
+        rows.append(check("short against ample, Fisher exact (D: p = 0.030)",
+                          0.030, float(g.loc["cannot reach 4 logs", "fisher_p"]),
+                          0.01))
 
     r = receipt("exp22_receipt.json")
     if r is not None:
