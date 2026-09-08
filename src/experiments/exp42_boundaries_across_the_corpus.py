@@ -64,6 +64,14 @@ import pandas as pd
 
 ROOT = Path(__file__).resolve().parents[2]
 LONG = ROOT / "data" / "processed" / "corpus_long.csv"
+# Floors that are stated in the SOURCE PAPER rather than in the deposited file:
+# a Methods sentence, a figure legend, a table footnote, a protocol PDF beside
+# the data. A floor is a floor wherever it is written down, and refusing one
+# because it sits in the article rather than the spreadsheet would leave a
+# deposit uncounted whose authors did exactly what this paper asks for.
+# Every row carries its quote and its location, so the number can be checked
+# against the sentence it came from.
+STATED = ROOT / "data" / "stated_floors.csv"
 TABLES = ROOT / "results" / "tables"
 RECEIPTS = ROOT / "results" / "receipts"
 
@@ -82,7 +90,7 @@ PILE_COUNT = 3
 TOL = 1e-6
 
 
-def establish_floor(s: pd.DataFrame) -> dict:
+def establish_floor(s: pd.DataFrame, stated: dict) -> dict:
     """Decide this deposit's floor, and say on what evidence."""
     v = s.cfu_per_ml.dropna()
     v = v[v > 0]
@@ -90,12 +98,26 @@ def establish_floor(s: pd.DataFrame) -> dict:
         return {"tier": "NONE", "floor": np.nan,
                 "basis": f"only {len(v)} positive readings"}
 
+    sid = s.study_id.iloc[0]
+    # A floor read out of the source paper outranks anything inferred from the
+    # value distribution, and outranks a placeholder-derived guess entirely.
+    # It does NOT outrank a per-reading floor already in the file, which is
+    # more specific than a deposit-wide constant.
+    if sid in stated and not s.floor_cfu_per_ml.notna().any():
+        r = stated[sid]
+        return {"tier": f"PAPER_{r['how_established']}",
+                "floor": float(r["floor_cfu_per_ml"]),
+                "basis": f"{r['where_found']} -- {str(r['quote'])[:90]}"}
+
     if s.floor_cfu_per_ml.notna().any():
         basis = str(s.floor_basis.dropna().iloc[0]) if s.floor_basis.notna().any() else ""
-        stated = bool(pd.Series([basis]).str.contains(
+        # Not named `stated`: that is the parameter holding the paper-read
+        # floors, and shadowing it here would leave a bool where a dict is
+        # expected the next time anyone adds a branch below this one.
+        depositor_gave_a_value = bool(pd.Series([basis]).str.contains(
             r"stated in the sheet|LOD column|limit of detection",
             case=False, regex=True, na=False).iloc[0])
-        return {"tier": "STATED" if stated else "DERIVED",
+        return {"tier": "STATED" if depositor_gave_a_value else "DERIVED",
                 "floor": float(s.floor_cfu_per_ml.dropna().min()),
                 "basis": basis[:120] or "floor column present"}
 
@@ -169,7 +191,8 @@ def series_table(d: pd.DataFrame, floors: dict) -> pd.DataFrame:
     return pd.DataFrame(rows)
 
 
-ORDER = ["STATED", "DERIVED", "INFERRED", "ABOVE_A_PLACEHOLDER"]
+ORDER = ["STATED", "DERIVED", "PAPER_STATED", "PAPER_DERIVED",
+         "INFERRED", "ABOVE_A_PLACEHOLDER"]
 
 
 def main() -> int:
@@ -179,7 +202,14 @@ def main() -> int:
     RECEIPTS.mkdir(parents=True, exist_ok=True)
     d = pd.read_csv(LONG, low_memory=False)
 
-    floors = {sid: establish_floor(s) for sid, s in d.groupby("study_id")}
+    stated = {}
+    if STATED.exists():
+        sf = pd.read_csv(STATED)
+        stated = {r.study_id: r._asdict() for r in sf.itertuples()}
+        print(f"{len(stated)} floors read out of source papers "
+              f"({STATED.relative_to(ROOT)})\n")
+    floors = {sid: establish_floor(s, stated)
+              for sid, s in d.groupby("study_id")}
     ser = series_table(d, floors)
     if ser.empty:
         print("no deposit in the corpus supports the boundaries")
@@ -241,7 +271,8 @@ def main() -> int:
                   f"  (+{r.excess_log10:.2f})")
 
     others = t[t.study_id != "PIRANFAR2026"]
-    firm = others[others.floor_tier.isin(["STATED", "DERIVED", "INFERRED"])]
+    firm = others[others.floor_tier.isin(
+        ["STATED", "DERIVED", "PAPER_STATED", "PAPER_DERIVED", "INFERRED"])]
     firm_pre = firm[firm.baseline_is_pre_treatment]
     weak = others[others.floor_tier == "ABOVE_A_PLACEHOLDER"]
     print(f"\n-- what Section 8 may claim --")
