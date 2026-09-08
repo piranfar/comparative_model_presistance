@@ -63,11 +63,15 @@ quantification against its floor; a susceptibility-testing methodology critique.
 | Title | No stated limit. | Retitled: names the finding and the design, expands "MDK", and drops the universal "every MDK" that the Discussion spent a paragraph walking back. 168 characters. |
 | Abstract | 250 words, 1–7 keywords. | Exactly 250 words. Seven keywords, retargeted to the journal's own vocabulary. |
 | Main text length | No limit, succinctness encouraged. | 12,000 words with 3 tables and 4 figures. Legal, and shorter than it was. |
-| Supplementary file | Encouraged; **can only be added or replaced at revision**, so it must be complete at first submission. | One file: three supplementary analyses, the full Materials and Methods, and 22 supplementary tables. Built by `src/build_submission.py` from the same prose as the article, so the two cannot drift. |
+| Supplementary file | Encouraged; **can only be added or replaced at revision**, so it must be complete at first submission. | One file: three supplementary analyses, the full Materials and Methods, one supplementary figure and 22 supplementary tables. Built by `src/build_submission.py` from the same prose as the article, so the two cannot drift. |
 | Every supplementary item cited | Files "must be cited in the text". | Enforced by the builder, which fails the build if an item is uncited. |
 | Reference style | Numbered, citation order. | Generated per file from its own citation order: 27 in the article, 38 in the supplement. |
 | Data availability | Required. | Paragraph at the end of Materials and Methods. |
 | Publication route | Subscription, not open access — this is what makes it free. | Requested explicitly in the cover letter. **Confirm it again on the submission form; the OA question is asked there and a wrong click costs USD 3,230.** |
+| Affiliation | Department, institution, city, country. | **Independent Researcher, New York, NY, USA.** In the manuscript front matter and in the cover letter signature. |
+| Generative AI disclosure | Required where generative AI assisted the writing. | Written, and it says what happened: Claude (Opus 5) edited and revised the text and wrote the analysis and plotting code; no figure or image was AI-generated; no AI tool is an author; the author verified every quantity against the deposits and the pipeline and takes responsibility. In Materials and Methods, repeated in the cover letter. |
+| Ethics determination | Required, or a statement that none was needed. | Stated: an independent researcher has no institutional review board with jurisdiction, none was approached, and none is required for secondary analysis of de-identified data already public under open licences. The prospective experiment used a reference strain and no human or animal material. |
+| Figure 2, panels B and D | Editorial call. | **Moved to Figure S1.** The Kaplan–Meier panel and the Cox p-value panel each disclaimed itself in its own legend, and a panel that has to do that does not belong in a main figure. Figure 2 is now two panels; `src/figures/figS1_survival_and_cox.py` imports the loader from `fig2_rate_vs_duration`, so the two cannot disagree about which laboratory is which colour. Checking the moved panel against its own table turned up an error the legend had carried through two review rounds — it said "five of the six terms move toward p = 1" where the model has five laboratory terms and four of them move. Corrected, and now pinned in `audit_claims`. |
 
 ---
 
@@ -75,10 +79,5 @@ quantification against its floor; a susceptibility-testing methodology critique.
 
 | Item | What is needed |
 |---|---|
-| **Affiliation** | Department, institution, city, country. The manuscript carries a placeholder. |
-| **Generative AI disclosure** | Elsevier requires a statement where generative AI assisted the *writing*; it does not require one where AI only ran or checked code. `AI_DISCLOSURE.md` lays out three options honestly, including the fact that use here exceeds "improving the language of human-generated text". This is the author's call and it must be made before submitting. |
-| **Ethics determination** | The prospective experiment used a reference strain and no human or animal material. Confirm the institution's position and state it. |
-| **Preferred reviewers** | Elsevier asks for suggestions at submission. None are named yet. |
 | **Print colour** | The guide prices no print colour and offers free online colour. If the proof stage offers print colour, decline it. |
-| **Figure 2, panels B and D** | Both are survival-analysis panels, both disclaimed in their own legend as descriptive rather than valid. Moving them to a supplementary figure would shorten the article and remove two panels that invite the objection the last review raised. Editorial call. |
 | **Repository URL** | The code deposit is cited as a reference; its public URL is not yet fixed. |

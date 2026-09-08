@@ -1,6 +1,6 @@
 {
   "script": "src/experiments/exp28_standard_vs_realised.py",
-  "utc": "2026-09-08T06:07:26+00:00",
+  "utc": "2026-09-08T14:11:45+00:00",
   "definitions": {
     "H_i": "N0_i / L_i",
     "h_i": "log10(N0_i / L_i), deepest measurable reduction",

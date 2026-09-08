@@ -876,6 +876,11 @@ _ABBR_STANDARD = {
     "CC": "Creative Commons licence tag",
     "BY": "Creative Commons licence tag",
     "NA": "not applicable, a table filler",
+    # the affiliation line. A postal abbreviation is not a term of art, and
+    # "New York, New York, United States of America" is not what a journal
+    # prints. These are exempt wherever they appear, which is only there.
+    "NY": "the state, in the affiliation line, where every journal abbreviates it",
+    "USA": "the country, in the affiliation line, where every journal abbreviates it",
 }
 # "OR" is an English word in lower case and an odds ratio in upper case.  The
 # lower-case test below would exempt it, and it should not: the manuscript uses

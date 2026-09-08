@@ -435,6 +435,30 @@ def main() -> int:
                 rows.append(check(f"{term} adjusted HAZARD RATIO (not the p)",
                                   claimed_hr, float(adj.loc[term, "hazard_ratio"]), 0.02))
 
+    # --- exp17, the Cox panel now in Figure S1 ----------------------------
+    # The legend it carried into the supplement said "five of the six terms move
+    # toward p = 1". Institute A is the reference, so the model has FIVE
+    # laboratory terms, and four of them move; the sixth term does not exist.
+    # The error survived two review rounds in the Figure 2 legend because
+    # nothing counted the rows. This does.
+    f = load("exp17_cox.csv")
+    if f is not None:
+        adj = f[f.model == "institute + starting density"].set_index("term")
+        alone = f[f.model == "institute only"].set_index("term")
+        labs = [t for t in alone.index if str(t).startswith("institute_")]
+        rows.append(check("laboratory terms in the Cox model (S1: 5, A is the reference)",
+                          5, float(len(labs)), 0.001))
+        toward_one = sum(1 for t in labs
+                         if float(adj.loc[t, "p_value"]) > float(alone.loc[t, "p_value"]))
+        rows.append(check("laboratory terms moving toward p = 1 on adjustment (S1: 4)",
+                          4, float(toward_one), 0.001))
+        for term, before, after in (("institute_B", 0.093, 0.264),
+                                    ("institute_C", 0.014, 0.00041)):
+            rows.append(check(f"{term} p, laboratory alone (S1)",
+                              before, float(alone.loc[term, "p_value"]), 0.02))
+            rows.append(check(f"{term} p, adjusted (S1)",
+                              after, float(adj.loc[term, "p_value"]), 0.05))
+
     # --- exp17, growth at one times MIC ----------------------------------
     # The claim is net GROWTH in five of six laboratories, which is stronger
     # than "little or no killing" and is what the numbers say.

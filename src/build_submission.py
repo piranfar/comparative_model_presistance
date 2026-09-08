@@ -292,6 +292,25 @@ def split_tables(tables_md: str) -> tuple[dict[str, str], list[str]]:
     return blocks, order
 
 
+def split_figure_legends(preamble: str) -> tuple[str, list[str]]:
+    """Separate the article's figure legends from the supplemental ones.
+
+    All legends live in one place in the prose file, because a legend written
+    beside its siblings is a legend written in the same voice as them. The split
+    is mechanical: a legend whose label starts with S belongs to the supplemental
+    file, and one that does not belongs to the article. Nothing else decides it,
+    so moving a figure to the supplement is a one-character edit to its label
+    rather than a cut-and-paste between two documents that then drift.
+    """
+    main, supp = [], []
+    for part in re.split(r"(?=^\*\*Figure S?\d+\.)", preamble.strip(), flags=re.M):
+        if not part.strip():
+            continue
+        m = re.match(r"\*\*Figure (S?\d+)\.", part.strip())
+        (supp if m and m.group(1).startswith("S") else main).append(part.strip())
+    return "\n\n".join(main), supp
+
+
 def renumber_tables(main_text: str, supp_text: str,
                     blocks: dict[str, str]) -> tuple[dict[str, str], list[str]]:
     """Number the kept tables, then everything else, in citation order.
@@ -445,9 +464,14 @@ def main() -> int:
     # heading, and the numbered list is generated below from this file's own
     # citation order. Emitting the placeholder too would put an empty References
     # section above the real one.
+    supp_fig_legends: list[str] = []
     for parent in ("Acknowledgments", "Figure legends"):
-        if parent in preambles:
-            main_parts += [f"## {parent}", "", preambles[parent].strip(), ""]
+        if parent not in preambles:
+            continue
+        text = preambles[parent].strip()
+        if parent == "Figure legends":
+            text, supp_fig_legends = split_figure_legends(text)
+        main_parts += [f"## {parent}", "", text, ""]
 
     # Read the title rather than repeating it. It was hard-coded in six files,
     # and retargeting the manuscript to a different journal changed it in one.
@@ -471,6 +495,9 @@ def main() -> int:
                            "paragraph answers a question a reader of that "
                            "section may reasonably ask.*", ""]
             supp_parts += ["\n\n".join(s.deferred), ""]
+    if supp_fig_legends:
+        supp_parts += ["## Supplementary figures", ""]
+        supp_parts += ["\n\n".join(supp_fig_legends), ""]
     supp_parts += ["## Supplementary methods", ""]
     for s in gather(SUPP, "Materials and Methods"):
         supp_parts += [f"### {s.title}", "", s.body.strip(), ""]
@@ -526,7 +553,8 @@ def main() -> int:
     n_figs = len({s for s in FIG_REF.findall(main_text) if not s.startswith("S")})
     main_text = COUNTS.sub(
         f"**Figures:** {n_figs} | **Tables:** {len(main_tabs)} | "
-        f"**Boxes:** 1 | **Supplemental tables:** {len(supp_tabs)}",
+        f"**Boxes:** 1 | **Supplemental figures:** {len(supp_fig_legends)} | "
+        f"**Supplemental tables:** {len(supp_tabs)}",
         main_text, count=1)
     if ABSTRACT.exists():
         abs_md = ABSTRACT.read_text(encoding="utf-8").strip()

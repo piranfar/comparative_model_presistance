@@ -1,6 +1,6 @@
 {
   "script": "src/audit_manuscript.py",
-  "utc": "2026-09-08T06:24:30+00:00",
+  "utc": "2026-09-08T14:16:39+00:00",
   "checkers": [
     "check_arithmetic",
     "check_census",
@@ -11,7 +11,7 @@
     "check_identity",
     "check_terms"
   ],
-  "n_words_audited": 32534,
+  "n_words_audited": 32747,
   "counts": {
     "high": 0,
     "medium": 1,
@@ -21,7 +21,7 @@
     {
       "severity": "medium",
       "kind": "limit-outside-its-declared-sense",
-      "where": "line 117 (Introduction)",
+      "where": "line 118 (Introduction)",
       "detail": "\"limit\" appears here in none of the senses the Methods reserve it for. Check that it is not standing in for the assay floor *L*.",
       "expected": "the assay floor *L*",
       "found": "m requires below- and above-quantification-limit flags together with the limit of quantification, and notes that pharmacometric mo",
@@ -31,24 +31,24 @@
       "severity": "low",
       "kind": "audit-count-summary",
       "where": "whole repository",
-      "detail": "src/audit_claims.py runs 152 checks (run); 3 place(s) state that number: Methods (PAPER_COMPLETE.md) line 1982 = 152; manuscript/RATE_VS_DURATION.md line 1729 = 152; README.md line 44 = 152",
-      "expected": "152",
-      "found": "152, 152, 152",
+      "detail": "src/audit_claims.py runs 158 checks (run); 3 place(s) state that number: Methods (PAPER_COMPLETE.md) line 1983 = 158; manuscript/RATE_VS_DURATION.md line 1729 = 158; README.md line 44 = 158",
+      "expected": "158",
+      "found": "158, 158, 158",
       "checker": "check_census"
     },
     {
       "severity": "low",
       "kind": "census-summary",
       "where": "whole manuscript",
-      "detail": "2 censuses of the form 'N of the M <things>' were checked against the parts the text names and partition cleanly; 2 are answerable to a table whose rows equal M and are the only ones the arithmetic runs on; 24 have no such table and are counted here rather than checked",
+      "detail": "2 censuses of the form 'N of the M <things>' were checked against the parts the text names and partition cleanly; 2 are answerable to a table whose rows equal M and are the only ones the arithmetic runs on; 23 have no such table and are counted here rather than checked",
       "expected": "every checkable census partitioned",
-      "found": "2 resolved, 2 gated on a table, 24 not checkable",
+      "found": "2 resolved, 2 gated on a table, 23 not checkable",
       "checker": "check_census"
     },
     {
       "severity": "low",
       "kind": "named-items-not-resolved",
-      "where": "other (line 170): \"Two further deposits establish that the same arithmetic governs killing experiments where inoculum is controll\"",
+      "where": "other (line 171): \"Two further deposits establish that the same arithmetic governs killing experiments where inoculum is controll\"",
       "detail": "resolved: the sentence says 2 and then names a list. Not resolved: 2 of its 4 items do not open with a determiner or a count (13); 15)), so the list runs into qualifying clauses and cannot be counted mechanically. Count it by eye",
       "expected": "2 items named",
       "found": "a list of 4 fragments",
@@ -57,7 +57,7 @@
     {
       "severity": "low",
       "kind": "named-items-not-resolved",
-      "where": "results, 4. The classification tracks growth; the resistance associat (line 652): \"Five of them are recorded almost exclusively for resistant isolates, so their missingness is the exposure: the\"",
+      "where": "results, 4. The classification tracks growth; the resistance associat (line 653): \"Five of them are recorded almost exclusively for resistant isolates, so their missingness is the exposure: the\"",
       "detail": "resolved: the sentence says 5 and then names a list. Not resolved: 2 of its 6 items do not open with a determiner or a count (for none of the 119 susceptible on; none), so the list runs into qualifying clauses and cannot be counted mechanically. Count it by eye",
       "expected": "5 items named",
       "found": "a list of 6 fragments",
@@ -66,7 +66,7 @@
     {
       "severity": "low",
       "kind": "quantity-in-words-and-figures",
-      "where": "discussion, How large the effect is (line 1383) and results, 7. The population that fell faster often crossed the floor l (line 966)",
+      "where": "discussion, How large the effect is (line 1384) and results, 7. The population that fell faster often crossed the floor l (line 967)",
       "detail": "\"a third\" states in words what 36.6 per cent states in figures; the two sentences share assay, crossed, faster, fell, flask. Check they are the same quantity -- this rule matches on wording, not on arithmetic, because 36.6 is not a rounding of 33.3333",
       "expected": "the figure, or the word, in both places",
       "found": "\"a third\" against 36.6 per cent",
@@ -85,9 +85,9 @@
       "severity": "low",
       "kind": "coverage-summary",
       "where": "whole manuscript",
-      "detail": "abstract (1): 18 numeric claims, 18 traceable, 18 of those to a results table or receipt, 5 tokens skipped as conventions; box (1): 9 numeric claims, 9 traceable, 9 of those to a results table or receipt, 5 tokens skipped as conventions; figure legend (4): 44 numeric claims, 44 traceable, 44 of those to a results table or receipt, 9 tokens skipped as conventions; table legend (25): 108 numeric claims, 108 traceable, 108 of those to a results table or receipt, 28 tokens skipped as conventions",
+      "detail": "abstract (1): 18 numeric claims, 18 traceable, 18 of those to a results table or receipt, 5 tokens skipped as conventions; box (1): 9 numeric claims, 9 traceable, 9 of those to a results table or receipt, 5 tokens skipped as conventions; figure legend (4): 38 numeric claims, 38 traceable, 38 of those to a results table or receipt, 10 tokens skipped as conventions; table legend (25): 108 numeric claims, 108 traceable, 108 of those to a results table or receipt, 28 tokens skipped as conventions",
       "expected": "every region scanned",
-      "found": "179 numeric claims outside table bodies",
+      "found": "173 numeric claims outside table bodies",
       "checker": "check_coverage"
     },
     {

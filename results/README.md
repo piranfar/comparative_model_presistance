@@ -6,7 +6,7 @@ Outputs of the earlier paper are not here; they live in `version_one/results/`.
 
 | | tables | figures | receipts |
 | --- | ---: | ---: | ---: |
-| total | 78 | 5 | 28 |
+| total | 78 | 6 | 28 |
 
 ## Tolerance and the assay floor (manuscript/PAPER_COMPLETE.md)
 
@@ -20,10 +20,10 @@ Outputs of the earlier paper are not here; they live in `version_one/results/`.
 | `exp16_tb_independence.csv` | `exp16_tb_mic_mdk_independence.py` | `audit_claims`, `build_tables`, `fig4_independence` |
 | `exp17_baseline.csv` | `exp17_era4tb_between_lab.py` | `build_tables`, `fig2_rate_vs_duration` |
 | `exp17_censoring.csv` | `exp17_era4tb_between_lab.py` | quoted in the text only |
-| `exp17_cox.csv` | `exp17_era4tb_between_lab.py` | `audit_claims`, `fig2_rate_vs_duration` |
+| `exp17_cox.csv` | `exp17_era4tb_between_lab.py` | `audit_claims`, `fig2_rate_vs_duration`, `figS1_survival_and_cox` |
 | `exp17_endpoint_spread.csv` | `exp17_era4tb_between_lab.py` | quoted in the text only |
 | `exp17_kill_rates.csv` | `exp17_era4tb_between_lab.py` | `audit_claims`, `build_tables`, `fig2_rate_vs_duration` |
-| `exp17_survival.csv` | `exp17_era4tb_between_lab.py` | `build_tables`, `fig2_rate_vs_duration` |
+| `exp17_survival.csv` | `exp17_era4tb_between_lab.py` | `build_tables`, `fig2_rate_vs_duration`, `figS1_survival_and_cox` |
 | `exp18_cycle_balance.csv` | `exp18_slow_grower_transferability.py` | `fig13_parameter_transfer` |
 | `exp18_kappa_sweep.csv` | `exp18_slow_grower_transferability.py` | quoted in the text only |
 | `exp18_parameter_gaps.csv` | `exp18_slow_grower_transferability.py` | `fig13_parameter_transfer` |
@@ -82,7 +82,7 @@ Outputs of the earlier paper are not here; they live in `version_one/results/`.
 
 ## Unassigned
 
-**Figures.** `fig13_parameter_transfer`
+**Figures.** `fig13_parameter_transfer`, `figS1_survival_and_cox`
 
 **Tables (15).**
 

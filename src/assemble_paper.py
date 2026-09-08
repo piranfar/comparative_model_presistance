@@ -38,6 +38,7 @@ FIGURES = {
     2: "fig2_rate_vs_duration",
     3: "fig3_endpoint_collapse",
     4: "fig4_independence",
+    "S1": "figS1_survival_and_cox",
     # fig13_parameter_transfer belongs to the published-rate-constant comparison,
     # which is no longer part of this paper. The figure stays in results/ as a
     # record of the work; it is neither embedded nor listed as supplementary.
@@ -136,14 +137,17 @@ def main() -> int:
 
     # ---- embed each figure just before its caption ------------------------
     def embed(m):
-        n = int(m.group(1))
-        stem = FIGURES.get(n)
+        n = m.group(1)
+        stem = FIGURES.get(int(n) if n.isdigit() else n)
         if not stem or not (FIGDIR / f"{stem}.png").exists():
             return m.group(0)
         rel = f"../results/figures/{stem}.png"
         return f"![Figure {n}]({rel})\n\n{m.group(0)}"
 
-    rest = re.sub(r"\*\*Figure (\d)\. ", lambda m: embed(m), rest)
+    # S-labelled legends are matched too. PAPER_COMPLETE.md is the one file that
+    # holds the whole paper in reading order, so a supplemental figure that is
+    # absent from it is a figure nobody reviews before submission.
+    rest = re.sub(r"\*\*Figure (S?\d+)\. ", lambda m: embed(m), rest)
 
     missing = []
     if not abstract:

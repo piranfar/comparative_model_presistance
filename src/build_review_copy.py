@@ -44,6 +44,13 @@ FIGURES = {
     4: "fig4_independence",
 }
 
+# Supplemental figures, placed in the supplement half of the reading copy by the
+# same routine. Keyed by the label as it appears in the legend, so "S1" builds
+# the pattern "Figure S1." without a second regex.
+SUPP_FIGURES = {
+    "S1": "figS1_survival_and_cox",
+}
+
 CSS = """
 :root { --ink:#1a1a1a; --dim:#666; --rule:#d8d8d8; --mark:#fffbe6; --bg:#fff; }
 * { box-sizing: border-box; }
@@ -110,7 +117,7 @@ def strip_front_matter(text: str) -> str:
     return text
 
 
-def embed_figures(html: str) -> tuple[str, list[int]]:
+def embed_figures(html: str, figures=None) -> tuple[str, list]:
     """Put each figure above its own legend, as a data URI.
 
     Placing it above rather than below is deliberate: a legend read before the
@@ -119,7 +126,7 @@ def embed_figures(html: str) -> tuple[str, list[int]]:
     figure that does not exist.
     """
     missing = []
-    for n, stem in FIGURES.items():
+    for n, stem in (FIGURES if figures is None else figures).items():
         png = FIGDIR / f"{stem}.png"
         if not png.exists():
             missing.append(n)
@@ -184,7 +191,9 @@ def main() -> int:
     body = md_to_html(main_md)
     body, missing = embed_figures(body)
     body = wrap_tables(number_lines(body))
-    supp_html = wrap_tables(number_lines(md_to_html(supp_md)))
+    supp_html, supp_missing = embed_figures(md_to_html(supp_md), SUPP_FIGURES)
+    missing = missing + supp_missing
+    supp_html = wrap_tables(number_lines(supp_html))
 
     warn = ("" if not missing else
             f" <b>Figures {', '.join(str(x) for x in missing)} could not be "
@@ -205,7 +214,8 @@ submitted files and are hidden when printed.<br><br>
 Article {words(main_md):,} words, {len(FIGURES)} figures,
 {main_md.count(chr(10) + '**Table ')} tables &middot;
 supplement {words(supp_md):,} words,
-{supp_md.count(chr(10) + '**Table ')} tables &middot;
+{supp_md.count(chr(10) + '**Table ')} tables,
+{len(SUPP_FIGURES)} figure &middot;
 target: <i>Journal of Microbiological Methods</i> &middot;
 manuscript audit: {audit_line()}.{warn}</div>
 <div class="part">Article</div>
@@ -220,7 +230,8 @@ manuscript audit: {audit_line()}.{warn}</div>
     if missing:
         print(f"   FIGURES NOT PLACED: {missing}")
         return 1
-    print("   all four figures embedded")
+    print(f"   all {len(FIGURES)} article figures and "
+          f"{len(SUPP_FIGURES)} supplemental figure embedded")
     pdf = to_pdf()
     print(f"   {pdf}")
     return 0

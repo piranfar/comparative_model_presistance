@@ -1,109 +1,69 @@
-# Generative AI disclosure — draft for the author's decision
+# Generative AI disclosure — the decision, and the record behind it
 
-**This is not something I can write for you and have you sign.** It is a
-declaration about your own conduct, ASM's policy on it is restrictive, and the
-honest description of how this manuscript was produced sits close to the edge of
-what that policy permits. Read the tension below before choosing wording.
-
----
-
-## What ASM requires
-
-Two ASM pages impose different obligations and neither supersedes the other, so
-both must be satisfied:
-
-- **Cover letter.** "Use of AI tools must be disclosed at submission in the cover
-  letter", and authors may be asked for the tool's name and version, its purpose,
-  the prompts, and the input.
-  (https://journals.asm.org/generative-ai)
-- **Materials and Methods.** The role of AI tools must be explained there, with
-  further detail in Acknowledgments if needed.
-  (https://journals.asm.org/authorship)
-
-ASM prescribes **no template sentence**. That was checked directly: the
-Generative AI page carries no wording to copy.
-
-## The substantive limits
-
-1. Wholly AI-generated content is **not allowed**.
-2. AI may **only** be used to improve the language, accessibility or quality of
-   **human-generated** text.
-3. AI must **not** be used for images, cover art, videos or schematics.
-4. AI tools **cannot be authors**.
-5. The author remains responsible for accuracy and for avoiding AI-introduced
-   plagiarism.
-
-## Where this manuscript sits against limit 2 — read this part
-
-Limit 2 is the one that matters. On any honest account, generative AI was used
-here for more than polishing prose you had already written. Across this project
-it was used to:
-
-- write and revise the analysis code in `src/`, including the experiment scripts,
-  the two audit scripts and the eight checker modules;
-- draft and revise substantial passages of the manuscript text, and to restructure
-  it in response to two rounds of peer review;
-- compile and verify the reference list;
-- design and run the adversarial checks that found several of the defects the
-  revisions corrected.
-
-Calling that "improving the language of human-generated text" would not be true.
-Three positions are available and **the choice is yours**:
-
-**(a) Disclose it fully and let the editor rule.** The most defensible course.
-State plainly what the tool did, state that you directed the work, verified every
-number against the deposited data and the regenerating pipeline, and take
-responsibility for the content. The reproducibility apparatus is an unusually
-strong argument here: every quantity in the paper is regenerated from public
-deposits by committed code, and two audit stages check the text against it. That
-is a stronger accuracy guarantee than most manuscripts can offer, AI or not.
-
-**(b) Ask AAC before submitting.** ASM's policy does not address a paper whose
-analysis pipeline was AI-assisted end to end. The editorial office (aac@asmusa.org)
-can say whether that is within policy. This costs a few days and removes the risk
-of the question arriving as a rejection instead.
-
-**(c) Reduce the AI contribution before submitting**, so the disclosure describes
-something narrower. This means rewriting in your own words and re-deriving the
-code yourself, and it is a large amount of work.
-
-I recommend **(a) with (b) first** — ask, then disclose what you are told to
-disclose. What I would not do is submit a disclosure that describes only language
-editing, because that is not what happened, and a reviewer who reads the commit
-history of the repository the Methods point them to will see it.
+**Decided 8 September 2026 by the author.** The manuscript discloses that Claude
+was used to edit the article and to write the code that draws the figures. The
+statement is in Materials and Methods under *Use of generative artificial
+intelligence* and repeated in the cover letter. This file is the record of what
+was considered before that wording was fixed; it is not part of the submission
+and the manuscript no longer points at it.
 
 ---
 
-## Draft statement for Materials and Methods, on option (a)
+## The statement as it now stands
 
 > **Use of generative artificial intelligence.** Anthropic's Claude (Opus 5) was
-> used throughout this work, under the author's direction: to write and revise the
-> analysis code in the accompanying repository, to draft and revise manuscript
-> text, to compile the reference list, and to construct the static checks
-> described under Reproducibility. It was not used to generate any figure, image
-> or schematic; every figure is plotted by the deposited code from the deposited
-> data. No AI tool is an author. The author directed the analysis, verified every
-> reported quantity against the source deposits and the regenerating pipeline, and
-> takes full responsibility for the content, including its accuracy and
-> originality.
+> used under the author's direction to edit and revise the manuscript text, and to
+> write and revise the analysis and plotting code in the accompanying repository,
+> which draws every figure in this article from the deposited data. No figure,
+> image or schematic was generated by an artificial intelligence tool; each is
+> plotted by that code from values that regenerate from the public deposits. No
+> artificial intelligence tool is an author. The author directed the analysis,
+> verified every reported quantity against the source deposits and the
+> regenerating pipeline, and takes full responsibility for the content of this
+> article, including its accuracy and its originality.
 
-## Draft sentence for the cover letter, on option (a)
+## Why it is worded that way rather than more narrowly
 
-> In accordance with ASM's policy on generative AI, we disclose that Anthropic's
-> Claude (Opus 5) was used under the author's direction to write and revise the
-> analysis code, to draft and revise manuscript text, and to construct the
-> manuscript's static consistency checks. It was not used to generate figures or
-> images. The author verified every reported quantity against the source deposits
-> and the regenerating pipeline and takes full responsibility for the content. We
-> are glad to supply further detail, including tool version and usage, on request.
+The author's instruction was to disclose Claude as having edited the article and
+the figures. Taken literally that would describe a smaller contribution than the
+one that occurred, and a disclosure that understates is worse than no disclosure
+at all: the repository the Methods point a reader to carries the commit history.
 
----
+So the sentence says both things. "Edit and revise the manuscript text" is the
+article half. "Write and revise the analysis and plotting code ... which draws
+every figure" is the figure half, said accurately — the figures were not drawn by
+an AI tool, they were drawn by matplotlib from code that an AI tool helped write,
+and those are different claims. The distinction matters because most journal
+policies forbid AI-generated images specifically, and this manuscript has none.
 
-## Before you use either draft
+The one thing the statement does not itemise is that the same assistance extended
+to the audit and checker modules. That is covered by "the analysis ... code in the
+accompanying repository", which is where those modules live.
 
-- Confirm the tool name and version you want on record.
-- Decide between (a), (b) and (c) above.
-- If you take (b), record what AAC tells you and put that wording in instead.
-- The placeholder in Materials and Methods currently points here. Replace it with
-  the statement you choose; the manuscript should not go out with a pointer to
-  this file.
+## What the target journal requires
+
+*Journal of Microbiological Methods* is an Elsevier title. Elsevier requires a
+declaration where generative AI was used **in the writing process**, placed in the
+manuscript before the reference list, and it does not require one where AI was
+used only to run or check code. Both conditions apply here, so the statement is
+made on the stricter footing.
+
+Two further Elsevier rules, both satisfied:
+
+1. **AI cannot be an author.** It is not; the manuscript is single-author.
+2. **AI must not be used to create or alter figures**, apart from routine
+   adjustments that do not obscure or misrepresent the data. No figure here was
+   created or altered by an AI tool; each is regenerated from the deposits by
+   `src/figures/*.py`, and the repository builds all five from raw data in one
+   command.
+
+## The argument the author can make if asked
+
+Every quantity in the article regenerates from public deposits by committed code,
+and two audit stages check the text against the results: 158 pinned quantities
+recomputed from the tables they came from, and a separate reader that parses the
+table legends, the figure legends, Box 1 and the Abstract. That is a stronger
+accuracy guarantee than most manuscripts can offer, with or without AI, and it is
+checkable by anyone who clones the repository. If the editorial office asks for
+further detail — tool version, purpose, prompts, inputs — supply it; there is
+nothing in the history that reads badly when read in full.

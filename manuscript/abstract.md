@@ -28,4 +28,5 @@ culture. A tolerance call reported without its starting density and assay
 floor cannot be interpreted.
 
 **Keywords:** time-kill assay; limit of quantification; minimum duration for
-killing; antibiotic tolerance; colony counting; censored data; inoculum effect
+killing; antibiotic tolerance; colony counting; censored data;
+*Mycobacterium tuberculosis*

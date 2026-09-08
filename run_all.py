@@ -99,6 +99,8 @@ STAGES = [
      "src.figures.fig1_dynamic_range"),
     ("fig 2  one protocol, six laboratories: the inoculum still decides",
      "src.figures.fig2_rate_vs_duration"),
+    ("fig S1 the descriptive survival picture behind figure 2, moved to the supplement",
+     "src.figures.figS1_survival_and_cox"),
     ("fig 3  the endpoint decides what is visible",
      "src.figures.fig3_endpoint_collapse"),
     ("fig 4  resistance and tolerance as separate axes",

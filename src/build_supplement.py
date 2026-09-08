@@ -35,6 +35,11 @@ OUT = ROOT / "manuscript" / "SUPPLEMENTAL_MATERIAL.md"
 
 MARKER = "\n## Supplementary tables"
 KEY = re.compile(r"\[\[(R\d+)\]\]")
+# A supplemental figure legend, taken whole from the prose file's own
+# "Figure legends" section. The S in the label is the only thing that marks
+# it as supplemental, which is the rule src/build_submission.py applies too:
+# two builders reading one source cannot disagree about which figure moves.
+FIG_LEGEND = re.compile(r"^\*\*Figure S\d+\..*?(?=\n\n|\Z)", re.M | re.S)
 
 
 def main() -> int:
@@ -54,6 +59,19 @@ def main() -> int:
     items = sorted({m.group(1) for m in
                     re.finditer(r"\*\*(Table S\d+)\.", supp)},
                    key=lambda s: int(s.split("S")[1]))
+
+    # Supplemental figure legends live with their siblings in the prose file's
+    # "Figure legends" section, and are recognised here by their S label alone --
+    # the same rule src/build_submission.py applies. Two builders reading one
+    # source cannot disagree about which figure is supplemental.
+    fig_legends = [m.group(0).strip() for m in
+                   re.finditer(FIG_LEGEND, prose)]
+    fig_labels = [re.match(r"\*\*(Figure S\d+)\.", f).group(1)
+                  for f in fig_legends]
+    # Cited means named somewhere other than in its own legend, so a label
+    # occurring exactly once is a figure the article never points the reader at.
+    uncited_figs = [f for f in fig_labels
+                    if len(re.findall(f + r"\b", prose)) < 2]
     uncited = [t for t in items
                if not re.search(rf"{t}\b", prose) and not re.search(rf"{t}\b", main_tables)]
 
@@ -67,15 +85,23 @@ def main() -> int:
         "",
         "Vahhab Piranfar",
         "",
-        f"This file contains {len(items)} supplemental tables, "
+        (f"This file contains {len(fig_legends)} supplemental figure and "
+         if len(fig_legends) == 1 else
+         f"This file contains {len(fig_legends)} supplemental figures and "
+         if fig_legends else "This file contains ")
+        + f"{len(items)} supplemental tables, "
         f"{items[0]} to {items[-1]}, each with its legend. Every one is cited in "
         "the manuscript text.",
         "",
         "---",
         "",
-        supp,
-        "",
     ]
+    if fig_legends:
+        body += ["## Supplemental figures", ""]
+        for f in fig_legends:
+            body += [f, ""]
+        body += ["---", ""]
+    body += ["## Supplemental tables", "", supp, ""]
 
     if only_here:
         body += ["---", "",
@@ -98,15 +124,19 @@ def main() -> int:
     print(f"   {len(items)} supplemental tables: {', '.join(items)}")
     print(f"   {len(OUT.read_text(encoding='utf-8').split()):,} words, "
           f"{OUT.stat().st_size / 1024:.0f} KB (AAC allows 15 MB per file)")
+    if fig_legends:
+        print(f"   {len(fig_legends)} supplemental figure(s): {', '.join(fig_labels)}")
     if uncited:
         print(f"   ! never cited in the manuscript, which AAC requires: {uncited}")
+    if uncited_figs:
+        print(f"   ! figure legend present but never cited in the text: {uncited_figs}")
     if only_here:
         print(f"   {len(only_here)} reference(s) cited only here, listed "
               f"separately: {only_here}")
     else:
         print("   every reference it uses is also cited in the manuscript, so it "
               "needs no separate list")
-    return 1 if uncited else 0
+    return 1 if (uncited or uncited_figs) else 0
 
 
 if __name__ == "__main__":
