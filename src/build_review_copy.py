@@ -42,7 +42,6 @@ FIGURES = {
     1: "fig1_dynamic_range",
     2: "fig2_rate_vs_duration",
     3: "fig3_endpoint_collapse",
-    4: "fig4_independence",
 }
 
 # Supplemental figures, placed in the supplement half of the reading copy by the
@@ -50,6 +49,7 @@ FIGURES = {
 # the pattern "Figure S1." without a second regex.
 SUPP_FIGURES = {
     "S1": "figS1_survival_and_cox",
+    "S2": "fig4_independence",
 }
 
 CSS = """

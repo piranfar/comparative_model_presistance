@@ -64,14 +64,22 @@ def main() -> int:
     # "Figure legends" section, and are recognised here by their S label alone --
     # the same rule src/build_submission.py applies. Two builders reading one
     # source cannot disagree about which figure is supplemental.
-    fig_legends = [m.group(0).strip() for m in
-                   re.finditer(FIG_LEGEND, prose)]
+    # By label number, not by position in the prose file. A legend's place in
+    # the source is where its figure was last edited, which is not an order a
+    # reader should meet them in: moving Figure 4 to Figure S2 put S2's legend
+    # above S1's, and the supplement listed them that way.
+    fig_legends = sorted(
+        (m.group(0).strip() for m in re.finditer(FIG_LEGEND, prose)),
+        key=lambda f: int(re.match(r"\*\*Figure S(\d+)\.", f).group(1)))
     fig_labels = [re.match(r"\*\*(Figure S\d+)\.", f).group(1)
                   for f in fig_legends]
-    # Cited means named somewhere other than in its own legend, so a label
-    # occurring exactly once is a figure the article never points the reader at.
+    # Cited means named somewhere other than in its own legend. The manuscript
+    # writes "Figure S1." in a legend and "Fig. S1" in running text, so counting
+    # only the long form found every citation exactly zero times and reported
+    # every figure as uncited the moment one was actually cited properly.
     uncited_figs = [f for f in fig_labels
-                    if len(re.findall(f + r"\b", prose)) < 2]
+                    if len(re.findall(r"(?:Figure|Fig\.)\s*"
+                                      + f.split()[1] + r"\b", prose)) < 2]
     uncited = [t for t in items
                if not re.search(rf"{t}\b", prose) and not re.search(rf"{t}\b", main_tables)]
 

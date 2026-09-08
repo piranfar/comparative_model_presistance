@@ -22,7 +22,7 @@ ORCID: [0000-0003-3653-5739](https://orcid.org/0000-0003-3653-5739)
 
 **Correspondence:** Vahhab Piranfar, vahab.p@gmail.com
 
-**Figures:** 4 | **Tables:** 15 | **Boxes:** 1 | **Supplementary figures:** 1 | **Supplementary tables:** 10
+**Figures:** 3 | **Tables:** 15 | **Boxes:** 1 | **Supplementary figures:** 2 | **Supplementary tables:** 10
 
 ---
 
@@ -217,7 +217,8 @@ and a low class identifiable against *L* = 23 per mL, seed above
 Two of the claims this arithmetic supports are not testable and should not be
 read as though they were. If the last reading sits at the floor, the recorded
 reduction cannot exceed *h*, because a deeper one would require a count below
-*L*. And the recorded fraction is then *L*/*N*₀, so its correlation with *N*₀ is
+*L*. And the recorded fraction is then *L*/*N*₀, a monotone decreasing function
+of *N*₀, so its RANK correlation with *N*₀ is
 −1 whatever the numbers are, including random ones. Both follow from the
 definition of a censored reading, and neither is evidence about a drug.
 
@@ -380,8 +381,8 @@ the previous section quantifies.
 
 ### 3. The affected isolates are named before the drug is added
 
-Sections 1 and 2 counted isolates. The two boundaries derived in the Methods,
-under *Dynamic range, and the two boundaries it sets*, do more than that. Given
+Sections 1 and 2 counted isolates. The two boundaries derived in the Methods
+do more than that. Given
 only the floor, the class thresholds and each isolate's starting density, they
 say in advance which isolates are affected, before any day-5 reading is used.
 
@@ -650,7 +651,8 @@ The two orderings do not correspond. Rank the laboratories by starting density
 and the three lowest are exactly the three that recorded crossings, the three
 highest exactly the three that did not, without exception. Rank them by kill rate
 and there is no such correspondence (Fig. 2B). Institute F has the highest
-starting density at 6.53 log10, kills faster than four of the other five at 0.223
+starting density at 6.53 log10 among the treated flasks of this arm, kills
+faster than four of the other five at 0.223
 log10 per day, and records no crossing. Institute E returns the slowest rate of
 all at 0.090 and also records none.
 
@@ -951,7 +953,7 @@ stop growth against how long it takes to kill. All 24 are corrected together.
 Testing that many things at once throws up hits by chance, so the Benjamini–Hochberg
 thresholds in Table 14 — the standard correction for a family of tests — are set
 against 24, not against the size of any one subgroup. Four are significant before
-correction, where 1.2 are expected by chance, and none survives it (Fig. 4,
+correction, where 1.2 are expected by chance, and none survives it (Fig. S2,
 Table 14). All four point the wrong way: a higher inhibitory concentration goes
 with a *shorter* killing time, which is not the direction a shared mechanism
 predicts. And they cluster at the deepest endpoint — the one Section 1 shows is
@@ -998,8 +1000,21 @@ specifies. The densities actually reached were 6.4 × 10⁴, 4.4 × 10⁵ and
 reduction the three flasks could report ran from 3.71 to 3.93 logs — each arm's
 own ceiling, not the drug's** — while those same three cultures plated at 100 µL
 ran from 4.88 to 5.05 (Table S9). Every flask is paired with itself across the
-two platings. Nothing changed but the pipette, so the gain belongs to the
-plating, not the culture.
+two platings, so the comparison is within a culture rather than between
+cultures.
+
+The gain the pipette buys is exactly one log, because the floor at the pooled
+100 µL plating is one tenth of the floor at the pooled 10 µL plating. The nine
+paired gains are not exactly one log: they run 0.87 to 1.19 (Table S9). The
+difference is not the drug and not the flask. It is that each plating measures
+its own starting density from the same culture, and the two measurements
+disagree — 425,000 against 565,000 per mL in one flask, 255,000 against 375,000
+in another. That disagreement is this paper's own argument turned on its own
+experiment: *N*₀ is not a constant a protocol supplies, it is a measurement with
+error, and the headroom computed from it inherits that error. Reported per
+flask, the gain never falls below 0.87 log10, so the four-log endpoint moves
+from unreportable to reportable in every one of the three cultures at the
+standard inoculum.
 
 That much is arithmetic, as Box 1 says. So is the next step. When both platings
 of one sample rest on their own floors, the two fractions written down are
@@ -1136,7 +1151,7 @@ the file records is not a short duration but no duration at all: the isolate is
 censored at the end of observation, which is the top of the scale and therefore
 the most tolerant value it can take. Of the 217 isolates, 33 lack the range for
 the 99.99 per cent endpoint the classification uses, and 33 of those 33 are
-recorded at that ceiling, against 162 of the 184 with ample room
+recorded at that ceiling, against 162 of the 184 with ample room.
 The isolates that could not demonstrate the endpoint are,
 without exception, the ones recorded as having failed to reach it.
 
@@ -1310,7 +1325,9 @@ smooth it over.
 
 In the six-laboratory exercise, starting density and laboratory are close to the
 same variable. 87.0 per cent of the variance in flask-level starting density lies
-between laboratories rather than within them: the laboratory means span 3.62
+between laboratories rather than within them. Taken over every flask that
+deposits an early density, treated and untreated arms together, the laboratory
+means span 3.62
 log10, against a median within-laboratory standard deviation of 0.43. Adding
 starting density to a model that already knows which laboratory a flask came from
 is therefore not separating two covariates. It is closer to swapping a label for
@@ -1909,10 +1926,11 @@ content of this article, including its accuracy and its originality.
 Every dataset analysed here was already public under an open licence when this
 work began, and none was generated for it. Each deposit is identified in Table 1
 and cited in the reference list alongside the article that first described it:
-the clinical isolate panel of Vijay and colleagues, the six-laboratory time-kill
-exercise of van Wijk and colleagues, the evolved-clone deposit of Windels and
-colleagues, the apramycin grid of Kaur and colleagues, and the hollow-fibre
-Source Data of Dubey and colleagues, which was held out of every fitting step.
+the clinical isolate panel of Vijay and colleagues [[R5]][[R51]], the
+six-laboratory time-kill exercise of van Wijk and colleagues [[R4]][[R23]], the
+evolved-clone deposit of Windels and colleagues [[R6]][[R38]], the apramycin grid
+of Kaur and colleagues [[R7]][[R37]], and the hollow-fibre Source Data of Dubey
+and colleagues [[R8]][[R36]], which was held out of every fitting step.
 
 The analysis code, both audit scripts, the headroom tool described above and the
 machine-readable receipts recording the software versions each stage ran under
@@ -2001,7 +2019,7 @@ each sampling day, rising to 48.2-fold at
 day 7 and collapsing to 5.2-fold at day 14. (**C**) The concentration slope fitted
 separately in each interval from a replicate-level bootstrap, 20 000 draws.
 
-**Figure 4. Resistance and tolerance occupy separate axes, in two designs.**
+**Figure S2. Resistance and tolerance occupy separate axes, in two designs.**
 (**A**) All 24 comparisons between the concentration axis and the duration axis
 that the 217-isolate file supports, each against the Benjamini–Hochberg critical
 value it would have to beat. Amber marks the four reaching nominal significance;

@@ -141,7 +141,7 @@ stop growth against how long it takes to kill. All 24 are corrected together.
 Testing that many things at once throws up hits by chance, so the Benjamini–Hochberg
 thresholds in Table S16 — the standard correction for a family of tests — are set
 against 24, not against the size of any one subgroup. Four are significant before
-correction, where 1.2 are expected by chance, and none survives it (Fig. 4,
+correction, where 1.2 are expected by chance, and none survives it (Fig. S2,
 Table S16). All four point the wrong way: a higher inhibitory concentration goes
 with a *shorter* killing time, which is not the direction a shared mechanism
 predicts. And they cluster at the deepest endpoint — the one Section 1 shows is
@@ -287,6 +287,15 @@ not a finding. Both panels stood in Figure 2 in an earlier version and are here
 because each had to disclaim itself in its own legend. Colour, and the split
 between laboratories that ever crossed and those that never did, are shared with
 Figure 2 by construction: both figures read the assignment from one function.
+
+**Figure S2. Resistance and tolerance occupy separate axes, in two designs.**
+(**A**) All 24 comparisons between the concentration axis and the duration axis
+that the 217-isolate file supports, each against the Benjamini–Hochberg critical
+value it would have to beat. Amber marks the four reaching nominal significance;
+none survives. (**B**) The censoring behind them: the fraction of isolates at the
+assay ceiling rises with endpoint depth, and the nominal hits concentrate where
+censoring is heaviest. (**C**) The same question in 126 evolved *E. coli* clones,
+by nutrient stratum.
 
 ## Supplementary methods
 

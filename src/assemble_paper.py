@@ -37,8 +37,11 @@ FIGURES = {
     1: "fig1_dynamic_range",
     2: "fig2_rate_vs_duration",
     3: "fig3_endpoint_collapse",
-    4: "fig4_independence",
     "S1": "figS1_survival_and_cox",
+    # Figure 4 became Figure S2: its only citation is in Section 10, which the
+    # routing table sends to the supplement, so the legend was sitting in an
+    # article that never referred to it.
+    "S2": "fig4_independence",
     # fig13_parameter_transfer belongs to the published-rate-constant comparison,
     # which is no longer part of this paper. The figure stays in results/ as a
     # record of the work; it is neither embedded nor listed as supplementary.

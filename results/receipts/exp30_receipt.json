@@ -1,6 +1,6 @@
 {
   "script": "src/experiments/exp30_ordinal_tolerance.py",
-  "utc": "2026-09-08T19:22:31+00:00",
+  "utc": "2026-09-08T22:17:57+00:00",
   "data_source": "eLife 93243 supplementary file 2",
   "organism": "Mycobacterium tuberculosis, clinical isolates",
   "n_rows_in_deposit": 217,

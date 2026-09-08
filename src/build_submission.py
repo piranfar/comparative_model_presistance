@@ -308,6 +308,10 @@ def split_figure_legends(preamble: str) -> tuple[str, list[str]]:
             continue
         m = re.match(r"\*\*Figure (S?\d+)\.", part.strip())
         (supp if m and m.group(1).startswith("S") else main).append(part.strip())
+    # By label number, not by position in the source. A legend sits where its
+    # figure was last edited, which is not an order a reader should meet them
+    # in: relabelling Figure 4 as Figure S2 put S2's legend above S1's.
+    supp.sort(key=lambda s: int(re.match(r"\*\*Figure S(\d+)\.", s).group(1)))
     return "\n\n".join(main), supp
 
 

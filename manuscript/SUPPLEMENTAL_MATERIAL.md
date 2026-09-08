@@ -4,7 +4,7 @@
 
 Vahhab Piranfar
 
-This file contains 1 supplemental figure and 10 supplemental tables, Table S1 to Table S10, each with its legend. Every one is cited in the manuscript text.
+This file contains 2 supplemental figures and 10 supplemental tables, Table S1 to Table S10, each with its legend. Every one is cited in the manuscript text.
 
 ---
 
@@ -31,6 +31,15 @@ not a finding. Both panels stood in Figure 2 in an earlier version and are here
 because each had to disclaim itself in its own legend. Colour, and the split
 between laboratories that ever crossed and those that never did, are shared with
 Figure 2 by construction: both figures read the assignment from one function.
+
+**Figure S2. Resistance and tolerance occupy separate axes, in two designs.**
+(**A**) All 24 comparisons between the concentration axis and the duration axis
+that the 217-isolate file supports, each against the Benjamini–Hochberg critical
+value it would have to beat. Amber marks the four reaching nominal significance;
+none survives. (**B**) The censoring behind them: the fraction of isolates at the
+assay ceiling rises with endpoint depth, and the nominal hits concentrate where
+censoring is heaviest. (**C**) The same question in 126 evolved *E. coli* clones,
+by nutrient stratum.
 
 ---
 
