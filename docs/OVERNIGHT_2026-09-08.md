@@ -117,17 +117,71 @@ dozen. What **is** available, and is stronger because it is checkable:
 That cannot be refuted by finding a deposit the search missed. It can only be
 extended.
 
-## 4. Corpus expansion — in progress
+## 4. Corpus expansion — done
 
-Manifest 62 → 78 rows. 13 of 16 new deposits downloaded with provenance;
-Rifapentine recovered after diagnosing the fetcher's dropped URL parameter.
+**29 deposits and 64,015 readings this morning; 40 deposits and 68,812 readings
+now.** Ten new readers written, each adversarially reviewed against its own
+source file by a second agent.
 
-Readers are being written and adversarially reviewed one per deposit, with one
-rule above all others: **never invent a floor.** A reader that supplies a
-plausible detection limit destroys the one number this corpus exists to count.
+The boundary sweep on the expanded corpus: **17 published deposits support the
+boundaries, across 2,210 series, with 0 violations of the consistency
+condition**, in seven species — *Acinetobacter baumannii*, *Escherichia coli*,
+*Mycobacterium abscessus*, *M. tuberculosis*, *Pseudomonas aeruginosa* and
+*Streptococcus pneumoniae*. Section 8 is updated to match.
 
-Two deposits have only a landing page and no file URL — `BARR2021_OSF` and
-`TABOR2025_MINDTHEGAP`. They need their file URLs found by hand.
+### The most valuable addition, and a citation it nearly got wrong
+
+`JINDANI1980_SGUL` — human sputum from a tuberculosis early-bactericidal-activity
+trial. 112 patients, 989 readings across 8 timepoints, 977 with a floor. Median
+headroom 4.23 logs: **43 of 112 patient series cannot demonstrate four logs and
+83 cannot demonstrate five.** That is the clinical analogue of the deposit this
+paper is built on.
+
+The floor is recovered rather than assumed: `cfu == (Ct1+Ct2) × K × 10^Diln`
+holds with a single K = 2.4 in 976 of 977 populated readings, so one colony at
+that reading's own dilution is K × 10^Diln CFU/mL. Per-reading, derived from
+inside the file, nothing taken from a paper.
+
+**The deposit is mislabelled and I nearly cited the wrong decade.** figshare
+27862029 carries the 2003 EBA paper's title and a description of "100 patients
+treated with 22 regimens". The file inside is `Jindani 1980.xlsx`, the sheet is
+"Jindani 1980", and it holds 112 patients and 24 regimens — including PAS and
+thiacetazone, which belong to the 1980 study and not to the 2003 one. Renamed to
+follow the contents, with the mismatch documented in the reader, the manifest and
+the corpus directory. Cite it by DOI, `10.24376/rd.sgul.27862029.v1`, and do not
+attach it to either paper without checking.
+
+### The same animals, deposited twice
+
+`build_corpus_long` now detects it. Two pairs survive a check that only counts
+values distinctive enough that they could not collide by chance:
+
+- **Dide-Agossou 2022 and Walter 2021** share 46 distinctive readings, 54% of one.
+  Same group, same mice, two papers.
+- **Rivani 2022 and Soeorg 2026** share 20, 28% of one — and this one is a
+  finding. Soeorg's deposit is a NONMEM dataset built from time-kill curves its
+  author extracted from published papers, and Rivani is evidently one of them.
+  The corpus holds the same *Acinetobacter* measurements twice: once as a primary
+  deposit, once as digitised input to somebody's model.
+
+Nothing is deleted. Which copy is canonical is a judgement about the papers, and
+the check exists so it gets made deliberately.
+
+## 4b. What is still outstanding in the expansion
+
+Manifest 62 → 78 rows. All 16 new deposits are now on disk with provenance.
+Three needed hand-work: Rifapentine after diagnosing a dropped URL parameter,
+and Barr and Tabor after finding their file URLs behind landing pages.
+
+Every reader was written under one rule above all others: **never invent a
+floor.** A reader that supplies a plausible detection limit destroys the one
+number this corpus exists to count. Each was then reviewed by a second agent
+whose brief was to attack that specifically.
+
+One deposit still has no reader: `SHEE2026_SENOLYTIC`, which was still being
+written when I stopped. Its interest is a contradiction worth confirming — the
+Fig. 1 legend states a limit of detection of 10 CFU while the deposited sheets
+appear to encode below-detection values as 1.
 
 ---
 

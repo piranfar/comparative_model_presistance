@@ -142,9 +142,17 @@ WHAT THE DEPOSIT DOES NOT SAY, and is therefore blank here.
     densities, and CFU/mL is this reader's label for a quantity the deposit
     leaves unlabelled; every row's notes say so.
 
-  * WHETHER Ct1 AND Ct2 ARE TWO PLATES OR TWO COUNTS OF ONE PLATE. The sheet
-    sums them, so they are pooled here into one reading, with both raw numbers
-    kept in notes. `colonies` is their sum.
+  * WHAT THE 48 IS MADE OF. See above: the plated volume and any fixed
+    dilution folded into it cannot be separated, so neither is recorded.
+
+ONE ROW PER SPECIMEN, NOT PER PLATE. Ct1 and Ct2 are two plates of one
+specimen, and the schema's tech_replicate is for exactly that -- but the file
+reports only the averaged density, never a per-plate one, so splitting the
+reading in two would mean manufacturing two cfu values the deposit does not
+contain. The reading the deposit reports is the specimen, so that is the row.
+`colonies` is Ct1 + Ct2, the total colonies actually counted (which is what the
+floor is one of), both raw numbers are kept in notes, and tech_replicate is
+used for the two day-0 SPECIMENS, A and B, which are a different thing.
 """
 from __future__ import annotations
 
