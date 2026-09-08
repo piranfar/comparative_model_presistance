@@ -825,13 +825,13 @@ microbiology and the hollow-fibre field returned one deposit that carried all
 three fields the boundaries require and could be analysed cold.
 
 That was true of the search described. It is no longer true of the analysis
-repository, which now holds 29 ingested deposits, of which 13 permit the
+repository, which now holds 40 ingested deposits, of which 17 permit the
 boundaries to be computed once the floor is established on the same tiers this
 paper uses for its own — stated by the depositor, derived from a recorded plated
 volume, or inferred from a pile-up on a plate-plausible value. Across those the
 condition the boundaries imply, that no series may present as a measurement a
-reduction deeper than its own floor allows, holds in 1 822 of 1 822 series in
-five species. Those deposits are described in the data release rather than here,
+reduction deeper than its own floor allows, holds in 2 210 of 2 210 series in
+seven species. Those deposits are described in the data release rather than here,
 because none was held out: the point of this section is a deposit opened after
 every boundary and threshold was fixed, and only one qualifies on that ground.
 

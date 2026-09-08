@@ -1,7 +1,7 @@
 {
   "script": "src/experiments/exp42_boundaries_across_the_corpus.py",
-  "utc": "2026-09-08T06:01:21+00:00",
-  "corpus_deposits": 38,
+  "utc": "2026-09-08T06:05:37+00:00",
+  "corpus_deposits": 40,
   "floor_tiers": {
     "STATED": [
       "DIDEAGOSSOU2022",
@@ -28,7 +28,8 @@
     ],
     "INFERRED": [
       "EDOO2026",
-      "JOVANOVIC2026"
+      "JOVANOVIC2026",
+      "WALLER2023"
     ],
     "ABOVE_A_PLACEHOLDER": [
       "PZA_PARP1_2023",
@@ -49,6 +50,7 @@
       "PEPPER2026",
       "RIVANI2022_2",
       "SEBASTIAN2025",
+      "SHEE2026_SENOLYTIC",
       "STEPANYAN2015",
       "STRYDOM2024",
       "WALTER2025",
@@ -56,7 +58,7 @@
       "YANG2024_PHAGE"
     ]
   },
-  "published_supporting_boundaries": 16,
+  "published_supporting_boundaries": 17,
   "on_firm_tiers": [
     "ALEXANDER2020",
     "BUCHHOLZ2026",
@@ -71,6 +73,7 @@
     "PRETOMANID",
     "RIVANI2022",
     "SOEORG2026",
+    "WALLER2023",
     "WALTER2021_RSRATIO"
   ],
   "firm_and_pre_treatment": [
@@ -87,7 +90,7 @@
     "STEWART2012",
     "ZHU2022"
   ],
-  "n_series": 2087,
+  "n_series": 2210,
   "n_series_violating_headroom": 0,
   "min_timepoints_required": 3,
   "plate_plausible_threshold": 2.0

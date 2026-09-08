@@ -379,6 +379,7 @@ def _floor_basis(xbytes: bytes, meta: "Meta") -> str:
         return FLOOR_WORD_FOUND % ", ".join('"%s"' % h for h in hits)
     return FLOOR_ABSENT % (len(set(nodes)), meta.rel)
 
+
 ZERO_NOTE = (
     "the sheet writes this reading as exactly 0 on its log10 scale, so the "
     "count transcribed here is 10**0 = 1 CFU/g; the deposit gives no detection "

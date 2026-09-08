@@ -44,48 +44,76 @@ apart in tech_replicate rather than averaged; column M "Mn Log cfu" is the
 sheet's own mean of the two day-0 logs and is a summary, not a reading, so no
 row is emitted for it.
 
-THE FLOOR: DERIVED FROM THE FILE'S OWN ARITHMETIC, NOT STATED BY THE AUTHORS.
-Nothing in the deposit gives a limit of detection, a limit of quantification or
-a plated volume -- no column, no footnote, no README, no legend. What the sheet
-does give is its own count-to-density conversion, which this reader recovers
-from the data rather than hard-coding: for every populated reading
+THE FLOOR: DERIVED FROM THE WORKBOOK'S OWN CELL FORMULA, NOT STATED BY ANYONE.
+Nobody in this deposit names a limit -- there is no LOD, no LOQ, no plated
+volume, no column, no footnote, no README, no legend. What the workbook does
+carry is live Excel formulas, and they give the conversion exactly. Every cfu
+cell in every one of the nine blocks reads
 
-    cfu == (Ct1 + Ct2) * K * 10**Diln
+    =AVERAGE(Ct1,Ct2)*48*10^(Diln-1)
 
-with a single constant K. K is fitted here as the modal ratio and then checked
-against every reading; it comes out at 2.4, and the identity holds in 976 of the
-977 populated readings. So one colony, pooled across the two plates, at the
-dilution THIS reading was plated at, is K * 10**Diln CFU/mL, and that is what
-goes in floor_cfu_per_ml -- a per-reading floor, the same construction as
-read_PIRANFAR2026 uses on a recorded plated volume. The lowest dilution used
-anywhere in the sheet is Diln = 1, so the smallest floor in the deposit, and
-the number to quote as the study-level floor, is 24 CFU/mL. A reading plated at
-Diln = 5 has a floor of 240,000 CFU/mL and cannot resolve anything below it.
+and every Log cfu cell reads =LOG(cfu). (Read off the workbook XML; the
+verbatim masters are e.g. AVERAGE(C6,D6)*48*10^(E6-1) for Day-0 A and
+AVERAGE(AS6,AT6)*48*10^(AU6-1) for Day-14.) _formula() below pulls that
+formula out of the file at read time, so the sentence in floor_basis is a
+quotation of the deposit and cannot go stale; _constant() then re-derives the
+same number from the values alone and the two must agree or the reader raises.
 
-  * The floor is DERIVED, and the corpus must count it as derived. K is
-    recovered by arithmetic from inside the deposit; no author states it, and
-    nothing was taken from the 2003 paper (which is not open access) or from
-    any protocol.
+Two consequences, and neither is an inference from outside the file.
 
-  * What CANNOT be separated is the plated volume from the absolute dilution.
-    K = 2.4 fixes only their ratio: a 10**Diln dilution with 417 uL pooled
-    across the two plates gives the same number as, say, a 0.48 * 10**Diln
-    dilution with 200 uL. The floor is invariant to that split because it comes
-    straight from the file's own cfu column, but the volume is not, so
-    plated_volume_ul is blank on every row and `dilution` carries 10**Diln with
-    that caveat repeated in notes.
+  * Ct1 and Ct2 ARE TWO SEPARATE PLATES of one specimen, not two counts of one
+    plate. The sheet AVERAGES them -- it does not sum them -- and the average
+    lands on a half in 498 of the 977 populated readings, with six readings
+    where one plate grew nothing and the other did (e.g. Ct1=1, Ct2=0 giving
+    cfu=240 at Diln=2). Two counts of a single plate could not do that.
+
+  * THE SMALLEST NON-ZERO DENSITY the sheet's own arithmetic can produce for a
+    reading is therefore one colony on one of the two plates: mean 0.5, i.e.
+
+        floor = 0.5 * 48 * 10**(Diln-1) = 24 * 10**(Diln-1) = 2.4 * 10**Diln
+
+    That is what goes in floor_cfu_per_ml -- a per-reading floor, the same
+    construction read_PIRANFAR2026 uses on a recorded plated volume, and one
+    the file demonstrates rather than merely permits (cfu = 240 at Diln=2 and
+    cfu = 48 at Diln=1 both occur). The lowest dilution used anywhere is
+    Diln = 1, so the smallest floor in the deposit, and the number to quote as
+    the study-level floor, is 24 CFU/mL. A reading taken at Diln = 5 has a
+    floor of 240,000 CFU/mL and cannot resolve anything below it.
+
+The floor is DERIVED and the corpus must count it as derived: the arithmetic is
+the depositor's, but the reading of it as a floor is this reader's. No author
+states a limit, and nothing was taken from the 2003 paper (not open access) or
+from any protocol.
+
+WHAT STILL CANNOT BE SEPARATED is the plated volume from any fixed dilution
+folded into the constant 48. The file applies 48 * 10**(Diln-1) as one factor;
+48 alone would be 1/48 mL = 20.8 uL plated, but a 20 uL plate with a further
+1:0.96 step gives the same number and the deposit does not say which. So
+plated_volume_ul stays blank on every row, and `dilution` carries the power of
+ten the file's own formula applies -- 10**(Diln-1), NOT 10**Diln -- with the
+caveat repeated in notes. (An earlier version of this reader wrote 10**Diln
+here, which is a factor of ten larger than anything the workbook does.)
 
 TWELVE READINGS HAVE NO DERIVABLE FLOOR, and they are exactly the ones where it
 matters. When both plate counts are zero the sheet leaves Diln, cfu and Log cfu
-empty, so the dilution that reading was plated at is not recorded and no floor
-follows for it. Those rows carry cfu_per_ml = 0, censored = "yes" (zero
-colonies on both plates is a non-detection whatever the limit was) and a BLANK
-floor. Nineteen further patient-timepoints are wholly empty -- no specimen --
-and get no row at all. 112 * 9 = 1008 = 977 + 12 + 19.
+empty, so the dilution that specimen was read at is not recorded and no floor
+follows for it. Those rows carry cfu_per_ml = 0 and a BLANK floor, and their
+`censored` is left for finish() to fill, which makes it "unknown". That is
+deliberate and it is the point of the corpus: we know nothing grew, and we do
+NOT know what density that non-detection excludes. Calling them censored = yes,
+as an earlier version of this reader did, is literally true but hides twelve
+readings from the one statistic the coverage table exists to report, and
+finish()'s own docstring forbids it -- "never by guessing that a zero means the
+floor". The fact that nothing grew is preserved in cfu_per_ml = 0 and in notes.
+Nineteen further patient-timepoints are wholly empty -- no specimen -- and get
+no row at all. 112 * 9 = 1008 = 977 + 12 + 19.
 
 ONE CORRUPT CELL, left uncorrected. Patient 1747206132, Day-14: Ct1 = 25,
 Ct2 = 29, Diln = 4, which give 1,296,000, but the sheet writes cfu = 3 and
-Log cfu = 0.477. It is the only cell in the workbook where the arithmetic
+Log cfu = 0.477. The workbook XML shows why: cell AV113 is the only cfu cell in
+the file with NO formula in it -- someone overtyped =AVERAGE(AS113,AT113)*48*
+10^(AU113-1) with a literal 3, and the neighbouring =LOG(AV113) faithfully
+returned 0.477. It is the only reading in the workbook where the arithmetic
 fails. The value is passed through exactly as written and flagged in notes; the
 censored flag that then follows from it is an artefact of the corrupt cell, not
 a measurement.

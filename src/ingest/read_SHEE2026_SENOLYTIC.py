@@ -341,6 +341,46 @@ def _match_raw(cands, value):
         "colonies and dilution are left blank" % shown)
 
 
+def _lookup_raw(lookup, group, hours, arm_lab, k, value):
+    """Find the deposited plate count behind one plotted value.
+
+    Tried in order: the arm's own label; the unlabelled column the raw block
+    uses at its earlier timepoint; and a label the raw block writes differently
+    from the processed block ("Vehicle" where the processed block says "Veh").
+    A candidate is accepted only when its arithmetic reproduces the plotted
+    value exactly, so a wrong pairing cannot slip through as a number.
+
+    Returns (colonies, dilution, why_not, how) -- at most one of the last two
+    is non-empty.
+    """
+    gk, ak = _key(group), _key(arm_lab)
+    exact = lookup.get((gk, hours, ak, k), [])
+    blank = lookup.get((gk, hours, "", k), [])
+    tried = [(exact, "")]
+    if blank:
+        tried.append((blank, "the raw-count block labels no arm at this "
+                             "timepoint; its single unlabelled column is the "
+                             "only candidate and it reproduces the plotted "
+                             "value exactly"))
+    near = [(a, v) for (g, h, a, kk), v in lookup.items()
+            if g == gk and h == hours and kk == k and a not in ("", ak)
+            and min(len(a), len(ak)) >= 3
+            and (a.startswith(ak) or ak.startswith(a))]
+    if len(near) == 1:
+        tried.append((near[0][1],
+                      'the raw-count block writes this arm "%s" where the '
+                      'plotted block writes it "%s"; the pairing is accepted '
+                      "only because its arithmetic reproduces the plotted "
+                      "value exactly" % (near[0][0], arm_lab)))
+
+    for cands, how in tried:
+        col, dil, _why = _match_raw(cands, value)
+        if np.isfinite(col):
+            return col, dil, "", how
+    col, dil, why = _match_raw(exact or blank, value)
+    return col, dil, why, ""
+
+
 # ---------------------------------------------------------------------------
 # Fig. 5f and Fig. 5g -- the treatment experiment
 # ---------------------------------------------------------------------------
@@ -423,19 +463,10 @@ def _read_fig5fg(path: Path, rel: str, sheet: str) -> list:
                                     % zero_notes[(i, c)])
                         colonies, dilution = 0.0, 1.0
                 if lookup:
-                    cands = lookup.get((_key(group), hours, _key(arm_lab), k))
-                    unlabelled = False
-                    if not cands:
-                        # the raw block labels arms only at its later timepoint;
-                        # the earlier one is a single unlabelled column
-                        cands = lookup.get((_key(group), hours, "", k), [])
-                        unlabelled = bool(cands)
-                    col, dil, why = _match_raw(cands, n)
-                    if np.isfinite(col) and unlabelled:
-                        note.append("the raw-count block labels no arm at this "
-                                    "timepoint; its single unlabelled column is "
-                                    "the only candidate and it reproduces the "
-                                    "plotted value exactly")
+                    col, dil, why, extra = _lookup_raw(
+                        lookup, group, hours, arm_lab, k, n)
+                    if extra:
+                        note.append(extra)
                     if np.isfinite(col):
                         colonies, dilution = col, dil
                         note.append(

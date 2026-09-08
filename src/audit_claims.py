@@ -494,13 +494,13 @@ def main() -> int:
     # from a table, which is how a figure drifts. Pinned so they cannot.
     r = receipt("exp42_receipt.json")
     if r is not None:
-        rows.append(check("corpus deposits ingested (8: 29)",
-                          29, float(r["corpus_deposits"]), 0.001))
-        rows.append(check("of those, boundaries computable (8: 13)",
-                          13, float(len(r["on_firm_tiers"])
+        rows.append(check("corpus deposits ingested (8: 40)",
+                          40, float(r["corpus_deposits"]), 0.001))
+        rows.append(check("of those, boundaries computable (8: 17)",
+                          17, float(len(r["on_firm_tiers"])
                                     + len(r["above_a_placeholder"])), 0.001))
-        rows.append(check("series tested against their own floor (8: 1822)",
-                          1822, float(r["n_series"]), 0.001))
+        rows.append(check("series tested against their own floor (8: 2210)",
+                          2210, float(r["n_series"]), 0.001))
         rows.append(check("series violating their own floor (8: 0)",
                           0, float(r["n_series_violating_headroom"]), 0.001))
 
