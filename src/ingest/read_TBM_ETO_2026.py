@@ -404,7 +404,12 @@ def read(d: Path) -> pd.DataFrame:
                             "plotted curve has a starting point; they are one "
                             "set of pre-treatment animals and are emitted once"
                             % ", ".join(a for a, _, _ in blocks))
-                    else:
+                    elif wk == 0:
+                        note.append("the week-0 columns of the four arm blocks "
+                                    "are not identical in this sheet, so each "
+                                    "block's week-0 readings are kept under its "
+                                    "own arm label rather than merged")
+                    if not baseline:
                         key = (arm, wk)
                         if key in agree and agree[key]:
                             note.append("this reading is also printed in sheet "

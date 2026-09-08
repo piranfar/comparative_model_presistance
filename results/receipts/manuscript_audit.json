@@ -1,6 +1,6 @@
 {
   "script": "src/audit_manuscript.py",
-  "utc": "2026-09-08T05:56:29+00:00",
+  "utc": "2026-09-08T05:57:12+00:00",
   "checkers": [
     "check_arithmetic",
     "check_census",
@@ -11,10 +11,10 @@
     "check_identity",
     "check_terms"
   ],
-  "n_words_audited": 32532,
+  "n_words_audited": 32534,
   "counts": {
     "high": 0,
-    "medium": 2,
+    "medium": 1,
     "low": 8
   },
   "findings": [
@@ -25,15 +25,6 @@
       "detail": "\"limit\" appears here in none of the senses the Methods reserve it for. Check that it is not standing in for the assay floor *L*.",
       "expected": "the assay floor *L*",
       "found": "m requires below- and above-quantification-limit flags together with the limit of quantification, and notes that pharmacometric mo",
-      "checker": "check_terms"
-    },
-    {
-      "severity": "medium",
-      "kind": "limit-outside-its-declared-sense",
-      "where": "line 1504 (What should change)",
-      "detail": "\"limit\" appears here in none of the senses the Methods reserve it for. Check that it is not standing in for the assay floor *L*.",
-      "expected": "the assay floor *L*",
-      "found": "two the diagnosis is not carelessness. The limit is measured, it is sometimes recorded to a standard higher than anyone asks for,",
       "checker": "check_terms"
     },
     {

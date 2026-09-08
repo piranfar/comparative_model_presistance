@@ -1501,9 +1501,9 @@ The complementary case is a deposit whose modelling table carries a column named
 `CFU_LOD`, and in which that column is empty in all 272 rows (36). The field
 was designed, declared numeric, and never filled; nor does a detection limit
 appear in any of the eight analysis scripts deposited beside it. Between these
-two the diagnosis is not carelessness. The limit is measured, it is sometimes
-recorded to a standard higher than anyone asks for, and it falls out of the
-record between the bench and the reader — off the end of a spreadsheet, or into
+two the diagnosis is not carelessness. The assay floor *L* is measured, it is
+sometimes recorded to a standard higher than anyone asks for, and it falls out
+of the record between the bench and the reader — off the end of a spreadsheet, or into
 a column nobody completed.
 
 **Choose the endpoint depth against the headroom actually available**, and note
