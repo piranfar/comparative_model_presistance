@@ -1049,6 +1049,19 @@ headroom a log-reduction endpoint cannot be interpreted. Neither costs anything
 to record. Four of the deposits examined in the course of this project state no
 limit anywhere.
 
+The recommendation is not aspirational, and the clearest evidence for that is a
+study that already meets it. A murine preventive-therapy experiment records its
+lower limit of detection in the deposited workbook once per sheet, separately
+for each agar type, and separately for individual mice where they differ: 0.78
+log10 CFU per lung on plain and hygromycin agar, 0.54 on thiophenecarboxylic
+acid hydrazide agar, with the plated volume stated beside it (31). That is
+better practice than anything else in this corpus. The article reporting the
+experiment states none of it — a full-text search returns no occurrence of
+"limit of detection" or of either value. So the number is not missing from the
+science. It is missing from the paper, and a reader who never opens the
+supplementary spreadsheet cannot know an endpoint was bounded. What we are
+asking for is a sentence, and somebody has already done the work behind it.
+
 **Choose the endpoint depth against the headroom actually available**, and note
 that the required inoculum is computable before the experiment rather than
 diagnosable after it: seeding above *L* · max(10^*q*, 1/*c*₁) makes both failure
@@ -1158,7 +1171,7 @@ Source Data of Dubey and colleagues, which was held out of every fitting step.
 
 The analysis code, both audit scripts, the headroom tool described above and the
 machine-readable receipts recording the software versions each stage ran under
-are deposited in a public repository (31), with the documentation needed to install
+are deposited in a public repository (32), with the documentation needed to install
 and run them and a test dataset with the control parameter settings used here.
 Code created to generate the results and to interpret the data is included. The
 repository is dual-licensed, MIT for the code and CC BY 4.0 for the manuscript,
@@ -1357,4 +1370,6 @@ The supplemental file carries the full Materials and Methods, the analyses named
 
 30. van Soolingen D, de Haas PEW, van Doorn HR, Kuijper E, Rinder H, Borgdorff MW. 2000. Mutations at amino acid position 315 of the *katG* gene are associated with high-level resistance to isoniazid, other drug resistance, and successful transmission of *Mycobacterium tuberculosis* in the Netherlands. J Infect Dis 182:1788-1790. https://doi.org/10.1086/317598.
 
-31. Piranfar V. 2026. Analysis code, audit scripts and headroom tool for "The detection floor bounds what a time-kill assay can report: minimum duration for killing and log-reduction endpoints in five published deposits and a prospective test".
+31. Lai RPJ, Ammerman NC, Tasneen R, Almeida DV, Converse PJ, Nuermberger EL. 2023. Using dynamic oral dosing of rifapentine and rifabutin to simulate exposure profiles of long-acting formulations in a mouse model of tuberculosis preventive therapy. Antimicrob Agents Chemother 67:e00481-23. https://doi.org/10.1128/aac.00481-23.
+
+32. Piranfar V. 2026. Analysis code, audit scripts and headroom tool for "The detection floor bounds what a time-kill assay can report: minimum duration for killing and log-reduction endpoints in five published deposits and a prospective test".

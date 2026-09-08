@@ -1244,6 +1244,19 @@ headroom a log-reduction endpoint cannot be interpreted. Neither costs anything
 to record. Four of the deposits examined in the course of this project state no
 limit anywhere.
 
+The recommendation is not aspirational, and the clearest evidence for that is a
+study that already meets it. A murine preventive-therapy experiment records its
+lower limit of detection in the deposited workbook once per sheet, separately
+for each agar type, and separately for individual mice where they differ: 0.78
+log10 CFU per lung on plain and hygromycin agar, 0.54 on thiophenecarboxylic
+acid hydrazide agar, with the plated volume stated beside it [[R59]]. That is
+better practice than anything else in this corpus. The article reporting the
+experiment states none of it — a full-text search returns no occurrence of
+"limit of detection" or of either value. So the number is not missing from the
+science. It is missing from the paper, and a reader who never opens the
+supplementary spreadsheet cannot know an endpoint was bounded. What we are
+asking for is a sentence, and somebody has already done the work behind it.
+
 **Choose the endpoint depth against the headroom actually available**, and note
 that the required inoculum is computable before the experiment rather than
 diagnosable after it: seeding above *L* · max(10^*q*, 1/*c*₁) makes both failure

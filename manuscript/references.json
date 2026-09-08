@@ -737,5 +737,14 @@
     "publisher": "",
     "repository": "",
     "identifier": "https://doi.org/10.64898/2026.07.27.740024"
+  },
+  "R59": {
+    "kind": "article",
+    "authors": "Lai RPJ, Ammerman NC, Tasneen R, Almeida DV, Converse PJ, Nuermberger EL",
+    "year": "2023",
+    "title": "Using dynamic oral dosing of rifapentine and rifabutin to simulate exposure profiles of long-acting formulations in a mouse model of tuberculosis preventive therapy",
+    "journal": "Antimicrob Agents Chemother",
+    "volume_pages": "67:e00481-23",
+    "identifier": "https://doi.org/10.1128/aac.00481-23"
   }
 }
