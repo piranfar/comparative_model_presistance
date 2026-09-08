@@ -70,7 +70,19 @@ log10(150) — three times into the "Fig 4a–c & Sup Fig 7-8" sheet of their So
 Data, and state the corresponding floor only in a supplementary figure legend.
 The article body does not carry it.
 
-Three cases, one pattern. Together they say the diagnosis is not carelessness:
+### A fourth, the most explicit of them
+
+Shee et al. 2026 write the literal string `0(=1)` into cells of their "Fig. 5g"
+sheet — the author spelling out the substitution, *zero, recorded as 1*. Their
+Fig. 1 legend states the limit of detection as 10 CFU. So the value they
+substitute for a non-detect does not match the limit they declare, and anyone
+taking the logarithm of that 1 computes a kill one log deeper than the assay
+could see.
+
+It is more transparent than most deposits manage, and inconsistent with its own
+stated limit. Verified by opening the workbook.
+
+Four cases, one pattern. Together they say the diagnosis is not carelessness:
 the floor is measured, sometimes recorded better than anyone asks for, and it
 falls out of the record between the bench and the reader — off the end of a
 spreadsheet, or into a column nobody completed.

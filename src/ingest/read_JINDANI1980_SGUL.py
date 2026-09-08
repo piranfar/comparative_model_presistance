@@ -171,6 +171,13 @@ SHEET = "Jindani 1980"
 CT1_RE = re.compile(r"^Day-(\d+)\s*([A-Z])?\s*Ct1$", re.I)
 PREFIX_RE = re.compile(r"^day-\d+\s*[a-z]?\s*")
 FOLLOW = ["ct2", "diln", "cfu", "log cfu"]
+# The cfu column is live Excel formulas: =AVERAGE(Ct1,Ct2)*48*10^(Diln-1).
+# That is the deposit's own arithmetic in the deposit's own words, and it is
+# the whole basis of the floor, so it is read out of the file rather than
+# assumed. Captures the multiplier and the exponent offset.
+FORMULA_RE = re.compile(
+    r"<f[^>]*>\s*AVERAGE\(\s*[A-Z]+\d+\s*,\s*[A-Z]+\d+\s*\)\s*\*\s*"
+    r"([0-9.]+)\s*\*\s*10\^\(\s*[A-Z]+\d+\s*-\s*([0-9.]+)\s*\)\s*</f>")
 
 UNIT_NOTE = ("the sheet's column is a bare \"cfu\" with no unit; these are "
              "sputum densities and CFU/mL is this reader's label, not the "
@@ -178,10 +185,6 @@ UNIT_NOTE = ("the sheet's column is a bare \"cfu\" with no unit; these are "
 CODE_NOTE = ("the deposit never expands its regimen letter codes, so the code "
              "is carried verbatim into arm and drug and no drug name, dose or "
              "unit is inferred")
-VOL_NOTE = ("no plated volume, limit of detection or limit of quantification "
-            "appears anywhere in the deposit, so plated_volume_ul is blank; "
-            "the dilution index Diln is recorded as 10**Diln, which is exact "
-            "up to the constant it shares with the unstated plated volume")
 
 
 def _norm(v) -> str:
@@ -215,20 +218,58 @@ def _blocks(raw: pd.DataFrame) -> list[tuple[str, int, float, str]]:
     return out
 
 
-def _constant(raw: pd.DataFrame, blocks) -> tuple[float, int, int]:
-    """The sheet's own colonies-to-density constant K in cfu = sum*K*10**Diln.
+def _formula(src: Path) -> tuple[float, float, int] | None:
+    """(multiplier, exponent offset, cells) read off the sheet's cfu formulas.
 
-    Fitted from the file, not assumed: the modal ratio across every populated
-    reading, then checked against all of them.
+    Returns None if the workbook has been re-saved values-only and the
+    formulas are gone; the caller then falls back to _constant()'s fit, which
+    gives the same floor but cannot say how the power of ten splits.
     """
-    ratios = []
+    try:
+        with zipfile.ZipFile(src) as z:
+            xml = "".join(
+                z.read(n).decode("utf-8", "replace") for n in z.namelist()
+                if n.startswith("xl/worksheets/") and n.endswith(".xml"))
+    except (OSError, zipfile.BadZipFile, KeyError):
+        return None
+    hits = FORMULA_RE.findall(xml)
+    if not hits:
+        return None
+    seen = {(float(m), float(o)) for m, o in hits}
+    if len(seen) != 1:
+        raise ValueError(
+            "%s: the cfu cells use %d different conversions %r; the floor "
+            "derivation must be re-checked before any floor is written"
+            % (SHEET, len(seen), sorted(seen)))
+    mult, off = seen.pop()
+    return mult, off, len(hits)
+
+
+def _constant(raw: pd.DataFrame, blocks) -> tuple[float, int, int, int, int]:
+    """The sheet's colonies-to-density constant K in cfu = (Ct1+Ct2)*K*10**Diln.
+
+    Fitted from the numbers, not assumed: the modal ratio across every
+    populated reading, then checked against all of them. Independent of
+    _formula(), which reads the same constant out of the cell formulas; the
+    two are cross-checked in read().
+
+    Also counts the evidence that Ct1 and Ct2 are two SEPARATE plates rather
+    than two counts of one plate, which is what fixes the floor at one colony
+    on one plate (mean 0.5) instead of one colony on both (mean 1): readings
+    whose two counts sum to an odd number, and readings where one plate grew
+    nothing and the other did.
+    """
+    ratios, halves, splits = [], 0, 0
     for _, c, _, _ in blocks:
         for i in range(1, len(raw)):
             a, b, dl, cfu = (raw.iat[i, c], raw.iat[i, c + 1],
                              raw.iat[i, c + 2], raw.iat[i, c + 3])
             if any(pd.isna(v) for v in (a, b, dl, cfu)):
                 continue
-            s = float(a) + float(b)
+            a, b = float(a), float(b)
+            s = a + b
+            halves += int(s % 2 == 1)
+            splits += int(min(a, b) == 0 and max(a, b) > 0)
             if s > 0:
                 ratios.append(round(float(cfu) / (s * 10.0 ** float(dl)), 10))
     if not ratios:
@@ -240,7 +281,7 @@ def _constant(raw: pd.DataFrame, blocks) -> tuple[float, int, int]:
             "the deposit's arithmetic has changed and the floor derivation "
             "must be re-checked before any floor is written"
             % (SHEET, n, len(ratios)))
-    return float(k), n, len(ratios)
+    return float(k), n, len(ratios), halves, splits
 
 
 def read(d: Path) -> pd.DataFrame:

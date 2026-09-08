@@ -21,18 +21,21 @@ WHAT THIS DEPOSIT IS, AND WHAT IT IS NOT.
   stage.  Every row here is one mouse, one lung, one plating.
 
   THE TIME AXIS IS MOSTLY MISSING, and that is a finding, not an oversight of
-  this reader.  The workbook's only absolute timing statement in any cell is
-  Supplementary Fig. 3's title, "Uncropped Western blots (PAR, b-Actin at the
-  start of treatment / 1 month post infection)".  Nowhere does it say how long
-  treatment lasted.  So:
+  this reader.  Two cells in the whole workbook state an absolute time, and
+  neither gives a treatment duration: Figure 6 b's title, "CFU - DAY 1 post
+  infection", and Supplementary Fig. 3 a's, "Uncropped Western blots (PAR,
+  b-Actin at the start of treatment / 1 month post infection)".  That month is
+  stated for the Supplementary Fig. 3 mice and for no others.  Nowhere does the
+  workbook say how long treatment lasted.  So:
 
       * "Start of treatment" (Figure 6 c) and "at treatment start"
         (Supplementary Fig. 3 c) are time_h = 0 -- treatment begins there.
       * "End of treatment" (Figures 4 b, 5 b, 6 d) has NO time_h.  The elapsed
         hours are not stated and are not inferred; the notes say so on every
         such row.
-      * "DAY 1 post infection" (Figure 6 b) is a pre-treatment reading, one day
-        after infection and about a month before dosing began.  It is not time
+      * "DAY 1 post infection" (Figure 6 b) is a pre-treatment reading taken
+        one day after infection; how long after infection this experiment's
+        treatment began is not stated anywhere in the workbook.  It is not time
         zero of treatment, so it carries no time_h either, and its notes say
         what it is.  It is kept rather than dropped because it is a real plate
         count and the schema has no way to express a negative time.
@@ -66,15 +69,24 @@ WHAT IS DELIBERATELY LEFT OUT.
     also had PAR measured.  Every value is a duplicate of a Figure 4 b value
     (checked to 1e-5; the deposit writes 8.575483 in one place and 8.575484 in
     the other).  Reading them would double-count mice, so they are skipped.
-  * "Supplementary Fig. 6 a" gives per-group mean and SEM of Figure 4 b, not
-    per-mouse readings.
+  * "Supplementary Fig. 6 a" holds the Figure 4 b group mean and SEM on its
+    left, and on its right all sixty per-mouse Figure 4 b log10 CFU values
+    again (every one checked identical).  Reading it would double-count the
+    same mice, so it is skipped.
 
 OTHER THINGS THE DEPOSIT DOES NOT SAY, left blank rather than filled.
 
   * No dose and no concentration for PZA, RIF or Tp -- concentration and
     conc_unit are blank on every row.
   * The workbook never expands its abbreviations.  PZA, RIF and Tp are carried
-    verbatim into `drug`, and "M.tb" verbatim into `organism`.
+    verbatim into `drug`, and "M.tb" verbatim into `organism`.  Supplementary
+    Fig. 3 c's title names neither organism nor strain: its strain is left
+    blank, and its "M.tb" is carried from the workbook's other CFU panel
+    titles, which the notes on those five rows say outright.
+  * The deposit never names or numbers its animals.  Mice are numbered by
+    position within their block and the Excel cell address of every reading is
+    carried in notes, so a number here is this reader's index, not the
+    depositor's.
   * cfu_per_ml holds a count PER LUNG, not per mL.  The deposit gives no
     homogenate volume, so no conversion is possible or attempted, and every
     row's notes say the column is a misnomer here.
@@ -132,9 +144,11 @@ PANELS = [
     dict(sheet="Fig 5", anchor="Figure 5 b", row_role="host",
          time_h=None, time_note=END_NOTE),
     dict(sheet="Fig 6", anchor="Figure 6 b", row_role="host", time_h=None,
-         time_note="DAY 1 post infection, a pre-treatment reading about a month "
-                   "before dosing began; it is not time zero of treatment, and "
-                   "the schema cannot hold a negative time, so time_h is blank"),
+         time_note="DAY 1 post infection, a pre-treatment reading; the workbook "
+                   "nowhere states how long after infection this experiment's "
+                   "treatment began, so the gap to time zero is unknown; it is "
+                   "not time zero of treatment, and the schema cannot hold a "
+                   "negative time, so time_h is blank"),
     dict(sheet="Fig 6", anchor="Figure 6 c", row_role="host", time_h=0.0,
          time_note='time_h = 0 because the panel title reads "CFU - Start of '
                    'treatment"; no drug had been given when these lungs were '
@@ -148,8 +162,9 @@ PANELS = [
 S3C = dict(sheet="Fig S3", anchor="Supplementary Fig. 3 c", time_h=0.0,
            time_note='time_h = 0 because the panel title reads "(at treatment '
                      'start)"; Supplementary Fig. 3 a dates that start as "1 '
-                     'month post infection", the only absolute time anywhere in '
-                     "the workbook",
+                     'month post infection", the workbook's only statement of '
+                     "an infection-to-treatment interval, and it is stated for "
+                     "these mice",
            arm="start of treatment")
 
 
