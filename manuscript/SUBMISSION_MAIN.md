@@ -1062,6 +1062,15 @@ science. It is missing from the paper, and a reader who never opens the
 supplementary spreadsheet cannot know an endpoint was bounded. What we are
 asking for is a sentence, and somebody has already done the work behind it.
 
+The complementary case is a deposit whose modelling table carries a column named
+`CFU_LOD`, and in which that column is empty in all 272 rows (32). The field
+was designed, declared numeric, and never filled; nor does a detection limit
+appear in any of the eight analysis scripts deposited beside it. Between these
+two the diagnosis is not carelessness. The limit is measured, it is sometimes
+recorded to a standard higher than anyone asks for, and it falls out of the
+record between the bench and the reader — off the end of a spreadsheet, or into
+a column nobody completed.
+
 **Choose the endpoint depth against the headroom actually available**, and note
 that the required inoculum is computable before the experiment rather than
 diagnosable after it: seeding above *L* · max(10^*q*, 1/*c*₁) makes both failure
@@ -1171,7 +1180,7 @@ Source Data of Dubey and colleagues, which was held out of every fitting step.
 
 The analysis code, both audit scripts, the headroom tool described above and the
 machine-readable receipts recording the software versions each stage ran under
-are deposited in a public repository (32), with the documentation needed to install
+are deposited in a public repository (33), with the documentation needed to install
 and run them and a test dataset with the control parameter settings used here.
 Code created to generate the results and to interpret the data is included. The
 repository is dual-licensed, MIT for the code and CC BY 4.0 for the manuscript,
@@ -1372,4 +1381,6 @@ The supplemental file carries the full Materials and Methods, the analyses named
 
 31. Lai RPJ, Ammerman NC, Tasneen R, Almeida DV, Converse PJ, Nuermberger EL. 2023. Using dynamic oral dosing of rifapentine and rifabutin to simulate exposure profiles of long-acting formulations in a mouse model of tuberculosis preventive therapy. Antimicrob Agents Chemother 67:e00481-23. https://doi.org/10.1128/aac.00481-23.
 
-32. Piranfar V. 2026. Analysis code, audit scripts and headroom tool for "The detection floor bounds what a time-kill assay can report: minimum duration for killing and log-reduction endpoints in five published deposits and a prospective test".
+32. Tabor ST, Friesen AD, Reichlen MJ, Dide-Agossou C, McGrath M, Peterson R, Ganusov VV, Robertson GT, Voskuil MI, Walter ND. 2025. Mind the gap: understanding discordance between culture- and a non-culture-based measure of bacterial burden in murine tuberculosis treatment models. bioRxiv posted 18 December 2025; preprint, not peer reviewed. https://github.com/SamuelTaborCU/Mtb-16S-rRNA-vs-CFU.
+
+33. Piranfar V. 2026. Analysis code, audit scripts and headroom tool for "The detection floor bounds what a time-kill assay can report: minimum duration for killing and log-reduction endpoints in five published deposits and a prospective test".

@@ -1,6 +1,6 @@
 {
   "script": "src/audit_manuscript.py",
-  "utc": "2026-09-08T05:52:39+00:00",
+  "utc": "2026-09-08T05:56:29+00:00",
   "checkers": [
     "check_arithmetic",
     "check_census",
@@ -11,10 +11,10 @@
     "check_identity",
     "check_terms"
   ],
-  "n_words_audited": 32380,
+  "n_words_audited": 32532,
   "counts": {
     "high": 0,
-    "medium": 1,
+    "medium": 2,
     "low": 8
   },
   "findings": [
@@ -28,10 +28,19 @@
       "checker": "check_terms"
     },
     {
+      "severity": "medium",
+      "kind": "limit-outside-its-declared-sense",
+      "where": "line 1504 (What should change)",
+      "detail": "\"limit\" appears here in none of the senses the Methods reserve it for. Check that it is not standing in for the assay floor *L*.",
+      "expected": "the assay floor *L*",
+      "found": "two the diagnosis is not carelessness. The limit is measured, it is sometimes recorded to a standard higher than anyone asks for,",
+      "checker": "check_terms"
+    },
+    {
       "severity": "low",
       "kind": "audit-count-summary",
       "where": "whole repository",
-      "detail": "src/audit_claims.py runs 152 checks (run); 3 place(s) state that number: Methods (PAPER_COMPLETE.md) line 1973 = 152; manuscript/RATE_VS_DURATION.md line 1720 = 152; README.md line 44 = 152",
+      "detail": "src/audit_claims.py runs 152 checks (run); 3 place(s) state that number: Methods (PAPER_COMPLETE.md) line 1982 = 152; manuscript/RATE_VS_DURATION.md line 1729 = 152; README.md line 44 = 152",
       "expected": "152",
       "found": "152, 152, 152",
       "checker": "check_census"

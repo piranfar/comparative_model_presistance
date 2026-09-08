@@ -746,5 +746,14 @@
     "journal": "Antimicrob Agents Chemother",
     "volume_pages": "67:e00481-23",
     "identifier": "https://doi.org/10.1128/aac.00481-23"
+  },
+  "R60": {
+    "kind": "article",
+    "authors": "Tabor ST, Friesen AD, Reichlen MJ, Dide-Agossou C, McGrath M, Peterson R, Ganusov VV, Robertson GT, Voskuil MI, Walter ND",
+    "year": "2025",
+    "title": "Mind the gap: understanding discordance between culture- and a non-culture-based measure of bacterial burden in murine tuberculosis treatment models",
+    "journal": "bioRxiv",
+    "volume_pages": "posted 18 December 2025; preprint, not peer reviewed",
+    "identifier": "https://github.com/SamuelTaborCU/Mtb-16S-rRNA-vs-CFU"
   }
 }
