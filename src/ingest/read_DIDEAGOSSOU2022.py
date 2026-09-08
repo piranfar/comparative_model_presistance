@@ -39,7 +39,8 @@ THREE THINGS THE DEPOSIT DOES NOT SAY, and which are therefore blank here.
     readings the deposit states a bound, so they get floor_cfu_per_ml =
     3.26086956521739 and censored = yes, with cfu_per_ml left BLANK -- the file
     gives an inequality, not a count, and writing 3.26 into the count column
-    would invent a measurement. The number is 75/23 exactly, and the three
+    would invent a measurement. The number is 75/23 to every digit the sheet
+    prints (not exactly: 75/23 runs on 3.2608695652173913...), and the three
     positive counts in the same group and day are 3.26, 6.52 and 9.78, i.e.
     one, two and three times it: it is that block's one-colony equivalent, and
     those three rows say so in their notes without receiving a floor. It is NOT
@@ -202,8 +203,9 @@ def _quantum_note(bound: float, counts: pd.Series) -> str:
     """
     frac = Fraction(bound).limit_denominator(1000)
     off = [c for c in counts if _multiple_of(float(c), bound) is None]
-    return ("%r is %d/%d exactly, and across this sheet %d of the %d "
-            "positive counts are NOT an integer multiple of it at the "
+    return ("%r is %d/%d to every digit the sheet prints, and across this "
+            "sheet %d of the %d positive counts are NOT an integer "
+            "multiple of it at the "
             "precision printed (%s among them), so it is the one-colony "
             "equivalent of the block that states it rather than a floor for "
             "the sheet, and it is applied to no other row"
@@ -370,9 +372,14 @@ def read(d: Path) -> pd.DataFrame:
                           "time_h is blank for this experiment")
 
     # ---- the absent floor, established rather than assumed -------------------
+    # Every sheet, not only the three that carry counts: the sentence this
+    # search produces says the phrase occurs nowhere in the WORKBOOK, and the
+    # two relapse sheets are part of the workbook. header=None keeps the column
+    # headings in the cells, so they are searched too.
+    whole = pd.read_excel(book, sheet_name=None, header=None)
     hay = text.lower() + " " + " ".join(
         " ".join(str(v) for v in f.values.ravel() if isinstance(v, str)).lower()
-        + " " + " ".join(map(str, f.columns)).lower() for f in frames.values())
+        for f in whole.values())
     hits = [w for w in FLOOR_WORDS if re.search(w, hay, re.I)]
     floor_absent = FLOOR_ABSENT if not hits else (
         "a floor phrase (%s) now occurs somewhere in this deposit and this "
@@ -438,7 +445,14 @@ def read(d: Path) -> pd.DataFrame:
 
             # -- time ---------------------------------------------------------
             if exp1:
-                time_h = 0.0 if group == "UNTX" else exp1_end_h
+                # UNTX is time zero of TREATMENT only because the methods say
+                # the untreated mice were taken on the day treatment began. If
+                # that sentence did not parse, a bare group label fixes no time
+                # at all and a 0 here would be exactly the quiet fill this
+                # corpus exists to count -- and it would contradict the note
+                # this row already carries. Blank for every arm, then.
+                time_h = ((0.0 if group == "UNTX" else exp1_end_h)
+                          if np.isfinite(exp1_end_h) else np.nan)
                 note.append(exp1_time_note)
             else:
                 days = float(row["Time (days)"])

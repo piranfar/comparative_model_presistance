@@ -186,13 +186,11 @@ UNIT_NOTE = ("the sheet's column is a bare \"cfu\" with no unit; these are "
 CODE_NOTE = ("the deposit never expands its regimen letter codes, so the code "
              "is carried verbatim into arm and drug and no drug name, dose or "
              "unit is inferred")
-# Referenced on every row and lost in an edit, which the corpus build caught as
-# a NameError rather than as a silent blank. It records the one thing the
-# recovered constant K cannot tell us.
-VOL_NOTE = ("the plated volume cannot be separated from the absolute dilution: "
-            "the recovered constant K fixes only their ratio, so plated_volume_ul "
-            "stays blank while the per-reading floor, which depends only on that "
-            "ratio, does not")
+# The volume note is NOT a module constant: it has to name the multiplier and
+# the exponent offset that _formula() reads out of the workbook, so it is built
+# per run inside read() as `vol_note`. (A module-level VOL_NOTE lived here
+# briefly and was restored once by mistake after this edit crossed a build; it
+# is dead now, and its wording predates the discovery of the cell formula.)
 
 
 def _norm(v) -> str:

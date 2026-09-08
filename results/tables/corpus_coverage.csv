@@ -13,7 +13,7 @@ derived from a stated plated volume,0,977,JINDANI1980_SGUL,989,112,8,True,989,97
 none,0,0,PEPPER2026,896,48,6,True,0,0,0,896,,
 none,0,0,SEBASTIAN2025,771,250,5,True,771,0,0,771,,BDQ; Emb; H2O2; INH; Mox; Q203; RIF; Rif; Rifampicin
 none,0,0,AGUILAR2025,756,756,10,True,756,0,0,756,,BCZ; BCZT; BPaC; BPaCJ; BPaJ; BPaL; BPaL/B; BPaL/BJ; BPaL/BP
-stated by the source,416,0,WALTER2021_RSRATIO,709,499,26,True,473,416,216,295,,2HRZE/3HR; BDQ; BPaL; BPaMZ; EMB; HRZE; INH; PZA; PZA + RIF;
+stated by the source,418,0,WALTER2021_RSRATIO,709,499,26,True,473,418,237,293,Mycobacterium tuberculosis,2HRZE/3HR; BDQ; BPaL; BPaMZ; EMB; HRZE; INH; PZA; PZA + RIF;
 none,0,0,STRYDOM2024,659,171,25,True,659,0,0,659,,LZD; TBI-223
 none,0,0,STEWART2012,658,6,5,True,658,0,0,658,,ampicillin; norfloxacin; streptomycin
 none,0,0,NOREL2023,544,157,9,True,544,0,0,544,,ampicillin; ciprofloxacin; ciprofloxaxin

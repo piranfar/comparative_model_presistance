@@ -24,15 +24,19 @@ left out rather than assumed.
 THE FLOOR.  Neither workbook states a limit of detection, a plated volume or a
 plating fraction, in any cell of any sheet.  floor_cfu_per_ml is therefore blank
 on every row.  What the deposit does give is dilution labels and, on four sheets,
-the raw colony counts behind the plotted values, and those two reconcile exactly:
+the raw colony counts behind the plotted values, and those two reconcile:
 
     plotted CFU = colonies x 10^(dilution exponent + 1)
 
-on Fig. 5g, S. Fig. 7d-f, S. Fig. 5a and Fig. 1g alike (exponent 3 is written on
-the last three as "Dilution=-3").  The extra factor of ten is the deposit's own
-arithmetic and is recorded in floor_basis, but the deposit never says where it
-comes from -- no plated volume, no homogenate volume, no fraction -- so it fixes
-no detection limit and none is filled.
+on Fig. 5g (dil=Neat..dil=4), Fig. 1g ("Dilution=-3") and S. Fig. 7d-f
+("dilution=-3") -- every reading but the 17 named under INTERNAL INCONSISTENCIES
+below.  S. Fig. 5a deposits raw counts too, and its factor is a flat 1e5, but it
+states no dilution anywhere, so dilution stays blank on its rows.  The extra
+factor of ten is the deposit's own arithmetic and is recorded in floor_basis;
+the deposit never says where it comes from -- no plated volume, no homogenate
+volume, no fraction -- so it fixes no detection limit and none is filled.  It is
+consistent with 100 uL plated, and with several other things, and a guess is
+exactly what this column must not contain.
 
 THE BELOW-LIMIT ENCODING, which is why this deposit was flagged.  Sheet Fig. 5g,
 the 2 wpi row of the B6.Sst1S block, contains the literal strings
@@ -66,6 +70,30 @@ vivo row.  No volume is stated and none is invented.
 ARM.  Where a sheet crosses a mouse group or an organ with a treatment label, arm
 joins the deposit's own two labels with " / " -- "B6.Sst1S / DQF+ETH", "Veh /
 Lung" -- so both axes survive in one column.  Both halves are verbatim.
+
+AND ARM IS NOT AN ASSIGNMENT AT THE EARLY TIMEPOINTS.  Fig. 5f's Day 1 and Week
+2 rows, and the first row of each Fig. 5g block, carry values in the leftmost
+band only -- the band headed "Veh".  Fig. 5g's raw-count grid shows that header
+is not an arm there: its labels "Vehicle", "DQF", "Eth" and "DQF+Eth" begin
+under the LATER timepoint, leaving the earlier one a single unlabelled column of
+animals.  Those 37 readings keep the sheet's own header verbatim, and each says
+in notes that the deposit does not state they are the vehicle arm rather than a
+pre-treatment burden common to every arm.  Read as a vehicle curve they would
+manufacture a four-point control the deposit never claims.
+
+REPLICATE IS A POSITION, NOT AN ANIMAL.  Fig. 5g's grid row "F1" holds a count
+in the Veh, DQF, Eth and DQF+Eth columns of the same 5 wpi block, so an F-label
+cannot be one mouse.  Every Fig. 5f and Fig. 5g row says so, because grouping by
+(arm, replicate) across timepoints otherwise reads 56 cross-sectional cells as
+56 mice followed over time.
+
+INTERNAL INCONSISTENCIES, 17 readings, flagged and not repaired.  On Fig. 5g's
+Aged B6 block the four DQF 5 wpi values are a decade below what their deposited
+counts give and Vehicle F4 a decade above.  On Fig. 1g the second timepoint of
+experiment 1 is shifted one column against its own raw block in all three mouse
+groups, so the first raw count of each has no plotted partner and the last
+plotted value of each has no raw count.  colonies and dilution are left blank on
+those rows rather than forced onto a pairing the arithmetic refuses.
 
 WHAT THE DEPOSIT NEVER SAYS.  It never spells out "DQF" or "ETH".  The only sheet
 carrying full compound names is S. Fig. 6a, an in vitro MIC panel reporting
@@ -113,11 +141,13 @@ FLOOR_BASIS = (
     "no floor: neither workbook states a limit of detection, a plated volume or "
     "a plating fraction in any cell of any of its 46 sheets. The only plating "
     "information deposited is the dilution labels (dil=Neat..dil=4 on Fig. 5g, "
-    '"Dilution=-3" on Fig. 1g and S. Fig. 7d-f) together with the raw colony '
-    "counts behind the plotted values, and those reconcile exactly as "
-    "CFU = colonies x 10^(dilution exponent + 1); the deposit never says where "
-    "that extra factor of ten comes from, so it fixes no detection limit and "
-    "none is supplied here"
+    '"Dilution=-3" on Fig. 1g, "dilution=-3" on S. Fig. 7d-f) together with the '
+    "raw colony counts behind the plotted values, and those reconcile as "
+    "CFU = colonies x 10^(dilution exponent + 1) on every reading but the 17 "
+    "flagged individually in notes; the deposit never says where that extra "
+    "factor of ten comes from -- no plated volume, no homogenate volume, no "
+    "plating fraction -- so it fixes no detection limit and none is supplied "
+    "here"
 )
 
 ABBREV_NOTE = (
@@ -148,6 +178,31 @@ CONV_NOTE = (
 INVITRO_NOTE = (
     "in vitro macrophage infection; the group label names the mouse the "
     "macrophages came from, not a treatment"
+)
+# Fig. 5g's raw grid reuses F1..F8 as row indices of the grid, not as animals:
+# row "F1" carries a count in the Veh, DQF, Eth AND DQF+Eth columns of the same
+# 5 wpi block, so one label cannot be one mouse. Without this a downstream
+# group-by (arm, replicate) reads 56 cross-sectional cells as 56 followed mice.
+REP_NOTE = (
+    "replicate is the position of the value inside its own block -- on Fig. 5g "
+    'the F-label that sheet\'s raw-count grid puts on the row. The deposit '
+    "states no animal identity: its grid row \"F1\" holds a count in the Veh, "
+    "DQF, Eth and DQF+Eth columns of the one 5 wpi block, so the same label at "
+    "another arm or timepoint is not stated to be the same mouse and these are "
+    "not longitudinal series"
+)
+# The early timepoints put values under the leftmost header only. Fig. 5g's raw
+# grid shows why that header is not an arm assignment: its arm labels start
+# under the LATER timepoint, leaving the earlier one a single unlabelled column.
+UNSPLIT_NOTE = (
+    "CAUTION: at this timepoint the sheet fills one column band only, the "
+    'leftmost, whose group header reads "%s" -- and Fig. 5g\'s raw-count grid '
+    "puts no arm label over its earliest timepoint at all: the labels "
+    '"Vehicle", "DQF", "Eth" and "DQF+Eth" begin under the later timepoint, so '
+    "the earlier one is a single unlabelled column of animals. The deposit "
+    "therefore does not state that these readings belong to the vehicle arm "
+    "rather than being a pre-treatment burden common to every arm; arm keeps "
+    "the sheet's own column header verbatim and nothing is reassigned"
 )
 
 # "0(=1)" on Fig. 5g, "0 (1)" on Fig. 5f: a zero count with the value it is
@@ -451,6 +506,10 @@ def _read_fig5fg(path: Path, rel: str, sheet: str) -> list:
         if not np.isfinite(hours):
             continue
         bare_label = not (DAY_RE.match(label) or WEEK_RE.match(label))
+        # which arm bands of this row carry any value at all
+        filled = [j for j, (_, a, b) in enumerate(arms)
+                  if any(_num(raw.iat[i, c]) is not None for c in range(a, b))]
+        first_band_only = filled == [0]
         for arm_lab, a, b in arms:
             k = 0
             for c in range(a, b):
@@ -460,12 +519,14 @@ def _read_fig5fg(path: Path, rel: str, sheet: str) -> list:
                     continue
                 k += 1
                 drug, conc, unit = _drug_of(arm_lab)
-                note = [ORG_NOTE, INVIVO_NOTE, PI_NOTE, ABBREV_NOTE,
+                note = [ORG_NOTE, INVIVO_NOTE, PI_NOTE, ABBREV_NOTE, REP_NOTE,
                         "the sheet does not name the organ; Fig. 5f and Fig. 5g "
                         "are two different organs and neither says which",
                         'the sheet writes this timepoint as "%s"' % label]
                 if bare_label:
                     note.append(unit_evidence)
+                if first_band_only:
+                    note.append(UNSPLIT_NOTE % arm_lab)
                 cens = ""
                 colonies = dilution = np.nan
                 if isinstance(v, str):

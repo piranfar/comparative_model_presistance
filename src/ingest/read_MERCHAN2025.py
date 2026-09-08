@@ -25,8 +25,11 @@ and what this reader does with it:
                                 at the foot.
   Planktonic_..._FOX.xlsx       READ. Same shape, five timepoint blocks
   Planktonic_..._TGC.xlsx       (24 h, 3, 5, 7, 10 days).
-  Biofilm_7H9vsCAMH.xlsx        READ. Growth of GD01 in two media, 0-120 h,
-  Planktonic_7H9vsCAMH.xlsx     three columns per medium. NO antimicrobial is
+  Biofilm_7H9vsCAMH.xlsx        READ. Growth of GD01 in two media, three
+  Planktonic_7H9vsCAMH.xlsx     columns per medium. The biofilm file runs
+                                0-120 h (its 0 h row fills only one column per
+                                medium); the planktonic file has no 0 h row at
+                                all and starts at 24 h. NO antimicrobial is
                                 applied in either file: they are growth curves,
                                 so `drug` is blank on all their rows. They are
                                 kept because they are viable counts over time
@@ -48,6 +51,13 @@ WHAT IS DELIBERATELY NOT READ.
   * THE AUC COLUMNS ("AUC CFU", "AUC"). Derived summaries of the curves already
     read, not readings.
   * "Muddy titer" and "8UZL titer" in the inoculum block: phage stock titres.
+  * The "Average" cell under each inoculum block: a mean of the three counts
+    directly above it, which are read individually.
+  * The DAY / Time (hours) index column of each sheet: it is the timepoint, and
+    it becomes time_h rather than a reading.
+
+  Every numeric cell in the deposit is accounted for by the four lines above
+  plus the rows this reader emits; the counts were checked cell by cell.
 
 THE FLOOR, and why it is on some rows and not others.
 
@@ -109,6 +119,18 @@ block headers. They are one experiment reported in two figures, so each such
 reading is emitted once, from the alphabetically first file, with a note naming
 the file that repeats it. Divergent repeats would be emitted twice with a
 divergence note instead; that comparison is made on the values at run time.
+
+AND WHERE THAT DE-DUPLICATION IS DELIBERATELY NOT APPLIED. The Fig. 1 sheets
+write their DAY 0 row four times, once under each arm, with the same three
+numbers -- at day 0 the culture has not been split, so there are three physical
+readings, not twelve. Those rows are all kept, because they are what the
+workbook contains and each arm's curve is anchored on them, but the consequence
+is that 18 of the 536 rows restate 6 physical readings. The dedup key is
+(arm, replicate, time), so it does not catch them, and the asymmetry with the
+FOX/TGC handling above is intentional rather than an oversight: across files a
+repeat is a second report of one experiment, within a sheet it is the sheet's
+own layout. Every one of those rows says so in `notes`; a count of distinct
+readings should drop day-0 rows whose note names the shared starting inoculum.
 """
 from __future__ import annotations
 
@@ -146,6 +168,13 @@ GLOSS_RE = re.compile(r"(?m)^([A-Z0-9]+):\s*[Tt]he antibiotic\s+(\w+)")
 MOI_BIO_RE = re.compile(
     r"For biofilm assays[^.]*?\(MOI\)\s*of\s*([\d:.]+)\s*\(([^)]*)\)", re.I)
 MOI_PLK_RE = re.compile(r"For planktonic cultures, the MOI was\s*([\d:.]+)", re.I)
+# The Fig. 1 legend states its own MOI for the SAME planktonic cultures --
+# "cultures treated with phage Muddy and 8UZL at MOI 1:10" -- and it does not
+# agree with the Methods sentence above.  Both are captured so the deposit's
+# self-contradiction is recorded rather than silently resolved in favour of
+# whichever sentence this reader happened to match first.
+MOI_LEGEND_RE = re.compile(
+    r"Planktonic cultures:[^.]*?at MOI\s*(\d+:\d+(?:\.\d+)?)", re.I)
 
 # block header text -> hours: "24hr (11/02)", "Day 3 (13/02)", "10 days (21/02)"
 HOURS_RE = re.compile(r"^\s*(\d+(?:\.\d+)?)\s*(?:h|hr|hrs|hour|hours)\b", re.I)
@@ -252,7 +281,13 @@ def _pdf(d: Path) -> dict:
     if not p.exists():
         return out
     try:
-        import pymupdf
+        # This PDF is the only place in the deposit where a detection limit is
+        # written down, so an import-name change must not be what quietly
+        # blanks it.  PyMuPDF < 1.24 installs as `fitz`.
+        try:
+            import pymupdf
+        except ImportError:                                # pragma: no cover
+            import fitz as pymupdf
         doc = pymupdf.open(p)
         text = "\n".join(page.get_text() for page in doc)
         doc.close()
@@ -277,6 +312,17 @@ def _pdf(d: Path) -> dict:
     m = MOI_PLK_RE.search(flat)
     if m:
         out["moi"]["planktonic"] = m.group(1)
+    m = MOI_LEGEND_RE.search(flat)
+    if m:
+        meth = out["moi"].get("planktonic", "")
+        if not meth:
+            out["moi"]["planktonic"] = "%s, in the Fig. 1 legend" % m.group(1)
+        elif m.group(1) != meth:
+            out["moi"]["planktonic"] = (
+                "%s in the Methods but %s in the Fig. 1 legend, which "
+                "describes these same planktonic cultures; the deposit "
+                "contradicts itself and neither figure is chosen"
+                % (meth, m.group(1)))
     return out
 
 
@@ -336,6 +382,14 @@ def _condition(label: str, meta: dict, mode: str) -> dict:
         low = tok.lower()
         if low in PHAGE:
             drugs.append(PHAGE[low])
+            # The schema has one column for what a well was treated with, so a
+            # phage has to go in `drug`.  Say so on the row: without it a
+            # downstream filter on `drug != ""` silently counts 294 phage rows
+            # as antibiotic exposures.
+            note.append('"%s" is a mycobacteriophage, not an antibiotic; the '
+                        "schema has no other column for a treatment, so it is "
+                        "named in drug -- anything filtering this corpus to "
+                        "antibiotic exposures must exclude it" % PHAGE[low])
             if low == "m":
                 note.append('"M" in the arm label is read as the Muddy phage, '
                             "from the parallel Fox/Tgc + 8UZL labels; the "

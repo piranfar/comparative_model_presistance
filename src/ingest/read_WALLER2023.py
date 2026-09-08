@@ -23,12 +23,15 @@ This is a good deal more than the repository's own sweep note found, which
 reported the Figure 6 sheet only.  Figure 4 alone carries seven count blocks.
 
 WHAT IS NOT READ, and why.  Figure 1 (a drug-by-mutant matrix of log2 fold MIC
-changes), Figures 2, 3A-D and Supplementary 1 and 3 (per cent growth against
-concentration), Figure 5 (per cent growth at 1x/3x/9x MIC), Figure 4 A-D and
-Supplementary 2 (colony counts against CONCENTRATION, with a single "Day 0" row
-for the inoculum and no second timepoint, so there is no time axis to put them
-on), and Figure 4 I and Figure 6 I and J (frequency of resistance, one number
-per replicate, no time).
+changes), Figures 2 A-F, 3 A-D and Supplementary 1 and 3 (per cent growth
+against concentration), Figure 5 (per cent growth at 1x/3x/9x MIC), Figure 4
+A-D, Figure 2 G/H and Supplementary 2 (colony counts against CONCENTRATION,
+with a single "Day 0" row for the inoculum and no second timepoint, so there is
+no time axis to put them on), and Figure 4 I and Figure 6 I and J (frequency of
+resistance, one number per replicate, no time).  The count of what is left out
+is checkable: only the eleven sheets' "Time (days)" / "Time (Days)" / "Day"
+header cells introduce a time index, there are twenty-six of them, and they
+hold 1059 numeric readings between them -- exactly the number of rows returned.
 
 TWO BLOCK TYPES, TOLD APART BY THEIR NUMBERS, NOT BY THEIR PANEL LETTER.  The
 count blocks run from 200 to 2e7.  Figure 3 E-H and Supplementary 5 A-D run from
@@ -95,18 +98,32 @@ WHAT ELSE THE WORKBOOK DOES NOT SAY, all left blank rather than imported.
     numbers are carried into cfu_per_ml, which is the only numeric column the
     schema has for a density, and `readout` says the unit is not stated.
 
-TWO THINGS WORTH KNOWING BEFORE MODELLING THESE CURVES.
+THREE THINGS WORTH KNOWING BEFORE MODELLING THESE CURVES.
 
-  * A CEILING.  20000000 recurs as a saturating maximum, and in Figure 6 F and
-    Supplementary 5 F the maximum is 10000000 instead.  Readings sitting on it
-    are at an upper reporting limit, not measured densities.  The schema has no
-    ceiling column, so every row that sits on its block's saturating maximum
-    says so in notes and the count is reported by the reader.
+  * A CEILING.  Readings pile up on 20000000, and in Figure 6 F and
+    Supplementary 5 F on 10000000 instead, the way they would at an upper
+    reporting limit -- but the workbook states no such limit and the schema has
+    no ceiling column, so the rows sitting there say so in notes, with the tie
+    counted, and the count itself is reported unaltered.  A block whose largest
+    reading is merely its largest reading gets no such note: see the REVIEWED
+    comment in _read_block.
 
   * BELOW-LIMIT READINGS ARE WRITTEN AS THE FLOOR VALUE ITSELF, 200, not as a
     zero, a blank or a "<" string.  A run of 200s is therefore indistinguishable
     in the file from a genuine measurement of 200, and rows on the minimum say
     so in notes.
+
+  * SOME BLOCKS REPEAT OTHER BLOCKS.  Supplementary 5 E and G share their WT,
+    INH-1 and Q203-13 columns exactly (36 count readings), and Supplementary 5
+    A and C share WT and INH-1 (20 non-count readings).  Of the workbook's 183
+    time-series columns, 171 are distinct.  Nothing is dropped, but every row
+    of a repeated series names its twin in notes: a model that treats them as
+    independent will understate the spread.  Four more series coincide exactly
+    without being flagged -- Figure 3 F's two AZ7-11 replicates, Figure 3 F
+    INH-1 Rep 2, Figure 3 E AZ7-11 and INH-1 Rep 2, and the two Supplementary 4
+    A DMSO replicates -- because those series take fewer than four distinct
+    values (a 0.02 grid, or one reading then eight at the ceiling) and can
+    coincide by arithmetic; see the gate in read().
 
 NO NEGATIVE TIMES anywhere: every block's day index starts at 0.
 """
@@ -499,7 +516,15 @@ def read(d: Path) -> pd.DataFrame:
         curve.setdefault(r["_series"], []).append(r["_point"])
     same = {}
     for name, pts in curve.items():
-        same.setdefault(tuple(sorted(pts)), []).append(name)
+        # Only a series with four or more DISTINCT values is evidence of a
+        # repeat.  The non-count blocks are written on a grid of 0.02, so
+        # several of their five-point series coincide exactly by arithmetic
+        # alone (Figure 3 E and F, AZ7-11 and INH-1), as do the two
+        # Supplementary 4 A DMSO replicates, which are one day-0 value
+        # followed by eight readings at the ceiling.  Flagging those would
+        # bury the repeats that are real.
+        if len({v for _, v in pts}) >= 4:
+            same.setdefault(tuple(sorted(pts)), []).append(name)
     twin = {name: [o for o in group if o != name]
             for group in same.values() if len(group) > 1 for name in group}
     for r in rows:
