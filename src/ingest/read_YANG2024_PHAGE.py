@@ -15,11 +15,14 @@ Replicates=3:
 
 WHAT THE DEPOSIT SAYS, and is therefore recorded.
 
-  * The unit and the system, but only inside the compressed graph block. The
-    graph title there is "CFU of liquid culture" and the Y-axis title is
-    "CFU/ml culture". This reader inflates that block and reads both strings out
-    rather than assuming them; the exact strings recovered are quoted in notes
-    on every row. The data table on its own carries no unit at all.
+  * The unit and the system, but only inside the compressed graph block, which
+    holds two text objects: "CFU of liquid culture" and "CFU/ml culture". This
+    reader inflates the block and reads both strings out rather than assuming
+    them; the exact strings recovered are quoted in notes on every row. The
+    data table on its own carries no unit at all. Which of the two is the graph
+    title and which an axis title is NOT settled by the file -- in the inflated
+    stream the first sits beside the slot tag "XTitle" and the second beside
+    "Y1Title" -- so notes call them text objects, not titles.
 
   * The arm labels, verbatim: Ctrl, D29, Chah, DS6A. "Ctrl" is the deposit's own
     control label, so its rows carry no drug. The other three go into `drug` as
@@ -43,10 +46,23 @@ WHAT THE DEPOSIT DOES NOT SAY, and is therefore left blank.
     no limit of detection, no plated volume, no dilution and no colony count --
     only densities. This reader searches for all of those, in both the XML text
     and the inflated graph strings, and records in floor_basis what it searched
-    for and did not find. The repository's own sweep note derives 100 CFU/mL for
-    this study from a 10 uL spot volume stated in the ARTICLE's Methods; that
-    text is not in this deposit, this reader has not read it, and the number is
-    deliberately not recorded here.
+    for and did not find. Two guards, both added at review:
+
+      - A floor may only be extracted from the readable data XML. The inflated
+        block is searched and any hit reported in floor_basis, but never turned
+        into a number, because Prism packs that block with the authoring
+        machine's whole font table and with strings from unrelated projects
+        ("Pfizer", "0% conversion 10uM GTP", "n relativa ARNm catalasa" are all
+        in this one). A regex over that is not evidence about this experiment.
+
+      - floor_basis carries no number from outside the deposit. The repository's
+        sweep note (docs/TB_DEPOSIT_SWEEP_2026-09-08.md) derives 100 CFU/mL for
+        this study from a 10 uL spot volume quoted from the ARTICLE's Methods
+        (PMC10924958). That text is not in this deposit and was not read here.
+        An earlier version of this reader wrote that figure into floor_basis on
+        all 48 rows with a disclaimer attached; the disclaimer does not survive
+        a copy-paste, so the number is gone from the data and lives only here.
+        For this corpus's purposes YANG2024_PHAGE is a floor-absent deposit.
 
 TWO THINGS A LATER READER NEEDS TO KNOW, both checked in code rather than
 asserted from memory.
@@ -182,21 +198,39 @@ def _read_one(path: Path) -> list[dict]:
     axis = [s for s in graph if UNIT_RE.search(s)]
     system = [s for s in graph if re.search(r"culture|broth|lung|spleen|"
                                             r"macrophage", s, re.I)]
+    # REVIEWED: these are called text objects, not titles. In the inflated
+    # block each string is stored beside a slot tag, and "CFU of liquid
+    # culture" sits beside "XTitle" while "CFU/ml culture" sits beside
+    # "Y1Title" -- so which string is the graph title and which is an axis
+    # title is not something this file settles. The unit is what is being
+    # claimed, and the string itself carries it.
     if axis:
         unit_note = ("the data table carries no unit; the unit is taken from "
-                     "the file's own compressed graph block, where a title "
-                     'reads "%s"' % axis[0])
+                     "the file's own compressed graph block, where a text "
+                     'object reads "%s"' % axis[0])
     else:
         unit_note = ("neither the data table nor the file's graph block names "
                      "a unit for these values; they are recorded as CFU/mL on "
                      "the reading that the table is a viable-count time course")
     if system:
-        unit_note += ('; the same block titles the graph "%s"' % system[0])
+        unit_note += ('; the same block holds the string "%s", which is the '
+                      "only word anywhere in the deposit for the system these "
+                      "counts came from" % system[0])
 
     # --- the floor, or the explicit absence of one ---------------------------
-    hay = raw[:raw.find("<Template")] + " " + " ".join(graph)
-    fm = FLOOR_RE.search(hay)
-    vm = VOLUME_RE.search(hay)
+    # REVIEWED: a floor is now taken ONLY from the readable data XML, which is
+    # unambiguously this deposit's own table. The inflated graph block is still
+    # searched, and a hit there is reported, but it can no longer become a
+    # number: Prism packs that block with the authoring machine's entire font
+    # table and with residue from unrelated projects -- this file's block
+    # contains "Pfizer", "0% conversion 10uM GTP" and "n relativa ARNm
+    # catalasa" -- so a regex match inside it is not evidence about this
+    # experiment until a human has looked at it.
+    data_xml = raw[:raw.find("<Template")]
+    graph_text = " ".join(graph)
+    fm = FLOOR_RE.search(data_xml)
+    gm = FLOOR_RE.search(graph_text)
+    vm = VOLUME_RE.search(data_xml) or VOLUME_RE.search(graph_text)
     if fm:
         floor = float(fm.group(1))
         basis = 'stated in the deposit: "%s"' % fm.group(0)
@@ -206,15 +240,26 @@ def _read_one(path: Path) -> list[dict]:
                  "that reports densities only -- no colony count, no dilution, "
                  "no plated volume and no limit of detection anywhere in it. "
                  + FLOOR_SEARCHED + ". ")
+        if gm:
+            basis += ('a floor-like string "%s" appears only inside the '
+                      "compressed graph block, which also carries the "
+                      "authoring machine's font list and strings from "
+                      "unrelated projects, so it is reported here and is NOT "
+                      "recorded as this deposit's floor. " % gm.group(0))
         if vm:
             basis += ('a volume-like string "%s" is present, but no dilution '
                       "accompanies it, so no floor follows by arithmetic and "
                       "none is recorded. " % vm.group(0))
-        basis += ("The repository's sweep note derives 100 CFU/mL for this "
-                  "study from a 10 uL spot volume stated in the ARTICLE's "
-                  "Methods; that text is outside this deposit, this reader has "
-                  "not read it, and the number is deliberately not recorded "
-                  "here")
+        # REVIEWED: this sentence used to carry "100 CFU/mL", derived in the
+        # repository's sweep note from a 10 uL spot volume quoted from the
+        # ARTICLE's Methods. floor_cfu_per_ml was correctly left blank, but a
+        # number that no deposited byte supports has no place in a corpus
+        # column whose purpose is to count how often the number is missing --
+        # it is one careless promotion away from becoming data. The pointer
+        # stays, the number does not; the docstring keeps the detail.
+        basis += ("any floor for this study would have to come from the "
+                  "article's Methods, which are not part of this deposit and "
+                  "were not read here, so none is recorded")
 
     no_meta = ("the deposit names no organism, strain, medium, agent class, "
                "concentration or MOI anywhere in the file, so all of those are "
@@ -235,6 +280,15 @@ def _read_one(path: Path) -> list[dict]:
         if not any(t is not None for t in times):
             raise ValueError("%s / %s: no time can be read from the row titles "
                              "%r" % (path.name, sheet, labels[:6]))
+        # REVIEWED: only an all-unreadable table used to be refused. A table
+        # where SOME titles parsed lost the rest in the loop below with nothing
+        # recorded anywhere -- silent loss, which is worse than a failed build
+        # the builder reports by name. Refuse the table instead.
+        unreadable = [x for x, t in zip(labels, times) if t is None and x.strip()]
+        if unreadable:
+            raise ValueError("%s / %s: row titles %r are not times; refusing to "
+                             "drop those readings silently"
+                             % (path.name, sheet, unreadable))
 
         cols = table.findall(f"{NS}YColumn")
         if not cols:

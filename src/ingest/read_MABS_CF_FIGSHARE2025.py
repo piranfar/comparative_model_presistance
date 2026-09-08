@@ -31,10 +31,10 @@ count, no README, no cell comment, no defined name. floor_cfu_per_ml is blank on
 all 408 rows and floor_basis says so. Nor is there an implicit floor to find: no
 value is zero, the smallest is 6.0e3, and nothing repeats at the bottom of the
 distribution the way a substituted limit would (the twelve smallest distinct
-values occur once or twice each). Every value is an integer multiple of 1,000,
-which is the sheet's reporting granularity and is consistent with a back-
-calculation from a plate count -- but the workbook states neither the dilution
-nor the volume, so no floor follows from it and none is invented.
+values occur between once and three times each). Every count is an integer
+multiple of 1,000, which is the sheet's reporting granularity and is consistent
+with a back-calculation from a plate count -- but the workbook states neither
+the dilution nor the volume, so no floor follows from it and none is invented.
 
 WHAT THE WORKBOOK DOES NOT SAY, and is therefore left blank here:
 
@@ -196,7 +196,7 @@ def read(d: Path) -> pd.DataFrame:
             "strain label is the workbook's own; the file never names the "
             "species, and does not say which isolates are smooth and which "
             "rough",
-            "every value in the sheet is an integer multiple of 1,000, the "
+            "every count in the sheet is an integer multiple of 1,000, the "
             "sheet's reporting granularity; the workbook states no dilution "
             "or plated volume, so no floor follows from it",
         ]
@@ -205,8 +205,9 @@ def read(d: Path) -> pd.DataFrame:
                         "exposure schedule, so concentration and conc_unit "
                         "are blank")
         elif withheld:
-            note.append("%s-free block: the untreated control for the %s arm "
-                        "of the same experiment" % (withheld, withheld))
+            note.append("%s-free block: the no-drug counterpart of the %s "
+                        "arm -- the same 17 strain labels at the same times in "
+                        "the same sheet" % (withheld, withheld))
 
         for k, (lcol, label) in enumerate(labels):
             strain = (("%g" % label) if isinstance(label, (int, float,
@@ -216,6 +217,16 @@ def read(d: Path) -> pd.DataFrame:
             for i, t in times:
                 for rep, c in enumerate(cols, start=1):
                     v = raw.iat[i, c]
+                    if isinstance(v, str) and v.strip():
+                        # A deposit writes a below-limit reading as text
+                        # ("<10", "ND", "0 (below L.O.D)"). Dropping such a
+                        # cell silently would erase the censoring this corpus
+                        # exists to count, so refuse rather than continue.
+                        raise ValueError(
+                            "%s: sheet row %d, strain %s, replicate %d holds "
+                            "the text %r where a count is expected; read it "
+                            "before trusting this reader's blank floor"
+                            % (FILE, i + 1, strain, rep, v.strip()))
                     if not isinstance(v, (int, float, np.number)) \
                             or not np.isfinite(v):
                         continue
