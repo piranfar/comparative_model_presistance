@@ -29,11 +29,11 @@ ORCID: [0000-0003-3653-5739](https://orcid.org/0000-0003-3653-5739)
 A culture that grows nothing after antibiotics has never proved sterility, so
 tolerance is scored by how far the count fell: the minimum duration for killing.
 That endpoint is a fraction of the starting count, so the inoculum should cancel.
-It does in the definition, and fails once killing reaches the assay's floor. Five
-published deposits are reanalysed; one experiment tests this prospectively.
+It does in the definition, and fails once killing reaches the assay's floor.
+Five deposits are reanalysed; one experiment tests this.
 
-Two boundaries follow from the definitions. For a floor *L*, the smallest count
-the method can report, a *q*-log endpoint is visible only above *L*·10^*q*; above
+Two boundaries follow from the definitions. For a floor *L*, a *q*-log endpoint
+is visible only above *L*·10^*q*; above
 *L*/*c*₁, with *c*₁ the lowest class threshold, a floor-level reading fits only
 the lowest class. Reaching the floor is the drug's doing; the label it permits is
 not.
@@ -41,15 +41,16 @@ not.
 Of 217 *Mycobacterium tuberculosis* isolates classified for rifampicin tolerance,
 33 began too close to the floor to show the 99.99 per cent reduction used, and
 all 33 are recorded as failing. Of eighteen read at the floor, twelve admit one
-class and six admit two. The label tracks growth state, not isoniazid resistance;
-most of that runs through a ten-fold lower inoculum, the denominator the label is
-cut on.
+class, six admit two. The label tracks growth state, not isoniazid resistance;
+most of that runs through a ten-fold lower inoculum — the denominator it is cut
+on.
 
-Under one written protocol, six laboratories differed by 4.40 log10 in
-demonstrable kill depth. Prospectively, *Escherichia coli* ATCC 25922 at the
-standard inoculum could report 3.71–3.93 logs at 10 µL and 4.88–5.05 at 100 µL;
-at a cut of 10⁻³, nine of 54 sample-times took two labels from one culture. A
-tolerance call reported without its starting density and assay floor cannot be
+Prospectively, *Escherichia coli* ATCC 25922 at the standard inoculum could
+report 3.71–3.93 logs at 10 µL and 4.88–5.05 at 100 µL; at a cut of 10⁻³, six of
+54 sample-times took two labels from one culture, the pipette alone deciding.
+Letting the plated volume vary across the permitted range moves demonstrable
+depth by 1.60 log10, as exact arithmetic.
+A tolerance call reported without its starting density and assay floor cannot be
 interpreted.
 
 **Keywords:** time-kill assay; limit of quantification; minimum duration for
@@ -224,7 +225,7 @@ break them, with every prediction written down before a plate was counted.
 | --- | --- | --- | --- | --- | --- |
 | Six-laboratory exercise | *M. tuberculosis* H37Rv | moxifloxacin, isoniazid, 1x and 10x MIC | 90 flasks, 2 775 readings | figshare 19766083 | CC BY 4.0 |
 | Clinical isolates | *M. tuberculosis*, 217 isolates | rifampicin | 6 duration endpoints per isolate | eLife 93243, suppl. file 2 | CC BY 4.0 |
-| Evolved clones | *E. coli*, 126 clones | amikacin | MIC and persister fraction per clone | Zenodo 7550302 | CC BY 4.0 |
+| Evolved clones | *E. coli*, 126 clones | amikacin | MIC and persister fraction per clone | Zenodo 7550302 (18) | CC BY 4.0 |
 | Concentration-by-time grid | *M. tuberculosis* | apramycin 1-128 ug/mL (amikacin arm not analysed) | 5 concentrations x 4 days x 3 replicates | figshare 26462791 | CC BY 4.0 |
 | Held out for validation | *E. coli*, hollow fibre | amoxicillin-clavulanate | 20 cultures, measured day-zero density, 100 uL plated | Nat Commun 2026 Source Data | CC BY 4.0 |
 
@@ -236,7 +237,7 @@ name are, in part, a record of how the assay was set up.
 
 **Box 1. Four numbers that score an MDK.** *N₀* is the starting density. *L* is
 the smallest positive count the method can report — one colony in a plated volume
-*v* µL is *L* = 1 000/*v* per mL, and an MPN series uses the lowest table rung (18, 19).
+*v* µL is *L* = 1 000/*v* per mL, and an MPN series uses the lowest table rung (19, 20).
 Headroom is *h* = log10(*N₀*/*L*). A *q*-log endpoint is legal only if *h* ≥ *q*,
 which is the same as seeding at or above *L* · 10^*q*. If the last reading sits
 at *L*, the recorded fraction is *L*/*N₀*: an upper bound, not a measurement.
@@ -259,7 +260,7 @@ Two of the claims this arithmetic supports are not testable and should not be
 read as though they were. If the last reading sits at the floor, the recorded
 reduction cannot exceed *h*, because a deeper one would require a count below
 *L*. And the recorded fraction is then *L*/*N*₀, a monotone decreasing function
-of *N*₀, so its RANK correlation with *N*₀ is
+of *N*₀, so its rank correlation with *N*₀ is
 −1 whatever the numbers are, including random ones. Both follow from the
 definition of a censored reading, and neither is evidence about a drug.
 
@@ -277,7 +278,7 @@ how often a real experiment lands in that window. It could be none of the time.
 ### 1. The plate's floor sets how far down killing can be seen
 
 The most probable number (MPN) readings can only take the discrete values of an
-MPN table (18, 19) — a fixed ladder of rungs, not a continuous scale. The
+MPN table (19, 20) — a fixed ladder of rungs, not a continuous scale. The
 day-5 column does not taper towards zero. It stops. Eighteen isolates sit at
 exactly 23 per mL in the 15-day panel and six in the 60-day panel, and nothing in
 the file lies below that (Fig. 1A). That is a floor, not a tail, and it is
@@ -516,7 +517,7 @@ is censored and more than one class is compatible. At 60 days the counts are 191
 The larger effect is at the deeper endpoint, and it falls unevenly on the groups
 a study would compare. The 99.99 per cent endpoint is unreachable for 22 of 84
 isoniazid-resistant isolates, 26.2 per cent, against 9 of 119 susceptible ones,
-7.6 per cent (Fisher exact p = 0.00056 (20)); the remaining two of the 33 are
+7.6 per cent (Fisher exact p = 0.00056 (21)); the remaining two of the 33 are
 MDR and fall outside that contrast. Their median headroom differs by a full log,
 4 against 5. A comparison of tolerance between those groups is therefore in part
 a comparison of how well each group could be measured, which is the disposition
@@ -618,7 +619,7 @@ p = 2.9 × 10⁻⁵).
 
 Why the adjustment does that is measurable. Isoniazid-resistant isolates go into
 this assay at 5.36 log10 against 6.36 for susceptible isolates, ten-fold thinner
-(Mann–Whitney p = 9.1 × 10⁻¹⁴) (21), and 26.2 per cent of them lack the
+(Mann–Whitney p = 9.1 × 10⁻¹⁴) (22), and 26.2 per cent of them lack the
 headroom for the deepest endpoint against 7.6 per cent of susceptible isolates
 (Section 2). They are one log short of observable killing before the experiment
 begins.
@@ -687,7 +688,7 @@ Why they seed lower is not established here, and the obvious explanation fails:
 resistant isolates do not grow significantly more slowly in this deposit (median
 time to OD 0.4 of 19 against 17, p = 0.24), and 85 of them carry *katG* S315X,
 the mutation that predominates clinically precisely because it is close to
-fitness-neutral — it costs the bacterium almost nothing to carry (22, 23).
+fitness-neutral — it costs the bacterium almost nothing to carry (23, 24).
 What the deposit can rule out is less than we first reported, and the correction
 runs in our favour. Seven of the nine pretreatment covariates the file carries
 cannot adjust this association, and they fail in two different ways. Five of them
@@ -736,9 +737,9 @@ assay is not thin. The two panels are columns on the same spreadsheet rows — 2
 isolates appear in both — so every comparison between them is within-isolate and
 is made that way. Pairing sharpens the result rather than softening it: 26
 isolates lose their headroom shortfall between panels and none acquires one
-(exact McNemar p = 3.0 × 10⁻⁸ against an unpaired p of 2 × 10⁻⁵) (24), eleven
+(exact McNemar p = 3.0 × 10⁻⁸ against an unpaired p of 2 × 10⁻⁵) (25), eleven
 leave the floor and none joins it (p = 9.8 × 10⁻⁴), and every isolate whose
-headroom changes gains (Wilcoxon signed-rank p = 1.3 × 10⁻³³) (25). The
+headroom changes gains (Wilcoxon signed-rank p = 1.3 × 10⁻³³) (26). The
 interquartile range of starting density falls by 0.58 log10.
 
 It does not vanish, and the ordinal treatment is what shows where it goes. The
@@ -896,7 +897,7 @@ The second is that the crossing time is never observed. It lies between the last
 visit above the floor and the first visit below it, and the naive treatment pins
 it to the later end, which biases every duration late by construction rather than
 merely imprecisely. Fitted as interval-censored data — the crossing recorded as
-lying somewhere inside a window rather than at a point (26) — at the most
+lying somewhere inside a window rather than at a point (27) — at the most
 sensitive plating, the tenth percentile of the first crossing falls from 2.95 to
 1.82 days and the twenty-fifth from 11.24 to 9.64; across the treated arms at all
 four platings the twenty-fifth percentile falls from 5.77 to 3.67 days, a 36 per
@@ -929,11 +930,11 @@ suspension to 0.5 McFarland and dilute it, and NCCLS M26-A (approved guideline,
 variable the preceding sections rest on does not vary.
 
 Two things about the standard let counts settle this. First, a McFarland reading
-is a turbidity — how cloudy the tube looks, matched optically (27) — and
+is a turbidity — how cloudy the tube looks, matched optically (28) — and
 cloudiness counts live cells, dead cells, debris and a clump of cells all as one
-particle (27). Converting it to CFU/mL assumes a cell size, a shape and a
+particle (28). Converting it to CFU/mL assumes a cell size, a shape and a
 dispersal that *M. tuberculosis* does not oblige, and tuberculosis protocols work
-from a range of dilutions and target inocula (28). Second, the standard fixes
+from a range of dilutions and target inocula (29). Second, the standard fixes
 what goes into the flask. What matters here is what the plate counts, and between
 the two sit a dilution, a transfer, and whatever clumping happens on the way.
 
@@ -1213,7 +1214,7 @@ points the same negative way. The axes are not shown to be independent here. The
 are shown not to be positively coupled, and that is what the deposits can
 support.
 
-Ask the same question of 126 evolved clones sharing one ancestor (29, 30) and
+Ask the same question of 126 evolved clones sharing one ancestor (18, 30) and
 the answer is ρ = +0.043 (p = 0.63), against the 0.175 this sample size could
 have detected. Independence holds inside every nutrient group separately.
 Splitting by nutrient is not optional there. The concentration written on the
@@ -1264,10 +1265,20 @@ they can fall either side of a class threshold and give one culture two labels.
 in the window where those two fractions straddle the cut**, and it depends on
 where the cut is (Table S10). Put the cut at one per cent and the window is
 nearly shut. Put it at one in a thousand, which is where the clinical
-classification analysed above cuts its lowest class, and one sample-time in six
-receives two different labels from one culture. Nothing about the biology differs
-between the two readings. There is one flask, one drug and one moment. The
-pipette decides.
+classification analysed above cuts its lowest class, and six of 54 sample-times
+receive two different labels from one culture — one in nine.
+
+That figure is computed with a single starting density per flask, and it has to
+be, because the sentence above says *L*₁/*N*₀ and *L*₂/*N*₀ — one denominator.
+The experiment can also be read the way a laboratory would actually run it, with
+each plating series carrying the starting density it measured for itself, and
+then the count is nine of 54 rather than six. The three extra are not the pipette.
+They are the two platings disagreeing about how much culture went in: across the
+nine flasks those two estimates differ by 0.74- to 1.53-fold, median 1.12. Both
+numbers belong in the record. Six is what the plated volume does on its own, and
+it is the claim this section makes; nine is what a laboratory would see, because
+in a real experiment the starting density is measured too, and it is measured
+with error.
 
 ---
 ## Discussion
@@ -1343,8 +1354,9 @@ comfortable at the other — same flask, same afternoon. That much is arithmetic
 and could not have failed. What could have failed is whether a real experiment
 ever lands in the window where the two platings fall on opposite sides of a
 class threshold, and at the cut the clinical classification uses it does so for
-nine of 54 sample-times: one culture, two labels, and nothing between them but
-the pipette. That is the boundary working as a design constraint rather than as
+six of 54 sample-times with the starting density held to one value per flask, and
+for nine when each plating carries its own — one culture, two labels, and nothing
+between them but the pipette and the error in measuring what went in. That is reachability working as a design constraint rather than as
 an explanation after the fact, and it is why the calculation in Box 1 belongs
 before an experiment rather than after it.
 
@@ -1414,7 +1426,13 @@ The same arithmetic answers the objection that the starting density is fixed by
 protocol. It is fixed as a turbidity, and a turbidity is not a viable count.
 Under one written protocol the densities actually achieved differed enough to
 move the deepest demonstrable kill by 2.33 log10 between laboratories, and by
-4.40 once the choice of plated volume is included, since that choice is what
+4.40 once the choice of plated volume is included. Those are two unlike
+quantities and the paper keeps them apart: 1.6 log10 of the 4.40 is exact
+arithmetic on *L* = 1000/*v* and carries no sampling uncertainty at all, while
+the density part is a range over the four laboratories that deposit an untreated
+day-zero reading at the 100 µL plating, and its cluster bootstrap runs 0.05 to
+2.33 log10. The exact part is the stronger half. The choice of plated volume is
+what
 sets the floor.
 
 The standard is not silent on that choice, and this is the paper's sharpest
@@ -1461,7 +1479,7 @@ enter the assay ten-fold lower and 26.2 per cent of them lack the room the
 endpoint requires. We do not know why they seed lower. The natural explanation —
 that resistance carries a fitness cost — is not supported here, since these
 isolates do not grow measurably more slowly and most carry the near-neutral
-*katG* S315X allele (22, 23). That gap is a finding in its own right and
+*katG* S315X allele (23, 24). That gap is a finding in its own right and
 belongs in the next study rather than in a speculative sentence in this one. Nor
 is it explained away by anything else the file records: of its nine pretreatment
 covariates only two can legitimately be adjusted for, and neither moves the
@@ -1741,7 +1759,7 @@ pre-treatment visits, is 2 580 readings, of which 19.3 per cent are flagged.
 experiment under amikacin, each carrying an endpoint minimum inhibitory
 concentration and a persister fraction measured on the same clone, labelled by
 the antibiotic concentration and nutrient level its population evolved under
-(Windels et al. 2024; Zenodo 10.5281/zenodo.7550302, CC BY 4.0) (29, 30). Six of its
+(Windels et al. 2024; Zenodo 10.5281/zenodo.7550302, CC BY 4.0) (18, 30). Six of its
 595 surviving fractions are written as exact zeros, marking a below-limit reading
 without naming a limit; they fix no floor, so this deposit is one of the two for
 which observability labels are refused.
@@ -1813,7 +1831,7 @@ conflating them is the error this paper is about.
 A **count below the assay floor** is left-censored: the population is somewhere
 below a known value. In the six-laboratory deposit that value is a property of
 the plated volume, as above. In the clinical deposit the readings are most
-probable numbers taking the discrete values of an MPN table (18, 19), and the day-5 column
+probable numbers taking the discrete values of an MPN table (19, 20), and the day-5 column
 bottoms out at 23 per mL with a visible pile-up there; that value is treated as
 the floor, and the first Results section reports the evidence for it.
 
@@ -2031,7 +2049,7 @@ cross, 60 per cent read above the floor again at a later visit.
 
 The crossing time is interval-censored, not observed: it lies between the last
 visit above the floor and the first visit below it, and the visit schedule is
-coarse. Interval-censored fits (26) are therefore reported alongside the naive
+coarse. Interval-censored fits (27) are therefore reported alongside the naive
 treatment that pins the event to the visit at which the blank plate was noticed.
 Kaplan–Meier (45) and Cox proportional hazards (46) are retained as **descriptive**
 summaries of first crossing only; their intervals are replaced by cluster
@@ -2103,7 +2121,7 @@ rather than asserted.
 ### Reproducibility
 
 Every number in this paper is regenerated by a script that writes a machine-
-readable receipt of what it computed, and a separate audit script recomputes 165
+readable receipt of what it computed, and a separate audit script recomputes 174
 of the quantities quoted in the text from the tables they came from and reports
 any that disagree. That audit is not exhaustive: it pins the load-bearing counts,
 every headline interval and every figure a conclusion rests on, and it does not
@@ -2181,7 +2199,7 @@ work began, and none was generated for it. Each deposit is identified in Table 1
 and cited in the reference list alongside the article that first described it:
 the clinical isolate panel of Vijay and colleagues (5, 12), the
 six-laboratory time-kill exercise of van Wijk and colleagues (6, 13), the
-evolved-clone deposit of Windels and colleagues (29, 30), the apramycin grid
+evolved-clone deposit of Windels and colleagues (18, 30), the apramycin grid
 of Kaur and colleagues (14, 15), and the hollow-fibre Source Data of Dubey
 and colleagues (16, 17), which was held out of every fitting step.
 
@@ -2255,29 +2273,29 @@ the original draft, review and editing, and visualisation.
 
 17. Dubey V, Darlow C, Gerada A, Unsworth J, Sheth E, Reza N, Farrington N, Haldenby S, Warren D, Liu X, Howard A, Hope W. 2026. Molecular pharmacodynamics of amoxicillin-clavulanic acid for urinary tract infections caused by *Escherichia coli*. Nat Commun 17:7504. https://doi.org/10.1038/s41467-026-74323-2.
 
-18. Cochran WG. 1950. Estimation of bacterial densities by means of the "most probable number". Biometrics 6:105. https://doi.org/10.2307/3001491.
+18. Windels EM, Cool L, Persy E, Swinnen J, Matthay P, Van den Bergh B, Wenseleers T, Michiels J. 2024. Antibiotic dose and nutrient availability differentially drive the evolution of antibiotic resistance and persistence. ISME J 18:wrae070. https://doi.org/10.1093/ismejo/wrae070.
 
-19. Blodgett R. 2023. BAM appendix 2: most probable number from serial dilutions. Bacteriological analytical manual. US Food and Drug Administration, Silver Spring, MD. https://www.fda.gov/food/laboratory-methods-food/bam-appendix-2-most-probable-number-serial-dilutions.
+19. Cochran WG. 1950. Estimation of bacterial densities by means of the "most probable number". Biometrics 6:105. https://doi.org/10.2307/3001491.
 
-20. Fisher RA. 1922. On the interpretation of χ² from contingency tables, and the calculation of P. J R Stat Soc 85:87-94. https://doi.org/10.2307/2340521.
+20. Blodgett R. 2023. BAM appendix 2: most probable number from serial dilutions. Bacteriological analytical manual. US Food and Drug Administration, Silver Spring, MD. https://www.fda.gov/food/laboratory-methods-food/bam-appendix-2-most-probable-number-serial-dilutions.
 
-21. Mann HB, Whitney DR. 1947. On a test of whether one of two random variables is stochastically larger than the other. Ann Math Stat 18:50-60. https://doi.org/10.1214/aoms/1177730491.
+21. Fisher RA. 1922. On the interpretation of χ² from contingency tables, and the calculation of P. J R Stat Soc 85:87-94. https://doi.org/10.2307/2340521.
 
-22. Pym AS, Saint-Joanis B, Cole ST. 2002. Effect of *katG* mutations on the virulence of *Mycobacterium tuberculosis* and the implication for transmission in humans. Infect Immun 70:4955-4960. https://doi.org/10.1128/IAI.70.9.4955-4960.2002.
+22. Mann HB, Whitney DR. 1947. On a test of whether one of two random variables is stochastically larger than the other. Ann Math Stat 18:50-60. https://doi.org/10.1214/aoms/1177730491.
 
-23. van Soolingen D, de Haas PEW, van Doorn HR, Kuijper E, Rinder H, Borgdorff MW. 2000. Mutations at amino acid position 315 of the *katG* gene are associated with high-level resistance to isoniazid, other drug resistance, and successful transmission of *Mycobacterium tuberculosis* in the Netherlands. J Infect Dis 182:1788-1790. https://doi.org/10.1086/317598.
+23. Pym AS, Saint-Joanis B, Cole ST. 2002. Effect of *katG* mutations on the virulence of *Mycobacterium tuberculosis* and the implication for transmission in humans. Infect Immun 70:4955-4960. https://doi.org/10.1128/IAI.70.9.4955-4960.2002.
 
-24. McNemar Q. 1947. Note on the sampling error of the difference between correlated proportions or percentages. Psychometrika 12:153-157. https://doi.org/10.1007/BF02295996.
+24. van Soolingen D, de Haas PEW, van Doorn HR, Kuijper E, Rinder H, Borgdorff MW. 2000. Mutations at amino acid position 315 of the *katG* gene are associated with high-level resistance to isoniazid, other drug resistance, and successful transmission of *Mycobacterium tuberculosis* in the Netherlands. J Infect Dis 182:1788-1790. https://doi.org/10.1086/317598.
 
-25. Wilcoxon F. 1945. Individual comparisons by ranking methods. Biom Bull 1:80. https://doi.org/10.2307/3001968.
+25. McNemar Q. 1947. Note on the sampling error of the difference between correlated proportions or percentages. Psychometrika 12:153-157. https://doi.org/10.1007/BF02295996.
 
-26. Turnbull BW. 1976. The empirical distribution function with arbitrarily grouped, censored and truncated data. J R Stat Soc Series B Stat Methodol 38:290-295. https://doi.org/10.1111/j.2517-6161.1976.tb01597.x.
+26. Wilcoxon F. 1945. Individual comparisons by ranking methods. Biom Bull 1:80. https://doi.org/10.2307/3001968.
 
-27. McFarland J. 1907. The nephelometer: an instrument for estimating the number of bacteria in suspensions used for calculating the opsonic index and for vaccines. JAMA 49:1176. https://doi.org/10.1001/jama.1907.25320140022001f.
+27. Turnbull BW. 1976. The empirical distribution function with arbitrarily grouped, censored and truncated data. J R Stat Soc Series B Stat Methodol 38:290-295. https://doi.org/10.1111/j.2517-6161.1976.tb01597.x.
 
-28. Franzblau SG, DeGroote MA, Cho SH, Andries K, Nuermberger E, Orme IM, Mdluli K, Angulo-Barturen I, Dick T, Dartois V, Lenaerts AJ. 2012. Comprehensive analysis of methods used for the evaluation of compounds against *Mycobacterium tuberculosis*. Tuberculosis (Edinb) 92:453-488. https://doi.org/10.1016/j.tube.2012.07.003.
+28. McFarland J. 1907. The nephelometer: an instrument for estimating the number of bacteria in suspensions used for calculating the opsonic index and for vaccines. JAMA 49:1176. https://doi.org/10.1001/jama.1907.25320140022001f.
 
-29. Windels EM, Cool L, Persy E, Swinnen J, Matthay P, Van den Bergh B, Wenseleers T, Michiels J. 2024. Antibiotic dose and nutrient availability differentially drive the evolution of antibiotic resistance and persistence. ISME J 18:wrae070. https://doi.org/10.1093/ismejo/wrae070.
+29. Franzblau SG, DeGroote MA, Cho SH, Andries K, Nuermberger E, Orme IM, Mdluli K, Angulo-Barturen I, Dick T, Dartois V, Lenaerts AJ. 2012. Comprehensive analysis of methods used for the evaluation of compounds against *Mycobacterium tuberculosis*. Tuberculosis (Edinb) 92:453-488. https://doi.org/10.1016/j.tube.2012.07.003.
 
 30. Windels EM, Cool L, Persy E, Swinnen J, Matthay P, Van den Bergh B, Wenseleers T, Michiels J. 2024. Data supporting "Antibiotic dose and nutrient availability differentially drive the evolution of antibiotic resistance and persistence". Zenodo. https://doi.org/10.5281/zenodo.7550302.
 
@@ -2615,7 +2633,7 @@ Held here so the Results stay on one line of reasoning. Table S6 supports Sectio
 | 7 | under the strictest rate separation the inversion rate is 23.0% of 100 pairs (95% CI 15.6-31.9) | 100 pair of flasks | 6 | cluster bootstrap over whole laboratories | WEAKENED |
 | 1 | 33 of 217 isolates (15.2%) lack the headroom for a 4-log endpoint | 217 isolate | 174 patients min | baseline-only recount | SUPPORTED |
 | 1 / 2 | 18 isolates rest on the floor at 15 days and 6 at 60 | 217 + 210 isolate-panel (each of 210 isolates counted once per panel) | 210 isolates | exact McNemar on the paired binary | SUPPORTED |
-| 10 | no MIC-MDK association survives Benjamini-Hochberg | 6 tests isolate | 174 patients min | baseline-only family of six | SUPPORTED |
+| 10 | no MIC-MDK association survives Benjamini-Hochberg (supplementary text, not a numbered section of the article) | 6 tests isolate | 174 patients min | baseline-only family of six | SUPPORTED |
 | 2 | 18 isolates at the floor; their survival span IS their inoculum span | 217 isolate | 174 patients min | baseline-only recount | SUPPORTED |
 | 2 | 185 determinable, 12 forced by the inoculum, 6 undecidable | 203 isolate | 174 patients min | baseline-only reclassification | SUPPORTED |
 | 2 | at 60 days the observability counts are 191, 6 and none, 'because the cultures are denser and few readings reach the floor' | 203 + 197 isolate-panel (each of 210 isolates counted once per panel) | 197 isolates | exact McNemar on the paired binary | SUPPORTED |
@@ -2648,10 +2666,10 @@ Held here so the Results stay on one line of reasoning. Table S6 supports Sectio
 | Mid | 2 | 340,000 | 380,000 | 3.83 | 4.88 | +1.05 |
 | Mid | 3 | 255,000 | 375,000 | 3.71 | 4.88 | +1.17 |
 
-**Table S10.** How often one culture receives two different tolerance labels from its two platings, swept across the class threshold. That two platings report different fractions is arithmetic; that those fractions land either side of a cut is not, and this is the quantity that could have come out zero. At a cut of one per cent the window is nearly shut. At one in a thousand, where the clinical classification reanalysed here cuts its lowest class, it is one sample-time in six.
+**Table S10.** How often one culture receives two different tolerance labels from its two platings, swept across the class threshold. That two platings report different fractions is arithmetic; that those fractions land either side of a cut is not, and this is the quantity that could have come out zero. At a cut of one per cent the window is nearly shut. At one in a thousand, where the clinical classification reanalysed here cuts its lowest class, it is one sample-time in nine. The two pairs of columns differ in one thing. The first holds the starting density to a single value per flask, so the only thing separating the two readings is the plated volume, which is what the argument claims. The second lets each plating carry the starting density it measured for itself, which is what a laboratory running both platings would have; the count rises because those two estimates of one culture disagree by 0.74- to 1.53-fold. The first column is the claim, the second is the practice, and neither is the other.
 
-| Class threshold *c*₁ | Sample-times whose two platings straddle it | Share |
-| --- | ---: | ---: |
-| 10^-2 | 1 of 54 | 2% |
-| 10^-3 | 9 of 54 | 17% |
-| 10^-4 | 8 of 54 | 15% |
+| Class threshold *c*₁ | Straddling, one *N*₀ per flask | Share | Straddling, each plating's own *N*₀ | Share  |
+| --- | ---: | ---: | ---: | ---: |
+| 10^-2 | 1 of 54 | 2% | 1 of 54 | 2% |
+| 10^-3 | 6 of 54 | 11% | 9 of 54 | 17% |
+| 10^-4 | 7 of 54 | 13% | 8 of 54 | 15% |

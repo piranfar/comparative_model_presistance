@@ -1285,7 +1285,7 @@ def main() -> int:
         "a null that stays a null; the follow-ups were not carrying it")
 
     add("Vijay clinical", "10",
-        "no MIC-MDK association survives Benjamini-Hochberg",
+        "no MIC-MDK association survives Benjamini-Hochberg (supplementary text, not a numbered section of the article)",
         "isolate", "up to 43 follow-ups repeat a patient",
         f"{fam_all['n_tests']} tests", "174 patients min",
         f"{fam_all['n_nominal']} nominal, {fam_all['n_surviving_bh']} survive",

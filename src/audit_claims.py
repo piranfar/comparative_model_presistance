@@ -624,6 +624,46 @@ def main() -> int:
                 rows.append(check(f"32-fold dose range separates at day {int(day)}",
                                   claimed, float(s.loc[day]), 0.05, "x"))
 
+    # --- exp38, the prospective experiment --------------------------------
+    # It had no pins at all, which is the wrong way round: every reanalysed
+    # deposit was audited and the one experiment generated for this study was
+    # not. The two straddle counts are pinned separately because the difference
+    # between them is the whole of an argument -- six is what the plated volume
+    # does on its own, nine is what a laboratory sees once the starting density
+    # is measured twice as well, and a revision that quietly reports one as the
+    # other is exactly what this file exists to stop.
+    f = load("exp38_threshold_sweep.csv")
+    if f is not None:
+        g = f.set_index("c1")
+        if 1e-3 in g.index:
+            rows.append(check("two-label sample-times at c1 = 1e-3, one N0 per flask (8, 11: 6)",
+                              6, float(g.loc[1e-3, "n_straddling_pooled_n0"]), 0.001))
+            rows.append(check("two-label sample-times at c1 = 1e-3, N0 per plating (8, 11: 9)",
+                              9, float(g.loc[1e-3, "n_straddling"]), 0.001))
+            rows.append(check("sample-times compared across the two platings (8, 11: 54)",
+                              54, float(g.loc[1e-3, "n_sample_times"]), 0.001))
+
+    f = load("exp38_headroom_by_flask.csv")
+    if f is not None:
+        gain = f["headroom_gained_by_plating_more"]
+        rows.append(check("smallest paired headroom gain, 10 to 100 uL (8: 0.87)",
+                          0.87, float(gain.min()), 0.02))
+        rows.append(check("largest paired headroom gain, 10 to 100 uL (8: 1.19)",
+                          1.19, float(gain.max()), 0.02))
+        # The two platings' estimates of one culture's starting density. This is
+        # the quantity the paper now reports as its own limitation.
+        ratio = f["n0_100ul"] / f["n0_10ul"]
+        rows.append(check("N0 disagreement between platings, lowest (8, 11: 0.74x)",
+                          0.74, float(ratio.min()), 0.02, "x"))
+        rows.append(check("N0 disagreement between platings, highest (8, 11: 1.53x)",
+                          1.53, float(ratio.max()), 0.02, "x"))
+        mid = f[f.arm == "MID"]
+        if len(mid):
+            rows.append(check("standard-inoculum ceiling at 10 uL, lowest (8: 3.71)",
+                              3.71, float(mid.headroom_10ul.min()), 0.01))
+            rows.append(check("standard-inoculum ceiling at 100 uL, highest (8: 5.05)",
+                              5.05, float(mid.headroom_100ul.max()), 0.01))
+
     out = pd.DataFrame(rows)
     pd.set_option("display.width", 210)
     pd.set_option("display.max_colwidth", 62)

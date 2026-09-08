@@ -43,9 +43,10 @@ ATCC 25922 against ciprofloxacin at ten times MIC, seeded at three densities,
 every sample plated at two volumes, with the predictions recorded before a plate
 was counted. At the standard inoculum the deepest reduction the assay could
 report ran 3.71 to 3.93 logs at the 10 µL plating and 4.88 to 5.05 at 100 µL in
-the same three cultures. At a class threshold of 10⁻³, nine of 54 sample-times
-received two different tolerance labels from one culture: one flask, one drug,
-one moment, and the pipette decides.
+the same three cultures. At a class threshold of 10⁻³, six of 54 sample-times
+received two different tolerance labels from one culture with nothing separating
+the two readings but the plated volume, and nine once each plating carries the
+starting density it measured for itself: one flask, one drug, one moment.
 
 **Scale of the effect in published data.** In 217 clinical *Mycobacterium
 tuberculosis* isolates carrying their authors' rifampicin tolerance
@@ -53,7 +54,7 @@ classification, 33 could not have demonstrated the 99.99 per cent reduction the
 classification is cut on before any drug was added — and all 33 are recorded as
 failing to reach it. Under one written protocol, six laboratories differed by
 4.40 log10 in the kill depth they could demonstrate at all once plated volume is
-counted. A hollow-fibre deposit held out entirely from the derivation then
+counted — of which 1.60 log10 is exact arithmetic on the plated volume alone. A hollow-fibre deposit held out entirely from the derivation then
 behaves as the boundaries predict.
 
 **Reuse of published datasets.** Four of the five deposits carry the analysis and
@@ -76,13 +77,13 @@ deposited with the analysis code.
 **Reproducibility.** Every number in the manuscript is regenerated from the public
 deposits and the deposited experiment by committed code, which writes a
 machine-readable receipt of what it computed. Two audit stages then check the text
-against those results: one recomputes 165 pinned quantities from the tables they
+against those results: one recomputes 174 pinned quantities from the tables they
 came from; the other reads the table legends, the figure legends, Box 1 and the
 Abstract, which the first does not parse. The manuscript states plainly what those
 audits do not cover.
 
 **Supplementary material.** The full Materials and Methods, three supplementary
-analyses, one supplementary figure and 22 supplementary tables are supplied as a
+analyses, two supplementary figures and 22 supplementary tables are supplied as a
 single supplemental file, complete at this first submission, as the journal's
 guide requires.
 

@@ -214,19 +214,52 @@ def main() -> int:
     # quantity that could have come out zero: the arithmetic guarantees that
     # two platings of one sample report different FRACTIONS, and guarantees
     # nothing at all about whether those fractions land either side of a cut.
+    # WHICH N0? Each plating measures its own, and for the headroom that is
+    # right: the 10 uL series never made the 100 uL measurement, so importing it
+    # would report a depth that series could not have reached. But a straddle
+    # computed that way can be produced by two things at once -- the floor,
+    # which is the claim, and the disagreement between two estimates of one
+    # culture's starting density, which is not. The claim in the text is that
+    # nothing separates the two readings but the pipette, so the sweep is run
+    # BOTH ways and the pooled-N0 count is the one that claim is entitled to.
+    pooled = (g[g.time_h == 0].groupby(["arm", "flask"], as_index=False)
+                .cfu.mean().rename(columns={"cfu": "n0_pooled"}))
+    gp = g.merge(pooled, on=["arm", "flask"], how="left")
+    gp["reported_fraction_pooled"] = np.where(
+        gp.censored, gp.floor / gp.n0_pooled, gp.cfu / gp.n0_pooled)
+    wp = (gp.pivot_table(index=["arm", "flask", "time_h"], columns="volume_ul",
+                         values="reported_fraction_pooled", aggfunc="first")
+            .reset_index().dropna(subset=[10.0, 100.0]))
+
     sweep = []
     for c1 in (1e-2, 1e-3, 1e-4):
         straddles = ((w.reported_fraction_10 < c1) !=
                      (w.reported_fraction_100 < c1))
+        pooled_str = (wp[10.0] < c1) != (wp[100.0] < c1)
         sweep.append({"c1": c1, "n_straddling": int(straddles.sum()),
                       "n_sample_times": int(len(w)),
-                      "share": float(straddles.mean())})
+                      "share": float(straddles.mean()),
+                      "n_straddling_pooled_n0": int(pooled_str.sum()),
+                      "share_pooled_n0": float(pooled_str.mean())})
     sw = pd.DataFrame(sweep)
     sw.to_csv(TABLES / "exp38_threshold_sweep.csv", index=False)
     print("\n   and how much of that depends on where the class cut falls:")
     for r in sw.itertuples():
         print(f"      c1 = {r.c1:.0e}:  {r.n_straddling:2d} of {r.n_sample_times} "
-              f"sample-times straddle it  ({r.share:.0%})")
+              f"straddle with each plating's own N0, "
+              f"{r.n_straddling_pooled_n0:2d} with one pooled N0")
+
+    # How far the two estimates of one culture's starting density disagree. It
+    # is the size of the effect that separates the two counts above, and it is
+    # worth reporting for its own sake: N0 is a measurement, not a setting.
+    pw = (g[g.time_h == 0].pivot_table(index=["arm", "flask"],
+                                       columns="volume_ul", values="n0",
+                                       aggfunc="first").dropna())
+    ratio = (pw[100.0] / pw[10.0])
+    print(f"\n   the two platings' estimates of one culture's N0 differ by "
+          f"{ratio.min():.2f}x to {ratio.max():.2f}x (median {ratio.median():.2f}x);"
+          f"\n   that disagreement, not the pipette, is what the two counts above "
+          f"differ by.")
 
     # ---- the arm ceilings, paired within a flask ----------------------
     # Reporting the deepest reachable reduction per ARM invites the comparison

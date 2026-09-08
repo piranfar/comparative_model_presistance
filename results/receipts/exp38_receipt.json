@@ -1,6 +1,6 @@
 {
   "script": "src/experiments/exp38_boundary_experiment.py",
-  "utc": "2026-09-08T22:22:05+00:00",
+  "utc": "2026-09-08T23:54:54+00:00",
   "source_workbook": "BOUNDARY_TEST_BLIND.xlsx",
   "n_plate_readings": 216,
   "n_sample_platings": 108,
@@ -261,19 +261,25 @@
         "c1": 0.01,
         "n_straddling": 1,
         "n_sample_times": 54,
-        "share": 0.018518518518518517
+        "share": 0.018518518518518517,
+        "n_straddling_pooled_n0": 1,
+        "share_pooled_n0": 0.018518518518518517
       },
       {
         "c1": 0.001,
         "n_straddling": 9,
         "n_sample_times": 54,
-        "share": 0.16666666666666666
+        "share": 0.16666666666666666,
+        "n_straddling_pooled_n0": 6,
+        "share_pooled_n0": 0.1111111111111111
       },
       {
         "c1": 0.0001,
         "n_straddling": 8,
         "n_sample_times": 54,
-        "share": 0.14814814814814814
+        "share": 0.14814814814814814,
+        "n_straddling_pooled_n0": 7,
+        "share_pooled_n0": 0.12962962962962962
       }
     ]
   },

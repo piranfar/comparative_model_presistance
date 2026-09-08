@@ -31,11 +31,11 @@ ORCID: [0000-0003-3653-5739](https://orcid.org/0000-0003-3653-5739)
 A culture that grows nothing after antibiotics has never proved sterility, so
 tolerance is scored by how far the count fell: the minimum duration for killing.
 That endpoint is a fraction of the starting count, so the inoculum should cancel.
-It does in the definition, and fails once killing reaches the assay's floor. Five
-published deposits are reanalysed; one experiment tests this prospectively.
+It does in the definition, and fails once killing reaches the assay's floor.
+Five deposits are reanalysed; one experiment tests this.
 
-Two boundaries follow from the definitions. For a floor *L*, the smallest count
-the method can report, a *q*-log endpoint is visible only above *L*·10^*q*; above
+Two boundaries follow from the definitions. For a floor *L*, a *q*-log endpoint
+is visible only above *L*·10^*q*; above
 *L*/*c*₁, with *c*₁ the lowest class threshold, a floor-level reading fits only
 the lowest class. Reaching the floor is the drug's doing; the label it permits is
 not.
@@ -43,15 +43,16 @@ not.
 Of 217 *Mycobacterium tuberculosis* isolates classified for rifampicin tolerance,
 33 began too close to the floor to show the 99.99 per cent reduction used, and
 all 33 are recorded as failing. Of eighteen read at the floor, twelve admit one
-class and six admit two. The label tracks growth state, not isoniazid resistance;
-most of that runs through a ten-fold lower inoculum, the denominator the label is
-cut on.
+class, six admit two. The label tracks growth state, not isoniazid resistance;
+most of that runs through a ten-fold lower inoculum — the denominator it is cut
+on.
 
-Under one written protocol, six laboratories differed by 4.40 log10 in
-demonstrable kill depth. Prospectively, *Escherichia coli* ATCC 25922 at the
-standard inoculum could report 3.71–3.93 logs at 10 µL and 4.88–5.05 at 100 µL;
-at a cut of 10⁻³, nine of 54 sample-times took two labels from one culture. A
-tolerance call reported without its starting density and assay floor cannot be
+Prospectively, *Escherichia coli* ATCC 25922 at the standard inoculum could
+report 3.71–3.93 logs at 10 µL and 4.88–5.05 at 100 µL; at a cut of 10⁻³, six of
+54 sample-times took two labels from one culture, the pipette alone deciding.
+Letting the plated volume vary across the permitted range moves demonstrable
+depth by 1.60 log10, as exact arithmetic.
+A tolerance call reported without its starting density and assay floor cannot be
 interpreted.
 
 **Keywords:** time-kill assay; limit of quantification; minimum duration for
@@ -250,7 +251,7 @@ Two of the claims this arithmetic supports are not testable and should not be
 read as though they were. If the last reading sits at the floor, the recorded
 reduction cannot exceed *h*, because a deeper one would require a count below
 *L*. And the recorded fraction is then *L*/*N*₀, a monotone decreasing function
-of *N*₀, so its RANK correlation with *N*₀ is
+of *N*₀, so its rank correlation with *N*₀ is
 −1 whatever the numbers are, including random ones. Both follow from the
 definition of a censored reading, and neither is evidence about a drug.
 
@@ -812,10 +813,20 @@ they can fall either side of a class threshold and give one culture two labels.
 in the window where those two fractions straddle the cut**, and it depends on
 where the cut is (Table S11). Put the cut at one per cent and the window is
 nearly shut. Put it at one in a thousand, which is where the clinical
-classification analysed above cuts its lowest class, and one sample-time in six
-receives two different labels from one culture. Nothing about the biology differs
-between the two readings. There is one flask, one drug and one moment. The
-pipette decides.
+classification analysed above cuts its lowest class, and six of 54 sample-times
+receive two different labels from one culture — one in nine.
+
+That figure is computed with a single starting density per flask, and it has to
+be, because the sentence above says *L*₁/*N*₀ and *L*₂/*N*₀ — one denominator.
+The experiment can also be read the way a laboratory would actually run it, with
+each plating series carrying the starting density it measured for itself, and
+then the count is nine of 54 rather than six. The three extra are not the pipette.
+They are the two platings disagreeing about how much culture went in: across the
+nine flasks those two estimates differ by 0.74- to 1.53-fold, median 1.12. Both
+numbers belong in the record. Six is what the plated volume does on its own, and
+it is the claim this section makes; nine is what a laboratory would see, because
+in a real experiment the starting density is measured too, and it is measured
+with error.
 
 ---
 
@@ -894,8 +905,9 @@ comfortable at the other — same flask, same afternoon. That much is arithmetic
 and could not have failed. What could have failed is whether a real experiment
 ever lands in the window where the two platings fall on opposite sides of a
 class threshold, and at the cut the clinical classification uses it does so for
-nine of 54 sample-times: one culture, two labels, and nothing between them but
-the pipette. That is the boundary working as a design constraint rather than as
+six of 54 sample-times with the starting density held to one value per flask, and
+for nine when each plating carries its own — one culture, two labels, and nothing
+between them but the pipette and the error in measuring what went in. That is reachability working as a design constraint rather than as
 an explanation after the fact, and it is why the calculation in Box 1 belongs
 before an experiment rather than after it.
 
@@ -965,7 +977,13 @@ The same arithmetic answers the objection that the starting density is fixed by
 protocol. It is fixed as a turbidity, and a turbidity is not a viable count.
 Under one written protocol the densities actually achieved differed enough to
 move the deepest demonstrable kill by 2.33 log10 between laboratories, and by
-4.40 once the choice of plated volume is included, since that choice is what
+4.40 once the choice of plated volume is included. Those are two unlike
+quantities and the paper keeps them apart: 1.6 log10 of the 4.40 is exact
+arithmetic on *L* = 1000/*v* and carries no sampling uncertainty at all, while
+the density part is a range over the four laboratories that deposit an untreated
+day-zero reading at the 100 µL plating, and its cluster bootstrap runs 0.05 to
+2.33 log10. The exact part is the stronger half. The choice of plated volume is
+what
 sets the floor.
 
 The standard is not silent on that choice, and this is the paper's sharpest
@@ -1383,7 +1401,7 @@ The supplemental file carries the full Materials and Methods, the analyses named
 | --- | --- | --- | --- | --- | --- |
 | Six-laboratory exercise | *M. tuberculosis* H37Rv | moxifloxacin, isoniazid, 1x and 10x MIC | 90 flasks, 2 775 readings | figshare 19766083 | CC BY 4.0 |
 | Clinical isolates | *M. tuberculosis*, 217 isolates | rifampicin | 6 duration endpoints per isolate | eLife 93243, suppl. file 2 | CC BY 4.0 |
-| Evolved clones | *E. coli*, 126 clones | amikacin | MIC and persister fraction per clone | Zenodo 7550302 | CC BY 4.0 |
+| Evolved clones | *E. coli*, 126 clones | amikacin | MIC and persister fraction per clone | Zenodo 7550302 (34) | CC BY 4.0 |
 | Concentration-by-time grid | *M. tuberculosis* | apramycin 1-128 ug/mL (amikacin arm not analysed) | 5 concentrations x 4 days x 3 replicates | figshare 26462791 | CC BY 4.0 |
 | Held out for validation | *E. coli*, hollow fibre | amoxicillin-clavulanate | 20 cultures, measured day-zero density, 100 uL plated | Nat Commun 2026 Source Data | CC BY 4.0 |
 

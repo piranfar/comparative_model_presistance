@@ -870,15 +870,27 @@ def check_table_blocks_are_generated(text, tables_md):
     if not tables_md.strip():
         return []
 
+    # A citation is written [[R38]] in tables.md and numbered (18) or (34) by
+    # the time it reaches a built file, so a table that carries one compares
+    # unequal to itself and is reported as hand-edited. This check exists to
+    # catch a table body edited away from what build_tables generated; the
+    # numbering is generated too, so both forms collapse to one marker before
+    # the comparison. Do it here rather than dropping the citation from the
+    # cell: a deposit named in a table with no citation at the point of use is
+    # the defect that put it there.
+    _CITE = re.compile(r"\[\[R\d+\]\]|\((?:\d+(?:,\s*\d+)*)\)")
+
+    def canon(s: str) -> str:
+        return re.sub(r"\s+", " ", _CITE.sub("<cite>", s)).strip()
+
     def blocks(src):
         out = {}
         for r in segment(src):
             if r["region"] != "table legend":
                 continue
             num = r["label"].split()[1]
-            out[num] = (re.sub(r"\s+", " ", r["text"]).strip(),
-                        [re.sub(r"\s+", " ", x).strip()
-                         for x in r["body"].split("\n") if x.strip()])
+            out[num] = (canon(r["text"]),
+                        [canon(x) for x in r["body"].split("\n") if x.strip()])
         return out
 
     paper, gen = blocks(text), blocks(tables_md)

@@ -47,7 +47,7 @@ def table1() -> str:
          "eLife 93243, suppl. file 2", "CC BY 4.0"],
         ["Evolved clones", "*E. coli*, 126 clones", "amikacin",
          "MIC and persister fraction per clone",
-         "Zenodo 7550302", "CC BY 4.0"],
+         "Zenodo 7550302 [[R38]]", "CC BY 4.0"],
         ["Concentration-by-time grid", "*M. tuberculosis*",
          "apramycin 1-128 ug/mL (amikacin arm not analysed)",
          "5 concentrations x 4 days x 3 replicates",
@@ -556,11 +556,13 @@ def tableS10() -> str:
     """Where the class cut falls, and how much of the disagreement depends on it."""
     d = pd.read_csv(T / "exp38_threshold_sweep.csv")
     rows = [[f"10^{round(math.log10(r.c1))}",
+             f"{r.n_straddling_pooled_n0} of {r.n_sample_times}",
+             f"{r.share_pooled_n0:.0%}",
              f"{r.n_straddling} of {r.n_sample_times}",
              f"{r.share:.0%}"] for r in d.itertuples()]
     f = pd.DataFrame(rows, columns=[
-        "Class threshold *c*₁", "Sample-times whose two platings straddle it",
-        "Share"])
+        "Class threshold *c*₁", "Straddling, one *N*₀ per flask", "Share",
+        "Straddling, each plating's own *N*₀", "Share "])
     return ("**Table S10.** How often one culture receives two different "
             "tolerance labels from its two platings, swept across the class "
             "threshold. That two platings report different fractions is "
@@ -568,7 +570,15 @@ def tableS10() -> str:
             "and this is the quantity that could have come out zero. At a cut "
             "of one per cent the window is nearly shut. At one in a thousand, "
             "where the clinical classification reanalysed here cuts its lowest "
-            "class, it is one sample-time in six."
+            "class, it is one sample-time in nine. The two pairs of columns "
+            "differ in one thing. The first holds the starting density to a "
+            "single value per flask, so the only thing separating the two "
+            "readings is the plated volume, which is what the argument claims. "
+            "The second lets each plating carry the starting density it measured "
+            "for itself, which is what a laboratory running both platings would "
+            "have; the count rises because those two estimates of one culture "
+            "disagree by 0.74- to 1.53-fold. The first column is the claim, the "
+            "second is the practice, and neither is the other."
             + chr(10) + chr(10) + md(f, align_right_from=1))
 
 

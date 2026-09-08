@@ -1,6 +1,6 @@
 {
   "script": "src/audit_manuscript.py",
-  "utc": "2026-09-08T22:23:14+00:00",
+  "utc": "2026-09-08T23:56:01+00:00",
   "checkers": [
     "check_arithmetic",
     "check_census",
@@ -11,7 +11,7 @@
     "check_identity",
     "check_terms"
   ],
-  "n_words_audited": 34599,
+  "n_words_audited": 34954,
   "counts": {
     "high": 0,
     "medium": 1,
@@ -21,7 +21,7 @@
     {
       "severity": "medium",
       "kind": "limit-outside-its-declared-sense",
-      "where": "line 139 (Introduction)",
+      "where": "line 140 (Introduction)",
       "detail": "\"limit\" appears here in none of the senses the Methods reserve it for. Check that it is not standing in for the assay floor *L*.",
       "expected": "the assay floor *L*",
       "found": "m requires below- and above-quantification-limit flags together with the limit of quantification, and notes that pharmacometric mo",
@@ -31,9 +31,9 @@
       "severity": "low",
       "kind": "audit-count-summary",
       "where": "whole repository",
-      "detail": "src/audit_claims.py runs 165 checks (run); 3 place(s) state that number: Methods (PAPER_COMPLETE.md) line 2106 = 165; manuscript/RATE_VS_DURATION.md line 1853 = 165; README.md line 44 = 165",
-      "expected": "165",
-      "found": "165, 165, 165",
+      "detail": "src/audit_claims.py runs 174 checks (run); 3 place(s) state that number: Methods (PAPER_COMPLETE.md) line 2124 = 174; manuscript/RATE_VS_DURATION.md line 1870 = 174; README.md line 44 = 174",
+      "expected": "174",
+      "found": "174, 174, 174",
       "checker": "check_census"
     },
     {
@@ -48,7 +48,7 @@
     {
       "severity": "low",
       "kind": "named-items-not-resolved",
-      "where": "other (line 201): \"Two further deposits establish that the same arithmetic governs killing experiments where inoculum is controll\"",
+      "where": "other (line 202): \"Two further deposits establish that the same arithmetic governs killing experiments where inoculum is controll\"",
       "detail": "resolved: the sentence says 2 and then names a list. Not resolved: 2 of its 4 items do not open with a determiner or a count (13); 15)), so the list runs into qualifying clauses and cannot be counted mechanically. Count it by eye",
       "expected": "2 items named",
       "found": "a list of 4 fragments",
@@ -57,7 +57,7 @@
     {
       "severity": "low",
       "kind": "named-items-not-resolved",
-      "where": "results, 4. The label tracks how fast an isolate grows, and its link  (line 686): \"Five of them are recorded almost only for resistant isolates, so their missingness is the exposure: the two su\"",
+      "where": "results, 4. The label tracks how fast an isolate grows, and its link  (line 687): \"Five of them are recorded almost only for resistant isolates, so their missingness is the exposure: the two su\"",
       "detail": "resolved: the sentence says 5 and then names a list. Not resolved: 2 of its 6 items do not open with a determiner or a count (for none of the 119 susceptible on; none), so the list runs into qualifying clauses and cannot be counted mechanically. Count it by eye",
       "expected": "5 items named",
       "found": "a list of 6 fragments",
@@ -66,7 +66,7 @@
     {
       "severity": "low",
       "kind": "quantity-in-words-and-figures",
-      "where": "Table 11 legend (line 1031) and results, 7. The flask that fell faster often crossed the floor later (line 1058)",
+      "where": "Table 11 legend (line 1032) and results, 7. The flask that fell faster often crossed the floor later (line 1059)",
       "detail": "\"a half\" states in words what 70.4 per cent states in figures; the two sentences share arms, bootstrap, deleting, distance, half. Check they are the same quantity -- this rule matches on wording, not on arithmetic, because 70.4 is not a rounding of 50",
       "expected": "the figure, or the word, in both places",
       "found": "\"a half\" against 70.4 per cent",
@@ -75,7 +75,7 @@
     {
       "severity": "low",
       "kind": "quantity-in-words-and-figures",
-      "where": "Table 11 legend (line 1031) and results, 7. The flask that fell faster often crossed the floor later (line 1058)",
+      "where": "Table 11 legend (line 1032) and results, 7. The flask that fell faster often crossed the floor later (line 1059)",
       "detail": "\"a half\" states in words what 62.3 per cent states in figures; the two sentences share arms, bootstrap, deleting, distance, half. Check they are the same quantity -- this rule matches on wording, not on arithmetic, because 62.3 is not a rounding of 50",
       "expected": "the figure, or the word, in both places",
       "found": "\"a half\" against 62.3 per cent",
@@ -84,7 +84,7 @@
     {
       "severity": "low",
       "kind": "quantity-in-words-and-figures",
-      "where": "discussion, How large the effect is (line 1477) and results, 7. The flask that fell faster often crossed the floor later (line 1015)",
+      "where": "discussion, How large the effect is (line 1495) and results, 7. The flask that fell faster often crossed the floor later (line 1016)",
       "detail": "\"a third\" states in words what 34.6 per cent states in figures; the two sentences share assay, crossed, faster, fell, flask. Check they are the same quantity -- this rule matches on wording, not on arithmetic, because 34.6 is not a rounding of 33.3333",
       "expected": "the figure, or the word, in both places",
       "found": "\"a third\" against 34.6 per cent",
@@ -94,25 +94,25 @@
       "severity": "low",
       "kind": "scope-summary",
       "where": "whole manuscript",
-      "detail": "43 claims are stated in the Results and repeated in a legend or in the self-audit table; 43 carry every qualifier family the Results attach to them",
+      "detail": "45 claims are stated in the Results and repeated in a legend or in the self-audit table; 45 carry every qualifier family the Results attach to them",
       "expected": "every repeated claim as narrowly scoped as its original",
-      "found": "43 of 43",
+      "found": "45 of 45",
       "checker": "check_census"
     },
     {
       "severity": "low",
       "kind": "coverage-summary",
       "where": "whole manuscript",
-      "detail": "abstract (1): 17 numeric claims, 17 traceable, 17 of those to a results table or receipt, 6 tokens skipped as conventions; box (1): 9 numeric claims, 9 traceable, 9 of those to a results table or receipt, 5 tokens skipped as conventions; figure legend (3): 34 numeric claims, 34 traceable, 34 of those to a results table or receipt, 9 tokens skipped as conventions; table legend (25): 115 numeric claims, 115 traceable, 115 of those to a results table or receipt, 28 tokens skipped as conventions",
+      "detail": "abstract (1): 16 numeric claims, 16 traceable, 16 of those to a results table or receipt, 6 tokens skipped as conventions; box (1): 9 numeric claims, 9 traceable, 9 of those to a results table or receipt, 5 tokens skipped as conventions; figure legend (3): 34 numeric claims, 34 traceable, 34 of those to a results table or receipt, 9 tokens skipped as conventions; table legend (25): 117 numeric claims, 117 traceable, 117 of those to a results table or receipt, 28 tokens skipped as conventions",
       "expected": "every region scanned",
-      "found": "175 numeric claims outside table bodies",
+      "found": "176 numeric claims outside table bodies",
       "checker": "check_coverage"
     },
     {
       "severity": "low",
       "kind": "deposit-table-map",
       "where": "manuscript/tables.md",
-      "detail": "Vijay: rows in 1*, 2, 5, 9, 15, S5, S7; legend only in no table; van Wijk / ERA4TB: rows in 1*, 2, 5, 9, 15, S5, S7, S8*; legend only in 8*, 11*; Windels: rows in 1*, 2, 15, S7; legend only in no table; Kaur: rows in 1*, 2, 9, 15, S5, S7; legend only in no table; Dubey: rows in 1*, 2, 5, 9, 15, S5, S7; legend only in 12. A starred table matched a description rather than the depositor's name",
+      "detail": "Vijay: rows in 1*, 2, 5, 9, 15, S5, S7; legend only in no table; van Wijk / ERA4TB: rows in 1*, 2, 5, 9, 15, S5, S7, S8*; legend only in 8*, 11*, S10*; Windels: rows in 1*, 2, 15, S7; legend only in no table; Kaur: rows in 1*, 2, 9, 15, S5, S7; legend only in no table; Dubey: rows in 1*, 2, 5, 9, 15, S5, S7; legend only in 12. A starred table matched a description rather than the depositor's name",
       "expected": "3 claims about a table's contents were checked; 0 denied or supposed rather than asserted, and skipped",
       "found": "aliases learned: Vijay = clinical isolates; van Wijk / ERA4TB = laboratories / laboratory plating / six-laboratory; Windels = clones evolved; Kaur = apramycin grid / intracellular / planktonic; Dubey = fibre hollow",
       "checker": "check_deposits"
