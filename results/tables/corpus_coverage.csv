@@ -1,5 +1,5 @@
 floor_regime,floor_stated_rows,floor_derived_rows,study_id,rows,series,timepoints,has_time_zero,with_a_count,with_a_floor,censored_rows,floor_unknown_rows,organisms,drugs
-none,0,0,GOORMAGHTIGH2021,28880,239,292,True,108,0,0,28880,,
+none,0,0,MANUSE2021,28880,239,292,True,108,0,0,28880,,
 none,0,0,BUCHHOLZ2026,8735,696,52,True,3339,0,0,8735,P. aeruginosa,CIP; GEN; Gentamicin; car; cip; ctz; gen; mer; pit
 derived from a stated plated volume,0,383,KOLLEROVA2024,5640,136,76,True,384,383,38,5257,Escherichia coli,Ampicillin
 none,0,0,LEON2025,3203,611,17,True,0,0,0,3203,,CIP
@@ -16,6 +16,7 @@ none,0,0,STEWART2012,658,6,5,True,658,0,0,658,,ampicillin; norfloxacin; streptom
 none,0,0,NOREL2023,544,157,9,True,544,0,0,544,,ampicillin; ciprofloxacin; ciprofloxaxin
 none,0,0,RIVANI2022,504,9,7,True,252,0,0,504,Acinetobacter baumannii,meropenem + amikacin; meropenem + ampicillin-sulbactam
 derived from a stated plated volume,0,408,ALEXANDER2020,408,48,16,False,330,408,38,0,,streptomycin
+none,0,0,MABS_CF_FIGSHARE2025,408,6,4,False,408,0,0,408,,amikacin
 none,0,0,MOLECULAR2026,394,74,10,True,394,0,0,394,E. coli,AMX; AMX + CLV; CLV
 none,0,0,JOVANOVIC2026,390,130,3,True,390,0,0,390,,Bedaquiline; Bedaquiline-Clofazimine-Delamanid-Pyrazinamide;
 none,0,0,MIYAHARA2026,371,52,64,True,262,0,0,371,,
