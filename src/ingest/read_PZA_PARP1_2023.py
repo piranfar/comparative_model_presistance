@@ -412,4 +412,8 @@ def read(d: Path) -> pd.DataFrame:
     book = pd.ExcelFile(src)
     rows = []
     for spec in PANELS:
-        rows += _read_panel(book.parse(sheet_
+        rows += _read_panel(book.parse(sheet_name=spec["sheet"], header=None),
+                            spec)
+    rows += _read_s3c(book.parse(sheet_name=S3C["sheet"], header=None), S3C)
+
+    return finish(pd.DataFrame(rows), "PZA_PARP1_2023")

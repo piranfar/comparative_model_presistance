@@ -157,12 +157,12 @@ used for the two day-0 SPECIMENS, A and B, which are a different thing.
 from __future__ import annotations
 
 import re
-import zipfile
 from collections import Counter
 from pathlib import Path
 
 import numpy as np
 import pandas as pd
+from openpyxl import load_workbook
 
 from src.ingest import empty
 
@@ -176,8 +176,8 @@ FOLLOW = ["ct2", "diln", "cfu", "log cfu"]
 # the whole basis of the floor, so it is read out of the file rather than
 # assumed. Captures the multiplier and the exponent offset.
 FORMULA_RE = re.compile(
-    r"<f[^>]*>\s*AVERAGE\(\s*[A-Z]+\d+\s*,\s*[A-Z]+\d+\s*\)\s*\*\s*"
-    r"([0-9.]+)\s*\*\s*10\^\(\s*[A-Z]+\d+\s*-\s*([0-9.]+)\s*\)\s*</f>")
+    r"^=\s*AVERAGE\(\s*[A-Z]+\d+\s*,\s*[A-Z]+\d+\s*\)\s*\*\s*([0-9.]+)\s*\*"
+    r"\s*10\^\(\s*[A-Z]+\d+\s*-\s*([0-9.]+)\s*\)\s*$")
 
 UNIT_NOTE = ("the sheet's column is a bare \"cfu\" with no unit; these are "
              "sputum densities and CFU/mL is this reader's label, not the "
@@ -225,31 +225,44 @@ def _blocks(raw: pd.DataFrame) -> list[tuple[str, int, float, str]]:
     return out
 
 
-def _formula(src: Path) -> tuple[float, float, int] | None:
-    """(multiplier, exponent offset, cells) read off the sheet's cfu formulas.
+def _formula(src: Path, blocks) -> tuple[float, float, int, int] | None:
+    """(multiplier, exponent offset, cells with the formula, cells without).
 
-    Returns None if the workbook has been re-saved values-only and the
+    Read off the cfu cells themselves, so what floor_basis says about the
+    deposit's arithmetic is a quotation of the file in hand and cannot go
+    stale. Returns None if the workbook has been re-saved values-only and the
     formulas are gone; the caller then falls back to _constant()'s fit, which
     gives the same floor but cannot say how the power of ten splits.
     """
-    try:
-        with zipfile.ZipFile(src) as z:
-            xml = "".join(
-                z.read(n).decode("utf-8", "replace") for n in z.namelist()
-                if n.startswith("xl/worksheets/") and n.endswith(".xml"))
-    except (OSError, zipfile.BadZipFile, KeyError):
+    ws = load_workbook(src, data_only=False)[SHEET]
+    seen, yes, no = set(), 0, 0
+    for _, c, _, _ in blocks:
+        for r in range(2, ws.max_row + 1):
+            v = ws.cell(row=r, column=c + 4).value   # 0-based c+3 -> 1-based
+            if v is None:
+                continue
+            if isinstance(v, str) and v.startswith("="):
+                m = FORMULA_RE.match(v)
+                if m is None:
+                    raise ValueError(
+                        "%s: cfu cell %s holds %r, which is not the "
+                        "AVERAGE(Ct1,Ct2)*k*10^(Diln-n) the rest of the sheet "
+                        "uses; the floor derivation must be re-checked before "
+                        "any floor is written"
+                        % (SHEET, ws.cell(row=r, column=c + 4).coordinate, v))
+                seen.add((float(m.group(1)), float(m.group(2))))
+                yes += 1
+            else:
+                no += 1
+    if not yes:
         return None
-    hits = FORMULA_RE.findall(xml)
-    if not hits:
-        return None
-    seen = {(float(m), float(o)) for m, o in hits}
     if len(seen) != 1:
         raise ValueError(
             "%s: the cfu cells use %d different conversions %r; the floor "
             "derivation must be re-checked before any floor is written"
             % (SHEET, len(seen), sorted(seen)))
     mult, off = seen.pop()
-    return mult, off, len(hits)
+    return mult, off, yes, no
 
 
 def _constant(raw: pd.DataFrame, blocks) -> tuple[float, int, int, int, int]:
@@ -299,7 +312,7 @@ def read(d: Path) -> pd.DataFrame:
 
     blocks = _blocks(raw)
     k, agree, total, halves, splits = _constant(raw, blocks)
-    form = _formula(src)
+    form = _formula(src, blocks)
     if form is None:
         # Formulas gone (a values-only re-save). The floor still follows from
         # the numbers, but how the power of ten splits between dilution and
@@ -310,7 +323,7 @@ def read(d: Path) -> pd.DataFrame:
                  "populated readings (the workbook's cfu formulas are gone, "
                  "so this is a fit, not a quotation)" % (k, agree, total))
     else:
-        mult, off, ncell = form
+        mult, off, live, dead = form
         # One colony on one of the two plates is a mean of 0.5, so the
         # per-colony density is 0.5*mult*10**(Diln-off) = k*10**Diln.
         from_formula = 0.5 * mult * 10.0 ** (-off)
@@ -320,11 +333,12 @@ def read(d: Path) -> pd.DataFrame:
                 "%g; the deposit's arithmetic has changed and the floor "
                 "derivation must be re-checked before any floor is written"
                 % (SHEET, from_formula, k))
-        quote = ("the workbook's own cfu cells read "
-                 "=AVERAGE(Ct1,Ct2)*%g*10^(Diln-%g), %d of them still live in "
-                 "the file, and the same constant comes back independently "
-                 "from the values in %d of %d populated readings"
-                 % (mult, off, ncell, agree, total))
+        quote = ("the workbook's cfu column is live Excel and every one of its "
+                 "%d formula cells reads =AVERAGE(Ct1,Ct2)*%g*10^(Diln-%g) "
+                 "(%d cfu cell(s) hold a typed value instead), and the same "
+                 "constant comes back independently from the numbers in %d of "
+                 "%d populated readings"
+                 % (live, mult, off, dead, agree, total))
 
     lowest = int(min(
         float(raw.iat[i, c + 2])
