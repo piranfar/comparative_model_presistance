@@ -726,5 +726,16 @@
     "repository": "University College London Research Data Repository",
     "identifier": "https://doi.org/10.5522/04/19175153.v2",
     "retrieved": "2026-09-07"
+  },
+  "R58": {
+    "kind": "article",
+    "authors": "van Wijk RC, Solans BP, Chaba L, Sordello S, Upton AM, Nuermberger EL, Robertson GT, Walter ND, Savic RM",
+    "year": "2026",
+    "title": "Predicting tuberculosis relapse based on 28-day CFU, RS ratio, and/or drug contribution for novel regimens in the relapsing mouse model",
+    "journal": "bioRxiv",
+    "volume_pages": "2026.07.27.740024, version 1, posted 30 July 2026; preprint, not peer reviewed",
+    "publisher": "",
+    "repository": "",
+    "identifier": "https://doi.org/10.64898/2026.07.27.740024"
   }
 }

@@ -1033,6 +1033,23 @@ the plate reporting them sterile could not see. This is the region a relapse
 comes from, and in the mouse model used to decide which regimens enter clinical
 trials it is the region a colony count is blind to.
 
+That is also where the counts feeding regimen selection are taken. A model
+published as a preprint while this paper was in preparation predicts relapse in
+the murine model from lung CFU at 28 days together with a ribosomal RNA
+synthesis ratio, across nine datasets, 58 regimens and 2 239 relapse
+observations, reaching an area under the curve of 0.90 on external validation
+[[R58]]. Its own reported finding is that CFU alone performs about as well as CFU
+with the RS ratio, once the sterilising contribution of the individual drugs is
+accounted for. That is what a censored covariate looks like from the outside:
+where the best regimens drive the count onto the floor the count stops
+separating them, and a term standing for drug identity takes over the
+discrimination it can no longer supply. Version 1 of that preprint reports no
+detection limit and no plated fraction, and we do not read this as a lapse
+peculiar to it — the field's own consensus guideline raises neither. It is
+precisely why the boundaries are worth writing down: a relapse model resting on a
+28-day count needs that count treated as left-censored, and *h* says when the
+question arises rather than leaving it to be noticed.
+
 A reader may object that this runs backwards. Falling below the limit of
 detection is what a *susceptible* population does; how can it make an isolate
 look more tolerant? The objection is a fair one, and it is answered by

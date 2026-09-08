@@ -1,6 +1,6 @@
 {
   "script": "src/audit_manuscript.py",
-  "utc": "2026-09-08T05:33:50+00:00",
+  "utc": "2026-09-08T05:40:59+00:00",
   "checkers": [
     "check_arithmetic",
     "check_census",
@@ -11,13 +11,22 @@
     "check_identity",
     "check_terms"
   ],
-  "n_words_audited": 31924,
+  "n_words_audited": 32184,
   "counts": {
     "high": 0,
-    "medium": 1,
+    "medium": 2,
     "low": 8
   },
   "findings": [
+    {
+      "severity": "medium",
+      "kind": "boundary-outside-its-declared-sense",
+      "where": "line 1289 (What fails, and where)",
+      "detail": "\"boundary\" appears here in none of the senses the Methods reserve it for. Check that it is not standing in for the assay floor *L*.",
+      "expected": "the assay floor *L*",
+      "found": "ne raises neither. It is precisely why the boundaries are worth writing down: a relapse model resting on a 28-day count needs that",
+      "checker": "check_terms"
+    },
     {
       "severity": "medium",
       "kind": "limit-outside-its-declared-sense",
@@ -31,7 +40,7 @@
       "severity": "low",
       "kind": "audit-count-summary",
       "where": "whole repository",
-      "detail": "src/audit_claims.py runs 152 checks (run); 3 place(s) state that number: Methods (PAPER_COMPLETE.md) line 1943 = 152; manuscript/RATE_VS_DURATION.md line 1690 = 152; README.md line 44 = 152",
+      "detail": "src/audit_claims.py runs 152 checks (run); 3 place(s) state that number: Methods (PAPER_COMPLETE.md) line 1960 = 152; manuscript/RATE_VS_DURATION.md line 1707 = 152; README.md line 44 = 152",
       "expected": "152",
       "found": "152, 152, 152",
       "checker": "check_census"
@@ -66,7 +75,7 @@
     {
       "severity": "low",
       "kind": "quantity-in-words-and-figures",
-      "where": "discussion, How large the effect is (line 1366) and results, 7. The population that fell faster often crossed the floor l (line 966)",
+      "where": "discussion, How large the effect is (line 1383) and results, 7. The population that fell faster often crossed the floor l (line 966)",
       "detail": "\"a third\" states in words what 36.6 per cent states in figures; the two sentences share assay, crossed, faster, fell, flask. Check they are the same quantity -- this rule matches on wording, not on arithmetic, because 36.6 is not a rounding of 33.3333",
       "expected": "the figure, or the word, in both places",
       "found": "\"a third\" against 36.6 per cent",
