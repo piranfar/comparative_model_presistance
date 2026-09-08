@@ -1,6 +1,6 @@
 {
   "script": "src/experiments/exp26_counter_tests.py",
-  "utc": "2026-09-08T17:29:36+00:00",
+  "utc": "2026-09-08T19:02:21+00:00",
   "counter_test_1_headroom_or_biology": {
     "n_with_ample_headroom": 184,
     "n_reached": 22,
@@ -28,13 +28,13 @@
     "verdict": "claim survives: resistance still predicts a lower inoculum with months on treatment in the model"
   },
   "counter_test_4_inversions_or_noise": {
-    "rate_at_no_threshold": 0.36649214659685864,
-    "rate_at_strictest": 0.2127659574468085,
+    "rate_at_no_threshold": 0.34554973821989526,
+    "rate_at_strictest": 0.23,
     "strictest_gap": 0.1,
-    "pairs_at_strictest": 94,
+    "pairs_at_strictest": 100,
     "ci_at_strictest": [
-      0.13948967489739442,
-      0.30341245841908815
+      0.1559701765210572,
+      0.31939715560366416
     ],
     "monotone_decline": true,
     "rival_supported": false,

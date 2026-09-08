@@ -200,19 +200,34 @@ def table11() -> str:
              f"{100 * inv['inversion_rate_95CI'][1]:.1f}%",
              f"{100 * inv['model_predicts_inversion_correctly']:.1f}%", "", ""]]
     for arm, v in r["variance_decomposition"].items():
+        jl, jh = v["share_distance_jackknife_min"], v["share_distance_jackknife_max"]
+        bl, bh = v["share_distance_lab_boot_low"], v["share_distance_lab_boot_high"]
         rows.append([arm, "", "", "", "", "",
                      f"{100 * v['share_distance']:.1f}%",
-                     f"{100 * v['share_rate']:.1f}%"])
+                     f"{100 * v['share_rate']:.1f}%",
+                     f"{100 * jl:.1f}-{100 * jh:.1f}%",
+                     f"{100 * bl:.1f}-{100 * bh:.1f}%"])
+    rows[0] += ["", ""]
     d = pd.DataFrame(rows, columns=[
         "Arm", "Comparable pairs", "Inversions", "Rate", "95% CI",
-        "Called by D/b criterion", "Variance: distance", "Variance: rate"])
+        "Called by D/b criterion", "Variance: distance", "Variance: rate",
+        "Distance share, leave one laboratory out",
+        "Distance share, laboratory bootstrap"])
     return (f"**Table 11.** Pairs of flasks in the same arm from different "
             f"laboratories. An inversion is a pair in which the population that "
             f"fell faster crossed below the assay floor later. "
             f"{inv['undecidable_pairs']} further pairs that the censoring could "
-            "not settle are excluded rather than imputed. The last two "
-            "columns decompose the spread in crossing time; the rate term is "
-            "the larger in each of the three arms that can be decomposed. "
+            "not settle are excluded rather than imputed. The variance columns "
+            "decompose the spread in crossing time. The rate term is the larger "
+            "at the flask level in all three arms that can be decomposed, and "
+            "that ordering is NOT a claim this table supports: the flasks are "
+            "three to a laboratory and share a starting culture, so the "
+            "quantity is a between-laboratory statistic on six clusters. "
+            "Deleting one laboratory sends the distance share above a half in "
+            "two of the three arms, and a bootstrap over whole laboratories "
+            "straddles a half in all three. The last two columns are those two "
+            "checks, and they are the reason the text claims only that the two "
+            "terms are of comparable size. "
             "Moxifloxacin at one times MIC is not among them: the "
             "decomposition is taken on log *D* and log *b*, five of six "
             "laboratories record net growth in that arm, and only one flask "

@@ -505,7 +505,7 @@ outcome to two levels agrees (Table S5).
 Two things bound that estimate, and neither is a formality. It rests on
 sequential ignorability — that nothing unmeasured drives both the starting
 density and the class — which no observational file can establish. A residual
-correlation of about −0.24 between the mediator and outcome errors would nullify
+correlation of about −0.23 between the mediator and outcome errors would nullify
 the point estimate, and one ordinary measured covariate already moves it about
 forty per cent of that way. More fundamentally, the step in the middle is the
 denominator of the ratio the outcome is cut on. The tolerance class is a
@@ -579,8 +579,11 @@ At ten times the minimum inhibitory concentration of moxifloxacin all six
 laboratories return a positive kill rate, and the rates span 5.2-fold, from 0.090
 to 0.464 log10 CFU/mL per day. Across all 30 laboratory-by-arm cells the Tobit
 estimate — a fit that treats a below-floor reading as below the floor rather than
-as a number — and the imputation estimate never differ by more than 0.003 log10
-per day (Fig. 2A, Table S6).
+as a number — and the imputation estimate never differ by more than 0.006 log10
+per day (Fig. 2A, Table S6). That agreement says the fit is not an artefact of the
+arithmetic used to reach it. It does not say the sub-floor assumption is safe:
+both estimators assume the same normal distribution below the floor, and nothing
+in this deposit can check that assumption from the inside.
 
 The duration endpoint behaves differently on the same flasks. What it records is
 not clearance and not sterilisation. It is a **first observed crossing below the
@@ -676,19 +679,25 @@ lying somewhere inside a window rather than at a point (24) — at the most
 sensitive plating, the tenth percentile of the first crossing falls from 2.95 to
 1.82 days and the twenty-fifth from 11.24 to 9.64; across the treated arms at all
 four platings the twenty-fifth percentile falls from 5.77 to 3.67 days, a 36 per
-cent shortening. The non-parametric interval-censored curve sits below the naive
-Kaplan–Meier at every visit at which crossings are still being recorded — by
-0.081 at day 3 and 0.031 at day 7 — and the two coincide only from day 14, where
-both are flat. A duration read off the naive curve is therefore too long, and by
-about a day at the depths that matter.
+cent shortening. The non-parametric estimate behaves differently, and the
+difference is instructive. Fitted on the half-open interval the data actually
+give — the crossing happened after the last visit that read above the floor, and
+at or before the first that read below — the Turnbull curve agrees with the naive
+Kaplan–Meier at every visit, to floating-point precision. That is not a
+coincidence: the crossing intervals are the visit gaps themselves, so between
+visits there is nothing left for a non-parametric estimator to identify, and the
+naive pinning costs nothing at the visits. What the pinning costs is everything
+between them, which is where the parametric fit puts the shortening above. A
+duration read off the naive curve is therefore too long, and by about a day at
+the depths that matter.
 
 What the adjustment establishes is descriptive and is worth stating as such: a
 continuous measure of where the cultures began accounts for the laboratory term
 at least as well as the laboratory label does, and one institute resists even
 that. What can be tested, because flasks are exchangeable across laboratories
 under the null, is how much of each quantity the laboratory owns. It owns 87.0
-per cent of the variance in starting density (permutation p < 0.0002) and 33.0
-per cent of the within-arm kill rate (p = 0.0048). It owns the duration endpoint
+per cent of the variance in starting density (permutation p < 0.0002) and 36.8
+per cent of the within-arm kill rate (p = 0.0018). It owns the duration endpoint
 outright, since three laboratories produce none at all.
 
 ### 6. The same boundaries hold in an experiment the framework never saw
@@ -741,13 +750,15 @@ remains is 4 to 128 µg/mL: 32-fold, five doublings. Across that range the
 survivor counts spread out 6.9-fold at day 3, 48.2-fold at day 7 and 5.2-fold at
 day 14 (Fig. 3, Table S9). The spread opens, then closes again. An experiment
 read at 14 days would report this drug as insensitive to a 32-fold change in
-dose. Each interval is fitted on its own, resampling all three replicates at both
-ends of every interval. Over days 0 to 3, each doubling of the dose adds +0.059
-log10 per day to the kill rate (95 per cent interval +0.030 to +0.088,
-p = 0.013). Over days 3 to 7 it adds +0.033 (−0.052 to +0.118, p = 0.24). Over
-days 7 to 14 it adds −0.025 (−0.060 to +0.010, p = 0.091). Early against late is
-a firm difference (+0.084, +0.037 to +0.128). Early against middle is not
-(p = 0.43).
+dose. Each interval is fitted on its own, resampling all three replicate counts
+with replacement at both ends of every interval, 20 000 draws. Over days 0 to 3,
+each doubling of the dose adds +0.059 log10 per day to the kill rate (95 per cent
+percentile interval +0.033 to +0.083). Over days 3 to 7 it adds +0.033 (+0.008 to
++0.059). Over days 7 to 14 it adds −0.025 (−0.035 to −0.015). Early against late
+is a firm difference (+0.084, +0.055 to +0.111). Early against middle is not
+(+0.026, −0.011 to +0.062). So concentration dependence is positive early, still
+positive but smaller in the middle, and reversed late — and the reversal, not
+just the shrinkage, is what a 14-day readout would be measuring.
 
 We do not claim the late slope is truly negative. By day 14 the highest arm is
 down to 65 CFU/mL, and the deposit states no limit of quantification and no
@@ -917,7 +928,7 @@ censored at the end of observation, which is the top of the scale and therefore
 the most tolerant value it can take. Of the 217 isolates, 33 lack the range for
 the 99.99 per cent endpoint the classification uses, and 33 of those 33 are
 recorded at that ceiling, against 162 of the 184 with ample room
-(Fisher p = 0.030). The isolates that could not demonstrate the endpoint are,
+The isolates that could not demonstrate the endpoint are,
 without exception, the ones recorded as having failed to reach it.
 
 A class endpoint asks how far the population fell by a fixed time, and there the
@@ -1007,13 +1018,17 @@ whole laboratories rather than pairs leaves that rate poorly determined — 3.0 
 72.4 per cent — so what the deposit establishes is the mechanism and not the
 rate.
 
-The variance decomposition sets the size of the effect. In every arm examined,
-the rate term carries more of the spread in crossing time than the distance term
-does. A crossing time is not mostly a measurement of the inoculum. It is a
-mixture in which the inoculum is a large minority — enough to reverse the
-ranking of two populations in more than a third of comparisons, which is the
-number that matters to anyone choosing between two compounds, and not enough to
-license the claim that the endpoint measures the starting culture.
+The variance decomposition sets the size of the effect, and it will not carry
+more than that. At the flask level the rate term takes the larger share in every
+arm examined, but the flasks are three to a laboratory and the ordering does not
+survive being asked at the laboratory level, so this paper does not assert it.
+What the decomposition does establish is that the two terms are of comparable
+size. A crossing time is not mostly a measurement of the inoculum, and it is not
+mostly a measurement of the drug either. It is a mixture in which the inoculum is
+a large minority — enough to reverse the ranking of two populations in more than
+a third of comparisons, which is the number that matters to anyone choosing
+between two compounds, and not enough to license the claim that the endpoint
+measures the starting culture.
 
 ### Where we agree with the original authors, and where we differ
 

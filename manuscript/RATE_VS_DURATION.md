@@ -479,7 +479,7 @@ outcome to two levels agrees (Table S3).
 Two things bound that estimate, and neither is a formality. It rests on
 sequential ignorability — that nothing unmeasured drives both the starting
 density and the class — which no observational file can establish. A residual
-correlation of about −0.24 between the mediator and outcome errors would nullify
+correlation of about −0.23 between the mediator and outcome errors would nullify
 the point estimate, and one ordinary measured covariate already moves it about
 forty per cent of that way. More fundamentally, the step in the middle is the
 denominator of the ratio the outcome is cut on. The tolerance class is a
@@ -618,8 +618,11 @@ At ten times the minimum inhibitory concentration of moxifloxacin all six
 laboratories return a positive kill rate, and the rates span 5.2-fold, from 0.090
 to 0.464 log10 CFU/mL per day. Across all 30 laboratory-by-arm cells the Tobit
 estimate — a fit that treats a below-floor reading as below the floor rather than
-as a number — and the imputation estimate never differ by more than 0.003 log10
-per day (Fig. 2A, Table 8).
+as a number — and the imputation estimate never differ by more than 0.006 log10
+per day (Fig. 2A, Table 8). That agreement says the fit is not an artefact of the
+arithmetic used to reach it. It does not say the sub-floor assumption is safe:
+both estimators assume the same normal distribution below the floor, and nothing
+in this deposit can check that assumption from the inside.
 
 The duration endpoint behaves differently on the same flasks. What it records is
 not clearance and not sterilisation. It is a **first observed crossing below the
@@ -726,19 +729,25 @@ lying somewhere inside a window rather than at a point [[R29]] — at the most
 sensitive plating, the tenth percentile of the first crossing falls from 2.95 to
 1.82 days and the twenty-fifth from 11.24 to 9.64; across the treated arms at all
 four platings the twenty-fifth percentile falls from 5.77 to 3.67 days, a 36 per
-cent shortening. The non-parametric interval-censored curve sits below the naive
-Kaplan–Meier at every visit at which crossings are still being recorded — by
-0.081 at day 3 and 0.031 at day 7 — and the two coincide only from day 14, where
-both are flat. A duration read off the naive curve is therefore too long, and by
-about a day at the depths that matter.
+cent shortening. The non-parametric estimate behaves differently, and the
+difference is instructive. Fitted on the half-open interval the data actually
+give — the crossing happened after the last visit that read above the floor, and
+at or before the first that read below — the Turnbull curve agrees with the naive
+Kaplan–Meier at every visit, to floating-point precision. That is not a
+coincidence: the crossing intervals are the visit gaps themselves, so between
+visits there is nothing left for a non-parametric estimator to identify, and the
+naive pinning costs nothing at the visits. What the pinning costs is everything
+between them, which is where the parametric fit puts the shortening above. A
+duration read off the naive curve is therefore too long, and by about a day at
+the depths that matter.
 
 What the adjustment establishes is descriptive and is worth stating as such: a
 continuous measure of where the cultures began accounts for the laboratory term
 at least as well as the laboratory label does, and one institute resists even
 that. What can be tested, because flasks are exchangeable across laboratories
 under the null, is how much of each quantity the laboratory owns. It owns 87.0
-per cent of the variance in starting density (permutation p < 0.0002) and 33.0
-per cent of the within-arm kill rate (p = 0.0048). It owns the duration endpoint
+per cent of the variance in starting density (permutation p < 0.0002) and 36.8
+per cent of the within-arm kill rate (p = 0.0018). It owns the duration endpoint
 outright, since three laboratories produce none at all.
 ### 6. The turbidity standard fixes what goes into the flask, not what the plate can see
 
@@ -809,14 +818,14 @@ began from.
 
 Take two flasks in the same treatment arm from different laboratories and compare
 them. Across 191 such pairs — with 45 further pairs that the censoring could not
-settle, which are excluded rather than imputed — **70 pairs — 36.6 per cent — are
+settle, which are excluded rather than imputed — **66 pairs — 34.6 per cent — are
 inversions**: the flask in which the population fell faster crossed below the
 assay floor later (Table 11). Restrict to pairs whose rates differ by more than
-0.10 log10 per day, so that the faster flask is unambiguously faster, and 21.3 per
-cent of 94 pairs still invert. The criterion *D_A*/*D_B* > *b_A*/*b_B* calls 83.8
+0.10 log10 per day, so that the faster flask is unambiguously faster, and 23.0 per
+cent of 100 pairs still invert. The criterion *D_A*/*D_B* > *b_A*/*b_B* calls 84.3
 per cent of all 191 pairs correctly, but that figure is carried by the easy
-majority. 63.4 per cent of pairs are not inversions, and the criterion gets 97.5
-per cent of those right against 60.0 per cent of the inversions themselves. So the
+majority. 65.4 per cent of pairs are not inversions, and the criterion gets 97.6
+per cent of those right against 59.1 per cent of the inversions themselves. So the
 decomposition identifies the mechanism — a pair inverts when the distance ratio
 exceeds the rate ratio — without predicting which pairs invert much better than
 three times in five. The residual is what a single averaged slope through a
@@ -825,28 +834,37 @@ of *b*.
 
 The effect holds when the faster flask is required to be unambiguously faster.
 Raise the minimum separation between the two fitted rates and pairs whose rates
-barely differ drop out. At 0.02 log10 per day the inversion rate is 34.5 per cent.
-At 0.05 it is 30.4 per cent. At 0.10 — a difference no reader would dispute — it
-is 21.3 per cent of 94 pairs.
+barely differ drop out. At 0.02 log10 per day the inversion rate is 33.7 per cent.
+At 0.05 it is 29.4 per cent. At 0.10 — a difference no reader would dispute — it
+is 23.0 per cent of 100 pairs.
 
 Those point estimates are firm. Their precision is not, and the difference
 matters. The pairs are not independent observations: 191 pairs are built from 42
 flasks in six laboratories, and an interval that treats them as independent coin
 flips reports a precision the design does not have. Resampling whole flasks within
-laboratory puts the 36.6 per cent between 24.7 and 50.5 per cent. Resampling whole
+laboratory puts the 34.6 per cent between 22.3 and 48.7 per cent. Resampling whole
 laboratories, which is the level at which the comparison is actually made, puts it
-between 3.0 and 72.4 per cent. Under the strictest rate separation the
-corresponding intervals are 7.6 to 42.7 per cent and 0 to 82.4 per cent. What the
+between 3.0 and 71.3 per cent. Under the strictest rate separation the
+corresponding intervals are 9.4 to 42.9 per cent and 0 to 79.4 per cent. What the
 deposit supports is therefore that inversions are common and are explained by the
 decomposition. It does not support any particular rate.
 
 The variance decomposition sets the size of the effect and it also bounds the
 claim. Of the variation available to move a crossing time, the distance term
-carries 39.4 per cent at ten times moxifloxacin, 31.4 per cent at ten times
-isoniazid and 19.6 per cent at one times isoniazid. The rate term carries the
-rest. **The rate contributes more of the spread than the distance does in each of
-the three arms that can be decomposed.** The fourth treated arm, moxifloxacin at
-one times the inhibitory concentration, is not among them: five of six
+carries 35.2 per cent at ten times moxifloxacin, 32.3 per cent at ten times
+isoniazid and 17.7 per cent at one times isoniazid. The rate term carries the
+rest in all three. **That ordering is not established, and we do not claim it.**
+The flasks it is computed over are three to a laboratory and share a starting
+culture, so this is a between-laboratory statistic with six clusters wearing
+flasks as a disguise. Deleting one laboratory pushes the distance share above a
+half in two of the three arms — to 70.4 per cent at ten times isoniazid and 62.3
+per cent at ten times moxifloxacin — and a bootstrap over whole laboratories
+straddles a half in all three (Table 11). What survives is the weaker and
+sufficient statement: the distance term is a large share of the variation
+available to move a crossing time, and the two terms are of comparable size.
+
+The fourth treated arm, moxifloxacin at
+one times the inhibitory concentration, cannot be decomposed at all: five of six
 laboratories record net growth there, and only one flask in the arm returns a
 positive fitted rate, so there is no spread in the rate to divide (Table 11). A
 crossing time is therefore not mainly an inoculum measurement. It is a mixture, in
@@ -904,13 +922,15 @@ remains is 4 to 128 µg/mL: 32-fold, five doublings. Across that range the
 survivor counts spread out 6.9-fold at day 3, 48.2-fold at day 7 and 5.2-fold at
 day 14 (Fig. 3, Table 13). The spread opens, then closes again. An experiment
 read at 14 days would report this drug as insensitive to a 32-fold change in
-dose. Each interval is fitted on its own, resampling all three replicates at both
-ends of every interval. Over days 0 to 3, each doubling of the dose adds +0.059
-log10 per day to the kill rate (95 per cent interval +0.030 to +0.088,
-p = 0.013). Over days 3 to 7 it adds +0.033 (−0.052 to +0.118, p = 0.24). Over
-days 7 to 14 it adds −0.025 (−0.060 to +0.010, p = 0.091). Early against late is
-a firm difference (+0.084, +0.037 to +0.128). Early against middle is not
-(p = 0.43).
+dose. Each interval is fitted on its own, resampling all three replicate counts
+with replacement at both ends of every interval, 20 000 draws. Over days 0 to 3,
+each doubling of the dose adds +0.059 log10 per day to the kill rate (95 per cent
+percentile interval +0.033 to +0.083). Over days 3 to 7 it adds +0.033 (+0.008 to
++0.059). Over days 7 to 14 it adds −0.025 (−0.035 to −0.015). Early against late
+is a firm difference (+0.084, +0.055 to +0.111). Early against middle is not
+(+0.026, −0.011 to +0.062). So concentration dependence is positive early, still
+positive but smaller in the middle, and reversed late — and the reversal, not
+just the shrinkage, is what a 14-day readout would be measuring.
 
 We do not claim the late slope is truly negative. By day 14 the highest arm is
 down to 65 CFU/mL, and the deposit states no limit of quantification and no
@@ -1117,7 +1137,7 @@ censored at the end of observation, which is the top of the scale and therefore
 the most tolerant value it can take. Of the 217 isolates, 33 lack the range for
 the 99.99 per cent endpoint the classification uses, and 33 of those 33 are
 recorded at that ceiling, against 162 of the 184 with ample room
-(Fisher p = 0.030). The isolates that could not demonstrate the endpoint are,
+The isolates that could not demonstrate the endpoint are,
 without exception, the ones recorded as having failed to reach it.
 
 A class endpoint asks how far the population fell by a fixed time, and there the
@@ -1208,13 +1228,17 @@ whole laboratories rather than pairs leaves that rate poorly determined — 3.0 
 72.4 per cent — so what the deposit establishes is the mechanism and not the
 rate.
 
-The variance decomposition sets the size of the effect. In every arm examined,
-the rate term carries more of the spread in crossing time than the distance term
-does. A crossing time is not mostly a measurement of the inoculum. It is a
-mixture in which the inoculum is a large minority — enough to reverse the
-ranking of two populations in more than a third of comparisons, which is the
-number that matters to anyone choosing between two compounds, and not enough to
-license the claim that the endpoint measures the starting culture.
+The variance decomposition sets the size of the effect, and it will not carry
+more than that. At the flask level the rate term takes the larger share in every
+arm examined, but the flasks are three to a laboratory and the ordering does not
+survive being asked at the laboratory level, so this paper does not assert it.
+What the decomposition does establish is that the two terms are of comparable
+size. A crossing time is not mostly a measurement of the inoculum, and it is not
+mostly a measurement of the drug either. It is a mixture in which the inoculum is
+a large minority — enough to reverse the ranking of two populations in more than
+a third of comparisons, which is the number that matters to anyone choosing
+between two compounds, and not enough to license the claim that the endpoint
+measures the starting culture.
 ### Where we agree with the original authors, and where we differ
 
 We agree with van Wijk and colleagues wherever the two analyses overlap. They
@@ -1609,7 +1633,7 @@ resamples, so the two are comparable term by term.
 Sequential ignorability is assumed and is not testable here, so the estimate is
 accompanied by the sensitivity that matters: the residual correlation between
 mediator and outcome errors at which the point estimate crosses zero, which is
-about −0.24. The outcome is an ordinal class scored linearly, as in the
+about −0.23. The outcome is an ordinal class scored linearly, as in the
 association family; the binary collapses are reported because they do not depend
 on that scoring. No claim is made that unmeasured confounding is absent. The
 estimate replaces the attenuation percentage as the quantity cited for the
@@ -1698,9 +1722,15 @@ the profile likelihood.
 
 **Multiple imputation** draws each censored reading from the fitted normal
 truncated at its own limit, refits by ordinary least squares, and pools 50 fits
-by Rubin's rules [[R48]]. It makes a different assumption from the Tobit model about what
-happened below the limit, so agreement between them shows the answer is not
-driven by either.
+by Rubin's rules [[R48]]. The imputation is proper: the line and the error scale
+are redrawn from the Tobit fit's own asymptotic distribution at every imputation
+rather than held at the point estimate, so the between-imputation variance
+carries the uncertainty in the model that generated the draws. What the agreement
+between the two estimators establishes is therefore that the answer does not
+depend on which arithmetic recovers it. It does not establish that the sub-floor
+distribution is normal: both make that assumption, and no reading below the floor
+exists to test it against. Where the assumption itself is in question, the
+quantity to look at is the headroom, not the fit.
 
 The growth proxy is the deposit's time to an optical density of 0.4, in days;
 the deposit records no wavelength, so none is given here. Because it is a time,
@@ -1745,10 +1775,17 @@ distinct times; below that the slope is determined by the censoring pattern
 rather than by the counts.
 
 **The replicate-level bootstrap** [[R26]] behind the interval slopes resamples the three
-replicate counts with replacement at both ends of each interval, refits the
-concentration slope on each draw, and takes percentile intervals from 20 000
-draws. The resampling unit is the replicate count, not the interval, so a draw
-can repeat a replicate at one end and not the other. An interval on a
+replicate counts with replacement at both ends of each interval, takes their
+mean, refits the concentration slope on each draw, and takes percentile intervals
+from 20 000 draws. The resampling unit is the replicate count, not the interval,
+so a draw can repeat a replicate at one end and not the other. It is a draw of
+the three-replicate MEAN, because the mean is what the slope is fitted through;
+drawing a single replicate instead would attach the variance of one count to an
+estimate built from three. This bootstrap, and not the least-squares fit through
+the four concentration means that the deposited table reports beside it, is the
+interval quoted in Section 9 and drawn in Figure 3C. The least-squares fit is
+kept in the table for comparison and is labelled there: it has two residual
+degrees of freedom and discards the replicate scatter entirely. An interval on a
 proportion — an inversion rate, or a share of flasks — is the Jeffreys
 interval [[R30]], which is the equal-tailed posterior under the Jeffreys prior
 and does not collapse to zero width when the count is 0 or n, as the normal
@@ -1796,7 +1833,7 @@ rather than asserted.
 ### Reproducibility
 
 Every number in this paper is regenerated by a script that writes a machine-
-readable receipt of what it computed, and a separate audit script recomputes 158
+readable receipt of what it computed, and a separate audit script recomputes 165
 of the quantities quoted in the text from the tables they came from and reports
 any that disagree. That audit is not exhaustive: it pins the load-bearing counts,
 every headline interval and every figure a conclusion rests on, and it does not

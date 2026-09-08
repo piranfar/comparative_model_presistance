@@ -1,6 +1,6 @@
 {
   "script": "src/experiments/exp34_mediation.py",
-  "utc": "2026-09-08T17:33:38.007195+00:00",
+  "utc": "2026-09-08T19:05:56.671409+00:00",
   "exposure": "INH-Suceptibility IR vs IS",
   "mediator": "log10(mpn_T0_15days)",
   "outcome": "Tolerant_level_D5_15 (Low=0, Medium=1, High=2)",
@@ -84,28 +84,28 @@
   "residual_correlation_sensitivity": {
     "sigma_m": 0.720742729754873,
     "sigma_y": 0.5926654618151742,
-    "rho_nullifying_acme": -0.2368346474977248,
+    "rho_nullifying_acme": -0.23045951231145345,
     "acme_at_rho0": 0.16550725488787185,
     "grid": [
       {
         "rho": -0.5,
-        "acme": -0.21235861162689906
+        "acme": -0.23796267306372482
       },
       {
         "rho": -0.4,
-        "acme": -0.12441137748468208
+        "acme": -0.13948734249872038
       },
       {
         "rho": -0.3,
-        "acme": -0.046273252433758225
+        "acme": -0.05426474321231203
       },
       {
         "rho": -0.2,
-        "acme": 0.026271973638640405
+        "acme": 0.022859093858160946
       },
       {
         "rho": -0.1,
-        "acme": 0.09610595055562801
+        "acme": 0.0952721555814436
       },
       {
         "rho": 0.0,
@@ -113,23 +113,23 @@
       },
       {
         "rho": 0.1,
-        "acme": 0.23657614916848452
+        "acme": 0.2357423541943001
       },
       {
         "rho": 0.2,
-        "acme": 0.31156829569806216
+        "acme": 0.3081554159175828
       },
       {
         "rho": 0.3,
-        "acme": 0.39327074376660953
+        "acme": 0.3852792529880557
       },
       {
         "rho": 0.4,
-        "acme": 0.4855778172885024
+        "acme": 0.47050185227446406
       },
       {
         "rho": 0.5,
-        "acme": 0.5945812442762942
+        "acme": 0.5689771828394685
       }
     ],
     "note": "|\u03c1| at or beyond |rho_nullifying_acme| would bring ACME to zero under this linear sensitivity model"

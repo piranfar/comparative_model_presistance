@@ -185,8 +185,13 @@ def era_flow() -> list[dict]:
         ("of those, not already below their own floor at day zero (the "
          "descriptive Cox set)", cox["n_series"],
          cox["dropped_already_below_at_day_zero"]),
+        # exp23's inversion table carries no rate_gap column, so inv_strict was
+        # always None and this row was always the hardcoded fallback. It said 94
+        # for as long as 94 was right, and went on saying it after the count
+        # became 100 -- a silent fallback that only looks correct. Read the
+        # sweep, which computes the number and regenerates with everything else.
         ("cross-laboratory pairs, strict rate separation",
-         len(inv_strict) if inv_strict is not None else 94, 0),
+         _strict_pairs(inv_strict), 0),
         ("flasks contributing those pairs",
          inv[["faster_institute", "slower_institute"]].stack().nunique() * 7, 0),
         ("laboratory-by-arm-by-volume cells with a measured start",
@@ -240,6 +245,24 @@ def dropped_vs_retained(d: pd.DataFrame) -> pd.DataFrame:
                 "resistance_fisher_p": float(p_r) if dn else np.nan,
             })
     return pd.DataFrame(rows)
+
+
+def _strict_pairs(inv_strict) -> int:
+    """Pairs surviving the 0.10 log10/day rate separation.
+
+    Prefer the column if the inversion table ever grows one; otherwise take it
+    from exp26's sweep, which is where the number is actually computed. Raise
+    rather than fall back to a literal: a stale constant that matches for a
+    while is worse than a build that stops.
+    """
+    if inv_strict is not None:
+        return int(len(inv_strict))
+    s = pd.read_csv(TABLES / "exp26_inversion_sensitivity.csv")
+    row = s.loc[(s["min_rate_gap_log10_per_day"] - 0.10).abs() < 1e-9]
+    if row.empty:
+        raise SystemExit("exp26_inversion_sensitivity.csv has no 0.10 rung; "
+                         "the strict pair count cannot be established")
+    return int(row["pairs"].iloc[0])
 
 
 def main() -> int:

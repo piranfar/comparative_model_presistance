@@ -1,6 +1,6 @@
 {
   "script": "src/audit_manuscript.py",
-  "utc": "2026-09-08T17:35:19+00:00",
+  "utc": "2026-09-08T19:07:28+00:00",
   "checkers": [
     "check_arithmetic",
     "check_census",
@@ -11,11 +11,11 @@
     "check_identity",
     "check_terms"
   ],
-  "n_words_audited": 33828,
+  "n_words_audited": 34420,
   "counts": {
     "high": 0,
     "medium": 1,
-    "low": 8
+    "low": 10
   },
   "findings": [
     {
@@ -31,18 +31,18 @@
       "severity": "low",
       "kind": "audit-count-summary",
       "where": "whole repository",
-      "detail": "src/audit_claims.py runs 158 checks (run); 3 place(s) state that number: Methods (PAPER_COMPLETE.md) line 2052 = 158; manuscript/RATE_VS_DURATION.md line 1799 = 158; README.md line 44 = 158",
-      "expected": "158",
-      "found": "158, 158, 158",
+      "detail": "src/audit_claims.py runs 165 checks (run); 3 place(s) state that number: Methods (PAPER_COMPLETE.md) line 2089 = 165; manuscript/RATE_VS_DURATION.md line 1836 = 165; README.md line 44 = 165",
+      "expected": "165",
+      "found": "165, 165, 165",
       "checker": "check_census"
     },
     {
       "severity": "low",
       "kind": "census-summary",
       "where": "whole manuscript",
-      "detail": "2 censuses of the form 'N of the M <things>' were checked against the parts the text names and partition cleanly; 2 are answerable to a table whose rows equal M and are the only ones the arithmetic runs on; 24 have no such table and are counted here rather than checked",
+      "detail": "2 censuses of the form 'N of the M <things>' were checked against the parts the text names and partition cleanly; 2 are answerable to a table whose rows equal M and are the only ones the arithmetic runs on; 26 have no such table and are counted here rather than checked",
       "expected": "every checkable census partitioned",
-      "found": "2 resolved, 2 gated on a table, 24 not checkable",
+      "found": "2 resolved, 2 gated on a table, 26 not checkable",
       "checker": "check_census"
     },
     {
@@ -66,28 +66,46 @@
     {
       "severity": "low",
       "kind": "quantity-in-words-and-figures",
-      "where": "discussion, How large the effect is (line 1442) and results, 7. The flask that fell faster often crossed the floor later (line 1004)",
-      "detail": "\"a third\" states in words what 36.6 per cent states in figures; the two sentences share assay, crossed, faster, fell, flask. Check they are the same quantity -- this rule matches on wording, not on arithmetic, because 36.6 is not a rounding of 33.3333",
+      "where": "Table 11 legend (line 1029) and results, 7. The flask that fell faster often crossed the floor later (line 1056)",
+      "detail": "\"a half\" states in words what 70.4 per cent states in figures; the two sentences share arms, bootstrap, deleting, distance, half. Check they are the same quantity -- this rule matches on wording, not on arithmetic, because 70.4 is not a rounding of 50",
       "expected": "the figure, or the word, in both places",
-      "found": "\"a third\" against 36.6 per cent",
+      "found": "\"a half\" against 70.4 per cent",
+      "checker": "check_census"
+    },
+    {
+      "severity": "low",
+      "kind": "quantity-in-words-and-figures",
+      "where": "Table 11 legend (line 1029) and results, 7. The flask that fell faster often crossed the floor later (line 1056)",
+      "detail": "\"a half\" states in words what 62.3 per cent states in figures; the two sentences share arms, bootstrap, deleting, distance, half. Check they are the same quantity -- this rule matches on wording, not on arithmetic, because 62.3 is not a rounding of 50",
+      "expected": "the figure, or the word, in both places",
+      "found": "\"a half\" against 62.3 per cent",
+      "checker": "check_census"
+    },
+    {
+      "severity": "low",
+      "kind": "quantity-in-words-and-figures",
+      "where": "discussion, How large the effect is (line 1462) and results, 7. The flask that fell faster often crossed the floor later (line 1013)",
+      "detail": "\"a third\" states in words what 34.6 per cent states in figures; the two sentences share assay, crossed, faster, fell, flask. Check they are the same quantity -- this rule matches on wording, not on arithmetic, because 34.6 is not a rounding of 33.3333",
+      "expected": "the figure, or the word, in both places",
+      "found": "\"a third\" against 34.6 per cent",
       "checker": "check_census"
     },
     {
       "severity": "low",
       "kind": "scope-summary",
       "where": "whole manuscript",
-      "detail": "39 claims are stated in the Results and repeated in a legend or in the self-audit table; 39 carry every qualifier family the Results attach to them",
+      "detail": "42 claims are stated in the Results and repeated in a legend or in the self-audit table; 42 carry every qualifier family the Results attach to them",
       "expected": "every repeated claim as narrowly scoped as its original",
-      "found": "39 of 39",
+      "found": "42 of 42",
       "checker": "check_census"
     },
     {
       "severity": "low",
       "kind": "coverage-summary",
       "where": "whole manuscript",
-      "detail": "abstract (1): 17 numeric claims, 17 traceable, 17 of those to a results table or receipt, 6 tokens skipped as conventions; box (1): 9 numeric claims, 9 traceable, 9 of those to a results table or receipt, 5 tokens skipped as conventions; figure legend (4): 38 numeric claims, 38 traceable, 38 of those to a results table or receipt, 10 tokens skipped as conventions; table legend (25): 111 numeric claims, 111 traceable, 111 of those to a results table or receipt, 28 tokens skipped as conventions",
+      "detail": "abstract (1): 17 numeric claims, 17 traceable, 17 of those to a results table or receipt, 6 tokens skipped as conventions; box (1): 9 numeric claims, 9 traceable, 9 of those to a results table or receipt, 5 tokens skipped as conventions; figure legend (4): 38 numeric claims, 38 traceable, 38 of those to a results table or receipt, 10 tokens skipped as conventions; table legend (25): 115 numeric claims, 115 traceable, 115 of those to a results table or receipt, 28 tokens skipped as conventions",
       "expected": "every region scanned",
-      "found": "175 numeric claims outside table bodies",
+      "found": "179 numeric claims outside table bodies",
       "checker": "check_coverage"
     },
     {

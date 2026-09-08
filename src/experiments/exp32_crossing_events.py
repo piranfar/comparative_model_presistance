@@ -473,13 +473,31 @@ def interval_vs_naive(e: pd.DataFrame, label: str) -> dict:
                     e.loc[e["event"] == 1, "first_observed_visit_below"].sum()),
                 "note": "fewer than three crossings; not fitted"}
 
-    wi = _weibull_interval(e["lower"], e["upper"])
+    # THE INTERVAL IS HALF-OPEN, AND LIFELINES READS IT AS CLOSED.
+    # `lower` is the last visit at which the culture was counted ABOVE its own
+    # floor. The crossing therefore happened strictly after that visit: the
+    # interval is (lower, upper], not [lower, upper]. lifelines' Turnbull builds
+    # its support from closed intervals, so passing the raw pair lets probability
+    # mass land ON a day the series was observed above the floor -- and because
+    # every series shares the visit grid, one series' `lower` is another's
+    # `upper`, so those days are exactly where the mass goes. Nudging the lower
+    # bound by one floating-point step excludes it without inventing a gap: the
+    # Turnbull support intervals become the visit gaps themselves, and every
+    # crossing's mass is uniquely assigned.
+    #
+    # It matters only for the NPMLE, which places atoms. The Weibull fits use
+    # S(lower) - S(upper) and a one-ULP shift is invisible to them; they take the
+    # same arrays so the two fits are answering the same question.
+    lower_open = np.nextafter(np.asarray(e["lower"], float),
+                              np.asarray(e["upper"], float))
+    upper = np.asarray(e["upper"], float)
+
+    wi = _weibull_interval(lower_open, upper)
     wn = _weibull_naive(e["naive_time"], e["event"])
     with warnings.catch_warnings():
         warnings.simplefilter("ignore")
         km = KaplanMeierFitter().fit(e["naive_time"], e["event"])
-        tb = KaplanMeierFitter().fit_interval_censoring(
-            np.asarray(e["lower"], float), np.asarray(e["upper"], float))
+        tb = KaplanMeierFitter().fit_interval_censoring(lower_open, upper)
 
     width = e.loc[e["event"] == 1, "upper"] - e.loc[e["event"] == 1, "lower"]
     last = float(e["last_visit_day"].max())

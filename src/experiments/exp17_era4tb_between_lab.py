@@ -179,6 +179,10 @@ def tobit_slope(g: pd.DataFrame) -> dict | None:
         "kill_rate_se": None if fit.stderr is None else float(fit.stderr[1]),
         "kill_rate_ci_low": float(-hi), "kill_rate_ci_high": float(-lo),
         "residual_sd": float(fit.sigma), "runs_z": float(fit.runs_test_z),
+        # Kept so the imputation below can be PROPER: Rubin's rules assume each
+        # imputation is drawn under a parameter value sampled from the fitted
+        # model's own uncertainty, not under the point estimate every time.
+        "theta_cov": None if fit.cov is None else np.asarray(fit.cov, float),
     }
 
 
@@ -199,12 +203,34 @@ def mi_slope(g: pd.DataFrame, rng: np.random.Generator) -> dict | None:
     if base is None:
         return None
     a, b, sd = base["intercept_log10"], -base["kill_rate_tobit"], base["residual_sd"]
+    cov = base.get("theta_cov")
+
+    # PROPER imputation. Holding (a, b, sigma) at the Tobit point estimate for
+    # all 50 draws makes the imputation "improper" in Rubin's sense: the
+    # between-imputation variance then measures only the sampling noise of the
+    # draws, not the uncertainty in the model that generated them, and the
+    # pooled variance is too small. It also makes the agreement with the Tobit
+    # estimate near-automatic, which is the more serious problem, because the
+    # manuscript reads that agreement as evidence. Redrawing the parameters from
+    # the fit's own asymptotic distribution at each imputation is the standard
+    # remedy and costs nothing. What it does NOT do is make the check
+    # independent of the normal-below-the-floor assumption -- both estimators
+    # still make it -- and the Methods now say so.
+    def draw_params(rng_):
+        if cov is None or not np.all(np.isfinite(cov)):
+            return a, b
+        try:
+            th = rng_.multivariate_normal([a, -b], cov, method="cholesky")
+        except (np.linalg.LinAlgError, ValueError):
+            return a, b
+        return float(th[0]), float(-th[1])
 
     ests, vars_ = [], []
     for _ in range(N_IMPUTATIONS):
+        a_d, b_d = draw_params(rng)
         z = y.copy()
         if c.any():
-            mu = a + b * t[c]
+            mu = a_d + b_d * t[c]
             # Draw from the fitted normal conditioned on being below the limit:
             # inverse-CDF sampling on the truncated distribution.
             u = rng.uniform(1e-12, 1.0, size=int(c.sum()))
@@ -323,8 +349,9 @@ def main() -> int:
     ok = rates.dropna(subset=["kill_rate_tobit", "kill_rate_mi"])
     agree = float(np.max(np.abs(ok["kill_rate_tobit"] - ok["kill_rate_mi"]))) if len(ok) else np.nan
     print(f"\n   Tobit and multiple imputation never differ by more than "
-          f"{agree:.3f} log10/day, so the answer is not an artefact of either")
-    print("   treatment of the censored readings.")
+          f"{agree:.3f} log10/day, so the answer does not depend on which\n"
+          "   arithmetic recovers it. Both still assume the same normal\n"
+          "   distribution below the floor, and nothing here can test that.")
 
     # -- survival ----------------------------------------------------------
     surv = survival_frame(d)

@@ -1540,7 +1540,7 @@ def main() -> int:
         "way round.")
 
     add("ERA4TB six-laboratory", "7",
-        "36.6% of 191 cross-laboratory pairs are inversions (95% CI 30.1-43.6)",
+        "34.6% of 191 cross-laboratory pairs are inversions (95% CI 28.1-41.5)",
         "pair of flasks", "each flask enters many pairs; flasks nested in six "
                           "laboratories",
         inv_all["naive_n_pairs"], inv_all["n_clusters"],
@@ -1561,8 +1561,8 @@ def main() -> int:
         "and the interval roughly doubles.")
 
     add("ERA4TB six-laboratory", "7",
-        "under the strictest rate separation the inversion rate is 21.3% of 94 "
-        "pairs (95% CI 13.9-30.3)",
+        "under the strictest rate separation the inversion rate is 23.0% of 100 "
+        "pairs (95% CI 15.6-31.9)",
         "pair of flasks", "each flask enters many pairs; flasks nested in six "
                           "laboratories",
         inv_strict["naive_n_pairs"], inv_strict["n_clusters"],

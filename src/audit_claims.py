@@ -170,8 +170,8 @@ def main() -> int:
         rows.append(check("between-laboratory share of starting density (5: 87.0%)",
                           0.870, float(r["era4tb_starting_density_variance"]
                                        ["observed_share"]), 0.01))
-        rows.append(check("between-laboratory share of within-arm kill rate (5: 33.0%)",
-                          0.330, float(r["era4tb_kill_rate_variance"]["observed_share"]), 0.01))
+        rows.append(check("between-laboratory share of within-arm kill rate (5: 36.8%)",
+                          0.368, float(r["era4tb_kill_rate_variance"]["observed_share"]), 0.01))
 
         h = r["era4tb_headroom_spread_100ul"]
         rows.append(check("laboratories behind delta h at 100 uL (6: 4)",
@@ -239,8 +239,10 @@ def main() -> int:
         rows.append(check("interval-censored t25, 100 uL (5: 9.64 d)",
                           9.637, float(g.loc[a, "weibull_interval_t25_days"]), 0.01))
         # the correction has a sign: the interval curve sits BELOW the naive one
-        rows.append(check("Turnbull minus naive KM at day 3 (5: -0.081)",
-                          -0.0814, float(g.loc[a, "turnbull_minus_km_day3"]), 0.02))
+        rows.append(check("Turnbull equals naive KM at day 3 (5: 0, half-open interval)",
+                          0.0, float(g.loc[a, "turnbull_minus_km_day3"]), 0.005))
+        rows.append(check("Turnbull equals naive KM at day 7 (5: 0, half-open interval)",
+                          0.0, float(g.loc[a, "turnbull_minus_km_day7"]), 0.005))
         t = "treated arms, all four platings"
         rows.append(check("treated arms, interval t25 (5: 3.67 d)",
                           3.670, float(g.loc[t, "weibull_interval_t25_days"]), 0.01))
@@ -292,10 +294,14 @@ def main() -> int:
         obs = f.inversion.astype(bool)
         rows.append(check("D/b criterion, all pairs (7: 83.8%)",
                           0.838, float((pred == obs).mean()), 0.01))
-        rows.append(check("D/b criterion, inversions only (7: 60.0%)",
-                          0.600, float((pred == obs)[obs].mean()), 0.01))
-        rows.append(check("pairs that are not inversions (7: 63.4%)",
-                          0.634, float((~obs).mean()), 0.01))
+        rows.append(check("D/b criterion, inversions only (7: 59.1%)",
+                          0.591, float((pred == obs)[obs].mean()), 0.01))
+        rows.append(check("D/b criterion, all pairs (7: 84.3%)",
+                          0.843, float((pred == obs).mean()), 0.01))
+        rows.append(check("D/b criterion, non-inversions only (7: 97.6%)",
+                          0.976, float((pred == obs)[~obs].mean()), 0.01))
+        rows.append(check("pairs that are not inversions (7: 65.4%)",
+                          0.654, float((~obs).mean()), 0.01))
 
     f = load("exp32_recrossing.csv")
     if f is not None:
@@ -399,10 +405,10 @@ def main() -> int:
     r = receipt("exp26_receipt.json")
     if r is not None:
         t4 = r["counter_test_4_inversions_or_noise"]
-        rows.append(check("inversion rate, no rate-gap requirement (5: 36.6%)",
-                          0.366, float(t4["rate_at_no_threshold"]), 0.01))
-        rows.append(check("inversion rate, gap > 0.10 log10/day (5: 21.3%)",
-                          0.213, float(t4["rate_at_strictest"]), 0.02))
+        rows.append(check("inversion rate, no rate-gap requirement (5: 34.6%)",
+                          0.346, float(t4["rate_at_no_threshold"]), 0.01))
+        rows.append(check("inversion rate, gap > 0.10 log10/day (5: 23.0%)",
+                          0.230, float(t4["rate_at_strictest"]), 0.02))
         rows.append(check("rivals supported across the four counter-tests (0)",
                           0, float(r["n_rivals_supported"]), 1.0))
 
@@ -561,8 +567,10 @@ def main() -> int:
     r = receipt("exp23_receipt.json")
     if r is not None:
         inv = r["inversions"]
-        rows.append(check("inversion rate (7: 36.6%)",
-                          0.366, float(inv["inversion_rate"]), 0.01))
+        rows.append(check("inversion rate (7: 34.6%)",
+                          0.346, float(inv["inversion_rate"]), 0.01))
+        rows.append(check("inversions counted (7: 66 of 191)",
+                          66, float(inv["n_inversions"]), 0.001))
         rows.append(check("comparable pairs (7: 191)",
                           191, float(inv["n_comparable_pairs"]), 0.001))
         # The share that argues AGAINST the strong reading. It is audited for
@@ -570,8 +578,16 @@ def main() -> int:
         # quietly in the direction we would prefer.
         mxf = r["variance_decomposition"].get("MXF 10X MIC")
         if mxf:
-            rows.append(check("distance share, MXF 10x (7: 39.4%)",
-                              0.394, float(mxf["share_distance"]), 0.02))
+            rows.append(check("distance share, MXF 10x (7: 35.2%)",
+                              0.352, float(mxf["share_distance"]), 0.02))
+            rows.append(check("distance share, MXF 10x, worst leave-one-lab-out (7: 62.3%)",
+                              0.623, float(mxf["share_distance_jackknife_max"]), 0.02))
+            inh = r["variance_decomposition"].get("INH 10X MIC")
+            if inh is not None:
+                rows.append(check("distance share, INH 10x (7: 32.3%)",
+                                  0.323, float(inh["share_distance"]), 0.02))
+                rows.append(check("distance share, INH 10x, worst leave-one-lab-out (7: 70.4%)",
+                                  0.704, float(inh["share_distance_jackknife_max"]), 0.02))
 
     # --- exp16, the family correction ------------------------------------
     f = load("exp16_tb_independence.csv")
@@ -587,8 +603,8 @@ def main() -> int:
     f = load("exp17_kill_rates.csv")
     if f is not None:
         g = f.dropna(subset=["kill_rate_tobit", "kill_rate_mi"])
-        rows.append(check("max |Tobit - imputation| (docs/18: 0.003 log10/day)",
-                          0.003, float((g.kill_rate_tobit - g.kill_rate_mi).abs().max()),
+        rows.append(check("max |Tobit - imputation| (docs/18: 0.006 log10/day)",
+                          0.006, float((g.kill_rate_tobit - g.kill_rate_mi).abs().max()),
                           0.35, " log10/d"))
 
     # --- exp18, the conclusion must hold on both unit readings ------------

@@ -1,6 +1,6 @@
 {
   "script": "src/experiments/exp37_analysis_flow.py",
-  "utc": "2026-09-08T17:34:09+00:00",
+  "utc": "2026-09-08T19:06:24+00:00",
   "distinct_denominators": [
     12,
     20,
@@ -13,7 +13,7 @@
     72,
     85,
     90,
-    94,
+    100,
     117,
     119,
     156,
@@ -445,7 +445,7 @@
       "panel": "-",
       "stratum": "derived units",
       "stage": "cross-laboratory pairs, strict rate separation",
-      "n": 94,
+      "n": 100,
       "excluded_here": 0,
       "appears_in_manuscript_as": ""
     },

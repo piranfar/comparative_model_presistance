@@ -1,6 +1,6 @@
 {
   "script": "src/experiments/exp23_inversion_decomposition.py",
-  "utc": "2026-09-08T17:29:30+00:00",
+  "utc": "2026-09-08T19:02:16+00:00",
   "data_source": "van Wijk et al. 2023, figshare 19766083",
   "clearance_limit_log10": 1.0,
   "fit_window_days": 14,
@@ -8,47 +8,65 @@
   "inversions": {
     "n_comparable_pairs": 191,
     "undecidable_pairs": 45,
-    "n_inversions": 70,
-    "inversion_rate": 0.36649214659685864,
+    "n_inversions": 66,
+    "inversion_rate": 0.34554973821989526,
     "inversion_rate_95CI": [
-      0.3005762258341505,
-      0.436419914891423
+      0.28082976366494017,
+      0.4149107384232366
     ],
-    "model_predicts_inversion_correctly": 0.837696335078534
+    "model_predicts_inversion_correctly": 0.8429319371727748
   },
   "variance_decomposition": {
     "INH 10X MIC": {
       "n_flasks": 11,
-      "var_log_predicted_time": 1.6226596560517141,
+      "n_laboratories": 4,
+      "var_log_predicted_time": 1.6023782421459267,
       "var_log_distance": 0.43486431222642385,
-      "var_log_rate": 0.9484058880787185,
-      "cov": -0.11969472787328593,
-      "share_distance": 0.3143740912878012,
-      "share_rate": 0.6856259087121989,
+      "var_log_rate": 0.9109997999306243,
+      "cov": -0.12825706499443917,
+      "share_distance": 0.3231116041347269,
+      "share_rate": 0.676888395865273,
+      "share_distance_jackknife_min": 0.19375451866634794,
+      "share_distance_jackknife_max": 0.7037589462591255,
+      "share_distance_lab_boot_low": 0.04777203637362091,
+      "share_distance_lab_boot_high": 0.8540485381367668,
+      "rate_share_survives_leave_one_lab_out": false,
       "distance_fold_spread": 5.268878087540558,
-      "rate_fold_spread": 30.210195023428003
+      "rate_fold_spread": 20.215566941890884
     },
     "INH 1X MIC": {
       "n_flasks": 10,
-      "var_log_predicted_time": 0.36897676779531435,
+      "n_laboratories": 4,
+      "var_log_predicted_time": 0.44912287936793094,
       "var_log_distance": 0.15684388142211167,
-      "var_log_rate": 0.6417772448633928,
-      "cov": 0.21482217924509509,
-      "share_distance": 0.1963933538192433,
-      "share_rate": 0.8036066461807567,
+      "var_log_rate": 0.7277623473235554,
+      "cov": 0.21774167468886807,
+      "share_distance": 0.17730361411145548,
+      "share_rate": 0.8226963858885445,
+      "share_distance_jackknife_min": 0.10910442588693316,
+      "share_distance_jackknife_max": 0.28334086084341475,
+      "share_distance_lab_boot_low": 0.012368691089829591,
+      "share_distance_lab_boot_high": 0.7031317713450458,
+      "rate_share_survives_leave_one_lab_out": true,
       "distance_fold_spread": 3.7817655629609277,
       "rate_fold_spread": 8.31197183006884
     },
     "MXF 10X MIC": {
       "n_flasks": 18,
-      "var_log_predicted_time": 0.46561956382453823,
+      "n_laboratories": 6,
+      "var_log_predicted_time": 0.5157395892095408,
       "var_log_distance": 0.18979287816080315,
-      "var_log_rate": 0.29200646383317935,
-      "cov": 0.008089889084722133,
-      "share_distance": 0.3939251501990918,
-      "share_rate": 0.6060748498009082,
+      "var_log_rate": 0.34884946602997724,
+      "cov": 0.011451377490619832,
+      "share_distance": 0.35235417379956463,
+      "share_rate": 0.6476458262004353,
+      "share_distance_jackknife_min": 0.23942867744036325,
+      "share_distance_jackknife_max": 0.6226264370480021,
+      "share_distance_lab_boot_low": 0.08626175273899277,
+      "share_distance_lab_boot_high": 0.766165584701041,
+      "rate_share_survives_leave_one_lab_out": false,
       "distance_fold_spread": 3.696499958023332,
-      "rate_fold_spread": 5.7759501114777265
+      "rate_fold_spread": 5.972365416651906
     }
   }
 }

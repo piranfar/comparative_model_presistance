@@ -136,6 +136,66 @@ def kill_grid() -> tuple[pd.DataFrame, float]:
     return g, base
 
 
+def replicate_grid() -> tuple[dict[tuple[float, float], np.ndarray], list[float], float]:
+    """The same kill kinetics, but the three replicate counts rather than their mean.
+
+    The interval slopes used to be intervalled by an ordinary least-squares fit
+    through four concentration MEANS, which has two residual degrees of freedom
+    and treats the replicate scatter as if it were not there. The Methods
+    describe something else entirely -- a replicate-level bootstrap -- and the
+    figure legend describes it too. This function supplies what that bootstrap
+    needs, so the text, the legend and the code finally agree.
+    """
+    d = pd.read_excel(DATA, sheet_name="Kill kinetics", header=None)
+    # The three day-zero replicate counts, not their average repeated three
+    # times: seeding the baseline from the mean gives one end of every interval
+    # no replicate variance at all, which narrows the bootstrap for free.
+    base = d.iloc[3, 4:7].astype(float).to_numpy()
+    k = d.iloc[4:, 1:7].copy()
+    k.columns = ["day", "compound", "conc", "r1", "r2", "r3"]
+    k["day"] = k["day"].ffill()
+    k["compound"] = k["compound"].ffill()
+    k = k[pd.to_numeric(k["r1"], errors="coerce").notna()].copy()
+    k["dayn"] = k["day"].astype(str).str.extract(r"(\d+)").astype(float)
+    ap = k[(k["compound"] == "Apramycin")
+           & (k["conc"].astype(float) >= MIN_KILLING_CONC)]
+    reps = {(float(r.conc), float(r.dayn)): np.array([r.r1, r.r2, r.r3], float)
+            for r in ap.itertuples()}
+    concs = sorted({c for c, _ in reps})
+    for c in concs:
+        reps[(c, 0.0)] = base
+    return reps, concs, float(base.mean())
+
+
+def bootstrap_interval_slopes(reps, concs, days, n_draws: int = 20_000,
+                              seed: int = 20240921) -> dict:
+    """Percentile intervals for the concentration slope, interval by interval.
+
+    A draw resamples the three replicate counts WITH REPLACEMENT at each end of
+    the interval and takes their mean, so the resampled cell carries variance/3
+    as the point estimate does. Drawing one replicate of the three instead --
+    which is what `rng.choice(v)` with no size does -- inflates every interval by
+    roughly sqrt(3), and it was doing exactly that in the figure.
+    """
+    rng = np.random.default_rng(seed)
+    out = {}
+    for a, b in zip(days[:-1], days[1:]):
+        s = np.empty(n_draws)
+        x = np.log2(np.asarray(concs, float))
+        for j in range(n_draws):
+            y = [(rng.choice(reps[(c, a)], size=3, replace=True).mean()
+                  - rng.choice(reps[(c, b)], size=3, replace=True).mean()) / (b - a)
+                 for c in concs]
+            s[j] = np.polyfit(x, y, 1)[0]
+        point = np.polyfit(x, [(reps[(c, a)].mean() - reps[(c, b)].mean()) / (b - a)
+                               for c in concs], 1)[0]
+        lo, hi = np.percentile(s, [2.5, 97.5])
+        out[(a, b)] = {"slope": float(point), "lo": float(lo), "hi": float(hi),
+                       "excludes_zero": bool(lo > 0 or hi < 0),
+                       "n_draws": int(n_draws), "draws": s}
+    return out
+
+
 def in_vivo() -> dict[str, np.ndarray]:
     d = pd.read_excel(DATA, sheet_name="In-vivo", header=None)
     s = d.iloc[3:, 1:3].copy()
@@ -157,22 +217,37 @@ def main() -> int:
     g, base = kill_grid()
     g = g.loc[g.index >= MIN_KILLING_CONC]
     cols = list(g.columns)
+    reps, rconcs, _ = replicate_grid()
+    boot = bootstrap_interval_slopes(reps, rconcs, [float(c) for c in cols])
     rows = []
     for a, b in zip(cols[:-1], cols[1:]):
         rate = (g[a] - g[b]) / (b - a)
         lr = stats.linregress(np.log2(rate.index.to_numpy(float)), rate.to_numpy())
         tcrit = stats.t.ppf(0.975, len(rate) - 2)
+        bs = boot[(float(a), float(b))]
         rows.append({
             "interval": f"days {int(a)}-{int(b)}",
             "n_concentrations": int(len(rate)),
             "slope_per_doubling": lr.slope,
-            "ci_low": lr.slope - tcrit * lr.stderr,
-            "ci_high": lr.slope + tcrit * lr.stderr,
+            # The reported interval. Percentile, from a bootstrap over the three
+            # replicate counts at both ends -- which is what the Methods and the
+            # Figure 3 legend say, and what the OLS interval beside it is not.
+            "ci_low": bs["lo"],
+            "ci_high": bs["hi"],
+            "boot_slope_per_doubling": bs["slope"],
+            "boot_excludes_zero": bs["excludes_zero"],
+            "boot_draws": bs["n_draws"],
+            # Kept for comparison and labelled for what it is: least squares
+            # through four concentration MEANS, two residual degrees of freedom,
+            # replicate scatter discarded. It is not the reported interval.
+            "ols_ci_low_on_means": lr.slope - tcrit * lr.stderr,
+            "ols_ci_high_on_means": lr.slope + tcrit * lr.stderr,
+            "ols_p_value_on_means": lr.pvalue,
             "p_value": lr.pvalue,
             "rate_at_lowest": float(rate.iloc[0]),
             "rate_at_highest": float(rate.iloc[-1]),
             "fold_across_range": float(rate.iloc[-1] / rate.iloc[0]),
-            "concentration_matters": bool(lr.pvalue < 0.05),
+            "concentration_matters": bs["excludes_zero"],
         })
     iv = pd.DataFrame(rows)
     iv.to_csv(TABLES / "exp21_interval_concentration_dependence.csv", index=False)

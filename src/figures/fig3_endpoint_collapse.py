@@ -24,6 +24,9 @@ from __future__ import annotations
 import numpy as np
 import pandas as pd
 
+from src.experiments.exp21_sequential_and_combination import (
+    bootstrap_interval_slopes, replicate_grid)
+
 from . import style as st
 
 ROOT = st.ROOT
@@ -33,35 +36,12 @@ SEED = 20260905
 N_BOOT = 20000
 
 
-def replicate_grid():
-    """Concentration x day x replicate, apramycin, from the deposited counts."""
-    d = pd.read_excel(XL, sheet_name="Kill kinetics", header=None)
-    base = d.iloc[3, 4:7].astype(float).to_numpy()
-    k = d.iloc[4:, 1:7].copy()
-    k.columns = ["day", "compound", "conc", "r1", "r2", "r3"]
-    k["day"] = k["day"].ffill()
-    k["compound"] = k["compound"].ffill()
-    k = k[pd.to_numeric(k["r1"], errors="coerce").notna()].copy()
-    k["dayn"] = k["day"].astype(str).str.extract(r"(\d+)").astype(float)
-    ap = k[(k["compound"] == "Apramycin") & (k["conc"].astype(float) >= 4)]
-    reps = {(float(r.conc), float(r.dayn)): np.array([r.r1, r.r2, r.r3], float)
-            for r in ap.itertuples()}
-    concs = sorted({c for c, _ in reps})
-    for c in concs:
-        reps[(c, 0.0)] = base
-    return reps, concs
-
-
-def bootstrap_slopes(reps, concs, days, rng):
-    out = {}
-    for a, b in zip(days[:-1], days[1:]):
-        s = np.empty(N_BOOT)
-        for j in range(N_BOOT):
-            y = [(rng.choice(reps[(c, a)]) - rng.choice(reps[(c, b)])) / (b - a)
-                 for c in concs]
-            s[j] = np.polyfit(np.log2(concs), y, 1)[0]
-        out[(a, b)] = s
-    return out
+# The replicate grid and the bootstrap both live in the experiment, not here.
+# Keeping a second copy in the figure meant two implementations and two seeds for
+# one quantity, and they had already diverged: the figure drew ONE replicate of
+# three at each end where the Methods describe resampling all three, so its
+# intervals ran about sqrt(3) too wide and the middle interval spanned zero when
+# it does not.
 
 
 def build():
@@ -71,10 +51,10 @@ def build():
     grid = pd.read_csv(T / "exp20_kill_grid.csv").set_index("conc")
     sep = pd.read_csv(T / "exp20_endpoint_separation.csv")
     floor = pd.read_csv(T / "exp20_floor_sensitivity.csv")
-    reps, concs = replicate_grid()
-    rng = np.random.default_rng(SEED)
+    reps, concs, _ = replicate_grid()
     days = [0.0, 3.0, 7.0, 14.0]
-    draws = bootstrap_slopes(reps, concs, days, rng)
+    boot = bootstrap_interval_slopes(reps, concs, days, n_draws=N_BOOT)
+    draws = {k: v["draws"] for k, v in boot.items()}
 
     fig = plt.figure(figsize=(7.0, 5.9))
     gs = fig.add_gridspec(2, 2, height_ratios=[1.0, 0.9])

@@ -82,7 +82,16 @@ def load() -> pd.DataFrame:
     d["censored"] = d["BQL"] == 1
     d["y"] = pd.to_numeric(d["CFUlog10"], errors="coerce")
     d.loc[d["censored"], "y"] = np.nan
-    return d.dropna(subset=["y", "loq"], how="all")
+    # A censored reading is kept with y = NaN on purpose: its likelihood uses the
+    # limit, not the value. A reading with NO count and NO below-limit flag is a
+    # different thing entirely -- the deposit simply has nothing there -- and it
+    # has to go, or the fill in flask_table below turns it into an OBSERVED count
+    # sitting exactly on the floor. `dropna(how="all")` did not remove them,
+    # because loq is finite on every row, so 105 empty readings (47 inside the
+    # 14-day fit window) were entering the likelihood as measurements of a
+    # population at the limit of detection. In a paper about floor-level readings
+    # being mistaken for measurements, that is the error it exists to name.
+    return d[d["censored"] | d["y"].notna()]
 
 
 def tobit_slope(t, y, cens, loq):
@@ -237,14 +246,55 @@ def decompose(f: pd.DataFrame) -> dict:
         vD, vb = np.var(lD, ddof=1), np.var(lb, ddof=1)
         cov = np.cov(lD, lb, ddof=1)[0, 1]
         vT = vD + vb - 2 * cov
+
+        # THE FLASKS ARE NOT THE INDEPENDENT UNIT, AND THIS SHARE IS BETWEEN
+        # LABORATORIES. Three flasks per laboratory share a starting culture, and
+        # almost all of the variance being decomposed here lies between
+        # laboratories rather than within them -- so a share computed over 18
+        # pooled flasks is a between-laboratory statistic with n = 6 wearing
+        # flasks as a disguise. Reported without uncertainty it invited exactly
+        # the reading the Limitations forbid everywhere else in this paper. Two
+        # laboratory-level checks are attached instead: a leave-one-laboratory-out
+        # jackknife, which says whether one laboratory decides the answer, and a
+        # cluster bootstrap over whole laboratories.
+        labs = sorted(g["institute"].unique())
+
+        def share(sub) -> float:
+            ld, lr = np.log(sub["distance_to_limit_log10"]), np.log(sub["rate_log10_per_day"])
+            a, b_ = np.var(ld, ddof=1), np.var(lr, ddof=1)
+            return float("nan") if (a + b_) <= 0 else float(a / (a + b_))
+
+        jack = [share(g[g["institute"] != L]) for L in labs] if len(labs) > 2 else []
+        jack = [v for v in jack if np.isfinite(v)]
+
+        rng = np.random.default_rng(20260908)
+        boots = []
+        for _ in range(4000):
+            pick = rng.choice(labs, size=len(labs), replace=True)
+            sub = pd.concat([g[g["institute"] == L] for L in pick], ignore_index=True)
+            if sub["institute"].nunique() < 2 or len(sub) < 4:
+                continue
+            v = share(sub)
+            if np.isfinite(v):
+                boots.append(v)
+        blo, bhi = (np.percentile(boots, [2.5, 97.5]) if len(boots) > 100
+                    else (float("nan"), float("nan")))
+
         out[arm] = {
             "n_flasks": int(len(g)),
+            "n_laboratories": int(len(labs)),
             "var_log_predicted_time": float(vT),
             "var_log_distance": float(vD),
             "var_log_rate": float(vb),
             "cov": float(cov),
             "share_distance": float(vD / (vD + vb)),
             "share_rate": float(vb / (vD + vb)),
+            "share_distance_jackknife_min": float(min(jack)) if jack else float("nan"),
+            "share_distance_jackknife_max": float(max(jack)) if jack else float("nan"),
+            "share_distance_lab_boot_low": float(blo),
+            "share_distance_lab_boot_high": float(bhi),
+            "rate_share_survives_leave_one_lab_out":
+                bool(jack and max(jack) < 0.5),
             "distance_fold_spread": float(np.exp(lD.max() - lD.min())),
             "rate_fold_spread": float(np.exp(lb.max() - lb.min())),
         }

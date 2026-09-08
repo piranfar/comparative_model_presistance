@@ -34,7 +34,7 @@ from dataclasses import dataclass, field
 from typing import Callable, Sequence
 
 import numpy as np
-from scipy.optimize import least_squares, minimize
+from scipy.optimize import brentq, least_squares, minimize
 from scipy.stats import chi2, norm
 
 
@@ -362,11 +362,33 @@ def profile_likelihood(model: Callable, t: np.ndarray, log10_obs: np.ndarray,
     # which is the corresponding statistic only when nothing is censored.
     sse_hat = nll_hat
     sse_grid = nll_grid
-    inside = grid[2.0 * (nll_grid - nll_hat) <= chi2.ppf(0.95, 1)]
-    if inside.size:
-        ci = (float(inside.min()), float(inside.max()))
-        open_low = bool(np.isclose(ci[0], grid.min()))
-        open_high = bool(np.isclose(ci[1], grid.max()))
+    # The grid locates the crossing; it does not define it. Reporting the
+    # outermost grid NODE still inside the region truncates the interval by up
+    # to one grid step at each end, always inwards, so every interval came out
+    # systematically too narrow -- by a factor of two on the tightest cells,
+    # where `scale = |centre|` makes the step largest relative to the width.
+    # Solve for the crossing instead, and interpolate only in the sense that
+    # brentq does: the bracket is the last node inside and the first node
+    # outside, and the root is found on the same profiled likelihood.
+    crit = chi2.ppf(0.95, 1)
+
+    def excess(b: float) -> float:
+        return 2.0 * (nll_at(float(b)) - nll_hat) - crit
+
+    ok = 2.0 * (nll_grid - nll_hat) <= crit
+    if ok.any():
+        i_lo, i_hi = int(np.argmax(ok)), int(len(ok) - 1 - np.argmax(ok[::-1]))
+        # Open at an end means the region runs off the grid: there is no node
+        # outside to bracket against, and the data do not bound the parameter
+        # on that side within the searched span. Say so rather than reporting
+        # the edge of the search as if it were an estimate.
+        open_low = i_lo == 0
+        open_high = i_hi == len(ok) - 1
+        lo = float(grid[i_lo]) if open_low else float(
+            brentq(excess, grid[i_lo - 1], grid[i_lo], xtol=1e-10))
+        hi = float(grid[i_hi]) if open_high else float(
+            brentq(excess, grid[i_hi], grid[i_hi + 1], xtol=1e-10))
+        ci = (lo, hi)
     else:
         ci, open_low, open_high = (float("nan"), float("nan")), True, True
 

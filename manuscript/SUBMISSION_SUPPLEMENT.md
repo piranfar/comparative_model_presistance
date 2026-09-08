@@ -77,14 +77,14 @@ began from.
 
 Take two flasks in the same treatment arm from different laboratories and compare
 them. Across 191 such pairs — with 45 further pairs that the censoring could not
-settle, which are excluded rather than imputed — **70 pairs — 36.6 per cent — are
+settle, which are excluded rather than imputed — **66 pairs — 34.6 per cent — are
 inversions**: the flask in which the population fell faster crossed below the
 assay floor later (Table S15). Restrict to pairs whose rates differ by more than
-0.10 log10 per day, so that the faster flask is unambiguously faster, and 21.3 per
-cent of 94 pairs still invert. The criterion *D_A*/*D_B* > *b_A*/*b_B* calls 83.8
+0.10 log10 per day, so that the faster flask is unambiguously faster, and 23.0 per
+cent of 100 pairs still invert. The criterion *D_A*/*D_B* > *b_A*/*b_B* calls 84.3
 per cent of all 191 pairs correctly, but that figure is carried by the easy
-majority. 63.4 per cent of pairs are not inversions, and the criterion gets 97.5
-per cent of those right against 60.0 per cent of the inversions themselves. So the
+majority. 65.4 per cent of pairs are not inversions, and the criterion gets 97.6
+per cent of those right against 59.1 per cent of the inversions themselves. So the
 decomposition identifies the mechanism — a pair inverts when the distance ratio
 exceeds the rate ratio — without predicting which pairs invert much better than
 three times in five. The residual is what a single averaged slope through a
@@ -93,28 +93,37 @@ of *b*.
 
 The effect holds when the faster flask is required to be unambiguously faster.
 Raise the minimum separation between the two fitted rates and pairs whose rates
-barely differ drop out. At 0.02 log10 per day the inversion rate is 34.5 per cent.
-At 0.05 it is 30.4 per cent. At 0.10 — a difference no reader would dispute — it
-is 21.3 per cent of 94 pairs.
+barely differ drop out. At 0.02 log10 per day the inversion rate is 33.7 per cent.
+At 0.05 it is 29.4 per cent. At 0.10 — a difference no reader would dispute — it
+is 23.0 per cent of 100 pairs.
 
 Those point estimates are firm. Their precision is not, and the difference
 matters. The pairs are not independent observations: 191 pairs are built from 42
 flasks in six laboratories, and an interval that treats them as independent coin
 flips reports a precision the design does not have. Resampling whole flasks within
-laboratory puts the 36.6 per cent between 24.7 and 50.5 per cent. Resampling whole
+laboratory puts the 34.6 per cent between 22.3 and 48.7 per cent. Resampling whole
 laboratories, which is the level at which the comparison is actually made, puts it
-between 3.0 and 72.4 per cent. Under the strictest rate separation the
-corresponding intervals are 7.6 to 42.7 per cent and 0 to 82.4 per cent. What the
+between 3.0 and 71.3 per cent. Under the strictest rate separation the
+corresponding intervals are 9.4 to 42.9 per cent and 0 to 79.4 per cent. What the
 deposit supports is therefore that inversions are common and are explained by the
 decomposition. It does not support any particular rate.
 
 The variance decomposition sets the size of the effect and it also bounds the
 claim. Of the variation available to move a crossing time, the distance term
-carries 39.4 per cent at ten times moxifloxacin, 31.4 per cent at ten times
-isoniazid and 19.6 per cent at one times isoniazid. The rate term carries the
-rest. **The rate contributes more of the spread than the distance does in each of
-the three arms that can be decomposed.** The fourth treated arm, moxifloxacin at
-one times the inhibitory concentration, is not among them: five of six
+carries 35.2 per cent at ten times moxifloxacin, 32.3 per cent at ten times
+isoniazid and 17.7 per cent at one times isoniazid. The rate term carries the
+rest in all three. **That ordering is not established, and we do not claim it.**
+The flasks it is computed over are three to a laboratory and share a starting
+culture, so this is a between-laboratory statistic with six clusters wearing
+flasks as a disguise. Deleting one laboratory pushes the distance share above a
+half in two of the three arms — to 70.4 per cent at ten times isoniazid and 62.3
+per cent at ten times moxifloxacin — and a bootstrap over whole laboratories
+straddles a half in all three (Table S15). What survives is the weaker and
+sufficient statement: the distance term is a large share of the variation
+available to move a crossing time, and the two terms are of comparable size.
+
+The fourth treated arm, moxifloxacin at
+one times the inhibitory concentration, cannot be decomposed at all: five of six
 laboratories record net growth there, and only one flask in the arm returns a
 positive fitted rate, so there is no spread in the rate to divide (Table S15). A
 crossing time is therefore not mainly an inoculum measurement. It is a mixture, in
@@ -472,7 +481,7 @@ resamples, so the two are comparable term by term.
 Sequential ignorability is assumed and is not testable here, so the estimate is
 accompanied by the sensitivity that matters: the residual correlation between
 mediator and outcome errors at which the point estimate crosses zero, which is
-about −0.24. The outcome is an ordinal class scored linearly, as in the
+about −0.23. The outcome is an ordinal class scored linearly, as in the
 association family; the binary collapses are reported because they do not depend
 on that scoring. No claim is made that unmeasured confounding is absent. The
 estimate replaces the attenuation percentage as the quantity cited for the
@@ -561,9 +570,15 @@ the profile likelihood.
 
 **Multiple imputation** draws each censored reading from the fitted normal
 truncated at its own limit, refits by ordinary least squares, and pools 50 fits
-by Rubin's rules (23). It makes a different assumption from the Tobit model about what
-happened below the limit, so agreement between them shows the answer is not
-driven by either.
+by Rubin's rules (23). The imputation is proper: the line and the error scale
+are redrawn from the Tobit fit's own asymptotic distribution at every imputation
+rather than held at the point estimate, so the between-imputation variance
+carries the uncertainty in the model that generated the draws. What the agreement
+between the two estimators establishes is therefore that the answer does not
+depend on which arithmetic recovers it. It does not establish that the sub-floor
+distribution is normal: both make that assumption, and no reading below the floor
+exists to test it against. Where the assumption itself is in question, the
+quantity to look at is the headroom, not the fit.
 
 The growth proxy is the deposit's time to an optical density of 0.4, in days;
 the deposit records no wavelength, so none is given here. Because it is a time,
@@ -608,10 +623,17 @@ distinct times; below that the slope is determined by the censoring pattern
 rather than by the counts.
 
 **The replicate-level bootstrap** (33) behind the interval slopes resamples the three
-replicate counts with replacement at both ends of each interval, refits the
-concentration slope on each draw, and takes percentile intervals from 20 000
-draws. The resampling unit is the replicate count, not the interval, so a draw
-can repeat a replicate at one end and not the other. An interval on a
+replicate counts with replacement at both ends of each interval, takes their
+mean, refits the concentration slope on each draw, and takes percentile intervals
+from 20 000 draws. The resampling unit is the replicate count, not the interval,
+so a draw can repeat a replicate at one end and not the other. It is a draw of
+the three-replicate MEAN, because the mean is what the slope is fitted through;
+drawing a single replicate instead would attach the variance of one count to an
+estimate built from three. This bootstrap, and not the least-squares fit through
+the four concentration means that the deposited table reports beside it, is the
+interval quoted in Section 7 and drawn in Figure 3C. The least-squares fit is
+kept in the table for comparison and is labelled there: it has two residual
+degrees of freedom and discards the replicate scatter entirely. An interval on a
 proportion — an inversion rate, or a share of flasks — is the Jeffreys
 interval (34), which is the equal-tailed posterior under the Jeffreys prior
 and does not collapse to zero width when the count is 0 or n, as the normal
@@ -659,7 +681,7 @@ rather than asserted.
 ### Reproducibility
 
 Every number in this paper is regenerated by a script that writes a machine-
-readable receipt of what it computed, and a separate audit script recomputes 158
+readable receipt of what it computed, and a separate audit script recomputes 165
 of the quantities quoted in the text from the tables they came from and reports
 any that disagree. That audit is not exhaustive: it pins the load-bearing counts,
 every headline interval and every figure a conclusion rests on, and it does not
@@ -771,7 +793,7 @@ pandas 3.0.3 (38), statsmodels 0.15.0 (39) and lifelines 0.30.3
 | ERA4TB six-laboratory | - | - | cross-laboratory pairs in the same arm | 191 | - |
 | ERA4TB six-laboratory | - | derived units | treated series with a quantified day-0 or day-1 reading in their own plating | 262 | -26 |
 | ERA4TB six-laboratory | - | derived units | of those, not already below their own floor at day zero (the descriptive Cox set) | 261 | -1 |
-| ERA4TB six-laboratory | - | derived units | cross-laboratory pairs, strict rate separation | 94 | - |
+| ERA4TB six-laboratory | - | derived units | cross-laboratory pairs, strict rate separation | 100 | - |
 | ERA4TB six-laboratory | - | derived units | flasks contributing those pairs | 42 | - |
 | ERA4TB six-laboratory | - | derived units | laboratory-by-arm-by-volume cells with a measured start | 56 | - |
 | ERA4TB six-laboratory | - | derived units | treated series with three or more quantified readings at 100 uL | 64 | - |
@@ -816,12 +838,12 @@ pandas 3.0.3 (38), statsmodels 0.15.0 (39) and lifelines 0.30.3
 
 | Lab | Starting density (log10 CFU/mL) | Reading day | Kill rate (log10/day) | 95% profile interval | By imputation | Readings censored | Flasks ever crossing the floor (treated arms) |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| A | 2.95 | day 1 | 0.119 | 0.092 to 0.155 | 0.119 | 51% | 9 / 12 |
-| B | 3.16 | day 0, day 1 | 0.139 | 0.097 to 0.191 | 0.138 | 58% | 10 / 12 |
-| C | 4.02 | day 0, day 1 | 0.464 | 0.430 to 0.499 | 0.464 | 44% | 10 / 12 |
-| D | 4.69 | day 0, day 1 | 0.104 | 0.081 to 0.128 | 0.105 | 3% | 0 / 12 |
-| E | 4.95 | day 0, day 1 | 0.090 | 0.077 to 0.104 | 0.090 | 1% | 0 / 12 |
-| F | 6.53 | day 0, day 1 | 0.223 | 0.206 to 0.240 | 0.223 | 0% | 0 / 12 |
+| A | 2.95 | day 1 | 0.119 | 0.084 to 0.160 | 0.125 | 51% | 9 / 12 |
+| B | 3.16 | day 0, day 1 | 0.139 | 0.097 to 0.191 | 0.140 | 58% | 10 / 12 |
+| C | 4.02 | day 0, day 1 | 0.464 | 0.408 to 0.528 | 0.464 | 44% | 10 / 12 |
+| D | 4.69 | day 0, day 1 | 0.104 | 0.077 to 0.132 | 0.104 | 3% | 0 / 12 |
+| E | 4.95 | day 0, day 1 | 0.090 | 0.073 to 0.107 | 0.090 | 1% | 0 / 12 |
+| F | 6.53 | day 0, day 1 | 0.223 | 0.191 to 0.254 | 0.223 | 0% | 0 / 12 |
 
 **Table S7.** What follows a first observed crossing below the assay floor. The state below the floor is not absorbing: a series sitting below it reads above again at the next visit with probability 0.22 overall, and that probability rises as drug pressure falls, which is what a plating artefact does. Only 56 of 360 series, 15.6 per cent, show the shape a survival model assumes -- one crossing that holds. The 360 series are four platings of each of 90 flasks and are not independent; the flask-level counts are 53 flasks with a crossing series and 42 with a returning one.
 
@@ -852,9 +874,9 @@ pandas 3.0.3 (38), statsmodels 0.15.0 (39) and lifelines 0.30.3
 | day 3 | 6.9x | 0.84 |  |  |  |
 | day 7 | 48.2x | 1.68 |  |  |  |
 | day 14 | 5.2x | 0.71 |  |  |  |
-| days 0-3 |  |  | +0.0590 | +0.0302 to +0.0878 | 0.013 |
-| days 3-7 |  |  | +0.0330 | -0.0517 to +0.1176 | 0.236 |
-| days 7-14 |  |  | -0.0251 | -0.0602 to +0.0099 | 0.091 |
+| days 0-3 |  |  | +0.0590 | +0.0327 to +0.0834 | 0.013 |
+| days 3-7 |  |  | +0.0330 | +0.0079 to +0.0586 | 0.236 |
+| days 7-14 |  |  | -0.0251 | -0.0353 to -0.0153 | 0.091 |
 
 **Table S10.** The deepest reduction each culture in the prospective experiment could report, at each of its two platings. *h* = log10(*N*₀/*L*) with *L* one colony in the pooled volume plated, taken at the lowest dilution the series was read at, which is where the floor is lowest and the reportable depth greatest. The two platings of one flask share a row: at the standard inoculum the 10 µL plating ceiling runs 3.71 to 3.93 logs and the 100 µL ceiling 4.88 to 5.05, so a four-log endpoint is unreportable at one plating and reportable at the other in the same culture. The gain column is close to the log10(10) = 1.00 that plating ten times the volume buys; it is not exactly 1.00 because each plating measures its own *N*₀ and the two measurements differ.
 
@@ -892,8 +914,8 @@ pandas 3.0.3 (38), statsmodels 0.15.0 (39) and lifelines 0.30.3
 | 5 | at one times MIC five of six laboratories record net growth | 6 laboratory-arm cell | 6 | Jeffreys interval on six clusters | WEAKENED |
 | 5 / 7 | the laboratory effect lands on the duration endpoint and not on the rate; the rate is 'far more reproducible' | 42 flask | 6 | permutation of the laboratory label across flasks, within arm for the rate | WEAKENED |
 | 6 | the deepest demonstrable kill differs by 2.33 log10 between laboratories at one plating volume | 12 day-zero reading | 4 | cluster bootstrap over whole laboratories | WEAKENED |
-| 7 | 36.6% of 191 cross-laboratory pairs are inversions (95% CI 30.1-43.6) | 191 pair of flasks | 6 | cluster bootstrap over whole laboratories; also over flasks within laboratory; also delete-one-laboratory jackknife | WEAKENED |
-| 7 | under the strictest rate separation the inversion rate is 21.3% of 94 pairs (95% CI 13.9-30.3) | 94 pair of flasks | 6 | cluster bootstrap over whole laboratories | WEAKENED |
+| 7 | 34.6% of 191 cross-laboratory pairs are inversions (95% CI 28.1-41.5) | 191 pair of flasks | 6 | cluster bootstrap over whole laboratories; also over flasks within laboratory; also delete-one-laboratory jackknife | WEAKENED |
+| 7 | under the strictest rate separation the inversion rate is 23.0% of 100 pairs (95% CI 15.6-31.9) | 100 pair of flasks | 6 | cluster bootstrap over whole laboratories | WEAKENED |
 | 1 | 33 of 217 isolates (15.2%) lack the headroom for a 4-log endpoint | 217 isolate | 174 patients min | baseline-only recount | SUPPORTED |
 | 1 / 2 | 18 isolates rest on the floor at 15 days and 6 at 60 | 217 + 210 isolate-panel (each of 210 isolates counted once per panel) | 210 isolates | exact McNemar on the paired binary | SUPPORTED |
 | 10 | no MIC-MDK association survives Benjamini-Hochberg | 6 tests isolate | 174 patients min | baseline-only family of six | SUPPORTED |
@@ -939,14 +961,14 @@ pandas 3.0.3 (38), statsmodels 0.15.0 (39) and lifelines 0.30.3
 | Kaur, intracellular | 5.94 | 170x |
 | Dubey, hollow fibre | 6.08 | 123x |
 
-**Table S15.** Pairs of flasks in the same arm from different laboratories. An inversion is a pair in which the population that fell faster crossed below the assay floor later. 45 further pairs that the censoring could not settle are excluded rather than imputed. The last two columns decompose the spread in crossing time; the rate term is the larger in each of the three arms that can be decomposed. Moxifloxacin at one times MIC is not among them: the decomposition is taken on log *D* and log *b*, five of six laboratories record net growth in that arm, and only one flask in it returns a positive fitted rate, so there is no spread in the rate to divide.
+**Table S15.** Pairs of flasks in the same arm from different laboratories. An inversion is a pair in which the population that fell faster crossed below the assay floor later. 45 further pairs that the censoring could not settle are excluded rather than imputed. The variance columns decompose the spread in crossing time. The rate term is the larger at the flask level in all three arms that can be decomposed, and that ordering is NOT a claim this table supports: the flasks are three to a laboratory and share a starting culture, so the quantity is a between-laboratory statistic on six clusters. Deleting one laboratory sends the distance share above a half in two of the three arms, and a bootstrap over whole laboratories straddles a half in all three. The last two columns are those two checks, and they are the reason the text claims only that the two terms are of comparable size. Moxifloxacin at one times MIC is not among them: the decomposition is taken on log *D* and log *b*, five of six laboratories record net growth in that arm, and only one flask in it returns a positive fitted rate, so there is no spread in the rate to divide.
 
-| Arm | Comparable pairs | Inversions | Rate | 95% CI | Called by D/b criterion | Variance: distance | Variance: rate |
-| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| All arms pooled | 191 | 70 | 36.6% | 30.1-43.6% | 83.8% |  |  |
-| INH 10X MIC |  |  |  |  |  | 31.4% | 68.6% |
-| INH 1X MIC |  |  |  |  |  | 19.6% | 80.4% |
-| MXF 10X MIC |  |  |  |  |  | 39.4% | 60.6% |
+| Arm | Comparable pairs | Inversions | Rate | 95% CI | Called by D/b criterion | Variance: distance | Variance: rate | Distance share, leave one laboratory out | Distance share, laboratory bootstrap |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| All arms pooled | 191 | 66 | 34.6% | 28.1-41.5% | 84.3% |  |  |  |  |
+| INH 10X MIC |  |  |  |  |  | 32.3% | 67.7% | 19.4-70.4% | 4.8-85.4% |
+| INH 1X MIC |  |  |  |  |  | 17.7% | 82.3% | 10.9-28.3% | 1.2-70.3% |
+| MXF 10X MIC |  |  |  |  |  | 35.2% | 64.8% | 23.9-62.3% | 8.6-76.6% |
 
 **Table S16.** The six strongest of the 24 comparisons the 217-isolate file supports. 4 reach nominal significance where 1.2 are expected by chance; none exceeds its Benjamini-Hochberg critical value, which is ranked against the full family of 24 rather than against any one stratum. MDK99 and MDK99.99 are the minimum durations for a 99 and a 99.99 per cent reduction, the endpoints the text names in words. The final column is the correlation each design could have resolved at 95% confidence.
 

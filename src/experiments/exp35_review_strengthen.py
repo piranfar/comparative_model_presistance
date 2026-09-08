@@ -181,7 +181,7 @@ def dense_sensitivity() -> tuple[pd.DataFrame, dict]:
     sm, sy = float(e_m.std(ddof=1)), float(e_y.std(ddof=1))
 
     def acme_at(rho: float) -> float:
-        return float(a * (b - rho * sy / sm) / np.sqrt(1.0 - rho * rho))
+        return float(a * (b - rho * (sy / sm) / np.sqrt(1.0 - rho * rho)))
 
     boots = bootstrap_effects(m)
     acme_lo = boots["acme_ci"][0]

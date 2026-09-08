@@ -374,10 +374,21 @@ def _check_self_audit(ms: Manuscript) -> list[dict]:
         for lineno, block in targets:
             btxt = _plain(_normalise(block))
             low = btxt.lower()
-            hits = [t for t in nums if _number_in(t, btxt)]
+            # DISTINCT numbers. A value the withdrawn claim happens to state
+            # twice -- "p = 0.015, 0.016, 0.015" -- used to score two hits
+            # against a single occurrence in the block, so one coincidental
+            # number was enough to fire. That is what it did on Section 9's
+            # bootstrap intervals, whose "-0.015" has nothing to do with a Cox
+            # p-value: one shared number, no shared word, reported as a
+            # re-asserted conclusion.
+            hits = {t for t in nums if _number_in(t, btxt)}
             shared = words & set(_content_words(block))
             cov = len(shared) / len(words)
-            fires = (len(hits) >= 2
+            # Two numbers in common and NOTHING else is a collision, not a
+            # restatement: a block that re-asserts a claim uses some of its
+            # words. One shared content word is a low bar and it is enough to
+            # tell the two cases apart.
+            fires = ((len(hits) >= 2 and shared)
                      or (len(hits) >= 1 and cov >= 0.50)
                      or (cov >= 0.70 and len(shared) >= 3))
             if not fires:

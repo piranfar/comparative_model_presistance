@@ -1,6 +1,6 @@
 {
   "script": "src/experiments/exp38_boundary_experiment.py",
-  "utc": "2026-09-08T17:34:11+00:00",
+  "utc": "2026-09-08T19:06:25+00:00",
   "source_workbook": "BOUNDARY_TEST_BLIND.xlsx",
   "n_plate_readings": 216,
   "n_sample_platings": 108,

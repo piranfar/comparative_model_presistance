@@ -119,12 +119,23 @@ def mediate(m: pd.DataFrame) -> dict:
 
 
 def residual_correlation_sensitivity(m: pd.DataFrame) -> dict:
-    """Imai–Keele–Yamamoto-style ACME as a function of Corr(ε_M, ε_Y) = ρ.
+    """Imai–Keele–Yamamoto ACME as a function of Corr(ε_M, ε_Y) = ρ.
 
-    Under the linear structural equations M ~ X and Y ~ X + M, a common closed
-    form for the continuous case is ACME(ρ) = a · (b − ρ · σ_Y/σ_M) / √(1−ρ²),
-    which recovers a·b at ρ = 0 and crosses zero at ρ = b · σ_M/σ_Y. This is a
-    sensitivity parameterisation, not a test of sequential ignorability.
+    Under the linear structural equations M ~ X and Y ~ X + M the closed form is
+
+        ACME(ρ) = a · [ b − ρ · (σ_Y/σ_M) / √(1−ρ²) ]
+
+    with σ_M the residual sd of M on X and σ_Y the residual sd of Y on X and M.
+    Only the SECOND term carries the 1/√(1−ρ²); an earlier version divided the
+    whole bracket by it, which inflated the direct-path correction and every
+    ACME at ρ ≠ 0, and pushed the nullifying correlation away from zero. The
+    form here recovers a·b at ρ = 0, and crosses zero at
+    ρ* = k/√(1+k²) with k = b·σ_M/σ_Y — not at k itself, which is what the
+    earlier version reported and which overstates how much unmeasured
+    mediator-outcome confounding the estimate can absorb.
+
+    This is a sensitivity parameterisation, not a test of sequential
+    ignorability.
     """
     y = m["y"].to_numpy(float)
     x = m["x"].to_numpy(float)
@@ -137,10 +148,15 @@ def residual_correlation_sensitivity(m: pd.DataFrame) -> dict:
     e_y = y - B @ b_coef
     a, b = float(a_coef[1]), float(b_coef[2])
     sm, sy = float(e_m.std(ddof=1)), float(e_y.std(ddof=1))
-    rho_null = float(b * sm / sy) if sy > 0 else np.nan
+    # ACME(rho) = 0 needs rho/sqrt(1-rho^2) = b*sigma_M/sigma_Y, so the
+    # nullifying correlation is k/sqrt(1+k^2), not k. Reporting k overstates
+    # it, and overstating it makes the estimate look more robust to
+    # unmeasured mediator-outcome confounding than it is.
+    _k = float(b * sm / sy) if sy > 0 else np.nan
+    rho_null = float(_k / np.sqrt(1.0 + _k * _k)) if sy > 0 else np.nan
 
     def acme_at(rho: float) -> float:
-        return float(a * (b - rho * sy / sm) / np.sqrt(1.0 - rho * rho))
+        return float(a * (b - rho * (sy / sm) / np.sqrt(1.0 - rho * rho)))
 
     grid = []
     for rho in np.round(np.linspace(-0.5, 0.5, 11), 2):
