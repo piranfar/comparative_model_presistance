@@ -1,0 +1,6 @@
+study_id,organism,drugs,n_series,baseline_is_pre_treatment,earliest_reading_h,floor_declared_by_depositor,floors_used,median_n0,headroom_min,headroom_median,headroom_max,series_short_of_4_logs,series_short_of_5_logs,n_censored_readings,series_violating_headroom,worst_excess_log10
+SOEORG2026,Acinetobacter baumannii,colistin; meropenem; meropenem + colistin; meropenem + polym,355,True,0.0,True,"10, 20, 100, 400",1122018.4543019629,1.9900000000000002,5.05,6.8100000000000005,31,119,126,0,0.0
+KOLLEROVA2024,Escherichia coli,Ampicillin,63,False,1.0,True,"200, 2000, 20000, 200000, 2e+06",3000000.0,0.0,1.3010299956639813,4.778151250383644,58,63,38,0,0.0
+ALEXANDER2020,not named,streptomycin,48,False,0.1166666666666666,False,50,450.0,0.6020599913279624,0.9542425094393249,1.146128035678238,48,48,38,0,0.0
+PRETOMANID,Mycobacterium tuberculosis,ND-011992; Q203; pretomanid; pretomanid + Q203; pretomanid +,21,True,0.0,True,20,8000000.0,5.431363764158987,5.6020599913279625,5.690196080028514,0,0,31,0,0.0
+PIRANFAR2026,Escherichia coli,ciprofloxacin,9,True,0.0,False,5,360000.0,3.9800033715837464,4.857332496431268,5.924279286061882,1,6,22,0,0.0
