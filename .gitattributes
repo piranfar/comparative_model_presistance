@@ -1,0 +1,37 @@
+# Line endings, fixed here rather than left to whichever machine has the
+# checkout. This repository was written on Windows and every `git add` prints
+# "LF will be replaced by CRLF"; a checkout on macOS or Linux would otherwise
+# rewrite every line of every text file and the first diff would look like the
+# whole manuscript had changed.
+#
+# `text=auto eol=lf` stores LF in the repository and hands each platform what it
+# wants in the working tree. The manuscript, the code and the results tables are
+# all text and all belong under it.
+* text=auto eol=lf
+
+# Binary, byte for byte, on every platform. A figure or a PDF that goes through
+# line-ending translation is a corrupted file, not a converted one.
+*.png binary
+*.pdf binary
+*.tif binary
+*.tiff binary
+*.jpg binary
+*.jpeg binary
+*.xlsx binary
+*.xls binary
+*.npz binary
+*.zip binary
+*.gz binary
+*.docx binary
+
+# Generated. Marked so a diff of the whole repository does not drown in files
+# that are rebuilt from source by `python run_all.py` anyway.
+manuscript/PAPER_COMPLETE.md linguist-generated=true
+manuscript/SUBMISSION_MAIN.md linguist-generated=true
+manuscript/SUBMISSION_SUPPLEMENT.md linguist-generated=true
+manuscript/SUPPLEMENTAL_MATERIAL.md linguist-generated=true
+manuscript/BLINDED_COPY.md linguist-generated=true
+manuscript/REVIEW_COPY.html linguist-generated=true
+manuscript/tables.md linguist-generated=true
+manuscript/references.md linguist-generated=true
+results/** linguist-generated=true

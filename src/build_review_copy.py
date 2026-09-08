@@ -24,6 +24,7 @@ from __future__ import annotations
 
 import base64
 import re
+import shutil
 import subprocess
 import sys
 from datetime import date
@@ -248,11 +249,27 @@ def to_pdf() -> str:
     a convenience.
     """
     out = OUT.with_suffix(".pdf")
+    # Windows, macOS and Linux, in that order, because this repository has lived
+    # on Windows and may not stay there. Nothing else in src/ carries an absolute
+    # path, so this function was the whole of the project's portability problem.
     candidates = [
         Path(r"C:\Program Files\Google\Chrome\Application\chrome.exe"),
         Path(r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"),
+        Path("/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"),
+        Path("/Applications/Microsoft Edge.app/Contents/MacOS/Microsoft Edge"),
+        Path("/Applications/Chromium.app/Contents/MacOS/Chromium"),
+        Path("/usr/bin/google-chrome"),
+        Path("/usr/bin/chromium"),
+        Path("/usr/bin/chromium-browser"),
     ]
     exe = next((c for c in candidates if c.exists()), None)
+    if exe is None:                       # anything on PATH, whatever it is called
+        for name in ("google-chrome", "chromium", "chromium-browser",
+                     "microsoft-edge", "chrome"):
+            found = shutil.which(name)
+            if found:
+                exe = Path(found)
+                break
     if exe is None:
         return "no Chromium found; open the HTML and print to PDF yourself"
     try:
