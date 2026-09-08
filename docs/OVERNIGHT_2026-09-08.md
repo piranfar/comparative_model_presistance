@@ -49,6 +49,29 @@ This reframes the whole recommendation from a complaint into a request for one
 sentence, behind which somebody has already done the work. It is now the closing
 argument of *What should change*.
 
+### And its complement — Tabor et al. 2025
+
+The deposited `Modeling data.csv` has 272 rows and 23 columns, one of them named
+**`CFU_LOD`**. It is declared numeric. **Zero of 272 rows carry a value.** No
+detection limit appears in any of the eight R analysis scripts deposited beside
+it either.
+
+The field for the detection limit was designed, declared, and never filled.
+
+I verified this by opening the file rather than taking it from a report.
+
+### A third instance, verified but not used in the text
+
+Walter et al. 2021 write the censoring constant `2.176091259` — which is
+log10(150) — three times into the "Fig 4a–c & Sup Fig 7-8" sheet of their Source
+Data, and state the corresponding floor only in a supplementary figure legend.
+The article body does not carry it.
+
+Three cases, one pattern. Together they say the diagnosis is not carelessness:
+the floor is measured, sometimes recorded better than anyone asks for, and it
+falls out of the record between the bench and the reader — off the end of a
+spreadsheet, or into a column nobody completed.
+
 ## 2. Below the floor is not nothing — Evangelopoulos et al. 2022
 
 Three parallel enumerations of the **same** murine lungs: colony count, molecular

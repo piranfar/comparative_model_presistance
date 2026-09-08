@@ -6,7 +6,7 @@ Outputs of the earlier paper are not here; they live in `version_one/results/`.
 
 | | tables | figures | receipts |
 | --- | ---: | ---: | ---: |
-| total | 75 | 5 | 26 |
+| total | 78 | 5 | 28 |
 
 ## Tolerance and the assay floor (manuscript/PAPER_COMPLETE.md)
 
@@ -84,7 +84,7 @@ Outputs of the earlier paper are not here; they live in `version_one/results/`.
 
 **Figures.** `fig13_parameter_transfer`
 
-**Tables (12).**
+**Tables (15).**
 
 | file | written by | used by |
 | --- | --- | --- |
@@ -96,6 +96,9 @@ Outputs of the earlier paper are not here; they live in `version_one/results/`.
 | `exp40_floor_signatures.csv` | `exp40_corpus_landscape.py` | quoted in the text only |
 | `exp40_landscape.csv` | `exp40_corpus_landscape.py` | quoted in the text only |
 | `exp41_mediation_without_floor.csv` | `exp41_mediation_without_floor.py` | quoted in the text only |
+| `exp42_corpus_boundaries.csv` | `exp42_boundaries_across_the_corpus.py` | quoted in the text only |
+| `exp42_corpus_series.csv` | `exp42_boundaries_across_the_corpus.py` | quoted in the text only |
+| `exp43_plate_zero_vs_mpn.csv` | `exp43_below_the_floor_is_not_zero.py` | quoted in the text only |
 | `learn_boundaries.csv` | `-` | `learn_boundaries` |
 | `neural_structure.csv` | `-` | `neural_structure` |
 | `symbolic_boundaries.csv` | `-` | `symbolic_boundaries` |
@@ -109,7 +112,7 @@ Outputs of the earlier paper are not here; they live in `version_one/results/`.
 
 ## Receipts
 
-26 JSON receipts, one per analysis stage. Each records the inputs, the headline outputs and the software versions the stage actually ran under, so a run under different versions is recorded rather than silently substituted.
+28 JSON receipts, one per analysis stage. Each records the inputs, the headline outputs and the software versions the stage actually ran under, so a run under different versions is recorded rather than silently substituted.
 
 ## Checking the numbers
 
