@@ -872,6 +872,10 @@ _ABBR_STANDARD = {
     # names of bodies, which are their acronyms
     "NCCLS": "the standards body's name",
     "CLSI": "the standards body's name",
+    # a culture-collection accession prefix, part of the strain's name. Nobody
+    # writes "American Type Culture Collection 25922", and an abstract with a
+    # 250-word cap should not spend four of them saying so.
+    "ATCC": "the culture-collection prefix in the strain designation ATCC 25922",
     # licence tags and table fillers
     "CC": "Creative Commons licence tag",
     "BY": "Creative Commons licence tag",
@@ -1092,8 +1096,16 @@ def _is_status_word(p: Paper, tok: str) -> bool:
     """
     if tok in _ABBR_ALWAYS:
         return False
-    n = len(re.findall(r"(?<![A-Za-z0-9])" + tok.lower() + r"(?![A-Za-z0-9])",
-                       p.text))
+    # Lower case OR capitalised, because a sentence that opens "Slower growth
+    # goes with a higher class" writes the word out just as fully as one that
+    # says it mid-sentence. Counting only the lower-case form made this test
+    # turn on where a sentence happened to break: the plain-English revision
+    # split one sentence in two, the second "slower" became "Slower", the count
+    # fell from two to one, and SLOWER was reported as an unexpanded
+    # abbreviation. The all-caps form itself is still excluded, which is the
+    # distinction the test is actually drawing.
+    n = len(re.findall(r"(?<![A-Za-z0-9])(?:" + tok.lower() + "|"
+                       + tok.capitalize() + r")(?![A-Za-z0-9])", p.text))
     if n < 2:
         return False
     return not _expansion_spans(p, tok)

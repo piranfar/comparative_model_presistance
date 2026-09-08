@@ -88,8 +88,10 @@ def table3() -> str:
         "Prior culture", "Endpoint", "Isolates", "Short of headroom",
         "Fraction short", "At ceiling: short vs ample"])
     return ("**Table 3.** The reduction each tolerance endpoint requires against "
-            "the reduction the assay can resolve. Headroom is the distance from "
-            "an isolate's starting density to the MPN floor of 23 per mL. An "
+            "the reduction the assay can resolve, in the 15-day and the 60-day "
+            "prior-culture panel alike. Headroom is the distance from an "
+            "isolate's starting density down to the day-5 MPN floor of 23 per "
+            "mL. An "
             "isolate short of headroom cannot reach that endpoint however "
             "completely the drug worked, and every such isolate is recorded at "
             "the assay ceiling." + chr(10) + chr(10) + md(d))
@@ -169,7 +171,7 @@ def table7() -> str:
             "ratio above one means higher odds of a higher tolerance class; time "
             "to an optical density (OD) of 0.4 is in days and runs inversely to "
             "growth rate, so above one "
-            "there means SLOWER growth accompanies a higher class. The "
+            "there means *slower* growth accompanies a higher class. The "
             "proportional-odds column is a Brant test per predictor; the "
             "assumption holds for every predictor in this family. Starting "
             "density enters the adjusted fits as a covariate rather than as a "
