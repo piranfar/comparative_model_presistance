@@ -704,5 +704,16 @@
     "volume_pages": "",
     "identifier": "https://doi.org/10.1101/2025.07.29.667394",
     "supports": "a shallower MDK threshold chosen so that more isolates could enter the analysis"
+  },
+  "R56": {
+    "kind": "article",
+    "authors": "Balaban NQ, Helaine S, Lewis K, Ackermann M, Aldridge B, Andersson DI, Brynildsen MP, Bumann D, Camilli A, Collins JJ, Dehio C, Fortune S, Ghigo J-M, Hardt W-D, Harms A, Heinemann M, Hung DT, Jenal U, Levin BR, Michiels J, Storz G, Tan M-W, Tenson T, Van Melderen L, Zinkernagel A",
+    "year": "2019",
+    "title": "Definitions and guidelines for research on antibiotic persistence",
+    "journal": "Nat Rev Microbiol",
+    "volume_pages": "17:441-448",
+    "publisher": "",
+    "repository": "",
+    "identifier": "https://doi.org/10.1038/s41579-019-0196-3"
   }
 }

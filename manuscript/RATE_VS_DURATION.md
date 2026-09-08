@@ -95,6 +95,32 @@ biases regimen ranking [[R54]], and a within-host tuberculosis tolerance study
 chose a shallower MDK threshold specifically so that more isolates could enter
 the analysis [[R55]].
 
+The closest statement of the bound is in the framework's own methods paper, and
+we claim no priority over it. Brauner and colleagues, presenting a direct
+measurement of tolerance that deliberately avoids time-kill curves, scale the
+inoculum to the endpoint being measured: a hundred bacteria per well to determine
+MDK99, a thousand for MDK99.9, and so on [[R3]]. That is the reachability
+inequality of this paper, with the floor idealised at one cell per well and a
+presence-or-absence readout in place of a count. What has not been done is to
+carry the rule back into plate-count time-kill, where the floor is not one cell
+but a concentration fixed by the plated volume — 10 to 400 CFU/mL across the
+deposits reanalysed here — and must therefore be measured per sample rather than
+assumed; nor to ask what the published record looks like where the rule was not
+applied.
+
+The requirement is older still, and it is quantitative. NCCLS M26-A ties the
+plated volume to the endpoint, requiring that after the defined 99.9 per cent
+killing at least ten colonies remain to be counted, and separately requires the
+smallest accurately detectable count to be established by serial dilution of a
+known inoculum [[R31]]. What has happened since is that the endpoint moved and the
+rule did not travel with it. The persistence field's own consensus guideline
+makes the time-kill assay the starting point for identifying persistence and
+catalogues at length what can go wrong with it — resistant mutants,
+heteroresistance, drug degradation, adhesion to the vessel, washing and recovery
+conditions, delayed colony appearance, culture density, inoculum history — and
+raises neither the limit of detection, nor the plated volume, nor how deep a
+reduction the assay can report [[R56]].
+
 None of these converts a floor-level reading into the classification rule it
 becomes: when the last count sits at *L*, the recorded fraction is *L*/*N*₀, and
 the low, medium or high label is then a cut on starting density. That is the gap
@@ -1014,8 +1040,26 @@ The same arithmetic answers the objection that the starting density is fixed by
 protocol. It is fixed as a turbidity, and a turbidity is not a viable count. Under
 one written protocol the realised densities differed enough to change the deepest
 demonstrable kill by 2.33 log10 between laboratories, and by 4.40 once the choice
-of plated volume is included, since that choice sets the floor. A standard that
-fixes what enters the flask does not thereby fix what the assay can resolve.
+of plated volume is included, since that choice sets the floor.
+
+The standard is not silent on that choice, and this is the paper's sharpest
+finding rather than an awkwardness for it. M26-A's section 1.3.2.5 is headed
+*Volume Transferred*, and it ties the volume to the endpoint by a quantification
+rule: the volume must be such that after the defined 99.9 per cent killing, at
+least ten colonies remain to be counted [[R31]]. It permits 10 to 100 µL, and gives a
+reason at each end — carryover above, Poisson sampling error below. Section 3.1
+goes further and requires that the smallest accurately detectable count be
+determined by serial dilution of a known inoculum. A guideline written in 1999
+therefore already required both of the numbers this paper asks for: a floor
+established by measurement, and a plated volume chosen against the endpoint.
+
+Applied to its own endpoint the rule bites. Ten colonies after a 99.9 per cent
+kill of 5 × 10⁵ per mL needs at least 20 µL streaked; a 10 µL streak yields five
+and fails the rule. The requirement was there, it was quantitative, and the
+deposits reanalysed here do not meet it — not because their authors disregarded a
+standard, but because the endpoint moved. M26-A sets 99.9 per cent throughout and
+nowhere contemplates a four-log call; the deeper endpoints came later, and the
+volume rule did not travel with them.
 
 ### What the tolerance phenotype tracks instead
 

@@ -1,6 +1,6 @@
 {
   "script": "src/audit_manuscript.py",
-  "utc": "2026-09-08T02:58:58+00:00",
+  "utc": "2026-09-08T03:29:29+00:00",
   "checkers": [
     "check_arithmetic",
     "check_census",
@@ -11,7 +11,7 @@
     "check_identity",
     "check_terms"
   ],
-  "n_words_audited": 30962,
+  "n_words_audited": 31525,
   "counts": {
     "high": 0,
     "medium": 1,
@@ -31,7 +31,7 @@
       "severity": "low",
       "kind": "audit-count-summary",
       "where": "whole repository",
-      "detail": "src/audit_claims.py runs 145 checks (run); 3 place(s) state that number: Methods (PAPER_COMPLETE.md) line 1873 = 145; manuscript/RATE_VS_DURATION.md line 1620 = 145; README.md line 44 = 145",
+      "detail": "src/audit_claims.py runs 145 checks (run); 3 place(s) state that number: Methods (PAPER_COMPLETE.md) line 1917 = 145; manuscript/RATE_VS_DURATION.md line 1664 = 145; README.md line 44 = 145",
       "expected": "145",
       "found": "145, 145, 145",
       "checker": "check_census"
@@ -48,8 +48,8 @@
     {
       "severity": "low",
       "kind": "named-items-not-resolved",
-      "where": "other (line 144): \"Two further deposits establish that the same arithmetic governs killing experiments where inoculum is controll\"",
-      "detail": "resolved: the sentence says 2 and then names a list. Not resolved: 2 of its 4 items do not open with a determiner or a count (11); 13)), so the list runs into qualifying clauses and cannot be counted mechanically. Count it by eye",
+      "where": "other (line 170): \"Two further deposits establish that the same arithmetic governs killing experiments where inoculum is controll\"",
+      "detail": "resolved: the sentence says 2 and then names a list. Not resolved: 2 of its 4 items do not open with a determiner or a count (13); 15)), so the list runs into qualifying clauses and cannot be counted mechanically. Count it by eye",
       "expected": "2 items named",
       "found": "a list of 4 fragments",
       "checker": "check_census"
@@ -57,7 +57,7 @@
     {
       "severity": "low",
       "kind": "named-items-not-resolved",
-      "where": "results, 4. The classification tracks growth; the resistance associat (line 626): \"Five of them are recorded almost exclusively for resistant isolates, so their missingness is the exposure: the\"",
+      "where": "results, 4. The classification tracks growth; the resistance associat (line 652): \"Five of them are recorded almost exclusively for resistant isolates, so their missingness is the exposure: the\"",
       "detail": "resolved: the sentence says 5 and then names a list. Not resolved: 2 of its 6 items do not open with a determiner or a count (for none of the 119 susceptible on; none), so the list runs into qualifying clauses and cannot be counted mechanically. Count it by eye",
       "expected": "5 items named",
       "found": "a list of 6 fragments",
@@ -66,7 +66,7 @@
     {
       "severity": "low",
       "kind": "quantity-in-words-and-figures",
-      "where": "discussion, How large the effect is (line 1296) and results, 7. The population that fell faster often crossed the floor l (line 940)",
+      "where": "discussion, How large the effect is (line 1340) and results, 7. The population that fell faster often crossed the floor l (line 966)",
       "detail": "\"a third\" states in words what 36.6 per cent states in figures; the two sentences share assay, crossed, faster, fell, flask. Check they are the same quantity -- this rule matches on wording, not on arithmetic, because 36.6 is not a rounding of 33.3333",
       "expected": "the figure, or the word, in both places",
       "found": "\"a third\" against 36.6 per cent",
