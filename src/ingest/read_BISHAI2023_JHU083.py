@@ -4,16 +4,21 @@ sheets, one sheet per figure.
 
 WHAT IS IN THE FILE, and what this reader takes.
 
-Only three of the twenty sheets carry a viable count with a time axis, and this
-reader takes those three panels and nothing else:
+Only three of the twenty sheets carry a viable count against any kind of time
+axis, and this reader takes those three panels and nothing else:
 
   Fig 1  :: Fig 1f   "Log10CFU" in infected BMDM wells, Day 0 / 3 / 5, four
                      arms (BMDM alone, and BMDM + 10X DON / JHU083 / INH),
                      three wells each, labelled C1-C3 by the sheet.
   Fig 2  :: Fig 2b   "Lung CFU (Log10)", Week 0 / 2 / 5, one row per mouse,
                      the sheet's own ids WT-PBS-Lung-M1 ... WT-RIF-Lung-M5.
+                     Its week axis has no stated origin and yields NO time_h
+                     -- see below.
   Fig S1 :: Fig S1a  "Log10CFU", Days 1 / 3 / 5, arms PBS / INH / 1X DON /
                      10X DON across merged three-column blocks.
+
+So the only usable time axis in this deposit is in vitro: Fig 1f at 0 / 72 /
+120 h and Fig S1a at 24 / 72 / 120 h. Time zero exists only in Fig 1f.
 
 Everything else in the workbook is either not a count (flow cytometry in Fig 4,
 5, S9-S15; metabolomics in Fig 6, S16-S18; body weight, lung weight, survival,
@@ -69,10 +74,22 @@ TWO THINGS A LATER READER SHOULD KNOW ABOUT THE READINGS THEMSELVES.
     all four arms. One inoculum reading per well, reported once per arm: the
     twelve Day 0 rows are three readings, not twelve. They are kept as the
     sheet writes them and flagged.
-  * Fig 2b's Week 0 exists only for the five PBS-labelled mice, and only four
-    of those five have a value. The sheet does not say whether Week 0 is the
-    start of treatment or the day of infection; it is taken at face value as
-    time zero because that is what the column is called.
+  * FIG 2b GETS NO TIME, and this is the one place where taking the sheet at
+    face value would have been wrong. The axis reads "Week 0 / Week 2 /
+    Week 5" and the workbook never says what week zero counts from. Week 0 is
+    not the start of drug exposure, and the deposit's own numbers show it: the
+    four Week 0 readings are 79-123 CFU per lung against 10**6.4-10**7.4 in
+    the same panel at Week 2 -- an implantation-level count, not a treatment
+    baseline -- and Week 0 exists only under the PBS-labelled mice, so it is a
+    separate, earlier sacrifice group rather than a time zero shared with the
+    JHU083 and RIF arms. Once Week 0 is not exposure zero, Week 2 and Week 5
+    have no known origin either, and 336 h and 840 h of drug exposure would be
+    numbers this deposit does not contain. All 31 readings are kept with their
+    counts; time_h is blank on every one and the notes carry the sheet's own
+    "Week n" label and the reasoning. This follows what the corpus already
+    does with an unanchored in vivo sacrifice (PZA_PARP1_2023's "DAY 1 post
+    infection" and "end of treatment" panels, WALTER2021_RSRATIO's mice whose
+    two day columns disagree).
 """
 from __future__ import annotations
 
@@ -112,6 +129,23 @@ MIC_NOTE = ("panel Fig S1b on this same sheet writes the same treatments as "
 NO_ORGANISM = ("this sheet does not name the organism; only the Fig 2 sheet "
                "does, in its panel Fig 2c header \"DON concentration in Mtb "
                "infected lungs\"")
+
+# Fig 2b carries no usable time.  The sheet's axis is "Week 0 / Week 2 /
+# Week 5" and nothing in the workbook says what week zero counts from, so
+# hours since drug exposure began are not recoverable -- and the deposit's own
+# numbers rule out the reading that would make the axis a treatment clock.
+# See the docstring for the arithmetic.  Handled the way the corpus already
+# handles this case (PZA_PARP1_2023 Figure 6 b, WALTER2021_RSRATIO's
+# euthanized-early mice): keep the count, leave time_h blank, say why.
+WEEK_NOTE = (
+    "no time_h: the sheet's axis is \"Week 0 / Week 2 / Week 5\" and the "
+    "workbook nowhere states what week zero counts from. It is not the start "
+    "of drug exposure: the Week 0 readings are 79-123 CFU per lung against "
+    "10**6.4-10**7.4 in the same panel at Week 2, an implantation-level count "
+    "rather than a treatment baseline, and Week 0 exists only for the "
+    "PBS-labelled mice -- a separate, earlier sacrifice group, not a time "
+    "zero shared by the JHU083 and RIF arms. Hours since exposure began are "
+    "therefore not in this deposit and none is invented here")
 
 
 def _grid(path: Path, sheet: str) -> pd.DataFrame:
@@ -246,7 +280,9 @@ def _fig2b(path: Path) -> list[dict]:
             if not np.isfinite(v):
                 continue
             note = [LOG_NOTE,
-                    "week converted to hours (the sheet's axis is weeks)",
+                    f"the sheet's own time label for this reading is "
+                    f"\"Week {week:g}\"",
+                    WEEK_NOTE,
                     "in vivo organ burden: this is CFU per lung, not per mL; "
                     "cfu_per_ml carries the per-organ count because that is "
                     "the column the schema has, and no volume was invented to "
@@ -259,16 +295,12 @@ def _fig2b(path: Path) -> list[dict]:
                     "concentration or dose is available" if drug else
                     "PBS arm: the sheet's untreated control"]
             if week == 0:
-                note.append("Week 0 is present only for the PBS-labelled mice "
-                            "(four of the five); the sheet does not say "
-                            "whether Week 0 is the start of treatment or the "
-                            "day of infection, and it is taken at face value "
-                            "as time zero because that is what the column is "
-                            "called")
+                note.append("Week 0 is present only for the PBS-labelled mice, "
+                            "and only for four of the five")
             out.append(_row(
                 sheet="Fig 2 :: Fig 2b", organism=organism, drug=drug,
                 concentration=conc, conc_unit=unit, arm=arm, replicate=lab,
-                time_h=week * 168.0, cfu_per_ml=10.0 ** v,
+                time_h=np.nan, cfu_per_ml=10.0 ** v,
                 notes="; ".join(note)))
     return out
 

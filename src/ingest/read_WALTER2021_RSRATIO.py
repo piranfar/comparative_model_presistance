@@ -126,7 +126,9 @@ F_FIG4_RES = ('stated in the sheet: its "Resistant CFU per lung (log10)" column 
               'detected value as 2.176091259, which is log10(150); the detected '
               'values are log10 of exact multiples of 150 (300, 600, 750, 2250), '
               'so one colony is 150 CFU per lung and 150 is this column\'s '
-              'reporting floor')
+              'reporting floor -- 150 exactly, because log10(150) = '
+              '2.1760912590556813 agrees with the sheet to every digit the '
+              'sheet writes')
 F_FIG5 = ('stated in the sheet: its "CFU per lung" column writes below-limit '
           'readings as "<3.26" and its smallest reported count is exactly 3.26 '
           'CFU per lung, so one colony is 3.26 CFU per lung and 3.26 is this '
@@ -412,12 +414,19 @@ def _fig4(ws) -> list[dict]:
             if v is None:
                 continue
             cfu = 10.0 ** v
-            if abs(v - 2.176091259) < 1e-6:
+            if v == 2.176091259:
                 extra = ("this is the sheet's censoring value itself, one "
                          "colony = 150 CFU per lung: a detection at the floor, "
                          "not a below-limit reading")
+            elif abs(v - 2.176091259) < 5e-4:
+                extra = ("the sheet writes this reading as %r, which is the "
+                         "same one-colony value it writes elsewhere as "
+                         "2.176091259 = log10(150), rounded; taken as written "
+                         "it lands a thousandth of a CFU ABOVE the floor, so "
+                         "the censored flag on this row reads 'no' for a "
+                         "reading that is in fact at the floor" % v)
         out.append({**base, "cfu_per_ml": cfu, "censored": cens,
-                    "floor_cfu_per_ml": 10.0 ** 2.176091259,
+                    "floor_cfu_per_ml": 150.0,
                     "floor_basis": F_FIG4_RES, "readout": R_LUNG_RES,
                     "notes": _join(common, extra, "sheet value %r" % raw)})
     return out

@@ -141,6 +141,51 @@ def main() -> int:
           "not the files:\n   a deposit whose article states the limit in its "
           "methods is a different case\n   from one where nobody recorded it at "
           "all. exp39 settles that.")
+    # ---- the same animals, deposited twice ------------------------------
+    # A group publishes a dataset, then republishes a superset with a later
+    # paper, and the corpus acquires both. Dide-Agossou 2022 and Walter 2021
+    # share three quarters of their readings exactly: the same mice, counted
+    # once and deposited twice. Nothing here deletes a row, because which copy
+    # is canonical is a judgement about the papers rather than the files. But a
+    # count of readings that silently includes both is wrong, and this says so
+    # before anybody quotes one.
+    # ONLY DISTINCTIVE VALUES COUNT. Two unrelated deposits will collide on
+    # 1000, 1e5, 1e6 all day, because those are what people seed to and report.
+    # A shared value carries evidence of common origin only when it is
+    # arbitrary -- 3937500.0018 is somebody's actual measurement and cannot be
+    # arrived at twice by chance. So a reading enters the comparison only if it
+    # has more than three significant figures. Without this the check reported
+    # five pairs, four of them coincidences on round numbers.
+    def distinctive(v: float) -> bool:
+        if not np.isfinite(v) or v <= 0:
+            return False
+        mant = v / (10 ** np.floor(np.log10(abs(v))))
+        return abs(mant * 1000 - round(mant * 1000)) > 1e-6 or \
+            abs(mant * 100 - round(mant * 100)) > 1e-6
+
+    print("\n   cross-deposit duplicate readings, on distinctive values only:")
+    pairs = {}
+    for sid, sub in long.dropna(subset=["cfu_per_ml", "time_h"]).groupby("study_id"):
+        pairs[sid] = {(t, v) for t, v in zip(sub.time_h.round(3),
+                                             sub.cfu_per_ml.round(6))
+                      if distinctive(v)}
+    ids = sorted(pairs)
+    found = False
+    for i, a in enumerate(ids):
+        for b in ids[i + 1:]:
+            shared = pairs[a] & pairs[b]
+            if len(shared) < 10:
+                continue
+            sa = 100 * len(shared) / max(len(pairs[a]), 1)
+            sb = 100 * len(shared) / max(len(pairs[b]), 1)
+            if max(sa, sb) < 20:
+                continue
+            found = True
+            print(f"      {a} and {b}: {len(shared)} distinctive (time, count) "
+                  f"pairs in both, {sa:.0f}% of one and {sb:.0f}% of the other")
+    if not found:
+        print("      none above the reporting threshold")
+
     if failed:
         print(f"\n   {len(failed)} reader(s) failed:")
         for s, why in failed:

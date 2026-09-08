@@ -198,20 +198,22 @@ def _search_all_sheets(book: dict[str, pd.DataFrame]) -> dict[str, str]:
     return found
 
 
-def _floor_basis(found: dict[str, str]) -> str:
+def _floor_basis(found: dict[str, str], lo: float, ties: int, n: int) -> str:
+    """Why floor_cfu_per_ml is blank, with the evidence counted, not asserted."""
+    seen = (f"What the workbook does show, counted here rather than asserted, "
+            f"is that {lo:g} is the smallest number in any of its count "
+            f"blocks, that exactly {ties} of its {n} readings sit on it, and "
+            f"that none lies below it. That is evidence for src.infer_floor "
+            f"to weigh, not a floor the source states. ")
     if found:
         got = "; ".join(f"{k} -> {v}" for k, v in found.items())
         return ("not recorded: the workbook does contain text matching " + got +
                 ", which this reader did not expect and has not interpreted "
-                "into a number. " + FLOOR_QUOTE)
-    return (
-        "not stated by this deposit. The reader searched every cell of all "
-        "eleven sheets for " + ", ".join(SEARCH) + ", and found none of them: "
-        "the workbook is bare numbers under panel letters. What it does show "
-        "-- that 200 is its smallest value, recurs exactly, is never "
-        "undercut, and is sustained for weeks in single replicates while the "
-        "paired replicate regrows -- is evidence for src.infer_floor to "
-        "weigh, not a floor the source states. " + FLOOR_QUOTE)
+                "into a number. " + seen + FLOOR_QUOTE)
+    return ("not stated by this deposit. The reader searched every cell of all "
+            "eleven sheets for " + ", ".join(SEARCH) + ", and found none of "
+            "them: the workbook is bare numbers under panel letters. " + seen
+            + FLOOR_QUOTE)
 
 
 def _panel_above(raw: pd.DataFrame, hdr: int) -> str:
@@ -420,7 +422,6 @@ def read(d: Path) -> pd.DataFrame:
     xl = pd.ExcelFile(src)
     book = {s: pd.read_excel(src, sheet_name=s, header=None)
             for s in xl.sheet_names}
-    basis = _floor_basis(_search_all_sheets(book))
 
     # Every block whose row index is a time, found by its header rather than
     # by address.
@@ -435,6 +436,8 @@ def read(d: Path) -> pd.DataFrame:
         if shape and max(shape[4]) >= COUNT_THRESHOLD:
             seen += [v for v in shape[4] if v > 0]
     workbook_min = min(seen) if seen else np.nan
+    basis = _floor_basis(_search_all_sheets(book), workbook_min,
+                         seen.count(workbook_min), len(seen))
 
     rows = []
     for sheet, i in blocks:

@@ -18,16 +18,21 @@ article, which is not in the deposit.
     isoniazid; R, rifampin; Z, pyrazinamide), HRZE (E, ethambutol added), or
     HRZEt (Et, ethionamide added)".
   * The mouse doses come from Table S1.  They are per drug and there are three
-    or four drugs per arm, so nothing goes in `concentration`; the whole dose
-    list goes in notes and the regimen label goes in `arm`.
+    or four drugs per arm, so nothing goes in `concentration`; the arm's doses
+    go in notes and the regimen label goes in `arm`.  Table S1 also gives a
+    dexamethasone dose that no regimen letter accounts for and that the deposit
+    never assigns to an arm; that is said in notes and put nowhere else.
 
 THERE IS NO FLOOR, AND THAT IS THE POINT.  Nothing in either file names a limit
 of detection, a plated volume, a dilution or a raw colony count -- the words
-"detection", "limit", "plate", "dilution", "homogenate" and "colony" do not
-occur anywhere in the deposit.  The values arrive already reduced to log10 CFU
-per gram, so no floor can be recovered by arithmetic either, and per-gram
-normalisation would in any case give every animal a different one.  So
-floor_cfu_per_ml stays blank.
+"detection", "limit", "LOD", "plate", "dilution", "homogenate" and "colony" do
+not occur anywhere in the deposit.  That is CHECKED at read time, over every
+text node of the workbook package (cells, comments, defined names) and over the
+methods document, rather than asserted: if any of those words ever appears,
+floor_basis says so loudly instead of repeating a denial that has gone stale.
+The values arrive already reduced to log10 CFU per gram, so no floor can be
+recovered by arithmetic either, and per-gram normalisation would in any case
+give every animal a different one.  So floor_cfu_per_ml stays blank.
 
   Nineteen lung readings, all at week 6, are written as exactly 0.  On the
   log10 scale the deposit uses, 0 means 1 CFU/g, and that is what this reader
@@ -56,13 +61,18 @@ WHAT THE SHEETS CONTAIN, and what is left out.
   serum GFAP in ug/mL and Figure S3 is percent area of Iba1 staining.  None is a
   viable count, and none is read.
 
-UNVERIFIED.  The deposit never says how long after infection treatment began,
-so the "0" row is read as time zero of TREATMENT, which is what the sheet's own
-W2/W6 labels and the legend's "after two weeks of treatment" describe.  It is
-not the inoculum: the week-0 brain and lung burdens differ by two logs, as an
-established intracranial infection would.  Nor does the deposit say whether the
-same column position in the brain and lung sheets is the same mouse; the animal
-counts match in every arm and week, which is suggestive and nothing more.
+UNVERIFIED, and every row says so in notes.  (1) The deposit never expands the
+"W" of W2/W6.  The row labels 0/2/6 are read as WEEKS because Figures 1B/1C
+label the very same columns W2 and W6 and the study counts its own treatment in
+weeks -- "after two weeks of treatment" (Figure S2 legend), "treated for two
+weeks" (Figure S3 legend).  That is an inference from the deposit's own words,
+not a statement in it, and it sets every time_h by a factor of 168.  (2) The
+deposit never says how long after infection treatment began, so the "0" row is
+read as time zero of TREATMENT.  It is not the inoculum: the week-0 brain and
+lung burdens differ by two logs, as an established intracranial infection would.
+(3) Nor does the deposit say whether the same column position in the brain and
+lung sheets is the same mouse; the animal counts match in every arm and week,
+which is suggestive and nothing more.
 """
 from __future__ import annotations
 
@@ -83,6 +93,12 @@ DOCX = "s0002.docx"
 SUPP_TO_MAIN = {"Figure S1A": "Figure 1B", "Figure S1B": "Figure 1C"}
 
 HOURS_PER_WEEK = 168.0
+
+# Every sheet in the deposit. The first four hold the counts (S1A/S1B read,
+# 1B/1C their reprints); the last four are drug concentrations, serum GFAP and
+# Iba1 staining -- no viable counts, checked against the legends, none read.
+KNOWN_SHEETS = {"Figure S1A", "Figure S1B", "Figure 1B", "Figure 1C",
+                "Figure 2A", "Figure 2B", "Figure S2", "Figure S3"}
 
 ARM_ROW = 2        # row carrying the arm labels in Figure S1A / S1B
 FIRST_DATA_ROW = 3  # first row carrying a week and its values
@@ -215,7 +231,23 @@ class Meta:
              + ", ".join(have))
         if miss:
             s += f"; no dose is stated for {', '.join(miss)}"
-        return s
+        # Table S1 also doses dexamethasone, which no regimen letter accounts
+        # for and which the deposit never assigns to an arm. Saying so is the
+        # honest move: these animals may have had a steroid alongside the
+        # regimen, and `drug` must not pretend to know either way.
+        extra = self.unassigned_doses()
+        return s + ("; " + extra if extra else "")
+
+    def unassigned_doses(self) -> str:
+        """Drugs Table S1 doses that no regimen letter in the legend explains."""
+        extra = sorted(set(self.doses) - set(self.letters.values()))
+        if not extra:
+            return ""
+        return ("Table S1 also states a mouse dose for %s, which no regimen "
+                "letter accounts for; the deposit never says which arms "
+                "received %s, so it is left out of `drug`"
+                % (", ".join("%s %s" % (n, self.doses[n]) for n in extra),
+                   "them" if len(extra) > 1 else "it"))
 
 
 # --------------------------------------------------------------------------
@@ -294,15 +326,58 @@ def _main_figure_columns(raw: pd.DataFrame) -> dict[tuple[str, float], list[floa
     return out
 
 
-FLOOR_BASIS = (
-    "left blank: the deposit states no detection limit and no plated volume. "
-    "The workbook's whole text is its title, the organ names and the regimen "
-    "letters (16 shared strings), and the supplementary methods "
-    "(aac.00190-26-s0002.docx) cover only the infection, the GFAP and Iba1 "
-    "assays and the statistics -- the words detection, limit, plate, dilution, "
-    "homogenate and colony do not appear in either file. Values are deposited "
-    "already reduced to log10 CFU/g, with no colony count, dilution or plated "
-    "volume, so no floor follows by arithmetic either")
+# Any word that would name a floor, a plated volume, a dilution or a raw count.
+# The basis below CLAIMS none of them occurs in this deposit. That claim is the
+# whole finding for this dataset, so it is checked against the files every time
+# the reader runs rather than trusted from the day it was written: a re-deposit
+# that added a methods line would otherwise slip past behind a stale denial.
+FLOOR_WORDS = re.compile(
+    r"detect\w*|limit\w*|L\.?O\.?D\b|plat(?:e|ed|ing)\b|dilut\w*|"
+    r"colon(?:y|ies)|homogen\w*|CFU\s*/\s*m[lL]", re.I)
+
+FLOOR_ABSENT = (
+    "left blank: the deposit states no detection limit and no plated volume, "
+    "and this reader verifies that rather than assuming it -- the words "
+    "detection, limit, LOD, plate, dilution, colony and homogenate occur in "
+    "neither file. Not in any of the %d distinct text values of the workbook "
+    "package (its title, the organ names, the regimen and week labels, the "
+    "numbers themselves, and no cell comments or defined names at all), and "
+    "not in the supplementary methods (%s), which cover only the animal "
+    "infection, the GFAP and Iba1 assays and the statistics. Values are "
+    "deposited already reduced to log10 CFU/g, with no colony count, dilution "
+    "or plated volume, so no floor follows by arithmetic either")
+
+FLOOR_WORD_FOUND = (
+    "left blank, but DO NOT TRUST THIS BLANK WITHOUT READING THE DEPOSIT: this "
+    "reader found no stated limit, yet the deposit's text contains %s, which it "
+    "did not contain when the reader was written. Someone must read those "
+    "passages and decide whether a floor is now stated")
+
+
+def _xml_text(blob: bytes) -> list[str]:
+    """Every text node of an OOXML package: cells, comments, defined names.
+
+    Markup is dropped rather than searched, so a tag or attribute name can never
+    be mistaken for a word the depositor wrote.
+    """
+    out: list[str] = []
+    with zipfile.ZipFile(io.BytesIO(blob)) as z:
+        for name in z.namelist():
+            if not name.endswith(".xml"):
+                continue
+            body = z.read(name).decode("utf-8", "replace")
+            out += [s.strip() for s in re.sub(r"<[^>]*>", "\n", body).split("\n")
+                    if s.strip()]
+    return out
+
+
+def _floor_basis(xbytes: bytes, meta: "Meta") -> str:
+    nodes = _xml_text(xbytes)
+    hits = sorted({m.group(0).lower()
+                   for m in FLOOR_WORDS.finditer("\n".join(nodes + [meta.text]))})
+    if hits:
+        return FLOOR_WORD_FOUND % ", ".join('"%s"' % h for h in hits)
+    return FLOOR_ABSENT % (len(set(nodes)), meta.rel)
 
 ZERO_NOTE = (
     "the sheet writes this reading as exactly 0 on its log10 scale, so the "
@@ -322,21 +397,38 @@ def read(d: Path) -> pd.DataFrame:
                          "unit, organism and dose this reader reports comes "
                          "from them" % DOCX)
     meta = Meta(_docx_text(got_d[0]), got_d[1])
+    floor_basis = _floor_basis(xbytes, meta)
     if not meta.unit or not meta.organ_of:
         raise ValueError("the Figure S1 legend no longer states the organs and "
                          "the unit; refusing to assume them")
 
     book = pd.ExcelFile(io.BytesIO(xbytes))
+    # The four sheets deliberately not read are named in the docstring; if the
+    # deposit ever grows a sheet nobody has looked at, the reader must stop
+    # rather than drop it silently -- an unread sheet of counts would be
+    # missing readings that nothing in the corpus would show as missing.
+    unexpected = [s for s in book.sheet_names if s not in KNOWN_SHEETS]
+    if unexpected:
+        raise ValueError("unexamined sheet(s) in %s: %s; the reader knows only "
+                         "%s and will not decide on its own that a new sheet "
+                         "holds no counts"
+                         % (xrel, ", ".join(map(repr, unexpected)),
+                            ", ".join(sorted(KNOWN_SHEETS))))
     shared = ("the supplementary methods (%s) supply the organism, strain, "
               "unit, regimen letters and doses; the workbook itself states "
               "none of them" % meta.rel)
     host = "; ".join(x for x in (meta.host, meta.route) if x)
-    time_note = ("the sheet labels the rows 0, 2 and 6 and Figures 1B/1C label "
-                 "the same columns W2 and W6, so the unit is weeks of "
-                 "treatment (the Figure S2 legend says \"after two weeks of "
-                 "treatment\"); converted here at 168 h per week. The deposit "
-                 "never says how long after infection treatment began, so the "
-                 "0 row is treatment time zero and not the inoculum")
+    time_note = ("UNVERIFIED time unit: the sheet labels the rows 0, 2 and 6 "
+                 "with no unit and the deposit never expands the \"W\" of the "
+                 "W2/W6 headings that Figures 1B/1C put over the same columns. "
+                 "They are read as WEEKS because the study counts its own "
+                 "treatment in weeks -- \"after two weeks of treatment\" "
+                 "(Figure S2 legend), \"treated for two weeks\" (Figure S3 "
+                 "legend) -- and converted at 168 h per week; that is an "
+                 "inference from the deposit's words, not a statement in it, "
+                 "and it scales every time_h by 168. The deposit also never "
+                 "says how long after infection treatment began, so the 0 row "
+                 "is treatment time zero and not the inoculum")
     unit_note = ("the deposit reports %s, quoting the Figure S1 legend: \"%s\"; "
                  "cfu_per_ml therefore holds a count per GRAM of tissue, not "
                  "per mL, and no volume is invented to convert it"
@@ -453,7 +545,7 @@ def read(d: Path) -> pd.DataFrame:
                         "plated_volume_ul": np.nan,
                         "cfu_per_ml": float(10.0 ** v),
                         "floor_cfu_per_ml": np.nan,
-                        "floor_basis": FLOOR_BASIS,
+                        "floor_basis": floor_basis,
                         "readout": "CFU per gram of %s tissue" % organ.lower(),
                         "notes": "; ".join(note),
                     })
