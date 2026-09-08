@@ -1,6 +1,6 @@
 {
   "script": "src/audit_manuscript.py",
-  "utc": "2026-09-08T05:40:59+00:00",
+  "utc": "2026-09-08T05:41:38+00:00",
   "checkers": [
     "check_arithmetic",
     "check_census",
@@ -11,22 +11,13 @@
     "check_identity",
     "check_terms"
   ],
-  "n_words_audited": 32184,
+  "n_words_audited": 32185,
   "counts": {
     "high": 0,
-    "medium": 2,
+    "medium": 1,
     "low": 8
   },
   "findings": [
-    {
-      "severity": "medium",
-      "kind": "boundary-outside-its-declared-sense",
-      "where": "line 1289 (What fails, and where)",
-      "detail": "\"boundary\" appears here in none of the senses the Methods reserve it for. Check that it is not standing in for the assay floor *L*.",
-      "expected": "the assay floor *L*",
-      "found": "ne raises neither. It is precisely why the boundaries are worth writing down: a relapse model resting on a 28-day count needs that",
-      "checker": "check_terms"
-    },
     {
       "severity": "medium",
       "kind": "limit-outside-its-declared-sense",

@@ -1286,9 +1286,9 @@ separating them, and a term standing for drug identity takes over the
 discrimination it can no longer supply. Version 1 of that preprint reports no
 detection limit and no plated fraction, and we do not read this as a lapse
 peculiar to it — the field's own consensus guideline raises neither. It is
-precisely why the boundaries are worth writing down: a relapse model resting on a
-28-day count needs that count treated as left-censored, and *h* says when the
-question arises rather than leaving it to be noticed.
+precisely why *N*_reach and *N*_id are worth writing down: a relapse model
+resting on a 28-day count needs that count treated as left-censored, and *h*
+says when the question arises rather than leaving it to be noticed.
 
 A reader may object that this runs backwards. Falling below the limit of
 detection is what a *susceptible* population does; how can it make an isolate
