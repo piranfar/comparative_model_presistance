@@ -10,7 +10,7 @@ Outputs of the earlier paper are not here; they live in `version_one/results/`.
 
 ## Tolerance and the assay floor (manuscript/PAPER_COMPLETE.md)
 
-**Figures.** `fig1_dynamic_range`, `fig2_rate_vs_duration`, `fig3_endpoint_collapse`, `fig4_independence`
+**Figures.** `fig1_dynamic_range`, `fig2_rate_vs_duration`, `fig3_endpoint_collapse`, `fig4_independence`, `figS1_survival_and_cox`
 
 **Tables (63).**
 
@@ -82,7 +82,7 @@ Outputs of the earlier paper are not here; they live in `version_one/results/`.
 
 ## Unassigned
 
-**Figures.** `fig13_parameter_transfer`, `figS1_survival_and_cox`
+**Figures.** `fig13_parameter_transfer`
 
 **Tables (15).**
 

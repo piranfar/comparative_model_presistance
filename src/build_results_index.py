@@ -27,7 +27,7 @@ OUT = RES / "README.md"
 PAPERS = {
     "Tolerance and the assay floor (manuscript/PAPER_COMPLETE.md)":
         [f"exp{n}" for n in range(16, 38)]
-        + ["fig1_", "fig2_", "fig3_", "fig4_"],
+        + ["fig1_", "fig2_", "fig3_", "fig4_", "figS"],
 }
 
 # Outputs retained on purpose although nothing currently cites them.
