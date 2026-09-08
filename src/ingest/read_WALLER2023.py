@@ -50,16 +50,23 @@ floor_cfu_per_ml is blank on every row.
   many times, that nothing lies below it, and that it is sustained for weeks in
   single replicates while the paired replicate regrows.
 
-  The repository's sweep derives 200 CFU/mL from the ARTICLE's Methods, and that
-  derivation was checked here against the article rather than taken on trust.
-  The "Killing kinetics" section says the samples were "diluted and spotted as
-  described above for MBC", and the MBC section says "5 uL of each dilution was
-  spotted onto 7H11 supplemented with OADC, leucine and pantothenate acid" after
-  "a 3-point, 10-fold dilution curve in 7H9 with pantothenic acid and leucine".
-  One colony in a 5 uL spot of the undiluted sample is 200 per mL, which is
-  exactly the minimum the workbook shows.  That text is outside this deposit, so
-  the number is quoted in floor_basis and deliberately NOT written into
-  floor_cfu_per_ml -- the same line read_YANG2024_PHAGE takes.
+  The repository's sweep note (docs/TB_DEPOSIT_SWEEP_2026-09-08.md) derives 200
+  CFU/mL for this study from the ARTICLE's Methods (PMC10024696): its MBC
+  section spots 5 uL of each dilution of a 3-point 10-fold curve, and its
+  "Killing kinetics" section routes the time-kill samples back through that same
+  procedure, so one colony in a 5 uL spot of undiluted sample is 200 per mL --
+  which is exactly the minimum this workbook shows.  None of that text is in the
+  deposit.
+
+  REVIEWED.  An earlier version of this reader carried that whole derivation,
+  the figure 200 CFU/mL included, in floor_basis on all 775 count rows, on the
+  ground that it was labelled as external.  It has been removed, because
+  read_YANG2024_PHAGE already settled this exact case in the other direction:
+  the disclaimer does not survive a copy-paste, and a number no deposited byte
+  supports has no place in a column whose purpose is to count how often the
+  number is missing.  The pointer stays, the number lives here in the docstring
+  and in the sweep note, and for this corpus's purposes WALLER2023 is a
+  floor-absent deposit.
 
 WHAT ELSE THE WORKBOOK DOES NOT SAY, all left blank rather than imported.
 
@@ -139,18 +146,15 @@ SEARCH = {
     "a raw colony count": re.compile(r"colon", re.I),
 }
 
-FLOOR_QUOTE = (
-    "The repository's sweep derives 200 CFU/mL for this study from the "
-    "ARTICLE's Methods (PMC10024696), and the derivation was checked against "
-    'the article rather than taken on trust: its "Killing kinetics" section '
-    'says samples were "diluted and spotted as described above for MBC", and '
-    'its MBC section says "5 uL of each dilution was spotted onto 7H11 '
-    'supplemented with OADC, leucine and pantothenate acid" following "a '
-    '3-point, 10-fold dilution curve in 7H9 with pantothenic acid and '
-    'leucine". One colony in a 5 uL spot of the undiluted sample is 200 per '
-    "mL, which is exactly the smallest number this workbook contains. That "
-    "text is outside this deposit, so the number is quoted here and "
-    "deliberately not written into floor_cfu_per_ml.")
+# REVIEWED: this string used to carry the article's spot volume and the 200
+# CFU/mL that follows from it, on every count row, with a disclaimer attached.
+# The disclaimer does not survive a copy-paste and the column exists to count
+# absences, so the number is gone from the data and kept only in the docstring
+# -- the line read_YANG2024_PHAGE took for the same situation.
+FLOOR_POINTER = (
+    "Any floor for this study would have to come from the article's Methods, "
+    "which are not part of this deposit and are not transcribed here, so none "
+    "is recorded.")
 
 NO_DRUG_NOTE = (
     "the workbook names no drug for this block: its columns are labelled with "
@@ -209,11 +213,11 @@ def _floor_basis(found: dict[str, str], lo: float, ties: int, n: int) -> str:
         got = "; ".join(f"{k} -> {v}" for k, v in found.items())
         return ("not recorded: the workbook does contain text matching " + got +
                 ", which this reader did not expect and has not interpreted "
-                "into a number. " + seen + FLOOR_QUOTE)
+                "into a number. " + seen + FLOOR_POINTER)
     return ("not stated by this deposit. The reader searched every cell of all "
             "eleven sheets for " + ", ".join(SEARCH) + ", and found none of "
             "them: the workbook is bare numbers under panel letters. " + seen
-            + FLOOR_QUOTE)
+            + FLOOR_POINTER)
 
 
 def _panel_above(raw: pd.DataFrame, hdr: int) -> str:
@@ -269,6 +273,15 @@ def _condition(label: str, siblings: set[str]):
         names.append(nm)
         vals.append(float(m.group(2)))
     if len(names) == 1:
+        # Supplementary 4 writes "INH 9x" and "TAC 0.3x" with no "MIC".  Saying
+        # xMIC there is an inference, so it is declared -- and it is an
+        # inference made INSIDE this deposit: Figure 6 labels the same design
+        # "INH 9x MIC".  Nothing is imported from the article to make it.
+        if "mic" not in label.lower():
+            notes.append('the workbook writes this arm "%s" and does not say '
+                         'what the multiple is of; conc_unit is read as xMIC '
+                         'because Figure 6 of the same workbook writes "INH 9x '
+                         'MIC" for the same design' % label)
         return names[0], vals[0], "xMIC", "; ".join(notes)
     notes.append("combination arm: the schema has one concentration column and "
                  "this arm has %d, so concentration is left blank and the "
@@ -313,7 +326,7 @@ def _shape(raw: pd.DataFrame, hdr: int):
     return panel, rep_row, body, labels, every
 
 
-def _read_block(raw, sheet, hdr, floor_basis, workbook_min):
+def _read_block(raw, sheet, hdr, floor_basis, workbook_min, saturating):
     ncol = raw.shape[1]
     shape = _shape(raw, hdr)
     if shape is None:
@@ -325,6 +338,16 @@ def _read_block(raw, sheet, hdr, floor_basis, workbook_min):
     # Is this a block of counts, or of some much smaller unlabelled quantity?
     is_count = max(every) >= COUNT_THRESHOLD
     ceiling = max(every) if is_count else None
+    # REVIEWED: every block's largest value used to be called a saturating
+    # maximum and "an upper reporting limit rather than a measured density".
+    # That is true of 2e7 and 1e7, where dozens of readings pile up; it was
+    # false for eleven readings that are simply the biggest number in their
+    # block -- among them Figure 4 F's 200000, which is a day-0 inoculum. A
+    # maximum now counts as a ceiling only when readings actually pile up on
+    # it: more than one in this block, or the same value plateaued in another
+    # block of this workbook (`saturating`). The note reports the tie counts.
+    ties = every.count(ceiling) if is_count else 0
+    is_ceiling = is_count and (ties > 1 or ceiling in saturating)
     floor_val = workbook_min if is_count else None
 
     rows = []
@@ -356,12 +379,18 @@ def _read_block(raw, sheet, hdr, floor_basis, workbook_min):
                     continue
                 note = [cnote] if cnote else []
                 if is_count:
-                    if v >= ceiling:
-                        note.append("this reading sits on the block's "
-                                    "saturating maximum of %g, an upper "
-                                    "reporting limit rather than a measured "
-                                    "density; the schema has no ceiling "
-                                    "column" % ceiling)
+                    if is_ceiling and v >= ceiling:
+                        note.append("this reading sits on %g, the largest "
+                                    "value in this block, which %d of the "
+                                    "block's %d readings share and which %d "
+                                    "readings across the workbook's count "
+                                    "blocks sit on; readings pile up there "
+                                    "the way they would at an upper reporting "
+                                    "limit, but the workbook states none and "
+                                    "the schema has no ceiling column, so the "
+                                    "tie is recorded and nothing is concluded"
+                                    % (ceiling, ties, len(every),
+                                       saturating.get(ceiling, ties)))
                     if v <= floor_val:
                         note.append("this reading sits on the smallest value "
                                     "anywhere in the workbook, %g; the file "
@@ -410,6 +439,10 @@ def _read_block(raw, sheet, hdr, floor_basis, workbook_min):
                                 if is_count else
                                 "not a count, unit not stated by the deposit"),
                     "notes": "; ".join(note),
+                    # dropped before the frame is returned; used only to find
+                    # series that one block repeats from another
+                    "_series": f"{sheet}|{panel or '?'}|{label}|{rep}",
+                    "_point": (day, v),
                 })
     return rows
 
@@ -428,20 +461,55 @@ def read(d: Path) -> pd.DataFrame:
     blocks = [(sheet, i) for sheet, raw in book.items() for i in range(len(raw))
               if TIME_HDR.match(_txt(raw.iat[i, 0]))]
 
-    # The smallest count anywhere in the workbook, over the count blocks only,
-    # taken in a first pass so that a row can say whether it sits on it.
-    seen = []
+    # First pass over the count blocks: the smallest count anywhere in the
+    # workbook, so a row can say whether it sits on it, and the values that
+    # readings actually pile up on at a block maximum, so that a ceiling note
+    # is only made where there is a pile-up to make it from.
+    seen, tied_max = [], []
     for sheet, i in blocks:
         shape = _shape(book[sheet], i)
         if shape and max(shape[4]) >= COUNT_THRESHOLD:
-            seen += [v for v in shape[4] if v > 0]
+            vals = [v for v in shape[4] if v > 0]
+            seen += vals
+            hi = max(vals)
+            if vals.count(hi) > 1:
+                tied_max.append(hi)
     workbook_min = min(seen) if seen else np.nan
+    saturating = {v: seen.count(v) for v in set(tied_max)}
     basis = _floor_basis(_search_all_sheets(book), workbook_min,
                          seen.count(workbook_min), len(seen))
 
     rows = []
     for sheet, i in blocks:
-        rows += _read_block(book[sheet], sheet, i, basis, workbook_min)
+        rows += _read_block(book[sheet], sheet, i, basis, workbook_min,
+                            saturating)
     if not rows:
         return empty()
-    return pd.DataFrame(rows)
+
+    # Blocks that repeat one another, value for value.  Supplementary 5 E and G
+    # share their WT, INH-1 and Q203-13 columns exactly, and Supplementary 5 A
+    # and C share WT and INH-1; two more series are repeated inside a single
+    # block.  Nothing in the workbook says whether that is one measurement
+    # plotted in two panels or a coincidence, so nothing is dropped -- but a
+    # model that treats the repeats as independent series will understate the
+    # spread, so every row of a repeated series says which series it matches.
+    # (The same flagging read_PRETOMANID does for its overlapping panels.)
+    curve = {}
+    for r in rows:
+        curve.setdefault(r["_series"], []).append(r["_point"])
+    same = {}
+    for name, pts in curve.items():
+        same.setdefault(tuple(sorted(pts)), []).append(name)
+    twin = {name: [o for o in group if o != name]
+            for group in same.values() if len(group) > 1 for name in group}
+    for r in rows:
+        others = twin.get(r["_series"])
+        if others:
+            r["notes"] += ("; this series is numerically identical, timepoint "
+                           "for timepoint, to %s; the workbook does not say "
+                           "whether that is one measurement shown twice or a "
+                           "coincidence, so both are kept and neither is "
+                           "treated as independent evidence"
+                           % " and ".join(sorted(others)))
+
+    return pd.DataFrame(rows).drop(columns=["_series", "_point"])

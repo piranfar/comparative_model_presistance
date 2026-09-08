@@ -52,12 +52,13 @@ cell in every one of the nine blocks reads
 
     =AVERAGE(Ct1,Ct2)*48*10^(Diln-1)
 
-and every Log cfu cell reads =LOG(cfu). (Read off the workbook XML; the
-verbatim masters are e.g. AVERAGE(C6,D6)*48*10^(E6-1) for Day-0 A and
-AVERAGE(AS6,AT6)*48*10^(AU6-1) for Day-14.) _formula() below pulls that
-formula out of the file at read time, so the sentence in floor_basis is a
-quotation of the deposit and cannot go stale; _constant() then re-derives the
-same number from the values alone and the two must agree or the reader raises.
+and every Log cfu cell reads =LOG(cfu) -- verbatim, e.g. F2 is
+"=AVERAGE(C2,D2)*48*10^(E2-1)" and AV2 is "=AVERAGE(AS2,AT2)*48*10^(AU2-1)".
+976 of the 977 populated cfu cells carry it; exactly one does not, and that one
+is the corrupt cell below. _formula() pulls the formula out of the file at read
+time, so the sentence in floor_basis is a quotation of the deposit in hand and
+cannot go stale; _constant() then re-derives the same constant from the values
+alone, and the two must agree or the reader raises rather than write a floor.
 
 Two consequences, and neither is an inference from outside the file.
 
@@ -333,12 +334,14 @@ def read(d: Path) -> pd.DataFrame:
                 "%g; the deposit's arithmetic has changed and the floor "
                 "derivation must be re-checked before any floor is written"
                 % (SHEET, from_formula, k))
-        quote = ("the workbook's cfu column is live Excel and every one of its "
-                 "%d formula cells reads =AVERAGE(Ct1,Ct2)*%g*10^(Diln-%g) "
-                 "(%d cfu cell(s) hold a typed value instead), and the same "
-                 "constant comes back independently from the numbers in %d of "
-                 "%d populated readings"
-                 % (live, mult, off, dead, agree, total))
+        quote = ("the workbook's cfu column is live Excel and all %d of its "
+                 "formula cells read =AVERAGE(Ct1,Ct2)*%g*10^(Diln-%g)%s, and "
+                 "the same constant comes back independently from the numbers "
+                 "in %d of %d populated readings"
+                 % (live, mult, off,
+                    "" if not dead else
+                    ", the other %d holding a typed value instead" % dead,
+                    agree, total))
 
     lowest = int(min(
         float(raw.iat[i, c + 2])
