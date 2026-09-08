@@ -185,6 +185,13 @@ UNIT_NOTE = ("the sheet's column is a bare \"cfu\" with no unit; these are "
 CODE_NOTE = ("the deposit never expands its regimen letter codes, so the code "
              "is carried verbatim into arm and drug and no drug name, dose or "
              "unit is inferred")
+# Referenced on every row and lost in an edit, which the corpus build caught as
+# a NameError rather than as a silent blank. It records the one thing the
+# recovered constant K cannot tell us.
+VOL_NOTE = ("the plated volume cannot be separated from the absolute dilution: "
+            "the recovered constant K fixes only their ratio, so plated_volume_ul "
+            "stays blank while the per-reading floor, which depends only on that "
+            "ratio, does not")
 
 
 def _norm(v) -> str:
@@ -291,8 +298,33 @@ def read(d: Path) -> pd.DataFrame:
     raw = pd.read_excel(src, sheet_name=SHEET, header=None)
 
     blocks = _blocks(raw)
-    k, agree, total = _constant(raw, blocks)
-    kfmt = "%g" % k
+    k, agree, total, halves, splits = _constant(raw, blocks)
+    form = _formula(src)
+    if form is None:
+        # Formulas gone (a values-only re-save). The floor still follows from
+        # the numbers, but how the power of ten splits between dilution and
+        # plated volume no longer does, so `dilution` is left blank.
+        off = None
+        quote = ("cfu = (Ct1+Ct2) x %g x 10^Diln, recovered from the sheet's "
+                 "own numbers as the modal ratio and holding in %d of %d "
+                 "populated readings (the workbook's cfu formulas are gone, "
+                 "so this is a fit, not a quotation)" % (k, agree, total))
+    else:
+        mult, off, ncell = form
+        # One colony on one of the two plates is a mean of 0.5, so the
+        # per-colony density is 0.5*mult*10**(Diln-off) = k*10**Diln.
+        from_formula = 0.5 * mult * 10.0 ** (-off)
+        if abs(from_formula - k) > 1e-9 * max(1.0, k):
+            raise ValueError(
+                "%s: the cfu formula gives %g per colony but the values give "
+                "%g; the deposit's arithmetic has changed and the floor "
+                "derivation must be re-checked before any floor is written"
+                % (SHEET, from_formula, k))
+        quote = ("the workbook's own cfu cells read "
+                 "=AVERAGE(Ct1,Ct2)*%g*10^(Diln-%g), %d of them still live in "
+                 "the file, and the same constant comes back independently "
+                 "from the values in %d of %d populated readings"
+                 % (mult, off, ncell, agree, total))
 
     lowest = int(min(
         float(raw.iat[i, c + 2])
@@ -300,8 +332,25 @@ def read(d: Path) -> pd.DataFrame:
         if pd.notna(raw.iat[i, c + 2])))
     study_floor = k * 10.0 ** lowest
 
-    fit = ("cfu = (Ct1+Ct2) x %s x 10^Diln, recovered from the sheet itself "
-           "and holding in %d of %d populated readings" % (kfmt, agree, total))
+    vol_note = (
+        "no plated volume and no reporting limit appears anywhere in the "
+        "deposit, so plated_volume_ul is blank; the file folds the volume into "
+        "a single constant" +
+        ("" if off is None else
+         " (%g, which alone would be 1/%g mL plated but could equally be a "
+         "smaller volume with a further fixed dilution step), and `dilution` "
+         "carries only the power of ten the file's own formula applies, "
+         "10**(Diln-%g)" % (mult, mult, off)) +
+        ("; the workbook's formulas are gone, so `dilution` is blank too"
+         if off is None else ""))
+
+    # Ct1 and Ct2 are two SEPARATE plates, which is what puts the floor at one
+    # colony on one plate rather than one on each. The file proves it: half the
+    # averages land on a .5, and some readings have one plate blank.
+    fit = ("%s. Ct1 and Ct2 are two separate plates, not two counts of one "
+           "plate -- the sheet averages them, the average lands on a half in "
+           "%d of the %d populated readings, and in %d of them one plate grew "
+           "nothing while the other did" % (quote, halves, total, splits))
     # NOTE ON WORDING. build_corpus_long.py separates a STATED floor from a
     # DERIVED one by matching floor_basis against
     #   "stated in the sheet|LOD column|limit of detection\b.*\d"
@@ -309,21 +358,23 @@ def read(d: Path) -> pd.DataFrame:
     # that the deposit HAS no detection limit would otherwise be counted as
     # the deposit having declared one, which is the exact miscount that table
     # exists to prevent. "detection limit" and "quantification limit" below
-    # are deliberate.
+    # are deliberate. The floor here IS derived: the arithmetic is the
+    # depositor's, but reading it as a floor is this reader's doing.
     basis_tmpl = (
-        "DERIVED BY THIS READER, NOT STATED BY THE DEPOSIT. The deposit gives "
-        "no detection limit, no quantification limit and no plated volume "
-        "anywhere. Its own "
-        "arithmetic (" + fit + ") makes one colony pooled across the two "
-        "plates at this reading's Diln=%d equal to %s CFU/mL. The lowest "
+        "DERIVED BY THIS READER, NOT STATED BY THE DEPOSIT. Nobody in the "
+        "deposit names a floor: no detection limit, no quantification limit, "
+        "no plated volume, no footnote, no README. The derivation is the "
+        "deposit's own arithmetic -- " + fit + ". So the smallest non-zero "
+        "density that arithmetic can produce for a reading taken at Diln=%d "
+        "is one colony on one of the two plates, %s CFU/mL. The lowest "
         "dilution used anywhere in the sheet is Diln=%d, so the study-level "
         "floor is %s CFU/mL.")
     basis_zero = (
         "NO FLOOR FOR THIS READING. Both plate counts are 0 and the sheet "
         "leaves Diln, cfu and Log cfu blank, so the dilution this specimen was "
-        "plated at is not recorded and no floor follows from it. The sheet's "
+        "read at is not recorded and no floor follows from it. The deposit's "
         "arithmetic (" + fit + ") would give %s CFU/mL only if this reading "
-        "had been plated at the lowest dilution the sheet uses anywhere "
+        "had been taken at the lowest dilution the sheet uses anywhere "
         "(Diln=%d), and the deposit does not say that it was."
         % ("%g" % study_floor, lowest))
 
@@ -343,8 +394,9 @@ def read(d: Path) -> pd.DataFrame:
                                  % (SHEET, i, label))
 
             colonies = float(a) + float(b)
-            note = ["%s: plate counts Ct1=%g and Ct2=%g, pooled by the sheet "
-                    "into one density" % (label, float(a), float(b))]
+            note = ["%s: two plates of one specimen, Ct1=%g and Ct2=%g, which "
+                    "the sheet AVERAGES (not sums) into one density; colonies "
+                    "is their total" % (label, float(a), float(b))]
 
             if pd.isna(dl):
                 if colonies != 0:
@@ -353,14 +405,23 @@ def read(d: Path) -> pd.DataFrame:
                         "zero-count readings lack a dilution in this deposit"
                         % (SHEET, i, label, colonies))
                 dilution, floor, basis = np.nan, np.nan, basis_zero
-                value, cens = 0.0, "yes"
+                # censored is LEFT BLANK for finish() to make "unknown".
+                # Calling it "yes" would be true of the count and false of the
+                # evidence: we know nothing grew, we do not know what density
+                # that excludes, and finish()'s own rule is never to infer
+                # censoring from a zero with no floor. The non-detection is
+                # carried by cfu_per_ml = 0 and by the note below.
+                value, cens = 0.0, ""
                 note.append("nothing grew on either plate; the sheet leaves "
                             "Diln, cfu and Log cfu empty for this reading, so "
                             "cfu_per_ml is the 0 the plate counts state and "
                             "the floor it sits below is not recorded")
             else:
                 dl = int(dl)
-                dilution = 10.0 ** dl
+                # The power of ten the sheet's own formula applies is
+                # 10**(Diln-off), not 10**Diln. Without the formulas the split
+                # is unknown, so the column stays blank rather than guess.
+                dilution = np.nan if off is None else 10.0 ** (dl - off)
                 floor = k * 10.0 ** dl
                 basis = basis_tmpl % (dl, "%g" % floor, lowest,
                                       "%g" % study_floor)
@@ -371,10 +432,13 @@ def read(d: Path) -> pd.DataFrame:
                     note.append(
                         "CORRUPT CELL, PASSED THROUGH UNCHANGED: the sheet "
                         "writes cfu=%g (Log cfu=%s) but its own Ct1, Ct2 and "
-                        "Diln give %g. This is the only reading in the "
-                        "workbook where the sheet's arithmetic fails. Nothing "
-                        "is repaired here, and any censoring flag on this row "
-                        "is an artefact of the bad cell, not a measurement"
+                        "Diln give %g. The cell has had its formula overtyped "
+                        "with a literal value -- it is the only cfu cell in "
+                        "the workbook with no formula in it -- and the "
+                        "neighbouring =LOG() faithfully logged the wrong "
+                        "number. Nothing is repaired here, and any censoring "
+                        "flag on this row is an artefact of the bad cell, not "
+                        "a measurement"
                         % (value,
                            "%g" % float(lg) if pd.notna(lg) else "blank",
                            expect))
@@ -405,7 +469,7 @@ def read(d: Path) -> pd.DataFrame:
                 "floor_cfu_per_ml": floor,
                 "floor_basis": basis,
                 "readout": "CFU",
-                "notes": "; ".join(note + [UNIT_NOTE, CODE_NOTE, VOL_NOTE]),
+                "notes": "; ".join(note + [UNIT_NOTE, CODE_NOTE, vol_note]),
             })
 
     df = pd.DataFrame(rows)

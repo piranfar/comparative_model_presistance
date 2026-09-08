@@ -9,7 +9,7 @@ none,0,0,BIOENERGETIC2025,1984,154,114,True,24,0,0,1984,E. coli,ampicillin; cipr
 none,0,0,ENOBLOCK,1152,8,72,True,0,0,0,1152,,Col; Col + ENO; Enoblock
 none,0,0,XU2026,1145,296,11,True,1145,0,0,1145,Mtb; Mycobacterium tuberculosis,BDQ; INH; QM; RFP
 none,0,0,WALLER2023,1059,183,12,True,775,0,0,1059,,BDQ; BDQ + INH; INH; INH + TAC; PA824; PA824 + INH; Q203; Q2
-derived from a stated plated volume,0,977,JINDANI1980_SGUL,989,112,8,True,989,977,14,0,,H150; H300; H600; HM; HR; HRM; HZ; M; PAS; R10; R20; R5; RM;
+derived from a stated plated volume,0,977,JINDANI1980_SGUL,989,112,8,True,989,977,2,12,,H150; H300; H600; HM; HR; HRM; HZ; M; PAS; R10; R20; R5; RM;
 none,0,0,PEPPER2026,896,48,6,True,0,0,0,896,,
 none,0,0,SEBASTIAN2025,771,250,5,True,771,0,0,771,,BDQ; Emb; H2O2; INH; Mox; Q203; RIF; Rif; Rifampicin
 none,0,0,AGUILAR2025,756,756,10,True,756,0,0,756,,BCZ; BCZT; BPaC; BPaCJ; BPaJ; BPaL; BPaL/B; BPaL/BJ; BPaL/BP
@@ -19,7 +19,7 @@ none,0,0,STEWART2012,658,6,5,True,658,0,0,658,,ampicillin; norfloxacin; streptom
 none,0,0,NOREL2023,544,157,9,True,544,0,0,544,,ampicillin; ciprofloxacin; ciprofloxaxin
 stated by the source,170,0,MERCHAN2025,536,132,8,True,536,170,9,366,Mycobacterium abscessus,8UZL; Muddy; cefoxitin; cefoxitin + 8UZL; cefoxitin + Muddy;
 none,0,0,RIVANI2022,504,9,7,True,252,0,0,504,Acinetobacter baumannii,meropenem + amikacin; meropenem + ampicillin-sulbactam
-none,0,0,SHEE2026_SENOLYTIC,459,317,7,True,459,0,3,456,Mtb,DQF; DQF+ ETH; DQF+ETH; ETH; Eth; TNF
+none,0,0,SHEE2026_SENOLYTIC,459,317,7,True,459,0,3,456,Mtb,DQF; DQF+ETH; ETH; Eth; TNF
 derived from a stated plated volume,0,408,ALEXANDER2020,408,48,16,False,330,408,38,0,,streptomycin
 none,0,0,MABS_CF_FIGSHARE2025,408,6,4,False,408,0,0,408,,amikacin
 none,0,0,MOLECULAR2026,394,74,10,True,394,0,0,394,E. coli,AMX; AMX + CLV; CLV
@@ -32,7 +32,7 @@ none,0,0,EDOO2026,288,27,6,True,288,0,0,288,,Alpibectir; Eto; Eto + Alpibectir; 
 none,0,0,ZHU2022,252,72,3,True,252,0,20,232,,CEFEPIME; CIP; Cipro; Gentamicin; Meropenem; SXT; VAN
 none,0,0,WALTER2025,234,151,6,True,234,0,0,234,,BTZ-043; INH
 none,0,0,HAO2026,216,60,4,False,216,0,0,216,A. baumannii,CP; Contezolid; PBNP
-stated by the source,3,0,DIDEAGOSSOU2022,186,178,5,True,183,3,3,183,Mycobacterium tuberculosis,BMZ; BMZRb; BPaL; BPaMZ; HRZE; PMZ; PaMZ; bedaquiline; etham
+stated by the source,3,0,DIDEAGOSSOU2022,186,186,5,True,183,3,3,183,Mycobacterium tuberculosis,BMZ; BMZRb; BPaL; BPaMZ; HRZE; PMZ; PaMZ; bedaquiline; etham
 none,0,0,PZA_PARP1_2023,160,160,1,True,160,0,0,160,M.tb,PZA; RIF; RIF + PZA; RIF + Tp; Tp
 none,0,0,TBM_ETO_2026,140,140,3,True,140,0,0,140,Mycobacterium tuberculosis,isoniazid + rifampin + pyrazinamide; isoniazid + rifampin + 
 derived from a stated plated volume,0,108,PIRANFAR2026,108,9,6,True,108,108,22,0,Escherichia coli,ciprofloxacin

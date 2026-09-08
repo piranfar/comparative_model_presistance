@@ -75,6 +75,23 @@ the deposit contains; the abbreviations are left unexpanded and no dose is
 assigned to them.  The organism is written "Mtb", and only on sheets Fig. 2g,
 Fig. 2h and S. Fig. 5b; no strain appears anywhere in either workbook.
 
+WHAT THE ARTICLE SAYS AND THE DEPOSIT DOES NOT.  This repository's own manifest
+(data/manifests/corpus.csv) records, from the Europe PMC full text of
+PMC13357804, that the Fig. 1 legend reads "Square indicates CFU below the limit
+of detection ( = 10 CFU)", that the strain is H37Rv, and that Fig. 5f is lung and
+Fig. 5g spleen.  NONE of that is in the deposit and NONE of it fills a field
+here: the deposit is what this reader reads.  It is written down because the
+contradiction is the point -- the article states a limit of detection of 10 CFU
+while the deposited sheets plot a zero count at 1 -- and because adopting the
+article's 10 would censor real readings: the Day 1 B6.Sst1S counts on Fig. 5f
+are 8, 13, 11.25, 10 and 12, two of which (8 and 10) sit at or below it.  Whether
+to import that number is a decision for the corpus, not for this reader.
+
+DUPLICATED ROWS.  Fig. 5f's "young B6" block repeats the aged block's Day 1
+values exactly (112.5, 135, 117.5, 133.75, 133.75).  Repeats like that are
+detected by comparing value sequences, not assumed, and the later copy is flagged
+in notes.
+
 Licence: CC BY-NC-ND 4.0.  Values are read here, not redistributed from here.
 """
 from __future__ import annotations
@@ -851,4 +868,28 @@ def read(d: Path) -> pd.DataFrame:
 
     if not rows:
         return empty()
+
+    # a block whose values repeat an earlier block's, verbatim: found by
+    # comparing the sequences, never assumed
+    seen: dict = {}
+    seqs: dict = {}
+    for r in rows:
+        seqs.setdefault((r["sheet"], r["arm"], r["time_h"]), []).append(
+            r["cfu_per_ml"])
+    dup = {}
+    for k, v in seqs.items():
+        if len(v) < 3:
+            continue
+        sig = (k[0], tuple(v))
+        if sig in seen:
+            dup[k] = seen[sig]
+        else:
+            seen[sig] = k
+    for r in rows:
+        k = (r["sheet"], r["arm"], r["time_h"])
+        if k in dup:
+            r["notes"] += ('; FINDING: every value in this block repeats, '
+                           'verbatim, the block "%s" of the same sheet at the '
+                           "same timepoint; the two are not independent readings"
+                           % dup[k][1])
     return finish(pd.DataFrame(rows), "SHEE2026_SENOLYTIC")

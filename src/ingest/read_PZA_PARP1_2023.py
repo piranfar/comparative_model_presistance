@@ -63,8 +63,10 @@ WHAT THIS DEPOSIT IS, AND WHAT IT IS NOT.
 WHAT IS DELIBERATELY LEFT OUT.
 
   * "Figure 3 d" is headed "CFU fold change" and its Vehicle column sums to
-    exactly zero: it is a normalised fold change, not a count, so it is not a
-    reading and is not read.
+    zero: it is a normalised fold change, not a count.  It is also not new
+    data -- every one of its 33 values is a Figure 4 b log10 CFU from the same
+    arm minus a single constant, 7.3873613 (checked; largest residual 4.3e-6,
+    the deposit's own rounding) -- so reading it would double-count as well.
   * "Supplementary Fig. 4 b-e" list lung CFU (log10) again for the mice that
     also had PAR measured.  Every value is a duplicate of a Figure 4 b value
     (checked to 1e-5; the deposit writes 8.575483 in one place and 8.575484 in
@@ -162,7 +164,7 @@ PANELS = [
 S3C = dict(sheet="Fig S3", anchor="Supplementary Fig. 3 c", time_h=0.0,
            time_note='time_h = 0 because the panel title reads "(at treatment '
                      'start)"; Supplementary Fig. 3 a dates that start as "1 '
-                     'month post infection", the workbook's only statement of '
+                     'month post infection", the workbook\'s only statement of '
                      "an infection-to-treatment interval, and it is stated for "
                      "these mice",
            arm="start of treatment")
@@ -372,6 +374,12 @@ def _read_s3c(raw: pd.DataFrame, spec: dict) -> list:
         note.append("these five mice are the infected animals whose PAR levels "
                     'Supplementary Fig. 3 b lists as "Infected": the PAR row of '
                     "this same block repeats those five values exactly")
+        # This panel's title names no organism, so say where "M.tb" came from
+        # rather than let it look like the panel's own word.
+        note.append("this panel's title names neither organism nor strain: "
+                    'strain is left blank, and organism "M.tb" is carried from '
+                    "the titles of the workbook's other CFU panels, not from "
+                    "this one")
         if starred:
             note.append("the sheet writes this value with an asterisk "
                         '("*outlier removed from analysis"); it is kept here')
@@ -404,8 +412,4 @@ def read(d: Path) -> pd.DataFrame:
     book = pd.ExcelFile(src)
     rows = []
     for spec in PANELS:
-        rows += _read_panel(book.parse(sheet_name=spec["sheet"], header=None),
-                            spec)
-    rows += _read_s3c(book.parse(sheet_name=S3C["sheet"], header=None), S3C)
-
-    return finish(pd.DataFrame(rows), "PZA_PARP1_2023")
+        rows += _read_panel(book.parse(sheet_

@@ -1,6 +1,6 @@
 {
   "script": "src/experiments/exp42_boundaries_across_the_corpus.py",
-  "utc": "2026-09-08T06:05:37+00:00",
+  "utc": "2026-09-08T06:10:05+00:00",
   "corpus_deposits": 40,
   "floor_tiers": {
     "STATED": [
