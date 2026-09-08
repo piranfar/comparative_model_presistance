@@ -1,26 +1,71 @@
 {
   "script": "src/experiments/exp42_boundaries_across_the_corpus.py",
-  "utc": "2026-09-08T02:17:05+00:00",
+  "utc": "2026-09-08T02:21:43+00:00",
   "corpus_deposits": 29,
-  "deposits_with_all_three_fields": 5,
-  "published_deposits_with_all_three_strict": 2,
-  "strict_study_ids": [
-    "SOEORG2026",
-    "PRETOMANID"
-  ],
-  "no_pre_treatment_reading": [
-    "KOLLEROVA2024",
-    "ALEXANDER2020"
-  ],
-  "qualifying_study_ids": [
+  "floor_tiers": {
+    "STATED": [
+      "KOLLEROVA2024",
+      "PRETOMANID",
+      "SOEORG2026"
+    ],
+    "DERIVED": [
+      "ALEXANDER2020",
+      "PIRANFAR2026"
+    ],
+    "INFERRED": [
+      "EDOO2026",
+      "JOVANOVIC2026"
+    ],
+    "ABOVE_A_PLACEHOLDER": [
+      "AGUILAR2025",
+      "GEERTS2022",
+      "MOLECULAR2026",
+      "STEWART2012",
+      "ZHU2022"
+    ],
+    "NONE": [
+      "BIOENERGETIC2025",
+      "BUCHHOLZ2026",
+      "ENOBLOCK",
+      "GOORMAGHTIGH2021",
+      "HAO2026",
+      "LEON2025",
+      "MIYAHARA2026",
+      "NOREL2023",
+      "OFORI2024",
+      "PEPPER2026",
+      "RIVANI2022",
+      "RIVANI2022_2",
+      "SEBASTIAN2025",
+      "STEPANYAN2015",
+      "STRYDOM2024",
+      "WALTER2025",
+      "XU2026"
+    ]
+  },
+  "published_supporting_boundaries": 10,
+  "on_firm_tiers": [
     "ALEXANDER2020",
+    "EDOO2026",
+    "JOVANOVIC2026",
     "KOLLEROVA2024",
-    "PIRANFAR2026",
     "PRETOMANID",
     "SOEORG2026"
   ],
-  "min_timepoints_required": 3,
-  "n_series": 496,
+  "firm_and_pre_treatment": [
+    "EDOO2026",
+    "JOVANOVIC2026",
+    "PRETOMANID",
+    "SOEORG2026"
+  ],
+  "above_a_placeholder": [
+    "GEERTS2022",
+    "MOLECULAR2026",
+    "STEWART2012",
+    "ZHU2022"
+  ],
+  "n_series": 1090,
   "n_series_violating_headroom": 0,
-  "violations": []
+  "min_timepoints_required": 3,
+  "plate_plausible_threshold": 2.0
 }
