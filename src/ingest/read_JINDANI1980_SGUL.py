@@ -157,6 +157,7 @@ used for the two day-0 SPECIMENS, A and B, which are a different thing.
 from __future__ import annotations
 
 import re
+import zipfile
 from collections import Counter
 from pathlib import Path
 

@@ -365,7 +365,8 @@ def _lookup_raw(lookup, group, hours, arm_lab, k, value):
     near = [(a, v) for (g, h, a, kk), v in lookup.items()
             if g == gk and h == hours and kk == k and a not in ("", ak)
             and min(len(a), len(ak)) >= 3
-            and (a.startswith(ak) or ak.startswith(a))]
+            and ("+" in a) == ("+" in ak)   # never pair a single arm with a
+            and (a.startswith(ak) or ak.startswith(a))]   # combination arm
     if len(near) == 1:
         tried.append((near[0][1],
                       'the raw-count block writes this arm "%s" where the '
@@ -377,7 +378,8 @@ def _lookup_raw(lookup, group, hours, arm_lab, k, value):
         col, dil, _why = _match_raw(cands, value)
         if np.isfinite(col):
             return col, dil, "", how
-    col, dil, why = _match_raw(exact or blank, value)
+    pool = next((c for c, _ in reversed(tried) if c), [])
+    col, dil, why = _match_raw(pool, value)
     return col, dil, why, ""
 
 

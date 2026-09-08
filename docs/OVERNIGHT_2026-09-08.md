@@ -16,8 +16,11 @@ Four things worth your attention, in order of how much they change the paper.
    Our clinical argument, observed in someone else's published data.
 3. **The systematic sweep: 151 candidates assessed, 25 usable, 126 rejected with
    reasons.** This is what licences a defensible claim about coverage.
-4. **The corpus is being expanded from 29 to ~42 deposits.** In progress; readers
-   are being written and reviewed as I write this.
+4. **The corpus went from 29 deposits to 40, and from 64,015 readings to
+   68,812.** 17 of them now support the boundaries across 2,210 series in seven
+   species, with zero violations. The best addition is human sputum from a
+   tuberculosis trial — and it arrived with a mislabelled citation that would
+   have put the wrong decade in the reference list.
 
 ---
 
