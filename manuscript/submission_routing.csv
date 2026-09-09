@@ -2,20 +2,20 @@ parent,old_number,title,destination,new_label,words,why
 Results,1,The plate's floor sets how far down killing can be seen,main,1,837,the boundary itself; without it there is no paper
 Results,2,The same floor reading was given different tolerance labels,main,2,876,the boundary changing a published label -- the core claim
 Results,3,The affected isolates are named before the drug is added,main,3,534,the affected isolates are identified before treatment; short and load-bearing
-Results,4,"The label tracks how fast an isolate grows, and its link to resistance cannot be separated from the inoculum",main,4,1191,"what the phenotype tracks instead, and the mediation the referee attacked; longest section, cut hard rather than moved"
-Results,5,One written protocol does not give every laboratory the same depth to look down,main,5,1570,"six laboratories, one protocol -- the generality argument"
+Results,4,"The label tracks how fast an isolate grows, and its link to resistance cannot be separated from the inoculum",main,4,1059,"what the phenotype tracks instead, and the mediation the referee attacked; longest section, cut hard rather than moved"
+Results,5,One written protocol does not give every laboratory the same depth to look down,main,5,1191,"six laboratories, one protocol -- the generality argument"
 Results,6,"The turbidity standard fixes what goes into the flask, not what the plate can see",supplement,S1,740,"corroboration: the turbidity standard fixes the inoculum, not the resolvable depth. Supports Section 5, does not extend it"
 Results,7,The flask that fell faster often crossed the floor later,supplement,S2,671,the inversion decomposition; a consequence of the boundary rather than evidence for it
-Results,8,The same boundaries hold in an experiment the framework never saw,main,6,454,the only prospective data in the paper
+Results,8,The same boundaries hold in an experiment the framework never saw,main,6,335,the only prospective data in the paper
 Results,9,Read the plate late enough and a 32-fold dose difference disappears,main,7,326,the shortest and most concrete demonstration of the cost
 Results,10,How much drug it takes and how long it takes are two different things,supplement,S3,444,"resistance and tolerance as separate axes; this is the prior literature's claim, not this paper's finding"
 Results,11,"One culture, two plated volumes, two tolerance labels",main,8,641,"one culture, two plated volumes, two labels -- the boundary made experimental"
-Discussion,,"What fails, and where",main,,1965,"part of the argument, not the evidence"
+Discussion,,"What fails, and where",main,,1729,"part of the argument, not the evidence"
 Discussion,,What the tolerance phenotype tracks instead,main,,356,"part of the argument, not the evidence"
 Discussion,,How large the effect is,main,,238,"part of the argument, not the evidence"
 Discussion,,"Where we agree with the original authors, and where we differ",main,,258,"part of the argument, not the evidence"
 Discussion,,Limitations,main,,703,"part of the argument, not the evidence"
-Discussion,,What should change,main,,937,"part of the argument, not the evidence"
+Discussion,,What should change,main,,624,"part of the argument, not the evidence"
 Discussion,,Conclusion,main,,258,"part of the argument, not the evidence"
 Materials and Methods,,Datasets,supplement,,858,detailed methods move wholesale
 Materials and Methods,,The prospective experiment,supplement,,628,detailed methods move wholesale

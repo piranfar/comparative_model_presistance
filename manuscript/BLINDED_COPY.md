@@ -154,14 +154,6 @@ inoculum-independent becomes a pure inoculum readout precisely at the depth wher
 tolerance is scored. That is the second boundary, and we call it
 identifiability.
 
-The two failures are different in kind, and this paper keeps them apart. Whether
-an endpoint is reachable at all is settled by the assay geometry before the drug
-is added, since *h* depends only on the starting culture and the floor. Whether a
-reading that has reached the floor can be classified is settled by the geometry
-too, but only once the drug has driven the population down to it: reaching the
-floor takes a reduction of the isolate's entire headroom, and that is the drug's
-doing.
-
 The bound is already in the papers that defined the assays. GROUP-1 and colleagues,
 introducing the most-probable-number MDK for DRUG-A — a count read off a
 dilution series rather than off colonies on a plate — treated an MDK99.99 longer
@@ -195,18 +187,13 @@ deposits reanalysed here — and must therefore be measured sample by sample rat
 than assumed; nor to ask what the published record looks like where the rule was
 not applied.
 
-The requirement is older still, and it is quantitative. NCCLS M26-A ties the
-plated volume to the endpoint: after the defined 99.9 per cent killing, at least
-ten colonies must remain to be counted. It separately requires the smallest
-accurately detectable count to be established by serial dilution of a known
-inoculum (10). What has happened since is that the endpoint moved and the rule
-did not travel with it. The persistence field's own consensus guideline makes the
-time-kill assay the starting point for identifying persistence and catalogues at
-length what can go wrong with it — resistant mutants, heteroresistance, drug
-degradation, adhesion to the vessel, washing and recovery conditions, delayed
-colony appearance, culture density, inoculum history — and raises neither the
-limit of detection, nor the plated volume, nor how deep a reduction the assay can
-report (11).
+The requirement is older still, and it is quantitative: NCCLS M26-A ties the
+plated volume to the endpoint, and separately requires the smallest accurately
+detectable count to be established by serial dilution of a known inoculum
+(10). The endpoint has since moved and the rule did not travel with it. The
+persistence field's own consensus guideline, which catalogues at length what else
+can go wrong with a time-kill assay, raises neither the limit of detection nor
+the plated volume nor how deep a reduction the assay can report (11).
 
 None of these converts a floor-level reading into the classification rule it
 becomes. When the last count sits at *L*, the recorded fraction is *L*/*N*₀, and
@@ -232,25 +219,18 @@ floor-level reading identifies a class — and both are computed from quantities
 time-kill protocol already records. Neither asks a laboratory to measure anything
 new.
 
-We then test the hypothesis that a deep log-reduction endpoint is
-inoculum-dependent through what can be observed, even though it is
-inoculum-independent in its definition, using the classification and the assay
-geometry of 217 clinical isolates. We then ask what the resulting phenotype
-tracks: drug susceptibility, or the physiological state of the culture. Two
-further deposits establish that the same arithmetic governs killing experiments
-where inoculum is controlled by protocol rather than by clinical accident: a
-six-laboratory consortium exercise distributing one strain under one written
-protocol (6, 13), and a concentration-by-time grid in the same organism
-(14, 15). From the first we also ask whether a faster-killing flask reliably
-crosses the floor sooner. From the second, whether a late endpoint can erase a
-dose difference that an early one resolves. A fourth deposit (16, 17), held
-out until every boundary was fixed, tests whether the boundaries locate the same
-depth in an experiment they were not built from. Finally we ask whether the
-concentration and duration axes are separate in these files, which is the premise
-the framework defining them rests on. All five deposits are published and openly
-licensed, and none was generated for this study (Table 1). The two boundaries are
-then tested forward rather than backward, in a prospective experiment built to
-break them, with every prediction written down before a plate was counted.
+We test the two boundaries on the classification and the assay geometry of 217
+clinical isolates, then ask what the resulting phenotype tracks: drug
+susceptibility, or the physiological state of the culture. Four further deposits
+carry the question beyond one clinical panel — a six-laboratory consortium
+exercise distributing one strain under one written protocol (6, 13), a
+concentration-by-time grid in the same organism (14, 15), a panel of evolved
+clones in which the concentration and duration axes can be checked for
+independence (16), and a hollow-fibre deposit (17, 18) held out until
+every boundary was fixed. All five are published and openly licensed, and none
+was generated for this study (Table 1). The two boundaries are then tested forward
+rather than backward, in a prospective experiment built to break them, with every
+prediction written down before a plate was counted.
 
 **Table 1.** The five published deposits reanalysed. Four carry the analysis and the fifth is held out to test it. None was generated for this study. The held-out deposit was opened after every boundary and threshold was fixed, which the commit history of the analysis repository timestamps; the other four were selected for the fields they carry, and that selection is not separately registered.
 
@@ -258,7 +238,7 @@ break them, with every prediction written down before a plate was counted.
 | --- | --- | --- | --- | --- | --- |
 | Six-laboratory exercise | XX STRAIN-2 | DRUG-C, DRUG-B, 1x and 10x MIC | 90 flasks, 2 775 readings | figshare 19766083 | CC BY 4.0 |
 | Clinical isolates | XX, 217 isolates | DRUG-A | 6 duration endpoints per isolate | eLife 93243, suppl. file 2 | CC BY 4.0 |
-| Evolved clones | SPECIES-1, 126 clones | amikacin | MIC and persister fraction per clone | Zenodo 7550302 (18) | CC BY 4.0 |
+| Evolved clones | SPECIES-1, 126 clones | amikacin | MIC and persister fraction per clone | Zenodo 7550302 (16) | CC BY 4.0 |
 | Concentration-by-time grid | XX | DRUG-D 1-128 ug/mL (amikacin arm not analysed) | 5 concentrations x 4 days x 3 replicates | figshare 26462791 | CC BY 4.0 |
 | Held out for validation | SPECIES-1, hollow fibre | DRUG-E-clavulanate | 20 cultures, measured day-zero density, 100 uL plated | Nat Commun 2026 Source Data | CC BY 4.0 |
 
@@ -692,7 +672,7 @@ path collapses to +0.008 (−0.197 to +0.208) and the proportion mediated rises
 from 0.65 to 0.96. Deleting exactly the isolates the criticism is about leaves
 the effect larger, so it is not an artefact of them. What it remains is an
 association in observational data, and the caution above about mechanism is
-unaffected.
+unaffected. <!--supp-->
 
 These 217 isolates are not 217 independent observations. Forty-three are
 follow-up isolates taken during treatment from patients who also gave a baseline
@@ -880,7 +860,7 @@ cluster, and with six laboratories and six parameters the cluster-robust
 covariance is singular by construction; fitting it anyway does not fail loudly
 but returns a smaller p than the one it was meant to correct. A coefficient that
 moves on adjustment says how far starting density and laboratory identity overlap
-in this design. It is not evidence that one explains the other.
+in this design. It is not evidence that one explains the other. <!--supp-->
 
 Where an interval is quoted from that fit it is a cluster bootstrap and not the
 model's own. For the starting-density coefficient the laboratory-clustered
@@ -900,7 +880,7 @@ not a decline, and 44 end more than one log10 above their own lowest reading,
 with a median rebound of 2.17 log10 and a largest of 5.54. Seventeen of the 32
 flasks that fell below the floor at the most sensitive plating — the 29 treated
 flasks above and three untreated ones — were detectable again at a later visit,
-14 of them in treated arms.
+14 of them in treated arms. <!--supp-->
 
 Across all four platings, 84 of the 140 series that cross return above the floor,
 60 per cent, and the return is quick: a median of four days, with 45 per cent
@@ -909,13 +889,16 @@ they are not 360 independent observations; counted by flask, 53 of the 90 contai
 a crossing series — the 48 treated flasks above and five untreated ones — and 42
 of those contain a returning one. A crossing below the assay floor in this
 deposit is therefore usually a transient rather than an endpoint, which is a
-further reason it summarises less than the trajectory that produced it. Killing
-itself is real and dose-dependent: at one times the inhibitory concentration five
-of six laboratories record net growth under DRUG-C, between −0.047 and
-−0.214 log10 per day, and at ten times all six record net decline.
+further reason it summarises less than the trajectory that produced it. <!--supp-->
 
-Two consequences follow, and they matter for anyone who reads a duration off such
-an experiment. The first is that the state below the floor is not absorbing: a
+Killing itself is real and dose-dependent: at one times the inhibitory
+concentration five of six laboratories record net growth under DRUG-C,
+between −0.047 and −0.214 log10 per day, and at ten times all six record net
+decline.
+
+A crossing below this floor is not the durable event a duration endpoint takes it
+for, and two consequences follow for anyone who reads a duration off such an
+experiment. The first is that the state below the floor is not absorbing: a
 series that drops below it does not stay there. Of 2 232 visit-to-visit
 transitions, 144 go from above to below and 95 go from below to above, so a
 series sitting below the floor leaves it at the next visit with probability 0.22.
@@ -1031,7 +1014,7 @@ way. Institute F shows why the check matters and why it is not decisive: its
 treated day-one readings average 6.62 log10, above its untreated day-zero reading
 of 6.00 — but the untreated culture itself grows to 6.72 over the same
 twenty-four hours. A day-one reading is not a day-zero reading, in either
-direction. A second deposit (16, 17) gives the same result against its own
+direction. A second deposit (17, 18) gives the same result against its own
 stated figure rather than against a standard: its Methods specify 10⁵ CFU/mL and
 its file measures 7 × 10⁵ to 2.8 × 10⁶, a median of 1.215 × 10⁶ and so 12.15-fold
 above nominal — computed from the unrounded median, which Table 9 displays rounded
@@ -1129,11 +1112,12 @@ volume, or inferred from a pile-up of counts on a plate-plausible value. Across
 those, the condition the boundaries imply — that no series may present as a
 measurement a reduction deeper than its own floor allows — holds in 2 210 of
 2 210 series in seven species. Those deposits are described in the data release
-rather than here, because none was held out. The point of this section is a
-deposit opened after every boundary and threshold was fixed, and only one
-qualifies on that ground.
+rather than here, because none was held out. <!--supp-->
 
-GROUP-5 and colleagues (2026) report DRUG-E-clavulanate against SPECIES-1 in a hollow-fibre system (16, 17). Their Methods state 100 µL plated
+The point of this section is a deposit opened after every boundary and threshold
+was fixed, and only one deposit qualifies on that ground.
+
+GROUP-5 and colleagues (2026) report DRUG-E-clavulanate against SPECIES-1 in a hollow-fibre system (17, 18). Their Methods state 100 µL plated
 with counts per mL, so *L* = 10 CFU/mL is derived rather than inferred, and the
 file corroborates the derivation: a 100 µL plate reporting per mL can return only
 multiples of ten, and all 229 genuine counts in the deposit are multiples of ten,
@@ -1246,7 +1230,7 @@ points the same negative way. The axes are not shown to be independent here. The
 are shown not to be positively coupled, and that is what the deposits can
 support.
 
-Ask the same question of 126 evolved clones sharing one ancestor (18, 30) and
+Ask the same question of 126 evolved clones sharing one ancestor (16, 30) and
 the answer is ρ = +0.043 (p = 0.63), against the 0.175 this sample size could
 have detected. Independence holds inside every nutrient group separately.
 Splitting by nutrient is not optional there. The concentration written on the
@@ -1322,26 +1306,15 @@ antibiotic exposure is not proof of sterility. That is not what this paper
 reports. What it reports is that the number brought in to replace that judgement
 carries the same defect — and once it is a number, it is harder to see.
 
-The minimum duration for killing was built to be scale-free. It reports a
-fraction, and a fraction divides out the starting density. That is the property
-meant to make it the time-side counterpart of the minimum inhibitory
-concentration.
-
-The property holds in the definition. It fails in the measurement, for a reason
-that is arithmetic, not statistical. A *q*-log reduction can only be seen where
-*q* logs are visible below where you started. When the last count rests on the
-plate's floor, the fraction written down collapses to *L*/*N₀* — the floor
-divided by the starting culture. The drug has dropped out of it.
+The minimum duration for killing was built to divide the starting density out,
+and in the definition it does. It stops the moment killing reaches the plate's
+floor, for a reason that is arithmetic rather than statistical: from there the
+fraction written down is *L*/*N₀*, and the drug has dropped out of it.
 
 Fifteen per cent of the clinical isolates examined here could not have shown the
-deepest endpoint whatever the drug did to them, and every one of them is
-recorded as having failed to show it. Eighteen isolates ended at the same
-censored value — recorded only as below the floor, true value unknown — and
-their tolerance labels are reproduced exactly by a single threshold on their
-starting density. To see why, sweep the true count across the range the floor
-allows. For twelve of them only one class fits a censored reading, so the
-published rule had no other label to give. For the other six the compatible
-range straddles a threshold, so the rule cannot choose at all. Whether those
+deepest endpoint whatever the drug did to them, and every one of them is recorded
+as having failed to show it. Eighteen more ended on the floor, and one threshold
+on their starting density reproduces every label they were given. Whether those
 cultures reached the floor is a question about DRUG-A. Which label they
 received once they were there is a question about arithmetic, and the starting
 density settles it.
@@ -1362,35 +1335,30 @@ reach, and that is the deep endpoint the clinical classification uses. Being
 that specific is what makes the problem fixable rather than fatal.
 
 This is a derivation rather than an observation, which is what lets anyone test
-it on their own plates. Both boundaries follow from the definitions alone, and
-neither refers to the drug or the strain. Give them a floor, a set of class
+it on their own plates. Both boundaries follow from the definitions alone and
+neither refers to the drug or the strain: give them a floor, a set of class
 thresholds and a starting density, and they name the affected isolates in
-advance. In the clinical deposit they name them exactly, isolate by isolate —
-though for the twelve with a single compatible class that agreement is forced by
-the class rule rather than an independent test. What could have gone the other
-way is the boundary itself: six isolates sit at *N*_id exactly, the strict
-inequality leaves them undecidable, and the deposit records all six as medium
-rather than low. In a deposit the framework was not built from, the same
-arithmetic locates the depth at which a sterilisation claim stops being
-demonstrable: five of twenty cultures cannot show a five-log reduction, and none
-of the twenty can show six.
+advance. In the clinical deposit they name them exactly, and the part of that
+agreement which could have gone the other way — the six isolates sitting on
+*N*_id itself, where the strict inequality leaves the class undecidable — goes
+the way the boundary predicts. In a deposit the framework was not built from it
+locates the depth at which a sterilisation claim stops being demonstrable: five
+of twenty cultures cannot show a five-log reduction, and none of the twenty can
+show six.
 
 Everything above is read backwards, out of files made for other purposes, and a
-derivation that only explains the past is worth less than one that survives
-being aimed at the future. So *N*_reach and *N*_id were used to design an
-experiment against themselves, with the predictions written down before a plate
-was counted. At the inoculum the standard specifies, the deepest reduction the
-three cultures could report ran 3.71 to 3.93 logs at the 10 µL plating and 4.88
-to 5.05 at 100 µL. The four-log endpoint was unreportable at one plating and
-comfortable at the other — same flask, same afternoon. That much is arithmetic
-and could not have failed. What could have failed is whether a real experiment
-ever lands in the window where the two platings fall on opposite sides of a
-class threshold, and at the cut the clinical classification uses it does so for
-six of 54 sample-times with the starting density held to one value per flask, and
-for nine when each plating carries its own — one culture, two labels, and nothing
-between them but the pipette and the error in measuring what went in. That is reachability working as a design constraint rather than as
-an explanation after the fact, and it is why the calculation in Box 1 belongs
-before an experiment rather than after it.
+derivation that only explains the past is worth less than one that survives being
+aimed at the future. So *N*_reach and *N*_id were used to design an experiment
+against themselves, with the predictions written down before a plate was counted.
+At the inoculum the standard specifies the four-log endpoint was unreportable at
+the 10 µL plating and comfortable at 100 µL — same flask, same afternoon — which
+is arithmetic and could not have failed. What could have failed is whether a real
+experiment ever lands in the window where the two platings fall on opposite sides
+of a class threshold, and at the cut the clinical classification uses it does:
+one culture, two labels, and nothing between them but the pipette and the error
+in measuring what went in. That is reachability working as a design constraint
+rather than as an explanation after the fact, and it is why the calculation in
+Box 1 belongs before an experiment rather than after it.
 
 What sits beneath the floor is the one thing a plate cannot report, and it has
 been measured. GROUP-8 and colleagues counted the same mouse lungs three
@@ -1433,21 +1401,18 @@ A duration endpoint asks when a fixed depth was reached. An isolate without the
 room that depth requires cannot reach it under any drug effect whatever, so what
 the file records is not a short duration but no duration at all: the isolate is
 censored at the end of observation, which is the top of the scale and therefore
-the most tolerant value it can take. Of the 217 isolates, 33 lack the range for
-the 99.99 per cent endpoint the classification uses, and 33 of those 33 are
-recorded at that ceiling, against 162 of the 184 with ample room.
-The isolates that could not demonstrate the endpoint are,
-without exception, the ones recorded as having failed to reach it.
+the most tolerant value it can take. The isolates that could not demonstrate the
+endpoint are, without exception, the ones recorded as having failed to reach
+it.
 
 A class endpoint asks how far the population fell by a fixed time, and there the
 arithmetic does not merely preserve the direction — it inverts it. Once the
 final reading sits on the floor the recorded fraction is *L*/*N₀*, and with *L*
 fixed a *lower* starting density yields a *larger* recorded fraction. A larger
-surviving fraction is a higher tolerance class, not a lower one. Eighteen
-isolates ended at the same floor value at day 5. Their starting densities span
-265-fold; their recorded apparent survival spans 265-fold. The two agree to
-every digit because they are the same quantity, and the labels split
-accordingly, twelve low and six medium.
+surviving fraction is a higher tolerance class, not a lower one. That is why the
+eighteen isolates ending on the same floor value split twelve low and six medium
+in the order their inocula do: the recorded survival and the starting density are
+the same quantity.
 
 Neither route asks anyone to mistake a sterile culture for a surviving one. In
 the first the assay returns no endpoint. In the second it returns the floor
@@ -1570,7 +1535,7 @@ are not independent of each other.
 
 ### Limitations
 
-Four things about these deposits bound what the analysis can establish. Each of
+Six things about these deposits bound what the analysis can establish. Each of
 them points at the experiment that would settle the question.
 
 The first limitation is one this paper has already acted on rather than merely
@@ -1655,7 +1620,7 @@ search returns no occurrence of "limit of detection" or of either value. So the
 number is not missing from the science. It is missing from the paper, and a
 reader who never opens the supplementary spreadGROUP-6t cannot know an endpoint was
 bounded. What we are asking for is one sentence in a methods section, and
-somebody has already done all the work that sits behind it.
+somebody has already done all the work that sits behind it. <!--supp-->
 
 The mirror image is a deposit whose modelling table carries a column named
 `CFU_LOD`, and that column is empty in all 272 rows (36). Somebody designed
@@ -1664,18 +1629,20 @@ limit appear in any of the eight analysis scripts deposited beside it. Put the
 two cases together and the diagnosis is not carelessness. The assay floor *L* is
 measured. Sometimes it is written down to a standard higher than anyone asks for.
 It then falls out of the record between the bench and the reader — off the end of
-a spreadGROUP-6t, or into a column nobody completed.
+a spreadGROUP-6t, or into a column nobody completed. <!--supp-->
 
-**Choose the depth of the endpoint to fit the headroom actually available.** The
-inoculum this needs can be worked out before the experiment rather than diagnosed
-after it. Seeding above *L* · max(10^*q*, 1/*c*₁) makes both failure modes
-impossible — the endpoint that was never reachable, and the last count that lands
-on the floor. For this assay that is 230 000 per mL. A 99 per cent endpoint was
-reachable for every isolate in this deposit, and a 99.99 per cent endpoint for 85
-per cent of them. Where the deep endpoint is wanted, concentrate the starting
-culture or lower the assay floor until the budget covers it. Where neither is
-possible, the shallower endpoint is the honest one. This is a design decision
-that is currently not being made.
+**Choose the depth of the endpoint to fit the headroom actually available, and do
+not densify the inoculum merely to buy more.** The inoculum this needs can be
+worked out before the experiment rather than diagnosed after it: seeding above
+*L* · max(10^*q*, 1/*c*₁) makes both failure modes impossible — the endpoint that
+was never reachable, and the last count that lands on the floor. For this assay
+that is 230 000 per mL. But seeding higher also changes the experiment, because a
+denser culture is a different physiological state, and this paper's own finding
+is that physiological state is what the tolerance label tracks. Where the deep
+endpoint is wanted, lower the assay floor; where the headroom will not carry it
+either way, the shallower endpoint is the honest one, and the growth state
+belongs on the report whichever is chosen. This is a design decision that is
+currently not being made.
 
 **Model an ordered label as ordered.** A tolerance class is low, medium or high.
 Scoring that 0, 1, 2 and fitting a line asserts that the step from low to medium
@@ -1684,13 +1651,6 @@ that. Proportional-odds regression — a fit built for ranked categories — cos
 nothing to run and reports in odds ratios. Where the proportionality it assumes
 fails, as it does here at 60 days, it says so rather than averaging two different
 effects into one null.
-
-**Do not densify the inoculum merely to buy headroom.** Seeding higher makes a
-deep endpoint legal, and it also changes the experiment: a denser culture is a
-different physiological state, and this paper's own finding is that physiological
-state is what the tolerance label tracks. Where the headroom will not carry the
-endpoint, the shallower endpoint is the honest choice, and the growth state
-belongs on the report either way.
 
 **Treat an endpoint at the floor as a bound, not a value.** A recorded fraction of
 *L*/*N₀* is an upper limit on survival, not an estimate of it. Analysed as a
@@ -1790,7 +1750,7 @@ pre-treatment visits, is 2 580 readings, of which 19.3 per cent are flagged.
 experiment under amikacin, each carrying an endpoint minimum inhibitory
 concentration and a persister fraction measured on the same clone, labelled by
 the antibiotic concentration and nutrient level its population evolved under
-(GROUP-4 et al. 2024; Zenodo 10.5281/zenodo.7550302, CC BY 4.0) (18, 30). Six of its
+(GROUP-4 et al. 2024; Zenodo 10.5281/zenodo.7550302, CC BY 4.0) (16, 30). Six of its
 595 surviving fractions are written as exact zeros, marking a below-limit reading
 without naming a limit; they fix no floor, so this deposit is one of the two for
 which observability labels are refused.
@@ -1800,7 +1760,7 @@ SPECIES-1 in a hollow-fibre infection model, with 100 µL plated and
 counts per mL so the assay floor is derived rather than inferred,
 measured day-zero densities for every culture rather than a nominal inoculum, and
 below-limit readings retained as a placeholder (GROUP-5 et al. 2026; article Source
-Data, CC BY 4.0) (16, 17). It was located by a search of five general repositories, the
+Data, CC BY 4.0) (17, 18). It was located by a search of five general repositories, the
 XX consortia, the persistence literature, food microbiology and the
 hollow-fibre field, and was the only deposit found carrying all three fields the
 boundaries require. No boundary, threshold or modelling choice in this
@@ -2291,9 +2251,9 @@ work began, and none was generated for it. Each deposit is identified in Table 1
 and cited in the reference list alongside the article that first described it:
 the clinical isolate panel of GROUP-1 and colleagues (5, 12), the
 six-laboratory time-kill exercise of GROUP-7 and colleagues (6, 13), the
-evolved-clone deposit of GROUP-4 and colleagues (18, 30), the DRUG-D grid
+evolved-clone deposit of GROUP-4 and colleagues (16, 30), the DRUG-D grid
 of GROUP-3 and colleagues (14, 15), and the hollow-fibre Source Data of GROUP-5
-and colleagues (16, 17), which was held out of every fitting step.
+and colleagues (17, 18), which was held out of every fitting step.
 
 The analysis code, both audit scripts, the headroom tool described above and the
 machine-readable receipts recording the software versions each stage ran under
@@ -2484,10 +2444,8 @@ STRAIN-2, DRUG-C at ten times the minimum inhibitory concentration.
 profile-likelihood intervals; every laboratory yields one, spanning 5.2-fold.
 (**B**) The two summaries against each other. The three lowest starting densities
 are exactly the three laboratories that recorded crossings at the 100 µL plating;
-the kill rate produces no such separation. The Kaplan–Meier curves for the
-crossing times themselves, and the movement of the laboratory terms in the
-descriptive Cox model, are Figure S1: both are descriptive, neither carries a
-between-laboratory test, and the supplement is where they belong.
+the kill rate produces no such separation. The crossing times themselves are Figure S1, with the
+laboratory-level tests this design does and does not support.
 
 ![Figure 3](../results/figures/fig3_endpoint_collapse.png)
 

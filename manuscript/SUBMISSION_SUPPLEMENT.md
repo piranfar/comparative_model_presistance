@@ -184,6 +184,18 @@ fit for ranked outcomes that does not assume the steps between ranks are equal.
 That fit makes an assumption of its own — that a single odds ratio serves both
 cut points — and we tested it rather than assuming it (Methods; Table S4).
 
+That last objection can be tested rather than merely conceded, because the
+isolates it applies to can be named. The recorded fraction is *L*/*N₀* exactly
+for the eighteen isolates whose day-5 reading sits on the floor, and for no
+others: in the remaining 185 the numerator was counted and is free to move
+independently of *N₀*. Refit on those 185 alone and the mediated path does not
+weaken but strengthens, to +0.227 classes (+0.118 to +0.348), while the direct
+path collapses to +0.008 (−0.197 to +0.208) and the proportion mediated rises
+from 0.65 to 0.96. Deleting exactly the isolates the criticism is about leaves
+the effect larger, so it is not an artefact of them. What it remains is an
+association in observational data, and the caution above about mechanism is
+unaffected.
+
 These 217 isolates are not 217 independent observations. Forty-three are
 follow-up isolates taken during treatment from patients who also gave a baseline
 isolate, so up to 86 rows sit in clusters of two. But the deposit carries no
@@ -253,6 +265,20 @@ available runs the other way: re-running the whole analysis on a day-one exposur
 for every laboratory leaves the ordering, the area under the curve and the
 laboratory-level exact test unchanged.
 
+The Cox fits are reported for the same reason and with the same restraint. On
+laboratory alone, institutes D, E and F carry hazard ratios of 0.20, 0.21 and
+0.20. Add starting density and those move to 0.34, 0.36 and 0.62, and concordance
+rises from 0.896 to 0.930 (Fig. S1B). Institute C moves the other way, from 3.0
+to 5.3, and it is also the fastest killer, which is how a laboratory that
+genuinely kills faster ought to behave. No p-value is attached to any of these
+terms, and the panel that displays them displays that movement rather than
+testing it. The reason is mechanical. The tested covariate is constant within
+cluster, and with six laboratories and six parameters the cluster-robust
+covariance is singular by construction; fitting it anyway does not fail loudly
+but returns a smaller p than the one it was meant to correct. A coefficient that
+moves on adjustment says how far starting density and laboratory identity overlap
+in this design. It is not evidence that one explains the other.
+
 Where an interval is quoted from that fit it is a cluster bootstrap and not the
 model's own. For the starting-density coefficient the laboratory-clustered
 interval is −1.11 to −0.51, half again as wide as the model's −0.91 to −0.48 and
@@ -263,6 +289,64 @@ keeps each laboratory's flasks together and the contrast barely moves, so the
 flask-clustered interval is quoted there instead. The crossings behind each
 laboratory's coefficient are also worth stating plainly: 43 of 48 series in
 institute C against 1 of 48 in institute E.
+
+Killing here is not sustained, and this is stronger than a caveat about
+individual flasks. Take the 64 treated series carrying at least three quantified
+readings at the most sensitive plating volume. In 48 of them the final step is
+not a decline, and 44 end more than one log10 above their own lowest reading,
+with a median rebound of 2.17 log10 and a largest of 5.54. Seventeen of the 32
+flasks that fell below the floor at the most sensitive plating — the 29 treated
+flasks above and three untreated ones — were detectable again at a later visit,
+14 of them in treated arms.
+
+Across all four platings, 84 of the 140 series that cross return above the floor,
+60 per cent, and the return is quick: a median of four days, with 45 per cent
+back within three. Those 360 series come from 90 flasks, four platings each, so
+they are not 360 independent observations; counted by flask, 53 of the 90 contain
+a crossing series — the 48 treated flasks above and five untreated ones — and 42
+of those contain a returning one. A crossing below the assay floor in this
+deposit is therefore usually a transient rather than an endpoint, which is a
+further reason it summarises less than the trajectory that produced it.
+
+### Extended results for Text S1: The same boundaries hold in an experiment the framework never saw
+
+*Material held back from the article for length. It is reported here rather than dropped, because each paragraph answers a question a reader of that section may reasonably ask.*
+
+That was true of the search as described. It is no longer true of the analysis
+repository, which now holds 40 ingested deposits. Of those, 17 permit the
+boundaries to be computed once the floor is established on the same tiers this
+paper uses for its own: stated by the depositor, derived from a recorded plated
+volume, or inferred from a pile-up of counts on a plate-plausible value. Across
+those, the condition the boundaries imply — that no series may present as a
+measurement a reduction deeper than its own floor allows — holds in 2 210 of
+2 210 series in seven species. Those deposits are described in the data release
+rather than here, because none was held out.
+
+### Extended results for Discussion: What should change
+
+*Material held back from the article for length. It is reported here rather than dropped, because each paragraph answers a question a reader of that section may reasonably ask.*
+
+This is not an aspiration. One study already does it. A murine preventive-therapy
+experiment writes its lower limit of detection into the deposited workbook once
+on every sheet, separately for each agar type, and separately for individual mice
+where the lower limit differed between them: 0.78 log10 CFU per lung on plain and
+hygromycin agar, 0.54 on thiophenecarboxylic acid hydrazide agar, with the plated
+volume stated beside it (11). That is better practice than anything else in
+this corpus. The article reporting the experiment states none of it — a full-text
+search returns no occurrence of "limit of detection" or of either value. So the
+number is not missing from the science. It is missing from the paper, and a
+reader who never opens the supplementary spreadsheet cannot know an endpoint was
+bounded. What we are asking for is one sentence in a methods section, and
+somebody has already done all the work that sits behind it.
+
+The mirror image is a deposit whose modelling table carries a column named
+`CFU_LOD`, and that column is empty in all 272 rows (12). Somebody designed
+the field, declared it numeric, and never filled it in; nor does a detection
+limit appear in any of the eight analysis scripts deposited beside it. Put the
+two cases together and the diagnosis is not carelessness. The assay floor *L* is
+measured. Sometimes it is written down to a standard higher than anyone asks for.
+It then falls out of the record between the bench and the reader — off the end of
+a spreadsheet, or into a column nobody completed.
 
 ## Supplementary figures
 
@@ -313,14 +397,14 @@ inhibitory concentration, minimum durations for 90, 99 and 99.99 per cent killin
 at 15 and 60 days of prior culture, most probable number readings at days 0, 2
 and 5, a growth-rate proxy, isoniazid susceptibility with the resistance mutation
 where present, months on treatment, and the authors' own tolerance level for each
-isolate (Vijay et al. 2024; eLife 93243 supplementary file 2) (11). The killing assay
+isolate (Vijay et al. 2024; eLife 93243 supplementary file 2) (13). The killing assay
 runs for six days, so an isolate not reaching its target within that window is
 recorded at the ceiling. Of the 217 rows, 43 are follow-up isolates from patients
 already represented, so a baseline-only stratum is analysed separately.
 
 **The six-laboratory exercise.** *M. tuberculosis* H37Rv from one stock,
 distributed with one written protocol to six laboratories blinded and labelled A
-to F (van Wijk et al. 2023; figshare 19766083, CC BY 4.0) (12, 13). Moxifloxacin and
+to F (van Wijk et al. 2023; figshare 19766083, CC BY 4.0) (14, 15). Moxifloxacin and
 isoniazid at one and ten times the minimum inhibitory concentration, an untreated
 control, three flasks per arm, sampled to day 21 or 28. Each sample was plated at
 four volumes: 100 µL in quadruplicate, 10 µL as four drops, 10 µL as a single
@@ -330,7 +414,7 @@ each volume being exactly 1000 divided by that volume, which is one colony per
 millilitre. The minimum reportable positive count is therefore a property of the
 plated volume — one colony in that volume — and equals 1.0, 2.0, 2.0 and
 2.6 log10 CFU/mL respectively, so four platings give three distinct floors
-spanning 1.6 log10 within a single flask-visit (14). The identity is exact for 1 055
+spanning 1.6 log10 within a single flask-visit (16). The identity is exact for 1 055
 of the 1 068 readings at 10 µL; the thirteen exceptions all come from one
 laboratory and do not lie on the lattice its recorded volume implies. The file
 holds 2 775 readings, of which 17.9 per cent are flagged below the floor and 24
@@ -370,7 +454,7 @@ its own in Table S8 — which is reporting rather than fitting.
 **Concentration-by-time grid.** Apramycin and amikacin against *M. tuberculosis*
 at 128, 32, 8, 4 and 1 µg/mL, triplicate log10 CFU at days 0, 3, 7 and 14, with a
 concurrent drug-free control at every visit (Kaur et al. 2024; figshare 26462791,
-CC BY 4.0) (15, 16). The amikacin arms are not analysed here. Within apramycin the 1 µg/mL
+CC BY 4.0) (17, 18). The amikacin arms are not analysed here. Within apramycin the 1 µg/mL
 arm shows net growth rather than killing and is excluded from the dose
 comparison, leaving 4 to 128 µg/mL as the range compared (Section 7).
 
@@ -462,7 +546,7 @@ conflating them is the error this paper is about.
 A **count below the assay floor** is left-censored: the population is somewhere
 below a known value. In the six-laboratory deposit that value is a property of
 the plated volume, as above. In the clinical deposit the readings are most
-probable numbers taking the discrete values of an MPN table (17, 18), and the day-5 column
+probable numbers taking the discrete values of an MPN table (19, 20), and the day-5 column
 bottoms out at 23 per mL with a visible pile-up there; that value is treated as
 the floor, and the first Results section reports the evidence for it.
 
@@ -537,7 +621,7 @@ The attenuation of the resistance coefficient once starting density enters the
 model is reported in the Results as a descriptive ratio, which is what it is.
 Separately, a linear product-of-coefficients mediation decomposes the total
 effect of isoniazid resistance on the day-5 tolerance class into an average
-causal mediation effect through log10 *N₀* and an average direct effect (19, 20), with
+causal mediation effect through log10 *N₀* and an average direct effect (21, 22), with
 bootstrap percentile intervals from 5 000 resamples, repeated on the baseline
 stratum and on two binary collapses of the outcome.
 
@@ -633,15 +717,15 @@ than a diagnosis after it.
 
 ### Estimation
 
-A **Tobit model** fits log10 CFU/mL linearly in time by maximum likelihood (21). An
+A **Tobit model** fits log10 CFU/mL linearly in time by maximum likelihood (23). An
 observed reading contributes the usual Gaussian density; a censored reading
 contributes log Φ((limit − µ)/σ), the probability that it fell below its own
-limit. This is Beal's M3 (Beal 2001) written for this assay (22). Intervals come from
+limit. This is Beal's M3 (Beal 2001) written for this assay (24). Intervals come from
 the profile likelihood.
 
 **Multiple imputation** draws each censored reading from the fitted normal
 truncated at its own limit, refits by ordinary least squares, and pools 50 fits
-by Rubin's rules (23). The imputation is proper: the line and the error scale
+by Rubin's rules (25). The imputation is proper: the line and the error scale
 are redrawn from the Tobit fit's own asymptotic distribution at every imputation
 rather than held at the point estimate, so the between-imputation variance
 carries the uncertainty in the model that generated the draws. What the agreement
@@ -656,13 +740,13 @@ the deposit records no wavelength, so none is given here. Because it is a time,
 it runs inversely to growth rate: a larger value is a slower-growing isolate.
 
 **The tolerance label** is modelled as an ordered categorical outcome by
-proportional-odds ordinal logistic regression (24), with starting density as a
+proportional-odds ordinal logistic regression (26), with starting density as a
 prespecified covariate and every association reported unadjusted and adjusted for
 it. The MDR category of the deposited label is a fourth, unordered category and
 is excluded; all 14 rows carrying it fall outside the susceptible-versus-resistant
 contrast in any case, so the ordinal and linear models are fitted to identical
-rows. Proportional odds is tested by a Brant test per predictor (25) and by a
-likelihood-ratio test against a generalised ordered logit (26) with the coefficient
+rows. Proportional odds is tested by a Brant test per predictor (27) and by a
+likelihood-ratio test against a generalised ordered logit (28) with the coefficient
 released; where it fails, the released partial-proportional-odds fit is reported
 and checked against a multinomial fit that assumes no ordering. Rows are dropped
 only for a missing outcome, predictor or starting density, and the dropped rows
@@ -680,20 +764,20 @@ cross, 60 per cent read above the floor again at a later visit.
 
 The crossing time is interval-censored, not observed: it lies between the last
 visit above the floor and the first visit below it, and the visit schedule is
-coarse. Interval-censored fits (27) are therefore reported alongside the naive
+coarse. Interval-censored fits (29) are therefore reported alongside the naive
 treatment that pins the event to the visit at which the blank plate was noticed.
-Kaplan–Meier (28) and Cox proportional hazards (29) are retained as **descriptive**
+Kaplan–Meier (30) and Cox proportional hazards (31) are retained as **descriptive**
 summaries of first crossing only; their intervals are replaced by cluster
-bootstraps over laboratories and over flasks (30), because those 261 series come from
+bootstraps over laboratories and over flasks (32), because those 261 series come from
 72 flasks in 6 laboratories and the partial likelihood treats them as independent.
 No p-value is quoted for a term that is constant within laboratory, since six
-clusters cannot support one. Proportionality is tested on Schoenfeld residuals (31, 32).
+clusters cannot support one. Proportionality is tested on Schoenfeld residuals (33, 34).
 
 A cell is fitted only when it retains at least six quantified readings at three
 distinct times; below that the slope is determined by the censoring pattern
 rather than by the counts.
 
-**The replicate-level bootstrap** (33) behind the interval slopes resamples the three
+**The replicate-level bootstrap** (35) behind the interval slopes resamples the three
 replicate counts with replacement at both ends of each interval, takes their
 mean, refits the concentration slope on each draw, and takes percentile intervals
 from 20 000 draws. The resampling unit is the replicate count, not the interval,
@@ -706,7 +790,7 @@ interval quoted in Section 7 and drawn in Figure 3C. The least-squares fit is
 kept in the table for comparison and is labelled there: it has two residual
 degrees of freedom and discards the replicate scatter entirely. An interval on a
 proportion — an inversion rate, or a share of flasks — is the Jeffreys
-interval (34), which is the equal-tailed posterior under the Jeffreys prior
+interval (36), which is the equal-tailed posterior under the Jeffreys prior
 and does not collapse to zero width when the count is 0 or n, as the normal
 approximation does at the sample sizes here.
 
@@ -744,7 +828,7 @@ from.
 ### Multiplicity
 
 Where a question admits more than one test, every test the deposit supports is
-run, and the family is corrected by the Benjamini–Hochberg procedure (35) at a false
+run, and the family is corrected by the Benjamini–Hochberg procedure (37) at a false
 discovery rate of 5 per cent. For each test we report the correlation the sample
 size could have resolved at 95 per cent confidence, so that a null is bounded
 rather than asserted.
@@ -795,9 +879,9 @@ conclusions that table lists, so a reading retracted in the prose alone lies
 outside it, and a verdict silently changed from unsupported to supported would
 not be detected.
 
-Analyses used Python 3.14 with numpy 2.5.0 (36), scipy 1.18.0 (37),
-pandas 3.0.3 (38), statsmodels 0.15.0 (39) and lifelines 0.30.3
-(40).
+Analyses used Python 3.14 with numpy 2.5.0 (38), scipy 1.18.0 (39),
+pandas 3.0.3 (40), statsmodels 0.15.0 (41) and lifelines 0.30.3
+(42).
 
 ---
 
@@ -1228,62 +1312,66 @@ pandas 3.0.3 (38), statsmodels 0.15.0 (39) and lifelines 0.30.3
 
 10. van Soolingen D, de Haas PEW, van Doorn HR, Kuijper E, Rinder H, Borgdorff MW. 2000. Mutations at amino acid position 315 of the *katG* gene are associated with high-level resistance to isoniazid, other drug resistance, and successful transmission of *Mycobacterium tuberculosis* in the Netherlands. J Infect Dis 182:1788-1790. https://doi.org/10.1086/317598.
 
-11. Vijay S, Bao NLH, Vinh DN, Nhat LTH, Thu DDA, Quang NL, Trieu LPT, Nhung HN, Ha VTN, Thai PVK, Ha DTM, Lan NH, Caws M, Thwaites GE, Javid B, Thuong NT. 2024. Supplementary file 2 to "Rifampicin tolerance and growth fitness among isoniazid-resistant clinical *Mycobacterium tuberculosis* isolates from a longitudinal study" (elife-93243-supp2-v1.xlsx). eLife. https://doi.org/10.7554/eLife.93243.
+11. Lai RPJ, Ammerman NC, Tasneen R, Almeida DV, Converse PJ, Nuermberger EL. 2023. Using dynamic oral dosing of rifapentine and rifabutin to simulate exposure profiles of long-acting formulations in a mouse model of tuberculosis preventive therapy. Antimicrob Agents Chemother 67:e00481-23. https://doi.org/10.1128/aac.00481-23.
 
-12. van Wijk RC, Lucía A, Sudhakar PK, Sonnenkalb L, Gaudin C, Hoffmann E, Dremierre B, Aguilar-Ayala DA, Dal Molin M, Rybniker J, de Giorgi S, Cioetto-Mazzabò L, Segafreddo G, Manganelli R, Degiacomi G, Recchia D, Pasca MR, Simonsson USH, Ramón-García S. 2023. Implementing best practices on data generation and reporting of *Mycobacterium tuberculosis* in vitro assays within the ERA4TB consortium. iScience 26:106411. https://doi.org/10.1016/j.isci.2023.106411.
+12. Tabor ST, Friesen AD, Reichlen MJ, Dide-Agossou C, McGrath M, Peterson R, Ganusov VV, Robertson GT, Voskuil MI, Walter ND. 2025. Mind the gap: understanding discordance between culture- and a non-culture-based measure of bacterial burden in murine tuberculosis treatment models. bioRxiv posted 18 December 2025; preprint, not peer reviewed. https://github.com/SamuelTaborCU/Mtb-16S-rRNA-vs-CFU.
 
-13. van Wijk RC, Lucía Quintana A, Ramón-García S. 2023. *Mycobacterium tuberculosis* time kill assay data of the standardized protocol within the ERA4TB consortium. figshare. https://doi.org/10.6084/m9.figshare.19766083.v1.
+13. Vijay S, Bao NLH, Vinh DN, Nhat LTH, Thu DDA, Quang NL, Trieu LPT, Nhung HN, Ha VTN, Thai PVK, Ha DTM, Lan NH, Caws M, Thwaites GE, Javid B, Thuong NT. 2024. Supplementary file 2 to "Rifampicin tolerance and growth fitness among isoniazid-resistant clinical *Mycobacterium tuberculosis* isolates from a longitudinal study" (elife-93243-supp2-v1.xlsx). eLife. https://doi.org/10.7554/eLife.93243.
 
-14. Rabodoarivelo MS, Hoffmann E, Gaudin C, Aguilar-Ayala DA, Galizia J, Sonnenkalb L, Dal Molin M, Cioetto-Mazzabò L, Degiacomi G, Recchia D, Rybniker J, Manganelli R, Pasca MR, Ramón-García S, Lucía A. 2025. Protocol to quantify bacterial burden in time-kill assays using colony-forming units and most probable number readouts for *Mycobacterium tuberculosis*. STAR Protoc 6:103643. https://doi.org/10.1016/j.xpro.2025.103643.
+14. van Wijk RC, Lucía A, Sudhakar PK, Sonnenkalb L, Gaudin C, Hoffmann E, Dremierre B, Aguilar-Ayala DA, Dal Molin M, Rybniker J, de Giorgi S, Cioetto-Mazzabò L, Segafreddo G, Manganelli R, Degiacomi G, Recchia D, Pasca MR, Simonsson USH, Ramón-García S. 2023. Implementing best practices on data generation and reporting of *Mycobacterium tuberculosis* in vitro assays within the ERA4TB consortium. iScience 26:106411. https://doi.org/10.1016/j.isci.2023.106411.
 
-15. Kaur P, Ramya VK, Naveenkumar CN, Bharathkumar K, Singh M, Hobbie SN, Shandil RK, Narayanan S. 2024. Apramycin kills replicating and non-replicating *Mycobacterium tuberculosis*. Front Trop Dis 5:1413211. https://doi.org/10.3389/fitd.2024.1413211.
+15. van Wijk RC, Lucía Quintana A, Ramón-García S. 2023. *Mycobacterium tuberculosis* time kill assay data of the standardized protocol within the ERA4TB consortium. figshare. https://doi.org/10.6084/m9.figshare.19766083.v1.
 
-16. Kaur P. 2024. Apramycin kills replicating and non-replicating *Mycobacterium tuberculosis* — raw data. figshare. https://doi.org/10.6084/m9.figshare.26462791.v1.
+16. Rabodoarivelo MS, Hoffmann E, Gaudin C, Aguilar-Ayala DA, Galizia J, Sonnenkalb L, Dal Molin M, Cioetto-Mazzabò L, Degiacomi G, Recchia D, Rybniker J, Manganelli R, Pasca MR, Ramón-García S, Lucía A. 2025. Protocol to quantify bacterial burden in time-kill assays using colony-forming units and most probable number readouts for *Mycobacterium tuberculosis*. STAR Protoc 6:103643. https://doi.org/10.1016/j.xpro.2025.103643.
 
-17. Cochran WG. 1950. Estimation of bacterial densities by means of the "most probable number". Biometrics 6:105. https://doi.org/10.2307/3001491.
+17. Kaur P, Ramya VK, Naveenkumar CN, Bharathkumar K, Singh M, Hobbie SN, Shandil RK, Narayanan S. 2024. Apramycin kills replicating and non-replicating *Mycobacterium tuberculosis*. Front Trop Dis 5:1413211. https://doi.org/10.3389/fitd.2024.1413211.
 
-18. Blodgett R. 2023. BAM appendix 2: most probable number from serial dilutions. Bacteriological analytical manual. US Food and Drug Administration, Silver Spring, MD. https://www.fda.gov/food/laboratory-methods-food/bam-appendix-2-most-probable-number-serial-dilutions.
+18. Kaur P. 2024. Apramycin kills replicating and non-replicating *Mycobacterium tuberculosis* — raw data. figshare. https://doi.org/10.6084/m9.figshare.26462791.v1.
 
-19. Imai K, Keele L, Yamamoto T. 2010. Identification, inference and sensitivity analysis for causal mediation effects. Stat Sci 25:51-71. https://doi.org/10.1214/10-STS321.
+19. Cochran WG. 1950. Estimation of bacterial densities by means of the "most probable number". Biometrics 6:105. https://doi.org/10.2307/3001491.
 
-20. Baron RM, Kenny DA. 1986. The moderator-mediator variable distinction in social psychological research: conceptual, strategic, and statistical considerations. J Pers Soc Psychol 51:1173-1182. https://doi.org/10.1037/0022-3514.51.6.1173.
+20. Blodgett R. 2023. BAM appendix 2: most probable number from serial dilutions. Bacteriological analytical manual. US Food and Drug Administration, Silver Spring, MD. https://www.fda.gov/food/laboratory-methods-food/bam-appendix-2-most-probable-number-serial-dilutions.
 
-21. Tobin J. 1958. Estimation of relationships for limited dependent variables. Econometrica 26:24. https://doi.org/10.2307/1907382.
+21. Imai K, Keele L, Yamamoto T. 2010. Identification, inference and sensitivity analysis for causal mediation effects. Stat Sci 25:51-71. https://doi.org/10.1214/10-STS321.
 
-22. Beal SL. 2001. Ways to fit a PK model with some data below the quantification limit. J Pharmacokinet Pharmacodyn 28:481-504. https://doi.org/10.1023/A:1012299115260.
+22. Baron RM, Kenny DA. 1986. The moderator-mediator variable distinction in social psychological research: conceptual, strategic, and statistical considerations. J Pers Soc Psychol 51:1173-1182. https://doi.org/10.1037/0022-3514.51.6.1173.
 
-23. Rubin DB. 1987. Multiple imputation for nonresponse in surveys. John Wiley & Sons, New York, NY. https://doi.org/10.1002/9780470316696.
+23. Tobin J. 1958. Estimation of relationships for limited dependent variables. Econometrica 26:24. https://doi.org/10.2307/1907382.
 
-24. McCullagh P. 1980. Regression models for ordinal data. J R Stat Soc Series B Stat Methodol 42:109-127. https://doi.org/10.1111/j.2517-6161.1980.tb01109.x.
+24. Beal SL. 2001. Ways to fit a PK model with some data below the quantification limit. J Pharmacokinet Pharmacodyn 28:481-504. https://doi.org/10.1023/A:1012299115260.
 
-25. Brant R. 1990. Assessing proportionality in the proportional odds model for ordinal logistic regression. Biometrics 46:1171-1178.
+25. Rubin DB. 1987. Multiple imputation for nonresponse in surveys. John Wiley & Sons, New York, NY. https://doi.org/10.1002/9780470316696.
 
-26. Peterson B, Harrell FE Jr. 1990. Partial proportional odds models for ordinal response variables. J R Stat Soc Ser C Appl Stat 39:205. https://doi.org/10.2307/2347760.
+26. McCullagh P. 1980. Regression models for ordinal data. J R Stat Soc Series B Stat Methodol 42:109-127. https://doi.org/10.1111/j.2517-6161.1980.tb01109.x.
 
-27. Turnbull BW. 1976. The empirical distribution function with arbitrarily grouped, censored and truncated data. J R Stat Soc Series B Stat Methodol 38:290-295. https://doi.org/10.1111/j.2517-6161.1976.tb01597.x.
+27. Brant R. 1990. Assessing proportionality in the proportional odds model for ordinal logistic regression. Biometrics 46:1171-1178.
 
-28. Kaplan EL, Meier P. 1958. Nonparametric estimation from incomplete observations. J Am Stat Assoc 53:457-481. https://doi.org/10.1080/01621459.1958.10501452.
+28. Peterson B, Harrell FE Jr. 1990. Partial proportional odds models for ordinal response variables. J R Stat Soc Ser C Appl Stat 39:205. https://doi.org/10.2307/2347760.
 
-29. Cox DR. 1972. Regression models and life-tables. J R Stat Soc Series B Stat Methodol 34:187-202. https://doi.org/10.1111/j.2517-6161.1972.tb00899.x.
+29. Turnbull BW. 1976. The empirical distribution function with arbitrarily grouped, censored and truncated data. J R Stat Soc Series B Stat Methodol 38:290-295. https://doi.org/10.1111/j.2517-6161.1976.tb01597.x.
 
-30. Field CA, Welsh AH. 2007. Bootstrapping clustered data. J R Stat Soc Series B Stat Methodol 69:369-390. https://doi.org/10.1111/j.1467-9868.2007.00593.x.
+30. Kaplan EL, Meier P. 1958. Nonparametric estimation from incomplete observations. J Am Stat Assoc 53:457-481. https://doi.org/10.1080/01621459.1958.10501452.
 
-31. Schoenfeld D. 1982. Partial residuals for the proportional hazards regression model. Biometrika 69:239-241. https://doi.org/10.1093/biomet/69.1.239.
+31. Cox DR. 1972. Regression models and life-tables. J R Stat Soc Series B Stat Methodol 34:187-202. https://doi.org/10.1111/j.2517-6161.1972.tb00899.x.
 
-32. Grambsch PM, Therneau TM. 1994. Proportional hazards tests and diagnostics based on weighted residuals. Biometrika 81:515-526. https://doi.org/10.1093/biomet/81.3.515.
+32. Field CA, Welsh AH. 2007. Bootstrapping clustered data. J R Stat Soc Series B Stat Methodol 69:369-390. https://doi.org/10.1111/j.1467-9868.2007.00593.x.
 
-33. Efron B. 1979. Bootstrap methods: another look at the jackknife. Ann Stat 7:1-26. https://doi.org/10.1214/aos/1176344552.
+33. Schoenfeld D. 1982. Partial residuals for the proportional hazards regression model. Biometrika 69:239-241. https://doi.org/10.1093/biomet/69.1.239.
 
-34. Brown LD, Cai TT, DasGupta A. 2001. Interval estimation for a binomial proportion. Stat Sci 16:101-133. https://doi.org/10.1214/ss/1009213286.
+34. Grambsch PM, Therneau TM. 1994. Proportional hazards tests and diagnostics based on weighted residuals. Biometrika 81:515-526. https://doi.org/10.1093/biomet/81.3.515.
 
-35. Benjamini Y, Hochberg Y. 1995. Controlling the false discovery rate: a practical and powerful approach to multiple testing. J R Stat Soc Series B Stat Methodol 57:289-300. https://doi.org/10.1111/j.2517-6161.1995.tb02031.x.
+35. Efron B. 1979. Bootstrap methods: another look at the jackknife. Ann Stat 7:1-26. https://doi.org/10.1214/aos/1176344552.
 
-36. Harris CR, Millman KJ, van der Walt SJ, Gommers R, Virtanen P, Cournapeau D, Wieser E, Taylor J, Berg S, Smith NJ, Kern R, Picus M, Hoyer S, van Kerkwijk MH, Brett M, Haldane A, del Río JF, Wiebe M, Peterson P, Gérard-Marchant P, Sheppard K, Reddy T, Weckesser W, Abbasi H, Gohlke C, Oliphant TE. 2020. Array programming with NumPy. Nature 585:357-362. https://doi.org/10.1038/s41586-020-2649-2.
+36. Brown LD, Cai TT, DasGupta A. 2001. Interval estimation for a binomial proportion. Stat Sci 16:101-133. https://doi.org/10.1214/ss/1009213286.
 
-37. Virtanen P, Gommers R, Oliphant TE, Haberland M, Reddy T, Cournapeau D, Burovski E, Peterson P, Weckesser W, Bright J, van der Walt SJ, Brett M, Wilson J, Millman KJ, Mayorov N, Nelson ARJ, Jones E, Kern R, Larson E, Carey CJ, Polat İ, Feng Y, Moore EW, VanderPlas J, Laxalde D, Perktold J, Cimrman R, Henriksen I, Quintero EA, Harris CR, Archibald AM, Ribeiro AH, Pedregosa F, van Mulbregt P, SciPy 1.0 Contributors. 2020. SciPy 1.0: fundamental algorithms for scientific computing in Python. Nat Methods 17:261-272. https://doi.org/10.1038/s41592-019-0686-2.
+37. Benjamini Y, Hochberg Y. 1995. Controlling the false discovery rate: a practical and powerful approach to multiple testing. J R Stat Soc Series B Stat Methodol 57:289-300. https://doi.org/10.1111/j.2517-6161.1995.tb02031.x.
 
-38. McKinney W. 2010. Data structures for statistical computing in Python. Proceedings of the 9th Python in Science Conference 56-61. https://doi.org/10.25080/Majora-92bf1922-00a.
+38. Harris CR, Millman KJ, van der Walt SJ, Gommers R, Virtanen P, Cournapeau D, Wieser E, Taylor J, Berg S, Smith NJ, Kern R, Picus M, Hoyer S, van Kerkwijk MH, Brett M, Haldane A, del Río JF, Wiebe M, Peterson P, Gérard-Marchant P, Sheppard K, Reddy T, Weckesser W, Abbasi H, Gohlke C, Oliphant TE. 2020. Array programming with NumPy. Nature 585:357-362. https://doi.org/10.1038/s41586-020-2649-2.
 
-39. Seabold S, Perktold J. 2010. Statsmodels: econometric and statistical modeling with Python. Proceedings of the 9th Python in Science Conference 92-96. https://doi.org/10.25080/Majora-92bf1922-011.
+39. Virtanen P, Gommers R, Oliphant TE, Haberland M, Reddy T, Cournapeau D, Burovski E, Peterson P, Weckesser W, Bright J, van der Walt SJ, Brett M, Wilson J, Millman KJ, Mayorov N, Nelson ARJ, Jones E, Kern R, Larson E, Carey CJ, Polat İ, Feng Y, Moore EW, VanderPlas J, Laxalde D, Perktold J, Cimrman R, Henriksen I, Quintero EA, Harris CR, Archibald AM, Ribeiro AH, Pedregosa F, van Mulbregt P, SciPy 1.0 Contributors. 2020. SciPy 1.0: fundamental algorithms for scientific computing in Python. Nat Methods 17:261-272. https://doi.org/10.1038/s41592-019-0686-2.
 
-40. Davidson-Pilon C. 2019. lifelines: survival analysis in Python. J Open Source Softw 4:1317. https://doi.org/10.21105/joss.01317.
+40. McKinney W. 2010. Data structures for statistical computing in Python. Proceedings of the 9th Python in Science Conference 56-61. https://doi.org/10.25080/Majora-92bf1922-00a.
+
+41. Seabold S, Perktold J. 2010. Statsmodels: econometric and statistical modeling with Python. Proceedings of the 9th Python in Science Conference 92-96. https://doi.org/10.25080/Majora-92bf1922-011.
+
+42. Davidson-Pilon C. 2019. lifelines: survival analysis in Python. J Open Source Softw 4:1317. https://doi.org/10.21105/joss.01317.

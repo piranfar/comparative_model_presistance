@@ -1,6 +1,6 @@
 {
   "script": "src/experiments/exp31_clustering_audit.py",
-  "utc": "2026-09-09T02:01:15+00:00",
+  "utc": "2026-09-09T04:14:30+00:00",
   "data_sources": [
     "eLife 93243 supplementary file 2",
     "ERA4TB standardised time-kill, figshare 19766083"
