@@ -1103,21 +1103,33 @@ regimens enter clinical trials it is the region a colony count is blind to.
 
 That is also where the counts feeding regimen selection are taken. A model
 published as a preprint while this paper was in preparation predicts relapse in
-the murine model from lung CFU at 28 days together with a ribosomal RNA
-synthesis ratio, across nine datasets, 58 regimens and 2 239 relapse
-observations, reaching an area under the curve of 0.90 on external validation
-[[R58]]. Its own reported finding is that CFU alone performs about as well as
-CFU with the RS ratio, once the sterilising contribution of the individual drugs
-is accounted for. That is what a censored covariate looks like from the outside:
-where the best regimens drive the count onto the floor the count stops
-separating them, and a term standing for drug identity takes over the
-discrimination the count can no longer supply. Version 1 of that preprint
-reports no detection limit and no plated fraction, and we do not read this as a
-lapse peculiar to it — the field's own consensus guideline raises neither. It is
-precisely why *N*_reach and *N*_id are worth writing down. A relapse model
-resting on a 28-day count needs that count treated as left-censored — read as
-below the floor rather than as a number — and *h* says when the question arises
-instead of leaving it to be noticed.
+the murine model across nine datasets, 58 regimens and 2 239 relapse
+observations, reaching an area under the receiver operating characteristic curve
+of 0.90 on its final external validation [[R58]]. Its eight predictors include
+the fall in lung CFU from baseline at days 14 and 28, the fall in the ribosomal RNA (ribonucleic acid)
+synthesis ratio at day 14, the presence of an oxazolidinone, and four
+experimental covariates. Removing either biomarker costs performance. What the
+authors show is that the loss from dropping the RS ratio can be recovered by
+adding model-estimated coefficients for the sterilising contribution of each drug
+— a substitution they license only for compounds already characterised, since
+those coefficients need prior long-term outcome data, and expressly not for the
+novel ones the model exists to rank.
+
+Their explanation for that gap is physiological, and it is why they built the RS
+ratio in the first place: a change in CFU cannot always separate a sterilising
+regimen from a non-sterilising one. A detection floor produces the same signature
+from outside. Where the best regimens drive the count into the region the plate
+cannot resolve, a term standing for drug identity absorbs discrimination the
+count is no longer free to express, and the fitted model looks as this one does.
+Nothing in the published record separates the two readings, because version 1 of
+that preprint states no detection limit and no plated fraction — and we do not
+read that as a lapse peculiar to it, since the field's own consensus guideline
+raises neither. That is the point. An explanation the reporting cannot adjudicate
+is one the reporting should not have left open, and it is precisely why
+*N*_reach and *N*_id are worth writing down. A relapse model that leans on a
+28-day count needs that count treated as left-censored — read as below the floor
+rather than as a number — and *h* says when the question arises instead of
+leaving it to be noticed.
 
 A reader may object that this runs backwards. Dropping below the limit of
 detection is what a *susceptible* population does; how can it make an isolate
