@@ -317,8 +317,8 @@ three, so no ordered analysis can place it (Table S2); over the 203 isolates wit
 an ordered label the same count is the 31 quoted above.
 
 All 33 are recorded as not having reached the endpoint — they sit at the **assay
-ceiling**. That is a census of the affected isolates rather than an estimate, and
-it is the load-bearing observation. The ceiling is a different censoring
+ceiling**. That is a census of the affected isolates, not an estimate. The
+ceiling is a different censoring
 mechanism from the floor and should not be read as its mirror. The floor censors
 the count: anything below *L* is not reported as a count. The ceiling censors
 time: the killing assay runs six days, so an isolate that has not reached its
@@ -434,8 +434,8 @@ once it happens, and there the agreement with the deposit is exact isolate by
 isolate: the set the algebra says has a single compatible class and the set the
 deposit records in the lowest class are the same set.
 
-That agreement is an identity rather than a passed test, and saying so is the
-honest way to report it. Once the label is a cut on the recorded fraction
+That agreement is an identity rather than a passed test. Once the label is a cut
+on the recorded fraction
 (Table S3) and every floor reading has a numerator of exactly *L*, the class of a
 floored isolate is a function of *N₀* alone, so the algebra cannot disagree with
 the deposit. What could have failed, and did not, is the premise: that the three
@@ -1312,7 +1312,7 @@ Code created to generate the results and to interpret the data is included. The
 repository is dual-licensed, MIT for the code and CC BY 4.0 for the manuscript,
 figures and results, which is no more restrictive than CC BY; the deposits keep
 their depositors' own licences and are not relicensed here. It is at
-https://github.com/piranfar/comparative_model_presistance. [The commit
+https://github.com/piranfar/detection-floor-tolerance-endpoints. [The commit
 identifier of the submitted version is to be inserted at submission.]
 
 Every number quoted in this manuscript is regenerated from the deposits by that
@@ -1494,4 +1494,4 @@ The supplemental file carries the full Materials and Methods, the analyses named
 
 34. Windels EM, Cool L, Persy E, Swinnen J, Matthay P, Van den Bergh B, Wenseleers T, Michiels J. 2024. Antibiotic dose and nutrient availability differentially drive the evolution of antibiotic resistance and persistence. ISME J 18:wrae070. https://doi.org/10.1093/ismejo/wrae070.
 
-35. Piranfar V. 2026. Analysis code, audit scripts and headroom tool for "The detection floor bounds tolerance endpoints in Mycobacterium tuberculosis".
+35. Piranfar V. 2026. Analysis code, audit scripts and headroom tool for "The detection floor bounds tolerance endpoints in Mycobacterium tuberculosis". GitHub. https://github.com/piranfar/detection-floor-tolerance-endpoints.

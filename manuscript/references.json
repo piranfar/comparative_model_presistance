@@ -670,8 +670,8 @@
     "journal": "",
     "volume_pages": "",
     "publisher": "",
-    "repository": "",
-    "identifier": "",
+    "repository": "GitHub",
+    "identifier": "https://github.com/piranfar/detection-floor-tolerance-endpoints",
     "retrieved": "",
     "supports": "Data availability: the repository holding the analysis code, both audit scripts, the headroom tool and the machine-readable software receipts from which every number in the manuscript is regenerated."
   },

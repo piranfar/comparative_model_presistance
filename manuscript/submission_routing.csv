@@ -1,7 +1,7 @@
 parent,old_number,title,destination,new_label,words,why
-Results,1,The plate's floor sets how far down killing can be seen,main,1,844,the boundary itself; without it there is no paper
+Results,1,The plate's floor sets how far down killing can be seen,main,1,837,the boundary itself; without it there is no paper
 Results,2,The same floor reading was given different tolerance labels,main,2,876,the boundary changing a published label -- the core claim
-Results,3,The affected isolates are named before the drug is added,main,3,544,the affected isolates are identified before treatment; short and load-bearing
+Results,3,The affected isolates are named before the drug is added,main,3,534,the affected isolates are identified before treatment; short and load-bearing
 Results,4,"The label tracks how fast an isolate grows, and its link to resistance cannot be separated from the inoculum",main,4,1191,"what the phenotype tracks instead, and the mediation the referee attacked; longest section, cut hard rather than moved"
 Results,5,One written protocol does not give every laboratory the same depth to look down,main,5,1570,"six laboratories, one protocol -- the generality argument"
 Results,6,"The turbidity standard fixes what goes into the flask, not what the plate can see",supplement,S1,740,"corroboration: the turbidity standard fixes the inoculum, not the resolvable depth. Supports Section 5, does not extend it"

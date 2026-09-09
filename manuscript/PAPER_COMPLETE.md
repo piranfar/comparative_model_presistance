@@ -349,8 +349,8 @@ an ordered label the same count is the 31 quoted above.
 
 
 All 33 are recorded as not having reached the endpoint — they sit at the **assay
-ceiling**. That is a census of the affected isolates rather than an estimate, and
-it is the load-bearing observation. The ceiling is a different censoring
+ceiling**. That is a census of the affected isolates, not an estimate. The
+ceiling is a different censoring
 mechanism from the floor and should not be read as its mirror. The floor censors
 the count: anything below *L* is not reported as a count. The ceiling censors
 time: the killing assay runs six days, so an isolate that has not reached its
@@ -543,8 +543,8 @@ once it happens, and there the agreement with the deposit is exact isolate by
 isolate: the set the algebra says has a single compatible class and the set the
 deposit records in the lowest class are the same set.
 
-That agreement is an identity rather than a passed test, and saying so is the
-honest way to report it. Once the label is a cut on the recorded fraction
+That agreement is an identity rather than a passed test. Once the label is a cut
+on the recorded fraction
 (Table 4) and every floor reading has a numerator of exactly *L*, the class of a
 floored isolate is a function of *N₀* alone, so the algebra cannot disagree with
 the deposit. What could have failed, and did not, is the premise: that the three
@@ -2211,7 +2211,7 @@ Code created to generate the results and to interpret the data is included. The
 repository is dual-licensed, MIT for the code and CC BY 4.0 for the manuscript,
 figures and results, which is no more restrictive than CC BY; the deposits keep
 their depositors' own licences and are not relicensed here. It is at
-https://github.com/piranfar/comparative_model_presistance. [The commit
+https://github.com/piranfar/detection-floor-tolerance-endpoints. [The commit
 identifier of the submitted version is to be inserted at submission.]
 
 Every number quoted in this manuscript is regenerated from the deposits by that
@@ -2353,7 +2353,7 @@ the original draft, review and editing, and visualisation.
 
 57. Davidson-Pilon C. 2019. lifelines: survival analysis in Python. J Open Source Softw 4:1317. https://doi.org/10.21105/joss.01317.
 
-58. Piranfar V. 2026. Analysis code, audit scripts and headroom tool for "The detection floor bounds tolerance endpoints in Mycobacterium tuberculosis".
+58. Piranfar V. 2026. Analysis code, audit scripts and headroom tool for "The detection floor bounds tolerance endpoints in Mycobacterium tuberculosis". GitHub. https://github.com/piranfar/detection-floor-tolerance-endpoints.
 
 ## Figure legends
 
