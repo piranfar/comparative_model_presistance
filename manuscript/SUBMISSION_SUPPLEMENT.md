@@ -374,6 +374,68 @@ CC BY 4.0) (15, 16). The amikacin arms are not analysed here. Within apramycin t
 arm shows net growth rather than killing and is excluded from the dose
 comparison, leaving 4 to 128 µg/mL as the range compared (Section 7).
 
+### The prospective experiment
+
+The two boundaries were used to design an experiment against themselves. Its
+design sheet, its predictions and its plate counts are one workbook, deposited
+with the analysis code, and the predictions were written on the design sheet
+before any plate was counted.
+
+**Strain and media.** *Escherichia coli* ATCC 25922, the quality-control
+reference strain the standard itself names. Broth and agar were HiMedia.
+Incubation was at the standard conditions for this organism
+**[TO CONFIRM: temperature, atmosphere and duration, exactly as run]**.
+
+**Drug.** Ciprofloxacin at ten times the minimum inhibitory concentration of this
+strain, taken as 0.008 mg/L. The concentration was chosen because it kills deeply
+and fast, so every arm reaches the floor inside a working day, which is what
+reachability and identifiability need in order to be testable at all.
+**[TO CONFIRM: whether 0.008 mg/L was measured in this laboratory by broth
+microdilution read turbidimetrically, or taken from the literature. The design
+sheet currently labels it "literature-aligned MIC; replace with a measured one",
+and the two readings give the paper different sentences.]**
+
+**Design.** Three seeding arms, chosen so that the four-log endpoint is
+unreachable in one, marginal in the second and comfortable in the third: targets
+5 × 10⁴, 5 × 10⁵ and 5 × 10⁶ CFU/mL, the middle arm being the inoculum the
+standard specifies. The densities actually reached were 6.4 × 10⁴, 4.4 × 10⁵ and
+3.8 × 10⁶ per mL, recomputed from the day-zero counts rather than assumed from
+the targets. Three flasks per arm, nine in all. Sampling at 0, 1, 2, 4, 6 and
+24 h; hour zero is not a convenience but the measurement of *N*₀ on which every
+boundary rests.
+
+**Plating.** Every sample was plated at two volumes, 100 µL and 10 µL, in
+duplicate at each volume, across dilutions from neat to 10⁻⁴. Nine flasks × six
+times × two volumes × two plates is 216 plate readings, which is the whole
+dataset. Washing and recovery followed the standard
+**[TO CONFIRM: the wash step and carry-over control as performed]**.
+
+**The floor, and why duplicate plating moves it.** *L* is one colony in the
+volume actually plated, referred back to the undiluted sample. Two 100 µL plates
+read together are 200 µL of sample, so one colony across the pair is 5 CFU/mL and
+not 10; the 10 µL pair gives 50. Pooling the technical plates therefore lowers
+the floor, and the two platings differ by exactly one log by construction. An
+earlier version of the analysis averaged the two plates' densities while keeping
+the single-plate floor, and a sample with one blank plate and one single-colony
+plate then reported a fraction below its own floor — a culture apparently killed
+deeper than its headroom allowed. That is the error this manuscript accuses the
+literature of, committed in its own arithmetic, and it is recorded here rather
+than quietly fixed.
+
+**Replication.** The experiment was run three times
+**[TO CONFIRM: whether the three flasks in each arm are the three independent
+runs — one flask per arm per run — or three flasks within a single run. The
+distinction decides whether the nine flasks are nine biological replicates or
+three, and the manuscript reports them as three per arm.]**
+
+**Analysis.** Each plating series carries the starting density measured on that
+same plating, because the 10 µL series never made the 100 µL measurement and
+importing it would report a depth that series could not have reached. Where the
+argument is about the plated volume alone — the two-label count — a single pooled
+*N*₀ per flask is used instead, and both figures are reported. Class labels use
+the thresholds of the clinical deposit reanalysed above, *c*₁ = 10⁻³ and
+*c*₂ = 10⁻², so that the two experiments are scored on one rule.
+
 ### Two kinds of limit, kept apart
 
 No deposit analysed here reports a validated limit of quantification with a
