@@ -34,7 +34,7 @@ hand. Delete it and rebuild it rather than correcting a file inside it.
 ## State of the manuscript at this build
 
 - Manuscript audit: {'high': 0, 'medium': 1, 'low': 10}
-- Article: 17,068 words
+- Article: 17,700 words
 - Supplement: 18,722 words
 
 ## Still to do before this can be sent

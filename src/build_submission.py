@@ -85,6 +85,9 @@ RESULTS_ROUTE = {
 # not named here defaults to the supplement, so a new Methods subsection is
 # moved unless someone deliberately keeps it.
 METHODS_KEEP_IN_MAIN = {
+    # The one experiment generated for this study. A methods journal cannot be
+    # asked to review an experiment whose protocol is in a supplemental file.
+    "The prospective experiment",
     "Ethics",
     "Use of generative artificial intelligence",
     "Data availability",
