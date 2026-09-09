@@ -1,6 +1,6 @@
 {
   "script": "src/experiments/exp32_crossing_events.py",
-  "utc": "2026-09-08T23:54:06+00:00",
+  "utc": "2026-09-09T00:26:49+00:00",
   "data_source": "ERA4TB standardised time-kill, figshare 19766083",
   "event_definition": "first observed crossing below the assay boundary; the boundary is 1000/plated volume CFU per mL",
   "duplicate_key_resolution": {

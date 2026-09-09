@@ -1,6 +1,6 @@
 {
   "script": "src/experiments/exp33_floor_posterior.py",
-  "utc": "2026-09-08T23:54:07.911391+00:00",
+  "utc": "2026-09-09T00:26:50.841130+00:00",
   "max_log10_span_for_labels": 1.0,
   "n_deposits": 7,
   "n_passed": 7,

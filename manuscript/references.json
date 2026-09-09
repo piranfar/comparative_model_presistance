@@ -687,21 +687,21 @@
   },
   "R54": {
     "kind": "article",
-    "authors": "",
-    "year": "2025",
-    "title": "Handling of bacterial counts below the limit of quantification in pharmacokinetic-pharmacodynamic analysis biases regimen ranking",
+    "authors": "Yamada WM, Schumitzky A, Kryshchenko A, Otalvaro J, Kim S, Louie A, Drusano GL, Neely MN",
+    "year": "2026",
+    "title": "Analyzing pharmacodynamic count data that rapidly decrease to zero",
     "journal": "CPT Pharmacometrics Syst Pharmacol",
-    "volume_pages": "",
+    "volume_pages": "15(1)",
     "identifier": "https://doi.org/10.1002/psp4.70140",
     "supports": "censoring counts below 10 CFU biases regimen ranking in hollow-fibre PK/PD"
   },
   "R55": {
     "kind": "preprint",
-    "authors": "",
+    "authors": "March VFA, Mchedlishvili K, Goig GA, Maghradze N, Avaliani T, Aspindzelashvili R, Avaliani Z, Kipiani M, Tukvadze N, Jugheli L, Bouaouina S, Doetsch A, Kalkan S, Reinhardt M, Gagneux S, Borrell S",
     "year": "2025",
-    "title": "Within-host antibiotic tolerance in Mycobacterium tuberculosis",
+    "title": "Within-host evolution of drug tolerance in *Mycobacterium tuberculosis*",
     "journal": "bioRxiv",
-    "volume_pages": "",
+    "volume_pages": "2025.07.29.667394; preprint, not peer reviewed",
     "identifier": "https://doi.org/10.1101/2025.07.29.667394",
     "supports": "a shallower MDK threshold chosen so that more isolates could enter the analysis"
   },

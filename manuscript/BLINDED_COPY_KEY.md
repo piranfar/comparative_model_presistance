@@ -24,6 +24,7 @@ The organism is masked to `XX` throughout: 48 substitutions over 9 spellings.
 ## GENE
 
 - `GENE-1` = katG
+- `GENE-2` = inhA
 
 ## SPECIES
 
