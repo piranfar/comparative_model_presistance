@@ -30,7 +30,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 TABLES = ROOT / "manuscript" / "tables.md"
-PROSE = ROOT / "manuscript" / "RATE_VS_DURATION.md"
+PROSE = ROOT / "manuscript" / "MANUSCRIPT.md"
 OUT = ROOT / "manuscript" / "SUPPLEMENTAL_MATERIAL.md"
 
 MARKER = "\n## Supplementary tables"

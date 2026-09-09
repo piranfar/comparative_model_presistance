@@ -128,6 +128,8 @@ STAGES = [
      "src.build_review_copy"),
     ("blind   the same paper with the organism masked, for a topic-blind read",
      "src.build_blinded_copy"),
+    ("pack    everything the journal receives, in one folder, correctly named",
+     "src.build_submission_package"),
 ]
 
 

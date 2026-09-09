@@ -1,7 +1,7 @@
 ---
 title: "Reference list, draft for verification"
 status: "Compiled 2026-09-06. Journal not yet chosen, so no house style is applied."
-scope: "Covers manuscript/PAPER_COMPLETE.md, manuscript/RATE_VS_DURATION.md and manuscript/abstract.md."
+scope: "Covers manuscript/PAPER_COMPLETE.md, manuscript/MANUSCRIPT.md and manuscript/abstract.md."
 ---
 
 # Reference list (draft)

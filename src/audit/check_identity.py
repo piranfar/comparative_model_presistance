@@ -530,7 +530,7 @@ def statistic_identity(text: str, min_sig: int = 2,
             # p-value problem: p-values, counts and percentages are dense
             # enough for coincidence, while hazard ratios, odds ratios and
             # correlations are not.  Ungated, the effect-versus-effect space
-            # on PAPER_COMPLETE.md, tables.md and RATE_VS_DURATION.md is
+            # on PAPER_COMPLETE.md, tables.md and MANUSCRIPT.md is
             # empty, so requiring corroboration here buys no silence and
             # costs the commonest failure: prose restating a table's estimate
             # under the wrong name, with none of the table's other numbers
@@ -986,7 +986,7 @@ def main() -> int:
     ctx = {
         "root": root,
         "tables": (man / "tables.md").read_text(encoding="utf-8"),
-        "prose": (man / "RATE_VS_DURATION.md").read_text(encoding="utf-8"),
+        "prose": (man / "MANUSCRIPT.md").read_text(encoding="utf-8"),
     }
 
     if "--debug" in sys.argv:

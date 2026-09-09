@@ -136,7 +136,7 @@ WHAT EACH RULE GRADES, AND WHY.
   audit-count-missing-from-paper           MEDIUM
                   The prose source states the size of the value audit and the
                   assembled paper states no such number.  PAPER_COMPLETE.md is
-                  generated from RATE_VS_DURATION.md, so a sentence present in
+                  generated from MANUSCRIPT.md, so a sentence present in
                   one and absent from the other means the assembled paper is
                   behind its source -- the same staleness that produced the live
                   defect, one step further along.  Without it, rewording the
@@ -1381,7 +1381,7 @@ def check_audit_count(text: str, ctx: dict) -> list[dict]:
     stated = []
     per_source = {}
     for label, body in (("Methods (PAPER_COMPLETE.md)", text),
-                        ("manuscript/RATE_VS_DURATION.md", ctx.get("prose") or ""),
+                        ("manuscript/MANUSCRIPT.md", ctx.get("prose") or ""),
                         ("README.md", _read(root / "README.md"))):
         hits = 0
         for m in AUDIT_COUNT_RE.finditer(_normalise(body)):
@@ -1401,12 +1401,12 @@ def check_audit_count(text: str, ctx: dict) -> list[dict]:
     # was present with a stale number rather than absent.  Without this the
     # coverage receipt would quietly say "2 places state that number" and read
     # as a clean result.
-    if per_source["manuscript/RATE_VS_DURATION.md"] and \
+    if per_source["manuscript/MANUSCRIPT.md"] and \
             not per_source["Methods (PAPER_COMPLETE.md)"]:
         findings.append({
             "severity": "medium", "kind": "audit-count-missing-from-paper",
             "where": "manuscript/PAPER_COMPLETE.md, Methods",
-            "detail": ("manuscript/RATE_VS_DURATION.md states how many "
+            "detail": ("manuscript/MANUSCRIPT.md states how many "
                        "quantities the value audit recomputes and the assembled "
                        "paper states no such number, so the assembled paper is "
                        "behind its own source; re-run python -m "
@@ -1515,7 +1515,7 @@ def main(argv: list[str] | None = None) -> int:
     paper = Path(argv[0]) if argv else root / "manuscript" / "PAPER_COMPLETE.md"
     ctx = {"root": root}
     for key, rel in (("tables", "manuscript/tables.md"),
-                     ("prose", "manuscript/RATE_VS_DURATION.md"),
+                     ("prose", "manuscript/MANUSCRIPT.md"),
                      ("abstract", "manuscript/abstract.md")):
         ctx[key] = _read(root / rel)
     findings = check(paper.read_text(encoding="utf-8"), ctx)

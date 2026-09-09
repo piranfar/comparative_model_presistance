@@ -1921,7 +1921,7 @@ def main(argv: list[str] | None = None) -> int:
     ctx = {
         "root": root,
         "tables": (root / "manuscript" / "tables.md").read_text(encoding="utf-8"),
-        "prose": (root / "manuscript" / "RATE_VS_DURATION.md").read_text(
+        "prose": (root / "manuscript" / "MANUSCRIPT.md").read_text(
             encoding="utf-8"),
     }
     findings = check(text, ctx)

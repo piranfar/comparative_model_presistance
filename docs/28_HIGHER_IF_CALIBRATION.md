@@ -111,7 +111,7 @@ Docs 24–25: trajectories have per-flask shape, no pooled law. Do **not** inven
 1. **Prospective:** matched-headroom re-score of forced isolates.  
 2. **Second non-*Mtb* clinical MDK deposit** with stated plated volume.  
 
-Items that do **not** move venue: retraining nets on *L* · 10^*q*; inventing a pooled kill-curve AI; parallel `RATE_VS_DURATION.md` maintenance.
+Items that do **not** move venue: retraining nets on *L* · 10^*q*; inventing a pooled kill-curve AI; parallel `MANUSCRIPT.md` maintenance.
 
 ---
 

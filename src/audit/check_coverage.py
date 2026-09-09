@@ -820,7 +820,7 @@ def check_inventory(text, regions, tables_md):
             want["supplementary tables"] = int(m.group("supp"))
         for what, n in sorted(want.items()):
             # a document that carries no table block at all is not the
-            # assembled paper -- RATE_VS_DURATION.md is the prose, and its
+            # assembled paper -- MANUSCRIPT.md is the prose, and its
             # tables are spliced in only at assembly. Do not accuse it of
             # losing sixteen tables it never held.
             if not labels and "tables" in what:
@@ -992,7 +992,7 @@ def main() -> int:
         return p.read_text(encoding="utf-8") if p.exists() else ""
 
     ctx = {"root": root, "tables": read("tables.md"),
-           "prose": read("RATE_VS_DURATION.md")}
+           "prose": read("MANUSCRIPT.md")}
     found = check(text, ctx)
     order = {"high": 0, "medium": 1, "low": 2}
     for f in sorted(found, key=lambda x: (order[x["severity"]], x["kind"])):

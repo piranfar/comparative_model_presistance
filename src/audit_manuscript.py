@@ -53,7 +53,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 PAPER = ROOT / "manuscript" / "PAPER_COMPLETE.md"
-PROSE = ROOT / "manuscript" / "RATE_VS_DURATION.md"
+PROSE = ROOT / "manuscript" / "MANUSCRIPT.md"
 TABLES = ROOT / "manuscript" / "tables.md"
 ABSTRACT = ROOT / "manuscript" / "abstract.md"
 RECEIPTS = ROOT / "results" / "receipts"

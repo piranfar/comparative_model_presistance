@@ -27,7 +27,7 @@ import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-BODY = ROOT / "manuscript" / "RATE_VS_DURATION.md"
+BODY = ROOT / "manuscript" / "MANUSCRIPT.md"
 TABLES = ROOT / "manuscript" / "tables.md"
 ABSTRACT = ROOT / "manuscript" / "abstract.md"
 FIGDIR = ROOT / "results" / "figures"

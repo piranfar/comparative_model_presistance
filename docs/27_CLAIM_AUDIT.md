@@ -97,7 +97,7 @@ Status codes: **SUPPORTED** | **WEAKENED** | **NOT SUPPORTED** | **TERMINOLOGY**
 
 - Authors, correspondence, funding, COI, contributions, archive commit: placeholders
 - References deliberately not compiled
-- `RATE_VS_DURATION.md`: lineage duplicate — do not maintain in parallel
+- `MANUSCRIPT.md`: lineage duplicate — do not maintain in parallel
 - CLI headroom tool: deferred to publication
 
 ---

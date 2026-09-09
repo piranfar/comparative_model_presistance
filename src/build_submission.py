@@ -38,7 +38,7 @@ from dataclasses import dataclass, field
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-PROSE = ROOT / "manuscript" / "RATE_VS_DURATION.md"
+PROSE = ROOT / "manuscript" / "MANUSCRIPT.md"
 TABLES = ROOT / "manuscript" / "tables.md"
 ABSTRACT = ROOT / "manuscript" / "abstract.md"
 MAIN_OUT = ROOT / "manuscript" / "SUBMISSION_MAIN.md"

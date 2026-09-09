@@ -122,7 +122,7 @@ def build_list(order: list[str], bib: dict) -> str:
 def main() -> int:
     bib = load_bib()
     body = ""
-    for f in ("manuscript/RATE_VS_DURATION.md", "manuscript/abstract.md",
+    for f in ("manuscript/MANUSCRIPT.md", "manuscript/abstract.md",
               "manuscript/tables.md"):
         p = ROOT / f
         if p.exists():

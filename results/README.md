@@ -90,7 +90,7 @@ Outputs of the earlier paper are not here; they live in `version_one/results/`.
 | --- | --- | --- |
 | `corpus_coverage.csv` | `-` | `build_corpus_long` |
 | `exp38_boundary_tests.csv` | `exp38_boundary_experiment.py` | quoted in the text only |
-| `exp38_experiment_readings.csv` | `exp38_boundary_experiment.py` | quoted in the text only |
+| `exp38_experiment_readings.csv` | `exp38_boundary_experiment.py` | `build_submission_package` |
 | `exp38_headroom_by_flask.csv` | `exp38_boundary_experiment.py` | `audit_claims`, `build_tables` |
 | `exp38_threshold_sweep.csv` | `exp38_boundary_experiment.py` | `audit_claims`, `build_tables` |
 | `exp40_floor_signatures.csv` | `exp40_corpus_landscape.py` | quoted in the text only |

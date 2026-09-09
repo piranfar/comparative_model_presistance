@@ -1592,7 +1592,7 @@ def main(argv: list[str] | None = None) -> int:
     text = paper.read_text(encoding="utf-8")
     ctx = {"root": root}
     for key, rel in (("tables", "manuscript/tables.md"),
-                     ("prose", "manuscript/RATE_VS_DURATION.md"),
+                     ("prose", "manuscript/MANUSCRIPT.md"),
                      ("abstract", "manuscript/abstract.md")):
         path = root / rel
         ctx[key] = path.read_text(encoding="utf-8") if path.exists() else ""

@@ -1,6 +1,6 @@
 {
   "script": "src/audit_manuscript.py",
-  "utc": "2026-09-09T00:28:34+00:00",
+  "utc": "2026-09-09T00:42:24+00:00",
   "checkers": [
     "check_arithmetic",
     "check_census",
@@ -31,7 +31,7 @@
       "severity": "low",
       "kind": "audit-count-summary",
       "where": "whole repository",
-      "detail": "src/audit_claims.py runs 174 checks (run); 3 place(s) state that number: Methods (PAPER_COMPLETE.md) line 2124 = 174; manuscript/RATE_VS_DURATION.md line 1870 = 174; README.md line 44 = 174",
+      "detail": "src/audit_claims.py runs 174 checks (run); 3 place(s) state that number: Methods (PAPER_COMPLETE.md) line 2124 = 174; manuscript/MANUSCRIPT.md line 1870 = 174; README.md line 44 = 174",
       "expected": "174",
       "found": "174, 174, 174",
       "checker": "check_census"

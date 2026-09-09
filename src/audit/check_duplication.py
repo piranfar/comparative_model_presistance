@@ -578,7 +578,7 @@ def _source_lines(prose: str, words: list[str], limit: int = 2) -> list[int]:
 
 def _where(sec: Section, a: int, b: int, prose: str, words: list[str]) -> str:
     src = _source_lines(prose, words)
-    tail = ("; RATE_VS_DURATION.md line%s %s"
+    tail = ("; MANUSCRIPT.md line%s %s"
             % ("" if len(src) == 1 else "s",
                " and ".join(str(s) for s in src))) if src else ""
     return ("section \"%s\" (line %d), lines %d and %d%s"
@@ -677,7 +677,7 @@ def check_renumbered(secs: list[Section], prose: str) -> list[dict]:
                     if not (_is_quantity(u) and _is_quantity(v)):
                         continue
                     src = _source_lines(prose, sec.words[i1:j1], limit=2)
-                    tail = ("; RATE_VS_DURATION.md line%s %s"
+                    tail = ("; MANUSCRIPT.md line%s %s"
                             % ("" if len(src) == 1 else "s",
                                " and ".join(str(s) for s in src))) if src else ""
                     findings.append({
@@ -730,7 +730,7 @@ def check_across_sections(secs: list[Section], prose: str) -> list[dict]:
         src = _source_lines(prose, words[a:a + length])
         where = ("sections \"%s\" (line %d) and \"%s\" (line %d)%s"
                  % (A.title[:45], A.lines[wa], B.title[:45], B.lines[wb],
-                    ("; RATE_VS_DURATION.md line %d" % src[0]) if src else ""))
+                    ("; MANUSCRIPT.md line %d" % src[0]) if src else ""))
 
         wa0, wa1 = A.widen(wa, wa + length)
         wb0, wb1 = B.widen(wb, wb + length)
@@ -994,7 +994,7 @@ def check_reassertions(text: str, secs: list[Section], prose: str) -> list[dict]
             findings.append({
                 "severity": "medium",
                 "kind": "numberless-reassertion",
-                "where": (where + (("; RATE_VS_DURATION.md line %d" % src[0])
+                "where": (where + (("; MANUSCRIPT.md line %d" % src[0])
                                    if src else "")),
                 "detail": ("this sentence carries %d of the %d distinctive words "
                            "of a conclusion Table %s marks %s (its Section %s "
@@ -1028,7 +1028,7 @@ def check(text: str, ctx: dict) -> list[dict]:
         return []
     prose = ctx.get("prose") or ""
     if not prose:
-        p = root / "manuscript" / "RATE_VS_DURATION.md"
+        p = root / "manuscript" / "MANUSCRIPT.md"
         prose = p.read_text(encoding="utf-8") if p.exists() else ""
 
     secs = sections(text)
@@ -1073,7 +1073,7 @@ def main(argv: list[str] | None = None) -> int:
         p = root / "manuscript" / name
         return p.read_text(encoding="utf-8") if p.exists() else ""
 
-    found = check(text, {"root": root, "prose": read("RATE_VS_DURATION.md"),
+    found = check(text, {"root": root, "prose": read("MANUSCRIPT.md"),
                          "tables": read("tables.md")})
     print("check_duplication on %s" % paper)
     if not found:
